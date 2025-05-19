@@ -4,9 +4,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { MapPin, Search, ChevronRight } from "lucide-react";
+import { MapPin, Search } from "lucide-react";
 import MapComponent from "@/components/dealers/MapComponent";
+import DealerAccordion from "@/components/dealers/DealerAccordion";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 declare global {
   interface Window {
@@ -21,10 +22,20 @@ interface Dealer {
   city: string;
   address: string;
   phone: string;
+  email?: string;
+  website?: string;
   services: string[];
   lat?: number;
   lng?: number;
+  country: string;
 }
+
+const radiusOptions = [
+  { value: "50", label: "50 km" },
+  { value: "100", label: "100 km" },
+  { value: "200", label: "200 km" },
+  { value: "500", label: "500 km" },
+];
 
 const Haendlersuche = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -35,19 +46,23 @@ const Haendlersuche = () => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const [selectedDealer, setSelectedDealer] = useState<number | null>(null);
   const [filteredDealers, setFilteredDealers] = useState<Dealer[]>([]);
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [selectedRadius, setSelectedRadius] = useState("100");
+  const [searchLocation, setSearchLocation] = useState<{lat: number, lng: number, radius?: number} | undefined>(undefined);
   
-  // Beispiel-Händler mit Koordinaten für die Demonstration
+  // Beispiel-Händler mit Koordinaten und Länderinformationen
   const exampleDealers: Dealer[] = [
     {
       id: 1,
-      name: "Wohnmobile Nord GmbH",
-      city: "Hamburg",
-      address: "Campingstraße 42, 22769 Hamburg",
-      phone: "+49 40 12345678",
+      name: "EURA MOBIL GmbH",
+      city: "Sprendlingen",
+      address: "Kreuznacher Str. 78, 55576 Sprendlingen",
+      phone: "+49 6701 203-0",
+      email: "info@euramobil.de",
+      website: "www.euramobil.de",
       services: ["Verkauf", "Service", "Vermietung"],
-      lat: 53.553,
-      lng: 9.992
+      lat: 49.8500,
+      lng: 7.8578,
+      country: "Deutschland"
     },
     {
       id: 2,
@@ -55,9 +70,12 @@ const Haendlersuche = () => {
       city: "München",
       address: "Wohnmobilweg 15, 80331 München",
       phone: "+49 89 87654321",
+      email: "info@caravan-munich.de",
+      website: "caravan-munich.de",
       services: ["Verkauf", "Service"],
       lat: 48.135,
-      lng: 11.582
+      lng: 11.582,
+      country: "Deutschland"
     },
     {
       id: 3,
@@ -67,7 +85,8 @@ const Haendlersuche = () => {
       phone: "+49 30 98765432",
       services: ["Verkauf", "Vermietung"],
       lat: 52.520,
-      lng: 13.405
+      lng: 13.405,
+      country: "Deutschland"
     },
     {
       id: 4,
@@ -75,9 +94,60 @@ const Haendlersuche = () => {
       city: "Köln",
       address: "Reisemobilallee 23, 50667 Köln",
       phone: "+49 221 55443322",
+      email: "kontakt@camping-koeln.de",
+      website: "camping-koeln.de",
       services: ["Verkauf", "Service", "Zubehör"],
       lat: 50.937,
-      lng: 6.96
+      lng: 6.96,
+      country: "Deutschland"
+    },
+    {
+      id: 5,
+      name: "Milano Camper",
+      city: "Milano",
+      address: "Via Roma 42, 20121 Milano",
+      phone: "+39 02 12345678",
+      email: "info@milanocamper.it",
+      website: "milanocamper.it",
+      services: ["Verkauf", "Service"],
+      lat: 45.4642,
+      lng: 9.1900,
+      country: "Italia"
+    },
+    {
+      id: 6,
+      name: "Paris Camping-Cars",
+      city: "Paris",
+      address: "123 Avenue des Champs-Élysées, 75008 Paris",
+      phone: "+33 1 23456789",
+      services: ["Verkauf"],
+      lat: 48.8566,
+      lng: 2.3522,
+      country: "France"
+    },
+    {
+      id: 7,
+      name: "Brussels Motorhomes",
+      city: "Brussels",
+      address: "42 Rue de Bruxelles, 1000 Brussels",
+      phone: "+32 2 1234567",
+      email: "info@brusselsmotorhomes.be",
+      website: "brusselsmotorhomes.be",
+      services: ["Verkauf", "Service", "Vermietung"],
+      lat: 50.8503,
+      lng: 4.3517,
+      country: "Belgique"
+    },
+    {
+      id: 8,
+      name: "Amsterdam Camper Center",
+      city: "Amsterdam",
+      address: "Damrak 42, 1012 Amsterdam",
+      phone: "+31 20 1234567",
+      services: ["Verkauf", "Service"],
+      lat: 52.3676,
+      lng: 4.9041,
+      country: "Nederland"
     }
   ];
 
@@ -86,7 +156,7 @@ const Haendlersuche = () => {
     setFilteredDealers(exampleDealers);
   }, []);
 
-  // Function to load Google Maps API script
+  // Load Google Maps API script
   useEffect(() => {
     const loadGoogleMapsScript = () => {
       const googleScript = document.createElement('script');
@@ -122,6 +192,7 @@ const Haendlersuche = () => {
     }
   }, []);
 
+  // Handle click outside of predictions dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (autocompleteRef.current && !autocompleteRef.current.contains(event.target as Node)) {
@@ -166,71 +237,65 @@ const Haendlersuche = () => {
   const handlePredictionSelect = (prediction: any) => {
     setSearchQuery(prediction.description);
     setShowPredictions(false);
-    // Here you could trigger the search with the selected location
-    searchDealers(prediction.description);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    searchDealers(searchQuery);
-    setShowPredictions(false);
-  };
-
-  const searchDealers = (query: string) => {
-    // In a real app, you would search by proximity to the searched location
-    // For this demo, we'll just filter dealers whose city contains the query string
-    const lowercaseQuery = query.toLowerCase();
+    if (!searchQuery.trim()) return;
     
-    let filtered = exampleDealers.filter(dealer => {
-      return (
-        dealer.city.toLowerCase().includes(lowercaseQuery) ||
-        dealer.address.toLowerCase().includes(lowercaseQuery)
-      );
-    });
-    
-    // Apply service filter if it's not "all"
-    if (activeFilter !== "all") {
-      filtered = filtered.filter(dealer => 
-        dealer.services.some(service => service.toLowerCase() === activeFilter)
-      );
-    }
-    
-    setFilteredDealers(filtered);
-  };
-
-  const handleFilterClick = (filter: string) => {
-    setActiveFilter(filter);
-    
-    let filtered = exampleDealers;
-    
-    // Apply search query if exists
-    if (searchQuery) {
-      const lowercaseQuery = searchQuery.toLowerCase();
-      filtered = filtered.filter(dealer => {
-        return (
-          dealer.city.toLowerCase().includes(lowercaseQuery) ||
-          dealer.address.toLowerCase().includes(lowercaseQuery)
-        );
+    try {
+      // Convert location to coordinates
+      const geocoder = new window.google.maps.Geocoder();
+      const result = await new Promise<any>((resolve, reject) => {
+        geocoder.geocode({ address: searchQuery }, (results: any, status: any) => {
+          if (status === window.google.maps.GeocoderStatus.OK) {
+            resolve(results[0]);
+          } else {
+            reject(status);
+          }
+        });
       });
+
+      const location = {
+        lat: result.geometry.location.lat(),
+        lng: result.geometry.location.lng(),
+        radius: parseInt(selectedRadius)
+      };
+
+      setSearchLocation(location);
+      
+      // Filter dealers by distance
+      const filteredByDistance = exampleDealers.filter(dealer => {
+        if (!dealer.lat || !dealer.lng) return false;
+        
+        // Calculate distance using Haversine formula
+        const R = 6371; // Radius of the Earth in km
+        const dLat = (dealer.lat - location.lat) * Math.PI / 180;
+        const dLng = (dealer.lng - location.lng) * Math.PI / 180;
+        const a = 
+          Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(location.lat * Math.PI / 180) * Math.cos(dealer.lat * Math.PI / 180) * 
+          Math.sin(dLng/2) * Math.sin(dLng/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        const distance = R * c; // Distance in km
+        
+        return distance <= parseInt(selectedRadius);
+      });
+      
+      setFilteredDealers(filteredByDistance);
+      setShowPredictions(false);
+    } catch (error) {
+      console.error("Geocoding error:", error);
     }
-    
-    // Apply service filter if it's not "all"
-    if (filter !== "all") {
-      filtered = filtered.filter(dealer => 
-        dealer.services.some(service => service.toLowerCase() === filter.toLowerCase())
-      );
-    }
-    
-    setFilteredDealers(filtered);
   };
 
   const handleDealerSelect = (dealerId: number) => {
     setSelectedDealer(dealerId);
-    // Scroll to the dealer card
-    const dealerCard = document.getElementById(`dealer-${dealerId}`);
-    if (dealerCard) {
-      dealerCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    // Scroll to the map
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -238,16 +303,16 @@ const Haendlersuche = () => {
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-6">
-        <h1 className="text-2xl md:text-3xl font-bold mb-6">Händler in Ihrer Nähe finden</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">Händlersuche</h1>
         
-        {/* Suchbereich */}
-        <div className="bg-gray-100 p-4 rounded-lg mb-6">
+        {/* Suchbereich - Fixed at top on mobile */}
+        <div className="bg-gray-100 p-4 rounded-lg mb-6 sticky top-0 z-10">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1 relative">
               <Input
                 ref={autocompleteRef}
                 type="text"
-                placeholder="Postleitzahl oder Ort eingeben"
+                placeholder="Ort oder PLZ eingeben"
                 value={searchQuery}
                 onChange={handleInputChange}
                 className="w-full"
@@ -257,7 +322,7 @@ const Haendlersuche = () => {
               
               {/* Autocomplete Suggestions */}
               {showPredictions && placePredictions.length > 0 && (
-                <div className="absolute z-10 w-full bg-white mt-1 shadow-lg rounded-md border border-gray-200">
+                <div className="absolute z-50 w-full bg-white mt-1 shadow-lg rounded-md border border-gray-200">
                   <ul className="py-1">
                     {placePredictions.map((prediction) => (
                       <li
@@ -272,47 +337,33 @@ const Haendlersuche = () => {
                 </div>
               )}
             </div>
-            <Button type="submit" className="flex items-center gap-2">
+            
+            <div className="w-full sm:w-40">
+              <Select
+                value={selectedRadius}
+                onValueChange={setSelectedRadius}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Umkreis wählen" />
+                </SelectTrigger>
+                <SelectContent>
+                  {radiusOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <Button 
+              type="submit" 
+              className="flex items-center gap-2 bg-red-600 hover:bg-red-700"
+            >
               <Search size={18} />
               <span>Suchen</span>
             </Button>
           </form>
-          
-          {/* Filter-Optionen */}
-          <div className="mt-4 flex gap-3 flex-wrap">
-            <Button 
-              variant={activeFilter === "all" ? "default" : "outline"} 
-              size="sm" 
-              className="text-sm"
-              onClick={() => handleFilterClick("all")}
-            >
-              Alle Händler
-            </Button>
-            <Button 
-              variant={activeFilter === "verkauf" ? "default" : "outline"} 
-              size="sm" 
-              className="text-sm"
-              onClick={() => handleFilterClick("verkauf")}
-            >
-              Nur Verkauf
-            </Button>
-            <Button 
-              variant={activeFilter === "vermietung" ? "default" : "outline"} 
-              size="sm" 
-              className="text-sm"
-              onClick={() => handleFilterClick("vermietung")}
-            >
-              Nur Vermietung
-            </Button>
-            <Button 
-              variant={activeFilter === "service" ? "default" : "outline"} 
-              size="sm" 
-              className="text-sm"
-              onClick={() => handleFilterClick("service")}
-            >
-              Nur Service
-            </Button>
-          </div>
         </div>
         
         {/* Kartenbereich */}
@@ -321,68 +372,23 @@ const Haendlersuche = () => {
           googleMapsLoaded={googleMapsLoaded} 
           selectedDealer={selectedDealer}
           onSelectDealer={handleDealerSelect}
+          searchLocation={searchLocation}
         />
         
-        {/* Händlerliste */}
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold">
-            {filteredDealers.length > 0
-              ? `Gefundene Händler (${filteredDealers.length})`
-              : "Keine Händler gefunden"
-            }
-          </h2>
-          
-          <div className="grid gap-4">
-            {filteredDealers.map((dealer) => (
-              <Card 
-                key={dealer.id} 
-                id={`dealer-${dealer.id}`}
-                className={`overflow-hidden transition-shadow ${
-                  selectedDealer === dealer.id ? "ring-2 ring-primary shadow-lg" : ""
-                }`}
-              >
-                <CardContent className="p-4">
-                  <h3 className="font-bold text-lg">{dealer.name}</h3>
-                  <p className="text-gray-600">{dealer.address}</p>
-                  <p className="text-gray-600">{dealer.phone}</p>
-                  
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {dealer.services.map((service) => (
-                      <span 
-                        key={service} 
-                        className="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded"
-                      >
-                        {service}
-                      </span>
-                    ))}
-                  </div>
-                </CardContent>
-                <CardFooter className="p-4 pt-0 flex justify-between">
-                  <Button variant="outline" size="sm">
-                    Details
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    size="sm" 
-                    className="flex items-center gap-1"
-                    onClick={() => {
-                      // In a real app, you would open directions in Google Maps
-                      window.open(
-                        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-                          dealer.address
-                        )}`,
-                        '_blank'
-                      );
-                    }}
-                  >
-                    Route anzeigen
-                    <ChevronRight size={16} />
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+        {/* Händlerliste als Accordion nach Ländern */}
+        <DealerAccordion 
+          dealers={filteredDealers}
+          selectedDealer={selectedDealer}
+          onSelectDealer={handleDealerSelect}
+        />
+        
+        {filteredDealers.length === 0 && (
+          <div className="text-center py-10 bg-gray-50 rounded-lg">
+            <MapPin size={32} className="mx-auto mb-2 text-gray-400" />
+            <p className="text-gray-600 text-lg">Keine Händler im ausgewählten Bereich gefunden.</p>
+            <p className="text-gray-500 mt-2">Bitte versuchen Sie einen größeren Umkreis oder einen anderen Ort.</p>
           </div>
-        </div>
+        )}
       </main>
       
       <Footer />
