@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { MapPin, Search, ChevronRight } from "lucide-react";
+import MapComponent from "@/components/dealers/MapComponent";
 
 declare global {
   interface Window {
@@ -14,22 +15,39 @@ declare global {
   }
 }
 
+interface Dealer {
+  id: number;
+  name: string;
+  city: string;
+  address: string;
+  phone: string;
+  services: string[];
+  lat?: number;
+  lng?: number;
+}
+
 const Haendlersuche = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const autocompleteRef = useRef<HTMLInputElement>(null);
   const [autocomplete, setAutocomplete] = useState<any>(null);
   const [placePredictions, setPlacePredictions] = useState<any[]>([]);
   const [showPredictions, setShowPredictions] = useState(false);
+  const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
+  const [selectedDealer, setSelectedDealer] = useState<number | null>(null);
+  const [filteredDealers, setFilteredDealers] = useState<Dealer[]>([]);
+  const [activeFilter, setActiveFilter] = useState<string>("all");
   
-  // Beispiel-Händler (normalerweise würden diese von einer API kommen)
-  const exampleDealers = [
+  // Beispiel-Händler mit Koordinaten für die Demonstration
+  const exampleDealers: Dealer[] = [
     {
       id: 1,
       name: "Wohnmobile Nord GmbH",
       city: "Hamburg",
       address: "Campingstraße 42, 22769 Hamburg",
       phone: "+49 40 12345678",
-      services: ["Verkauf", "Service", "Vermietung"]
+      services: ["Verkauf", "Service", "Vermietung"],
+      lat: 53.553,
+      lng: 9.992
     },
     {
       id: 2,
@@ -37,7 +55,9 @@ const Haendlersuche = () => {
       city: "München",
       address: "Wohnmobilweg 15, 80331 München",
       phone: "+49 89 87654321",
-      services: ["Verkauf", "Service"]
+      services: ["Verkauf", "Service"],
+      lat: 48.135,
+      lng: 11.582
     },
     {
       id: 3,
@@ -45,7 +65,9 @@ const Haendlersuche = () => {
       city: "Berlin",
       address: "Mobilstraße 8, 10115 Berlin",
       phone: "+49 30 98765432",
-      services: ["Verkauf", "Vermietung"]
+      services: ["Verkauf", "Vermietung"],
+      lat: 52.520,
+      lng: 13.405
     },
     {
       id: 4,
@@ -53,9 +75,16 @@ const Haendlersuche = () => {
       city: "Köln",
       address: "Reisemobilallee 23, 50667 Köln",
       phone: "+49 221 55443322",
-      services: ["Verkauf", "Service", "Zubehör"]
+      services: ["Verkauf", "Service", "Zubehör"],
+      lat: 50.937,
+      lng: 6.96
     }
   ];
+
+  // Initialize filtered dealers with all dealers
+  useEffect(() => {
+    setFilteredDealers(exampleDealers);
+  }, []);
 
   // Function to load Google Maps API script
   useEffect(() => {
@@ -64,6 +93,11 @@ const Haendlersuche = () => {
       googleScript.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGoogleAutocomplete`;
       googleScript.async = true;
       googleScript.defer = true;
+      
+      googleScript.onload = () => {
+        setGoogleMapsLoaded(true);
+      };
+      
       document.head.appendChild(googleScript);
       
       return () => {
@@ -75,6 +109,7 @@ const Haendlersuche = () => {
       if (autocompleteRef.current) {
         const autocompleteInstance = new window.google.maps.places.AutocompleteService();
         setAutocomplete(autocompleteInstance);
+        setGoogleMapsLoaded(true);
       }
     };
 
@@ -83,6 +118,7 @@ const Haendlersuche = () => {
       loadGoogleMapsScript();
     } else {
       window.initGoogleAutocomplete();
+      setGoogleMapsLoaded(true);
     }
   }, []);
 
@@ -130,14 +166,71 @@ const Haendlersuche = () => {
   const handlePredictionSelect = (prediction: any) => {
     setSearchQuery(prediction.description);
     setShowPredictions(false);
-    // Here you could also trigger the search
+    // Here you could trigger the search with the selected location
+    searchDealers(prediction.description);
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Hier würde normalerweise die Suche ausgelöst werden
-    console.log("Suche nach:", searchQuery);
+    searchDealers(searchQuery);
     setShowPredictions(false);
+  };
+
+  const searchDealers = (query: string) => {
+    // In a real app, you would search by proximity to the searched location
+    // For this demo, we'll just filter dealers whose city contains the query string
+    const lowercaseQuery = query.toLowerCase();
+    
+    let filtered = exampleDealers.filter(dealer => {
+      return (
+        dealer.city.toLowerCase().includes(lowercaseQuery) ||
+        dealer.address.toLowerCase().includes(lowercaseQuery)
+      );
+    });
+    
+    // Apply service filter if it's not "all"
+    if (activeFilter !== "all") {
+      filtered = filtered.filter(dealer => 
+        dealer.services.some(service => service.toLowerCase() === activeFilter)
+      );
+    }
+    
+    setFilteredDealers(filtered);
+  };
+
+  const handleFilterClick = (filter: string) => {
+    setActiveFilter(filter);
+    
+    let filtered = exampleDealers;
+    
+    // Apply search query if exists
+    if (searchQuery) {
+      const lowercaseQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter(dealer => {
+        return (
+          dealer.city.toLowerCase().includes(lowercaseQuery) ||
+          dealer.address.toLowerCase().includes(lowercaseQuery)
+        );
+      });
+    }
+    
+    // Apply service filter if it's not "all"
+    if (filter !== "all") {
+      filtered = filtered.filter(dealer => 
+        dealer.services.some(service => service.toLowerCase() === filter.toLowerCase())
+      );
+    }
+    
+    setFilteredDealers(filtered);
+  };
+
+  const handleDealerSelect = (dealerId: number) => {
+    setSelectedDealer(dealerId);
+    // Scroll to the dealer card
+    const dealerCard = document.getElementById(`dealer-${dealerId}`);
+    if (dealerCard) {
+      dealerCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   return (
@@ -187,34 +280,67 @@ const Haendlersuche = () => {
           
           {/* Filter-Optionen */}
           <div className="mt-4 flex gap-3 flex-wrap">
-            <Button variant="outline" size="sm" className="text-sm">
+            <Button 
+              variant={activeFilter === "all" ? "default" : "outline"} 
+              size="sm" 
+              className="text-sm"
+              onClick={() => handleFilterClick("all")}
+            >
               Alle Händler
             </Button>
-            <Button variant="outline" size="sm" className="text-sm">
+            <Button 
+              variant={activeFilter === "verkauf" ? "default" : "outline"} 
+              size="sm" 
+              className="text-sm"
+              onClick={() => handleFilterClick("verkauf")}
+            >
               Nur Verkauf
             </Button>
-            <Button variant="outline" size="sm" className="text-sm">
+            <Button 
+              variant={activeFilter === "vermietung" ? "default" : "outline"} 
+              size="sm" 
+              className="text-sm"
+              onClick={() => handleFilterClick("vermietung")}
+            >
               Nur Vermietung
+            </Button>
+            <Button 
+              variant={activeFilter === "service" ? "default" : "outline"} 
+              size="sm" 
+              className="text-sm"
+              onClick={() => handleFilterClick("service")}
+            >
+              Nur Service
             </Button>
           </div>
         </div>
         
         {/* Kartenbereich */}
-        <div className="w-full h-64 md:h-96 bg-gray-200 rounded-lg mb-6 flex items-center justify-center">
-          <div className="text-center text-gray-500">
-            <MapPin size={36} className="mx-auto mb-2" />
-            <p>Kartenansicht der Händlerstandorte</p>
-            <p className="text-xs">Hier würde normalerweise eine Karte angezeigt</p>
-          </div>
-        </div>
+        <MapComponent 
+          dealers={filteredDealers} 
+          googleMapsLoaded={googleMapsLoaded} 
+          selectedDealer={selectedDealer}
+          onSelectDealer={handleDealerSelect}
+        />
         
         {/* Händlerliste */}
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold">Gefundene Händler</h2>
+          <h2 className="text-xl font-semibold">
+            {filteredDealers.length > 0
+              ? `Gefundene Händler (${filteredDealers.length})`
+              : "Keine Händler gefunden"
+            }
+          </h2>
           
           <div className="grid gap-4">
-            {exampleDealers.map((dealer) => (
-              <Card key={dealer.id} className="overflow-hidden">
+            {filteredDealers.map((dealer) => (
+              <Card 
+                key={dealer.id} 
+                id={`dealer-${dealer.id}`}
+                className={`overflow-hidden transition-shadow ${
+                  selectedDealer === dealer.id ? "ring-2 ring-primary shadow-lg" : ""
+                }`}
+              >
                 <CardContent className="p-4">
                   <h3 className="font-bold text-lg">{dealer.name}</h3>
                   <p className="text-gray-600">{dealer.address}</p>
@@ -235,7 +361,20 @@ const Haendlersuche = () => {
                   <Button variant="outline" size="sm">
                     Details
                   </Button>
-                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex items-center gap-1"
+                    onClick={() => {
+                      // In a real app, you would open directions in Google Maps
+                      window.open(
+                        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+                          dealer.address
+                        )}`,
+                        '_blank'
+                      );
+                    }}
+                  >
                     Route anzeigen
                     <ChevronRight size={16} />
                   </Button>
