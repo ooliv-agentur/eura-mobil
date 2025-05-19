@@ -79,14 +79,14 @@ const QuestionScreen = ({
         ))}
       </div>
 
-      <div className="flex justify-between mt-auto">
-        <Button variant="outline" onClick={onBack}>
+      <div className="flex justify-between mt-auto relative z-50">
+        <Button variant="outline" onClick={onBack} className="z-50">
           Zurück
         </Button>
         <Button
           onClick={handleNextClick}
           disabled={!localSelection}
-          className="bg-blue-600 hover:bg-blue-700" // More distinct styling
+          className="bg-blue-600 hover:bg-blue-700 z-50 relative" // Added z-index and relative positioning
         >
           Weiter
         </Button>
