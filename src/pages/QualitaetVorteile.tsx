@@ -29,6 +29,11 @@ const qualityFeatures = [
     link: "/qualitaet/moebelbau"
   },
   {
+    title: "Doppelboden",
+    description: "Mehr Stauraum und bessere Isolierung für ganzjährigen Einsatz",
+    link: "/qualitaet/doppelboden"
+  },
+  {
     title: "Schlafkomfort",
     description: "Ergonomische Matratzen und durchdachte Bettkonzepte",
     link: "/qualitaet/schlafkomfort"

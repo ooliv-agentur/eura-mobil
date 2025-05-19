@@ -18,6 +18,14 @@ import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import ActivaOneDetail from "./pages/ActivaOneDetail";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
+import SealedStructure from "./pages/quality/SealedStructure";
+import Winterfestigkeit from "./pages/quality/Winterfestigkeit";
+import Leichtbauarchitektur from "./pages/quality/Leichtbauarchitektur";
+import Moebelbau from "./pages/quality/Moebelbau";
+import Doppelboden from "./pages/quality/Doppelboden";
+import Schlafkomfort from "./pages/quality/Schlafkomfort";
+import Kuechenwelt from "./pages/quality/Kuechenwelt";
+import Wellness from "./pages/quality/Wellness";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +49,14 @@ const App = () => (
           <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
           <Route path="/konfigurator" element={<Konfigurator />} />
           <Route path="/qualitaet" element={<QualitaetVorteile />} />
+          <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
+          <Route path="/qualitaet/winterfestigkeit" element={<Winterfestigkeit />} />
+          <Route path="/qualitaet/leichtbau" element={<Leichtbauarchitektur />} />
+          <Route path="/qualitaet/moebelbau" element={<Moebelbau />} />
+          <Route path="/qualitaet/doppelboden" element={<Doppelboden />} />
+          <Route path="/qualitaet/schlafkomfort" element={<Schlafkomfort />} />
+          <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
+          <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
           <Route path="/service" element={<NotFound />} />
           <Route path="/ueber-uns" element={<NotFound />} />
           <Route path="/kontakt" element={<NotFound />} />
