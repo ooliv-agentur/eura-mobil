@@ -4,7 +4,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 
 // Mock job listings data
@@ -38,15 +44,24 @@ const jobs = [
     title: "Kundendienstmitarbeiter (m/w/d)",
     location: "Hamburg",
     description: "Als Teil unseres Serviceteams sorgen Sie für eine erstklassige Betreuung unserer Kunden nach dem Kauf."
+  },
+  {
+    id: 6,
+    title: "Produktmanager (m/w/d)",
+    location: "Sprendlingen",
+    description: "Gestalten Sie die Zukunft unserer Produktlinie und entwickeln Sie innovative Lösungen für unsere Wohnmobile."
   }
 ];
 
 const Karriere = () => {
   const [filterLocation, setFilterLocation] = React.useState("");
+  
+  // Extrahiere alle eindeutigen Standorte aus den Jobs
+  const uniqueLocations = Array.from(new Set(jobs.map(job => job.location))).sort();
 
   // Filter jobs based on location
   const filteredJobs = filterLocation 
-    ? jobs.filter(job => job.location.toLowerCase().includes(filterLocation.toLowerCase())) 
+    ? jobs.filter(job => job.location === filterLocation) 
     : jobs;
 
   return (
@@ -66,14 +81,22 @@ const Karriere = () => {
           <div className="space-y-4">
             <div>
               <Label htmlFor="location">Standort filtern</Label>
-              <Input
-                id="location"
-                type="text"
-                placeholder="z.B. Hamburg, Berlin"
+              <Select 
                 value={filterLocation}
-                onChange={(e) => setFilterLocation(e.target.value)}
-                className="w-full mt-1"
-              />
+                onValueChange={setFilterLocation}
+              >
+                <SelectTrigger id="location" className="w-full mt-1">
+                  <SelectValue placeholder="Alle Standorte" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="">Alle Standorte</SelectItem>
+                  {uniqueLocations.map((location) => (
+                    <SelectItem key={location} value={location}>
+                      {location}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
