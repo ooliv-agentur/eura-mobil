@@ -34,7 +34,6 @@ const radiusOptions = [
   { value: "50", label: "50 km" },
   { value: "100", label: "100 km" },
   { value: "200", label: "200 km" },
-  { value: "500", label: "500 km" },
 ];
 
 const Haendlersuche = () => {
@@ -284,6 +283,14 @@ const Haendlersuche = () => {
       
       setFilteredDealers(filteredByDistance);
       setShowPredictions(false);
+      
+      // Scroll to results
+      setTimeout(() => {
+        const resultsElement = document.getElementById('dealer-results');
+        if (resultsElement) {
+          resultsElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     } catch (error) {
       console.error("Geocoding error:", error);
     }
@@ -305,14 +312,14 @@ const Haendlersuche = () => {
       <main className="flex-1 container mx-auto px-4 py-6">
         <h1 className="text-2xl md:text-3xl font-bold mb-6">Händlersuche</h1>
         
-        {/* Suchbereich - Fixed at top on mobile */}
-        <div className="bg-gray-100 p-4 rounded-lg mb-6 sticky top-0 z-10">
+        {/* Suchbereich - Normal scroll behavior */}
+        <div className="bg-gray-100 p-4 rounded-lg mb-6">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
             <div className="flex-1 relative">
               <Input
                 ref={autocompleteRef}
                 type="text"
-                placeholder="Ort oder PLZ eingeben"
+                placeholder="Postleitzahl oder Ort eingeben"
                 value={searchQuery}
                 onChange={handleInputChange}
                 className="w-full"

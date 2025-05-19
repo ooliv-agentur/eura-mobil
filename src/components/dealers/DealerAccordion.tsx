@@ -69,7 +69,7 @@ const DealerAccordion: React.FC<DealerAccordionProps> = ({
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8" id="dealer-results">
       <h2 className="text-xl font-semibold mb-4">Alle Standorte</h2>
       
       <Accordion type="multiple" className="space-y-4">
@@ -93,7 +93,7 @@ const DealerAccordion: React.FC<DealerAccordionProps> = ({
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
                       <div className="flex-1">
                         <h3 className="font-bold text-lg">{dealer.name}</h3>
-                        <div className="mt-2 space-y-1 text-gray-700">
+                        <div className="mt-2 space-y-2 text-gray-700">
                           <p className="flex items-start gap-2">
                             <MapPin size={16} className="mt-1 flex-shrink-0" />
                             <span>{dealer.address}</span>
@@ -118,15 +118,6 @@ const DealerAccordion: React.FC<DealerAccordionProps> = ({
                       </div>
                       
                       <div className="flex flex-col gap-2 min-w-[150px]">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex items-center gap-1 justify-center"
-                          onClick={() => handleRouteClick(dealer.address)}
-                        >
-                          Route anzeigen
-                        </Button>
-                        
                         {dealer.website && (
                           <Button
                             size="sm"
@@ -137,6 +128,15 @@ const DealerAccordion: React.FC<DealerAccordionProps> = ({
                             Webseite besuchen
                           </Button>
                         )}
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-1 justify-center"
+                          onClick={() => handleRouteClick(dealer.address)}
+                        >
+                          Route anzeigen
+                        </Button>
                         
                         <Button
                           variant="ghost"
