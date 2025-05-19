@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Menu, Facebook, Instagram, Youtube } from "lucide-react";
-import { useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -22,6 +21,7 @@ const Header = () => {
             <li><Link to="/modelle" className="hover:text-blue-600">Modelle</Link></li>
             <li><Link to="/berater" className="hover:text-blue-600">Beratung</Link></li>
             <li><Link to="/haendler" className="hover:text-blue-600">Händler</Link></li>
+            <li><Link to="/downloads" className="hover:text-blue-600">Downloads</Link></li>
             <li><Link to="/karriere" className="hover:text-blue-600">Karriere</Link></li>
             <li><Link to="/unternehmen" className="hover:text-blue-600">Unternehmen</Link></li>
           </ul>
@@ -52,6 +52,11 @@ const Header = () => {
                   <li>
                     <SheetClose asChild>
                       <Link to="/service" className="block hover:text-blue-600">Service</Link>
+                    </SheetClose>
+                  </li>
+                  <li>
+                    <SheetClose asChild>
+                      <Link to="/downloads" className="block hover:text-blue-600">Downloads</Link>
                     </SheetClose>
                   </li>
                   <li>
