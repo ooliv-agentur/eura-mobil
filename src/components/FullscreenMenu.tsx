@@ -44,7 +44,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
       <div className="container mx-auto px-4 py-6 h-full">
         <div className="flex flex-col h-full">
           {/* Top Area with Logo and Close */}
-          <div className="flex justify-between items-center mb-8">
+          <div className="flex justify-between items-center mb-4">
             <Link to="/" onClick={onClose} className="font-bold text-xl">
               EURA MOBIL
             </Link>
@@ -55,6 +55,16 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             >
               <X className="h-6 w-6" />
             </button>
+          </div>
+          
+          {/* CTA Button moved below logo */}
+          <div className="mb-8">
+            <Button className="w-full" asChild>
+              <Link to="/berater?step=1" onClick={onClose}>
+                <Calendar className="mr-2 h-4 w-4" />
+                Welches Wohnmobil passt zu mir?
+              </Link>
+            </Button>
           </div>
           
           <div className="overflow-y-auto flex-grow">
@@ -151,7 +161,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Language Selector moved down */}
+            {/* Language Selector */}
             <div className="mb-8">
               <h2 className="text-lg font-bold mb-2">Sprache</h2>
               <Separator className="mb-4" />
@@ -165,16 +175,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   <SelectItem value="fr">Französisch</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
-            
-            {/* CTA Button updated to link directly to /berater?step=1 */}
-            <div className="mb-8">
-              <Button className="w-full" asChild>
-                <Link to="/berater?step=1" onClick={onClose}>
-                  <Calendar className="mr-2 h-4 w-4" />
-                  {isKonfiguratorPage ? "Wohnmobil finden" : "Jetzt Beratung vereinbaren"}
-                </Link>
-              </Button>
             </div>
           </div>
         </div>
