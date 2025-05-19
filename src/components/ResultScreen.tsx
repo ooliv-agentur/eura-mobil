@@ -1,7 +1,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Compare } from "lucide-react";
 
 interface ResultScreenProps {
   answers: string[];
@@ -73,6 +74,8 @@ const euraMobilModels = [
 ];
 
 const ResultScreen = ({ answers, onRestart }: ResultScreenProps) => {
+  const navigate = useNavigate();
+
   // Match models to user answers with recommendation logic
   const getRecommendedModels = () => {
     if (!answers || answers.length < 3) {
@@ -110,6 +113,23 @@ const ResultScreen = ({ answers, onRestart }: ResultScreenProps) => {
     return recommendedModels;
   };
   
+  // Handler for the compare button
+  const handleCompare = (modelId: string) => {
+    // Check if there's already a model in localStorage for comparison
+    const existingModelId = localStorage.getItem('compareModelA');
+    
+    if (existingModelId) {
+      // If we already have a model, set the second model and redirect to comparison page
+      localStorage.setItem('compareModelB', modelId);
+      navigate(`/modellvergleich?modelA=${existingModelId}&modelB=${modelId}`);
+    } else {
+      // If this is the first model, store it and show feedback
+      localStorage.setItem('compareModelA', modelId);
+      console.log(`Model ${modelId} added to comparison. Select another model to compare.`);
+      // Note: In a real implementation, you might want to add a toast notification here
+    }
+  };
+  
   const recommendedModels = getRecommendedModels();
   
   console.log("User answers:", answers);
@@ -145,7 +165,18 @@ const ResultScreen = ({ answers, onRestart }: ResultScreenProps) => {
                 <Button size="sm" variant="outline" asChild>
                   <Link to={`/modelle/${model.id}`}>Modell ansehen</Link>
                 </Button>
-                <Button size="sm" variant="outline">Händler finden</Button>
+                <Button size="sm" variant="outline" asChild>
+                  <Link to="/haendler">Händler finden</Link>
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => handleCompare(model.id)}
+                  className="flex items-center gap-2"
+                >
+                  <Compare size={16} />
+                  Vergleichen
+                </Button>
               </CardFooter>
             </Card>
           ))
