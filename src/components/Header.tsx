@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -42,7 +41,7 @@ const Header = () => {
     <header className="sticky top-0 z-10 bg-white border-b border-gray-200 p-4">
       <div className="flex justify-between items-center">
         <Link to="/" className="font-bold text-xl">
-          Wohnmobile Deluxe
+          EURA MOBIL
         </Link>
         
         {/* Desktop Navigation */}
@@ -195,7 +194,7 @@ const Header = () => {
           onClose={closeMegaMenu} 
         />
         
-        {/* Backdrop for desktop hover - helps prevent accidental menu closing */}
+        {/* Backdrop for desktop hover */}
         {megaMenuOpen && window.innerWidth >= 768 && (
           <div
             className="fixed inset-0 bg-transparent z-40"

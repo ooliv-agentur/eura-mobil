@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Wohnmobile Deluxe. Alle Rechte vorbehalten.
+          © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
         </div>
       </div>
     </footer>

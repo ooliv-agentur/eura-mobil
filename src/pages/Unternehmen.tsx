@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight, Book, Building, Flag, MapPin, CalendarDays } from "lucide-react";
 import Header from "@/components/Header";
@@ -12,10 +11,10 @@ const Unternehmen = () => {
       <Header />
       
       <main className="flex-1 container mx-auto px-4 py-6">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4">Eura Mobil – Qualität aus Deutschland</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-4">EURA MOBIL – Qualität aus Deutschland</h1>
         
         <p className="text-base mb-8">
-          Seit über 60 Jahren steht Eura Mobil für höchste Qualität und Innovation im Wohnmobilbau. 
+          Seit über 60 Jahren steht EURA MOBIL für höchste Qualität und Innovation im Wohnmobilbau. 
           Als familiengeführtes Unternehmen verbinden wir Tradition mit modernster Technik und setzen 
           Maßstäbe in Sachen Komfort, Zuverlässigkeit und Design.
         </p>
@@ -27,7 +26,7 @@ const Unternehmen = () => {
           </div>
           
           <p className="text-base">
-            Die Erfolgsgeschichte von Eura Mobil begann 1959 mit der Vision, Reisefreiheit neu zu 
+            Die Erfolgsgeschichte von EURA MOBIL begann 1959 mit der Vision, Reisefreiheit neu zu 
             definieren. Was in einer kleinen Werkstatt in Rheinland-Pfalz begann, entwickelte sich zu 
             einem der führenden Wohnmobilhersteller Europas. Durch kontinuierliche Innovation und 
             kompromisslose Qualität haben wir uns einen hervorragenden Ruf in der Branche erarbeitet.
@@ -39,7 +38,7 @@ const Unternehmen = () => {
           </p>
         </section>
         
-        {/* Neue Timeline Sektion */}
+        {/* Timeline section and remaining content */}
         <section className="mb-10">
           <div className="flex items-center gap-2 mb-3">
             <CalendarDays className="text-blue-600" />
