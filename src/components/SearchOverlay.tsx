@@ -72,16 +72,23 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const overlayRef = useRef<HTMLDivElement>(null);
   
-  // Reset search when opening/closing the overlay
+  // Toggle body scroll lock when overlay opens/closes
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-    
-    if (!isOpen) {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    } else {
+      document.body.classList.remove('overflow-hidden');
       setSearchTerm("");
       setResults([]);
     }
+    
+    return () => {
+      // Cleanup: ensure scroll is enabled when component unmounts
+      document.body.classList.remove('overflow-hidden');
+    };
   }, [isOpen]);
 
   // Search as user types with debounce
@@ -124,7 +131,6 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
     <div 
       ref={overlayRef}
       className="fixed inset-0 z-50 bg-white bg-opacity-95 overflow-y-auto"
-      style={{ overflowY: 'auto' }}
     >
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center mb-6">
