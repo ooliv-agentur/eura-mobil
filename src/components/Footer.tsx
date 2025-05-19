@@ -18,7 +18,7 @@ const Footer = () => {
           <div>
             <h3 className="font-bold mb-3">Service</h3>
             <ul className="space-y-2">
-              <li><Link to="/berater" className="text-gray-600 hover:text-blue-600 block py-1">Wohnmobilberater</Link></li>
+              <li><Link to="/berater?step=1" className="text-gray-600 hover:text-blue-600 block py-1">Wohnmobilberater</Link></li>
               <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
               <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
             </ul>

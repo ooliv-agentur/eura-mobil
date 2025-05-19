@@ -281,7 +281,7 @@ const ActivaOneDetail = () => {
               className="flex items-center gap-2 justify-center" 
               asChild
             >
-              <Link to="/berater?preselect=activa-one">
+              <Link to="/berater?step=1">
                 <Users size={18} />
                 Wohnmobilberater
               </Link>

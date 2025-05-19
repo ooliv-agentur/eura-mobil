@@ -96,7 +96,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               <h2 className="text-lg font-bold mb-2">02 Kaufen & Mieten</h2>
               <Separator className="mb-4" />
               <ul className="space-y-3">
-                <li><Link to="/berater" onClick={onClose}>Wohnmobilberater</Link></li>
+                <li><Link to="/berater?step=1" onClick={onClose}>Wohnmobilberater</Link></li>
                 <li><Link to="/konfigurator" onClick={onClose}>Konfigurator</Link></li>
                 <li><Link to="/mietfahrzeuge" onClick={onClose}>Mietfahrzeuge</Link></li>
                 <li><Link to="/gebrauchtfahrzeuge" onClick={onClose}>Gebrauchtfahrzeuge</Link></li>
