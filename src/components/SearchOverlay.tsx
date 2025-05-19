@@ -48,18 +48,31 @@ const dummySearchData: SearchResult[] = [
     title: "Wohnmobiltypen",
     description: "Informationen zu verschiedenen Wohnmobiltypen",
     path: "/wohnmobiltypen"
+  },
+  {
+    id: "6",
+    title: "Van",
+    description: "Kompakter Van für maximale Flexibilität auf Reisen",
+    path: "/modelle/van"
+  },
+  {
+    id: "7",
+    title: "Variante XL",
+    description: "Luxusvariante mit extra Ausstattungsmerkmalen",
+    path: "/modelle/variante-xl"
   }
 ];
 
 const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
-  const [hasSearched, setHasSearched] = useState(false);
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const overlayRef = useRef<HTMLDivElement>(null);
   
+  // Reset search when opening/closing the overlay
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
@@ -68,7 +81,6 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
     if (!isOpen) {
       setSearchTerm("");
       setResults([]);
-      setHasSearched(false);
     }
   }, [isOpen]);
 
@@ -80,11 +92,18 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
 
     if (searchTerm.trim().length > 0) {
       searchTimeoutRef.current = setTimeout(() => {
-        performSearch();
+        const searchTermLower = searchTerm.toLowerCase();
+        
+        // Filter the dummy data based on the search term
+        const filteredResults = dummySearchData.filter(item => 
+          item.title.toLowerCase().includes(searchTermLower) || 
+          item.description.toLowerCase().includes(searchTermLower)
+        );
+        
+        setResults(filteredResults);
       }, 300);
     } else {
       setResults([]);
-      setHasSearched(false);
     }
 
     return () => {
@@ -94,29 +113,6 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
     };
   }, [searchTerm]);
 
-  const performSearch = () => {
-    if (searchTerm.trim() === "") {
-      setResults([]);
-      return;
-    }
-    
-    const searchTermLower = searchTerm.toLowerCase();
-    
-    // Filter the dummy data based on the search term
-    const filteredResults = dummySearchData.filter(item => 
-      item.title.toLowerCase().includes(searchTermLower) || 
-      item.description.toLowerCase().includes(searchTermLower)
-    );
-    
-    setResults(filteredResults);
-    setHasSearched(true);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    performSearch();
-  };
-
   const handleResultClick = (path: string) => {
     onClose();
     navigate(path);
@@ -125,10 +121,16 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-white bg-opacity-95 flex flex-col overflow-y-auto">
+    <div 
+      ref={overlayRef}
+      className="fixed inset-0 z-50 bg-white bg-opacity-95 overflow-y-auto"
+      style={{ overflowY: 'auto' }}
+    >
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Suchergebnisse für: {searchTerm}</h2>
+          <h2 className="text-xl font-semibold">
+            {searchTerm ? `Suchergebnisse für: ${searchTerm}` : "Suche"}
+          </h2>
           <Button 
             variant="ghost" 
             size="icon" 
@@ -139,7 +141,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           </Button>
         </div>
 
-        <form onSubmit={handleSubmit} className="mb-8">
+        <div className="mb-8">
           <div className="flex gap-2">
             <Input
               ref={inputRef}
@@ -148,30 +150,35 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-grow"
+              autoComplete="off"
             />
-            <Button type="submit">Suchen</Button>
+            <Button type="button">Suchen</Button>
           </div>
-        </form>
+        </div>
 
         <div className="mt-6">
-          {hasSearched && results.length === 0 ? (
-            <div className="text-center py-10">
-              <p className="text-gray-500">Keine passenden Inhalte gefunden.</p>
-            </div>
-          ) : (
-            <ul className="space-y-6">
-              {results.map((result) => (
-                <li 
-                  key={result.id} 
-                  className="border-b pb-4 hover:bg-gray-50 p-3 cursor-pointer"
-                  onClick={() => handleResultClick(result.path)}
-                >
-                  <h3 className="text-lg font-medium">{result.title}</h3>
-                  <p className="text-gray-600 mt-1">{result.description}</p>
-                  <p className="text-gray-400 text-sm mt-2">{result.path}</p>
-                </li>
-              ))}
-            </ul>
+          {searchTerm.trim().length > 0 && (
+            <>
+              {results.length === 0 ? (
+                <div className="text-center py-10">
+                  <p className="text-gray-500">Keine passenden Inhalte gefunden.</p>
+                </div>
+              ) : (
+                <ul className="space-y-6">
+                  {results.map((result) => (
+                    <li 
+                      key={result.id} 
+                      className="border-b pb-4 hover:bg-gray-50 p-3 cursor-pointer"
+                      onClick={() => handleResultClick(result.path)}
+                    >
+                      <h3 className="text-lg font-medium">{result.title}</h3>
+                      <p className="text-gray-600 mt-1">{result.description}</p>
+                      <p className="text-gray-400 text-sm mt-2">{result.path}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
           )}
         </div>
       </div>
