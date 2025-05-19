@@ -1,8 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AnimatedHeroBackground from "@/components/AnimatedHeroBackground";
 import { 
   Carousel, 
   CarouselContent, 
@@ -42,16 +44,21 @@ const Home = () => {
       <Header />
       
       <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative w-full h-96 bg-gray-200">
-          <div className="absolute inset-0 flex flex-col justify-center items-start p-6 md:p-12 bg-black bg-opacity-30 text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4">
+        {/* Enhanced Hero Section */}
+        <section className="relative w-full h-screen flex justify-center items-center overflow-hidden">
+          <AnimatedHeroBackground className="z-0" />
+          <div 
+            className="absolute inset-0 bg-gradient-to-b from-transparent to-white/30 z-10"
+            aria-hidden="true"
+          />
+          <div className="relative z-20 max-w-3xl text-center px-6 py-12 md:p-12">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black">
               Freiheit erleben. Komfort genießen.
             </h1>
-            <p className="mb-6 max-w-md">
-              Entdecken Sie die Welt unserer hochwertigen Wohnmobile und finden Sie Ihr perfektes Reisemobil.
+            <p className="mb-8 text-lg md:text-xl text-black/80">
+              Entdecken Sie unsere hochwertigen Wohnmobile – innovativ, komfortabel, individuell.
             </p>
-            <Button asChild>
+            <Button asChild size="lg" className="px-8 py-6 text-base">
               <Link to="/modelle">Jetzt Modell entdecken</Link>
             </Button>
           </div>
