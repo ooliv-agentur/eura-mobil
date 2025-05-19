@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Check, Download, MapPin } from "lucide-react";
+import { Check, Download, MapPin, Settings } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -53,8 +53,9 @@ const modelDetails = {
 const ProductDetail = () => {
   const { modelId } = useParams();
   
-  // In einer echten Anwendung würden wir hier die Modelldaten basierend auf der ID laden
-  // Für diesen Prototyp verwenden wir die vordefinierte Konstante
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+  };
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -82,6 +83,22 @@ const ProductDetail = () => {
           {/* Modellname und Intro */}
           <h1 className="text-2xl md:text-3xl font-bold">{modelDetails.name}</h1>
           <p className="text-gray-600 mt-2 mb-6">{modelDetails.intro}</p>
+          
+          <div className="flex flex-col sm:flex-row gap-3 mt-4 mb-6">
+            <Button 
+              className="flex items-center gap-2"
+              onClick={handleKonfiguratorClick}
+            >
+              <Settings size={18} />
+              Konfigurator starten
+            </Button>
+            <Button variant="outline" className="flex items-center gap-2" asChild>
+              <Link to="/haendler">
+                <MapPin size={18} />
+                Händler finden
+              </Link>
+            </Button>
+          </div>
           
           {/* Bildergalerie */}
           <div className="my-8">
@@ -162,6 +179,13 @@ const ProductDetail = () => {
           
           {/* CTA Block */}
           <section className="my-8 space-y-4">
+            <Button 
+              className="w-full flex justify-center gap-2"
+              onClick={handleKonfiguratorClick}
+            >
+              <Settings size={16} />
+              Konfigurator starten
+            </Button>
             <Button className="w-full flex justify-center gap-2" asChild>
               <Link to="/haendler">
                 <MapPin size={16} />

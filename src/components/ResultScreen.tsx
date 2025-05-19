@@ -1,8 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Settings } from "lucide-react";
 
 interface ResultScreenProps {
   answers: string[];
@@ -130,6 +129,10 @@ const ResultScreen = ({ answers, onRestart }: ResultScreenProps) => {
     }
   };
   
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+  };
+  
   const recommendedModels = getRecommendedModels();
   
   console.log("User answers:", answers);
@@ -176,6 +179,15 @@ const ResultScreen = ({ answers, onRestart }: ResultScreenProps) => {
                 >
                   <ChevronRight size={16} />
                   Vergleichen
+                </Button>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={handleKonfiguratorClick}
+                  className="flex items-center gap-2"
+                >
+                  <Settings size={16} />
+                  Konfigurator starten
                 </Button>
               </CardFooter>
             </Card>

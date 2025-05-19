@@ -25,7 +25,8 @@ import {
   MapPin, 
   GitCompare, 
   Users, 
-  Car 
+  Car,
+  ExternalLink
 } from "lucide-react";
 
 const ActivaOneDetail = () => {
@@ -100,6 +101,10 @@ const ActivaOneDetail = () => {
     "Beach Home Interieur verfügbar"
   ];
 
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -119,13 +124,18 @@ const ActivaOneDetail = () => {
             <p className="text-lg text-gray-700 mt-2 mb-4">Alkoven Wohnmobil für Familien und Einsteiger</p>
             
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
-              <Button className="flex items-center gap-2">
+              <Button 
+                className="flex items-center gap-2"
+                onClick={handleKonfiguratorClick}
+              >
                 <Settings size={18} />
-                Jetzt konfigurieren
+                Konfigurator starten
               </Button>
-              <Button variant="outline" className="flex items-center gap-2">
-                <MapPin size={18} />
-                Händler finden
+              <Button variant="outline" className="flex items-center gap-2" asChild>
+                <Link to="/haendler">
+                  <MapPin size={18} />
+                  Händler finden
+                </Link>
               </Button>
             </div>
           </div>
@@ -261,10 +271,10 @@ const ActivaOneDetail = () => {
             <Button 
               variant="outline" 
               className="flex items-center gap-2 justify-center"
-              onClick={() => window.open('https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE', '_blank')}
+              onClick={handleKonfiguratorClick}
             >
               <Settings size={18} />
-              Konfigurator
+              Konfigurator starten
             </Button>
             <Button 
               variant="outline" 

@@ -7,8 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const Konfigurator = () => {
   const handleExternalLink = () => {
-    // Simuliert das Öffnen eines externen Links
-    window.open("https://example.com/konfigurator", "_blank");
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
 
   return (
@@ -39,7 +38,7 @@ const Konfigurator = () => {
               size="lg"
               className="flex items-center gap-2"
             >
-              Jetzt Konfigurator starten
+              Konfigurator starten
               <ExternalLink className="h-4 w-4" />
             </Button>
           </div>
