@@ -1,9 +1,12 @@
+
 import { Link } from "react-router-dom";
-import { ArrowRight, Book, Building, Flag, MapPin, CalendarDays } from "lucide-react";
+import { ArrowRight, Book, Building, Flag, MapPin, CalendarDays, Star } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Unternehmen = () => {
   return (
@@ -38,36 +41,68 @@ const Unternehmen = () => {
           </p>
         </section>
         
-        {/* Timeline section and remaining content */}
+        {/* New Timeline section */}
         <section className="mb-10">
           <div className="flex items-center gap-2 mb-3">
             <CalendarDays className="text-blue-600" />
             <h2 className="text-xl font-semibold">Unsere Historie – seit 1959 auf Tour</h2>
           </div>
           
-          <p className="text-base mb-4">
+          <p className="text-base mb-8">
             Von der Wohnwagen-Produktion bis zum Reisemobil-Pionier.
           </p>
           
-          <ScrollArea className="h-[320px] w-full rounded-md border p-4">
-            <div className="relative">
-              {/* Zeitachse (vertikale Linie) */}
-              <div className="absolute top-0 bottom-0 left-[18px] w-[2px] bg-blue-200"></div>
+          {/* Modern vertical timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-6 h-full w-0.5 bg-blue-100"></div>
+            
+            <div className="space-y-12">
+              <TimelineItem 
+                year="1959" 
+                event="Gründung als Blessing KG" 
+                milestone={true}
+                description="Der Grundstein unserer Erfolgsgeschichte wird in einer kleinen Werkstatt in Rheinland-Pfalz gelegt. Hier beginnt die Vision eines modernen Reiseerlebnisses."
+                hasImage={true}
+              />
               
-              {/* Zeitmarken */}
-              <div className="space-y-8 relative">
-                <TimelineItem year="1959" event="Gründung als Blessing KG" />
-                <TimelineItem year="1983" event="Start der Reisemobil-Produktion" />
-                <TimelineItem year="2005" event="Übernahme durch Trigano" />
-                <TimelineItem year="2016" event="Einführung 10 Jahre Dichtigkeitsgarantie" />
-                <TimelineItem year="2019" event="60 Jahre Jubiläum" />
-                <TimelineItem year="2024" event="Launch Xtura 4×4 Fernreisemobil" />
-              </div>
+              <TimelineItem 
+                year="1983" 
+                event="Start der Reisemobil-Produktion" 
+                description="Nach erfolgreichen Jahren in der Wohnwagen-Produktion wagen wir den Schritt zum Reisemobil und setzen neue Maßstäbe in der Branche."
+              />
+              
+              <TimelineItem 
+                year="2005" 
+                event="Übernahme durch Trigano" 
+                description="Ein wichtiger Meilenstein für die internationale Expansion: Die Übernahme durch die Trigano-Gruppe eröffnet neue Märkte und Perspektiven."
+              />
+              
+              <TimelineItem 
+                year="2016" 
+                event="Einführung 10 Jahre Dichtigkeitsgarantie" 
+                description="Als einer der ersten Hersteller bieten wir eine 10-Jahres-Garantie auf die Dichtigkeit unserer Fahrzeuge – ein Zeichen unseres Qualitätsversprechens."
+              />
+              
+              <TimelineItem 
+                year="2019" 
+                event="60 Jahre Jubiläum"
+                milestone={true} 
+                description="Sechs Jahrzehnte Innovation und Leidenschaft für Reisemobile feiern wir mit besonderen Jubiläumsmodellen und Veranstaltungen."
+              />
+              
+              <TimelineItem 
+                year="2024" 
+                event="Launch Xtura 4×4 Fernreisemobil" 
+                milestone={true}
+                description="Mit dem neuen Xtura 4×4 revolutionieren wir den Markt für Fernreisemobile und setzen auf kompromisslose Geländetauglichkeit bei maximaler Autarkie."
+                hasImage={true}
+              />
             </div>
-          </ScrollArea>
+          </div>
           
-          {/* Optionaler CTA */}
-          <div className="mt-6 text-center">
+          {/* Optional CTA */}
+          <div className="mt-12 text-center">
             <Button className="gap-2" asChild>
               <Link to="/werksbesichtigung">
                 Zur Werksführung
@@ -139,15 +174,56 @@ const Unternehmen = () => {
   );
 };
 
-// Timeline-Item Komponente
-const TimelineItem = ({ year, event }: { year: string; event: string }) => (
-  <div className="flex">
-    <div className="relative">
-      <div className="w-[10px] h-[10px] rounded-full bg-blue-600 border-4 border-blue-100 absolute left-[12px] top-1 -translate-x-1/2"></div>
+// Modern Timeline Component
+const TimelineItem = ({ 
+  year, 
+  event, 
+  milestone = false,
+  description,
+  hasImage = false
+}: { 
+  year: string; 
+  event: string;
+  milestone?: boolean;
+  description?: string;
+  hasImage?: boolean;
+}) => (
+  <div className="relative pl-16">
+    {/* Year badge with dot */}
+    <div className="absolute left-0 flex flex-col items-center">
+      <div className={`w-12 h-12 rounded-full flex items-center justify-center z-10 ${milestone ? 'bg-blue-600' : 'bg-blue-100'}`}>
+        <span className={`text-sm font-bold ${milestone ? 'text-white' : 'text-blue-800'}`}>{year}</span>
+      </div>
+      {/* Icon for milestone */}
+      {milestone && (
+        <div className="absolute -top-1 -right-1">
+          <Badge variant="secondary" className="bg-blue-50 border-blue-200">
+            <Star className="h-3 w-3 text-blue-600 mr-0.5" />
+          </Badge>
+        </div>
+      )}
     </div>
-    <div className="ml-8">
-      <h3 className="font-bold text-blue-800">{year}</h3>
-      <p>{event}</p>
+    
+    {/* Content */}
+    <div>
+      <h3 className="font-bold text-lg text-blue-800">{event}</h3>
+      {description && (
+        <p className="mt-1 text-gray-600">{description}</p>
+      )}
+      
+      {/* Optional image placeholder for certain years */}
+      {hasImage && (
+        <div className="mt-3">
+          <Card className="overflow-hidden border-blue-100">
+            <CardContent className="p-0">
+              {/* Image placeholder */}
+              <div className="bg-blue-50 h-40 flex items-center justify-center">
+                <span className="text-blue-400 text-sm">Historisches Bildmaterial {year}</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   </div>
 );
