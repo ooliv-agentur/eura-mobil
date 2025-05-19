@@ -6,6 +6,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useOverlay } from "@/context/OverlayContext";
+import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface FullscreenMenuProps {
 
 const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
+  const { startBeraterFlow } = useWohnmobilberaterTrigger();
   
   // Control body scroll when menu is open
   useEffect(() => {
@@ -31,13 +33,20 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
+  const handleStartBerater = () => {
+    onClose(); // Close the menu first
+    setTimeout(() => {
+      startBeraterFlow(); // Open the berater dialog
+    }, 150); // Small delay to ensure smooth transition
+  };
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white overflow-y-auto">
       <div className="container mx-auto px-4 py-6 h-full">
         <div className="flex flex-col h-full">
-          {/* Top Area with Logo, Close, Language and CTA */}
+          {/* Top Area with Logo and Close */}
           <div className="flex justify-between items-center mb-8">
             <Link to="/" onClick={onClose} className="font-bold text-xl">
               EURA MOBIL
@@ -51,21 +60,9 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
           
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
-            {/* Language Selector */}
-            <Select defaultValue="de">
-              <SelectTrigger className="w-36">
-                <SelectValue placeholder="Sprache" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="de">Deutsch</SelectItem>
-                <SelectItem value="en">Englisch</SelectItem>
-                <SelectItem value="fr">Französisch</SelectItem>
-              </SelectContent>
-            </Select>
-            
-            {/* CTA Button */}
-            <Button className="w-full sm:w-auto">
+          {/* CTA Button moved out of the flex row */}
+          <div className="mb-8">
+            <Button className="w-full" onClick={handleStartBerater}>
               <Calendar className="mr-2 h-4 w-4" />
               Jetzt Beratung vereinbaren
             </Button>
@@ -163,6 +160,22 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   <Youtube className="h-6 w-6" />
                 </a>
               </div>
+            </div>
+            
+            {/* Language Selector moved to the bottom */}
+            <div className="mb-8">
+              <h2 className="text-lg font-bold mb-2">Sprache</h2>
+              <Separator className="mb-4" />
+              <Select defaultValue="de">
+                <SelectTrigger className="w-full sm:w-36">
+                  <SelectValue placeholder="Sprache" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="en">Englisch</SelectItem>
+                  <SelectItem value="fr">Französisch</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         </div>
