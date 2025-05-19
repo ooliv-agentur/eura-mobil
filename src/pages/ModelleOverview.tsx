@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { 
@@ -24,37 +25,37 @@ const ModelleOverview = () => {
   // Beispielmodelle
   const modelle = [
     {
-      id: 1,
+      id: "activa-one",
       name: "Activa One",
       description: "Kompaktes Einsteigermodell mit cleverer Raumnutzung. Ideal für Paare und kleine Familien.",
       imageUrl: "https://images.unsplash.com/photo-1532941781729-b8e6bf6a3d0c?w=500&auto=format"
     },
     {
-      id: 2,
+      id: "integra-line",
       name: "Integra Line",
       description: "Vollintegriertes Wohnmobil mit höchstem Komfort. Perfekt für längere Reisen zu jeder Jahreszeit.",
       imageUrl: "https://images.unsplash.com/photo-1593150532356-223f7151d4c4?w=500&auto=format"
     },
     {
-      id: 3,
+      id: "profila-t",
       name: "Profila T",
       description: "Teilintegriertes Modell mit optimalem Preis-Leistungs-Verhältnis. Großzügiger Wohnraum für bis zu 4 Personen.",
       imageUrl: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=500&auto=format"
     },
     {
-      id: 4,
+      id: "aventura",
       name: "Aventura",
       description: "Luxuriöses Reisemobil für anspruchsvolle Camper. Hochwertige Ausstattung und innovative Technologien.",
       imageUrl: "https://images.unsplash.com/photo-1464851707681-f9d5fdaccea8?w=500&auto=format"
     },
     {
-      id: 5,
+      id: "compacta",
       name: "Compacta",
       description: "Wendiges Stadtmobil unter 6 Metern Länge. Perfekt für spontane Wochenendtrips und urbane Abenteuer.",
       imageUrl: "https://images.unsplash.com/photo-1501600254222-20eeb3e1e342?w=500&auto=format"
     },
     {
-      id: 6,
+      id: "familia-l",
       name: "Familia L",
       description: "Geräumiges Familienmobil mit bis zu 6 Schlafplätzen. Großer Stauraum für Sportgeräte und Gepäck.",
       imageUrl: "https://images.unsplash.com/photo-1534430480872-3498386e7856?w=500&auto=format"
@@ -132,7 +133,9 @@ const ModelleOverview = () => {
                 <p className="text-sm text-gray-600">{modell.description}</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">Details ansehen</Button>
+                <Button variant="outline" className="w-full" asChild>
+                  <Link to={`/modelle/${modell.id}`}>Details ansehen</Link>
+                </Button>
               </CardFooter>
             </Card>
           ))}
