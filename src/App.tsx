@@ -26,6 +26,7 @@ import Doppelboden from "./pages/quality/Doppelboden";
 import Schlafkomfort from "./pages/quality/Schlafkomfort";
 import Kuechenwelt from "./pages/quality/Kuechenwelt";
 import Wellness from "./pages/quality/Wellness";
+import Kontakt from "./pages/Kontakt";
 
 const queryClient = new QueryClient();
 
@@ -57,9 +58,9 @@ const App = () => (
           <Route path="/qualitaet/schlafkomfort" element={<Schlafkomfort />} />
           <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
           <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
+          <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/service" element={<NotFound />} />
           <Route path="/ueber-uns" element={<NotFound />} />
-          <Route path="/kontakt" element={<NotFound />} />
           <Route path="/haendler-login" element={<NotFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
