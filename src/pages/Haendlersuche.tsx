@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -47,6 +46,8 @@ const Haendlersuche = () => {
   const [filteredDealers, setFilteredDealers] = useState<Dealer[]>([]);
   const [selectedRadius, setSelectedRadius] = useState("100");
   const [searchLocation, setSearchLocation] = useState<{lat: number, lng: number, radius?: number} | undefined>(undefined);
+  const [isSearching, setIsSearching] = useState(false);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   // Beispiel-Händler mit Koordinaten und Länderinformationen
   const exampleDealers: Dealer[] = [
@@ -205,6 +206,13 @@ const Haendlersuche = () => {
     };
   }, []);
 
+  // Handle radius changes
+  useEffect(() => {
+    if (searchLocation && searchQuery.trim().length >= 3) {
+      performSearch();
+    }
+  }, [selectedRadius]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
@@ -227,6 +235,19 @@ const Haendlersuche = () => {
           }
         }
       );
+
+      // Debounce the search function to avoid too many requests
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+
+      searchTimeoutRef.current = setTimeout(() => {
+        performSearch();
+      }, 500);
+    } else if (value.length === 0) {
+      // Reset to show all dealers when search input is cleared
+      setFilteredDealers(exampleDealers);
+      setSearchLocation(undefined);
     } else {
       setPlacePredictions([]);
       setShowPredictions(false);
@@ -236,13 +257,15 @@ const Haendlersuche = () => {
   const handlePredictionSelect = (prediction: any) => {
     setSearchQuery(prediction.description);
     setShowPredictions(false);
+    performSearch();
   };
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
+  const performSearch = async () => {
+    if (!searchQuery.trim() || searchQuery.trim().length < 3) return;
     
     try {
+      setIsSearching(true);
+      
       // Convert location to coordinates
       const geocoder = new window.google.maps.Geocoder();
       const result = await new Promise<any>((resolve, reject) => {
@@ -293,7 +316,14 @@ const Haendlersuche = () => {
       }, 100);
     } catch (error) {
       console.error("Geocoding error:", error);
+    } finally {
+      setIsSearching(false);
     }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    performSearch();
   };
 
   const handleDealerSelect = (dealerId: number) => {
@@ -348,7 +378,9 @@ const Haendlersuche = () => {
             <div className="w-full sm:w-40">
               <Select
                 value={selectedRadius}
-                onValueChange={setSelectedRadius}
+                onValueChange={(value) => {
+                  setSelectedRadius(value);
+                }}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Umkreis wählen" />
@@ -366,8 +398,13 @@ const Haendlersuche = () => {
             <Button 
               type="submit" 
               className="flex items-center gap-2 bg-red-600 hover:bg-red-700"
+              disabled={isSearching}
             >
-              <Search size={18} />
+              {isSearching ? (
+                <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full mr-2"/>
+              ) : (
+                <Search size={18} />
+              )}
               <span>Suchen</span>
             </Button>
           </form>

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
 
 interface SearchResult {
   id: string;
@@ -54,8 +55,10 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
+  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (isOpen && inputRef.current) {
@@ -68,6 +71,28 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
       setHasSearched(false);
     }
   }, [isOpen]);
+
+  // Search as user types with debounce
+  useEffect(() => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+
+    if (searchTerm.trim().length > 0) {
+      searchTimeoutRef.current = setTimeout(() => {
+        performSearch();
+      }, 300);
+    } else {
+      setResults([]);
+      setHasSearched(false);
+    }
+
+    return () => {
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
+  }, [searchTerm]);
 
   const performSearch = () => {
     if (searchTerm.trim() === "") {
@@ -90,6 +115,11 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     performSearch();
+  };
+
+  const handleResultClick = (path: string) => {
+    onClose();
+    navigate(path);
   };
 
   if (!isOpen) return null;
@@ -131,7 +161,11 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
           ) : (
             <ul className="space-y-6">
               {results.map((result) => (
-                <li key={result.id} className="border-b pb-4">
+                <li 
+                  key={result.id} 
+                  className="border-b pb-4 hover:bg-gray-50 p-3 cursor-pointer"
+                  onClick={() => handleResultClick(result.path)}
+                >
                   <h3 className="text-lg font-medium">{result.title}</h3>
                   <p className="text-gray-600 mt-1">{result.description}</p>
                   <p className="text-gray-400 text-sm mt-2">{result.path}</p>
