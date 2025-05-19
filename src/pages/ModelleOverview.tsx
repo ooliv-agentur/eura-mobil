@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Filter, Bed, Users } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -47,7 +46,6 @@ const ModelleOverview = () => {
   const [lengthFilter, setLengthFilter] = useState<string>("all");
   const [seatsFilter, setSeatsFilter] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<number[]>([50]);
-  const [showFilters, setShowFilters] = useState<boolean>(false);
   const [filteredModels, setFilteredModels] = useState<ModelData[]>([]);
 
   // All EURA MOBIL models with realistic data
@@ -249,77 +247,76 @@ const ModelleOverview = () => {
       <div className="container mx-auto px-4 py-6">
         <h1 className="text-2xl md:text-3xl font-bold mb-6">Unsere Modelle im Überblick</h1>
         
-        {/* Mobile Filter Toggle */}
-        <div className="md:hidden mb-4">
-          <Button 
-            variant="outline" 
-            className="w-full flex items-center justify-center gap-2"
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            <Filter className="h-4 w-4" />
-            Filter {showFilters ? 'ausblenden' : 'anzeigen'}
-          </Button>
-        </div>
-
-        {/* Filter Section - Responsive */}
-        <div className={`${showFilters ? 'block' : 'hidden'} md:block`}>
-          <div className="bg-gray-100 p-4 rounded-lg mb-6 space-y-4">
-            <h2 className="font-semibold">Filter</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Länge</label>
-                <Select value={lengthFilter} onValueChange={setLengthFilter}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Länge auswählen" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Alle Längen</SelectItem>
-                    {lengthRanges.map(range => (
-                      <SelectItem key={range.value} value={range.value}>
-                        {range.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Sitzplätze</label>
-                <Select value={seatsFilter} onValueChange={setSeatsFilter}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sitzplätze auswählen" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Alle Sitzplätze</SelectItem>
-                    <SelectItem value="2">2 Sitzplätze</SelectItem>
-                    <SelectItem value="3">3 Sitzplätze</SelectItem>
-                    <SelectItem value="4">4 Sitzplätze</SelectItem>
-                    <SelectItem value="5plus">5+ Sitzplätze</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Preisbereich: bis {formatPrice(priceRange[0] * 1000)}</label>
-                <Slider
-                  min={50}
-                  max={150}
-                  step={5}
-                  value={priceRange}
-                  onValueChange={setPriceRange}
-                />
-              </div>
+        {/* Filter Section - Always visible */}
+        <div className="bg-gray-100 p-4 rounded-lg mb-6 space-y-4 sticky top-0 z-10">
+          <h2 className="font-semibold">Filter</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Länge</label>
+              <Select value={lengthFilter} onValueChange={setLengthFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Länge auswählen" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Alle Längen</SelectItem>
+                  {lengthRanges.map(range => (
+                    <SelectItem key={range.value} value={range.value}>
+                      {range.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             
-            {/* Filter results count */}
-            <div className="text-sm text-gray-600">
-              {filteredModels.length} {filteredModels.length === 1 ? 'Modell' : 'Modelle'} gefunden
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Sitzplätze</label>
+              <Select value={seatsFilter} onValueChange={setSeatsFilter}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Sitzplätze auswählen" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Alle Sitzplätze</SelectItem>
+                  <SelectItem value="2">2 Sitzplätze</SelectItem>
+                  <SelectItem value="3">3 Sitzplätze</SelectItem>
+                  <SelectItem value="4">4 Sitzplätze</SelectItem>
+                  <SelectItem value="5plus">5+ Sitzplätze</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Preisbereich: bis {formatPrice(priceRange[0] * 1000)}</label>
+              <Slider
+                min={50}
+                max={150}
+                step={5}
+                value={priceRange}
+                onValueChange={setPriceRange}
+              />
+            </div>
+          </div>
+          
+          {/* Filter results count */}
+          <div className="text-sm text-gray-600 flex justify-between items-center">
+            <div>{filteredModels.length} {filteredModels.length === 1 ? 'Modell' : 'Modelle'} gefunden</div>
+            {(lengthFilter !== "all" || seatsFilter !== "all" || priceRange[0] !== 50) && (
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => {
+                  setLengthFilter("all");
+                  setSeatsFilter("all");
+                  setPriceRange([50]);
+                }}
+              >
+                Filter zurücksetzen
+              </Button>
+            )}
           </div>
         </div>
         
-        {/* Mobile Accordion Filter for Small Screens */}
+        {/* Mobile Accordion Categories */}
         <div className="md:hidden mb-6">
           <Accordion type="single" collapsible className="w-full">
             <AccordionItem value="categories">
