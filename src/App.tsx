@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { WohnmobilberaterProvider } from "./context/WohnmobilberaterContext";
+import { OverlayProvider } from "./context/OverlayContext";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
@@ -40,44 +41,46 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <WohnmobilberaterProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/berater" element={<Index />} />
-            <Route path="/modelle" element={<ModelleOverview />} />
-            <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
-            <Route path="/modelle/:modelId" element={<ProductDetail />} />
-            <Route path="/modelle/activa-one" element={<ActivaOneDetail />} />
-            <Route path="/haendler" element={<Haendlersuche />} />
-            <Route path="/karriere" element={<Karriere />} />
-            <Route path="/unternehmen" element={<Unternehmen />} />
-            <Route path="/downloads" element={<Downloads />} />
-            <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
-            <Route path="/konfigurator" element={<Konfigurator />} />
-            <Route path="/modellvergleich" element={<Modellvergleich />} />
-            <Route path="/qualitaet" element={<QualitaetVorteile />} />
-            <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
-            <Route path="/qualitaet/winterfestigkeit" element={<Winterfestigkeit />} />
-            <Route path="/qualitaet/leichtbau" element={<Leichtbauarchitektur />} />
-            <Route path="/qualitaet/moebelbau" element={<Moebelbau />} />
-            <Route path="/qualitaet/doppelboden" element={<Doppelboden />} />
-            <Route path="/qualitaet/schlafkomfort" element={<Schlafkomfort />} />
-            <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
-            <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
-            <Route path="/kontakt" element={<Kontakt />} />
-            <Route path="/impressum" element={<Impressum />} />
-            <Route path="/datenschutz" element={<Datenschutz />} />
-            <Route path="/agb" element={<AGB />} />
-            <Route path="/service" element={<NotFound />} />
-            <Route path="/ueber-uns" element={<NotFound />} />
-            <Route path="/haendler-login" element={<NotFound />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <OverlayProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/berater" element={<Index />} />
+              <Route path="/modelle" element={<ModelleOverview />} />
+              <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
+              <Route path="/modelle/:modelId" element={<ProductDetail />} />
+              <Route path="/modelle/activa-one" element={<ActivaOneDetail />} />
+              <Route path="/haendler" element={<Haendlersuche />} />
+              <Route path="/karriere" element={<Karriere />} />
+              <Route path="/unternehmen" element={<Unternehmen />} />
+              <Route path="/downloads" element={<Downloads />} />
+              <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
+              <Route path="/konfigurator" element={<Konfigurator />} />
+              <Route path="/modellvergleich" element={<Modellvergleich />} />
+              <Route path="/qualitaet" element={<QualitaetVorteile />} />
+              <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
+              <Route path="/qualitaet/winterfestigkeit" element={<Winterfestigkeit />} />
+              <Route path="/qualitaet/leichtbau" element={<Leichtbauarchitektur />} />
+              <Route path="/qualitaet/moebelbau" element={<Moebelbau />} />
+              <Route path="/qualitaet/doppelboden" element={<Doppelboden />} />
+              <Route path="/qualitaet/schlafkomfort" element={<Schlafkomfort />} />
+              <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
+              <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
+              <Route path="/kontakt" element={<Kontakt />} />
+              <Route path="/impressum" element={<Impressum />} />
+              <Route path="/datenschutz" element={<Datenschutz />} />
+              <Route path="/agb" element={<AGB />} />
+              <Route path="/service" element={<NotFound />} />
+              <Route path="/ueber-uns" element={<NotFound />} />
+              <Route path="/haendler-login" element={<NotFound />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </OverlayProvider>
       </WohnmobilberaterProvider>
     </TooltipProvider>
   </QueryClientProvider>
