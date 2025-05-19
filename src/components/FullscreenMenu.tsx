@@ -1,10 +1,10 @@
 
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Calendar, X } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -12,6 +12,22 @@ interface FullscreenMenuProps {
 }
 
 const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
+  // Control body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      // Prevent scrolling on the background content
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Re-enable scrolling when menu is closed
+      document.body.style.overflow = '';
+    }
+    
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (

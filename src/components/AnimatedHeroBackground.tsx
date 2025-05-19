@@ -1,12 +1,23 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface AnimatedHeroBackgroundProps {
   className?: string;
+  isPaused?: boolean;
 }
 
-const AnimatedHeroBackground: React.FC<AnimatedHeroBackgroundProps> = ({ className }) => {
+const AnimatedHeroBackground: React.FC<AnimatedHeroBackgroundProps> = ({ 
+  className,
+  isPaused = false 
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    // Update active state when isPaused prop changes
+    setIsActive(!isPaused);
+  }, [isPaused]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -63,6 +74,11 @@ const AnimatedHeroBackground: React.FC<AnimatedHeroBackgroundProps> = ({ classNa
 
     // Animation function
     const animate = () => {
+      // Skip animation if paused
+      if (!isActive) {
+        return;
+      }
+      
       // Clear canvas with semi-transparent background to create trail effect
       ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -86,17 +102,23 @@ const AnimatedHeroBackground: React.FC<AnimatedHeroBackgroundProps> = ({ classNa
         ctx.fill();
       });
       
-      requestAnimationFrame(animate);
+      // Request next frame only if active
+      animationRef.current = requestAnimationFrame(animate);
     };
 
     // Start animation
-    animate();
+    if (isActive) {
+      animationRef.current = requestAnimationFrame(animate);
+    }
 
     // Cleanup function
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
-  }, []);
+  }, [isActive]);
 
   return <canvas ref={canvasRef} className={`absolute inset-0 w-full h-full ${className}`} />;
 };

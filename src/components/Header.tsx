@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import FullscreenMenu from "./FullscreenMenu";
 import SearchOverlay from "./SearchOverlay";
-import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

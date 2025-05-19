@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -39,6 +40,8 @@ const newsItems = [
 ];
 
 const Home = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -46,7 +49,7 @@ const Home = () => {
       <main className="flex-1">
         {/* Enhanced Hero Section */}
         <section className="relative w-full h-screen flex justify-center items-center overflow-hidden">
-          <AnimatedHeroBackground className="z-0" />
+          <AnimatedHeroBackground className="z-0" isPaused={menuOpen} />
           <div 
             className="absolute inset-0 bg-gradient-to-b from-transparent to-white/30 z-10"
             aria-hidden="true"
