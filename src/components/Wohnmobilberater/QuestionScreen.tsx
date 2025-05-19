@@ -20,6 +20,12 @@ const QuestionScreen = ({
   onNext,
   onBack,
 }: QuestionScreenProps) => {
+  // Function to handle option selection
+  const handleOptionSelect = (option: string) => {
+    // Immediately proceed to next step when an option is selected
+    onNext(option);
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div className="sticky top-0 bg-white p-4 rounded-lg shadow-sm">
@@ -45,7 +51,7 @@ const QuestionScreen = ({
             className={`cursor-pointer ${
               selectedOption === option ? "border-blue-500 border-2" : ""
             }`}
-            onClick={() => onNext(option)}
+            onClick={() => handleOptionSelect(option)}
           >
             <CardContent className="p-4 text-center">{option}</CardContent>
           </Card>
