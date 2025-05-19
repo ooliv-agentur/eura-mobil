@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -102,7 +101,7 @@ const ActivaOneDetail = () => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Header />
       
       <main className="flex-1">
@@ -259,21 +258,43 @@ const ActivaOneDetail = () => {
         <section className="container mx-auto px-4 py-8 space-y-4">
           <h2 className="text-xl font-bold mb-4">Weitere Informationen</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Button variant="outline" className="flex items-center gap-2 justify-center">
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2 justify-center"
+              onClick={() => window.open('https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE', '_blank')}
+            >
               <Settings size={18} />
               Konfigurator
             </Button>
-            <Button variant="outline" className="flex items-center gap-2 justify-center">
-              <GitCompare size={18} />
-              Modelle vergleichen
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2 justify-center" 
+              asChild
+            >
+              <Link to="/modellvergleich?model=activa-one">
+                <GitCompare size={18} />
+                Modelle vergleichen
+              </Link>
             </Button>
-            <Button variant="outline" className="flex items-center gap-2 justify-center">
-              <Users size={18} />
-              Wohnmobilberater
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2 justify-center" 
+              asChild
+            >
+              <Link to="/berater?preselect=activa-one">
+                <Users size={18} />
+                Wohnmobilberater
+              </Link>
             </Button>
-            <Button variant="outline" className="flex items-center gap-2 justify-center">
-              <Car size={18} />
-              Gebraucht- & Mietfahrzeuge
+            <Button 
+              variant="outline" 
+              className="flex items-center gap-2 justify-center" 
+              asChild
+            >
+              <Link to="/gebrauchtfahrzeuge">
+                <Car size={18} />
+                Gebraucht- & Mietfahrzeuge
+              </Link>
             </Button>
           </div>
         </section>
