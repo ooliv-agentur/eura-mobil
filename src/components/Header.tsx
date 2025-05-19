@@ -14,6 +14,7 @@ const Header = () => {
             <li><Link to="/modelle" className="hover:text-blue-600">Modelle</Link></li>
             <li><Link to="/berater" className="hover:text-blue-600">Beratung</Link></li>
             <li><Link to="/haendler" className="hover:text-blue-600">Händler</Link></li>
+            <li><Link to="/karriere" className="hover:text-blue-600">Karriere</Link></li>
             <li><Link to="/news" className="hover:text-blue-600">News</Link></li>
           </ul>
         </nav>
