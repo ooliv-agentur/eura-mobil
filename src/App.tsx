@@ -14,6 +14,7 @@ import Karriere from "./pages/Karriere";
 import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
 import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
+import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/berater" element={<Index />} />
           <Route path="/modelle" element={<ModelleOverview />} />
+          <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
           <Route path="/modelle/:modelId" element={<ProductDetail />} />
           <Route path="/haendler" element={<Haendlersuche />} />
           <Route path="/karriere" element={<Karriere />} />

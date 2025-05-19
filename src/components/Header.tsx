@@ -18,6 +18,7 @@ const Header = () => {
         </Link>
         <nav className="hidden md:block">
           <ul className="flex space-x-6">
+            <li><Link to="/wohnmobiltypen" className="hover:text-blue-600">Wohnmobiltypen</Link></li>
             <li><Link to="/modelle" className="hover:text-blue-600">Modelle</Link></li>
             <li><Link to="/gebrauchtfahrzeuge" className="hover:text-blue-600">Gebraucht & Miete</Link></li>
             <li><Link to="/berater" className="hover:text-blue-600">Beratung</Link></li>
@@ -40,6 +41,11 @@ const Header = () => {
             <nav className="flex flex-col h-full">
               <div className="flex-1 mt-8">
                 <ul className="space-y-6 text-lg font-medium">
+                  <li>
+                    <SheetClose asChild>
+                      <Link to="/wohnmobiltypen" className="block hover:text-blue-600">Wohnmobiltypen</Link>
+                    </SheetClose>
+                  </li>
                   <li>
                     <SheetClose asChild>
                       <Link to="/modelle" className="block hover:text-blue-600">Wohnmobile</Link>
