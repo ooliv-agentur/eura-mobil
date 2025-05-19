@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Calendar, X } from "lucide-react";
@@ -36,7 +37,11 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const handleStartBerater = () => {
     onClose(); // Close the menu first
     setTimeout(() => {
-      startBeraterFlow(); // Open the berater dialog
+      // On the konfigurator page, open Berater fullscreen
+      const isKonfiguratorPage = location.pathname === '/konfigurator';
+      startBeraterFlow({
+        mode: isKonfiguratorPage ? "fullpage" : "dialog"
+      });
     }, 150); // Small delay to ensure smooth transition
   };
 
