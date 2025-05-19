@@ -1,9 +1,10 @@
 
 import { Link } from "react-router-dom";
-import { ArrowRight, Book, Building, Flag, MapPin } from "lucide-react";
+import { ArrowRight, Book, Building, Flag, MapPin, CalendarDays } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Unternehmen = () => {
   return (
@@ -36,6 +37,45 @@ const Unternehmen = () => {
             Perfektion teilen. Jedes Fahrzeug wird mit größter Sorgfalt hergestellt und durchläuft 
             strenge Qualitätskontrollen, bevor es unser Werk verlässt.
           </p>
+        </section>
+        
+        {/* Neue Timeline Sektion */}
+        <section className="mb-10">
+          <div className="flex items-center gap-2 mb-3">
+            <CalendarDays className="text-blue-600" />
+            <h2 className="text-xl font-semibold">Unsere Historie – seit 1959 auf Tour</h2>
+          </div>
+          
+          <p className="text-base mb-4">
+            Von der Wohnwagen-Produktion bis zum Reisemobil-Pionier.
+          </p>
+          
+          <ScrollArea className="h-[320px] w-full rounded-md border p-4">
+            <div className="relative">
+              {/* Zeitachse (vertikale Linie) */}
+              <div className="absolute top-0 bottom-0 left-[18px] w-[2px] bg-blue-200"></div>
+              
+              {/* Zeitmarken */}
+              <div className="space-y-8 relative">
+                <TimelineItem year="1959" event="Gründung als Blessing KG" />
+                <TimelineItem year="1983" event="Start der Reisemobil-Produktion" />
+                <TimelineItem year="2005" event="Übernahme durch Trigano" />
+                <TimelineItem year="2016" event="Einführung 10 Jahre Dichtigkeitsgarantie" />
+                <TimelineItem year="2019" event="60 Jahre Jubiläum" />
+                <TimelineItem year="2024" event="Launch Xtura 4×4 Fernreisemobil" />
+              </div>
+            </div>
+          </ScrollArea>
+          
+          {/* Optionaler CTA */}
+          <div className="mt-6 text-center">
+            <Button className="gap-2" asChild>
+              <Link to="/werksbesichtigung">
+                Zur Werksführung
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </section>
         
         <section className="mb-8">
@@ -99,5 +139,18 @@ const Unternehmen = () => {
     </div>
   );
 };
+
+// Timeline-Item Komponente
+const TimelineItem = ({ year, event }: { year: string; event: string }) => (
+  <div className="flex">
+    <div className="relative">
+      <div className="w-[10px] h-[10px] rounded-full bg-blue-600 border-4 border-blue-100 absolute left-[12px] top-1 -translate-x-1/2"></div>
+    </div>
+    <div className="ml-8">
+      <h3 className="font-bold text-blue-800">{year}</h3>
+      <p>{event}</p>
+    </div>
+  </div>
+);
 
 export default Unternehmen;
