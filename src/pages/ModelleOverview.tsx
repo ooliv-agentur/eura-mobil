@@ -44,8 +44,8 @@ interface ModelData {
 
 const ModelleOverview = () => {
   // Filter states
-  const [lengthFilter, setLengthFilter] = useState<string>("");
-  const [seatsFilter, setSeatsFilter] = useState<string>("");
+  const [lengthFilter, setLengthFilter] = useState<string>("all");
+  const [seatsFilter, setSeatsFilter] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<number[]>([50]);
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const [filteredModels, setFilteredModels] = useState<ModelData[]>([]);
@@ -209,7 +209,7 @@ const ModelleOverview = () => {
     let result = [...allModels];
     
     // Apply length filter
-    if (lengthFilter) {
+    if (lengthFilter && lengthFilter !== "all") {
       const selectedRange = lengthRanges.find(range => range.value === lengthFilter);
       if (selectedRange) {
         result = result.filter(model => 
@@ -219,7 +219,7 @@ const ModelleOverview = () => {
     }
     
     // Apply seats filter
-    if (seatsFilter) {
+    if (seatsFilter && seatsFilter !== "all") {
       if (seatsFilter === "5plus") {
         result = result.filter(model => model.seats >= 5);
       } else {
@@ -274,7 +274,7 @@ const ModelleOverview = () => {
                     <SelectValue placeholder="Länge auswählen" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Alle Längen</SelectItem>
+                    <SelectItem value="all">Alle Längen</SelectItem>
                     {lengthRanges.map(range => (
                       <SelectItem key={range.value} value={range.value}>
                         {range.label}
@@ -291,7 +291,7 @@ const ModelleOverview = () => {
                     <SelectValue placeholder="Sitzplätze auswählen" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Alle Sitzplätze</SelectItem>
+                    <SelectItem value="all">Alle Sitzplätze</SelectItem>
                     <SelectItem value="2">2 Sitzplätze</SelectItem>
                     <SelectItem value="3">3 Sitzplätze</SelectItem>
                     <SelectItem value="4">4 Sitzplätze</SelectItem>
@@ -392,8 +392,8 @@ const ModelleOverview = () => {
               variant="outline" 
               className="mt-4"
               onClick={() => {
-                setLengthFilter("");
-                setSeatsFilter("");
+                setLengthFilter("all");
+                setSeatsFilter("all");
                 setPriceRange([50]);
               }}
             >
