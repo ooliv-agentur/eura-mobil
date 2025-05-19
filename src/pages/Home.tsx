@@ -1,14 +1,24 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
 
+// Erweiterte Modellliste
 const modelTypes = [
-  { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger", path: "/modelle/activa-one" },
-  { name: "Profila", description: "Komfort für unterwegs", path: "/modelle/profila" },
-  { name: "Integra", description: "Luxus auf Rädern", path: "/modelle/integra" },
+  { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one" },
+  { name: "Profila T", description: "Komfort und Flexibilität für unterwegs", path: "/modelle/profila-t" },
+  { name: "Profila RS", description: "Großzügiger Wohnraum mit praktischer Aufteilung", path: "/modelle/profila-rs" },
+  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra" },
+  { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura" },
+  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura" },
 ];
 
 const newsItems = [
@@ -47,10 +57,38 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Model Types Grid */}
+        {/* Model Types Carousel */}
         <section className="py-10 px-4">
           <h2 className="text-2xl font-bold mb-6 text-center">Unsere Wohnmobil-Serien</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          {/* Mobile Carousel */}
+          <div className="md:hidden">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {modelTypes.map((model) => (
+                  <CarouselItem key={model.name} className="pl-1 md:basis-1/2 lg:basis-1/3">
+                    <Card className="h-full">
+                      <CardContent className="p-6 flex flex-col h-full">
+                        <div className="h-40 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
+                          [Modellbild]
+                        </div>
+                        <h3 className="text-xl font-bold">{model.name}</h3>
+                        <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
+                        <Button variant="outline" asChild className="w-full">
+                          <Link to={model.path}>Mehr erfahren</Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-1 bg-white" />
+              <CarouselNext className="right-1 bg-white" />
+            </Carousel>
+          </div>
+          
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-4">
             {modelTypes.map((model) => (
               <Card key={model.name} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
@@ -65,6 +103,13 @@ const Home = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          
+          {/* "Alle Modelle ansehen" Button */}
+          <div className="mt-8 text-center">
+            <Button asChild>
+              <Link to="/modelle">Alle Modelle ansehen</Link>
+            </Button>
           </div>
         </section>
 
