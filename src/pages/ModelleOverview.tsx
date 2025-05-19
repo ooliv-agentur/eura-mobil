@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Filter, Bed, Users } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -45,7 +46,7 @@ const ModelleOverview = () => {
   // Filter states
   const [lengthFilter, setLengthFilter] = useState<string>("all");
   const [seatsFilter, setSeatsFilter] = useState<string>("all");
-  const [priceRange, setPriceRange] = useState<number[]>([50]);
+  const [priceRange, setPriceRange] = useState<number[]>([160]); // Default to max price
   const [filteredModels, setFilteredModels] = useState<ModelData[]>([]);
 
   // All EURA MOBIL models with realistic data
@@ -61,8 +62,8 @@ const ModelleOverview = () => {
       lengthMax: 6.36,
       seats: 4,
       sleepingPlaces: 2,
-      priceMin: 52000,
-      priceMax: 68000
+      priceMin: 62000,
+      priceMax: 78000
     },
     {
       id: "activa-one",
@@ -76,7 +77,7 @@ const ModelleOverview = () => {
       seats: 5,
       sleepingPlaces: 6,
       priceMin: 69000,
-      priceMax: 79000
+      priceMax: 89000
     },
     {
       id: "profila-t-fiat",
@@ -89,8 +90,8 @@ const ModelleOverview = () => {
       lengthMax: 7.41,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 75000,
-      priceMax: 90000
+      priceMin: 85000,
+      priceMax: 100000
     },
     {
       id: "profila-rs",
@@ -103,8 +104,8 @@ const ModelleOverview = () => {
       lengthMax: 7.41,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 85000,
-      priceMax: 98000
+      priceMin: 95000,
+      priceMax: 108000
     },
     {
       id: "profila-t-mercedes",
@@ -117,8 +118,8 @@ const ModelleOverview = () => {
       lengthMax: 7.41,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 99000,
-      priceMax: 110000
+      priceMin: 109000,
+      priceMax: 120000
     },
     {
       id: "contura",
@@ -131,8 +132,8 @@ const ModelleOverview = () => {
       lengthMax: 7.61,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 105000,
-      priceMax: 120000
+      priceMin: 115000,
+      priceMax: 130000
     },
     {
       id: "integra-line-fiat",
@@ -145,8 +146,8 @@ const ModelleOverview = () => {
       lengthMax: 7.81,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 95000,
-      priceMax: 115000
+      priceMin: 105000,
+      priceMax: 125000
     },
     {
       id: "integra-line-gt-mercedes",
@@ -159,8 +160,8 @@ const ModelleOverview = () => {
       lengthMax: 7.81,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 115000,
-      priceMax: 130000
+      priceMin: 125000,
+      priceMax: 140000
     },
     {
       id: "integra",
@@ -173,8 +174,8 @@ const ModelleOverview = () => {
       lengthMax: 8.99,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 125000,
-      priceMax: 150000
+      priceMin: 135000,
+      priceMax: 160000
     },
     {
       id: "xtura",
@@ -187,8 +188,8 @@ const ModelleOverview = () => {
       lengthMax: 7.61,
       seats: 4,
       sleepingPlaces: 4,
-      priceMin: 110000,
-      priceMax: 135000
+      priceMin: 120000,
+      priceMax: 145000
     }
   ];
 
@@ -288,8 +289,8 @@ const ModelleOverview = () => {
             <div className="space-y-2">
               <label className="text-sm font-medium">Preisbereich: bis {formatPrice(priceRange[0] * 1000)}</label>
               <Slider
-                min={50}
-                max={150}
+                min={60}
+                max={160}
                 step={5}
                 value={priceRange}
                 onValueChange={setPriceRange}
@@ -300,14 +301,14 @@ const ModelleOverview = () => {
           {/* Filter results count */}
           <div className="text-sm text-gray-600 flex justify-between items-center">
             <div>{filteredModels.length} {filteredModels.length === 1 ? 'Modell' : 'Modelle'} gefunden</div>
-            {(lengthFilter !== "all" || seatsFilter !== "all" || priceRange[0] !== 50) && (
+            {(lengthFilter !== "all" || seatsFilter !== "all" || priceRange[0] !== 160) && (
               <Button 
                 variant="outline" 
                 size="sm"
                 onClick={() => {
                   setLengthFilter("all");
                   setSeatsFilter("all");
-                  setPriceRange([50]);
+                  setPriceRange([160]);
                 }}
               >
                 Filter zurücksetzen
@@ -391,7 +392,7 @@ const ModelleOverview = () => {
               onClick={() => {
                 setLengthFilter("all");
                 setSeatsFilter("all");
-                setPriceRange([50]);
+                setPriceRange([160]);
               }}
             >
               Filter zurücksetzen
