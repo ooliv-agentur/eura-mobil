@@ -5,6 +5,7 @@ import { Facebook, Instagram, Youtube, Calendar, X } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { useOverlay } from "@/context/OverlayContext";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -12,6 +13,8 @@ interface FullscreenMenuProps {
 }
 
 const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
+  const { setActiveOverlay } = useOverlay();
+  
   // Control body scroll when menu is open
   useEffect(() => {
     if (isOpen) {

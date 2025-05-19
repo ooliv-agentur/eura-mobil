@@ -1,21 +1,39 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import FullscreenMenu from "./FullscreenMenu";
 import SearchOverlay from "./SearchOverlay";
+import { useOverlay } from "@/context/OverlayContext";
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { activeOverlay, setActiveOverlay, isOverlayActive } = useOverlay();
   const [searchOpen, setSearchOpen] = useState(false);
   
+  // Sync search state with overlay context
+  useEffect(() => {
+    if (searchOpen && activeOverlay !== "search") {
+      setSearchOpen(false);
+    } else if (!searchOpen && activeOverlay === "search") {
+      setSearchOpen(true);
+    }
+  }, [activeOverlay, searchOpen]);
+
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    if (isOverlayActive("menu")) {
+      setActiveOverlay("none");
+    } else {
+      setActiveOverlay("menu");
+    }
   };
 
   const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
+    if (isOverlayActive("search")) {
+      setActiveOverlay("none");
+    } else {
+      setActiveOverlay("search");
+    }
   };
 
   return (
@@ -39,7 +57,7 @@ const Header = () => {
           
           {/* Burger Menu Button */}
           <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Menü öffnen">
-            {menuOpen ? (
+            {isOverlayActive("menu") ? (
               <X className="h-6 w-6" />
             ) : (
               <Menu className="h-6 w-6" />
@@ -48,10 +66,16 @@ const Header = () => {
         </div>
         
         {/* Fullscreen Menu Overlay */}
-        <FullscreenMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+        <FullscreenMenu 
+          isOpen={isOverlayActive("menu")} 
+          onClose={() => setActiveOverlay("none")} 
+        />
         
         {/* Search Overlay */}
-        <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+        <SearchOverlay 
+          isOpen={searchOpen} 
+          onClose={() => setActiveOverlay("none")} 
+        />
       </div>
     </header>
   );
