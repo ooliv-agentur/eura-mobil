@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Check, Download, MapPin, Compare } from "lucide-react";
+import { Check, Download, MapPin } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -170,7 +170,6 @@ const ProductDetail = () => {
             </Button>
             <Button variant="outline" className="w-full flex justify-center gap-2" asChild>
               <Link to="/modellvergleich">
-                <Compare size={16} />
                 Mit anderem Modell vergleichen
               </Link>
             </Button>
