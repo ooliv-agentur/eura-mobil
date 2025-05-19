@@ -16,6 +16,7 @@ import Downloads from "./pages/Downloads";
 import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import ActivaOneDetail from "./pages/ActivaOneDetail";
+import Konfigurator from "./pages/Konfigurator";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/unternehmen" element={<Unternehmen />} />
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
+          <Route path="/konfigurator" element={<Konfigurator />} />
           <Route path="/service" element={<NotFound />} />
           <Route path="/ueber-uns" element={<NotFound />} />
           <Route path="/kontakt" element={<NotFound />} />

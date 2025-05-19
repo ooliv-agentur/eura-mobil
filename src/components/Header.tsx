@@ -20,6 +20,7 @@ const Header = () => {
           <ul className="flex space-x-6">
             <li><Link to="/wohnmobiltypen" className="hover:text-blue-600">Wohnmobiltypen</Link></li>
             <li><Link to="/modelle" className="hover:text-blue-600">Modelle</Link></li>
+            <li><Link to="/konfigurator" className="hover:text-blue-600">Konfigurator</Link></li>
             <li><Link to="/gebrauchtfahrzeuge" className="hover:text-blue-600">Gebraucht & Miete</Link></li>
             <li><Link to="/berater" className="hover:text-blue-600">Beratung</Link></li>
             <li><Link to="/haendler" className="hover:text-blue-600">Händler</Link></li>
@@ -49,6 +50,11 @@ const Header = () => {
                   <li>
                     <SheetClose asChild>
                       <Link to="/modelle" className="block hover:text-blue-600">Wohnmobile</Link>
+                    </SheetClose>
+                  </li>
+                  <li>
+                    <SheetClose asChild>
+                      <Link to="/konfigurator" className="block hover:text-blue-600">Konfigurator</Link>
                     </SheetClose>
                   </li>
                   <li>
