@@ -17,6 +17,8 @@ const Index = () => {
     // Set to fullpage mode and start the advisor
     setDisplayMode("fullpage");
     startBerater(step === '1' ? 1 : 0); // Start with intro or step 1 based on URL parameter
+    
+    console.log("Starting berater with step:", step === '1' ? 1 : 0);
   }, [setDisplayMode, startBerater, location.search]);
 
   return (

@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useWohnmobilberater } from "@/context/WohnmobilberaterContext";
 import { X } from "lucide-react";
@@ -29,6 +29,13 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
   
   const navigate = useNavigate();
 
+  // Debug the current state
+  useEffect(() => {
+    console.log("Current step:", currentStep);
+    console.log("Selected option:", selectedOption);
+    console.log("Answers:", answers);
+  }, [currentStep, selectedOption, answers]);
+
   // Function to handle closing the berater and navigating if needed
   const handleClose = () => {
     closeBerater();
@@ -37,6 +44,12 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
     if (displayMode === "fullpage") {
       navigate(-1);
     }
+  };
+
+  // Wrapper for handleNext to ensure it works properly
+  const handleNextWrapper = (option: string) => {
+    console.log("handleNextWrapper called with option:", option);
+    handleNext(option);
   };
 
   // Custom back handler that closes the berater on step 1
@@ -50,7 +63,7 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
 
   const renderContent = () => {
     if (currentStep === 0) {
-      return <IntroScreen onStart={() => handleNext("")} />;
+      return <IntroScreen onStart={() => handleNextWrapper("")} />;
     } else if (currentStep >= 1 && currentStep <= totalSteps) {
       return (
         <QuestionScreen
@@ -58,7 +71,7 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
           currentStep={currentStep}
           totalSteps={totalSteps}
           selectedOption={selectedOption}
-          onNext={handleNext}
+          onNext={handleNextWrapper}
           onBack={handleCustomBack}
         />
       );

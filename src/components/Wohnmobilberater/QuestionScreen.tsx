@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuestionData } from "@/context/WohnmobilberaterContext";
+import { useEffect } from "react";
 
 interface QuestionScreenProps {
   questionData: QuestionData;
@@ -20,8 +21,9 @@ const QuestionScreen = ({
   onNext,
   onBack,
 }: QuestionScreenProps) => {
-  // Function to handle option selection
+  // Function to handle option selection - ensure it directly progresses
   const handleOptionSelect = (option: string) => {
+    console.log("Wohnmobilberater option selected:", option);
     // Immediately proceed to next step when an option is selected
     onNext(option);
   };
@@ -63,8 +65,8 @@ const QuestionScreen = ({
           Zurück
         </Button>
         <Button
+          onClick={() => selectedOption && handleOptionSelect(selectedOption)}
           disabled={!selectedOption}
-          onClick={() => selectedOption && onNext(selectedOption)}
         >
           Weiter
         </Button>
