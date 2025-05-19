@@ -1,6 +1,5 @@
-
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Calendar, X } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +15,7 @@ interface FullscreenMenuProps {
 const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
+  const location = useLocation();
   
   // Control body scroll when menu is open
   useEffect(() => {
@@ -39,6 +39,9 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
       startBeraterFlow(); // Open the berater dialog
     }, 150); // Small delay to ensure smooth transition
   };
+
+  // Check if we're on the konfigurator page
+  const isKonfiguratorPage = location.pathname === '/konfigurator';
 
   if (!isOpen) return null;
 
@@ -64,7 +67,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           <div className="mb-8">
             <Button className="w-full" onClick={handleStartBerater}>
               <Calendar className="mr-2 h-4 w-4" />
-              Jetzt Beratung vereinbaren
+              {isKonfiguratorPage ? "Wohnmobil finden" : "Jetzt Beratung vereinbaren"}
             </Button>
           </div>
           
