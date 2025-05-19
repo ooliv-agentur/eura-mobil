@@ -11,6 +11,10 @@ import {
   CarouselNext, 
   CarouselPrevious 
 } from "@/components/ui/carousel";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import QuestionScreen from "@/components/QuestionScreen";
+import IntroScreen from "@/components/IntroScreen";
+import ResultScreen from "@/components/ResultScreen";
 
 // Erweiterte Modellliste
 const modelTypes = [
@@ -39,6 +43,79 @@ const newsItems = [
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [advisorDialogOpen, setAdvisorDialogOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const totalSteps = 3;
+
+  const questions = [
+    {
+      question: "Wie viele Personen reisen mit?",
+      options: ["1–2", "3–4", "5+"],
+    },
+    {
+      question: "Wann sind Sie unterwegs?",
+      options: ["Sommer", "Ganzjährig", "Winter"],
+    },
+    {
+      question: "Was ist Ihnen besonders wichtig?",
+      options: ["Komfort", "Stauraum", "Kompakte Größe", "Preis-Leistung"],
+    },
+  ];
+
+  const [answers, setAnswers] = useState<string[]>([]);
+
+  const handleStart = () => {
+    setCurrentStep(1);
+    setAdvisorDialogOpen(true);
+  };
+
+  const handleNext = (selectedOption: string) => {
+    const newAnswers = [...answers];
+    newAnswers[currentStep - 1] = selectedOption;
+    setAnswers(newAnswers);
+
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      setCurrentStep(totalSteps + 1); // Go to results
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    } else {
+      // Close the dialog if going back from first step
+      setAdvisorDialogOpen(false);
+      setCurrentStep(0);
+    }
+  };
+
+  const handleClose = () => {
+    setAdvisorDialogOpen(false);
+    setCurrentStep(0);
+    setAnswers([]);
+  };
+
+  const renderAdvisorContent = () => {
+    if (currentStep === 0) {
+      // This shouldn't normally be visible as we skip the intro
+      return <IntroScreen onStart={() => setCurrentStep(1)} />;
+    } else if (currentStep >= 1 && currentStep <= totalSteps) {
+      return (
+        <QuestionScreen
+          questionData={questions[currentStep - 1]}
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+          selectedOption={answers[currentStep - 1] || ""}
+          onNext={handleNext}
+          onBack={handleBack}
+        />
+      );
+    } else {
+      return <ResultScreen answers={answers} onRestart={() => setCurrentStep(0)} />;
+    }
+  };
   
   return (
     <Layout>
@@ -119,18 +196,27 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Wohnmobilberater Teaser */}
+        {/* Updated Wohnmobilberater Teaser */}
         <section className="py-10 px-4 bg-gray-100">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl font-bold mb-4">Welches Wohnmobil passt zu mir?</h2>
             <p className="mb-6">
               Finden Sie in nur wenigen Schritten das perfekte Wohnmobil für Ihre Bedürfnisse und Ansprüche.
             </p>
-            <Button asChild>
-              <Link to="/berater">Jetzt starten</Link>
+            <Button onClick={handleStart}>
+              Jetzt starten
             </Button>
           </div>
         </section>
+        
+        {/* Dialog for Wohnmobilberater content */}
+        <Dialog open={advisorDialogOpen} onOpenChange={handleClose}>
+          <DialogContent className="max-w-md p-0">
+            <div className="max-h-[80vh] overflow-auto p-4">
+              {renderAdvisorContent()}
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Dealer Search Teaser */}
         <section className="py-10 px-4">
