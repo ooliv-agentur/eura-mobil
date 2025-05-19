@@ -13,6 +13,7 @@ import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
 import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
+import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/karriere" element={<Karriere />} />
           <Route path="/unternehmen" element={<Unternehmen />} />
           <Route path="/downloads" element={<Downloads />} />
+          <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
           <Route path="/service" element={<NotFound />} />
           <Route path="/ueber-uns" element={<NotFound />} />
           <Route path="/kontakt" element={<NotFound />} />
