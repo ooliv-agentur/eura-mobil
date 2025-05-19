@@ -174,7 +174,7 @@ const Unternehmen = () => {
   );
 };
 
-// Modern Timeline Component
+// Modified Timeline Component to remove the redundant circle background
 const TimelineItem = ({ 
   year, 
   event, 
@@ -189,7 +189,7 @@ const TimelineItem = ({
   hasImage?: boolean;
 }) => (
   <div className="relative pl-16">
-    {/* Year badge with dot */}
+    {/* Year badge - removed the background dot/circle */}
     <div className="absolute left-0 flex flex-col items-center">
       <div className={`w-12 h-12 rounded-full flex items-center justify-center z-10 ${milestone ? 'bg-blue-600' : 'bg-blue-100'}`}>
         <span className={`text-sm font-bold ${milestone ? 'text-white' : 'text-blue-800'}`}>{year}</span>
