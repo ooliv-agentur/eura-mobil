@@ -167,10 +167,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </Select>
             </div>
             
-            {/* CTA Button moved to the bottom */}
+            {/* CTA Button updated to link directly to /berater?step=1 */}
             <div className="mb-8">
               <Button className="w-full" asChild>
-                <Link to="/berater" onClick={onClose}>
+                <Link to="/berater?step=1" onClick={onClose}>
                   <Calendar className="mr-2 h-4 w-4" />
                   {isKonfiguratorPage ? "Wohnmobil finden" : "Jetzt Beratung vereinbaren"}
                 </Link>
