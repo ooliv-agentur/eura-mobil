@@ -27,6 +27,7 @@ import Schlafkomfort from "./pages/quality/Schlafkomfort";
 import Kuechenwelt from "./pages/quality/Kuechenwelt";
 import Wellness from "./pages/quality/Wellness";
 import Kontakt from "./pages/Kontakt";
+import Modellvergleich from "./pages/Modellvergleich";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
           <Route path="/konfigurator" element={<Konfigurator />} />
+          <Route path="/modellvergleich" element={<Modellvergleich />} />
           <Route path="/qualitaet" element={<QualitaetVorteile />} />
           <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
           <Route path="/qualitaet/winterfestigkeit" element={<Winterfestigkeit />} />

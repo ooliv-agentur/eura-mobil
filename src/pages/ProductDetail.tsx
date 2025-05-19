@@ -1,12 +1,12 @@
 
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Check, Download, MapPin } from "lucide-react";
+import { Check, Download, MapPin, Compare } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -162,12 +162,17 @@ const ProductDetail = () => {
           
           {/* CTA Block */}
           <section className="my-8 space-y-4">
-            <Button className="w-full flex justify-center gap-2">
-              <MapPin size={16} />
-              Jetzt Händler finden
+            <Button className="w-full flex justify-center gap-2" asChild>
+              <Link to="/haendler">
+                <MapPin size={16} />
+                Jetzt Händler finden
+              </Link>
             </Button>
-            <Button variant="outline" className="w-full">
-              Modell vergleichen
+            <Button variant="outline" className="w-full flex justify-center gap-2" asChild>
+              <Link to="/modellvergleich">
+                <Compare size={16} />
+                Mit anderem Modell vergleichen
+              </Link>
             </Button>
           </section>
         </div>

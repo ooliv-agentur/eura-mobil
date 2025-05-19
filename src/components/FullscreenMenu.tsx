@@ -1,7 +1,6 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-import { X, ChevronDown, Facebook, Instagram, Youtube } from "lucide-react";
+import { X, ChevronDown, Facebook, Instagram, Youtube, Compare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -78,6 +77,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <MenuLink to="/wohnmobiltypen/integriert">Integriert</MenuLink>
                 <MenuLink to="/wohnmobiltypen/vans">Vans</MenuLink>
               </div>
+            </div>
+            <div className="flex mt-3 items-center">
+              <Compare className="h-4 w-4 mr-2" />
+              <MenuLink to="/modellvergleich">Modell vergleichen</MenuLink>
             </div>
           </MenuSection>
 
