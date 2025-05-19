@@ -134,7 +134,9 @@ const ModelleOverview = () => {
               </CardContent>
               <CardFooter>
                 <Button variant="outline" className="w-full" asChild>
-                  <Link to={`/modelle/${modell.id}`}>Details ansehen</Link>
+                  <Link to={modell.id === "activa-one" ? "/modelle/activa-one" : `/modelle/${modell.id}`}>
+                    Details ansehen
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
