@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Filter, Bed, Users } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { 
@@ -24,6 +24,11 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
+import { 
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "@/components/ui/collapsible";
 import { Link } from "react-router-dom";
 
 // Define model interfaces
@@ -48,6 +53,38 @@ const ModelleOverview = () => {
   const [seatsFilter, setSeatsFilter] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<number[]>([160]); // Default to max price
   const [filteredModels, setFilteredModels] = useState<ModelData[]>([]);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
+  const filterApplied = lengthFilter !== "all" || seatsFilter !== "all" || priceRange[0] !== 160;
+
+  // Handle filter changes
+  const handleLengthChange = (value: string) => {
+    setLengthFilter(value);
+    setIsFilterOpen(false);
+    scrollToResults();
+  };
+
+  const handleSeatsChange = (value: string) => {
+    setSeatsFilter(value);
+    setIsFilterOpen(false);
+    scrollToResults();
+  };
+
+  const handlePriceChange = (value: number[]) => {
+    setPriceRange(value);
+    setIsFilterOpen(false);
+    scrollToResults();
+  };
+
+  // Scroll to results after filter change
+  const scrollToResults = () => {
+    if (resultsRef.current) {
+      // Use scrollIntoView with a small delay to ensure DOM updates
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ block: 'start' });
+      }, 50);
+    }
+  };
 
   // All EURA MOBIL models with realistic data
   const allModels: ModelData[] = [
@@ -243,13 +280,99 @@ const ModelleOverview = () => {
     }).format(price);
   };
 
+  // Reset all filters
+  const resetFilters = () => {
+    setLengthFilter("all");
+    setSeatsFilter("all");
+    setPriceRange([160]);
+  };
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-6">
         <h1 className="text-2xl md:text-3xl font-bold mb-6">Unsere Modelle im Überblick</h1>
         
-        {/* Filter Section - Always visible */}
-        <div className="bg-gray-100 p-4 rounded-lg mb-6 space-y-4 sticky top-0 z-10">
+        {/* Mobile Filter Collapsible */}
+        <div className="md:hidden mb-6">
+          <Collapsible open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="font-semibold">Filter</h2>
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" size="sm" className="flex items-center gap-1">
+                  <Filter className="h-4 w-4" />
+                  {isFilterOpen ? "Filter ausblenden" : "Filter anzeigen"}
+                </Button>
+              </CollapsibleTrigger>
+            </div>
+            
+            <CollapsibleContent className="space-y-4 bg-gray-50 p-4 rounded-lg">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Länge</label>
+                <Select value={lengthFilter} onValueChange={handleLengthChange}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Länge auswählen" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Alle Längen</SelectItem>
+                    {lengthRanges.map(range => (
+                      <SelectItem key={range.value} value={range.value}>
+                        {range.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Sitzplätze</label>
+                <Select value={seatsFilter} onValueChange={handleSeatsChange}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sitzplätze auswählen" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Alle Sitzplätze</SelectItem>
+                    <SelectItem value="2">2 Sitzplätze</SelectItem>
+                    <SelectItem value="3">3 Sitzplätze</SelectItem>
+                    <SelectItem value="4">4 Sitzplätze</SelectItem>
+                    <SelectItem value="5plus">5+ Sitzplätze</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Preisbereich: bis {formatPrice(priceRange[0] * 1000)}</label>
+                <Slider
+                  min={60}
+                  max={160}
+                  step={5}
+                  value={priceRange}
+                  onValueChange={handlePriceChange}
+                />
+              </div>
+              
+              {filterApplied && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={resetFilters}
+                  className="w-full mt-2"
+                >
+                  Filter zurücksetzen
+                </Button>
+              )}
+            </CollapsibleContent>
+          </Collapsible>
+          
+          {/* Filter results count for mobile */}
+          {filterApplied && (
+            <div className="text-sm text-gray-600 mb-4">
+              {filteredModels.length} {filteredModels.length === 1 ? 'Modell' : 'Modelle'} gefunden
+            </div>
+          )}
+        </div>
+        
+        {/* Desktop Filter Section */}
+        <div className="hidden md:block bg-gray-100 p-4 rounded-lg mb-6 space-y-4 sticky top-0 z-10">
           <h2 className="font-semibold">Filter</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -301,15 +424,11 @@ const ModelleOverview = () => {
           {/* Filter results count */}
           <div className="text-sm text-gray-600 flex justify-between items-center">
             <div>{filteredModels.length} {filteredModels.length === 1 ? 'Modell' : 'Modelle'} gefunden</div>
-            {(lengthFilter !== "all" || seatsFilter !== "all" || priceRange[0] !== 160) && (
+            {filterApplied && (
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => {
-                  setLengthFilter("all");
-                  setSeatsFilter("all");
-                  setPriceRange([160]);
-                }}
+                onClick={resetFilters}
               >
                 Filter zurücksetzen
               </Button>
@@ -335,51 +454,71 @@ const ModelleOverview = () => {
           </Accordion>
         </div>
         
+        {/* Results reference point */}
+        <div ref={resultsRef}></div>
+        
         {/* Models Grid */}
         {filteredModels.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredModels.map((model) => (
-              <Card key={model.id} className="overflow-hidden">
-                <div className="aspect-video bg-gray-200 overflow-hidden">
-                  <img 
-                    src={model.imageUrl} 
-                    alt={model.name} 
-                    className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
-                  />
-                </div>
-                <CardHeader className="pb-2">
-                  <div className="flex justify-between items-start">
-                    <h3 className="text-xl font-bold">{model.name}</h3>
-                    <div className="text-sm text-gray-600">
-                      {formatPrice(model.priceMin)} - {formatPrice(model.priceMax)}
-                    </div>
+            {filteredModels.map((model, index) => (
+              <React.Fragment key={model.id}>
+                <Card className="overflow-hidden">
+                  <div className="aspect-video bg-gray-200 overflow-hidden">
+                    <img 
+                      src={model.imageUrl} 
+                      alt={model.name} 
+                      className="w-full h-full object-cover transition-transform hover:scale-105 duration-300"
+                    />
                   </div>
-                </CardHeader>
-                <CardContent className="pb-2 space-y-3">
-                  <p className="text-sm text-gray-600">{model.description}</p>
-                  
-                  <div className="flex flex-wrap gap-3 text-sm">
-                    <div className="flex items-center gap-1 text-gray-700">
-                      <span className="font-medium">Länge:</span> {model.lengthRange}
+                  <CardHeader className="pb-2">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-xl font-bold">{model.name}</h3>
+                      <div className="text-sm text-gray-600">
+                        {formatPrice(model.priceMin)} - {formatPrice(model.priceMax)}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1 text-gray-700">
-                      <Users className="h-4 w-4" />
-                      <span>{model.seats}</span>
+                  </CardHeader>
+                  <CardContent className="pb-2 space-y-3">
+                    <p className="text-sm text-gray-600">{model.description}</p>
+                    
+                    <div className="flex flex-wrap gap-3 text-sm">
+                      <div className="flex items-center gap-1 text-gray-700">
+                        <span className="font-medium">Länge:</span> {model.lengthRange}
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-700">
+                        <Users className="h-4 w-4" />
+                        <span>{model.seats}</span>
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-700">
+                        <Bed className="h-4 w-4" />
+                        <span>{model.sleepingPlaces}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1 text-gray-700">
-                      <Bed className="h-4 w-4" />
-                      <span>{model.sleepingPlaces}</span>
-                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" className="w-full" asChild>
+                      <Link to={`/modelle/${model.id}`}>
+                        Mehr erfahren
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                {/* Insert filter adjustment button after first or second model on mobile */}
+                {filterApplied && (index === 1) && (
+                  <div className="md:hidden col-span-1 sm:col-span-2 mt-2 mb-6">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="w-full flex items-center justify-center gap-2"
+                      onClick={() => setIsFilterOpen(true)}
+                    >
+                      <Filter className="h-4 w-4" />
+                      Filter anpassen
+                    </Button>
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link to={`/modelle/${model.id}`}>
-                      Mehr erfahren
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                )}
+              </React.Fragment>
             ))}
           </div>
         ) : (
@@ -389,11 +528,7 @@ const ModelleOverview = () => {
             <Button 
               variant="outline" 
               className="mt-4"
-              onClick={() => {
-                setLengthFilter("all");
-                setSeatsFilter("all");
-                setPriceRange([160]);
-              }}
+              onClick={resetFilters}
             >
               Filter zurücksetzen
             </Button>
