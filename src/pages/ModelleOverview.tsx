@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from "react";
-import { Filter, Bed, Users, Compare } from "lucide-react";
+import { Filter, Bed, Users, GitCompare } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { 
   Select, 
@@ -602,7 +601,7 @@ const ModelleOverview = () => {
               onClick={navigateToComparison}
               className="w-full sm:w-auto flex items-center gap-2"
             >
-              <Compare className="h-4 w-4" />
+              <GitCompare className="h-4 w-4" />
               Modelle vergleichen
             </Button>
           </div>
