@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
-import { Filter, Bed, Users } from "lucide-react";
+import { Filter, Bed, Users, Compare } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { 
   Select, 
@@ -29,7 +29,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger
 } from "@/components/ui/collapsible";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Switch } from "@/components/ui/switch";
+import { toast } from "@/components/ui/use-toast";
 
 // Define model interfaces
 interface ModelData {
@@ -48,6 +50,8 @@ interface ModelData {
 }
 
 const ModelleOverview = () => {
+  const navigate = useNavigate();
+  
   // Filter states
   const [lengthFilter, setLengthFilter] = useState<string>("all");
   const [seatsFilter, setSeatsFilter] = useState<string>("all");
@@ -56,7 +60,10 @@ const ModelleOverview = () => {
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const resultsRef = useRef<HTMLDivElement>(null);
   const filterApplied = lengthFilter !== "all" || seatsFilter !== "all" || priceRange[0] !== 160;
-
+  
+  // Comparison states
+  const [compareModels, setCompareModels] = useState<ModelData[]>([]);
+  
   // Handle filter changes
   const handleLengthChange = (value: string) => {
     setLengthFilter(value);
@@ -74,6 +81,38 @@ const ModelleOverview = () => {
     setPriceRange(value);
     setIsFilterOpen(false);
     scrollToResults();
+  };
+
+  // Handle model comparison toggle
+  const toggleCompare = (model: ModelData) => {
+    const isAlreadySelected = compareModels.some(m => m.id === model.id);
+    
+    if (isAlreadySelected) {
+      // Remove model from comparison
+      setCompareModels(compareModels.filter(m => m.id !== model.id));
+    } else {
+      // Add model to comparison
+      if (compareModels.length < 2) {
+        setCompareModels([...compareModels, model]);
+      } else {
+        // Maximum 2 models, replace the first one
+        toast({
+          title: "Maximal 2 Modelle vergleichbar",
+          description: "Das erste Modell wird ersetzt.",
+          duration: 3000,
+        });
+        setCompareModels([compareModels[1], model]);
+      }
+    }
+  };
+
+  // Navigate to comparison page
+  const navigateToComparison = () => {
+    if (compareModels.length === 2) {
+      const modelAId = compareModels[0].id;
+      const modelBId = compareModels[1].id;
+      navigate(`/modellvergleich?modelA=${modelAId}&modelB=${modelBId}`);
+    }
   };
 
   // Scroll to results after filter change
@@ -495,12 +534,24 @@ const ModelleOverview = () => {
                       </div>
                     </div>
                   </CardContent>
-                  <CardFooter>
-                    <Button variant="outline" className="w-full" asChild>
-                      <Link to={`/modelle/${model.id}`}>
-                        Mehr erfahren
-                      </Link>
-                    </Button>
+                  <CardFooter className="flex flex-col gap-2">
+                    <div className="flex w-full justify-between items-center">
+                      <Button variant="outline" className="flex-1" asChild>
+                        <Link to={`/modelle/${model.id}`}>
+                          Mehr erfahren
+                        </Link>
+                      </Button>
+                      <div className="flex items-center gap-2 ml-2">
+                        <Switch 
+                          checked={compareModels.some(m => m.id === model.id)}
+                          onCheckedChange={() => toggleCompare(model)}
+                          id={`compare-${model.id}`}
+                        />
+                        <label htmlFor={`compare-${model.id}`} className="text-sm cursor-pointer">
+                          Vergleichen
+                        </label>
+                      </div>
+                    </div>
                   </CardFooter>
                 </Card>
                 
@@ -535,6 +586,28 @@ const ModelleOverview = () => {
           </div>
         )}
       </div>
+      
+      {/* Sticky Compare Button */}
+      {compareModels.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 border-t border-gray-200 z-20">
+          <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="text-sm">
+              {compareModels.length === 1
+                ? "1 Modell zum Vergleich ausgewählt. Wählen Sie ein weiteres aus."
+                : "2 Modelle zum Vergleich ausgewählt."
+              }
+            </div>
+            <Button 
+              disabled={compareModels.length < 2}
+              onClick={navigateToComparison}
+              className="w-full sm:w-auto flex items-center gap-2"
+            >
+              <Compare className="h-4 w-4" />
+              Modelle vergleichen
+            </Button>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };

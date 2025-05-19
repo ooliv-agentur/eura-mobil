@@ -1,8 +1,8 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { 
   Select,
   SelectContent,
@@ -12,68 +12,146 @@ import {
 } from "@/components/ui/select";
 
 const models = [
+  { id: "van", name: "Van" },
   { id: "activa-one", name: "Activa One" },
-  { id: "xtura", name: "Xtura" },
-  { id: "integra", name: "Integra" },
+  { id: "profila-t-fiat", name: "Profila T - Fiat" },
+  { id: "profila-rs", name: "Profila RS" },
+  { id: "profila-t-mercedes", name: "Profila T - Mercedes" },
   { id: "contura", name: "Contura" },
-  { id: "terrestra", name: "Terrestra" },
+  { id: "integra-line-fiat", name: "Integra Line - Fiat" },
+  { id: "integra-line-gt-mercedes", name: "Integra Line GT - Mercedes" },
+  { id: "integra", name: "Integra" },
+  { id: "xtura", name: "Xtura" },
 ];
 
 const Modellvergleich = () => {
-  const [selectedModelA, setSelectedModelA] = useState<string>("");
-  const [selectedModelB, setSelectedModelB] = useState<string>("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const modelAFromQuery = queryParams.get('modelA');
+  const modelBFromQuery = queryParams.get('modelB');
+
+  const [selectedModelA, setSelectedModelA] = useState<string>(modelAFromQuery || "");
+  const [selectedModelB, setSelectedModelB] = useState<string>(modelBFromQuery || "");
+
+  // Update URL when models change
+  useEffect(() => {
+    if (selectedModelA && selectedModelB) {
+      navigate(`/modellvergleich?modelA=${selectedModelA}&modelB=${selectedModelB}`, { replace: true });
+    }
+  }, [selectedModelA, selectedModelB, navigate]);
 
   const getModelDetails = (modelId: string) => {
     switch (modelId) {
-      case "activa-one":
+      case "van":
         return {
-          length: "5,99 m",
+          length: "5,99 - 6,36 m",
           width: "2,20 m",
           height: "2,75 m",
-          sleepingPlaces: "2-4",
+          sleepingPlaces: "2",
           seats: "4",
-          layout: "Teilintegriert",
-          priceRange: "ab 65.900 €",
+          layout: "Van",
+          priceRange: "62.000 € - 78.000 €",
+          description: "Kompakter Camper Van mit durchdachter Raumnutzung für spontane Reisen und maximale Flexibilität."
         };
-      case "xtura":
+      case "activa-one":
         return {
-          length: "7,41 m",
+          length: "6,50 - 7,57 m",
+          width: "2,32 m",
+          height: "2,95 m",
+          sleepingPlaces: "6",
+          seats: "5",
+          layout: "Alkoven",
+          priceRange: "69.000 € - 89.000 €",
+          description: "Alkoven-Modell mit familiärer Gemütlichkeit und viel Stauraum. Ideal für Familien mit Kindern."
+        };
+      case "profila-t-fiat":
+        return {
+          length: "6,85 - 7,41 m",
           width: "2,32 m",
           height: "2,95 m",
           sleepingPlaces: "4",
           seats: "4",
-          layout: "Integriert",
-          priceRange: "ab 82.500 €",
+          layout: "Teilintegriert",
+          priceRange: "85.000 € - 100.000 €",
+          description: "Teilintegriertes Wohnmobil auf Fiat-Basis mit herrlichen Ausblicken und bester Ausstattung."
         };
-      case "integra":
+      case "profila-rs":
         return {
-          length: "8,99 m",
+          length: "7,09 - 7,41 m",
           width: "2,32 m",
-          height: "3,05 m",
-          sleepingPlaces: "4-5",
+          height: "2,95 m",
+          sleepingPlaces: "4",
           seats: "4",
-          layout: "Integriert",
-          priceRange: "ab 120.900 €",
+          layout: "Teilintegriert",
+          priceRange: "95.000 € - 108.000 €",
+          description: "Teilintegriertes Wohnmobil mit Schlafkomfort auf Sternenniveau dank Hubbett über der Sitzgruppe."
+        };
+      case "profila-t-mercedes":
+        return {
+          length: "6,99 - 7,41 m",
+          width: "2,32 m",
+          height: "2,95 m",
+          sleepingPlaces: "4",
+          seats: "4",
+          layout: "Teilintegriert",
+          priceRange: "109.000 € - 120.000 €",
+          description: "Teilintegriertes Modell auf Mercedes-Basis mit überragender Fahrdynamik und luxuriösem Interieur."
         };
       case "contura":
         return {
-          length: "7,24 m",
+          length: "7,31 - 7,61 m",
           width: "2,32 m",
-          height: "2,86 m",
+          height: "2,95 m",
           sleepingPlaces: "4",
           seats: "4",
           layout: "Teilintegriert",
-          priceRange: "ab 73.300 €",
+          priceRange: "115.000 € - 130.000 €",
+          description: "Teilintegriertes Premium-Wohnmobil mit exklusiver Ausstattung und höchstem Reisekomfort."
         };
-      case "terrestra":
+      case "integra-line-fiat":
         return {
-          length: "6,99 m",
+          length: "7,15 - 7,81 m",
           width: "2,32 m",
-          height: "2,95 m",
-          sleepingPlaces: "2-4",
+          height: "3,05 m",
+          sleepingPlaces: "4",
           seats: "4",
-          layout: "Teilintegriert",
-          priceRange: "ab 76.400 €",
+          layout: "Integriert",
+          priceRange: "105.000 € - 125.000 €",
+          description: "Vollintegriertes Modell mit harmonischer Raumaufteilung und beeindruckender Wohnatmosphäre."
+        };
+      case "integra-line-gt-mercedes":
+        return {
+          length: "7,15 - 7,81 m",
+          width: "2,32 m",
+          height: "3,05 m",
+          sleepingPlaces: "4",
+          seats: "4",
+          layout: "Integriert",
+          priceRange: "125.000 € - 140.000 €",
+          description: "Vollintegriertes Luxus-Wohnmobil auf Mercedes-Basis mit innovativen Technologien und elegantem Design."
+        };
+      case "integra":
+        return {
+          length: "7,15 - 8,99 m",
+          width: "2,32 m",
+          height: "3,15 m",
+          sleepingPlaces: "4",
+          seats: "4",
+          layout: "Integriert",
+          priceRange: "135.000 € - 160.000 €",
+          description: "Vollintegriertes Flaggschiff der EURA MOBIL-Flotte mit höchstem Luxus und einzigartigem Wohngefühl."
+        };
+      case "xtura":
+        return {
+          length: "7,41 - 7,61 m",
+          width: "2,32 m",
+          height: "3,05 m",
+          sleepingPlaces: "4",
+          seats: "4",
+          layout: "Crossover",
+          priceRange: "120.000 € - 145.000 €",
+          description: "Innovatives Crossover-Modell mit herausragender Raumeffizienz und modernem, automobilen Design."
         };
       default:
         return {
@@ -84,6 +162,7 @@ const Modellvergleich = () => {
           seats: "-",
           layout: "-",
           priceRange: "-",
+          description: "-",
         };
     }
   };
@@ -149,6 +228,11 @@ const Modellvergleich = () => {
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td className="border p-2 font-medium">Beschreibung</td>
+                  <td className="border p-2">{modelA?.description}</td>
+                  <td className="border p-2">{modelB?.description}</td>
+                </tr>
                 <tr>
                   <td className="border p-2 font-medium">Gesamtlänge</td>
                   <td className="border p-2">{modelA?.length}</td>
