@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -28,6 +29,9 @@ import Kuechenwelt from "./pages/quality/Kuechenwelt";
 import Wellness from "./pages/quality/Wellness";
 import Kontakt from "./pages/Kontakt";
 import Modellvergleich from "./pages/Modellvergleich";
+import Impressum from "./pages/Impressum";
+import Datenschutz from "./pages/Datenschutz";
+import AGB from "./pages/AGB";
 
 const queryClient = new QueryClient();
 
@@ -62,6 +66,9 @@ const App = () => (
             <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
             <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
             <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/impressum" element={<Impressum />} />
+            <Route path="/datenschutz" element={<Datenschutz />} />
+            <Route path="/agb" element={<AGB />} />
             <Route path="/service" element={<NotFound />} />
             <Route path="/ueber-uns" element={<NotFound />} />
             <Route path="/haendler-login" element={<NotFound />} />
