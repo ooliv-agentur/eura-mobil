@@ -10,6 +10,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ChevronRight } from "lucide-react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const models = [
   { id: "van", name: "Van" },
@@ -33,6 +42,21 @@ const Modellvergleich = () => {
 
   const [selectedModelA, setSelectedModelA] = useState<string>(modelAFromQuery || "");
   const [selectedModelB, setSelectedModelB] = useState<string>(modelBFromQuery || "");
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  // Check for mobile viewport
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   // Update URL when models change
   useEffect(() => {
@@ -170,23 +194,38 @@ const Modellvergleich = () => {
   const modelA = selectedModelA ? getModelDetails(selectedModelA) : null;
   const modelB = selectedModelB ? getModelDetails(selectedModelB) : null;
 
+  // Properties to compare
+  const properties = [
+    { key: "description", label: "Beschreibung" },
+    { key: "length", label: "Gesamtlänge" },
+    { key: "width", label: "Breite" },
+    { key: "height", label: "Höhe" },
+    { key: "sleepingPlaces", label: "Schlafplätze" },
+    { key: "seats", label: "Sitzplätze" },
+    { key: "layout", label: "Grundriss-Typ" },
+    { key: "priceRange", label: "Preisbereich" }
+  ];
+
+  const modelAName = models.find(m => m.id === selectedModelA)?.name || "Modell A";
+  const modelBName = models.find(m => m.id === selectedModelB)?.name || "Modell B";
+
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-center mb-4">Modellvergleich</h1>
+      <div className="container mx-auto px-4 py-6 md:py-8">
+        <h1 className="text-xl md:text-2xl font-bold text-center mb-4">Modellvergleich</h1>
         
-        <p className="text-center mb-6">
+        <p className="text-center mb-4 md:mb-6 text-sm md:text-base">
           Wählen Sie zwei Modelle, um deren Ausstattung, Maße und Besonderheiten direkt miteinander zu vergleichen.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-6">
           <div>
-            <label className="block mb-2">Modell A auswählen</label>
+            <label className="block mb-1 text-sm">Modell A auswählen</label>
             <Select value={selectedModelA} onValueChange={setSelectedModelA}>
-              <SelectTrigger>
+              <SelectTrigger className="h-9 md:h-10">
                 <SelectValue placeholder="Bitte wählen" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent position="item-aligned">
                 {models.map((model) => (
                   <SelectItem key={`a-${model.id}`} value={model.id}>
                     {model.name}
@@ -197,12 +236,12 @@ const Modellvergleich = () => {
           </div>
 
           <div>
-            <label className="block mb-2">Modell B auswählen</label>
+            <label className="block mb-1 text-sm">Modell B auswählen</label>
             <Select value={selectedModelB} onValueChange={setSelectedModelB}>
-              <SelectTrigger>
+              <SelectTrigger className="h-9 md:h-10">
                 <SelectValue placeholder="Bitte wählen" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent position="item-aligned">
                 {models.map((model) => (
                   <SelectItem key={`b-${model.id}`} value={model.id}>
                     {model.name}
@@ -214,83 +253,77 @@ const Modellvergleich = () => {
         </div>
 
         {(selectedModelA && selectedModelB) ? (
-          <div className="overflow-x-auto mb-8">
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-gray-50">
-                  <th className="border p-2 text-left">Eigenschaft</th>
-                  <th className="border p-2 text-left">
-                    {models.find(m => m.id === selectedModelA)?.name || "Modell A"}
-                  </th>
-                  <th className="border p-2 text-left">
-                    {models.find(m => m.id === selectedModelB)?.name || "Modell B"}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border p-2 font-medium">Beschreibung</td>
-                  <td className="border p-2">{modelA?.description}</td>
-                  <td className="border p-2">{modelB?.description}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Gesamtlänge</td>
-                  <td className="border p-2">{modelA?.length}</td>
-                  <td className="border p-2">{modelB?.length}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Breite</td>
-                  <td className="border p-2">{modelA?.width}</td>
-                  <td className="border p-2">{modelB?.width}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Höhe</td>
-                  <td className="border p-2">{modelA?.height}</td>
-                  <td className="border p-2">{modelB?.height}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Schlafplätze</td>
-                  <td className="border p-2">{modelA?.sleepingPlaces}</td>
-                  <td className="border p-2">{modelB?.sleepingPlaces}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Sitzplätze</td>
-                  <td className="border p-2">{modelA?.seats}</td>
-                  <td className="border p-2">{modelB?.seats}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Grundriss-Typ</td>
-                  <td className="border p-2">{modelA?.layout}</td>
-                  <td className="border p-2">{modelB?.layout}</td>
-                </tr>
-                <tr>
-                  <td className="border p-2 font-medium">Preisbereich</td>
-                  <td className="border p-2">{modelA?.priceRange}</td>
-                  <td className="border p-2">{modelB?.priceRange}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <>
+            {/* Desktop comparison table */}
+            <div className="hidden md:block mb-8">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-1/4">Eigenschaft</TableHead>
+                    <TableHead>{modelAName}</TableHead>
+                    <TableHead>{modelBName}</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {properties.map((prop) => (
+                    <TableRow key={prop.key}>
+                      <TableCell className="font-medium">{prop.label}</TableCell>
+                      <TableCell>{modelA?.[prop.key as keyof typeof modelA]}</TableCell>
+                      <TableCell>{modelB?.[prop.key as keyof typeof modelB]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+
+            {/* Mobile stacked comparison view */}
+            <div className="md:hidden">
+              <div className="sticky top-0 z-10 bg-white dark:bg-gray-900 py-2 border-b flex items-center justify-around text-center font-medium shadow-sm mb-4">
+                <div className="w-1/2 px-2">{modelAName}</div>
+                <div className="w-1/2 px-2">{modelBName}</div>
+              </div>
+              
+              <div className="space-y-4 mb-8">
+                {properties.map((prop) => (
+                  <div key={prop.key} className="border rounded-lg overflow-hidden">
+                    <div className="bg-gray-50 dark:bg-gray-800 p-3 font-medium border-b">
+                      {prop.label}
+                    </div>
+                    <div className="flex flex-col sm:flex-row">
+                      <div className="p-3 border-b sm:border-b-0 sm:border-r sm:w-1/2 bg-white dark:bg-gray-900">
+                        <span className="text-sm text-gray-500 block sm:hidden mb-1">{modelAName}</span>
+                        <div>{modelA?.[prop.key as keyof typeof modelA]}</div>
+                      </div>
+                      <div className="p-3 sm:w-1/2 bg-white dark:bg-gray-900">
+                        <span className="text-sm text-gray-500 block sm:hidden mb-1">{modelBName}</span>
+                        <div>{modelB?.[prop.key as keyof typeof modelB]}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
         ) : (
-          <div className="text-center py-12 bg-gray-50 rounded-md mb-8">
+          <div className="text-center py-8 md:py-12 bg-gray-50 dark:bg-gray-800 rounded-md mb-8">
             <p className="text-gray-500">
               Bitte wählen Sie zwei Modelle aus, um den Vergleich anzuzeigen.
             </p>
           </div>
         )}
 
-        <p className="text-sm text-gray-500 mb-8 text-center">
+        <p className="text-xs md:text-sm text-gray-500 mb-6 md:mb-8 text-center">
           Die technischen Daten basieren auf der aktuellen Modellgeneration. Änderungen vorbehalten.
         </p>
 
-        <div className="flex flex-col md:flex-row justify-center gap-4 mt-8">
-          <Button asChild>
+        <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mt-6 md:mt-8">
+          <Button asChild size="sm" className="md:text-base md:py-6">
             <Link to="/modelle">Zur Modellübersicht</Link>
           </Button>
-          <Button variant="outline" asChild>
+          <Button variant="outline" asChild size="sm" className="md:text-base md:py-6">
             <Link to="/konfigurator">Jetzt konfigurieren</Link>
           </Button>
-          <Button variant="secondary" asChild>
+          <Button variant="secondary" asChild size="sm" className="md:text-base md:py-6">
             <Link to="/haendler">Händler finden</Link>
           </Button>
         </div>

@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { Compare } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 interface ResultScreenProps {
   answers: string[];
@@ -174,7 +174,7 @@ const ResultScreen = ({ answers, onRestart }: ResultScreenProps) => {
                   onClick={() => handleCompare(model.id)}
                   className="flex items-center gap-2"
                 >
-                  <Compare size={16} />
+                  <ChevronRight size={16} />
                   Vergleichen
                 </Button>
               </CardFooter>
