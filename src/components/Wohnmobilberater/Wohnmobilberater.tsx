@@ -2,6 +2,8 @@
 import React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useWohnmobilberater } from "@/context/WohnmobilberaterContext";
+import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import QuestionScreen from "./QuestionScreen";
 import IntroScreen from "@/components/IntroScreen";
 import ResultScreen from "@/components/ResultScreen";
@@ -24,6 +26,27 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
     answers,
     resetBerater,
   } = useWohnmobilberater();
+  
+  const navigate = useNavigate();
+
+  // Function to handle closing the berater and navigating if needed
+  const handleClose = () => {
+    closeBerater();
+    
+    // If in fullpage mode, navigate back
+    if (displayMode === "fullpage") {
+      navigate(-1);
+    }
+  };
+
+  // Custom back handler that closes the berater on step 1
+  const handleCustomBack = () => {
+    if (currentStep <= 1) {
+      handleClose();
+    } else {
+      handleBack();
+    }
+  };
 
   const renderContent = () => {
     if (currentStep === 0) {
@@ -36,7 +59,7 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
           totalSteps={totalSteps}
           selectedOption={selectedOption}
           onNext={handleNext}
-          onBack={handleBack}
+          onBack={handleCustomBack}
         />
       );
     } else {
@@ -44,10 +67,22 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
     }
   };
 
+  // Close button for all display modes
+  const CloseButton = () => (
+    <button
+      onClick={handleClose}
+      className="absolute right-4 top-4 rounded-full p-1 bg-white/80 hover:bg-gray-200 transition-colors z-10"
+      aria-label="Close advisor"
+    >
+      <X size={20} />
+    </button>
+  );
+
   // For inline display mode
   if (displayMode === "inline") {
     return (
-      <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="bg-white rounded-lg shadow-md p-4 relative">
+        <CloseButton />
         {renderContent()}
       </div>
     );
@@ -56,7 +91,8 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
   // For fullpage display mode
   if (displayMode === "fullpage") {
     return (
-      <div className="min-h-screen flex flex-col bg-gray-100">
+      <div className="min-h-screen flex flex-col bg-gray-100 relative">
+        <CloseButton />
         <div className="flex-1 w-full max-w-md mx-auto p-4">
           {renderContent()}
         </div>
@@ -68,7 +104,8 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
   return (
     <Dialog open={isOpen} onOpenChange={closeBerater}>
       <DialogContent className="max-w-md p-0">
-        <div className="max-h-[80vh] overflow-auto p-4">
+        <div className="max-h-[80vh] overflow-auto p-4 relative">
+          <CloseButton />
           {renderContent()}
         </div>
       </DialogContent>
