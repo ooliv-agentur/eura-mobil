@@ -41,14 +41,6 @@ const QuestionScreen = ({
     }, 50);
   };
 
-  // Function for the "Weiter" button
-  const handleNextClick = () => {
-    if (localSelection) {
-      console.log("Weiter button clicked with option:", localSelection);
-      onNext(localSelection);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-6">
       <div className="sticky top-0 bg-white p-4 rounded-lg shadow-sm">
@@ -81,16 +73,9 @@ const QuestionScreen = ({
         ))}
       </div>
 
-      <div className="flex justify-between mt-auto z-50">
+      <div className="flex justify-start mt-auto z-50">
         <Button variant="outline" onClick={onBack} className="z-50">
           Zurück
-        </Button>
-        <Button
-          onClick={handleNextClick}
-          disabled={!localSelection}
-          className="bg-blue-600 hover:bg-blue-700 z-50" // Added z-index
-        >
-          Weiter
         </Button>
       </div>
     </div>
