@@ -34,17 +34,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  const handleStartBerater = () => {
-    onClose(); // Close the menu first
-    setTimeout(() => {
-      // On the konfigurator page, open Berater fullscreen
-      const isKonfiguratorPage = location.pathname === '/konfigurator';
-      startBeraterFlow({
-        mode: isKonfiguratorPage ? "fullpage" : "dialog"
-      });
-    }, 150); // Small delay to ensure smooth transition
-  };
-
   // Check if we're on the konfigurator page
   const isKonfiguratorPage = location.pathname === '/konfigurator';
 
@@ -66,14 +55,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             >
               <X className="h-6 w-6" />
             </button>
-          </div>
-          
-          {/* CTA Button moved out of the flex row */}
-          <div className="mb-8">
-            <Button className="w-full" onClick={handleStartBerater}>
-              <Calendar className="mr-2 h-4 w-4" />
-              {isKonfiguratorPage ? "Wohnmobil finden" : "Jetzt Beratung vereinbaren"}
-            </Button>
           </div>
           
           <div className="overflow-y-auto flex-grow">
@@ -170,7 +151,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Language Selector moved to the bottom */}
+            {/* Language Selector moved down */}
             <div className="mb-8">
               <h2 className="text-lg font-bold mb-2">Sprache</h2>
               <Separator className="mb-4" />
@@ -184,6 +165,16 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   <SelectItem value="fr">Französisch</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+            
+            {/* CTA Button moved to the bottom */}
+            <div className="mb-8">
+              <Button className="w-full" asChild>
+                <Link to="/berater" onClick={onClose}>
+                  <Calendar className="mr-2 h-4 w-4" />
+                  {isKonfiguratorPage ? "Wohnmobil finden" : "Jetzt Beratung vereinbaren"}
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
