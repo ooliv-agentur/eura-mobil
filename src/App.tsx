@@ -27,6 +27,10 @@ const App = () => (
           <Route path="/modelle/:modelId" element={<ProductDetail />} />
           <Route path="/haendler" element={<Haendlersuche />} />
           <Route path="/karriere" element={<Karriere />} />
+          <Route path="/service" element={<NotFound />} />
+          <Route path="/ueber-uns" element={<NotFound />} />
+          <Route path="/kontakt" element={<NotFound />} />
+          <Route path="/haendler-login" element={<NotFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
