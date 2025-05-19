@@ -31,7 +31,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-white overflow-y-auto">
+    <div className="fixed inset-0 z-[9999] bg-white overflow-y-auto">
       <div className="container mx-auto px-4 py-6 h-full">
         <div className="flex flex-col h-full">
           {/* Top Area with Logo, Close, Language and CTA */}
