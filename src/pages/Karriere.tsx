@@ -54,15 +54,15 @@ const jobs = [
 ];
 
 const Karriere = () => {
-  const [filterLocation, setFilterLocation] = React.useState("");
+  const [filterLocation, setFilterLocation] = React.useState("all");
   
   // Extrahiere alle eindeutigen Standorte aus den Jobs
   const uniqueLocations = Array.from(new Set(jobs.map(job => job.location))).sort();
 
   // Filter jobs based on location
-  const filteredJobs = filterLocation 
-    ? jobs.filter(job => job.location === filterLocation) 
-    : jobs;
+  const filteredJobs = filterLocation === "all" 
+    ? jobs 
+    : jobs.filter(job => job.location === filterLocation);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -89,7 +89,7 @@ const Karriere = () => {
                   <SelectValue placeholder="Alle Standorte" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">Alle Standorte</SelectItem>
+                  <SelectItem value="all">Alle Standorte</SelectItem>
                   {uniqueLocations.map((location) => (
                     <SelectItem key={location} value={location}>
                       {location}
