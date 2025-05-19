@@ -11,6 +11,7 @@ import ModelleOverview from "./pages/ModelleOverview";
 import ProductDetail from "./pages/ProductDetail";
 import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
+import Unternehmen from "./pages/Unternehmen";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/modelle/:modelId" element={<ProductDetail />} />
           <Route path="/haendler" element={<Haendlersuche />} />
           <Route path="/karriere" element={<Karriere />} />
+          <Route path="/unternehmen" element={<Unternehmen />} />
           <Route path="/service" element={<NotFound />} />
           <Route path="/ueber-uns" element={<NotFound />} />
           <Route path="/kontakt" element={<NotFound />} />

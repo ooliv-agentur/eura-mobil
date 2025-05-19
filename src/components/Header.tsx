@@ -23,7 +23,7 @@ const Header = () => {
             <li><Link to="/berater" className="hover:text-blue-600">Beratung</Link></li>
             <li><Link to="/haendler" className="hover:text-blue-600">Händler</Link></li>
             <li><Link to="/karriere" className="hover:text-blue-600">Karriere</Link></li>
-            <li><Link to="/news" className="hover:text-blue-600">News</Link></li>
+            <li><Link to="/unternehmen" className="hover:text-blue-600">Unternehmen</Link></li>
           </ul>
         </nav>
         
@@ -56,7 +56,7 @@ const Header = () => {
                   </li>
                   <li>
                     <SheetClose asChild>
-                      <Link to="/ueber-uns" className="block hover:text-blue-600">Eura Mobil Welt</Link>
+                      <Link to="/unternehmen" className="block hover:text-blue-600">Eura Mobil Welt</Link>
                     </SheetClose>
                   </li>
                   <li>
