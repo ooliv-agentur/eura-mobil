@@ -14,11 +14,16 @@ const Index = () => {
     const searchParams = new URLSearchParams(location.search);
     const step = searchParams.get('step');
     
-    // Set to fullpage mode and start the advisor
+    // Set to fullpage mode and start the advisor with a slight delay to ensure initialization
     setDisplayMode("fullpage");
-    startBerater(step === '1' ? 1 : 0); // Start with intro or step 1 based on URL parameter
     
-    console.log("Starting berater with step:", step === '1' ? 1 : 0);
+    // Use setTimeout to avoid race conditions
+    setTimeout(() => {
+      const initialStep = step === '1' ? 1 : 0;
+      console.log("Starting berater with step:", initialStep);
+      startBerater(initialStep); // Start with intro or step 1 based on URL parameter
+    }, 100);
+    
   }, [setDisplayMode, startBerater, location.search]);
 
   return (

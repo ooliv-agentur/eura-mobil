@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { QuestionData } from "@/context/WohnmobilberaterContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface QuestionScreenProps {
   questionData: QuestionData;
@@ -21,11 +21,30 @@ const QuestionScreen = ({
   onNext,
   onBack,
 }: QuestionScreenProps) => {
-  // Function to handle option selection - ensure it directly progresses
+  const [localSelection, setLocalSelection] = useState<string>(selectedOption);
+
+  // Update local selection when prop changes
+  useEffect(() => {
+    setLocalSelection(selectedOption);
+  }, [selectedOption]);
+
+  // Function to handle option selection with delay to prevent double execution
   const handleOptionSelect = (option: string) => {
     console.log("Wohnmobilberater option selected:", option);
-    // Immediately proceed to next step when an option is selected
-    onNext(option);
+    setLocalSelection(option);
+    
+    // Use setTimeout to prevent double execution and ensure state updates
+    setTimeout(() => {
+      onNext(option);
+    }, 50);
+  };
+
+  // Function for the "Weiter" button
+  const handleNextClick = () => {
+    if (localSelection) {
+      console.log("Wohnmobilberater Weiter button clicked with option:", localSelection);
+      onNext(localSelection);
+    }
   };
 
   return (
@@ -51,7 +70,7 @@ const QuestionScreen = ({
           <Card
             key={option}
             className={`cursor-pointer ${
-              selectedOption === option ? "border-blue-500 border-2" : ""
+              localSelection === option ? "border-blue-500 border-2" : ""
             }`}
             onClick={() => handleOptionSelect(option)}
           >
@@ -65,8 +84,9 @@ const QuestionScreen = ({
           Zurück
         </Button>
         <Button
-          onClick={() => selectedOption && handleOptionSelect(selectedOption)}
-          disabled={!selectedOption}
+          onClick={handleNextClick}
+          disabled={!localSelection}
+          className="bg-blue-600 hover:bg-blue-700" // More distinct styling
         >
           Weiter
         </Button>

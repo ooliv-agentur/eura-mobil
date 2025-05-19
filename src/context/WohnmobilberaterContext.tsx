@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode, useCallback } from "react";
 
 // Types
 export interface QuestionData {
@@ -52,43 +52,52 @@ export const WohnmobilberaterProvider: React.FC<{
   const questions = customQuestions || defaultQuestions;
   const totalSteps = questions.length;
 
-  const startBerater = (initialStep = 1, prefilled: string[] = []) => {
+  const startBerater = useCallback((initialStep = 1, prefilled: string[] = []) => {
+    console.log("Starting berater with initialStep:", initialStep);
     if (prefilled.length > 0) {
       setAnswers(prefilled);
+    } else {
+      // Reset answers when starting fresh
+      setAnswers([]);
     }
     setCurrentStep(initialStep);
     setIsOpen(true);
-  };
+  }, []);
 
-  const closeBerater = () => {
+  const closeBerater = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
-  const resetBerater = () => {
+  const resetBerater = useCallback(() => {
     setCurrentStep(0);
     setAnswers([]);
     setIsOpen(false);
-  };
+  }, []);
 
-  const handleNext = (selectedOption: string) => {
+  const handleNext = useCallback((selectedOption: string) => {
+    console.log(`handleNext called with option: ${selectedOption}, current step: ${currentStep}`);
+    
     const newAnswers = [...answers];
     newAnswers[currentStep - 1] = selectedOption;
+    console.log("Setting answers to:", newAnswers);
     setAnswers(newAnswers);
 
     if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
+      console.log(`Advancing to step ${currentStep + 1}`);
+      setCurrentStep(prevStep => prevStep + 1);
     } else {
+      console.log("Going to results");
       setCurrentStep(totalSteps + 1); // Go to results
     }
-  };
+  }, [currentStep, answers, totalSteps]);
 
-  const handleBack = () => {
+  const handleBack = useCallback(() => {
     if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
+      setCurrentStep(prevStep => prevStep - 1);
     } else {
       resetBerater();
     }
-  };
+  }, [currentStep, resetBerater]);
 
   const selectedOption = answers[currentStep - 1] || "";
 

@@ -46,10 +46,14 @@ const Wohnmobilberater: React.FC<WohnmobilberaterProps> = ({ inline = false }) =
     }
   };
 
-  // Wrapper for handleNext to ensure it works properly
+  // Enhanced wrapper for handleNext to ensure it works properly
   const handleNextWrapper = (option: string) => {
     console.log("handleNextWrapper called with option:", option);
-    handleNext(option);
+    
+    // Use setTimeout to ensure state updates properly
+    setTimeout(() => {
+      handleNext(option);
+    }, 10);
   };
 
   // Custom back handler that closes the berater on step 1
