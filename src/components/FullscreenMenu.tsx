@@ -149,13 +149,13 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               <h2 className="text-lg font-bold mb-2">06 Social Links</h2>
               <Separator className="mb-4" />
               <div className="flex gap-6">
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="p-2">
+                <a href="https://www.instagram.com/euramobil/" target="_blank" rel="noopener noreferrer" className="p-2">
                   <Instagram className="h-6 w-6" />
                 </a>
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" className="p-2">
+                <a href="https://www.facebook.com/EuraMobil" target="_blank" rel="noopener noreferrer" className="p-2">
                   <Facebook className="h-6 w-6" />
                 </a>
-                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" className="p-2">
+                <a href="https://www.youtube.com/@euramobil" target="_blank" rel="noopener noreferrer" className="p-2">
                   <Youtube className="h-6 w-6" />
                 </a>
               </div>
