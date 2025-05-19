@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Menu, X, Facebook, Instagram, Youtube, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import FullscreenMenu from "./FullscreenMenu";
 import SearchOverlay from "./SearchOverlay";
 import { cn } from "@/lib/utils";
