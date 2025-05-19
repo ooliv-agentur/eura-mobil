@@ -1,10 +1,8 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Layout } from "@/components/Layout";
 import AnimatedHeroBackground from "@/components/AnimatedHeroBackground";
 import { 
   Carousel, 
@@ -43,9 +41,7 @@ const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      
+    <Layout>
       <main className="flex-1">
         {/* Enhanced Hero Section */}
         <section className="relative w-full h-screen flex justify-center items-center overflow-hidden">
@@ -178,9 +174,7 @@ const Home = () => {
           </div>
         </section>
       </main>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 
