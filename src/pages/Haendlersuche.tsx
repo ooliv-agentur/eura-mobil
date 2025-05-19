@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Header from "@/components/Header";
@@ -7,8 +7,19 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { MapPin, Search, ChevronRight } from "lucide-react";
 
+declare global {
+  interface Window {
+    google: any;
+    initGoogleAutocomplete: () => void;
+  }
+}
+
 const Haendlersuche = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const autocompleteRef = useRef<HTMLInputElement>(null);
+  const [autocomplete, setAutocomplete] = useState<any>(null);
+  const [placePredictions, setPlacePredictions] = useState<any[]>([]);
+  const [showPredictions, setShowPredictions] = useState(false);
   
   // Beispiel-Händler (normalerweise würden diese von einer API kommen)
   const exampleDealers = [
@@ -46,10 +57,87 @@ const Haendlersuche = () => {
     }
   ];
 
+  // Function to load Google Maps API script
+  useEffect(() => {
+    const loadGoogleMapsScript = () => {
+      const googleScript = document.createElement('script');
+      googleScript.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initGoogleAutocomplete`;
+      googleScript.async = true;
+      googleScript.defer = true;
+      document.head.appendChild(googleScript);
+      
+      return () => {
+        document.head.removeChild(googleScript);
+      };
+    };
+
+    window.initGoogleAutocomplete = () => {
+      if (autocompleteRef.current) {
+        const autocompleteInstance = new window.google.maps.places.AutocompleteService();
+        setAutocomplete(autocompleteInstance);
+      }
+    };
+
+    // Only load the script if it hasn't been loaded yet
+    if (!window.google) {
+      loadGoogleMapsScript();
+    } else {
+      window.initGoogleAutocomplete();
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (autocompleteRef.current && !autocompleteRef.current.contains(event.target as Node)) {
+        setShowPredictions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    
+    // Get predictions if input has at least 3 characters
+    if (value.length >= 3 && autocomplete) {
+      autocomplete.getPlacePredictions(
+        {
+          input: value,
+          componentRestrictions: { country: 'de' }, // Restrict to Germany
+          types: ['(cities)']
+        },
+        (predictions: any[], status: string) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+            setPlacePredictions(predictions);
+            setShowPredictions(true);
+          } else {
+            setPlacePredictions([]);
+            setShowPredictions(false);
+          }
+        }
+      );
+    } else {
+      setPlacePredictions([]);
+      setShowPredictions(false);
+    }
+  };
+
+  const handlePredictionSelect = (prediction: any) => {
+    setSearchQuery(prediction.description);
+    setShowPredictions(false);
+    // Here you could also trigger the search
+  };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     // Hier würde normalerweise die Suche ausgelöst werden
     console.log("Suche nach:", searchQuery);
+    setShowPredictions(false);
   };
 
   return (
@@ -62,14 +150,34 @@ const Haendlersuche = () => {
         {/* Suchbereich */}
         <div className="bg-gray-100 p-4 rounded-lg mb-6">
           <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
-            <div className="flex-1">
+            <div className="flex-1 relative">
               <Input
+                ref={autocompleteRef}
                 type="text"
                 placeholder="Postleitzahl oder Ort eingeben"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleInputChange}
                 className="w-full"
+                aria-label="Ort oder PLZ Suche"
+                autoComplete="off"
               />
+              
+              {/* Autocomplete Suggestions */}
+              {showPredictions && placePredictions.length > 0 && (
+                <div className="absolute z-10 w-full bg-white mt-1 shadow-lg rounded-md border border-gray-200">
+                  <ul className="py-1">
+                    {placePredictions.map((prediction) => (
+                      <li
+                        key={prediction.place_id}
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                        onClick={() => handlePredictionSelect(prediction)}
+                      >
+                        {prediction.description}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
             <Button type="submit" className="flex items-center gap-2">
               <Search size={18} />
