@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -166,48 +165,58 @@ const Home = () => {
           </div>
         </section>
 
-        {/* New Combined Section: Models & CTA cards */}
+        {/* Models & CTA Section */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            {/* Main heading */}
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Welches Wohnmobil passt zu mir?</h2>
+            {/* Main section heading */}
+            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
+              Welches Wohnmobil passt zu mir?
+            </h2>
             
-            {/* Horizontally scrollable filter bar */}
-            <div className="overflow-x-auto pb-4 mb-8">
-              <div className="flex justify-center min-w-max">
-                <ToggleGroup 
-                  type="single" 
-                  value={activeFilter}
-                  onValueChange={(value) => value && setActiveFilter(value)} 
-                  className="border rounded-full overflow-hidden shadow-sm p-1"
-                >
-                  <ToggleGroupItem value="alle" className="rounded-full text-sm px-4">Alle</ToggleGroupItem>
-                  <ToggleGroupItem value="alkoven" className="rounded-full text-sm px-4">Alkoven</ToggleGroupItem>
-                  <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm px-4">Teilintegriert</ToggleGroupItem>
-                  <ToggleGroupItem value="integriert" className="rounded-full text-sm px-4">Integriert</ToggleGroupItem>
-                  <ToggleGroupItem value="vans" className="rounded-full text-sm px-4">Vans</ToggleGroupItem>
-                </ToggleGroup>
-              </div>
+            {/* Filter tab buttons - pill style */}
+            <div className="flex justify-center mb-8">
+              <ToggleGroup 
+                type="single" 
+                value={activeFilter}
+                onValueChange={(value) => value && setActiveFilter(value)} 
+                className="border rounded-full overflow-hidden shadow-sm p-1 flex-wrap justify-center"
+              >
+                <ToggleGroupItem value="alle" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                  Alle
+                </ToggleGroupItem>
+                <ToggleGroupItem value="alkoven" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                  Alkoven
+                </ToggleGroupItem>
+                <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                  Teilintegriert
+                </ToggleGroupItem>
+                <ToggleGroupItem value="integriert" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                  Integriert
+                </ToggleGroupItem>
+                <ToggleGroupItem value="vans" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                  Vans
+                </ToggleGroupItem>
+              </ToggleGroup>
             </div>
 
-            {/* Model carousel with consistent image sizing and hover effects */}
-            <div className="mb-12">
-              <Carousel className="relative">
+            {/* Model cards carousel - with consistent spacing and sizing */}
+            <div className="mb-16">
+              <Carousel className="w-full">
                 <CarouselContent>
                   {filteredModels.map((model) => (
                     <CarouselItem 
                       key={model.name} 
                       className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4"
                     >
-                      <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
-                        <CardContent className="p-6 flex flex-col h-full">
+                      <Card className="h-full transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
+                        <CardContent className="p-4">
                           {/* Fixed aspect ratio for consistent image dimensions */}
                           <div className="mb-4">
-                            <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md overflow-hidden" />
+                            <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md" />
                           </div>
-                          <h3 className="text-xl font-bold mb-1">{model.name}</h3>
-                          <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
-                          <Button variant="outline" asChild className="w-full mt-auto">
+                          <h3 className="text-lg font-bold mb-2 line-clamp-2">{model.name}</h3>
+                          <p className="text-sm text-gray-600 mb-4 line-clamp-1">{model.description}</p>
+                          <Button variant="outline" asChild className="w-full">
                             <Link to={model.path}>Mehr erfahren</Link>
                           </Button>
                         </CardContent>
@@ -217,38 +226,38 @@ const Home = () => {
                 </CarouselContent>
                 
                 {/* Navigation arrows - only visible on desktop */}
-                <div className="hidden lg:block">
-                  <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2" />
-                  <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2" />
+                <div className="hidden md:block">
+                  <CarouselPrevious className="-left-12" />
+                  <CarouselNext className="-right-12" />
                 </div>
               </Carousel>
             </div>
             
-            {/* CTA Cards section - redesigned */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            {/* CTA Cards - dark background with white text and buttons */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {ctaCards.map((card, index) => (
-                <Card key={index} className="h-full transition-all duration-200 hover:shadow-lg bg-primary text-primary-foreground">
+                <Card key={index} className="h-full bg-[#0E1122] text-white border-0 overflow-hidden transition-transform duration-200 hover:transform hover:scale-[1.02]">
                   <CardContent className="p-6 flex flex-col h-full">
-                    <div className="mb-4 flex justify-center">
+                    <div className="mb-6 flex justify-center">
                       <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
                         {/* Icon placeholder */}
                         <div className="w-6 h-6" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 text-center">{card.title}</h3>
-                    <p className="text-gray-100 mb-6 flex-grow text-center">{card.description}</p>
+                    <h3 className="text-xl font-bold mb-3 text-center">{card.title}</h3>
+                    <p className="text-gray-200 mb-6 flex-grow text-center">{card.description}</p>
                     {card.isBeratung ? (
-                      <Button onClick={handleStartBerater} variant="outline" className="mt-auto w-full bg-white text-primary hover:bg-white/90 hover:text-primary">
+                      <Button onClick={handleStartBerater} variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
                         {card.buttonText}
                       </Button>
                     ) : card.isExternal ? (
-                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-primary hover:bg-white/90 hover:text-primary">
+                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
                         <a href={card.path} target="_blank" rel="noopener noreferrer">
                           {card.buttonText}
                         </a>
                       </Button>
                     ) : (
-                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-primary hover:bg-white/90 hover:text-primary">
+                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
                         <Link to={card.path}>{card.buttonText}</Link>
                       </Button>
                     )}
