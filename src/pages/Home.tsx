@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,7 +23,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ArrowDown, Circle, Search } from "lucide-react";
+import { ChevronDown, ArrowDown, Circle, Search, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -431,7 +430,7 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* Section 6: Händlersuche - Updated with working autocomplete */}
+        {/* Section 6: Händlersuche - Updated with static map placeholder */}
         <section className="py-16 px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">Händler in Ihrer Nähe</h2>
@@ -439,7 +438,7 @@ const Home = () => {
               Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
             </p>
             
-            {/* Search input with Google Places Autocomplete - improved implementation */}
+            {/* Search input with Google Places Autocomplete */}
             <div className="flex gap-2 mb-6">
               <div className="flex-1 relative">
                 <Input 
@@ -477,8 +476,13 @@ const Home = () => {
               </Button>
             </div>
             
-            {/* Map placeholder */}
-            <div className="w-full h-64 bg-gray-200 rounded-md"></div>
+            {/* Static map placeholder */}
+            <div className="w-full h-64 bg-gray-200 rounded-lg border border-gray-300 flex items-center justify-center">
+              <div className="text-center text-gray-500">
+                <MapPin size={36} className="mx-auto mb-2" />
+                <p>Kartenbereich</p>
+              </div>
+            </div>
           </div>
         </section>
 
