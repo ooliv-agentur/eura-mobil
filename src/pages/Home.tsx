@@ -174,35 +174,37 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Responsive model series carousel with snapping - FIXED IMPLEMENTATION */}
-            <Carousel className="relative">
-              <CarouselContent className="ml-0">
-                {filteredModels.map((model) => (
-                  <CarouselItem 
-                    key={model.name} 
-                    className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4"
-                  >
-                    <Card className="h-full">
-                      <CardContent className="p-6 flex flex-col h-full">
-                        {/* Placeholder Image */}
-                        <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
-                        <h3 className="text-xl font-bold mb-1">{model.name}</h3>
-                        <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
-                        <Button variant="outline" asChild className="w-full mt-auto">
-                          <Link to={model.path}>Mehr erfahren</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
+            {/* Responsive model series carousel with snapping */}
+            <div className="relative">
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
+                  {filteredModels.map((model) => (
+                    <div 
+                      key={model.name} 
+                      className="flex-none min-w-[90%] sm:min-w-[calc(50%-16px)] lg:min-w-[calc(25%-16px)] pr-4"
+                    >
+                      <Card className="h-full">
+                        <CardContent className="p-6 flex flex-col h-full">
+                          {/* Placeholder Image */}
+                          <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
+                          <h3 className="text-xl font-bold mb-1">{model.name}</h3>
+                          <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
+                          <Button variant="outline" asChild className="w-full mt-auto">
+                            <Link to={model.path}>Mehr erfahren</Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {/* Navigation arrows - only visible on desktop */}
               <div className="hidden lg:block">
                 <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2" />
                 <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2" />
               </div>
-            </Carousel>
+            </div>
             
             {/* NEW: Wohnmobiltypen erklärt - Collapsible Section */}
             <div className="mt-12 border rounded-lg">
