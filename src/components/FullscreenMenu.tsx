@@ -57,8 +57,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
           
-          {/* CTA Button moved below logo */}
-          <div className="mb-8">
+          {/* CTA Button moved below logo - left aligned with increased spacing */}
+          <div className="mb-12">
             <Button className="w-full md:w-auto" asChild>
               <Link to="/berater?step=1" onClick={onClose}>
                 <Calendar className="mr-2 h-4 w-4" />
@@ -68,11 +68,13 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           </div>
           
           <div className="overflow-y-auto flex-grow">
-            {/* Enhanced Desktop Grid Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Enhanced Desktop Grid Layout with improved spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
               {/* 01 Wohnmobile & Vans */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-2">01 Wohnmobile & Vans</h2>
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+                <h2 className="text-lg font-bold mb-2">
+                  <span className="text-gray-400">01</span> Wohnmobile & Vans
+                </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3">
                   <li>
@@ -169,8 +171,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* 02 Kaufen & Mieten */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-2">02 Kaufen & Mieten</h2>
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+                <h2 className="text-lg font-bold mb-2">
+                  <span className="text-gray-400">02</span> Kaufen & Mieten
+                </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3">
                   <li>
@@ -184,9 +188,11 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                     </Link>
                   </li>
                   <li>
-                    <Link 
-                      to="/konfigurator" 
+                    <a 
+                      href="/konfigurator" 
                       onClick={onClose}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="group flex items-center justify-between hover:text-blue-600 transition-colors"
                     >
                       <div className="flex items-center">
@@ -194,7 +200,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                         Konfigurator
                       </div>
                       <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-blue-600" />
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <Link 
@@ -230,8 +236,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* 03 Qualität & Vorteile */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-2">03 Qualität & Vorteile</h2>
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+                <h2 className="text-lg font-bold mb-2">
+                  <span className="text-gray-400">03</span> Qualität & Vorteile
+                </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3">
                   <li>
@@ -318,8 +326,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* 04 Unternehmen */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-2">04 Unternehmen</h2>
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+                <h2 className="text-lg font-bold mb-2">
+                  <span className="text-gray-400">04</span> Unternehmen
+                </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3">
                   <li>
@@ -386,14 +396,18 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* 05 Karriere & Service */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-2">05 Karriere & Service</h2>
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+                <h2 className="text-lg font-bold mb-2">
+                  <span className="text-gray-400">05</span> Karriere & Service
+                </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3">
                   <li>
-                    <Link 
-                      to="/karriere" 
+                    <a 
+                      href="/karriere" 
                       onClick={onClose}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="group flex items-center justify-between hover:text-blue-600 transition-colors"
                     >
                       <div className="flex items-center">
@@ -401,7 +415,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                         Stellenangebote
                       </div>
                       <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-blue-600" />
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <Link 
@@ -457,8 +471,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* 06 Social Links */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
-                <h2 className="text-lg font-bold mb-2">06 Social Links</h2>
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+                <h2 className="text-lg font-bold mb-2">
+                  <span className="text-gray-400">06</span> Social Links
+                </h2>
                 <Separator className="mb-4" />
                 <div className="flex gap-6">
                   <a 
@@ -489,7 +505,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* Language Selector */}
-              <div className="mb-8 bg-gray-50 p-4 rounded-lg">
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
                 <h2 className="text-lg font-bold mb-2">Sprache</h2>
                 <Separator className="mb-4" />
                 <Select defaultValue="de">
