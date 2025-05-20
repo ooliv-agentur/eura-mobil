@@ -24,7 +24,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ArrowDown, Circle } from "lucide-react";
+import { ChevronDown, ArrowDown, Circle, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -111,6 +111,20 @@ const newsItems = [
   }
 ];
 
+// Interface for Google Places prediction
+interface PlacePrediction {
+  description: string;
+  place_id: string;
+}
+
+// Add window type declaration for Google Places Autocomplete
+declare global {
+  interface Window {
+    google: any;
+    initPlacesAutocomplete: () => void;
+  }
+}
+
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
@@ -137,8 +151,83 @@ const Home = () => {
     }
   }, [activeFilter, emblaApi]);
   
-  // New state for dealer search input
+  // State for dealer search input and Google Places Autocomplete
   const [dealerSearch, setDealerSearch] = useState("");
+  const [placePredictions, setPlacePredictions] = useState<PlacePrediction[]>([]);
+  const [showPredictions, setShowPredictions] = useState(false);
+  const autocompleteService = useRef<any>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Load Google Maps script with Places API
+  useEffect(() => {
+    // Only load script if it's not already loaded
+    if (!window.google) {
+      const googleMapsScript = document.createElement('script');
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC1bL2XXLL3OK510dcAO-5lSwyrKjfzro8&libraries=places&callback=initPlacesAutocomplete`;
+      googleMapsScript.async = true;
+      googleMapsScript.defer = true;
+      
+      window.initPlacesAutocomplete = () => {
+        autocompleteService.current = new window.google.maps.places.AutocompleteService();
+      };
+      
+      document.head.appendChild(googleMapsScript);
+      
+      return () => {
+        document.head.removeChild(googleMapsScript);
+      };
+    } else if (window.google && window.google.maps && window.google.maps.places) {
+      autocompleteService.current = new window.google.maps.places.AutocompleteService();
+    }
+  }, []);
+
+  // Handle click outside predictions dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchInputRef.current && !searchInputRef.current.contains(event.target as Node)) {
+        setShowPredictions(false);
+      }
+    };
+    
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Handle dealer search input changes
+  const handleDealerSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setDealerSearch(value);
+    
+    if (value.length >= 2 && autocompleteService.current) {
+      autocompleteService.current.getPlacePredictions(
+        {
+          input: value,
+          componentRestrictions: { country: ['de', 'at', 'ch'] }, // Restrict to Germany, Austria, Switzerland
+          types: ['(cities)', 'postal_code', 'locality', 'sublocality', 'administrative_area_level_1', 'administrative_area_level_2']
+        },
+        (predictions: PlacePrediction[] | null, status: string) => {
+          if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+            setPlacePredictions(predictions);
+            setShowPredictions(true);
+          } else {
+            setPlacePredictions([]);
+            setShowPredictions(false);
+          }
+        }
+      );
+    } else {
+      setPlacePredictions([]);
+      setShowPredictions(false);
+    }
+  };
+
+  // Handle selection of a prediction
+  const handlePredictionSelect = (prediction: PlacePrediction) => {
+    setDealerSearch(prediction.description);
+    setShowPredictions(false);
+  };
 
   const handleStartBerater = () => {
     startBeraterFlow({ mode: "dialog", initialStep: 1 });
@@ -297,17 +386,40 @@ const Home = () => {
               Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
             </p>
             
-            {/* Search input and button */}
+            {/* Search input with Google Places Autocomplete */}
             <div className="flex gap-2 mb-6">
-              <Input 
-                placeholder="Ort oder PLZ eingeben"
-                value={dealerSearch}
-                onChange={(e) => setDealerSearch(e.target.value)}
-                className="flex-1"
-              />
-              <Button asChild>
-                <Link to={`/haendler${dealerSearch ? `?location=${dealerSearch}` : ''}`}>
-                  Händler finden
+              <div className="flex-1 relative">
+                <Input 
+                  ref={searchInputRef}
+                  placeholder="Ort oder PLZ eingeben"
+                  value={dealerSearch}
+                  onChange={handleDealerSearchChange}
+                  className="flex-1 w-full"
+                  aria-label="Ort oder PLZ Suche"
+                  autoComplete="off"
+                />
+                
+                {/* Autocomplete dropdown */}
+                {showPredictions && placePredictions.length > 0 && (
+                  <div className="absolute z-10 w-full bg-white mt-1 shadow-lg rounded-md border border-gray-200">
+                    <ul className="py-1">
+                      {placePredictions.map((prediction) => (
+                        <li
+                          key={prediction.place_id}
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => handlePredictionSelect(prediction)}
+                        >
+                          {prediction.description}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <Button asChild className="flex items-center gap-2">
+                <Link to={`/haendler${dealerSearch ? `?location=${encodeURIComponent(dealerSearch)}` : ''}`}>
+                  <Search size={18} className="mr-1" />
+                  <span>Händler finden</span>
                 </Link>
               </Button>
             </div>
