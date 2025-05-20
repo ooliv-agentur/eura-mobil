@@ -50,8 +50,8 @@ const Home = () => {
   return (
     <Layout>
       <main className="flex-1">
-        {/* Simplified Hero Section (without animated background) */}
-        <section className="relative w-full flex justify-center items-center py-16 bg-gray-50">
+        {/* Fullscreen Hero Section (100vh) mit neutralem Hintergrund */}
+        <section className="relative w-full h-screen flex justify-center items-center bg-[#f5f5f5]">
           <div className="relative z-20 max-w-3xl text-center px-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
@@ -115,6 +115,7 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Rest der Seite bleibt unverändert */}
         {/* Updated Wohnmobilberater Teaser */}
         <section className="py-10 px-4 bg-gray-100">
           <div className="max-w-3xl mx-auto text-center">
