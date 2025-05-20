@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Facebook, Instagram, Youtube, Calendar, X, ArrowRight, ExternalLink } from "lucide-react";
+import { Facebook, Instagram, Youtube, Calendar, X, ArrowRight, ExternalLink, Square } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -77,14 +77,33 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3">
+                  {/* Added Van as the first item */}
+                  <li>
+                    <Link 
+                      to="/modelle/van" 
+                      onClick={onClose}
+                      className="group flex items-center hover:text-blue-600 transition-colors"
+                    >
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Van</span>
+                      </div>
+                    </Link>
+                  </li>
                   <li>
                     <Link 
                       to="/modelle/activa-one" 
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Activa One
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Activa One</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -93,8 +112,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Xtura
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Xtura</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -103,8 +126,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Profila T – Fiat
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Profila T – Fiat</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -113,8 +140,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Profila T – Mercedes
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Profila T – Mercedes</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -123,8 +154,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Profila RS
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Profila RS</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -133,8 +168,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Contura
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Contura</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -143,8 +182,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Integra Line – Fiat
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Integra Line – Fiat</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -153,8 +196,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Integra Line GT – Mercedes
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Integra Line GT – Mercedes</span>
+                      </div>
                     </Link>
                   </li>
                   <li>
@@ -163,8 +210,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                       onClick={onClose}
                       className="group flex items-center hover:text-blue-600 transition-colors"
                     >
-                      <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
-                      Integra
+                      <div className="flex items-center w-full">
+                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                          <Square className="h-6 w-6 text-gray-400" />
+                        </div>
+                        <span>Integra</span>
+                      </div>
                     </Link>
                   </li>
                 </ul>
