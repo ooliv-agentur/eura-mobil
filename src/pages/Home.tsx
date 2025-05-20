@@ -23,7 +23,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ArrowDown, Square, Tent, Caravan, BusFront, Bus } from "lucide-react";
+import { ChevronDown, ArrowDown, Circle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -42,27 +42,27 @@ const modelTypes = [
   { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "vans" }
 ];
 
-// Wohnmobiltypen Erklärungen with icon mappings
+// Wohnmobiltypen Erklärungen with generic icon placeholders
 const wohnmobiltypenErklaerungen = {
   alle: {
     text: "Entdecken Sie unsere gesamte Modellpalette - von kompakten Vans bis zu integrierten Luxus-Wohnmobilen.",
-    icon: Square
+    icon: Circle
   },
   alkoven: {
     text: "In den Alkoven-Wohnmobilen von Eura Mobil schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde – zum Wohnen, Schlafen und Erleben.",
-    icon: Tent
+    icon: Circle
   },
   teilintegriert: {
     text: "Kompakter Aufbau mit hochwertiger Ausstattung – ideal für Paare oder kleine Familien, die Flexibilität und Komfort schätzen.",
-    icon: Caravan
+    icon: Circle
   },
   integriert: {
     text: "Großzügige Wohnmobile mit durchgängigem Design, maximalem Komfort und einem luxuriösen Gefühl für lange Reisen und hohe Ansprüche.",
-    icon: BusFront
+    icon: Circle
   },
   vans: {
     text: "Kompakte Fahrzeuge für flexible Reisen – wendig, alltagstauglich und hochwertig verarbeitet.",
-    icon: Bus
+    icon: Circle
   }
 };
 
@@ -200,17 +200,13 @@ const Home = () => {
               </ToggleGroup>
             </div>
 
-            {/* Updated Type explanation box with icons that changes based on filter selection */}
+            {/* Updated Type explanation box with generic circle placeholders */}
             <div className="bg-gray-100 rounded-md p-4 mb-8 max-w-3xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-center gap-4">
                 <div className="flex justify-center md:justify-start">
-                  {/* Icon placeholder with consistent size */}
-                  <div className="bg-gray-200 rounded-full p-3 w-16 h-16 flex items-center justify-center">
-                    {/* Dynamically render the icon based on activeFilter */}
-                    {(() => {
-                      const IconComponent = wohnmobiltypenErklaerungen[activeFilter].icon;
-                      return <IconComponent size={32} className="text-gray-600" />;
-                    })()}
+                  {/* Generic circle placeholder with consistent size */}
+                  <div className="bg-gray-300 rounded-full p-3 w-16 h-16 flex items-center justify-center">
+                    <Circle size={32} className="text-gray-600" />
                   </div>
                 </div>
                 <p className="text-gray-700 text-center md:text-left">
