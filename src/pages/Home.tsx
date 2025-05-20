@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -29,17 +30,18 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
+// Updated with correct category assignments
 const modelTypes = [
   { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen", path: "/modelle/van", type: "vans" },
   { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one", type: "alkoven" },
   { name: "Profila T – Fiat", description: "Komfort und Flexibilität auf Fiat-Basis", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
   { name: "Profila RS", description: "Großzügiger Wohnraum mit praktischer Aufteilung", path: "/modelle/profila-rs", type: "teilintegriert" },
   { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
-  { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura", type: "integriert" },
+  { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura", type: "teilintegriert" },
   { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf Fiat-Basis", path: "/modelle/integra-line-fiat", type: "integriert" },
   { name: "Integra Line GT – Mercedes", description: "Premium Integrierte mit Mercedes Fahrgestell", path: "/modelle/integra-line-gt", type: "integriert" },
   { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra", type: "integriert" },
-  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "vans" }
+  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "teilintegriert" }
 ];
 
 // Wohnmobiltypen Erklärungen with generic icon placeholders
