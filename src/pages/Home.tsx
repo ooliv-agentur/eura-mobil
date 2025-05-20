@@ -143,7 +143,7 @@ const Home = () => {
     <Layout>
       <main className="flex-1">
         {/* Section 1: Above-the-Fold Hero Section (100vh) */}
-        <section className="relative w-full h-screen flex justify-center items-center bg-[#f5f5f5]">
+        <section className="relative w-full h-screen flex justify-center items-center">
           <div className="relative z-20 max-w-3xl text-center px-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
@@ -151,12 +151,12 @@ const Home = () => {
             <p className="mb-8 text-lg md:text-xl text-gray-600">
               Entdecken Sie unsere hochwertigen Wohnmobile – innovativ, komfortabel, individuell.
             </p>
-            <Button onClick={handleStartBerater} size="lg" className="px-8 py-6 text-base">
-              Jetzt Beratung starten
+            <Button asChild size="lg" className="px-8 py-6 text-base">
+              <Link to="/modelle">Jetzt Modell entdecken</Link>
             </Button>
             
             {/* Scroll indicator */}
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
               <ArrowDown className="h-6 w-6 text-gray-400" />
             </div>
           </div>
