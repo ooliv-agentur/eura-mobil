@@ -1,11 +1,50 @@
 
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-gray-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* Contact Section - Added above the grid */}
+        <div className="mb-8 pb-6 border-b border-gray-200">
+          <div className="flex flex-col md:flex-row justify-between">
+            <div>
+              <h3 className="font-bold mb-3">EURA Mobil GmbH</h3>
+              <div className="space-y-2">
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-gray-500 mt-0.5" />
+                  <span className="text-gray-600">Kreuznacher Str. 78, 55576 Sprendlingen, Germany</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-4 h-4 text-gray-500" />
+                  <a href="tel:+4967012030" className="text-gray-600 hover:text-blue-600">+49 6701 20 30</a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-gray-500" />
+                  <a href="mailto:info@euramobil.de" className="text-gray-600 hover:text-blue-600">info@euramobil.de</a>
+                </div>
+              </div>
+            </div>
+            
+            {/* Social Media Icons - moved to the right side on desktop */}
+            <div className="mt-6 md:mt-0">
+              <h3 className="font-bold mb-3">Folgen Sie uns</h3>
+              <div className="flex space-x-4">
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                  <Youtube className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+                </a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <Instagram className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+                </a>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <Facebook className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div>
             <h3 className="font-bold mb-3">Über uns</h3>
@@ -44,27 +83,9 @@ const Footer = () => {
         </div>
         
         <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
-            <div className="text-sm text-gray-500">
-              © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
-            </div>
-            
-            {/* Social Media Icons - moved to be alongside copyright */}
-            <div className="flex space-x-4">
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <Youtube className="w-5 h-5 text-gray-500 hover:text-gray-700" />
-              </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <Instagram className="w-5 h-5 text-gray-500 hover:text-gray-700" />
-              </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <Facebook className="w-5 h-5 text-gray-500 hover:text-gray-700" />
-              </a>
-            </div>
+          <div className="text-sm text-gray-500">
+            © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
           </div>
-          
-          {/* Empty div to maintain spacing in the flex layout */}
-          <div></div>
         </div>
       </div>
     </footer>
