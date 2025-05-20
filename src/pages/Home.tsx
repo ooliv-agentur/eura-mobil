@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -289,8 +290,8 @@ const Home = () => {
   return (
     <Layout>
       <main className="flex-1">
-        {/* Section 1: Above-the-Fold Hero Section (100vh) */}
-        <section className="relative w-full h-screen flex flex-col justify-center items-center">
+        {/* Section 1: Hero Section (reduced to ~75vh) */}
+        <section className="relative w-full h-[75vh] flex flex-col justify-center items-center">
           <div className="relative z-20 max-w-3xl text-center px-6 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
@@ -303,10 +304,10 @@ const Home = () => {
             </Button>
           </div>
           
-          {/* Scroll indicator positioned higher in the viewport to ensure visibility */}
-          <div className="absolute bottom-[15vh] left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-            <ArrowDown className="h-6 w-6 text-gray-400 mb-1" />
-            <span className="text-sm text-gray-400">Nach unten scrollen</span>
+          {/* Scroll indicator - made more subtle */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+            <ArrowDown className="h-5 w-5 text-gray-500 mb-1 animate-bounce" />
+            <span className="text-xs text-gray-500">Scrollen</span>
           </div>
         </section>
 
