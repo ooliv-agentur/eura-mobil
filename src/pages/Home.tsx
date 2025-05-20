@@ -251,6 +251,37 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Configurator Section - New */}
+        <section className="py-12 px-4 bg-gray-100">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              {/* Image placeholder */}
+              <div className="w-full md:w-1/2">
+                <AspectRatio ratio={16 / 9} className="bg-gray-300 rounded-md overflow-hidden">
+                  <Skeleton className="w-full h-full" />
+                </AspectRatio>
+              </div>
+              
+              {/* Text and button */}
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h2 className="text-2xl font-bold mb-4">Konfigurieren Sie Ihr Wohnmobil</h2>
+                <p className="mb-6 text-gray-600">
+                  Wählen Sie eines unserer Modelle und passen Sie es Ihren individuellen Vorlieben an.
+                </p>
+                <Button asChild>
+                  <a 
+                    href="https://konfigurator.euramobil.de" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    Zum Konfigurator
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Rest der Seite bleibt unverändert */}
         {/* Updated Wohnmobilberater Teaser */}
         <section className="py-10 px-4 bg-gray-100">
