@@ -87,6 +87,22 @@ const wohnmobiltypen = [
   }
 ];
 
+// News items data
+const newsItems = [
+  {
+    title: "Neuheiten 2025 vorgestellt",
+    date: "12.05.2025",
+    description: "Entdecken Sie die aktuellen Neuheiten und innovativen Modelle für die kommende Saison.",
+    path: "/news/neuheiten-2025"
+  },
+  {
+    title: "Caravan Salon Düsseldorf",
+    date: "28.08.2025",
+    description: "Besuchen Sie uns auf dem Caravan Salon in Düsseldorf und erleben Sie unsere Wohnmobile hautnah.",
+    path: "/news/caravan-salon-2025"
+  }
+];
+
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
