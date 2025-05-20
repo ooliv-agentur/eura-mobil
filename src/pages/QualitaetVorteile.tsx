@@ -71,15 +71,12 @@ const QualitaetVorteile = () => {
           </div>
         </section>
         
-        {/* Teaser-Grid */}
+        {/* Teaser-Grid - without images */}
         <section className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {qualityFeatures.map((feature) => (
               <Card key={feature.title} className="hover:shadow-md transition-shadow">
                 <CardContent className="p-6 flex flex-col h-full">
-                  <div className="h-32 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                    [Platzhalterbild]
-                  </div>
                   <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
                   <p className="text-gray-600 mb-4 flex-grow">{feature.description}</p>
                   <Button variant="outline" asChild className="w-full">

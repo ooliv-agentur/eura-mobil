@@ -1,9 +1,9 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
-import AnimatedHeroBackground from "@/components/AnimatedHeroBackground";
 import { 
   Carousel, 
   CarouselContent, 
@@ -50,18 +50,13 @@ const Home = () => {
   return (
     <Layout>
       <main className="flex-1">
-        {/* Enhanced Hero Section */}
-        <section className="relative w-full h-screen flex justify-center items-center overflow-hidden">
-          <AnimatedHeroBackground className="z-0" isPaused={menuOpen} />
-          <div 
-            className="absolute inset-0 bg-gradient-to-b from-transparent to-white/30 z-10"
-            aria-hidden="true"
-          />
-          <div className="relative z-20 max-w-3xl text-center px-6 py-12 md:p-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-black">
+        {/* Simplified Hero Section (without animated background) */}
+        <section className="relative w-full flex justify-center items-center py-16 bg-gray-50">
+          <div className="relative z-20 max-w-3xl text-center px-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
             </h1>
-            <p className="mb-8 text-lg md:text-xl text-black/80">
+            <p className="mb-8 text-lg md:text-xl text-gray-600">
               Entdecken Sie unsere hochwertigen Wohnmobile – innovativ, komfortabel, individuell.
             </p>
             <Button asChild size="lg" className="px-8 py-6 text-base">
@@ -70,7 +65,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Model Types Carousel */}
+        {/* Model Types Carousel - Simplified without images */}
         <section className="py-10 px-4">
           <h2 className="text-2xl font-bold mb-6 text-center">Unsere Wohnmobil-Serien</h2>
           
@@ -82,9 +77,6 @@ const Home = () => {
                   <CarouselItem key={model.name} className="pl-1 md:basis-1/2 lg:basis-1/3">
                     <Card className="h-full">
                       <CardContent className="p-6 flex flex-col h-full">
-                        <div className="h-40 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                          [Modellbild]
-                        </div>
                         <h3 className="text-xl font-bold">{model.name}</h3>
                         <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
                         <Button variant="outline" asChild className="w-full">
@@ -105,9 +97,6 @@ const Home = () => {
             {modelTypes.map((model) => (
               <Card key={model.name} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
-                  <div className="h-40 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                    [Modellbild]
-                  </div>
                   <h3 className="text-xl font-bold">{model.name}</h3>
                   <p className="text-gray-600 mb-4">{model.description}</p>
                   <Button variant="outline" asChild className="w-full">
@@ -142,13 +131,10 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* Dealer Search Teaser */}
+        {/* Dealer Search Teaser - Simplified without map */}
         <section className="py-10 px-4">
           <div className="flex flex-col md:flex-row items-center max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="w-full md:w-1/2 h-48 md:h-full bg-gray-200 flex items-center justify-center text-gray-400">
-              [Karte]
-            </div>
-            <div className="w-full md:w-1/2 p-6">
+            <div className="w-full p-6">
               <h2 className="text-2xl font-bold mb-2">Händler in Ihrer Nähe</h2>
               <p className="text-gray-600 mb-4">
                 Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
@@ -160,7 +146,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* News Teaser */}
+        {/* News Teaser - Simplified */}
         <section className="py-10 px-4 bg-gray-50">
           <h2 className="text-2xl font-bold mb-6 text-center">Aktuelles & Events</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">

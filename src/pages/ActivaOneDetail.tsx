@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -110,33 +111,28 @@ const ActivaOneDetail = () => {
       <Header />
       
       <main className="flex-1">
-        {/* 1. Hero-Bereich */}
+        {/* 1. Hero-Bereich - Simplified */}
         <section className="relative">
-          <div className="w-full h-64 md:h-96 bg-gray-200">
-            <img 
-              src="https://images.unsplash.com/photo-1532941781729-b8e6bf6a3d0c?w=900&auto=format" 
-              alt="Activa One" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="container mx-auto px-4 py-6">
-            <h1 className="text-2xl md:text-3xl font-bold">Activa One – Entspannung nach Plan</h1>
-            <p className="text-lg text-gray-700 mt-2 mb-4">Alkoven Wohnmobil für Familien und Einsteiger</p>
-            
-            <div className="flex flex-col sm:flex-row gap-3 mt-4">
-              <Button 
-                className="flex items-center gap-2"
-                onClick={handleKonfiguratorClick}
-              >
-                <Settings size={18} />
-                Konfigurator starten
-              </Button>
-              <Button variant="outline" className="flex items-center gap-2" asChild>
-                <Link to="/haendler">
-                  <MapPin size={18} />
-                  Händler finden
-                </Link>
-              </Button>
+          <div className="w-full py-12 bg-gray-100">
+            <div className="container mx-auto px-4">
+              <h1 className="text-2xl md:text-3xl font-bold">Activa One – Entspannung nach Plan</h1>
+              <p className="text-lg text-gray-700 mt-2 mb-4">Alkoven Wohnmobil für Familien und Einsteiger</p>
+              
+              <div className="flex flex-col sm:flex-row gap-3 mt-4">
+                <Button 
+                  className="flex items-center gap-2"
+                  onClick={handleKonfiguratorClick}
+                >
+                  <Settings size={18} />
+                  Konfigurator starten
+                </Button>
+                <Button variant="outline" className="flex items-center gap-2" asChild>
+                  <Link to="/haendler">
+                    <MapPin size={18} />
+                    Händler finden
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -194,7 +190,7 @@ const ActivaOneDetail = () => {
           </div>
         </section>
         
-        {/* 5. Innenraum & Deko */}
+        {/* 5. Innenraum & Deko - Text only */}
         <section className="container mx-auto px-4 py-8 bg-gray-50">
           <h2 className="text-xl font-bold mb-4">Beach Home Deko-Paket</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -207,13 +203,6 @@ const ActivaOneDetail = () => {
                 <li>Praktische Aufbewahrungslösungen</li>
                 <li>Hochwertige Stoffe und Materialien</li>
               </ul>
-            </div>
-            <div className="bg-gray-200 h-48 md:h-full">
-              <img 
-                src="https://images.unsplash.com/photo-1593150532356-223f7151d4c4?w=500&auto=format" 
-                alt="Beach Home Interior" 
-                className="w-full h-full object-cover"
-              />
             </div>
           </div>
         </section>
