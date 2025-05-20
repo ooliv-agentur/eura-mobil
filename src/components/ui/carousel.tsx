@@ -26,6 +26,7 @@ type CarouselContextProps = {
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
   scrollNext: () => void
+  scrollTo: (index: number) => void // Added scrollTo property to the type definition
   canScrollPrev: boolean
   canScrollNext: boolean
   selectedIndex: number
@@ -143,6 +144,7 @@ const Carousel = React.forwardRef<
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
           scrollPrev,
           scrollNext,
+          scrollTo, // Added scrollTo to the context value
           canScrollPrev,
           canScrollNext,
           selectedIndex,
