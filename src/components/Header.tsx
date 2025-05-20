@@ -55,24 +55,25 @@ const Header = () => {
             <Search className="h-6 w-6" />
           </Button>
           
-          {/* Fixed-size container for menu icon with precise positioning */}
+          {/* Menu icon container with fixed dimensions */}
           <div className="relative w-10 h-10">
-            {/* Single Button that toggles between icons */}
+            {/* Button container with fixed position */}
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={toggleMenu} 
               aria-label={isOverlayActive("menu") ? "Menü schließen" : "Menü öffnen"}
-              className="absolute inset-0 flex items-center justify-center"
+              className="absolute top-0 left-0 w-10 h-10 p-0"
             >
-              {/* Absolutely positioned icons with identical center positioning */}
-              <span className="absolute inset-0 flex items-center justify-center">
-                {isOverlayActive("menu") ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
-              </span>
+              {/* Both icons exist in the DOM but we toggle visibility */}
+              <Menu 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 transition-opacity duration-200" 
+                style={{ opacity: isOverlayActive("menu") ? 0 : 1 }}
+              />
+              <X 
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 transition-opacity duration-200" 
+                style={{ opacity: isOverlayActive("menu") ? 1 : 0 }}
+              />
             </Button>
           </div>
         </div>
