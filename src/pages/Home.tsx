@@ -13,15 +13,16 @@ import {
 } from "@/components/ui/carousel";
 import Wohnmobilberater from "@/components/Wohnmobilberater/Wohnmobilberater";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 // Erweiterte Modellliste
 const modelTypes = [
-  { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one" },
-  { name: "Profila T", description: "Komfort und Flexibilität für unterwegs", path: "/modelle/profila-t" },
-  { name: "Profila RS", description: "Großzügiger Wohnraum mit praktischer Aufteilung", path: "/modelle/profila-rs" },
-  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra" },
-  { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura" },
-  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura" },
+  { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one", type: "alkoven" },
+  { name: "Profila T", description: "Komfort und Flexibilität für unterwegs", path: "/modelle/profila-t", type: "teilintegriert" },
+  { name: "Profila RS", description: "Großzügiger Wohnraum mit praktischer Aufteilung", path: "/modelle/profila-rs", type: "teilintegriert" },
+  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra", type: "integriert" },
+  { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura", type: "integriert" },
+  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "vans" },
 ];
 
 const newsItems = [
@@ -42,10 +43,16 @@ const newsItems = [
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
+  const [activeFilter, setActiveFilter] = useState("alle");
   
   const handleStartBerater = () => {
     startBeraterFlow({ mode: "dialog", initialStep: 1 });
   };
+
+  // Filter models based on active filter
+  const filteredModels = activeFilter === "alle" 
+    ? modelTypes 
+    : modelTypes.filter(model => model.type === activeFilter);
 
   return (
     <Layout>
@@ -65,18 +72,38 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Model Types Carousel - Simplified without images */}
+        {/* Model Types with Filter Bar */}
         <section className="py-10 px-4">
           <h2 className="text-2xl font-bold mb-6 text-center">Unsere Wohnmobil-Serien</h2>
+          
+          {/* Filter Bar */}
+          <div className="flex justify-center mb-6 overflow-x-auto">
+            <ToggleGroup 
+              type="single" 
+              value={activeFilter}
+              onValueChange={(value) => value && setActiveFilter(value)} 
+              className="border rounded-md"
+            >
+              <ToggleGroupItem value="alle">Alle</ToggleGroupItem>
+              <ToggleGroupItem value="alkoven">Alkoven</ToggleGroupItem>
+              <ToggleGroupItem value="teilintegriert">Teilintegriert</ToggleGroupItem>
+              <ToggleGroupItem value="integriert">Integriert</ToggleGroupItem>
+              <ToggleGroupItem value="vans">Vans</ToggleGroupItem>
+            </ToggleGroup>
+          </div>
           
           {/* Mobile Carousel */}
           <div className="md:hidden">
             <Carousel className="w-full">
               <CarouselContent>
-                {modelTypes.map((model) => (
+                {filteredModels.map((model) => (
                   <CarouselItem key={model.name} className="pl-1 md:basis-1/2 lg:basis-1/3">
                     <Card className="h-full">
                       <CardContent className="p-6 flex flex-col h-full">
+                        {/* Placeholder Image */}
+                        <div className="w-full h-40 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
+                          Bild-Platzhalter
+                        </div>
                         <h3 className="text-xl font-bold">{model.name}</h3>
                         <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
                         <Button variant="outline" asChild className="w-full">
@@ -94,9 +121,13 @@ const Home = () => {
           
           {/* Desktop Grid */}
           <div className="hidden md:grid md:grid-cols-3 gap-4">
-            {modelTypes.map((model) => (
+            {filteredModels.map((model) => (
               <Card key={model.name} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
+                  {/* Placeholder Image */}
+                  <div className="w-full h-48 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
+                    Bild-Platzhalter
+                  </div>
                   <h3 className="text-xl font-bold">{model.name}</h3>
                   <p className="text-gray-600 mb-4">{model.description}</p>
                   <Button variant="outline" asChild className="w-full">
