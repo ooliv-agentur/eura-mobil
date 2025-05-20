@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -17,6 +18,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
+  showIndicators?: boolean
 }
 
 type CarouselContextProps = {
@@ -26,6 +28,9 @@ type CarouselContextProps = {
   scrollNext: () => void
   canScrollPrev: boolean
   canScrollNext: boolean
+  selectedIndex: number
+  scrollSnaps: number[]
+  showIndicators?: boolean
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -52,6 +57,7 @@ const Carousel = React.forwardRef<
       plugins,
       className,
       children,
+      showIndicators = true,
       ...props
     },
     ref
@@ -63,6 +69,8 @@ const Carousel = React.forwardRef<
       },
       plugins
     )
+    const [selectedIndex, setSelectedIndex] = React.useState(0)
+    const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
 
@@ -71,9 +79,14 @@ const Carousel = React.forwardRef<
         return
       }
 
+      setSelectedIndex(api.selectedScrollSnap())
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
     }, [])
+
+    const scrollTo = React.useCallback((index: number) => {
+      api?.scrollTo(index)
+    }, [api])
 
     const scrollPrev = React.useCallback(() => {
       api?.scrollPrev()
@@ -109,8 +122,10 @@ const Carousel = React.forwardRef<
         return
       }
 
+      setScrollSnaps(api.scrollSnapList())
       onSelect(api)
       api.on("reInit", onSelect)
+      api.on("reInit", () => setScrollSnaps(api.scrollSnapList()))
       api.on("select", onSelect)
 
       return () => {
@@ -130,6 +145,9 @@ const Carousel = React.forwardRef<
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          selectedIndex,
+          scrollSnaps,
+          showIndicators
         }}
       >
         <div
@@ -250,6 +268,45 @@ const CarouselNext = React.forwardRef<
 })
 CarouselNext.displayName = "CarouselNext"
 
+// New Component: CarouselIndicators
+const CarouselIndicators = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const { scrollSnaps, selectedIndex, scrollTo, showIndicators, orientation } = useCarousel()
+  
+  if (!showIndicators) {
+    return null
+  }
+
+  return (
+    <div 
+      ref={ref}
+      className={cn(
+        "flex justify-center mt-4 gap-1.5",
+        orientation === "vertical" ? "flex-col" : "",
+        className
+      )}
+      {...props}
+    >
+      {scrollSnaps.map((_, index) => (
+        <button
+          key={index}
+          className={cn(
+            "h-1 rounded-full transition-all",
+            selectedIndex === index 
+              ? "w-6 bg-gray-800" 
+              : "w-3 bg-gray-300",
+          )}
+          onClick={() => scrollTo(index)}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  )
+})
+CarouselIndicators.displayName = "CarouselIndicators"
+
 export {
   type CarouselApi,
   Carousel,
@@ -257,4 +314,5 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  CarouselIndicators,
 }

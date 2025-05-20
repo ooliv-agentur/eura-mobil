@@ -8,7 +8,8 @@ import {
   CarouselContent, 
   CarouselItem, 
   CarouselNext, 
-  CarouselPrevious 
+  CarouselPrevious, 
+  CarouselIndicators 
 } from "@/components/ui/carousel";
 import Wohnmobilberater from "@/components/Wohnmobilberater/Wohnmobilberater";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
@@ -358,7 +359,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Model cards carousel - with consistent spacing and sizing */}
+            {/* Model cards carousel - with consistent spacing and sizing - NOW WITH INDICATORS */}
             <div className="mb-16">
               <Carousel className="w-full">
                 <CarouselContent>
@@ -389,6 +390,9 @@ const Home = () => {
                   <CarouselPrevious className="-left-12" />
                   <CarouselNext className="-right-12" />
                 </div>
+                
+                {/* Add indicators */}
+                <CarouselIndicators />
               </Carousel>
             </div>
             
@@ -486,7 +490,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Section 7: News and Events - Updated with Carousel */}
+        {/* Section 7: News and Events - Updated with Carousel AND INDICATORS */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-center">Aktuelles & Events</h2>
@@ -528,6 +532,9 @@ const Home = () => {
                   <CarouselPrevious className="left-0 md:-left-5" />
                   <CarouselNext className="right-0 md:-right-5" />
                 </div>
+                
+                {/* Add indicators */}
+                <CarouselIndicators />
               </Carousel>
             </div>
             

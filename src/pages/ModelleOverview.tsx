@@ -31,6 +31,14 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/components/ui/use-toast";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselIndicators
+} from "@/components/ui/carousel";
 
 // Define model interfaces
 interface ModelData {
