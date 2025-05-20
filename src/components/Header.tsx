@@ -55,15 +55,15 @@ const Header = () => {
             <Search className="h-6 w-6" />
           </Button>
           
-          {/* Menu Icon Container - Fixed positioning for both icons */}
-          <div className="relative w-10 h-10">
-            {/* Burger Menu Button */}
+          {/* Menu Icon Container with fixed positioning */}
+          <div className="relative w-10 h-10 flex items-center justify-center">
+            {/* Burger/Close Menu Button with centered positioning */}
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={toggleMenu} 
               aria-label={isOverlayActive("menu") ? "Menü schließen" : "Menü öffnen"}
-              className="absolute inset-0"
+              className="absolute inset-0 flex items-center justify-center"
             >
               {isOverlayActive("menu") ? (
                 <X className="h-6 w-6" />
