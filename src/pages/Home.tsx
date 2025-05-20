@@ -132,11 +132,11 @@ interface PlacePrediction {
   place_id: string;
 }
 
-// Add window type declaration for Google Places Autocomplete
+// Add specific window type declaration for Google Places
 declare global {
   interface Window {
     google: any;
-    initPlacesAutocomplete: () => void;
+    initGoogleAutocomplete: () => void;
   }
 }
 
@@ -173,26 +173,34 @@ const Home = () => {
   const autocompleteService = useRef<any>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Load Google Maps script with Places API
+  // Load Google Maps script with Places API - updated to use proper callback
   useEffect(() => {
     // Only load script if it's not already loaded
-    if (!window.google) {
+    if (!window.google || !window.google.maps || !window.google.maps.places) {
       const googleMapsScript = document.createElement('script');
-      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC1bL2XXLL3OK510dcAO-5lSwyrKjfzro8&libraries=places&callback=initPlacesAutocomplete`;
+      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC1bL2XXLL3OK510dcAO-5lSwyrKjfzro8&libraries=places&callback=initGoogleAutocomplete`;
       googleMapsScript.async = true;
       googleMapsScript.defer = true;
       
-      window.initPlacesAutocomplete = () => {
+      window.initGoogleAutocomplete = () => {
+        if (!window.google.maps.places) {
+          console.error('Google Maps Places library not loaded');
+          return;
+        }
         autocompleteService.current = new window.google.maps.places.AutocompleteService();
+        console.log("Google Places Autocomplete initialized successfully");
       };
       
       document.head.appendChild(googleMapsScript);
       
       return () => {
-        document.head.removeChild(googleMapsScript);
+        if (document.head.contains(googleMapsScript)) {
+          document.head.removeChild(googleMapsScript);
+        }
       };
     } else if (window.google && window.google.maps && window.google.maps.places) {
       autocompleteService.current = new window.google.maps.places.AutocompleteService();
+      console.log("Google Places Autocomplete already loaded and initialized");
     }
   }, []);
 
@@ -210,28 +218,36 @@ const Home = () => {
     };
   }, []);
 
-  // Handle dealer search input changes
+  // Handle dealer search input changes - improved error handling
   const handleDealerSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setDealerSearch(value);
     
     if (value.length >= 2 && autocompleteService.current) {
-      autocompleteService.current.getPlacePredictions(
-        {
-          input: value,
-          componentRestrictions: { country: ['de', 'at', 'ch'] }, // Restrict to Germany, Austria, Switzerland
-          types: ['(cities)', 'postal_code', 'locality', 'sublocality', 'administrative_area_level_1', 'administrative_area_level_2']
-        },
-        (predictions: PlacePrediction[] | null, status: string) => {
-          if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-            setPlacePredictions(predictions);
-            setShowPredictions(true);
-          } else {
-            setPlacePredictions([]);
-            setShowPredictions(false);
+      try {
+        autocompleteService.current.getPlacePredictions(
+          {
+            input: value,
+            componentRestrictions: { country: ['de', 'at', 'ch'] }, // Restrict to Germany, Austria, Switzerland
+            types: ['(cities)', 'postal_code', 'locality', 'sublocality', 'administrative_area_level_1', 'administrative_area_level_2']
+          },
+          (predictions: PlacePrediction[] | null, status: string) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
+              console.log("Got predictions:", predictions.length);
+              setPlacePredictions(predictions);
+              setShowPredictions(true);
+            } else {
+              console.log("No predictions or error:", status);
+              setPlacePredictions([]);
+              setShowPredictions(false);
+            }
           }
-        }
-      );
+        );
+      } catch (error) {
+        console.error("Error getting place predictions:", error);
+        setPlacePredictions([]);
+        setShowPredictions(false);
+      }
     } else {
       setPlacePredictions([]);
       setShowPredictions(false);
@@ -409,7 +425,7 @@ const Home = () => {
               Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
             </p>
             
-            {/* Search input with Google Places Autocomplete */}
+            {/* Search input with Google Places Autocomplete - updated with better structure */}
             <div className="flex gap-2 mb-6">
               <div className="flex-1 relative">
                 <Input 
