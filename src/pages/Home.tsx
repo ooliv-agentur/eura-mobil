@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,7 +23,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ArrowDown } from "lucide-react";
+import { ChevronDown, ArrowDown, Square, Tent, Caravan, BusFront, Bus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -43,13 +42,28 @@ const modelTypes = [
   { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "vans" }
 ];
 
-// Wohnmobiltypen Erklärungen
+// Wohnmobiltypen Erklärungen with icon mappings
 const wohnmobiltypenErklaerungen = {
-  alle: "Entdecken Sie unsere gesamte Modellpalette - von kompakten Vans bis zu integrierten Luxus-Wohnmobilen.",
-  alkoven: "In den Alkoven-Wohnmobilen von Eura Mobil schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde – zum Wohnen, Schlafen und Erleben.",
-  teilintegriert: "Kompakter Aufbau mit hochwertiger Ausstattung – ideal für Paare oder kleine Familien, die Flexibilität und Komfort schätzen.",
-  integriert: "Großzügige Wohnmobile mit durchgängigem Design, maximalem Komfort und einem luxuriösen Gefühl für lange Reisen und hohe Ansprüche.",
-  vans: "Kompakte Fahrzeuge für flexible Reisen – wendig, alltagstauglich und hochwertig verarbeitet."
+  alle: {
+    text: "Entdecken Sie unsere gesamte Modellpalette - von kompakten Vans bis zu integrierten Luxus-Wohnmobilen.",
+    icon: Square
+  },
+  alkoven: {
+    text: "In den Alkoven-Wohnmobilen von Eura Mobil schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde – zum Wohnen, Schlafen und Erleben.",
+    icon: Tent
+  },
+  teilintegriert: {
+    text: "Kompakter Aufbau mit hochwertiger Ausstattung – ideal für Paare oder kleine Familien, die Flexibilität und Komfort schätzen.",
+    icon: Caravan
+  },
+  integriert: {
+    text: "Großzügige Wohnmobile mit durchgängigem Design, maximalem Komfort und einem luxuriösen Gefühl für lange Reisen und hohe Ansprüche.",
+    icon: BusFront
+  },
+  vans: {
+    text: "Kompakte Fahrzeuge für flexible Reisen – wendig, alltagstauglich und hochwertig verarbeitet.",
+    icon: Bus
+  }
 };
 
 // CTA cards data
@@ -186,9 +200,23 @@ const Home = () => {
               </ToggleGroup>
             </div>
 
-            {/* Type explanation box that changes based on filter selection */}
-            <div className="bg-gray-100 rounded-md p-4 mb-8 text-center max-w-3xl mx-auto">
-              <p className="text-gray-700">{wohnmobiltypenErklaerungen[activeFilter]}</p>
+            {/* Updated Type explanation box with icons that changes based on filter selection */}
+            <div className="bg-gray-100 rounded-md p-4 mb-8 max-w-3xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <div className="flex justify-center md:justify-start">
+                  {/* Icon placeholder with consistent size */}
+                  <div className="bg-gray-200 rounded-full p-3 w-16 h-16 flex items-center justify-center">
+                    {/* Dynamically render the icon based on activeFilter */}
+                    {(() => {
+                      const IconComponent = wohnmobiltypenErklaerungen[activeFilter].icon;
+                      return <IconComponent size={32} className="text-gray-600" />;
+                    })()}
+                  </div>
+                </div>
+                <p className="text-gray-700 text-center md:text-left">
+                  {wohnmobiltypenErklaerungen[activeFilter].text}
+                </p>
+              </div>
             </div>
 
             {/* Model cards carousel - with consistent spacing and sizing */}
