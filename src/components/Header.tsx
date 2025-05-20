@@ -55,14 +55,23 @@ const Header = () => {
             <Search className="h-6 w-6" />
           </Button>
           
-          {/* Burger Menu Button */}
-          <Button variant="ghost" size="icon" onClick={toggleMenu} aria-label="Menü öffnen">
-            {isOverlayActive("menu") ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
+          {/* Menu Icon Container - Fixed positioning for both icons */}
+          <div className="relative w-10 h-10">
+            {/* Burger Menu Button */}
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={toggleMenu} 
+              aria-label={isOverlayActive("menu") ? "Menü schließen" : "Menü öffnen"}
+              className="absolute inset-0"
+            >
+              {isOverlayActive("menu") ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
         </div>
         
         {/* Fullscreen Menu Overlay */}
