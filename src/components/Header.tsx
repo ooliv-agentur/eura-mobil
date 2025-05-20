@@ -55,9 +55,9 @@ const Header = () => {
             <Search className="h-6 w-6" />
           </Button>
           
-          {/* Menu Icon Container with fixed positioning */}
-          <div className="relative w-10 h-10 flex items-center justify-center">
-            {/* Burger/Close Menu Button with centered positioning */}
+          {/* Fixed-size container for menu icon with precise positioning */}
+          <div className="relative w-10 h-10">
+            {/* Single Button that toggles between icons */}
             <Button 
               variant="ghost" 
               size="icon" 
@@ -65,11 +65,14 @@ const Header = () => {
               aria-label={isOverlayActive("menu") ? "Menü schließen" : "Menü öffnen"}
               className="absolute inset-0 flex items-center justify-center"
             >
-              {isOverlayActive("menu") ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {/* Absolutely positioned icons with identical center positioning */}
+              <span className="absolute inset-0 flex items-center justify-center">
+                {isOverlayActive("menu") ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </span>
             </Button>
           </div>
         </div>
