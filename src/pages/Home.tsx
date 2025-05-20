@@ -252,29 +252,6 @@ const Home = () => {
         </section>
 
         {/* Rest der Seite bleibt unverändert */}
-        {/* NEW SECTION: Unsere Wohnmobiltypen im Überblick */}
-        <section className="py-12 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-center">Unsere Wohnmobiltypen im Überblick</h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {wohnmobiltypen.map((typ) => (
-                <div key={typ.title} className="flex flex-col h-full">
-                  {/* Placeholder Image */}
-                  <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
-                  
-                  <h3 className="text-xl font-bold mb-2">{typ.title}</h3>
-                  <p className="text-gray-600 mb-4 flex-grow text-sm">{typ.description}</p>
-                  
-                  <Button variant="outline" asChild className="mt-auto">
-                    <Link to={typ.path}>Mehr erfahren</Link>
-                  </Button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Updated Wohnmobilberater Teaser */}
         <section className="py-10 px-4 bg-gray-100">
           <div className="max-w-3xl mx-auto text-center">
