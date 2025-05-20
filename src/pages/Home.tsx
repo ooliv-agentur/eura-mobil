@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -143,8 +142,8 @@ const Home = () => {
     <Layout>
       <main className="flex-1">
         {/* Section 1: Above-the-Fold Hero Section (100vh) */}
-        <section className="relative w-full h-screen flex justify-center items-center">
-          <div className="relative z-20 max-w-3xl text-center px-6">
+        <section className="relative w-full h-screen flex flex-col justify-center items-center">
+          <div className="relative z-20 max-w-3xl text-center px-6 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
             </h1>
@@ -154,11 +153,11 @@ const Home = () => {
             <Button asChild size="lg" className="px-8 py-6 text-base">
               <Link to="/modelle">Jetzt Modell entdecken</Link>
             </Button>
-            
-            {/* Scroll indicator */}
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2">
-              <ArrowDown className="h-6 w-6 text-gray-400" />
-            </div>
+          </div>
+          
+          {/* Scroll indicator - with proper spacing below the button */}
+          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+            <ArrowDown className="h-6 w-6 text-gray-400" />
           </div>
         </section>
 
