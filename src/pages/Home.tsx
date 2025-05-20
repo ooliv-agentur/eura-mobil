@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -98,77 +97,77 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Model Types with Filter Bar */}
-        <section className="py-10 px-4">
-          <h2 className="text-2xl font-bold mb-6 text-center">Unsere Wohnmobil-Serien</h2>
-          
-          {/* Filter Bar */}
-          <div className="flex justify-center mb-6 overflow-x-auto">
-            <ToggleGroup 
-              type="single" 
-              value={activeFilter}
-              onValueChange={(value) => value && setActiveFilter(value)} 
-              className="border rounded-md"
-            >
-              <ToggleGroupItem value="alle">Alle</ToggleGroupItem>
-              <ToggleGroupItem value="alkoven">Alkoven</ToggleGroupItem>
-              <ToggleGroupItem value="teilintegriert">Teilintegriert</ToggleGroupItem>
-              <ToggleGroupItem value="integriert">Integriert</ToggleGroupItem>
-              <ToggleGroupItem value="vans">Vans</ToggleGroupItem>
-            </ToggleGroup>
-          </div>
-          
-          {/* Mobile Carousel */}
-          <div className="md:hidden">
-            <Carousel className="w-full">
-              <CarouselContent>
-                {filteredModels.map((model) => (
-                  <CarouselItem key={model.name} className="pl-1 md:basis-1/2 lg:basis-1/3">
-                    <Card className="h-full">
-                      <CardContent className="p-6 flex flex-col h-full">
-                        {/* Placeholder Image */}
-                        <div className="w-full h-40 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                          Bild-Platzhalter
-                        </div>
-                        <h3 className="text-xl font-bold">{model.name}</h3>
-                        <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
-                        <Button variant="outline" asChild className="w-full">
-                          <Link to={model.path}>Mehr erfahren</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="left-1 bg-white" />
-              <CarouselNext className="right-1 bg-white" />
-            </Carousel>
-          </div>
-          
-          {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-3 gap-4">
-            {filteredModels.map((model) => (
-              <Card key={model.name} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  {/* Placeholder Image */}
-                  <div className="w-full h-48 bg-gray-200 mb-4 flex items-center justify-center text-gray-400">
-                    Bild-Platzhalter
-                  </div>
-                  <h3 className="text-xl font-bold">{model.name}</h3>
-                  <p className="text-gray-600 mb-4">{model.description}</p>
-                  <Button variant="outline" asChild className="w-full">
-                    <Link to={model.path}>Mehr erfahren</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          {/* "Alle Modelle ansehen" Button */}
-          <div className="mt-8 text-center">
-            <Button asChild>
-              <Link to="/modelle">Alle Modelle ansehen</Link>
-            </Button>
+        {/* Updated Model Types with Filter Bar */}
+        <section className="py-12 px-4">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-2xl font-bold mb-8 text-center">Unsere Wohnmobil-Serien</h2>
+            
+            {/* Filter Bar - Modernized */}
+            <div className="flex justify-center mb-8">
+              <ToggleGroup 
+                type="single" 
+                value={activeFilter}
+                onValueChange={(value) => value && setActiveFilter(value)} 
+                className="border rounded-full overflow-hidden shadow-sm p-1"
+              >
+                <ToggleGroupItem value="alle" className="rounded-full text-sm px-4">Alle</ToggleGroupItem>
+                <ToggleGroupItem value="alkoven" className="rounded-full text-sm px-4">Alkoven</ToggleGroupItem>
+                <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm px-4">Teilintegriert</ToggleGroupItem>
+                <ToggleGroupItem value="integriert" className="rounded-full text-sm px-4">Integriert</ToggleGroupItem>
+                <ToggleGroupItem value="vans" className="rounded-full text-sm px-4">Vans</ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+            
+            {/* Mobile Carousel - Modernized */}
+            <div className="md:hidden pb-8">
+              <Carousel className="w-full">
+                <CarouselContent>
+                  {filteredModels.map((model) => (
+                    <CarouselItem key={model.name} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                      <Card className="h-full">
+                        <CardContent className="p-6 flex flex-col h-full">
+                          {/* Placeholder Image */}
+                          <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
+                          <h3 className="text-xl font-bold">{model.name}</h3>
+                          <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
+                          <Button variant="outline" asChild className="w-full mt-auto">
+                            <Link to={model.path}>Mehr erfahren</Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-center mt-4">
+                  <CarouselPrevious className="relative static mx-2 bg-white" />
+                  <CarouselNext className="relative static mx-2 bg-white" />
+                </div>
+              </Carousel>
+            </div>
+            
+            {/* Desktop Grid - Modernized */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredModels.map((model) => (
+                <Card key={model.name} className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    {/* Placeholder Image */}
+                    <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
+                    <h3 className="text-xl font-bold">{model.name}</h3>
+                    <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
+                    <Button variant="outline" asChild className="w-full mt-auto">
+                      <Link to={model.path}>Mehr erfahren</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            {/* "Alle Modelle ansehen" Button - Modernized */}
+            <div className="mt-10 text-center">
+              <Button asChild size="lg" className="px-8">
+                <Link to="/modelle">Alle Modelle ansehen</Link>
+              </Button>
+            </div>
           </div>
         </section>
 
