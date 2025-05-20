@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,6 +27,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { ChevronDown, ArrowDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
 const modelTypes = [
@@ -42,28 +44,13 @@ const modelTypes = [
 ];
 
 // Wohnmobiltypen Erklärungen
-const wohnmobiltypenErklaerungen = [
-  {
-    title: "Alkoven Wohnmobile",
-    description: "In den Alkoven-Wohnmobilen von Eura Mobil schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde – zum Wohnen, Schlafen und Erleben.",
-    path: "/wohnmobiltypen#alkoven",
-  },
-  {
-    title: "Teilintegrierte Wohnmobile",
-    description: "Kompakter Aufbau mit hochwertiger Ausstattung – ideal für Paare oder kleine Familien.",
-    path: "/wohnmobiltypen#teilintegriert",
-  },
-  {
-    title: "Integrierte Wohnmobile",
-    description: "Durchgängig gestalteter Wohnraum mit maximalem Komfort und exklusivem Design.",
-    path: "/wohnmobiltypen#integriert",
-  },
-  {
-    title: "Vans",
-    description: "Kompakte Fahrzeuge für flexible Reisen, wendig, alltagstauglich und hochwertig verarbeitet.",
-    path: "/wohnmobiltypen#vans",
-  }
-];
+const wohnmobiltypenErklaerungen = {
+  alle: "Entdecken Sie unsere gesamte Modellpalette - von kompakten Vans bis zu integrierten Luxus-Wohnmobilen.",
+  alkoven: "In den Alkoven-Wohnmobilen von Eura Mobil schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde – zum Wohnen, Schlafen und Erleben.",
+  teilintegriert: "Kompakter Aufbau mit hochwertiger Ausstattung – ideal für Paare oder kleine Familien, die Flexibilität und Komfort schätzen.",
+  integriert: "Großzügige Wohnmobile mit durchgängigem Design, maximalem Komfort und einem luxuriösen Gefühl für lange Reisen und hohe Ansprüche.",
+  vans: "Kompakte Fahrzeuge für flexible Reisen – wendig, alltagstauglich und hochwertig verarbeitet."
+};
 
 // CTA cards data
 const ctaCards = [
@@ -174,7 +161,7 @@ const Home = () => {
             </h2>
             
             {/* Filter tab buttons - pill style */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-4">
               <ToggleGroup 
                 type="single" 
                 value={activeFilter}
@@ -197,6 +184,11 @@ const Home = () => {
                   Vans
                 </ToggleGroupItem>
               </ToggleGroup>
+            </div>
+
+            {/* Type explanation box that changes based on filter selection */}
+            <div className="bg-gray-100 rounded-md p-4 mb-8 text-center max-w-3xl mx-auto">
+              <p className="text-gray-700">{wohnmobiltypenErklaerungen[activeFilter]}</p>
             </div>
 
             {/* Model cards carousel - with consistent spacing and sizing */}
@@ -264,39 +256,6 @@ const Home = () => {
                   </CardContent>
                 </Card>
               ))}
-            </div>
-            
-            {/* Wohnmobiltypen erklärt - Collapsible Section */}
-            <div className="mt-16 border rounded-lg">
-              <Collapsible 
-                className="w-full"
-                open={isTypesExpanded}
-                onOpenChange={setIsTypesExpanded}
-              >
-                <div className="flex items-center justify-between p-4">
-                  <h3 className="text-xl font-medium">Wohnmobiltypen erklärt</h3>
-                  <CollapsibleTrigger asChild>
-                    <Button variant="ghost" size="sm" className="w-9 p-0">
-                      <ChevronDown className={`h-4 w-4 transition-transform ${isTypesExpanded ? "transform rotate-180" : ""}`} />
-                      <span className="sr-only">Toggle</span>
-                    </Button>
-                  </CollapsibleTrigger>
-                </div>
-                <CollapsibleContent className="p-4 pt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
-                    {wohnmobiltypenErklaerungen.map((typ) => (
-                      <div key={typ.title} className="flex flex-col p-4 border rounded-md h-full">
-                        <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
-                        <h4 className="font-bold mb-2">{typ.title}</h4>
-                        <p className="text-sm text-gray-600 mb-4 flex-grow">{typ.description}</p>
-                        <Button variant="outline" asChild className="w-full mt-auto">
-                          <Link to={typ.path}>Mehr erfahren</Link>
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
             </div>
           </div>
         </section>
