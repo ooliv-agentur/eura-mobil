@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -42,8 +43,23 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
+        <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+          <div className="text-sm text-gray-500">
+            © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
+          </div>
+          
+          {/* Social Media Icons */}
+          <div className="flex space-x-4 mt-4 md:mt-0">
+            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <Youtube className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+            </a>
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <Facebook className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
