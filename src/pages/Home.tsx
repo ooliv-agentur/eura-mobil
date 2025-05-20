@@ -155,9 +155,10 @@ const Home = () => {
             </Button>
           </div>
           
-          {/* Scroll indicator - with proper spacing below the button */}
-          <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-            <ArrowDown className="h-6 w-6 text-gray-400" />
+          {/* Updated scroll indicator with text */}
+          <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <ArrowDown className="h-6 w-6 text-gray-400 mb-1" />
+            <span className="text-sm text-gray-400">Nach unten scrollen</span>
           </div>
         </section>
 
