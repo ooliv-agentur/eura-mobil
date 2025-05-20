@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -16,6 +15,7 @@ import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Accordion,
   AccordionContent,
@@ -26,7 +26,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { ChevronDown } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 
-// Erweiterte Modellliste mit 10 Modellserien
+// Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
 const modelTypes = [
   { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen", path: "/modelle/van", type: "vans" },
   { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one", type: "alkoven" },
@@ -110,7 +110,7 @@ const Home = () => {
   const [activeFilter, setActiveFilter] = useState("alle");
   const [isTypesExpanded, setIsTypesExpanded] = useState(false);
   
-  // Embla carousel hook for the model series carousel with options for snapping
+  // Embla carousel hook for the model series carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     slidesToScroll: 1,
@@ -157,7 +157,7 @@ const Home = () => {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-center">Unsere Wohnmobil-Serien</h2>
             
-            {/* Horizontally scrollable filter bar on mobile */}
+            {/* Horizontally scrollable filter bar */}
             <div className="overflow-x-auto pb-4 mb-6">
               <div className="flex justify-center min-w-max">
                 <ToggleGroup 
@@ -175,33 +175,33 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Responsive model series carousel with snapping */}
+            {/* Fixed model carousel with consistent image sizing */}
             <Carousel className="relative">
-              <CarouselContent className="ml-0">
-                <div className="overflow-hidden" ref={emblaRef}>
-                  <div className="flex">
-                    {filteredModels.map((model) => (
-                      <div 
-                        key={model.name} 
-                        className="flex-none min-w-[90%] sm:min-w-[calc(50%-16px)] lg:min-w-[calc(25%-16px)] pr-4"
-                      >
-                        <Card className="h-full">
-                          <CardContent className="p-6 flex flex-col h-full">
-                            {/* Placeholder Image */}
-                            <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
-                            <h3 className="text-xl font-bold mb-1">{model.name}</h3>
-                            <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
-                            <Button variant="outline" asChild className="w-full mt-auto">
-                              <Link to={model.path}>Mehr erfahren</Link>
-                            </Button>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <CarouselContent>
+                {filteredModels.map((model) => (
+                  <CarouselItem 
+                    key={model.name} 
+                    className="basis-full md:basis-1/2 lg:basis-1/4 pl-4"
+                  >
+                    <Card className="h-full">
+                      <CardContent className="p-6 flex flex-col h-full">
+                        {/* Fixed aspect ratio for consistent image dimensions */}
+                        <div className="mb-4">
+                          <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md overflow-hidden">
+                            <Skeleton className="w-full h-full" />
+                          </AspectRatio>
+                        </div>
+                        <h3 className="text-xl font-bold mb-1">{model.name}</h3>
+                        <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
+                        <Button variant="outline" asChild className="w-full mt-auto">
+                          <Link to={model.path}>Mehr erfahren</Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                ))}
               </CarouselContent>
-
+              
               {/* Navigation arrows - only visible on desktop */}
               <div className="hidden lg:block">
                 <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2" />
@@ -251,6 +251,7 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Rest der Seite bleibt unverändert */}
         {/* NEW SECTION: Unsere Wohnmobiltypen im Überblick */}
         <section className="py-12 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
@@ -274,7 +275,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Rest der Seite bleibt unverändert */}
         {/* Updated Wohnmobilberater Teaser */}
         <section className="py-10 px-4 bg-gray-100">
           <div className="max-w-3xl mx-auto text-center">
