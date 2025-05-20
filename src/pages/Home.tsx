@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
@@ -130,6 +131,9 @@ const Home = () => {
     }
   }, [activeFilter, emblaApi]);
   
+  // New state for dealer search input
+  const [dealerSearch, setDealerSearch] = useState("");
+
   const handleStartBerater = () => {
     startBeraterFlow({ mode: "dialog", initialStep: 1 });
   };
@@ -299,18 +303,31 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* Dealer Search Teaser - Simplified without map */}
+        {/* Updated Dealer Search Teaser - With Map Placeholder */}
         <section className="py-10 px-4">
-          <div className="flex flex-col md:flex-row items-center max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <div className="w-full p-6">
-              <h2 className="text-2xl font-bold mb-2">Händler in Ihrer Nähe</h2>
-              <p className="text-gray-600 mb-4">
-                Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
-              </p>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-4">Händler in Ihrer Nähe</h2>
+            <p className="text-gray-600 mb-6">
+              Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
+            </p>
+            
+            {/* Search input and button */}
+            <div className="flex gap-2 mb-6">
+              <Input 
+                placeholder="Ort oder PLZ eingeben"
+                value={dealerSearch}
+                onChange={(e) => setDealerSearch(e.target.value)}
+                className="flex-1"
+              />
               <Button asChild>
-                <Link to="/haendler">Händler finden</Link>
+                <Link to={`/haendler${dealerSearch ? `?location=${dealerSearch}` : ''}`}>
+                  Händler finden
+                </Link>
               </Button>
             </div>
+            
+            {/* Map placeholder - full width gray box */}
+            <div className="w-full h-64 bg-gray-200 rounded-lg"></div>
           </div>
         </section>
 
