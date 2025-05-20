@@ -1,12 +1,13 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Facebook, Instagram, Youtube, Calendar, X, ArrowRight, ExternalLink, Square } from "lucide-react";
+import { Facebook, Instagram, Youtube, Calendar, X, ChevronDown, ExternalLink, Square } from "lucide-react";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useOverlay } from "@/context/OverlayContext";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   NavigationMenuPreviewContainer,
   NavigationMenuPreviewImage,
@@ -14,6 +15,7 @@ import {
   NavigationMenuPreviewFacts,
   NavigationMenuPreviewFactItem
 } from "@/components/ui/navigation-menu";
+import { useMobile } from "@/hooks/use-mobile";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -104,37 +106,44 @@ const modelPreviewData = {
   }
 };
 
-// Model entry component with preview
-const ModelEntry = ({ 
+// Mobile model preview component with collapsible content
+const MobileModelEntry = ({ 
   modelId, 
   modelName, 
-  onClose 
+  onClose,
+  activeModel,
+  setActiveModel
 }: { 
   modelId: string; 
   modelName: string;
   onClose: () => void;
+  activeModel: string | null;
+  setActiveModel: (id: string | null) => void;
 }) => {
+  const isActive = activeModel === modelId;
   const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
   
   return (
-    <li className="group mb-3 relative">
-      <Link 
-        to={`/modelle/${modelId}`} 
-        onClick={onClose}
-        className="group flex items-center hover:text-blue-600 transition-colors"
+    <li className="mb-3">
+      <Collapsible 
+        open={isActive} 
+        onOpenChange={(isOpen) => setActiveModel(isOpen ? modelId : null)}
       >
-        <div className="flex items-center w-full">
-          <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-            <Square className="h-6 w-6 text-gray-400" />
-          </div>
-          <span>{modelName}</span>
-        </div>
-      </Link>
-      
-      {/* Preview container - hidden on mobile */}
-      <div className="hidden lg:block absolute top-0 left-full ml-6 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-        <NavigationMenuPreviewContainer>
-          <NavigationMenuPreviewImage />
+        <CollapsibleTrigger asChild>
+          <button className="group flex items-center w-full justify-between hover:text-blue-600 transition-colors">
+            <div className="flex items-center">
+              <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+                <Square className="h-6 w-6 text-gray-400" />
+              </div>
+              <span>{modelName}</span>
+            </div>
+            <ChevronDown 
+              className={`h-5 w-5 transition-transform ${isActive ? 'rotate-180' : ''}`} 
+            />
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-3 ml-12 space-y-3">
+          <NavigationMenuPreviewImage className="w-full h-40" />
           <NavigationMenuPreviewText>
             {modelData.text}
           </NavigationMenuPreviewText>
@@ -146,12 +155,88 @@ const ModelEntry = ({
               </NavigationMenuPreviewFactItem>
             ))}
           </NavigationMenuPreviewFacts>
-          <Button size="sm" variant="outline" className="w-full">
-            Mehr erfahren
+          <Button size="sm" variant="outline" className="w-full" asChild>
+            <Link to={`/modelle/${modelId}`} onClick={onClose}>
+              Mehr erfahren
+            </Link>
           </Button>
-        </NavigationMenuPreviewContainer>
-      </div>
+        </CollapsibleContent>
+      </Collapsible>
     </li>
+  );
+};
+
+// Desktop model entry component with preview
+const DesktopModelEntry = ({ 
+  modelId, 
+  modelName, 
+  onClose,
+  activeModel,
+  setActiveModel
+}: { 
+  modelId: string; 
+  modelName: string;
+  onClose: () => void;
+  activeModel: string | null;
+  setActiveModel: (id: string | null) => void;
+}) => {
+  const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  
+  return (
+    <li className="mb-3">
+      <button 
+        className={`flex items-center w-full hover:text-blue-600 transition-colors text-left ${activeModel === modelId ? 'text-blue-600' : ''}`}
+        onMouseEnter={() => setActiveModel(modelId)}
+        onClick={() => {
+          setActiveModel(activeModel === modelId ? null : modelId);
+        }}
+      >
+        <div className="flex items-center w-full">
+          <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+            <Square className="h-6 w-6 text-gray-400" />
+          </div>
+          <span>{modelName}</span>
+        </div>
+      </button>
+    </li>
+  );
+};
+
+// Model preview panel for desktop view
+const DesktopModelPreview = ({
+  modelId,
+  onClose
+}: {
+  modelId: string | null;
+  onClose: () => void;
+}) => {
+  if (!modelId) return null;
+  
+  const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  if (!modelData) return null;
+  
+  return (
+    <div className="absolute top-0 left-full ml-6 w-80">
+      <NavigationMenuPreviewContainer>
+        <NavigationMenuPreviewImage />
+        <NavigationMenuPreviewText>
+          {modelData.text}
+        </NavigationMenuPreviewText>
+        <NavigationMenuPreviewFacts>
+          {modelData.facts.map((fact, index) => (
+            <NavigationMenuPreviewFactItem key={index}>
+              <span className="font-medium text-gray-900 mb-1">{fact.label}</span>
+              <span className="text-gray-600">{fact.value}</span>
+            </NavigationMenuPreviewFactItem>
+          ))}
+        </NavigationMenuPreviewFacts>
+        <Button size="sm" variant="outline" className="w-full" asChild>
+          <Link to={`/modelle/${modelId}`} onClick={onClose}>
+            Mehr erfahren
+          </Link>
+        </Button>
+      </NavigationMenuPreviewContainer>
+    </div>
   );
 };
 
@@ -159,6 +244,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const location = useLocation();
+  const isMobile = useMobile();
+  const [activeModel, setActiveModel] = useState<string | null>(null);
   
   // Control body scroll when menu is open
   useEffect(() => {
@@ -174,6 +261,13 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
     return () => {
       document.body.style.overflow = '';
     };
+  }, [isOpen]);
+
+  // Reset active model when closing menu
+  useEffect(() => {
+    if (!isOpen) {
+      setActiveModel(null);
+    }
   }, [isOpen]);
 
   // Check if we're on the konfigurator page
@@ -213,22 +307,46 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             {/* Enhanced Desktop Grid Layout with improved spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
               {/* 01 Wohnmobile & Vans */}
-              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md">
+              <div className="mb-8 bg-gray-50 p-5 rounded-lg transition-all group hover:shadow-md relative">
                 <h2 className="text-lg font-bold mb-2">
                   <span className="text-gray-400">01</span> Wohnmobile & Vans
                 </h2>
                 <Separator className="mb-4" />
                 <ul className="space-y-3 relative">
-                  <ModelEntry modelId="van" modelName="Van" onClose={onClose} />
-                  <ModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} />
-                  <ModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} />
-                  <ModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} />
-                  <ModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} />
-                  <ModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} />
-                  <ModelEntry modelId="contura" modelName="Contura" onClose={onClose} />
-                  <ModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} />
-                  <ModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} />
-                  <ModelEntry modelId="integra" modelName="Integra" onClose={onClose} />
+                  {isMobile ? (
+                    // Mobile view with collapsible accordions
+                    <>
+                      <MobileModelEntry modelId="van" modelName="Van" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="contura" modelName="Contura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <MobileModelEntry modelId="integra" modelName="Integra" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    </>
+                  ) : (
+                    // Desktop view with separate preview panel
+                    <>
+                      <DesktopModelEntry modelId="van" modelName="Van" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="contura" modelName="Contura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      <DesktopModelEntry modelId="integra" modelName="Integra" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      
+                      {/* Preview panel for desktop */}
+                      {activeModel && (
+                        <DesktopModelPreview modelId={activeModel} onClose={onClose} />
+                      )}
+                    </>
+                  )}
                 </ul>
               </div>
 
