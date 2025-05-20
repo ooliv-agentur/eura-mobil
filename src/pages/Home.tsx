@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -24,30 +23,20 @@ import {
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
-// Erweiterte Modellliste
+// Erweiterte Modellliste mit 10 Modellserien
 const modelTypes = [
+  { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen", path: "/modelle/van", type: "vans" },
   { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one", type: "alkoven" },
-  { name: "Profila T", description: "Komfort und Flexibilität für unterwegs", path: "/modelle/profila-t", type: "teilintegriert" },
+  { name: "Profila T – Fiat", description: "Komfort und Flexibilität auf Fiat-Basis", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
   { name: "Profila RS", description: "Großzügiger Wohnraum mit praktischer Aufteilung", path: "/modelle/profila-rs", type: "teilintegriert" },
-  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra", type: "integriert" },
+  { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
   { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura", type: "integriert" },
-  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "vans" },
-];
-
-const newsItems = [
-  { 
-    title: "Caravan Salon 2025", 
-    description: "Besuchen Sie uns auf dem größten Wohnmobil-Event des Jahres", 
-    date: "14.09.2025",
-    path: "/news/caravan-salon-2025"
-  },
-  { 
-    title: "Neue Modelle 2026", 
-    description: "Entdecken Sie unsere Innovation für die kommende Saison", 
-    date: "01.08.2025",
-    path: "/news/neue-modelle-2026"
-  },
+  { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf Fiat-Basis", path: "/modelle/integra-line-fiat", type: "integriert" },
+  { name: "Integra Line GT – Mercedes", description: "Premium Integrierte mit Mercedes Fahrgestell", path: "/modelle/integra-line-gt", type: "integriert" },
+  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra", type: "integriert" },
+  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "vans" }
 ];
 
 // Wohnmobiltypen Erklärungen
@@ -104,14 +93,29 @@ const Home = () => {
   const [activeFilter, setActiveFilter] = useState("alle");
   const [isTypesExpanded, setIsTypesExpanded] = useState(false);
   
-  const handleStartBerater = () => {
-    startBeraterFlow({ mode: "dialog", initialStep: 1 });
-  };
+  // Embla carousel hook for the model series carousel with options for snapping
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    slidesToScroll: 1,
+    dragFree: false,
+    containScroll: "trimSnaps"
+  });
 
-  // Filter models based on active filter
+  // Filter model types based on active filter
   const filteredModels = activeFilter === "alle" 
     ? modelTypes 
     : modelTypes.filter(model => model.type === activeFilter);
+  
+  // Handle sliding to start when filter changes
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.scrollTo(0);
+    }
+  }, [activeFilter, emblaApi]);
+  
+  const handleStartBerater = () => {
+    startBeraterFlow({ mode: "dialog", initialStep: 1 });
+  };
 
   return (
     <Layout>
@@ -131,69 +135,59 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Updated Model Types with Filter Bar and expandable explanation section */}
+        {/* Updated Model Series with horizontal scrollable carousel */}
         <section className="py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-center">Unsere Wohnmobil-Serien</h2>
             
-            {/* Filter Bar - Modernized */}
-            <div className="flex justify-center mb-8">
-              <ToggleGroup 
-                type="single" 
-                value={activeFilter}
-                onValueChange={(value) => value && setActiveFilter(value)} 
-                className="border rounded-full overflow-hidden shadow-sm p-1"
-              >
-                <ToggleGroupItem value="alle" className="rounded-full text-sm px-4">Alle</ToggleGroupItem>
-                <ToggleGroupItem value="alkoven" className="rounded-full text-sm px-4">Alkoven</ToggleGroupItem>
-                <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm px-4">Teilintegriert</ToggleGroupItem>
-                <ToggleGroupItem value="integriert" className="rounded-full text-sm px-4">Integriert</ToggleGroupItem>
-                <ToggleGroupItem value="vans" className="rounded-full text-sm px-4">Vans</ToggleGroupItem>
-              </ToggleGroup>
+            {/* Horizontally scrollable filter bar on mobile */}
+            <div className="overflow-x-auto pb-4 mb-6">
+              <div className="flex justify-center min-w-max">
+                <ToggleGroup 
+                  type="single" 
+                  value={activeFilter}
+                  onValueChange={(value) => value && setActiveFilter(value)} 
+                  className="border rounded-full overflow-hidden shadow-sm p-1"
+                >
+                  <ToggleGroupItem value="alle" className="rounded-full text-sm px-4">Alle</ToggleGroupItem>
+                  <ToggleGroupItem value="alkoven" className="rounded-full text-sm px-4">Alkoven</ToggleGroupItem>
+                  <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm px-4">Teilintegriert</ToggleGroupItem>
+                  <ToggleGroupItem value="integriert" className="rounded-full text-sm px-4">Integriert</ToggleGroupItem>
+                  <ToggleGroupItem value="vans" className="rounded-full text-sm px-4">Vans</ToggleGroupItem>
+                </ToggleGroup>
+              </div>
             </div>
-            
-            {/* Mobile Carousel - Modernized */}
-            <div className="md:hidden pb-8">
-              <Carousel className="w-full">
-                <CarouselContent>
+
+            {/* Responsive model series carousel with snapping */}
+            <div className="relative">
+              <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
                   {filteredModels.map((model) => (
-                    <CarouselItem key={model.name} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div 
+                      key={model.name} 
+                      className="flex-none min-w-[90%] sm:min-w-[calc(50%-16px)] lg:min-w-[calc(25%-16px)] pr-4"
+                    >
                       <Card className="h-full">
                         <CardContent className="p-6 flex flex-col h-full">
                           {/* Placeholder Image */}
                           <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
-                          <h3 className="text-xl font-bold">{model.name}</h3>
-                          <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
+                          <h3 className="text-xl font-bold mb-1">{model.name}</h3>
+                          <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
                           <Button variant="outline" asChild className="w-full mt-auto">
                             <Link to={model.path}>Mehr erfahren</Link>
                           </Button>
                         </CardContent>
                       </Card>
-                    </CarouselItem>
+                    </div>
                   ))}
-                </CarouselContent>
-                <div className="flex justify-center mt-4">
-                  <CarouselPrevious className="relative static mx-2 bg-white" />
-                  <CarouselNext className="relative static mx-2 bg-white" />
                 </div>
-              </Carousel>
-            </div>
-            
-            {/* Desktop Grid - Modernized with animated transitions */}
-            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredModels.map((model) => (
-                <Card key={model.name} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    {/* Placeholder Image */}
-                    <Skeleton className="w-full aspect-video bg-gray-200 mb-4" />
-                    <h3 className="text-xl font-bold">{model.name}</h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{model.description}</p>
-                    <Button variant="outline" asChild className="w-full mt-auto">
-                      <Link to={model.path}>Mehr erfahren</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+              </div>
+
+              {/* Navigation arrows - only visible on desktop */}
+              <div className="hidden lg:block">
+                <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2" />
+                <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2" />
+              </div>
             </div>
             
             {/* NEW: Wohnmobiltypen erklärt - Collapsible Section */}
@@ -229,7 +223,7 @@ const Home = () => {
               </Collapsible>
             </div>
 
-            {/* "Alle Modelle ansehen" Button - Modernized */}
+            {/* "Alle Modelle ansehen" Button */}
             <div className="mt-10 text-center">
               <Button asChild size="lg" className="px-8">
                 <Link to="/modelle">Alle Modelle ansehen</Link>
