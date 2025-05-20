@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -95,19 +94,35 @@ const ctaCards = [
   }
 ];
 
-// News items data
+// News items data - expanded to 4 items with more details
 const newsItems = [
   {
     title: "Neuheiten 2025 vorgestellt",
     date: "12.05.2025",
-    description: "Entdecken Sie die aktuellen Neuheiten und innovativen Modelle für die kommende Saison.",
-    path: "/news/neuheiten-2025"
+    description: "Entdecken Sie die aktuellen Neuheiten und innovativen Modelle für die kommende Saison. Besuchen Sie uns auf der Messe.",
+    path: "/news/neuheiten-2025",
+    image: "news-placeholder-1"
   },
   {
-    title: "Caravan Salon Düsseldorf",
+    title: "Caravan Salon Düsseldorf - Besuchen Sie uns in Halle 5",
     date: "28.08.2025",
-    description: "Besuchen Sie uns auf dem Caravan Salon in Düsseldorf und erleben Sie unsere Wohnmobile hautnah.",
-    path: "/news/caravan-salon-2025"
+    description: "Besuchen Sie uns auf dem Caravan Salon in Düsseldorf und erleben Sie unsere Wohnmobile hautnah. Wir freuen uns auf Ihren Besuch.",
+    path: "/news/caravan-salon-2025",
+    image: "news-placeholder-2"
+  },
+  {
+    title: "Nachhaltige Innovationen im Wohnmobilbau",
+    date: "03.06.2025",
+    description: "Wir setzen auf umweltfreundliche Materialien und Produktionsverfahren. Erfahren Sie mehr über unsere nachhaltigen Innovationen.",
+    path: "/news/nachhaltige-innovationen",
+    image: "news-placeholder-3"
+  },
+  {
+    title: "Neues Servicecenter in München eröffnet",
+    date: "15.07.2025",
+    description: "Ab sofort können Sie unser neues Servicecenter in München besuchen. Profitieren Sie von umfassenden Service- und Wartungsleistungen.",
+    path: "/news/servicecenter-muenchen",
+    image: "news-placeholder-4"
   }
 ];
 
@@ -232,6 +247,14 @@ const Home = () => {
   const handleStartBerater = () => {
     startBeraterFlow({ mode: "dialog", initialStep: 1 });
   };
+  
+  // New carousel hook for news items
+  const [newsEmblaRef] = useEmblaCarousel({
+    align: "start",
+    slidesToScroll: 1,
+    dragFree: false,
+    containScroll: "trimSnaps"
+  });
 
   return (
     <Layout>
@@ -429,29 +452,55 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Section 7: News and Events */}
+        {/* Section 7: News and Events - Updated with Carousel */}
         <section className="py-16 px-4 bg-gray-50">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-center">Aktuelles & Events</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {newsItems.map((news) => (
-                <Card key={news.title} className="h-full">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="text-sm text-gray-500 mb-2">{news.date}</div>
-                    <h3 className="text-xl font-bold mb-2">{news.title}</h3>
-                    <p className="text-gray-600 mb-4 flex-grow">{news.description}</p>
-                    <Button variant="outline" asChild className="mt-auto">
-                      <Link to={news.path}>Weiterlesen</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+            {/* News items carousel */}
+            <div className="mb-10">
+              <Carousel className="w-full">
+                <CarouselContent className="-ml-4" ref={newsEmblaRef}>
+                  {newsItems.map((news, index) => (
+                    <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                      <Card className="h-full">
+                        <CardContent className="p-4 flex flex-col h-full">
+                          {/* Image placeholder with fixed aspect ratio */}
+                          <div className="mb-3">
+                            <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
+                          </div>
+                          
+                          {/* Date */}
+                          <div className="text-sm text-gray-500 mb-2">{news.date}</div>
+                          
+                          {/* Title - limited to 2 lines */}
+                          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{news.title}</h3>
+                          
+                          {/* Description - limited to 3 lines */}
+                          <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">{news.description}</p>
+                          
+                          {/* Button */}
+                          <Button variant="outline" asChild size="sm" className="mt-auto w-full">
+                            <Link to={news.path}>Mehr erfahren</Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                
+                {/* Non-sticky navigation arrows - only visible on desktop */}
+                <div className="hidden md:block">
+                  <CarouselPrevious className="left-0 md:-left-5" />
+                  <CarouselNext className="right-0 md:-right-5" />
+                </div>
+              </Carousel>
             </div>
             
-            <div className="mt-8 text-center">
-              <Button variant="outline" asChild>
-                <Link to="/news">Alle News</Link>
+            {/* "View all news" button */}
+            <div className="flex justify-center">
+              <Button asChild variant="outline" className="px-6">
+                <Link to="/news">Alle Meldungen ansehen</Link>
               </Button>
             </div>
           </div>
