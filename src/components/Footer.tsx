@@ -8,10 +8,10 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto">
         {/* Contact Section - Added above the grid */}
         <div className="mb-8 pb-6 border-b border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between">
+          <div className="flex flex-col md:flex-row justify-between items-start">
             <div>
               <h3 className="font-bold mb-3">EURA Mobil GmbH</h3>
-              <div className="space-y-2">
+              <div className="space-y-3 md:space-y-2">
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-gray-500 mt-0.5" />
                   <span className="text-gray-600">Kreuznacher Str. 78, 55576 Sprendlingen, Germany</span>
@@ -27,8 +27,8 @@ const Footer = () => {
               </div>
             </div>
             
-            {/* Social Media Icons - moved to the right side on desktop */}
-            <div className="mt-6 md:mt-0">
+            {/* Social Media Icons - aligned with company name */}
+            <div>
               <h3 className="font-bold mb-3">Folgen Sie uns</h3>
               <div className="flex space-x-4">
                 <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
