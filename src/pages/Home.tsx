@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -65,27 +66,30 @@ const wohnmobiltypenErklaerungen = [
   }
 ];
 
-// Entry paths for the 3-card section
-const entryPaths = [
+// CTA cards data
+const ctaCards = [
   {
-    title: "Modelle entdecken",
-    description: "Stöbern Sie durch alle Wohnmobil-Serien von EURA MOBIL.",
-    buttonText: "Jetzt Modelle entdecken",
-    path: "/modelle"
+    title: "Alle Modelle",
+    description: "Stöbern Sie durch unsere gesamte Modellpalette von Vans bis zu integrierten Luxus-Wohnmobilen.",
+    buttonText: "Modelle entdecken",
+    path: "/modelle",
+    icon: "search"
   },
   {
-    title: "Berater-Tool nutzen",
-    description: "Finden Sie mit wenigen Klicks das passende Modell für Ihre Wünsche.",
+    title: "Beratungs-Tool",
+    description: "Finden Sie mit wenigen Klicks das passende Modell für Ihre Wünsche und Bedürfnisse.",
     buttonText: "Beratung starten",
     path: "#",
-    isBeratung: true
+    isBeratung: true,
+    icon: "advice"
   },
   {
-    title: "Konfigurator öffnen",
-    description: "Passen Sie Ihr Wohnmobil individuell an – direkt im Online-Konfigurator.",
+    title: "Konfigurator",
+    description: "Passen Sie Ihr ausgewähltes Modell nach Ihren individuellen Wünschen an.",
     buttonText: "Zum Konfigurator",
     path: "https://konfigurator.euramobil.de",
-    isExternal: true
+    isExternal: true,
+    icon: "settings"
   }
 ];
 
@@ -162,47 +166,14 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Section 2: Einstiegskarten - 3 Entry Paths */}
-        <section className="py-16 px-4">
+        {/* New Combined Section: Models & CTA cards */}
+        <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {entryPaths.map((entry, index) => (
-                <Card key={index} className="h-full">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="mb-4">
-                      <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">{entry.title}</h3>
-                    <p className="text-gray-600 mb-6 flex-grow">{entry.description}</p>
-                    {entry.isBeratung ? (
-                      <Button onClick={handleStartBerater} className="mt-auto w-full">
-                        {entry.buttonText}
-                      </Button>
-                    ) : entry.isExternal ? (
-                      <Button asChild className="mt-auto w-full">
-                        <a href={entry.path} target="_blank" rel="noopener noreferrer">
-                          {entry.buttonText}
-                        </a>
-                      </Button>
-                    ) : (
-                      <Button asChild className="mt-auto w-full">
-                        <Link to={entry.path}>{entry.buttonText}</Link>
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 3: Wohnmobil-Serien with carousel and filter */}
-        <section className="py-12 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-center">Unsere Wohnmobil-Serien</h2>
+            {/* Main heading */}
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Welches Wohnmobil passt zu mir?</h2>
             
             {/* Horizontally scrollable filter bar */}
-            <div className="overflow-x-auto pb-4 mb-6">
+            <div className="overflow-x-auto pb-4 mb-8">
               <div className="flex justify-center min-w-max">
                 <ToggleGroup 
                   type="single" 
@@ -219,40 +190,75 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Model carousel with consistent image sizing */}
-            <Carousel className="relative">
-              <CarouselContent>
-                {filteredModels.map((model) => (
-                  <CarouselItem 
-                    key={model.name} 
-                    className="basis-full md:basis-1/2 lg:basis-1/3 pl-4"
-                  >
-                    <Card className="h-full">
-                      <CardContent className="p-6 flex flex-col h-full">
-                        {/* Fixed aspect ratio for consistent image dimensions */}
-                        <div className="mb-4">
-                          <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md" />
-                        </div>
-                        <h3 className="text-xl font-bold mb-1">{model.name}</h3>
-                        <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
-                        <Button variant="outline" asChild className="w-full mt-auto">
-                          <Link to={model.path}>Mehr erfahren</Link>
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              
-              {/* Navigation arrows - only visible on desktop */}
-              <div className="hidden lg:block">
-                <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2" />
-                <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2" />
-              </div>
-            </Carousel>
+            {/* Model carousel with consistent image sizing and hover effects */}
+            <div className="mb-12">
+              <Carousel className="relative">
+                <CarouselContent>
+                  {filteredModels.map((model) => (
+                    <CarouselItem 
+                      key={model.name} 
+                      className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4"
+                    >
+                      <Card className="h-full transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+                        <CardContent className="p-6 flex flex-col h-full">
+                          {/* Fixed aspect ratio for consistent image dimensions */}
+                          <div className="mb-4">
+                            <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md overflow-hidden" />
+                          </div>
+                          <h3 className="text-xl font-bold mb-1">{model.name}</h3>
+                          <p className="text-gray-600 mb-4 flex-grow text-sm">{model.description}</p>
+                          <Button variant="outline" asChild className="w-full mt-auto">
+                            <Link to={model.path}>Mehr erfahren</Link>
+                          </Button>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                
+                {/* Navigation arrows - only visible on desktop */}
+                <div className="hidden lg:block">
+                  <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2" />
+                  <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2" />
+                </div>
+              </Carousel>
+            </div>
+            
+            {/* CTA Cards section - redesigned */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              {ctaCards.map((card, index) => (
+                <Card key={index} className="h-full transition-all duration-200 hover:shadow-lg bg-primary text-primary-foreground">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <div className="mb-4 flex justify-center">
+                      <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                        {/* Icon placeholder */}
+                        <div className="w-6 h-6" />
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-center">{card.title}</h3>
+                    <p className="text-gray-100 mb-6 flex-grow text-center">{card.description}</p>
+                    {card.isBeratung ? (
+                      <Button onClick={handleStartBerater} variant="outline" className="mt-auto w-full bg-white text-primary hover:bg-white/90 hover:text-primary">
+                        {card.buttonText}
+                      </Button>
+                    ) : card.isExternal ? (
+                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-primary hover:bg-white/90 hover:text-primary">
+                        <a href={card.path} target="_blank" rel="noopener noreferrer">
+                          {card.buttonText}
+                        </a>
+                      </Button>
+                    ) : (
+                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-primary hover:bg-white/90 hover:text-primary">
+                        <Link to={card.path}>{card.buttonText}</Link>
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
             
             {/* Wohnmobiltypen erklärt - Collapsible Section */}
-            <div className="mt-10 border rounded-lg">
+            <div className="mt-16 border rounded-lg">
               <Collapsible 
                 className="w-full"
                 open={isTypesExpanded}
@@ -283,29 +289,9 @@ const Home = () => {
                 </CollapsibleContent>
               </Collapsible>
             </div>
-
-            {/* "Alle Modelle ansehen" Button */}
-            <div className="mt-10 text-center">
-              <Button asChild>
-                <Link to="/modelle">Alle Modelle ansehen</Link>
-              </Button>
-            </div>
           </div>
         </section>
 
-        {/* Section 4: Wohnmobilberater */}
-        <section className="py-16 px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-4">Welches Wohnmobil passt zu mir?</h2>
-            <p className="mb-6">
-              Finden Sie in nur wenigen Schritten das perfekte Wohnmobil für Ihre Bedürfnisse.
-            </p>
-            <Button onClick={handleStartBerater} size="lg">
-              Jetzt starten
-            </Button>
-          </div>
-        </section>
-        
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
