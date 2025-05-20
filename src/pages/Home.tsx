@@ -548,7 +548,7 @@ const Home = () => {
         </section>
 
         {/* New Section: About EURA MOBIL */}
-        <section className="py-16 px-4">
+        <section className="py-10 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold mb-8">Über EURA MOBIL</h2>
             
@@ -571,9 +571,11 @@ const Home = () => {
                 </div>
               </div>
               
-              {/* Video Placeholder Column */}
+              {/* Grayscale Video Thumbnail Column */}
               <div className="order-first md:order-last mb-6 md:mb-0">
-                <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md w-full" />
+                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full overflow-hidden">
+                  <div className="w-full h-full bg-[url('/euramobil-thumbnail-grayscale.jpg')] bg-cover bg-center filter grayscale"></div>
+                </AspectRatio>
               </div>
             </div>
           </div>
