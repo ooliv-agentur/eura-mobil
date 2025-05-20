@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -170,37 +171,50 @@ const Home = () => {
   const [dealerSearch, setDealerSearch] = useState("");
   const [placePredictions, setPlacePredictions] = useState<PlacePrediction[]>([]);
   const [showPredictions, setShowPredictions] = useState(false);
-  const autocompleteService = useRef<any>(null);
+  const placesServiceRef = useRef<any>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // Load Google Maps script with Places API - updated to use proper callback
+  // Load Google Maps script with Places API - updated implementation
   useEffect(() => {
-    // Only load script if it's not already loaded
-    if (!window.google || !window.google.maps || !window.google.maps.places) {
-      const googleMapsScript = document.createElement('script');
-      googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC1bL2XXLL3OK510dcAO-5lSwyrKjfzro8&libraries=places&callback=initGoogleAutocomplete`;
-      googleMapsScript.async = true;
-      googleMapsScript.defer = true;
-      
+    // Function to initialize the Google Places Autocomplete
+    const initPlacesAutocomplete = () => {
+      if (window.google && window.google.maps && window.google.maps.places) {
+        try {
+          placesServiceRef.current = new window.google.maps.places.AutocompleteService();
+          console.log("Home page: Google Places Autocomplete initialized successfully");
+        } catch (error) {
+          console.error("Error initializing Places Autocomplete:", error);
+        }
+      } else {
+        console.error("Google Maps Places library not available");
+      }
+    };
+
+    // Check if script is already loaded
+    if (window.google && window.google.maps && window.google.maps.places) {
+      initPlacesAutocomplete();
+    } else {
+      // Define callback for when API loads
       window.initGoogleAutocomplete = () => {
-        if (!window.google.maps.places) {
-          console.error('Google Maps Places library not loaded');
-          return;
-        }
-        autocompleteService.current = new window.google.maps.places.AutocompleteService();
-        console.log("Google Places Autocomplete initialized successfully");
+        initPlacesAutocomplete();
       };
-      
-      document.head.appendChild(googleMapsScript);
-      
-      return () => {
-        if (document.head.contains(googleMapsScript)) {
-          document.head.removeChild(googleMapsScript);
-        }
-      };
-    } else if (window.google && window.google.maps && window.google.maps.places) {
-      autocompleteService.current = new window.google.maps.places.AutocompleteService();
-      console.log("Google Places Autocomplete already loaded and initialized");
+
+      // Load the script if it's not already loaded
+      const existingScript = document.getElementById('google-maps-script');
+      if (!existingScript) {
+        const googleMapsScript = document.createElement('script');
+        googleMapsScript.id = 'google-maps-script';
+        googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyC1bL2XXLL3OK510dcAO-5lSwyrKjfzro8&libraries=places&callback=initGoogleAutocomplete`;
+        googleMapsScript.async = true;
+        googleMapsScript.defer = true;
+        document.head.appendChild(googleMapsScript);
+
+        return () => {
+          if (document.head.contains(googleMapsScript)) {
+            document.head.removeChild(googleMapsScript);
+          }
+        };
+      }
     }
   }, []);
 
@@ -218,14 +232,14 @@ const Home = () => {
     };
   }, []);
 
-  // Handle dealer search input changes - improved error handling
+  // Handle dealer search input changes - improved implementation
   const handleDealerSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setDealerSearch(value);
     
-    if (value.length >= 2 && autocompleteService.current) {
+    if (value.length >= 2 && placesServiceRef.current) {
       try {
-        autocompleteService.current.getPlacePredictions(
+        placesServiceRef.current.getPlacePredictions(
           {
             input: value,
             componentRestrictions: { country: ['de', 'at', 'ch'] }, // Restrict to Germany, Austria, Switzerland
@@ -233,18 +247,18 @@ const Home = () => {
           },
           (predictions: PlacePrediction[] | null, status: string) => {
             if (status === window.google.maps.places.PlacesServiceStatus.OK && predictions) {
-              console.log("Got predictions:", predictions.length);
+              console.log("Home page: Got predictions:", predictions.length);
               setPlacePredictions(predictions);
               setShowPredictions(true);
             } else {
-              console.log("No predictions or error:", status);
+              console.log("Home page: No predictions or error:", status);
               setPlacePredictions([]);
               setShowPredictions(false);
             }
           }
         );
       } catch (error) {
-        console.error("Error getting place predictions:", error);
+        console.error("Home page: Error getting place predictions:", error);
         setPlacePredictions([]);
         setShowPredictions(false);
       }
@@ -417,7 +431,7 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* Section 6: Händlersuche */}
+        {/* Section 6: Händlersuche - Updated with working autocomplete */}
         <section className="py-16 px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">Händler in Ihrer Nähe</h2>
@@ -425,7 +439,7 @@ const Home = () => {
               Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
             </p>
             
-            {/* Search input with Google Places Autocomplete - updated with better structure */}
+            {/* Search input with Google Places Autocomplete - improved implementation */}
             <div className="flex gap-2 mb-6">
               <div className="flex-1 relative">
                 <Input 
