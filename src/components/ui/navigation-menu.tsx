@@ -80,6 +80,7 @@ NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
 
 const NavigationMenuLink = NavigationMenuPrimitive.Link
 
+// Enhanced viewport to handle our larger preview containers
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
@@ -116,6 +117,86 @@ const NavigationMenuIndicator = React.forwardRef<
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
 
+// New component for model preview containers
+const NavigationMenuPreviewContainer = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex flex-col w-80 p-4 bg-white border border-gray-200 rounded-md shadow-sm",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuPreviewContainer.displayName = "NavigationMenuPreviewContainer"
+
+// New component for model preview image
+const NavigationMenuPreviewImage = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "w-full aspect-[16/9] bg-gray-200 rounded-md mb-3",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuPreviewImage.displayName = "NavigationMenuPreviewImage"
+
+// New component for model preview text
+const NavigationMenuPreviewText = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn(
+      "text-sm text-gray-600 mb-3 line-clamp-3",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuPreviewText.displayName = "NavigationMenuPreviewText"
+
+// New component for model preview facts list
+const NavigationMenuPreviewFacts = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "grid grid-cols-3 gap-2 mb-4 text-xs",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuPreviewFacts.displayName = "NavigationMenuPreviewFacts"
+
+// New component for model preview fact item
+const NavigationMenuPreviewFactItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex flex-col items-center",
+      className
+    )}
+    {...props}
+  />
+))
+NavigationMenuPreviewFactItem.displayName = "NavigationMenuPreviewFactItem"
+
 export {
   navigationMenuTriggerStyle,
   NavigationMenu,
@@ -126,4 +207,9 @@ export {
   NavigationMenuLink,
   NavigationMenuIndicator,
   NavigationMenuViewport,
+  NavigationMenuPreviewContainer,
+  NavigationMenuPreviewImage,
+  NavigationMenuPreviewText,
+  NavigationMenuPreviewFacts,
+  NavigationMenuPreviewFactItem,
 }

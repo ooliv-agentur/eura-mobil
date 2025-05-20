@@ -7,11 +7,153 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useOverlay } from "@/context/OverlayContext";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
+import {
+  NavigationMenuPreviewContainer,
+  NavigationMenuPreviewImage,
+  NavigationMenuPreviewText,
+  NavigationMenuPreviewFacts,
+  NavigationMenuPreviewFactItem
+} from "@/components/ui/navigation-menu";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+// Dummy data for model previews
+const modelPreviewData = {
+  "van": {
+    text: "Kompakter Van mit flexiblem Innenraum. Ideal für Reisende, die ein wendiges Fahrzeug für Städte und kleine Straßen suchen.",
+    facts: [
+      { label: "Länge", value: "5,4 - 6,0 m" },
+      { label: "Sitzplätze", value: "2 - 4" },
+      { label: "Schlafplätze", value: "2 - 3" }
+    ]
+  },
+  "activa-one": {
+    text: "Teilintegriertes Wohnmobil mit optimiertem Raumangebot. Perfekt für Paare und kleine Familien auf der Suche nach Komfort.",
+    facts: [
+      { label: "Länge", value: "6,5 - 7,1 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
+    ]
+  },
+  "xtura": {
+    text: "Geräumiges Reisemobil mit luxuriöser Ausstattung. Bietet hohen Komfort für anspruchsvolle Reisende auf langen Strecken.",
+    facts: [
+      { label: "Länge", value: "7,4 - 7,9 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "profila-t-fiat": {
+    text: "Teilintegriertes Wohnmobil auf Fiat-Basis mit flexiblem Grundriss. Ideal für komfortable Reisen mit praktischer Ausstattung.",
+    facts: [
+      { label: "Länge", value: "7,1 - 7,4 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
+    ]
+  },
+  "profila-t-mercedes": {
+    text: "Premium-Teilintegrierten auf Mercedes-Basis. Bietet hohen Fahrkomfort und erstklassige Verarbeitung für anspruchsvolle Reisende.",
+    facts: [
+      { label: "Länge", value: "7,2 - 7,5 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
+    ]
+  },
+  "profila-rs": {
+    text: "Sportliches Reisemobil mit dynamischer Linie. Kombiniert Fahrkomfort mit praktischer Raumnutzung für aktive Reisende.",
+    facts: [
+      { label: "Länge", value: "7,1 - 7,5 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "contura": {
+    text: "Elegantes Wohnmobil mit großzügigem Raumkonzept. Bietet Wohnkomfort auf höchstem Niveau mit durchdachten Details.",
+    facts: [
+      { label: "Länge", value: "7,6 - 8,0 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "integra-line-fiat": {
+    text: "Vollintegriertes Reisemobil auf Fiat-Basis. Überzeugt durch harmonisches Raumkonzept und hochwertige Verarbeitung.",
+    facts: [
+      { label: "Länge", value: "7,1 - 7,6 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "integra-line-gt-mercedes": {
+    text: "Premium-Vollintegrierter auf Mercedes-Basis mit GT-Ausstattung. Vereint Luxus und Funktionalität für höchste Ansprüche.",
+    facts: [
+      { label: "Länge", value: "7,2 - 7,7 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "integra": {
+    text: "Luxuriöses Flaggschiff mit exklusiver Ausstattung. Bietet maximalen Wohnkomfort für anspruchsvolle Reisende auf langen Strecken.",
+    facts: [
+      { label: "Länge", value: "7,9 - 8,9 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  }
+};
+
+// Model entry component with preview
+const ModelEntry = ({ 
+  modelId, 
+  modelName, 
+  onClose 
+}: { 
+  modelId: string; 
+  modelName: string;
+  onClose: () => void;
+}) => {
+  const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  
+  return (
+    <li className="group mb-3 relative">
+      <Link 
+        to={`/modelle/${modelId}`} 
+        onClick={onClose}
+        className="group flex items-center hover:text-blue-600 transition-colors"
+      >
+        <div className="flex items-center w-full">
+          <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
+            <Square className="h-6 w-6 text-gray-400" />
+          </div>
+          <span>{modelName}</span>
+        </div>
+      </Link>
+      
+      {/* Preview container - hidden on mobile */}
+      <div className="hidden lg:block absolute top-0 left-full ml-6 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        <NavigationMenuPreviewContainer>
+          <NavigationMenuPreviewImage />
+          <NavigationMenuPreviewText>
+            {modelData.text}
+          </NavigationMenuPreviewText>
+          <NavigationMenuPreviewFacts>
+            {modelData.facts.map((fact, index) => (
+              <NavigationMenuPreviewFactItem key={index}>
+                <span className="font-medium text-gray-900 mb-1">{fact.label}</span>
+                <span className="text-gray-600">{fact.value}</span>
+              </NavigationMenuPreviewFactItem>
+            ))}
+          </NavigationMenuPreviewFacts>
+          <Button size="sm" variant="outline" className="w-full">
+            Mehr erfahren
+          </Button>
+        </NavigationMenuPreviewContainer>
+      </div>
+    </li>
+  );
+};
 
 const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
@@ -76,148 +218,17 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   <span className="text-gray-400">01</span> Wohnmobile & Vans
                 </h2>
                 <Separator className="mb-4" />
-                <ul className="space-y-3">
-                  {/* Added Van as the first item */}
-                  <li>
-                    <Link 
-                      to="/modelle/van" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Van</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/activa-one" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Activa One</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/xtura" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Xtura</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/profila-t-fiat" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Profila T – Fiat</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/profila-t-mercedes" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Profila T – Mercedes</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/profila-rs" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Profila RS</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/contura" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Contura</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/integra-line-fiat" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Integra Line – Fiat</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/integra-line-gt-mercedes" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Integra Line GT – Mercedes</span>
-                      </div>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      to="/modelle/integra" 
-                      onClick={onClose}
-                      className="group flex items-center hover:text-blue-600 transition-colors"
-                    >
-                      <div className="flex items-center w-full">
-                        <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
-                          <Square className="h-6 w-6 text-gray-400" />
-                        </div>
-                        <span>Integra</span>
-                      </div>
-                    </Link>
-                  </li>
+                <ul className="space-y-3 relative">
+                  <ModelEntry modelId="van" modelName="Van" onClose={onClose} />
+                  <ModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} />
+                  <ModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} />
+                  <ModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} />
+                  <ModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} />
+                  <ModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} />
+                  <ModelEntry modelId="contura" modelName="Contura" onClose={onClose} />
+                  <ModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} />
+                  <ModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} />
+                  <ModelEntry modelId="integra" modelName="Integra" onClose={onClose} />
                 </ul>
               </div>
 
