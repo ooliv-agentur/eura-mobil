@@ -117,7 +117,7 @@ const NavigationMenuIndicator = React.forwardRef<
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
 
-// New component for model preview containers
+// Enhanced component for model preview containers
 const NavigationMenuPreviewContainer = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -125,7 +125,7 @@ const NavigationMenuPreviewContainer = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-col w-80 p-4 bg-white border border-gray-200 rounded-md shadow-sm",
+      "flex flex-col w-full p-4 bg-white border border-gray-200 rounded-md shadow-sm",
       className
     )}
     {...props}
@@ -133,7 +133,7 @@ const NavigationMenuPreviewContainer = React.forwardRef<
 ))
 NavigationMenuPreviewContainer.displayName = "NavigationMenuPreviewContainer"
 
-// New component for model preview image
+// Enhanced component for model preview image with consistent ratio
 const NavigationMenuPreviewImage = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -141,7 +141,7 @@ const NavigationMenuPreviewImage = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "w-full aspect-[16/9] bg-gray-200 rounded-md mb-3",
+      "w-full aspect-video bg-gray-200 rounded-md mb-3",
       className
     )}
     {...props}
@@ -149,7 +149,7 @@ const NavigationMenuPreviewImage = React.forwardRef<
 ))
 NavigationMenuPreviewImage.displayName = "NavigationMenuPreviewImage"
 
-// New component for model preview text
+// Updated component for model preview text
 const NavigationMenuPreviewText = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
@@ -165,7 +165,7 @@ const NavigationMenuPreviewText = React.forwardRef<
 ))
 NavigationMenuPreviewText.displayName = "NavigationMenuPreviewText"
 
-// New component for model preview facts list
+// Updated component for model preview facts list with more consistent spacing
 const NavigationMenuPreviewFacts = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -181,7 +181,7 @@ const NavigationMenuPreviewFacts = React.forwardRef<
 ))
 NavigationMenuPreviewFacts.displayName = "NavigationMenuPreviewFacts"
 
-// New component for model preview fact item
+// Updated component for model preview fact item with better alignment
 const NavigationMenuPreviewFactItem = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
@@ -189,7 +189,7 @@ const NavigationMenuPreviewFactItem = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex flex-col items-center",
+      "flex flex-col items-center justify-start",
       className
     )}
     {...props}

@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Calendar, X, ChevronDown, ExternalLink, Square } from "lucide-react";
@@ -123,13 +124,20 @@ const MobileModelEntry = ({
   const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
   
   return (
-    <li className="mb-3">
+    <li className="mb-4">
       <Collapsible 
         open={isActive} 
-        onOpenChange={(isOpen) => setActiveModel(isOpen ? modelId : null)}
+        onOpenChange={(isOpen) => {
+          // If opening this model, close any other open model
+          if (isOpen) {
+            setActiveModel(modelId);
+          } else if (activeModel === modelId) {
+            setActiveModel(null);
+          }
+        }}
       >
         <CollapsibleTrigger asChild>
-          <button className="group flex items-center w-full justify-between hover:text-blue-600 transition-colors">
+          <button className="group flex items-center w-full justify-between hover:bg-gray-100 p-2 rounded-md transition-colors">
             <div className="flex items-center">
               <div className="bg-gray-200 rounded-md w-10 h-10 flex items-center justify-center mr-3 flex-shrink-0">
                 <Square className="h-6 w-6 text-gray-400" />
@@ -141,7 +149,7 @@ const MobileModelEntry = ({
             />
           </button>
         </CollapsibleTrigger>
-        <CollapsibleContent className="mt-3 ml-12 space-y-3">
+        <CollapsibleContent className="mt-3 ml-12 mb-4 space-y-3">
           <NavigationMenuPreviewImage className="w-full h-40" />
           <NavigationMenuPreviewText>
             {modelData.text}
@@ -179,14 +187,18 @@ const DesktopModelEntry = ({
   activeModel: string | null;
   setActiveModel: (id: string | null) => void;
 }) => {
-  const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  const isActive = activeModel === modelId;
   
   return (
-    <li className="mb-3">
+    <li className="mb-2">
       <button 
-        className={`flex items-center w-full hover:text-blue-600 transition-colors text-left ${activeModel === modelId ? 'text-blue-600' : ''}`}
-        onMouseEnter={() => setActiveModel(modelId)}
+        className={`flex items-center w-full rounded-md p-2 transition-colors text-left ${
+          activeModel === modelId 
+            ? 'bg-gray-100 text-blue-600' 
+            : 'hover:bg-gray-50 hover:text-blue-600'
+        }`}
         onClick={() => {
+          // Toggle active model, or set to this model if another is active
           setActiveModel(activeModel === modelId ? null : modelId);
         }}
       >
@@ -201,7 +213,7 @@ const DesktopModelEntry = ({
   );
 };
 
-// Model preview panel for desktop view
+// Model preview panel for desktop view - now with fixed positioning
 const DesktopModelPreview = ({
   modelId,
   onClose
@@ -215,8 +227,8 @@ const DesktopModelPreview = ({
   if (!modelData) return null;
   
   return (
-    <div className="absolute top-0 left-full ml-6 w-80">
-      <NavigationMenuPreviewContainer>
+    <div className="h-full">
+      <NavigationMenuPreviewContainer className="sticky top-6">
         <NavigationMenuPreviewImage />
         <NavigationMenuPreviewText>
           {modelData.text}
@@ -311,42 +323,50 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   <span className="text-gray-400">01</span> Wohnmobile & Vans
                 </h2>
                 <Separator className="mb-4" />
-                <ul className="space-y-3 relative">
-                  {isMobile ? (
-                    // Mobile view with collapsible accordions
-                    <>
-                      <MobileModelEntry modelId="van" modelName="Van" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="contura" modelName="Contura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <MobileModelEntry modelId="integra" modelName="Integra" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                    </>
-                  ) : (
-                    // Desktop view with separate preview panel
-                    <>
-                      <DesktopModelEntry modelId="van" modelName="Van" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="contura" modelName="Contura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      <DesktopModelEntry modelId="integra" modelName="Integra" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
-                      
-                      {/* Preview panel for desktop */}
-                      {activeModel && (
+                
+                {/* Desktop view with separate models list and preview panel side by side */}
+                {!isMobile && (
+                  <div className="flex gap-6">
+                    {/* Models list column */}
+                    <div className="w-full">
+                      <ul className="space-y-1 relative">
+                        <DesktopModelEntry modelId="van" modelName="Van" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="contura" modelName="Contura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                        <DesktopModelEntry modelId="integra" modelName="Integra" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                      </ul>
+                    </div>
+                    
+                    {/* Preview panel column - reserved space for the active model preview */}
+                    {activeModel && (
+                      <div className="w-full">
                         <DesktopModelPreview modelId={activeModel} onClose={onClose} />
-                      )}
-                    </>
-                  )}
-                </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Mobile view with collapsible accordions */}
+                {isMobile && (
+                  <ul className="space-y-1 relative">
+                    <MobileModelEntry modelId="van" modelName="Van" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="activa-one" modelName="Activa One" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="xtura" modelName="Xtura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="profila-t-fiat" modelName="Profila T – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="profila-t-mercedes" modelName="Profila T – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="profila-rs" modelName="Profila RS" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="contura" modelName="Contura" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="integra-line-fiat" modelName="Integra Line – Fiat" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="integra-line-gt-mercedes" modelName="Integra Line GT – Mercedes" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                    <MobileModelEntry modelId="integra" modelName="Integra" onClose={onClose} activeModel={activeModel} setActiveModel={setActiveModel} />
+                  </ul>
+                )}
               </div>
 
               {/* 02 Kaufen & Mieten */}
