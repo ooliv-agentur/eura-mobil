@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Calendar, X, ChevronDown, ExternalLink, Square } from "lucide-react";
@@ -15,7 +14,7 @@ import {
   NavigationMenuPreviewFacts,
   NavigationMenuPreviewFactItem
 } from "@/components/ui/navigation-menu";
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -244,7 +243,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const location = useLocation();
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
   const [activeModel, setActiveModel] = useState<string | null>(null);
   
   // Control body scroll when menu is open
