@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
@@ -42,11 +41,16 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
             <div>
               <h3 className="font-bold text-lg mb-3">Modelle</h3>
               <div className="space-y-2">
+                {/* Updated order of models to match the specified sequence */}
+                <div><MenuLink to="/modelle/van">Van</MenuLink></div>
                 <div><MenuLink to="/modelle/activa-one">Activa One</MenuLink></div>
-                <div><MenuLink to="/modelle/integra">Integra</MenuLink></div>
-                <div><MenuLink to="/modelle/profila-t">Profila T</MenuLink></div>
+                <div><MenuLink to="/modelle/profila-t-fiat">Profila T - Fiat</MenuLink></div>
                 <div><MenuLink to="/modelle/profila-rs">Profila RS</MenuLink></div>
+                <div><MenuLink to="/modelle/profila-t-mercedes">Profila T - Mercedes</MenuLink></div>
                 <div><MenuLink to="/modelle/contura">Contura</MenuLink></div>
+                <div><MenuLink to="/modelle/integra-line-fiat">Integra Line - Fiat</MenuLink></div>
+                <div><MenuLink to="/modelle/integra-line-gt-mercedes">Integra Line GT - Mercedes</MenuLink></div>
+                <div><MenuLink to="/modelle/integra">Integra</MenuLink></div>
                 <div><MenuLink to="/modelle/xtura">Xtura</MenuLink></div>
               </div>
             </div>
