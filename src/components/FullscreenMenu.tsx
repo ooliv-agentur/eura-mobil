@@ -107,7 +107,7 @@ const modelPreviewData = {
   }
 };
 
-// Model preview component for the hero section - optimized height
+// Model preview component for the hero section - optimized height and tighter spacing
 const ModelPreviewHero = ({
   modelId,
   onClose
@@ -122,8 +122,8 @@ const ModelPreviewHero = ({
   
   return (
     <div className="flex flex-col h-full">
-      {/* Reduced fixed height image placeholder */}
-      <div className="bg-gray-200 w-full h-[180px] mb-2"></div>
+      {/* Reduced height image placeholder */}
+      <div className="bg-gray-200 w-full h-[140px] mb-2"></div>
       
       <h3 className="text-xl font-medium mb-1">{modelData.title}</h3>
       
@@ -198,67 +198,73 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Main content area - height optimized */}
+      {/* Main content area - improved hierarchy */}
       <div className="flex-1 overflow-hidden">
         <div className="container mx-auto px-4 h-full flex flex-col">
-          {/* 1. Wohnmobile & Vans - Full-width Hero Section with height optimization */}
+          {/* 1. Wohnmobile & Vans - Full-width Hero Section with visual improvements */}
           <section className="mb-3">
             <h2 className="text-xl font-medium mb-2">Wohnmobile & Vans</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[220px] md:h-auto">
-              {/* Left side: Model list with ScrollArea for overflow - reduced height */}
-              <div className="md:col-span-1 overflow-hidden">
-                <ScrollArea className="h-[200px] md:h-[210px]">
-                  <ul className="space-y-1.5 pr-3">
-                    {modelIds.map(modelId => {
-                      const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
-                      return (
-                        <li key={modelId}>
-                          <button 
-                            className={`flex items-center w-full text-left py-1 ${activeModel === modelId ? 'text-blue-600' : ''} hover:text-blue-600`}
-                            onClick={() => handleModelSelect(modelId)}
-                          >
-                            {/* Small dummy image */}
-                            <div className="bg-gray-200 w-12 h-8 mr-2 flex-shrink-0"></div>
-                            <span>{model.title}</span>
-                          </button>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </ScrollArea>
+            {/* Card-like wrapper with border to group the content */}
+            <div className="rounded-md border border-gray-200 p-4 bg-gray-50/50">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 h-[200px] md:h-auto">
+                {/* Left side: Model list with ScrollArea for overflow */}
+                <div className="md:col-span-1 overflow-hidden">
+                  <ScrollArea className="h-[180px] md:h-[200px]">
+                    <ul className="space-y-1.5 pr-3">
+                      {modelIds.map(modelId => {
+                        const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
+                        return (
+                          <li key={modelId}>
+                            <button 
+                              className={`flex items-center w-full text-left py-1 pl-2 rounded-sm
+                                ${activeModel === modelId 
+                                  ? 'text-blue-600 bg-blue-50 border-l-2 border-blue-500' 
+                                  : 'hover:bg-gray-100 hover:text-blue-600'}`}
+                              onClick={() => handleModelSelect(modelId)}
+                            >
+                              {/* Small dummy image */}
+                              <div className="bg-gray-200 w-12 h-8 mr-2 flex-shrink-0"></div>
+                              <span>{model.title}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </ScrollArea>
+                </div>
+                
+                {/* Right side: Preview for selected model */}
+                <div className="md:col-span-2">
+                  <ModelPreviewHero modelId={activeModel} onClose={onClose} />
+                </div>
               </div>
               
-              {/* Right side: Preview for selected model */}
-              <div className="md:col-span-2">
-                <ModelPreviewHero modelId={activeModel} onClose={onClose} />
+              {/* Prominent Links below hero section - reduced spacing */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2 py-1">
+                <Button variant="outline" asChild size="sm">
+                  <Link to="/modellvergleich" onClick={onClose}>
+                    Modelle vergleichen
+                  </Link>
+                </Button>
+                
+                <Button variant="outline" asChild size="sm">
+                  <a 
+                    href="https://konfigurator.euramobil.de" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                  >
+                    Jetzt konfigurieren
+                  </a>
+                </Button>
+                
+                <Button className="bg-blue-600 hover:bg-blue-700" asChild size="sm">
+                  <Link to="/berater" onClick={onClose}>
+                    Beratung starten
+                  </Link>
+                </Button>
               </div>
-            </div>
-            
-            {/* Prominent Links below hero section - reduced spacing */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
-              <Button variant="outline" asChild size="sm">
-                <Link to="/modellvergleich" onClick={onClose}>
-                  Modelle vergleichen
-                </Link>
-              </Button>
-              
-              <Button variant="outline" asChild size="sm">
-                <a 
-                  href="https://konfigurator.euramobil.de" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                >
-                  Jetzt konfigurieren
-                </a>
-              </Button>
-              
-              <Button className="bg-blue-600 hover:bg-blue-700" asChild size="sm">
-                <Link to="/berater" onClick={onClose}>
-                  Beratung starten
-                </Link>
-              </Button>
             </div>
           </section>
           
@@ -266,7 +272,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           <Separator className="my-2" />
           
           {/* 2. Regular Menu Sections - more compact with scrollable areas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-3 mb-3 flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-2 mb-2 flex-1">
             {/* Qualität & Vorteile */}
             <div>
               <h3 className="font-medium text-lg mb-1.5">Qualität & Vorteile</h3>
@@ -513,8 +519,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
       
-      {/* Footer area with legal links, social media, and language selector - fixed size */}
-      <div className="container mx-auto px-4 py-3 border-t border-gray-200 flex-shrink-0">
+      {/* Footer area with legal links, social media, and language selector - improved visual anchoring */}
+      <div className="container mx-auto px-4 py-3 border-t border-gray-200 bg-gray-50 flex-shrink-0 mt-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           {/* Legal links */}
           <div className="mb-3 md:mb-0">
