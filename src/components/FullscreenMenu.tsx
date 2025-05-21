@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
@@ -108,7 +107,7 @@ const modelPreviewData = {
   }
 };
 
-// Model preview component for the hero section
+// Model preview component for the hero section - optimized height
 const ModelPreviewHero = ({
   modelId,
   onClose
@@ -123,19 +122,19 @@ const ModelPreviewHero = ({
   
   return (
     <div className="flex flex-col h-full">
-      {/* Grey dummy image placeholder */}
-      <div className="bg-gray-200 w-full aspect-video mb-3"></div>
+      {/* Reduced-height image placeholder with aspect ratio control */}
+      <div className="bg-gray-200 w-full aspect-video h-auto max-h-[200px] mb-2"></div>
       
-      <h3 className="text-xl font-medium mb-2">{modelData.title}</h3>
+      <h3 className="text-xl font-medium mb-1">{modelData.title}</h3>
       
-      <p className="text-sm text-gray-600 mb-3 line-clamp-3">
+      <p className="text-sm text-gray-600 mb-2 line-clamp-2">
         {modelData.text}
       </p>
       
-      <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
+      <div className="grid grid-cols-3 gap-2 mb-3 text-xs">
         {modelData.facts.map((fact, index) => (
           <div key={index} className="flex flex-col">
-            <span className="font-medium text-gray-900 mb-1">{fact.label}</span>
+            <span className="font-medium text-gray-900 mb-0.5">{fact.label}</span>
             <span className="text-gray-600">{fact.value}</span>
           </div>
         ))}
@@ -180,8 +179,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white flex flex-col overflow-hidden">
-      <div className="container mx-auto px-4 py-4 flex-shrink-0">
-        <div className="flex justify-between items-center mb-6">
+      <div className="container mx-auto px-4 py-3 flex-shrink-0">
+        <div className="flex justify-between items-center mb-4">
           <Link to="/" onClick={onClose} className="font-bold text-xl">
             EURA MOBIL
           </Link>
@@ -199,28 +198,28 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Main scrollable content area */}
+      {/* Main scrollable content area - height optimized */}
       <div className="flex-1 overflow-hidden">
         <div className="container mx-auto px-4 h-full flex flex-col">
-          {/* 1. Wohnmobile & Vans - Full-width Hero Section */}
-          <section className="mb-8">
-            <h2 className="text-xl font-medium mb-4">Wohnmobile & Vans</h2>
+          {/* 1. Wohnmobile & Vans - Full-width Hero Section with height optimization */}
+          <section className="mb-4">
+            <h2 className="text-xl font-medium mb-3">Wohnmobile & Vans</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[250px] md:h-auto">
-              {/* Left side: Model list with ScrollArea for overflow */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[220px] md:h-auto">
+              {/* Left side: Model list with ScrollArea for overflow - optimized height */}
               <div className="md:col-span-1 overflow-hidden">
-                <ScrollArea className="h-[250px] md:h-[300px]">
-                  <ul className="space-y-3 pr-4">
+                <ScrollArea className="h-[220px] md:h-[250px]">
+                  <ul className="space-y-2 pr-3">
                     {modelIds.map(modelId => {
                       const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
                       return (
                         <li key={modelId}>
                           <button 
-                            className={`flex items-center w-full text-left ${activeModel === modelId ? 'text-blue-600' : ''} hover:text-blue-600`}
+                            className={`flex items-center w-full text-left py-1 ${activeModel === modelId ? 'text-blue-600' : ''} hover:text-blue-600`}
                             onClick={() => handleModelSelect(modelId)}
                           >
                             {/* Small dummy image */}
-                            <div className="bg-gray-200 w-14 h-10 mr-3 flex-shrink-0"></div>
+                            <div className="bg-gray-200 w-12 h-8 mr-2 flex-shrink-0"></div>
                             <span>{model.title}</span>
                           </button>
                         </li>
@@ -237,7 +236,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </div>
             
             {/* Prominent Links below hero section - reduced spacing */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
               <Button variant="outline" asChild size="sm">
                 <Link to="/modellvergleich" onClick={onClose}>
                   Modelle vergleichen
@@ -264,15 +263,15 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           </section>
           
           {/* Separator between hero and regular menu sections - reduced margins */}
-          <Separator className="my-5" />
+          <Separator className="my-3" />
           
           {/* 2. Regular Menu Sections - more compact with scrollable areas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5 mb-4 flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 mb-3 flex-1">
             {/* Qualität & Vorteile */}
             <div>
-              <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
-              <ScrollArea className="h-[160px]">
-                <ul className="space-y-2 pr-4">
+              <h3 className="font-medium text-lg mb-2">Qualität & Vorteile</h3>
+              <ScrollArea className="h-[140px]">
+                <ul className="space-y-1.5 pr-4">
                   <li>
                     <Link 
                       to="/qualitaet/sealed-structure" 
@@ -351,8 +350,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Kaufen & Mieten */}
             <div>
-              <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
-              <ul className="space-y-2">
+              <h3 className="font-medium text-lg mb-2">Kaufen & Mieten</h3>
+              <ul className="space-y-1.5">
                 <li>
                   <Link 
                     to="/berater" 
@@ -406,8 +405,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Unternehmen */}
             <div>
-              <h3 className="font-medium text-lg mb-3">Unternehmen</h3>
-              <ul className="space-y-2">
+              <h3 className="font-medium text-lg mb-2">Unternehmen</h3>
+              <ul className="space-y-1.5">
                 <li>
                   <Link 
                     to="/unternehmen" 
@@ -449,8 +448,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Karriere & Service */}
             <div>
-              <h3 className="font-medium text-lg mb-3">Karriere & Service</h3>
-              <ul className="space-y-2">
+              <h3 className="font-medium text-lg mb-2">Karriere & Service</h3>
+              <ul className="space-y-1.5">
                 <li>
                   <a 
                     href="/karriere" 
@@ -515,10 +514,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
       </div>
       
       {/* Footer area with legal links, social media, and language selector - fixed size */}
-      <div className="container mx-auto px-4 py-4 border-t border-gray-200 flex-shrink-0">
+      <div className="container mx-auto px-4 py-3 border-t border-gray-200 flex-shrink-0">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           {/* Legal links */}
-          <div className="mb-4 md:mb-0">
+          <div className="mb-3 md:mb-0">
             <ul className="flex flex-wrap gap-x-4 gap-y-1">
               <li>
                 <Link 
@@ -551,7 +550,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           </div>
           
           {/* Language selector and social media */}
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-3">
             {/* Language selector */}
             <Select defaultValue="de">
               <SelectTrigger className="w-32 h-8 text-sm">
