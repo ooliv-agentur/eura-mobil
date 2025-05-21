@@ -122,8 +122,8 @@ const ModelPreviewHero = ({
   
   return (
     <div className="flex flex-col h-full">
-      {/* Reduced-height image placeholder with aspect ratio control */}
-      <div className="bg-gray-200 w-full aspect-video h-auto max-h-[200px] mb-2"></div>
+      {/* Reduced fixed height image placeholder */}
+      <div className="bg-gray-200 w-full h-[180px] mb-2"></div>
       
       <h3 className="text-xl font-medium mb-1">{modelData.title}</h3>
       
@@ -131,7 +131,7 @@ const ModelPreviewHero = ({
         {modelData.text}
       </p>
       
-      <div className="grid grid-cols-3 gap-2 mb-3 text-xs">
+      <div className="grid grid-cols-3 gap-2 mb-2 text-xs">
         {modelData.facts.map((fact, index) => (
           <div key={index} className="flex flex-col">
             <span className="font-medium text-gray-900 mb-0.5">{fact.label}</span>
@@ -179,8 +179,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white flex flex-col overflow-hidden">
-      <div className="container mx-auto px-4 py-3 flex-shrink-0">
-        <div className="flex justify-between items-center mb-4">
+      <div className="container mx-auto px-4 py-4 flex-shrink-0">
+        <div className="flex justify-between items-center">
           <Link to="/" onClick={onClose} className="font-bold text-xl">
             EURA MOBIL
           </Link>
@@ -198,18 +198,18 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
 
-      {/* Main scrollable content area - height optimized */}
+      {/* Main content area - height optimized */}
       <div className="flex-1 overflow-hidden">
         <div className="container mx-auto px-4 h-full flex flex-col">
           {/* 1. Wohnmobile & Vans - Full-width Hero Section with height optimization */}
-          <section className="mb-4">
-            <h2 className="text-xl font-medium mb-3">Wohnmobile & Vans</h2>
+          <section className="mb-3">
+            <h2 className="text-xl font-medium mb-2">Wohnmobile & Vans</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[220px] md:h-auto">
-              {/* Left side: Model list with ScrollArea for overflow - optimized height */}
+              {/* Left side: Model list with ScrollArea for overflow - reduced height */}
               <div className="md:col-span-1 overflow-hidden">
-                <ScrollArea className="h-[220px] md:h-[250px]">
-                  <ul className="space-y-2 pr-3">
+                <ScrollArea className="h-[200px] md:h-[210px]">
+                  <ul className="space-y-1.5 pr-3">
                     {modelIds.map(modelId => {
                       const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
                       return (
@@ -236,7 +236,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </div>
             
             {/* Prominent Links below hero section - reduced spacing */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
               <Button variant="outline" asChild size="sm">
                 <Link to="/modellvergleich" onClick={onClose}>
                   Modelle vergleichen
@@ -263,15 +263,15 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           </section>
           
           {/* Separator between hero and regular menu sections - reduced margins */}
-          <Separator className="my-3" />
+          <Separator className="my-2" />
           
           {/* 2. Regular Menu Sections - more compact with scrollable areas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 mb-3 flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-3 mb-3 flex-1">
             {/* Qualität & Vorteile */}
             <div>
-              <h3 className="font-medium text-lg mb-2">Qualität & Vorteile</h3>
-              <ScrollArea className="h-[140px]">
-                <ul className="space-y-1.5 pr-4">
+              <h3 className="font-medium text-lg mb-1.5">Qualität & Vorteile</h3>
+              <ScrollArea className="h-[130px]">
+                <ul className="space-y-1 pr-4">
                   <li>
                     <Link 
                       to="/qualitaet/sealed-structure" 
@@ -350,8 +350,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Kaufen & Mieten */}
             <div>
-              <h3 className="font-medium text-lg mb-2">Kaufen & Mieten</h3>
-              <ul className="space-y-1.5">
+              <h3 className="font-medium text-lg mb-1.5">Kaufen & Mieten</h3>
+              <ul className="space-y-1">
                 <li>
                   <Link 
                     to="/berater" 
@@ -405,8 +405,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Unternehmen */}
             <div>
-              <h3 className="font-medium text-lg mb-2">Unternehmen</h3>
-              <ul className="space-y-1.5">
+              <h3 className="font-medium text-lg mb-1.5">Unternehmen</h3>
+              <ul className="space-y-1">
                 <li>
                   <Link 
                     to="/unternehmen" 
@@ -448,8 +448,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Karriere & Service */}
             <div>
-              <h3 className="font-medium text-lg mb-2">Karriere & Service</h3>
-              <ul className="space-y-1.5">
+              <h3 className="font-medium text-lg mb-1.5">Karriere & Service</h3>
+              <ul className="space-y-1">
                 <li>
                   <a 
                     href="/karriere" 
