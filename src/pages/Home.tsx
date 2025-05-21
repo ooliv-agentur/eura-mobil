@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -141,6 +140,14 @@ declare global {
     initGoogleAutocomplete: () => void;
   }
 }
+
+// Define button text mapping for wohnmobiltypen CTA buttons
+const wohnmobiltypenButtonText = {
+  alkoven: "Mehr über Alkoven-Wohnmobile",
+  teilintegriert: "Teilintegrierte Wohnmobile entdecken",
+  integriert: "Integrierte Wohnmobile im Überblick",
+  vans: "Was macht Vans besonders?",
+};
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -345,8 +352,8 @@ const Home = () => {
               </ToggleGroup>
             </div>
 
-            {/* Updated Type explanation box with generic circle placeholders */}
-            <div className="bg-gray-100 rounded-md p-4 mb-8 max-w-3xl mx-auto">
+            {/* Type explanation box */}
+            <div className="bg-gray-100 rounded-md p-4 mb-4 max-w-3xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-center gap-4">
                 <div className="flex justify-center md:justify-start">
                   {/* Generic circle placeholder with consistent size */}
@@ -359,8 +366,19 @@ const Home = () => {
                 </p>
               </div>
             </div>
+            
+            {/* New CTA button that only appears for specific filters */}
+            {activeFilter !== 'alle' && (
+              <div className="flex justify-center mb-8">
+                <Button asChild size="lg" className="mt-4">
+                  <Link to="/wohnmobiltypen">
+                    {wohnmobiltypenButtonText[activeFilter]}
+                  </Link>
+                </Button>
+              </div>
+            )}
 
-            {/* Model cards carousel - with consistent spacing and sizing - NOW WITH INDICATORS */}
+            {/* Model cards carousel - with consistent spacing and sizing */}
             <div className="mb-16">
               <Carousel className="w-full">
                 <CarouselContent>
