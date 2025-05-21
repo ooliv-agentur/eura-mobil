@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "@/components/Header";
@@ -121,7 +120,7 @@ const modelsData = {
         "Polster in Eco-Leder / Stoff-Kombination",
         "Doppelboden-Staufächer (1 Auszug, 1 Klappfach, 1 Bodenfach)",
         "Hinterlüftete Oberschränke mit Ambientebeleuchtung",
-        "Möbeldekor „Beach Home"",
+        "Möbeldekor \"Beach Home\"",
         "Kleiderschrank mit ausziehbarer Stange",
         "Flauschbespannung an Decke, textile Wandbespannung",
         "Eco-Leder-Blenden an Fensterrahmen & Dachhauben",
