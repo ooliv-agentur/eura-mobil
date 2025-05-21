@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
@@ -7,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useOverlay } from "@/context/OverlayContext";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -107,7 +107,7 @@ const modelPreviewData = {
   }
 };
 
-// Simplified model preview component for the hero section - optimized height and tighter spacing
+// Simplified model preview component with proper aspect ratio and balanced spacing
 const ModelPreviewHero = ({
   modelId,
   onClose
@@ -122,16 +122,16 @@ const ModelPreviewHero = ({
   
   return (
     <div className="flex flex-col h-full">
-      {/* Reduced height image placeholder */}
-      <div className="bg-gray-200 w-full h-[140px] mb-2"></div>
+      {/* Image placeholder with proper 16:9 aspect ratio */}
+      <AspectRatio ratio={16/9} className="mb-4 bg-gray-200 rounded-md overflow-hidden" />
       
-      <h3 className="text-xl font-medium mb-1">{modelData.title}</h3>
+      <h3 className="text-xl font-medium mb-2">{modelData.title}</h3>
       
-      <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+      <p className="text-sm text-gray-600 mb-4">
         {modelData.text}
       </p>
       
-      <div className="grid grid-cols-3 gap-2 mb-2 text-xs">
+      <div className="grid grid-cols-3 gap-3 mb-4 text-sm">
         {modelData.facts.map((fact, index) => (
           <div key={index} className="flex flex-col">
             <span className="font-medium text-gray-900 mb-0.5">{fact.label}</span>
@@ -140,11 +140,13 @@ const ModelPreviewHero = ({
         ))}
       </div>
       
-      <Button size="sm" variant="outline" className="w-full" asChild>
-        <Link to={`/modelle/${modelId}`} onClick={onClose}>
-          Mehr erfahren
-        </Link>
-      </Button>
+      <div className="mt-auto">
+        <Button variant="outline" className="w-full" asChild>
+          <Link to={`/modelle/${modelId}`} onClick={onClose}>
+            Mehr erfahren
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 };
@@ -178,31 +180,29 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const modelIds = Object.keys(modelPreviewData);
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-white flex flex-col overflow-y-auto">
-      {/* Header with logo and close button - same container structure as main site header */}
-      <div className="container mx-auto px-4 py-4 flex-shrink-0">
+    <div className="fixed inset-0 z-[9999] bg-white overflow-y-auto">
+      {/* Header with logo and close button */}
+      <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" onClick={onClose} className="font-bold text-xl">
             EURA MOBIL
           </Link>
           
           {/* Close button */}
-          <div className="relative">
-            <button 
-              onClick={onClose}
-              aria-label="Menü schließen"
-              className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center"
-            >
-              <X className="h-6 w-6 text-gray-800" />
-            </button>
-          </div>
+          <button 
+            onClick={onClose}
+            aria-label="Menü schließen"
+            className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center"
+          >
+            <X className="h-6 w-6 text-gray-800" />
+          </button>
         </div>
       </div>
 
-      {/* Main content - using container for consistent width */}
-      <div className="container mx-auto px-4 flex-1">
-        {/* 1. Vehicle models section with 12-column grid */}
-        <section className="mb-6">
+      {/* Main content with 12-column grid */}
+      <div className="container mx-auto px-4 pb-16 md:pb-0">
+        {/* 1. Vehicle models section */}
+        <section className="mb-8">
           <h2 className="text-xl font-medium mb-3">Wohnmobile & Vans</h2>
           
           {/* Card-like wrapper with border */}
@@ -211,21 +211,21 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             <div className="grid grid-cols-12 gap-6">
               {/* Left side: Model list (4 columns) */}
               <div className="col-span-12 md:col-span-4">
-                <ul className="space-y-1.5 md:pr-3">
+                <ul className="space-y-2">
                   {modelIds.map(modelId => {
                     const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
                     return (
                       <li key={modelId}>
                         <button 
-                          className={`flex items-center w-full text-left py-1 pl-2 rounded-sm
+                          className={`flex items-center w-full text-left py-2 pl-2 rounded-sm transition-colors
                             ${activeModel === modelId 
                               ? 'text-blue-600 bg-blue-50 border-l-2 border-blue-500' 
                               : 'hover:bg-gray-100 hover:text-blue-600'}`}
                           onClick={() => handleModelSelect(modelId)}
                         >
-                          {/* Small dummy image */}
-                          <div className="bg-gray-200 w-12 h-8 mr-2 flex-shrink-0"></div>
-                          <span>{model.title}</span>
+                          {/* Small dummy image with consistent size */}
+                          <div className="bg-gray-200 w-16 h-10 mr-3 flex-shrink-0 rounded-sm"></div>
+                          <span className="font-medium">{model.title}</span>
                         </button>
                       </li>
                     );
@@ -239,15 +239,15 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* CTA Buttons in 3-column grid - with margin to separate from above content */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
-              <Button variant="outline" asChild size="sm">
+            {/* CTA Buttons in 3-column grid with proper spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <Button variant="outline" asChild>
                 <Link to="/modellvergleich" onClick={onClose}>
                   Modelle vergleichen
                 </Link>
               </Button>
               
-              <Button variant="outline" asChild size="sm">
+              <Button variant="outline" asChild>
                 <a 
                   href="https://konfigurator.euramobil.de" 
                   target="_blank" 
@@ -258,7 +258,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 </a>
               </Button>
               
-              <Button className="bg-blue-600 hover:bg-blue-700" asChild size="sm">
+              <Button className="bg-blue-600 hover:bg-blue-700" asChild>
                 <Link to="/berater" onClick={onClose}>
                   Beratung starten
                 </Link>
@@ -267,20 +267,19 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           </div>
         </section>
         
-        {/* Separator between main section and link grid */}
-        <Separator className="my-4" />
+        <Separator className="my-6" />
         
-        {/* 2. Link grid section - 4 columns with equal width */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-6 mb-8">
-          {/* Qualität & Vorteile */}
-          <div>
+        {/* 2. Link grid section with 12-column grid for consistent alignment */}
+        <div className="grid grid-cols-12 gap-x-6 gap-y-8 mb-12">
+          {/* Qualität & Vorteile - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
             <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
                   to="/qualitaet/sealed-structure" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Sealed Structure
                 </Link>
@@ -289,7 +288,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/winterfestigkeit" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Winterfestigkeit
                 </Link>
@@ -298,7 +297,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/leichtbau" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Leichtbau
                 </Link>
@@ -307,7 +306,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/moebelbau" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Möbelbau
                 </Link>
@@ -316,7 +315,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/doppelboden" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Doppelboden
                 </Link>
@@ -325,7 +324,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/schlafkomfort" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Schlafkomfort
                 </Link>
@@ -334,7 +333,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/kuechenwelt" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Küchen
                 </Link>
@@ -343,7 +342,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/qualitaet/wellnessbereich" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Wellness
                 </Link>
@@ -351,15 +350,15 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
           
-          {/* Kaufen & Mieten */}
-          <div>
+          {/* Kaufen & Mieten - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
             <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
                   to="/berater" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Wohnmobilberater
                 </Link>
@@ -370,7 +369,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors"
+                  className="flex items-center hover:text-blue-600 transition-colors py-1"
                 >
                   <span>Konfigurator</span>
                   <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
@@ -380,7 +379,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/mietfahrzeuge" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Mietfahrzeuge
                 </Link>
@@ -389,7 +388,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/gebrauchtfahrzeuge" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Gebrauchtfahrzeuge
                 </Link>
@@ -398,7 +397,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/haendler" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Händlersuche
                 </Link>
@@ -406,15 +405,15 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
           
-          {/* Unternehmen */}
-          <div>
+          {/* Unternehmen - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
             <h3 className="font-medium text-lg mb-3">Unternehmen</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
                   to="/unternehmen" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Über EURA MOBIL
                 </Link>
@@ -423,7 +422,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/unternehmen/werksfuehrung" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Werksführung
                 </Link>
@@ -432,7 +431,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/unternehmen/club" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Club
                 </Link>
@@ -441,7 +440,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/unternehmen/videos" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Videos
                 </Link>
@@ -449,8 +448,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
           
-          {/* Karriere & Service */}
-          <div>
+          {/* Karriere & Service - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
             <h3 className="font-medium text-lg mb-3">Karriere & Service</h3>
             <ul className="space-y-2">
               <li>
@@ -459,7 +458,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors"
+                  className="flex items-center hover:text-blue-600 transition-colors py-1"
                 >
                   <span>Stellenangebote</span>
                   <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
@@ -469,7 +468,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/karriere/ausbildung" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Ausbildung
                 </Link>
@@ -478,7 +477,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/kontakt" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Kontakt
                 </Link>
@@ -487,7 +486,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/garantie" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Garantie
                 </Link>
@@ -496,7 +495,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/newsletter" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Newsletter
                 </Link>
@@ -505,7 +504,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 <Link 
                   to="/downloads" 
                   onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Downloads
                 </Link>
@@ -515,94 +514,96 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
       
-      {/* Footer area with legal links, social media, and language selector */}
-      <div className="container mx-auto px-4 py-4 border-t border-gray-200 bg-gray-50 mt-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-          {/* Legal links */}
-          <div className="mb-3 md:mb-0">
-            <ul className="flex flex-wrap gap-x-4 gap-y-1">
-              <li>
-                <Link 
-                  to="/impressum" 
-                  onClick={onClose}
-                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                >
-                  Impressum
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/datenschutz" 
-                  onClick={onClose}
-                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                >
-                  Datenschutz
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/agb" 
-                  onClick={onClose}
-                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                >
-                  AGB
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Language selector and social media */}
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-3">
-            {/* Language selector */}
-            <Select defaultValue="de">
-              <SelectTrigger className="w-32 h-8 text-sm">
-                <SelectValue placeholder="Sprache" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="de">Deutsch</SelectItem>
-                <SelectItem value="en">Englisch</SelectItem>
-                <SelectItem value="fr">Französisch</SelectItem>
-              </SelectContent>
-            </Select>
+      {/* Footer with links, social media, and language selector - aligned to the grid */}
+      <div className="mt-auto border-t border-gray-200 bg-gray-50 py-6">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            {/* Legal links */}
+            <div className="mb-4 md:mb-0">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                <li>
+                  <Link 
+                    to="/impressum" 
+                    onClick={onClose}
+                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    Impressum
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/datenschutz" 
+                    onClick={onClose}
+                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    Datenschutz
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/agb" 
+                    onClick={onClose}
+                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    AGB
+                  </Link>
+                </li>
+              </ul>
+            </div>
             
-            {/* Social media icons */}
-            <div className="flex gap-3">
-              <a 
-                href="https://www.instagram.com/euramobil/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://www.facebook.com/EuraMobil" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://www.youtube.com/@euramobil" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="h-5 w-5" />
-              </a>
+            {/* Language selector and social media */}
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              {/* Language selector */}
+              <Select defaultValue="de">
+                <SelectTrigger className="w-32 h-9 text-sm">
+                  <SelectValue placeholder="Sprache" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="en">Englisch</SelectItem>
+                  <SelectItem value="fr">Französisch</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              {/* Social media icons - slightly larger hit area */}
+              <div className="flex gap-4">
+                <a 
+                  href="https://www.instagram.com/euramobil/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://www.facebook.com/EuraMobil" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/@euramobil" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="h-5 w-5" />
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Mobile only: Fixed CTA at the bottom - display only when scrolled to near bottom */}
+      {/* Mobile only: Fixed CTA at the bottom - with proper spacing */}
       {isMobile && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 md:hidden">
-          <Button className="w-full" asChild size="sm">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden">
+          <Button className="w-full" asChild>
             <Link to="/berater" onClick={onClose}>
               Jetzt Beratung starten
             </Link>
