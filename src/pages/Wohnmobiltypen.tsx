@@ -5,33 +5,37 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Caravan, Truck, Bus, Tent } from "lucide-react";
+import { Caravan, Truck, Bus, Home } from "lucide-react";
 
 const Wohnmobiltypen = () => {
   const wohnmobiltypen = [
     {
       id: "vans",
       title: "Vans",
-      description: "Kompakt und wendig – ideal für Paare und Stadtabenteuer. Einfach zu fahren und zu parken, mit cleverer Raumaufteilung und Komfort auf kleinstem Raum.",
+      description: "Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den EURA MOBIL Van zu Ihrem ganz persönlichen mobilen Zuhause machen.",
+      buttonText: "Jetzt Vans entdecken",
       icon: <Caravan className="h-12 w-12 mb-4" />,
     },
     {
       id: "alkoven",
-      title: "Alkoven",
-      description: "Geräumige Familienfahrzeuge mit bis zu 6 Schlafplätzen. Charakteristisches Merkmal ist der Alkoven über dem Fahrerhaus, der zusätzlichen Wohnraum bietet.",
-      icon: <Truck className="h-12 w-12 mb-4" />,
+      title: "Alkoven-Wohnmobile",
+      description: "In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit.",
+      buttonText: "Alkoven-Modelle anzeigen",
+      icon: <Home className="h-12 w-12 mb-4" />,
     },
     {
       id: "teilintegriert",
-      title: "Teilintegriert",
-      description: "Die perfekte Balance zwischen Fahrdynamik und Wohnkomfort. Nutzt das Original-Fahrerhaus und bietet dennoch großzügigen Wohnraum. Ideal für Paare und kleine Familien.",
+      title: "Teilintegrierte Wohnmobile",
+      description: "Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik.",
+      buttonText: "Teilintegrierte entdecken",
       icon: <Bus className="h-12 w-12 mb-4" />,
     },
     {
       id: "integriert",
-      title: "Integriert",
-      description: "Luxuriöse Reisemobile mit maximaler Raumausnutzung. Das Fahrerhaus ist vollständig in den Wohnraum integriert und bietet ein großzügiges Raumgefühl mit Top-Komfort.",
-      icon: <Tent className="h-12 w-12 mb-4" />,
+      title: "Integrierte Wohnmobile",
+      description: "Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl.",
+      buttonText: "Integrierte anzeigen",
+      icon: <Truck className="h-12 w-12 mb-4" />,
     },
   ];
 
@@ -39,25 +43,32 @@ const Wohnmobiltypen = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      <main className="flex-1 container mx-auto px-4 py-6">
-        <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center">Welcher Wohnmobiltyp passt zu Ihnen?</h1>
+      <main className="flex-1 container mx-auto px-4 py-8">
+        <section className="text-center mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Unsere Wohnmobiltypen im Überblick</h1>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            EURA MOBIL bietet Ihnen für jedes Reisebedürfnis den passenden Wohnmobiltyp – von kompakten Vans bis zu luxuriösen Integrierten. Hier erfahren Sie, was die einzelnen Kategorien auszeichnet und welche Modelle zu Ihnen passen könnten.
+          </p>
+        </section>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {wohnmobiltypen.map((typ) => (
             <Card key={typ.id} className="overflow-hidden">
-              <CardContent className="p-6 flex flex-col items-center">
-                <div className="text-blue-600">
-                  {typ.icon}
+              <CardContent className="p-6">
+                <div className="aspect-video bg-gray-100 mb-4 flex items-center justify-center">
+                  <div className="text-blue-600">
+                    {typ.icon}
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold mb-2">{typ.title}</h2>
-                <p className="text-gray-600 mb-4 text-center">{typ.description}</p>
-                <Button className="w-full" asChild>
-                  <Link to={`/modelle?typ=${typ.id}`}>Modelle anzeigen</Link>
+                <h2 className="text-2xl font-bold mb-3">{typ.title}</h2>
+                <p className="text-gray-600 mb-6">{typ.description}</p>
+                <Button className="w-full sm:w-auto" asChild>
+                  <Link to={`/modelle?typ=${typ.id}`}>{typ.buttonText}</Link>
                 </Button>
               </CardContent>
             </Card>
           ))}
-        </div>
+        </section>
       </main>
       
       <Footer />

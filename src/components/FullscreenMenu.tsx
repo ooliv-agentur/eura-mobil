@@ -324,6 +324,18 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 </h2>
                 <Separator className="mb-4" />
                 
+                {/* Add the new Wohnmobiltypen overview link before models list */}
+                <div className="mb-4">
+                  <Link 
+                    to="/wohnmobiltypen" 
+                    onClick={onClose}
+                    className="group flex items-center hover:text-blue-600 transition-colors"
+                  >
+                    <span className="inline-block w-1.5 h-1.5 bg-gray-400 mr-2 rounded-full"></span>
+                    Wohnmobiltypen im Überblick
+                  </Link>
+                </div>
+                
                 {/* Desktop view with separate models list and preview panel side by side */}
                 {!isMobile && (
                   <div className="flex gap-6">
