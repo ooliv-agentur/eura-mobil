@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
-import { Check, Download, MapPin, Settings } from "lucide-react";
+import { Check, Download, Image, MapPin, Settings } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Tabs,
@@ -23,6 +23,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Model data repository - could later be moved to a separate file
 const modelsData = {
@@ -30,12 +31,12 @@ const modelsData = {
     id: "van",
     name: "Van",
     intro: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...",
-    heroImage: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=900&auto=format",
+    heroImage: "/placeholder.svg",
     galleryImages: [
-      "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=500&auto=format",
-      "https://images.unsplash.com/photo-1527576539890-dfa815648363?w=500&auto=format",
-      "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=500&auto=format",
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format"
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
     ],
     technicalData: {
       länge: "5,99 – 6,36 m",
@@ -55,21 +56,21 @@ const modelsData = {
       {
         id: "v-635-eb",
         name: "V 635 EB",
-        image: "https://images.unsplash.com/photo-1527576539890-dfa815648363?w=500&auto=format",
+        image: "/placeholder.svg",
         length: "6,36 m",
         sleepingPlaces: "2"
       },
       {
         id: "v-635-hb",
         name: "V 635 HB",
-        image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=500&auto=format",
+        image: "/placeholder.svg",
         length: "6,36 m",
         sleepingPlaces: "2"
       },
       {
         id: "v-595-hb",
         name: "V 595 HB",
-        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format",
+        image: "/placeholder.svg",
         length: "5,99 m",
         sleepingPlaces: "2"
       }
@@ -192,12 +193,12 @@ const modelsData = {
     id: "activa-one",
     name: "Activa One",
     intro: "Kompaktes Einsteigermodell mit cleverer Raumnutzung. Ideal für Paare und kleine Familien.",
-    heroImage: "https://images.unsplash.com/photo-1532941781729-b8e6bf6a3d0c?w=900&auto=format",
+    heroImage: "/placeholder.svg",
     galleryImages: [
-      "https://images.unsplash.com/photo-1532941781729-b8e6bf6a3d0c?w=500&auto=format",
-      "https://images.unsplash.com/photo-1593150532356-223f7151d4c4?w=500&auto=format",
-      "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=500&auto=format",
-      "https://images.unsplash.com/photo-1464851707681-f9d5fdaccea8?w=500&auto=format"
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
     ],
     technicalData: {
       länge: "5,99 m",
@@ -303,20 +304,25 @@ const ProductDetail = () => {
     return !!section;
   };
   
+  // PlaceholderImage component for consistent placeholder styling
+  const PlaceholderImage = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-gray-200 relative ${className}`}>
+      <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+        <Image className="w-12 h-12" />
+        <span className="ml-2 font-medium text-gray-500">Platzhalter</span>
+      </div>
+    </AspectRatio>
+  );
+  
   // Helper function for type-safe section rendering
   const renderLayouts = () => {
     if (!modelDetails.layouts) return null;
+    
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {modelDetails.layouts.map((layout) => (
           <Card key={layout.id} className="overflow-hidden">
-            <AspectRatio ratio={16/9}>
-              <img 
-                src={layout.image} 
-                alt={layout.name}
-                className="w-full h-full object-cover"
-              />
-            </AspectRatio>
+            <PlaceholderImage />
             <CardContent className="p-4">
               <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
@@ -336,6 +342,7 @@ const ProductDetail = () => {
   
   const renderInterior = () => {
     if (!modelDetails.interior) return null;
+    
     return (
       <ul className="space-y-4 divide-y">
         {modelDetails.interior.map((item, index) => (
@@ -350,11 +357,17 @@ const ProductDetail = () => {
   
   const renderUpholstery = () => {
     if (!modelDetails.upholsteryTypes) return null;
+    
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {modelDetails.upholsteryTypes.map((type, index) => (
           <div key={index} className="border rounded-lg overflow-hidden">
-            <div className="bg-gray-200 h-40"></div>
+            <div className="bg-gray-200 h-40 flex items-center justify-center">
+              <div className="flex flex-col items-center">
+                <Image className="w-8 h-8 text-gray-400" />
+                <span className="mt-2 text-gray-500">Polster</span>
+              </div>
+            </div>
             <div className="p-3">
               <h3 className="font-medium">{type}</h3>
             </div>
@@ -366,6 +379,7 @@ const ProductDetail = () => {
   
   const renderEquipmentMobile = () => {
     if (!modelDetails.equipment) return null;
+    
     return (
       <Accordion type="single" collapsible className="w-full">
         {Object.entries(modelDetails.equipment).map(([key, items]) => (
@@ -427,11 +441,7 @@ const ProductDetail = () => {
         {/* Hero Section */}
         <div className="relative">
           <div className="w-full h-72 sm:h-96 bg-gray-200">
-            <img 
-              src={modelDetails.heroImage} 
-              alt={modelDetails.name} 
-              className="w-full h-full object-cover"
-            />
+            <PlaceholderImage ratio={21/9} className="h-full" />
           </div>
         </div>
         
@@ -513,13 +523,7 @@ const ProductDetail = () => {
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3">
-                  <AspectRatio ratio={16/9}>
-                    <img 
-                      src={modelDetails.galleryImages[0]} 
-                      alt="Innenraum"
-                      className="w-full h-full object-cover rounded-lg"
-                    />
-                  </AspectRatio>
+                  <PlaceholderImage ratio={16/9} />
                 </div>
                 <div className="lg:col-span-2">
                   <div className="bg-white rounded-lg p-4 shadow-sm h-full">
