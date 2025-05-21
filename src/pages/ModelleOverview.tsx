@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Filter, Bed, Users, GitCompare } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -132,7 +133,7 @@ const ModelleOverview = () => {
     }
   };
 
-  // All EURA MOBIL models with realistic data
+  // All EURA MOBIL models with realistic data - reordered to match the specified sequence
   const allModels: ModelData[] = [
     {
       id: "van",

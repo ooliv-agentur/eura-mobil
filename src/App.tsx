@@ -51,17 +51,17 @@ const App = () => (
               <Route path="/modelle" element={<ModelleOverview />} />
               <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
               
-              {/* Explicit routes for models in the correct order matching the live site */}
+              {/* Explicit routes for models in the correct order matching the specified sequence */}
               <Route path="/modelle/van" element={<ProductDetail />} />
               <Route path="/modelle/activa-one" element={<ProductDetail />} />
-              <Route path="/modelle/xtura" element={<ProductDetail />} />
               <Route path="/modelle/profila-t-fiat" element={<ProductDetail />} />
-              <Route path="/modelle/profila-t-mercedes" element={<ProductDetail />} />
               <Route path="/modelle/profila-rs" element={<ProductDetail />} />
+              <Route path="/modelle/profila-t-mercedes" element={<ProductDetail />} />
               <Route path="/modelle/contura" element={<ProductDetail />} />
               <Route path="/modelle/integra-line-fiat" element={<ProductDetail />} />
               <Route path="/modelle/integra-line-gt-mercedes" element={<ProductDetail />} />
               <Route path="/modelle/integra" element={<ProductDetail />} />
+              <Route path="/modelle/xtura" element={<ProductDetail />} />
               
               {/* Dynamic route as fallback for other models */}
               <Route path="/modelle/:modelId" element={<ProductDetail />} />
