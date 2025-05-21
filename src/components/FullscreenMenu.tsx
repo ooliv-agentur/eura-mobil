@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
@@ -249,12 +250,14 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               
               <Button variant="outline" asChild>
                 <a 
-                  href="https://konfigurator.euramobil.de" 
+                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={onClose}
+                  className="flex items-center justify-center"
                 >
-                  Jetzt konfigurieren
+                  <span>Jetzt konfigurieren</span>
+                  <ExternalLink className="ml-1.5 h-4 w-4" />
                 </a>
               </Button>
               
@@ -365,7 +368,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </li>
               <li>
                 <a 
-                  href="https://konfigurator.euramobil.de" 
+                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
                   onClick={onClose}
                   target="_blank"
                   rel="noopener noreferrer"
