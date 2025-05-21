@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { useOverlay } from "@/context/OverlayContext";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -123,15 +124,15 @@ const ModelPreviewHero = ({
   return (
     <div className="flex flex-col h-full">
       {/* Grey dummy image placeholder */}
-      <div className="bg-gray-200 w-full aspect-video mb-4"></div>
+      <div className="bg-gray-200 w-full aspect-video mb-3"></div>
       
       <h3 className="text-xl font-medium mb-2">{modelData.title}</h3>
       
-      <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+      <p className="text-sm text-gray-600 mb-3 line-clamp-3">
         {modelData.text}
       </p>
       
-      <div className="grid grid-cols-3 gap-4 mb-6 text-xs">
+      <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
         {modelData.facts.map((fact, index) => (
           <div key={index} className="flex flex-col">
             <span className="font-medium text-gray-900 mb-1">{fact.label}</span>
@@ -178,9 +179,9 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const modelIds = Object.keys(modelPreviewData);
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-white overflow-y-auto">
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex justify-between items-center mb-8">
+    <div className="fixed inset-0 z-[9999] bg-white flex flex-col overflow-hidden">
+      <div className="container mx-auto px-4 py-4 flex-shrink-0">
+        <div className="flex justify-between items-center mb-6">
           <Link to="/" onClick={onClose} className="font-bold text-xl">
             EURA MOBIL
           </Link>
@@ -192,405 +193,414 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             <X className="h-6 w-6" />
           </button>
         </div>
-        
-        {/* 1. Wohnmobile & Vans - Full-width Hero Section */}
-        <section className="mb-12">
-          <h2 className="text-xl font-medium mb-6">Wohnmobile & Vans</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Left side: Model list */}
-            <div className="md:col-span-1">
-              <ul className="space-y-4">
-                {modelIds.map(modelId => {
-                  const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
-                  return (
-                    <li key={modelId}>
-                      <button 
-                        className={`flex items-center w-full text-left ${activeModel === modelId ? 'text-blue-600' : ''} hover:text-blue-600`}
-                        onClick={() => handleModelSelect(modelId)}
-                      >
-                        {/* Small dummy image */}
-                        <div className="bg-gray-200 w-16 h-12 mr-3 flex-shrink-0"></div>
-                        <span>{model.title}</span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+      </div>
+
+      {/* Main scrollable content area */}
+      <div className="flex-1 overflow-hidden">
+        <div className="container mx-auto px-4 h-full flex flex-col">
+          {/* 1. Wohnmobile & Vans - Full-width Hero Section */}
+          <section className="mb-8">
+            <h2 className="text-xl font-medium mb-4">Wohnmobile & Vans</h2>
             
-            {/* Right side: Preview for selected model */}
-            <div className="md:col-span-2">
-              <ModelPreviewHero modelId={activeModel} onClose={onClose} />
-            </div>
-          </div>
-          
-          {/* Prominent Links below hero section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            <Button variant="outline" asChild>
-              <Link to="/modellvergleich" onClick={onClose}>
-                Modelle vergleichen
-              </Link>
-            </Button>
-            
-            <Button variant="outline" asChild>
-              <a 
-                href="https://konfigurator.euramobil.de" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={onClose}
-              >
-                Jetzt konfigurieren
-              </a>
-            </Button>
-            
-            <Button className="bg-blue-600 hover:bg-blue-700" asChild>
-              <Link to="/berater" onClick={onClose}>
-                Beratung starten
-              </Link>
-            </Button>
-          </div>
-        </section>
-        
-        {/* Separator between hero and regular menu sections */}
-        <Separator className="my-8" />
-        
-        {/* 2. Regular Menu Sections */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-8">
-          {/* Qualität & Vorteile */}
-          <div>
-            <h3 className="font-medium text-lg mb-4">Qualität & Vorteile</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link 
-                  to="/qualitaet/sealed-structure" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Sealed Structure
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/winterfestigkeit" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Winterfestigkeit
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/leichtbau" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Leichtbau
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/moebelbau" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Möbelbau
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/doppelboden" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Doppelboden
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/schlafkomfort" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Schlafkomfort
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/kuechenwelt" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Küchen
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/wellnessbereich" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Wellness
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Kaufen & Mieten */}
-          <div>
-            <h3 className="font-medium text-lg mb-4">Kaufen & Mieten</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link 
-                  to="/berater" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Wohnmobilberater
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="https://konfigurator.euramobil.de" 
-                  onClick={onClose}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors"
-                >
-                  <span>Konfigurator</span>
-                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
-                </a>
-              </li>
-              <li>
-                <Link 
-                  to="/mietfahrzeuge" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Mietfahrzeuge
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/gebrauchtfahrzeuge" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Gebrauchtfahrzeuge
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/haendler" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Händlersuche
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Unternehmen */}
-          <div>
-            <h3 className="font-medium text-lg mb-4">Unternehmen</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link 
-                  to="/unternehmen" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Über EURA MOBIL
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/unternehmen/werksfuehrung" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Werksführung
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/unternehmen/club" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Club
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/unternehmen/videos" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Videos
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Karriere & Service */}
-          <div>
-            <h3 className="font-medium text-lg mb-4">Karriere & Service</h3>
-            <ul className="space-y-3">
-              <li>
-                <a 
-                  href="/karriere" 
-                  onClick={onClose}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors"
-                >
-                  <span>Stellenangebote</span>
-                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
-                </a>
-              </li>
-              <li>
-                <Link 
-                  to="/karriere/ausbildung" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Ausbildung
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/kontakt" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Kontakt
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/garantie" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Garantie
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/newsletter" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Newsletter
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/downloads" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  Downloads
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        {/* Footer area with legal links, social media, and language selector */}
-        <div className="mt-16 pt-8 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            {/* Legal links */}
-            <div className="mb-6 md:mb-0">
-              <ul className="flex flex-wrap gap-x-4 gap-y-2">
-                <li>
-                  <Link 
-                    to="/impressum" 
-                    onClick={onClose}
-                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    Impressum
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/datenschutz" 
-                    onClick={onClose}
-                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    Datenschutz
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/agb" 
-                    onClick={onClose}
-                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    AGB
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Language selector and social media */}
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              {/* Language selector */}
-              <Select defaultValue="de">
-                <SelectTrigger className="w-32 h-9 text-sm">
-                  <SelectValue placeholder="Sprache" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="de">Deutsch</SelectItem>
-                  <SelectItem value="en">Englisch</SelectItem>
-                  <SelectItem value="fr">Französisch</SelectItem>
-                </SelectContent>
-              </Select>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[250px] md:h-auto">
+              {/* Left side: Model list with ScrollArea for overflow */}
+              <div className="md:col-span-1 overflow-hidden">
+                <ScrollArea className="h-[250px] md:h-[300px]">
+                  <ul className="space-y-3 pr-4">
+                    {modelIds.map(modelId => {
+                      const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
+                      return (
+                        <li key={modelId}>
+                          <button 
+                            className={`flex items-center w-full text-left ${activeModel === modelId ? 'text-blue-600' : ''} hover:text-blue-600`}
+                            onClick={() => handleModelSelect(modelId)}
+                          >
+                            {/* Small dummy image */}
+                            <div className="bg-gray-200 w-14 h-10 mr-3 flex-shrink-0"></div>
+                            <span>{model.title}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </ScrollArea>
+              </div>
               
-              {/* Social media icons */}
-              <div className="flex gap-4">
-                <a 
-                  href="https://www.instagram.com/euramobil/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
-                <a 
-                  href="https://www.facebook.com/EuraMobil" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="h-5 w-5" />
-                </a>
-                <a 
-                  href="https://www.youtube.com/@euramobil" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                  aria-label="YouTube"
-                >
-                  <Youtube className="h-5 w-5" />
-                </a>
+              {/* Right side: Preview for selected model */}
+              <div className="md:col-span-2">
+                <ModelPreviewHero modelId={activeModel} onClose={onClose} />
               </div>
             </div>
+            
+            {/* Prominent Links below hero section - reduced spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-5">
+              <Button variant="outline" asChild size="sm">
+                <Link to="/modellvergleich" onClick={onClose}>
+                  Modelle vergleichen
+                </Link>
+              </Button>
+              
+              <Button variant="outline" asChild size="sm">
+                <a 
+                  href="https://konfigurator.euramobil.de" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={onClose}
+                >
+                  Jetzt konfigurieren
+                </a>
+              </Button>
+              
+              <Button className="bg-blue-600 hover:bg-blue-700" asChild size="sm">
+                <Link to="/berater" onClick={onClose}>
+                  Beratung starten
+                </Link>
+              </Button>
+            </div>
+          </section>
+          
+          {/* Separator between hero and regular menu sections - reduced margins */}
+          <Separator className="my-5" />
+          
+          {/* 2. Regular Menu Sections - more compact with scrollable areas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-5 mb-4 flex-1">
+            {/* Qualität & Vorteile */}
+            <div>
+              <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
+              <ScrollArea className="h-[160px]">
+                <ul className="space-y-2 pr-4">
+                  <li>
+                    <Link 
+                      to="/qualitaet/sealed-structure" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Sealed Structure
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/winterfestigkeit" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Winterfestigkeit
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/leichtbau" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Leichtbau
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/moebelbau" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Möbelbau
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/doppelboden" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Doppelboden
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/schlafkomfort" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Schlafkomfort
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/kuechenwelt" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Küchen
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/qualitaet/wellnessbereich" 
+                      onClick={onClose}
+                      className="hover:text-blue-600 transition-colors"
+                    >
+                      Wellness
+                    </Link>
+                  </li>
+                </ul>
+              </ScrollArea>
+            </div>
+            
+            {/* Kaufen & Mieten */}
+            <div>
+              <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link 
+                    to="/berater" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Wohnmobilberater
+                  </Link>
+                </li>
+                <li>
+                  <a 
+                    href="https://konfigurator.euramobil.de" 
+                    onClick={onClose}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center hover:text-blue-600 transition-colors"
+                  >
+                    <span>Konfigurator</span>
+                    <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                  </a>
+                </li>
+                <li>
+                  <Link 
+                    to="/mietfahrzeuge" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Mietfahrzeuge
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/gebrauchtfahrzeuge" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Gebrauchtfahrzeuge
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/haendler" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Händlersuche
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            
+            {/* Unternehmen */}
+            <div>
+              <h3 className="font-medium text-lg mb-3">Unternehmen</h3>
+              <ul className="space-y-2">
+                <li>
+                  <Link 
+                    to="/unternehmen" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Über EURA MOBIL
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/unternehmen/werksfuehrung" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Werksführung
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/unternehmen/club" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Club
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/unternehmen/videos" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Videos
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            
+            {/* Karriere & Service */}
+            <div>
+              <h3 className="font-medium text-lg mb-3">Karriere & Service</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a 
+                    href="/karriere" 
+                    onClick={onClose}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center hover:text-blue-600 transition-colors"
+                  >
+                    <span>Stellenangebote</span>
+                    <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                  </a>
+                </li>
+                <li>
+                  <Link 
+                    to="/karriere/ausbildung" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Ausbildung
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/kontakt" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Kontakt
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/garantie" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Garantie
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/newsletter" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Newsletter
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/downloads" 
+                    onClick={onClose}
+                    className="hover:text-blue-600 transition-colors"
+                  >
+                    Downloads
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-        
-        {/* Fixed prominent CTA at the bottom */}
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden">
-          <Button className="w-full" asChild>
-            <Link to="/berater" onClick={onClose}>
-              Jetzt Beratung starten
-            </Link>
-          </Button>
+      </div>
+      
+      {/* Footer area with legal links, social media, and language selector - fixed size */}
+      <div className="container mx-auto px-4 py-4 border-t border-gray-200 flex-shrink-0">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+          {/* Legal links */}
+          <div className="mb-4 md:mb-0">
+            <ul className="flex flex-wrap gap-x-4 gap-y-1">
+              <li>
+                <Link 
+                  to="/impressum" 
+                  onClick={onClose}
+                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                >
+                  Impressum
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/datenschutz" 
+                  onClick={onClose}
+                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                >
+                  Datenschutz
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/agb" 
+                  onClick={onClose}
+                  className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                >
+                  AGB
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Language selector and social media */}
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+            {/* Language selector */}
+            <Select defaultValue="de">
+              <SelectTrigger className="w-32 h-8 text-sm">
+                <SelectValue placeholder="Sprache" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="de">Deutsch</SelectItem>
+                <SelectItem value="en">Englisch</SelectItem>
+                <SelectItem value="fr">Französisch</SelectItem>
+              </SelectContent>
+            </Select>
+            
+            {/* Social media icons */}
+            <div className="flex gap-3">
+              <a 
+                href="https://www.instagram.com/euramobil/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://www.facebook.com/EuraMobil" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@euramobil" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
+      
+      {/* Fixed prominent CTA at the bottom - mobile only */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 md:hidden">
+        <Button className="w-full" asChild size="sm">
+          <Link to="/berater" onClick={onClose}>
+            Jetzt Beratung starten
+          </Link>
+        </Button>
       </div>
     </div>
   );
