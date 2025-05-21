@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
@@ -10,6 +9,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -154,7 +154,7 @@ const ModelPreviewHero = ({
   );
 };
 
-// New Mobile Model Item component with expanding preview
+// Mobile Model Item component with expanding preview
 const MobileModelItem = ({ 
   modelId, 
   isActive, 
@@ -216,6 +216,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const location = useLocation();
   const isMobile = useIsMobile();
+  const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const [activeModel, setActiveModel] = useState<string | null>("van"); // Default to first model
   
   // Control body scroll when menu is open
@@ -235,6 +236,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
 
   const handleModelSelect = (id: string) => {
     setActiveModel(id);
+  };
+
+  // Handler for starting berater instead of navigating
+  const handleStartBerater = () => {
+    onClose(); // Close the menu first
+    startBeraterFlow(); // Start the berater with default options
   };
 
   // Array of all model IDs for easy iteration
@@ -334,10 +341,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 </a>
               </Button>
               
-              <Button className="bg-blue-600 hover:bg-blue-700" asChild>
-                <Link to="/berater" onClick={onClose}>
-                  Beratung starten
-                </Link>
+              <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleStartBerater}>
+                Beratung starten
               </Button>
             </div>
           </div>
@@ -431,13 +436,12 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
             <ul className="space-y-2">
               <li>
-                <Link 
-                  to="/berater" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
+                <button 
+                  onClick={handleStartBerater}
+                  className="hover:text-blue-600 transition-colors block py-1 text-left w-full"
                 >
                   Wohnmobilberater
-                </Link>
+                </button>
               </li>
               <li>
                 <a 
@@ -679,10 +683,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
       {/* Mobile only: Fixed CTA at the bottom - with proper spacing */}
       {isMobile && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden">
-          <Button className="w-full" asChild>
-            <Link to="/berater" onClick={onClose}>
-              Jetzt Beratung starten
-            </Link>
+          <Button className="w-full" onClick={handleStartBerater}>
+            Jetzt Beratung starten
           </Button>
         </div>
       )}
