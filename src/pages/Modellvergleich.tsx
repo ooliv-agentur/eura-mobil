@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Check, ChevronRight } from "lucide-react";
+import { Check, ChevronRight, Info } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -15,6 +15,8 @@ import {
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 
 const models = [
   { 
@@ -23,6 +25,7 @@ const models = [
     teaser: "Kompakter Van für 2 Personen",
     length: "5,99 - 6,36 m",
     sleepingPlaces: "2",
+    description: "Der Van ist das kompakteste Modell mit hoher Mobilität, einfachem Handling und einer durchdachten Raumaufteilung für maximale Flexibilität."
   },
   { 
     id: "activa-one", 
@@ -30,6 +33,7 @@ const models = [
     teaser: "Alkoven-Modell ideal für Familien",
     length: "6,50 - 7,57 m",
     sleepingPlaces: "6", 
+    description: "Der Activa One bietet mit seinem Alkoven-Konzept reichlich Schlafplätze und ist besonders für Familien mit Kindern geeignet."
   },
   { 
     id: "profila-t-fiat", 
@@ -37,6 +41,7 @@ const models = [
     teaser: "Teilintegrierter auf Fiat-Basis",
     length: "6,85 - 7,41 m",
     sleepingPlaces: "4", 
+    description: "Der Profila T auf Fiat-Basis kombiniert Fahrkomfort mit durchdachter Raumgestaltung und bietet komfortable Reisemobilität."
   },
   { 
     id: "profila-rs", 
@@ -44,6 +49,7 @@ const models = [
     teaser: "Teilintegrierter mit Hubbett",
     length: "7,09 - 7,41 m",
     sleepingPlaces: "4", 
+    description: "Der Profila RS zeichnet sich durch ein innovatives Hubbett über der Sitzgruppe aus und bietet damit flexiblen Schlafkomfort."
   },
   { 
     id: "profila-t-mercedes", 
@@ -51,6 +57,7 @@ const models = [
     teaser: "Teilintegrierter auf Mercedes-Basis",
     length: "6,99 - 7,41 m",
     sleepingPlaces: "4", 
+    description: "Der Profila T auf Mercedes-Basis überzeugt durch hochwertige Fahrzeugtechnik und exzellente Fahreigenschaften."
   },
   { 
     id: "contura", 
@@ -58,6 +65,7 @@ const models = [
     teaser: "Premium-Teilintegrierter mit Luxus",
     length: "7,31 - 7,61 m",
     sleepingPlaces: "4", 
+    description: "Der Contura setzt Maßstäbe im Premium-Segment der Teilintegrierten mit exklusiver Ausstattung und elegantem Design."
   },
   { 
     id: "integra-line-fiat", 
@@ -65,6 +73,7 @@ const models = [
     teaser: "Vollintegrierter mit harmonischer Raumaufteilung",
     length: "7,15 - 7,81 m",
     sleepingPlaces: "4", 
+    description: "Der Integra Line auf Fiat-Basis bietet als Vollintegrierter eine harmonische Raumgestaltung und beeindruckende Panoramasicht."
   },
   { 
     id: "integra-line-gt-mercedes", 
@@ -72,6 +81,7 @@ const models = [
     teaser: "Vollintegrierter mit Mercedes-Technologie",
     length: "7,15 - 7,81 m",
     sleepingPlaces: "4", 
+    description: "Der Integra Line GT kombiniert Mercedes-Qualität mit luxuriösem Wohnkomfort und modernster Fahrzeugtechnik."
   },
   { 
     id: "integra", 
@@ -79,6 +89,7 @@ const models = [
     teaser: "Flaggschiff mit höchstem Luxus",
     length: "7,15 - 8,99 m",
     sleepingPlaces: "4", 
+    description: "Der Integra ist das absolute Flaggschiff der EURA MOBIL-Flotte mit erstklassigem Luxus, innovativsten Technologien und maximaler Ausstattung."
   },
   { 
     id: "xtura", 
@@ -86,6 +97,7 @@ const models = [
     teaser: "Innovatives Crossover-Modell",
     length: "7,41 - 7,61 m",
     sleepingPlaces: "4", 
+    description: "Der Xtura vereint als Crossover-Modell die Vorteile verschiedener Bauformen mit modernster Technologie und innovativem Design."
   },
 ];
 
@@ -99,11 +111,20 @@ const Modellvergleich = () => {
   const [selectedModelA, setSelectedModelA] = useState<string>(modelAFromQuery || "");
   const [selectedModelB, setSelectedModelB] = useState<string>(modelBFromQuery || "");
   const isMobile = useIsMobile();
+  const comparisonRef = useRef<HTMLDivElement>(null);
 
   // Update URL when models change
   useEffect(() => {
     if (selectedModelA && selectedModelB) {
       navigate(`/modellvergleich?modelA=${selectedModelA}&modelB=${selectedModelB}`, { replace: true });
+      
+      // Scroll to comparison section with animation
+      setTimeout(() => {
+        comparisonRef.current?.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 300);
     }
   }, [selectedModelA, selectedModelB, navigate]);
 
@@ -291,7 +312,21 @@ const Modellvergleich = () => {
         )}
       </div>
       <CardContent className="p-3">
-        <h3 className="font-bold text-sm">{model.name}</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="font-bold text-sm">{model.name}</h3>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="rounded-full bg-muted p-1 cursor-help">
+                  <Info className="h-3 w-3 text-muted-foreground" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="top" className="max-w-[250px] text-sm">
+                {model.description}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <p className="text-xs text-muted-foreground mb-2">{model.teaser}</p>
         <div className="flex text-xs justify-between">
           <div>
@@ -346,7 +381,7 @@ const Modellvergleich = () => {
         </div>
 
         {(selectedModelA && selectedModelB) ? (
-          <>
+          <div ref={comparisonRef}>
             {/* Desktop comparison table */}
             <div className="hidden md:block mb-8">
               <Table>
@@ -396,7 +431,7 @@ const Modellvergleich = () => {
                 ))}
               </div>
             </div>
-          </>
+          </div>
         ) : (
           <div className="text-center py-8 md:py-12 bg-gray-50 dark:bg-gray-800 rounded-md mb-8">
             <p className="text-gray-500">
