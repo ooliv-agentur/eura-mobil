@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
-import { Check, Download, Image, MapPin, Settings } from "lucide-react";
+import { Check, Download, MapPin, Settings } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Tabs,
@@ -317,14 +317,9 @@ const ProductDetail = () => {
     startBeraterFlow();
   };
   
-  // PlaceholderImage component for consistent placeholder styling
-  const PlaceholderImage = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-gray-200 relative ${className}`}>
-      <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-        <Image className="w-12 h-12" />
-        <span className="ml-2 font-medium text-gray-500">Platzhalter</span>
-      </div>
-    </AspectRatio>
+  // Simple gray box placeholder component
+  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
   );
   
   // Helper function for layout rendering
@@ -335,7 +330,7 @@ const ProductDetail = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {modelDetails.layouts.map((layout) => (
           <Card key={layout.id} className="overflow-hidden">
-            <PlaceholderImage />
+            <GrayBoxPlaceholder ratio={4/3} />
             <CardContent className="p-4">
               <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
               <div className="grid grid-cols-2 gap-2 text-sm">
@@ -377,12 +372,7 @@ const ProductDetail = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {modelDetails.upholsteryTypes.map((type, index) => (
           <div key={index} className="border rounded-lg overflow-hidden">
-            <div className="bg-gray-200 h-40 flex items-center justify-center">
-              <div className="flex flex-col items-center">
-                <Image className="w-8 h-8 text-gray-400" />
-                <span className="mt-2 text-gray-500">Polster</span>
-              </div>
-            </div>
+            <GrayBoxPlaceholder ratio={4/3} className="h-40" />
             <div className="p-3">
               <h3 className="font-medium">{type}</h3>
             </div>
@@ -458,8 +448,8 @@ const ProductDetail = () => {
       <main className="flex-1 pb-12">
         {/* Hero Section */}
         <div className="relative">
-          <div className="w-full h-72 sm:h-96 bg-gray-200">
-            <PlaceholderImage ratio={21/9} className="h-full" />
+          <div className="w-full h-72 sm:h-96">
+            <GrayBoxPlaceholder ratio={21/9} className="h-full" />
           </div>
         </div>
         
@@ -527,6 +517,17 @@ const ProductDetail = () => {
             </div>
           </section>
           
+          {/* Gallery Section */}
+          <section className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+            </div>
+          </section>
+          
           {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
           {hasLayouts(modelDetails) && (
             <section className="my-10">
@@ -541,7 +542,7 @@ const ProductDetail = () => {
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3">
-                  <PlaceholderImage ratio={16/9} />
+                  <GrayBoxPlaceholder ratio={16/9} />
                 </div>
                 <div className="lg:col-span-2">
                   <div className="bg-white rounded-lg p-4 shadow-sm h-full">
@@ -606,4 +607,3 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
-
