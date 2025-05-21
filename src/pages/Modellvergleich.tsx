@@ -3,14 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { ChevronRight } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -19,18 +12,81 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Card, CardContent } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const models = [
-  { id: "van", name: "Van" },
-  { id: "activa-one", name: "Activa One" },
-  { id: "profila-t-fiat", name: "Profila T - Fiat" },
-  { id: "profila-rs", name: "Profila RS" },
-  { id: "profila-t-mercedes", name: "Profila T - Mercedes" },
-  { id: "contura", name: "Contura" },
-  { id: "integra-line-fiat", name: "Integra Line - Fiat" },
-  { id: "integra-line-gt-mercedes", name: "Integra Line GT - Mercedes" },
-  { id: "integra", name: "Integra" },
-  { id: "xtura", name: "Xtura" },
+  { 
+    id: "van", 
+    name: "Van", 
+    teaser: "Kompakter Van für 2 Personen",
+    length: "5,99 - 6,36 m",
+    sleepingPlaces: "2",
+  },
+  { 
+    id: "activa-one", 
+    name: "Activa One",
+    teaser: "Alkoven-Modell ideal für Familien",
+    length: "6,50 - 7,57 m",
+    sleepingPlaces: "6", 
+  },
+  { 
+    id: "profila-t-fiat", 
+    name: "Profila T - Fiat",
+    teaser: "Teilintegrierter auf Fiat-Basis",
+    length: "6,85 - 7,41 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "profila-rs", 
+    name: "Profila RS",
+    teaser: "Teilintegrierter mit Hubbett",
+    length: "7,09 - 7,41 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "profila-t-mercedes", 
+    name: "Profila T - Mercedes",
+    teaser: "Teilintegrierter auf Mercedes-Basis",
+    length: "6,99 - 7,41 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "contura", 
+    name: "Contura",
+    teaser: "Premium-Teilintegrierter mit Luxus",
+    length: "7,31 - 7,61 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "integra-line-fiat", 
+    name: "Integra Line - Fiat",
+    teaser: "Vollintegrierter mit harmonischer Raumaufteilung",
+    length: "7,15 - 7,81 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "integra-line-gt-mercedes", 
+    name: "Integra Line GT - Mercedes",
+    teaser: "Vollintegrierter mit Mercedes-Technologie",
+    length: "7,15 - 7,81 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "integra", 
+    name: "Integra",
+    teaser: "Flaggschiff mit höchstem Luxus",
+    length: "7,15 - 8,99 m",
+    sleepingPlaces: "4", 
+  },
+  { 
+    id: "xtura", 
+    name: "Xtura",
+    teaser: "Innovatives Crossover-Modell",
+    length: "7,41 - 7,61 m",
+    sleepingPlaces: "4", 
+  },
 ];
 
 const Modellvergleich = () => {
@@ -42,21 +98,7 @@ const Modellvergleich = () => {
 
   const [selectedModelA, setSelectedModelA] = useState<string>(modelAFromQuery || "");
   const [selectedModelB, setSelectedModelB] = useState<string>(modelBFromQuery || "");
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  // Check for mobile viewport
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
+  const isMobile = useIsMobile();
 
   // Update URL when models change
   useEffect(() => {
@@ -209,6 +251,62 @@ const Modellvergleich = () => {
   const modelAName = models.find(m => m.id === selectedModelA)?.name || "Modell A";
   const modelBName = models.find(m => m.id === selectedModelB)?.name || "Modell B";
 
+  // Handle model selection
+  const handleModelSelection = (modelId: string) => {
+    if (selectedModelA === modelId) {
+      // Deselect if already selected
+      setSelectedModelA("");
+    } else if (selectedModelB === modelId) {
+      // Deselect if already selected
+      setSelectedModelB("");
+    } else if (!selectedModelA) {
+      // Select as model A if A is empty
+      setSelectedModelA(modelId);
+    } else if (!selectedModelB) {
+      // Select as model B if B is empty
+      setSelectedModelB(modelId);
+    } else {
+      // Replace model A if both are selected
+      setSelectedModelA(modelId);
+    }
+  };
+
+  // Model card component
+  const ModelCard = ({ model, isSelected, role }: { model: typeof models[0], isSelected: boolean, role: string }) => (
+    <Card 
+      className={`cursor-pointer transition-all hover:shadow-md ${isSelected ? 'ring-2 ring-primary ring-offset-2' : 'border'}`}
+      onClick={() => handleModelSelection(model.id)}
+    >
+      <div className="relative">
+        <AspectRatio ratio={16/9} className="bg-[#E5E7EB]" />
+        {isSelected && (
+          <div className="absolute top-2 right-2 bg-primary text-white rounded-full p-1">
+            <Check className="h-4 w-4" />
+          </div>
+        )}
+        {isSelected && (
+          <div className="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-md">
+            {role}
+          </div>
+        )}
+      </div>
+      <CardContent className="p-3">
+        <h3 className="font-bold text-sm">{model.name}</h3>
+        <p className="text-xs text-muted-foreground mb-2">{model.teaser}</p>
+        <div className="flex text-xs justify-between">
+          <div>
+            <span className="text-muted-foreground">Länge: </span>
+            <span>{model.length}</span>
+          </div>
+          <div>
+            <span className="text-muted-foreground">Schlafpl.: </span>
+            <span>{model.sleepingPlaces}</span>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-6 md:py-8">
@@ -218,37 +316,32 @@ const Modellvergleich = () => {
           Wählen Sie zwei Modelle, um deren Ausstattung, Maße und Besonderheiten direkt miteinander zu vergleichen.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-6">
-          <div>
-            <label className="block mb-1 text-sm">Modell A auswählen</label>
-            <Select value={selectedModelA} onValueChange={setSelectedModelA}>
-              <SelectTrigger className="h-9 md:h-10">
-                <SelectValue placeholder="Bitte wählen" />
-              </SelectTrigger>
-              <SelectContent position="item-aligned">
-                {models.map((model) => (
-                  <SelectItem key={`a-${model.id}`} value={model.id}>
-                    {model.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        <div className="mb-8">
+          <div className="mb-4">
+            <h2 className="text-lg font-medium mb-2">Modellauswahl</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              Klicken Sie auf zwei Modelle, um diese zu vergleichen.
+              {selectedModelA && selectedModelB ? (
+                <span className="block mt-2 text-primary">Beide Modelle ausgewählt</span>
+              ) : (
+                <span className="block mt-2">
+                  {!selectedModelA && !selectedModelB 
+                    ? "Wählen Sie zwei Modelle aus" 
+                    : "Wählen Sie noch ein Modell aus"}
+                </span>
+              )}
+            </p>
           </div>
-
-          <div>
-            <label className="block mb-1 text-sm">Modell B auswählen</label>
-            <Select value={selectedModelB} onValueChange={setSelectedModelB}>
-              <SelectTrigger className="h-9 md:h-10">
-                <SelectValue placeholder="Bitte wählen" />
-              </SelectTrigger>
-              <SelectContent position="item-aligned">
-                {models.map((model) => (
-                  <SelectItem key={`b-${model.id}`} value={model.id}>
-                    {model.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {models.map(model => (
+              <ModelCard 
+                key={model.id} 
+                model={model} 
+                isSelected={selectedModelA === model.id || selectedModelB === model.id}
+                role={selectedModelA === model.id ? "Modell A" : "Modell B"}
+              />
+            ))}
           </div>
         </div>
 
