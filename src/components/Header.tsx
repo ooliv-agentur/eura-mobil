@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Menu, X, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import FullscreenMenu from "./FullscreenMenu";
 import SearchOverlay from "./SearchOverlay";
 import { useOverlay } from "@/context/OverlayContext";
@@ -55,20 +55,30 @@ const Header = () => {
             <Search className="h-6 w-6" />
           </Button>
           
-          {/* Simple hamburger menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
+          {/* Hamburger menu button with animated transition to X */}
+          <button
             onClick={toggleMenu}
             aria-label={isOverlayActive("menu") ? "Menü schließen" : "Menü öffnen"}
-            className="w-12 h-12 rounded-full bg-gray-100"
+            className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center relative"
           >
-            {isOverlayActive("menu") ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </Button>
+            <div className="flex flex-col justify-center items-center w-6 h-6">
+              <span 
+                className={`block w-6 h-0.5 bg-gray-800 rounded-full transition-transform duration-300 ease-in-out ${
+                  isOverlayActive("menu") ? 'absolute rotate-45' : 'mb-1.5'
+                }`} 
+              />
+              <span 
+                className={`block w-6 h-0.5 bg-gray-800 rounded-full transition-opacity duration-300 ease-in-out ${
+                  isOverlayActive("menu") ? 'opacity-0' : ''
+                }`} 
+              />
+              <span 
+                className={`block w-6 h-0.5 bg-gray-800 rounded-full transition-transform duration-300 ease-in-out ${
+                  isOverlayActive("menu") ? 'absolute -rotate-45' : 'mt-1.5'
+                }`} 
+              />
+            </div>
+          </button>
         </div>
         
         {/* Fullscreen Menu Overlay */}
