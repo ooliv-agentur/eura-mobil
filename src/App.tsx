@@ -50,7 +50,19 @@ const App = () => (
               <Route path="/berater" element={<Index />} />
               <Route path="/modelle" element={<ModelleOverview />} />
               <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
+              
+              {/* Explicit routes for main models for better site structure visibility */}
+              <Route path="/modelle/van" element={<ProductDetail />} />
+              <Route path="/modelle/activa-one" element={<ProductDetail />} />
+              <Route path="/modelle/profila-rs" element={<ProductDetail />} />
+              <Route path="/modelle/profila-t" element={<ProductDetail />} />
+              <Route path="/modelle/contura" element={<ProductDetail />} />
+              <Route path="/modelle/integra-line" element={<ProductDetail />} />
+              <Route path="/modelle/integra" element={<ProductDetail />} />
+              
+              {/* Dynamic route as fallback for other models */}
               <Route path="/modelle/:modelId" element={<ProductDetail />} />
+              
               <Route path="/haendler" element={<Haendlersuche />} />
               <Route path="/karriere" element={<Karriere />} />
               <Route path="/unternehmen" element={<Unternehmen />} />
