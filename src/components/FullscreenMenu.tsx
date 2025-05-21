@@ -16,7 +16,7 @@ interface FullscreenMenuProps {
   onClose: () => void;
 }
 
-// Dummy data for model previews
+// Dummy data for model previews - Updated order to match the specified sequence
 const modelPreviewData = {
   "van": {
     title: "Van",
@@ -36,29 +36,11 @@ const modelPreviewData = {
       { label: "Schlafplätze", value: "2 - 4" }
     ]
   },
-  "xtura": {
-    title: "Xtura",
-    text: "Geräumiges Reisemobil mit luxuriöser Ausstattung. Bietet hohen Komfort für anspruchsvolle Reisende auf langen Strecken.",
-    facts: [
-      { label: "Länge", value: "7,4 - 7,9 m" },
-      { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "4" }
-    ]
-  },
   "profila-t-fiat": {
     title: "Profila T – Fiat",
     text: "Teilintegriertes Wohnmobil auf Fiat-Basis mit flexiblem Grundriss. Ideal für komfortable Reisen mit praktischer Ausstattung.",
     facts: [
       { label: "Länge", value: "7,1 - 7,4 m" },
-      { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "2 - 4" }
-    ]
-  },
-  "profila-t-mercedes": {
-    title: "Profila T – Mercedes",
-    text: "Premium-Teilintegrierten auf Mercedes-Basis. Bietet hohen Fahrkomfort und erstklassige Verarbeitung für anspruchsvolle Reisende.",
-    facts: [
-      { label: "Länge", value: "7,2 - 7,5 m" },
       { label: "Sitzplätze", value: "4" },
       { label: "Schlafplätze", value: "2 - 4" }
     ]
@@ -70,6 +52,15 @@ const modelPreviewData = {
       { label: "Länge", value: "7,1 - 7,5 m" },
       { label: "Sitzplätze", value: "4" },
       { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "profila-t-mercedes": {
+    title: "Profila T – Mercedes",
+    text: "Premium-Teilintegrierten auf Mercedes-Basis. Bietet hohen Fahrkomfort und erstklassige Verarbeitung für anspruchsvolle Reisende.",
+    facts: [
+      { label: "Länge", value: "7,2 - 7,5 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
     ]
   },
   "contura": {
@@ -104,6 +95,15 @@ const modelPreviewData = {
     text: "Luxuriöses Flaggschiff mit exklusiver Ausstattung. Bietet maximalen Wohnkomfort für anspruchsvolle Reisende auf langen Strecken.",
     facts: [
       { label: "Länge", value: "7,9 - 8,9 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "xtura": {
+    title: "Xtura",
+    text: "Geräumiges Reisemobil mit luxuriöser Ausstattung. Bietet hohen Komfort für anspruchsvolle Reisende auf langen Strecken.",
+    facts: [
+      { label: "Länge", value: "7,4 - 7,9 m" },
       { label: "Sitzplätze", value: "4" },
       { label: "Schlafplätze", value: "4" }
     ]
@@ -244,8 +244,19 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
     startBeraterFlow(); // Start the berater with default options
   };
 
-  // Array of all model IDs for easy iteration
-  const modelIds = Object.keys(modelPreviewData);
+  // Array of all model IDs in the specified order
+  const modelIds = [
+    "van",
+    "activa-one",
+    "profila-t-fiat",
+    "profila-rs",
+    "profila-t-mercedes",
+    "contura",
+    "integra-line-fiat",
+    "integra-line-gt-mercedes",
+    "integra",
+    "xtura"
+  ];
 
   return (
     <div className="fixed inset-0 z-[9999] bg-white overflow-y-auto">
