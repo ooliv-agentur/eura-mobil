@@ -154,6 +154,7 @@ const Home = () => {
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const [activeFilter, setActiveFilter] = useState("alle");
   const [isTypesExpanded, setIsTypesExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState("unternehmen");
   
   // Embla carousel hook for the model series carousel
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -452,6 +453,102 @@ const Home = () => {
 
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
+
+        {/* New Tabbed Section: About EURA MOBIL */}
+        <section className="py-16 px-4 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">Entdecken Sie EURA MOBIL</h2>
+            
+            <Tabs 
+              defaultValue="unternehmen" 
+              className="w-full" 
+              onValueChange={(value) => setActiveTab(value)}
+            >
+              <div className="flex justify-center mb-6">
+                <TabsList className="grid w-full max-w-md grid-cols-3">
+                  <TabsTrigger value="unternehmen">Über EURA MOBIL</TabsTrigger>
+                  <TabsTrigger value="qualitaet">Qualität & Vorteile</TabsTrigger>
+                  <TabsTrigger value="werksfuehrung">Werksführung</TabsTrigger>
+                </TabsList>
+              </div>
+              
+              <TabsContent value="unternehmen" className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-gray-600">
+                      Seit über 60 Jahren steht EURA MOBIL für höchste Qualität, deutsche Ingenieurskunst und Innovation im Wohnmobilbau. 
+                      Vom Ursprung 1959 bis zum heutigen Produktionsstandort in Sprendlingen prägen Leidenschaft und Präzision jedes unserer Fahrzeuge.
+                    </p>
+                    
+                    <div className="mt-4">
+                      <Button asChild variant="outline" className="px-6">
+                        <Link to="/unternehmen">Mehr erfahren</Link>
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="order-first md:order-last mb-6 md:mb-0">
+                    <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full overflow-hidden">
+                      <div className="w-full h-full flex items-center justify-center text-gray-500">
+                        Marke Image
+                      </div>
+                    </AspectRatio>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="qualitaet" className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-gray-600">
+                      Ob Sealed Structure, winterfeste Isolierung oder hochwertige Möbel: Unsere Fahrzeuge verbinden modernste Technologie mit jahrzehntelanger Erfahrung. 
+                      Entdecken Sie, was ein EURA MOBIL besonders macht – in jeder Fahrzeugklasse.
+                    </p>
+                    
+                    <div className="mt-4">
+                      <Button asChild variant="outline" className="px-6">
+                        <Link to="/qualitaet">Mehr erfahren</Link>
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="order-first md:order-last mb-6 md:mb-0">
+                    <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full overflow-hidden">
+                      <div className="w-full h-full flex items-center justify-center text-gray-500">
+                        Qualität Image
+                      </div>
+                    </AspectRatio>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="werksfuehrung" className="mt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-gray-600">
+                      Begleiten Sie uns auf einen Rundgang durch unsere moderne Fertigung in Sprendlingen. 
+                      Erleben Sie, wie aus hochwertigen Komponenten und handwerklicher Präzision eines der besten Wohnmobile Europas entsteht.
+                    </p>
+                    
+                    <div className="mt-4">
+                      <Button asChild variant="outline" className="px-6">
+                        <Link to="/werksfuehrung">Mehr erfahren</Link>
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="order-first md:order-last mb-6 md:mb-0">
+                    <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full overflow-hidden">
+                      <div className="w-full h-full flex items-center justify-center text-gray-500">
+                        Werk Image
+                      </div>
+                    </AspectRatio>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </section>
 
         {/* Section 6: Händlersuche - Updated with static map placeholder */}
         <section className="py-16 px-4">

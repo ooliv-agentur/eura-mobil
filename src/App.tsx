@@ -33,6 +33,7 @@ import Modellvergleich from "./pages/Modellvergleich";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import AGB from "./pages/AGB";
+import Werksfuehrung from "./pages/Werksfuehrung";
 
 const queryClient = new QueryClient();
 
@@ -69,6 +70,7 @@ const App = () => (
               <Route path="/haendler" element={<Haendlersuche />} />
               <Route path="/karriere" element={<Karriere />} />
               <Route path="/unternehmen" element={<Unternehmen />} />
+              <Route path="/werksfuehrung" element={<Werksfuehrung />} />
               <Route path="/downloads" element={<Downloads />} />
               <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
               <Route path="/konfigurator" element={<Konfigurator />} />
