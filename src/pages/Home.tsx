@@ -662,40 +662,6 @@ const Home = () => {
             </div>
           </div>
         </section>
-
-        {/* New Section: About EURA MOBIL */}
-        <section className="py-10 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8">Über EURA MOBIL</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-              {/* Company Info Text Column */}
-              <div className="flex flex-col gap-4">
-                <p className="text-gray-600">
-                  EURA MOBIL, gegründet 1959, steht seit über 60 Jahren für hochwertige Wohnmobile mit deutschem Ingenieursgeist. 
-                  Als Teil der renommierten Trigano Group kombinieren wir internationale Expertise mit lokaler Handwerkskunst.
-                </p>
-                <p className="text-gray-600">
-                  Unsere Produktion in Deutschland gewährleistet höchste Qualitätsstandards bei allen unseren Wohnmobilen – 
-                  von komfortablen Alkoven über flexible Teilintegrierte bis hin zu luxuriösen Integrierten Modellen.
-                </p>
-                
-                <div className="mt-4">
-                  <Button asChild variant="outline" className="px-6">
-                    <Link to="/unternehmen">Mehr erfahren</Link>
-                  </Button>
-                </div>
-              </div>
-              
-              {/* Grayscale Video Thumbnail Column */}
-              <div className="order-first md:order-last mb-6 md:mb-0">
-                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full overflow-hidden">
-                  <div className="w-full h-full bg-[url('/euramobil-thumbnail-grayscale.jpg')] bg-cover bg-center filter grayscale"></div>
-                </AspectRatio>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
     </Layout>
   );
