@@ -18,7 +18,6 @@ import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
 import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
-import ActivaOneDetail from "./pages/ActivaOneDetail";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
 import SealedStructure from "./pages/quality/SealedStructure";
@@ -52,7 +51,6 @@ const App = () => (
               <Route path="/modelle" element={<ModelleOverview />} />
               <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
               <Route path="/modelle/:modelId" element={<ProductDetail />} />
-              <Route path="/modelle/activa-one" element={<ActivaOneDetail />} />
               <Route path="/haendler" element={<Haendlersuche />} />
               <Route path="/karriere" element={<Karriere />} />
               <Route path="/unternehmen" element={<Unternehmen />} />

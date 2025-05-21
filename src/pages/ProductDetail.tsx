@@ -192,7 +192,7 @@ const modelsData = {
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
-    intro: "Kompaktes Einsteigermodell mit cleverer Raumnutzung. Ideal für Paare und kleine Familien.",
+    intro: "Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, beginnt die Entspannung sofort mit der Abfahrt.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -201,25 +201,107 @@ const modelsData = {
       "/placeholder.svg"
     ],
     technicalData: {
-      länge: "5,99 m",
-      breite: "2,20 m",
-      höhe: "2,75 m",
-      gewicht: "2.850 kg",
-      schlafplätze: "2-4",
-      sitzplätze: "4"
+      länge: "5,99 – 7,57 m",
+      sitzplätze: "4-6",
+      schlafplätze: "4-6"
     },
     highlights: [
-      "Kompakte Außenmaße für hohe Wendigkeit",
-      "Großzügiger Stauraum in der Heckgarage",
-      "Vollausgestattete Küche mit 3-Flammen-Herd",
-      "Separate Duschkabine im Badezimmer",
-      "Großes Hubbett im Heck"
+      "Ausziehbares Doppelstockbett (AO 690 VB)",
+      "Maximaler Stauraum dank 37 cm hohem Doppelboden",
+      "Isolierter und beheizter Alkoven",
+      "Praktische Familien-Grundrisse",
+      "Wassertanks im isolierten und beheizten Doppelboden",
+      "Jetzt mit 2× Isofix in Fahrtrichtung (außer HS-Grundrisse)",
+      "Beach Home Interieur optional verfügbar"
     ],
-    downloadItems: [
-      { name: "Technische Daten", type: "PDF", url: "#" },
-      { name: "Preisliste", type: "PDF", url: "#" },
-      { name: "360° Tour", type: "Web", url: "#" }
-    ]
+    layouts: [
+      {
+        id: "ao-570-hs",
+        name: "AO 570 HS",
+        image: "/placeholder.svg",
+        length: "5,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "ao-630-ls",
+        name: "AO 630 LS",
+        image: "/placeholder.svg",
+        length: "6,44 m",
+        sleepingPlaces: "5"
+      },
+      {
+        id: "ao-650-hs",
+        name: "AO 650 HS",
+        image: "/placeholder.svg",
+        length: "6,50 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "ao-690-hb",
+        name: "AO 690 HB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "6"
+      },
+      {
+        id: "ao-690-vb",
+        name: "AO 690 VB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "6"
+      }
+    ],
+    interior: [
+      { 
+        name: "Deko-Pack \"Beach Home\"", 
+        description: "Farbige Wandverkleidung, dekorative Segeltaue, zusätzliche Alkovenverblendung mit Stautaschen" 
+      },
+      { 
+        name: "Atmosphäre", 
+        description: "Wertige, frische Premium-Atmosphäre" 
+      }
+    ],
+    upholsteryTypes: ["Polster Milano", "Polster Dara", "Deko Lasca"],
+    equipment: {
+      chassis: [
+        "140 PS Motor, Euro 6d-Final",
+        "CCS Breitspur-Tiefrahmen (1.980 mm)",
+        "ESP inkl. Traction+, Hill-Descent-Control",
+        "16\" Räder, Tagfahrlicht, Tempomat"
+      ],
+      body: [
+        "Leichtbaudoppelboden, isoliert & beheizt",
+        "Wände/Dach/Boden: 30/32/38mm",
+        "Beheizter Alkoven mit klappbarem Boden",
+        "2 Fenster + Sicherheitsnetz im Alkoven",
+        "Karosserie GFK + Aluminium, winterfest EN 1646"
+      ],
+      livingArea: [
+        "Möbeldekor Wildeiche & Strandweiß",
+        "Oberschränke mit Geräuschdämpfung",
+        "7-Zonen-Kaltschaummatratzen",
+        "Fußboden mit Trittschalldämpfung"
+      ],
+      kitchen: [
+        "3-Flamm Kocher mit Zündung",
+        "Kühlschrank 142 Liter",
+        "Wasserhahn mit Anti-Tropf-Auslass"
+      ],
+      bathroom: [
+        "Ergonomisch optimierte Mittelwaschräume",
+        "Duschkabine, Spiegelschrank, Cassetten-WC"
+      ],
+      installation: [
+        "143–150 l Frischwasser, 150 l Abwasser (beheizt, isoliert)",
+        "Schnellverschlussventile, Keramikkartuschen"
+      ],
+      electrical: [
+        "80 Ah Gel-Batterie",
+        "LED-Spots, 2× 230 V, 1× 12 V, 1× USB",
+        "Ladegerät 21 A",
+        "Haushaltslogik Lichtsystem"
+      ]
+    }
   }
 };
 
@@ -228,12 +310,12 @@ const equipmentTabs = {
   chassis: "Chassis",
   body: "Aufbau",
   driversCabin: "Fahrerhaus",
-  livingArea: "Wohnraum",
+  livingArea: "Wohnwelt",
   kitchen: "Küche",
-  bathroom: "Bad",
+  bathroom: "Waschraum",
   sleeping: "Schlafbereich",
-  installation: "Installation",
-  electrical: "Elektroversorgung"
+  installation: "Wasserinstallation",
+  electrical: "Elektroinstallation"
 };
 
 // Define more specific types for our different model types
