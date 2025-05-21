@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { useOverlay } from "@/context/OverlayContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -152,6 +154,64 @@ const ModelPreviewHero = ({
   );
 };
 
+// New Mobile Model Item component with expanding preview
+const MobileModelItem = ({ 
+  modelId, 
+  isActive, 
+  onSelect, 
+  onClose 
+}: { 
+  modelId: string; 
+  isActive: boolean; 
+  onSelect: (id: string) => void; 
+  onClose: () => void;
+}) => {
+  const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  
+  return (
+    <div className="border-b border-gray-100 last:border-b-0">
+      <button 
+        className={cn(
+          "flex items-center w-full text-left py-3 px-2 transition-colors",
+          isActive ? "text-blue-600" : "text-gray-800"
+        )}
+        onClick={() => onSelect(modelId)}
+      >
+        {/* Small dummy image with consistent size */}
+        <div className="bg-gray-200 w-16 h-10 mr-3 flex-shrink-0 rounded-sm"></div>
+        <span className="font-medium flex-grow">{model.title}</span>
+        {isActive ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+      </button>
+      
+      {/* Expandable preview section */}
+      {isActive && (
+        <div className="px-2 pb-4 animate-fade-in">
+          <AspectRatio ratio={16/9} className="mb-3 bg-gray-200 rounded-md overflow-hidden" />
+          
+          <p className="text-sm text-gray-600 mb-3">
+            {model.text}
+          </p>
+          
+          <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
+            {model.facts.map((fact, index) => (
+              <div key={index} className="flex flex-col">
+                <span className="font-medium text-gray-900 mb-0.5">{fact.label}</span>
+                <span className="text-gray-600">{fact.value}</span>
+              </div>
+            ))}
+          </div>
+          
+          <Button variant="outline" className="w-full text-sm" asChild>
+            <Link to={`/modelle/${modelId}`} onClick={onClose}>
+              Mehr erfahren
+            </Link>
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const location = useLocation();
@@ -208,10 +268,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           
           {/* Card-like wrapper with border */}
           <div className="rounded-md border border-gray-200 p-4 bg-gray-50/50">
-            {/* 12-column grid for model list and preview */}
-            <div className="grid grid-cols-12 gap-6">
+            {/* Desktop: 12-column grid for model list and preview */}
+            <div className="hidden md:grid grid-cols-12 gap-6">
               {/* Left side: Model list (4 columns) */}
-              <div className="col-span-12 md:col-span-4">
+              <div className="col-span-4">
                 <ul className="space-y-2">
                   {modelIds.map(modelId => {
                     const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
@@ -235,9 +295,22 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </div>
               
               {/* Right side: Preview (8 columns) */}
-              <div className="col-span-12 md:col-span-8">
+              <div className="col-span-8">
                 <ModelPreviewHero modelId={activeModel} onClose={onClose} />
               </div>
+            </div>
+            
+            {/* Mobile: Accordion style list with inline previews */}
+            <div className="md:hidden">
+              {modelIds.map(modelId => (
+                <MobileModelItem 
+                  key={modelId}
+                  modelId={modelId}
+                  isActive={activeModel === modelId}
+                  onSelect={handleModelSelect}
+                  onClose={onClose}
+                />
+              ))}
             </div>
             
             {/* CTA Buttons in 3-column grid with proper spacing */}
