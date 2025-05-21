@@ -185,13 +185,17 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
           <Link to="/" onClick={onClose} className="font-bold text-xl">
             EURA MOBIL
           </Link>
-          <button 
-            onClick={onClose}
-            className="p-2" 
-            aria-label="Menü schließen"
-          >
-            <X className="h-6 w-6" />
-          </button>
+          
+          {/* Repositioned close button with exact same styles as burger button */}
+          <div className="relative">
+            <button 
+              onClick={onClose}
+              aria-label="Menü schließen"
+              className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center relative z-[60]"
+            >
+              <X className="h-6 w-6 text-gray-800" />
+            </button>
+          </div>
         </div>
       </div>
 
