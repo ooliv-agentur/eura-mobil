@@ -455,122 +455,62 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* New Vertical Tabbed Section: About EURA MOBIL - UPDATED */}
+        {/* New Stacked Horizontal Content Boxes Section: About EURA MOBIL - UPDATED */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">Entdecken Sie EURA MOBIL</h2>
+            <h2 className="text-3xl font-bold mb-10 text-center">Entdecken Sie EURA MOBIL</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {/* Vertical tabs on the left - 1/4 width on desktop, full width stacked on mobile */}
-              <div className="flex flex-row md:flex-col overflow-x-auto md:overflow-visible pb-4 md:pb-0">
-                <button 
-                  onClick={() => setActiveVerticalTab("unternehmen")}
-                  className={`px-4 py-3 text-left whitespace-nowrap md:whitespace-normal rounded-md transition-colors mb-0 md:mb-2 mr-2 md:mr-0 min-w-[140px] md:min-w-0 ${
-                    activeVerticalTab === "unternehmen" 
-                      ? "bg-primary text-primary-foreground" 
-                      : "hover:bg-muted/80"
-                  }`}
-                >
-                  Über EURA MOBIL
-                </button>
-                <button 
-                  onClick={() => setActiveVerticalTab("qualitaet")}
-                  className={`px-4 py-3 text-left whitespace-nowrap md:whitespace-normal rounded-md transition-colors mb-0 md:mb-2 mr-2 md:mr-0 min-w-[140px] md:min-w-0 ${
-                    activeVerticalTab === "qualitaet" 
-                      ? "bg-primary text-primary-foreground" 
-                      : "hover:bg-muted/80"
-                  }`}
-                >
-                  Qualität & Vorteile
-                </button>
-                <button 
-                  onClick={() => setActiveVerticalTab("werksfuehrung")}
-                  className={`px-4 py-3 text-left whitespace-nowrap md:whitespace-normal rounded-md transition-colors mb-0 md:mb-2 mr-2 md:mr-0 min-w-[140px] md:min-w-0 ${
-                    activeVerticalTab === "werksfuehrung" 
-                      ? "bg-primary text-primary-foreground" 
-                      : "hover:bg-muted/80"
-                  }`}
-                >
-                  Werksführung
-                </button>
+            <div className="space-y-8">
+              {/* Block 1: Über EURA MOBIL */}
+              <div className="bg-white p-6 rounded-md shadow-sm">
+                <h3 className="text-xl font-bold mb-4">Über EURA MOBIL</h3>
+                <div className="text-gray-600 space-y-2 mb-6">
+                  <p>
+                    Seit über 60 Jahren steht EURA MOBIL für höchste Qualität, deutsche Ingenieurskunst und Innovation im Wohnmobilbau.
+                    Unsere Modelle entstehen in Sprendlingen und verbinden langlebige Bauweise mit modernem Komfort.
+                    Als Teil der Trigano-Gruppe setzen wir Maßstäbe in Funktionalität und Design.
+                  </p>
+                </div>
+                
+                <Button asChild variant="outline" className="px-6 mb-6">
+                  <Link to="/ueber-eura-mobil">Mehr erfahren</Link>
+                </Button>
+                
+                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full" />
               </div>
               
-              {/* Content area on the right - 3/4 width on desktop */}
-              <div className="md:col-span-3">
-                {/* Tab 1: Über EURA MOBIL */}
-                {activeVerticalTab === "unternehmen" && (
-                  <div className="space-y-4">
-                    <div className="text-gray-600 space-y-2">
-                      <p>
-                        Seit über 60 Jahren steht EURA MOBIL für höchste Qualität, deutsche Ingenieurskunst und Innovation im Wohnmobilbau.
-                      </p>
-                      <p>
-                        Unsere Modelle entstehen in Sprendlingen (Rheinland-Pfalz) und verbinden langlebige Bauweise mit zeitgemäßem Komfort.
-                      </p>
-                      <p>
-                        Als Teil der europäischen Trigano-Gruppe setzen wir Maßstäbe in Funktionalität, Design und nachhaltiger Fertigung.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <Button asChild variant="outline" className="px-6 mt-4">
-                        <Link to="/unternehmen">Mehr erfahren</Link>
-                      </Button>
-                    </div>
-                    
-                    <div className="mt-4">
-                      <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-3/4 mx-0" />
-                    </div>
-                  </div>
-                )}
+              {/* Block 2: Qualität & Vorteile */}
+              <div className="bg-white p-6 rounded-md shadow-sm">
+                <h3 className="text-xl font-bold mb-4">Qualität & Vorteile</h3>
+                <div className="text-gray-600 space-y-2 mb-6">
+                  <p>
+                    Ob Sealed Structure, winterfeste Isolation oder langlebige Materialien – EURA MOBIL setzt konsequent auf geprüfte Qualität.
+                    Unsere Vorteile zeigen sich im Detail und begleiten Sie auf jeder Reise.
+                  </p>
+                </div>
                 
-                {/* Tab 2: Qualität & Vorteile */}
-                {activeVerticalTab === "qualitaet" && (
-                  <div className="space-y-4">
-                    <div className="text-gray-600 space-y-2">
-                      <p>
-                        Ob Sealed Structure, winterfeste Isolation oder hochwertige Möbel: Unsere Fahrzeuge verbinden modernste Technologie mit jahrzehntelanger Erfahrung.
-                      </p>
-                      <p>
-                        Jede Fahrzeugklasse profitiert von durchdachten Details, nachhaltiger Bauweise und maximalem Wohnkomfort auf Reisen.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <Button asChild variant="outline" className="px-6 mt-4">
-                        <Link to="/qualitaet">Mehr erfahren</Link>
-                      </Button>
-                    </div>
-                    
-                    <div className="mt-4">
-                      <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-3/4 mx-0" />
-                    </div>
-                  </div>
-                )}
+                <Button asChild variant="outline" className="px-6 mb-6">
+                  <Link to="/qualitaet">Mehr erfahren</Link>
+                </Button>
                 
-                {/* Tab 3: Werksführung */}
-                {activeVerticalTab === "werksfuehrung" && (
-                  <div className="space-y-4">
-                    <div className="text-gray-600 space-y-2">
-                      <p>
-                        Begleiten Sie uns auf einen Rundgang durch unsere moderne Fertigung in Sprendlingen.
-                      </p>
-                      <p>
-                        Erleben Sie, wie aus hochwertigen Komponenten und handwerklicher Präzision eines der besten Wohnmobile Europas entsteht – Made in Germany.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <Button asChild variant="outline" className="px-6 mt-4">
-                        <Link to="/werksfuehrung">Mehr erfahren</Link>
-                      </Button>
-                    </div>
-                    
-                    <div className="mt-4">
-                      <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-3/4 mx-0" />
-                    </div>
-                  </div>
-                )}
+                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full" />
+              </div>
+              
+              {/* Block 3: Werksführung */}
+              <div className="bg-white p-6 rounded-md shadow-sm">
+                <h3 className="text-xl font-bold mb-4">Werksführung</h3>
+                <div className="text-gray-600 space-y-2 mb-6">
+                  <p>
+                    Begleiten Sie uns auf einen Rundgang durch unsere moderne Fertigung in Sprendlingen.
+                    Erleben Sie, wie aus hochwertigen Komponenten und handwerklicher Präzision eines der besten Wohnmobile Europas entsteht.
+                  </p>
+                </div>
+                
+                <Button asChild variant="outline" className="px-6 mb-6">
+                  <Link to="/werksfuehrung">Mehr erfahren</Link>
+                </Button>
+                
+                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full" />
               </div>
             </div>
           </div>
