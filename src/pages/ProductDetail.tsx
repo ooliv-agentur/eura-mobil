@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "@/components/Header";
@@ -120,7 +121,7 @@ const modelsData = {
         "Polster in Eco-Leder / Stoff-Kombination",
         "Doppelboden-Staufächer (1 Auszug, 1 Klappfach, 1 Bodenfach)",
         "Hinterlüftete Oberschränke mit Ambientebeleuchtung",
-        "Möbeldekor „Beach Home“",
+        "Möbeldekor „Beach Home"",
         "Kleiderschrank mit ausziehbarer Stange",
         "Flauschbespannung an Decke, textile Wandbespannung",
         "Eco-Leder-Blenden an Fensterrahmen & Dachhauben",
@@ -234,6 +235,38 @@ const equipmentTabs = {
   electrical: "Elektroversorgung"
 };
 
+// Type definition for our model data structure
+type ModelData = {
+  id: string;
+  name: string;
+  intro: string;
+  heroImage: string;
+  galleryImages: string[];
+  technicalData: Record<string, string>;
+  highlights: string[];
+  layouts?: Array<{
+    id: string;
+    name: string;
+    image: string;
+    length: string;
+    sleepingPlaces: string;
+  }>;
+  interior?: Array<{
+    name: string;
+    description: string;
+  }>;
+  upholsteryTypes?: string[];
+  equipment?: Record<string, string[]>;
+  downloadItems?: Array<{
+    name: string;
+    type: string;
+    url: string;
+  }>;
+}
+
+// Type for our models data object
+type ModelsDataType = Record<string, ModelData>;
+
 const ProductDetail = () => {
   const { modelId } = useParams();
   const isMobile = useIsMobile();
@@ -241,7 +274,7 @@ const ProductDetail = () => {
   
   // Default to van if no model ID or model not found
   const modelDetails = modelId && modelId in modelsData 
-    ? modelsData[modelId] 
+    ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
   
   const handleKonfiguratorClick = () => {
@@ -336,7 +369,7 @@ const ProductDetail = () => {
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modelDetails.layouts.map((layout) => (
+              {modelDetails.layouts && modelDetails.layouts.map((layout) => (
                 <Card key={layout.id} className="overflow-hidden">
                   <AspectRatio ratio={16/9}>
                     <img 
@@ -377,7 +410,7 @@ const ProductDetail = () => {
               <div className="lg:col-span-2">
                 <div className="bg-white rounded-lg p-4 shadow-sm h-full">
                   <ul className="space-y-4 divide-y">
-                    {modelDetails.interior.map((item, index) => (
+                    {modelDetails.interior && modelDetails.interior.map((item, index) => (
                       <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
                         <div className="font-medium">{item.name}</div>
                         <div className="text-gray-600">{item.description}</div>
@@ -393,7 +426,7 @@ const ProductDetail = () => {
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {modelDetails.upholsteryTypes.map((type, index) => (
+              {modelDetails.upholsteryTypes && modelDetails.upholsteryTypes.map((type, index) => (
                 <div key={index} className="border rounded-lg overflow-hidden">
                   <div className="bg-gray-200 h-40"></div>
                   <div className="p-3">
@@ -410,10 +443,10 @@ const ProductDetail = () => {
             
             {isMobile ? (
               <Accordion type="single" collapsible className="w-full">
-                {Object.entries(modelDetails.equipment).map(([key, items]) => (
+                {modelDetails.equipment && Object.entries(modelDetails.equipment).map(([key, items]) => (
                   <AccordionItem key={key} value={key}>
                     <AccordionTrigger className="py-4 px-0">
-                      <span className="text-lg">{equipmentTabs[key]}</span>
+                      <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
                     </AccordionTrigger>
                     <AccordionContent>
                       <ul className="space-y-2 pl-1">
@@ -437,7 +470,7 @@ const ProductDetail = () => {
                     </TabsTrigger>
                   ))}
                 </TabsList>
-                {Object.entries(modelDetails.equipment).map(([key, items]) => (
+                {modelDetails.equipment && Object.entries(modelDetails.equipment).map(([key, items]) => (
                   <TabsContent key={key} value={key} className="mt-4">
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
                       {items.map((item, i) => (
