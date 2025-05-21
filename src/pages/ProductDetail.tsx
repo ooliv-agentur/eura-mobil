@@ -285,6 +285,16 @@ const ProductDetail = () => {
     startBeraterFlow();
   };
   
+  // Helper function to check if a section should be displayed
+  const hasSection = (sectionName: keyof ModelData, checkLength: boolean = true): boolean => {
+    if (!(sectionName in modelDetails)) return false;
+    const section = modelDetails[sectionName];
+    if (checkLength && Array.isArray(section)) {
+      return section.length > 0;
+    }
+    return !!section;
+  };
+  
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -366,11 +376,11 @@ const ProductDetail = () => {
           </section>
           
           {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
-          {modelDetails.layouts && modelDetails.layouts.length > 0 && (
+          {hasSection('layouts') && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {modelDetails.layouts.map((layout) => (
+                {modelDetails.layouts?.map((layout) => (
                   <Card key={layout.id} className="overflow-hidden">
                     <AspectRatio ratio={16/9}>
                       <img 
@@ -397,7 +407,7 @@ const ProductDetail = () => {
           )}
           
           {/* Innenraum (Interior) Section - Only shown if interior exists */}
-          {modelDetails.interior && modelDetails.interior.length > 0 && (
+          {hasSection('interior') && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -413,7 +423,7 @@ const ProductDetail = () => {
                 <div className="lg:col-span-2">
                   <div className="bg-white rounded-lg p-4 shadow-sm h-full">
                     <ul className="space-y-4 divide-y">
-                      {modelDetails.interior.map((item, index) => (
+                      {modelDetails.interior?.map((item, index) => (
                         <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
                           <div className="font-medium">{item.name}</div>
                           <div className="text-gray-600">{item.description}</div>
@@ -427,11 +437,11 @@ const ProductDetail = () => {
           )}
           
           {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
-          {modelDetails.upholsteryTypes && modelDetails.upholsteryTypes.length > 0 && (
+          {hasSection('upholsteryTypes') && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {modelDetails.upholsteryTypes.map((type, index) => (
+                {modelDetails.upholsteryTypes?.map((type, index) => (
                   <div key={index} className="border rounded-lg overflow-hidden">
                     <div className="bg-gray-200 h-40"></div>
                     <div className="p-3">
@@ -444,13 +454,13 @@ const ProductDetail = () => {
           )}
           
           {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
-          {modelDetails.equipment && Object.keys(modelDetails.equipment).length > 0 && (
+          {hasSection('equipment') && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
               
               {isMobile ? (
                 <Accordion type="single" collapsible className="w-full">
-                  {Object.entries(modelDetails.equipment).map(([key, items]) => (
+                  {Object.entries(modelDetails.equipment || {}).map(([key, items]) => (
                     <AccordionItem key={key} value={key}>
                       <AccordionTrigger className="py-4 px-0">
                         <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
@@ -477,7 +487,7 @@ const ProductDetail = () => {
                       </TabsTrigger>
                     ))}
                   </TabsList>
-                  {Object.entries(modelDetails.equipment).map(([key, items]) => (
+                  {Object.entries(modelDetails.equipment || {}).map(([key, items]) => (
                     <TabsContent key={key} value={key} className="mt-4">
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
                         {items.map((item, i) => (
