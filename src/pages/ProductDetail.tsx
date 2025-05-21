@@ -236,8 +236,8 @@ const equipmentTabs = {
   electrical: "Elektroversorgung"
 };
 
-// Type definition for our model data structure
-type ModelData = {
+// Define more specific types for our different model types
+type BaseModelData = {
   id: string;
   name: string;
   intro: string;
@@ -245,28 +245,59 @@ type ModelData = {
   galleryImages: string[];
   technicalData: Record<string, string>;
   highlights: string[];
-  layouts?: Array<{
+};
+
+// Full model with all features
+type FullModelData = BaseModelData & {
+  layouts: Array<{
     id: string;
     name: string;
     image: string;
     length: string;
     sleepingPlaces: string;
   }>;
-  interior?: Array<{
+  interior: Array<{
     name: string;
     description: string;
   }>;
-  upholsteryTypes?: string[];
-  equipment?: Record<string, string[]>;
-  downloadItems?: Array<{
+  upholsteryTypes: string[];
+  equipment: Record<string, string[]>;
+};
+
+// Download-only model with download items
+type DownloadModelData = BaseModelData & {
+  downloadItems: Array<{
     name: string;
     type: string;
     url: string;
   }>;
-}
+};
+
+// Union type for all possible model types
+type ModelData = FullModelData | DownloadModelData;
 
 // Type for our models data object
 type ModelsDataType = Record<string, ModelData>;
+
+// Type guard to check if a model has layouts
+function hasLayouts(model: ModelData): model is FullModelData {
+  return 'layouts' in model && Array.isArray(model.layouts);
+}
+
+// Type guard to check if a model has interior details
+function hasInterior(model: ModelData): model is FullModelData {
+  return 'interior' in model && Array.isArray(model.interior);
+}
+
+// Type guard to check if a model has upholstery types
+function hasUpholstery(model: ModelData): model is FullModelData {
+  return 'upholsteryTypes' in model && Array.isArray(model.upholsteryTypes);
+}
+
+// Type guard to check if a model has equipment details
+function hasEquipment(model: ModelData): model is FullModelData {
+  return 'equipment' in model && model.equipment !== undefined;
+}
 
 const ProductDetail = () => {
   const { modelId } = useParams();
@@ -286,24 +317,6 @@ const ProductDetail = () => {
     startBeraterFlow();
   };
   
-  // Helper function to check if a section should be displayed
-  const hasSection = (sectionName: keyof ModelData): boolean => {
-    if (!(sectionName in modelDetails)) return false;
-    
-    const section = modelDetails[sectionName];
-    if (!section) return false;
-    
-    if (Array.isArray(section)) {
-      return section.length > 0;
-    }
-    
-    if (typeof section === 'object') {
-      return Object.keys(section).length > 0;
-    }
-    
-    return !!section;
-  };
-  
   // PlaceholderImage component for consistent placeholder styling
   const PlaceholderImage = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
     <AspectRatio ratio={ratio} className={`bg-gray-200 relative ${className}`}>
@@ -314,9 +327,9 @@ const ProductDetail = () => {
     </AspectRatio>
   );
   
-  // Helper function for type-safe section rendering
+  // Helper function for layout rendering
   const renderLayouts = () => {
-    if (!modelDetails.layouts) return null;
+    if (!hasLayouts(modelDetails)) return null;
     
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -340,8 +353,9 @@ const ProductDetail = () => {
     );
   };
   
+  // Helper function for interior rendering
   const renderInterior = () => {
-    if (!modelDetails.interior) return null;
+    if (!hasInterior(modelDetails)) return null;
     
     return (
       <ul className="space-y-4 divide-y">
@@ -355,8 +369,9 @@ const ProductDetail = () => {
     );
   };
   
+  // Helper function for upholstery rendering
   const renderUpholstery = () => {
-    if (!modelDetails.upholsteryTypes) return null;
+    if (!hasUpholstery(modelDetails)) return null;
     
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -377,8 +392,9 @@ const ProductDetail = () => {
     );
   };
   
+  // Helper function for equipment rendering on mobile
   const renderEquipmentMobile = () => {
-    if (!modelDetails.equipment) return null;
+    if (!hasEquipment(modelDetails)) return null;
     
     return (
       <Accordion type="single" collapsible className="w-full">
@@ -403,8 +419,10 @@ const ProductDetail = () => {
     );
   };
   
+  // Helper function for equipment rendering on desktop
   const renderEquipmentDesktop = () => {
-    if (!modelDetails.equipment) return null;
+    if (!hasEquipment(modelDetails)) return null;
+    
     const equipmentKeys = Object.keys(modelDetails.equipment);
     if (equipmentKeys.length === 0) return null;
     
@@ -510,7 +528,7 @@ const ProductDetail = () => {
           </section>
           
           {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
-          {hasSection('layouts') && (
+          {hasLayouts(modelDetails) && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
               {renderLayouts()}
@@ -518,7 +536,7 @@ const ProductDetail = () => {
           )}
           
           {/* Innenraum (Interior) Section - Only shown if interior exists */}
-          {hasSection('interior') && (
+          {hasInterior(modelDetails) && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
@@ -535,7 +553,7 @@ const ProductDetail = () => {
           )}
           
           {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
-          {hasSection('upholsteryTypes') && (
+          {hasUpholstery(modelDetails) && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
               {renderUpholstery()}
@@ -543,7 +561,7 @@ const ProductDetail = () => {
           )}
           
           {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
-          {hasSection('equipment') && (
+          {hasEquipment(modelDetails) && (
             <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
               {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
@@ -588,3 +606,4 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
