@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "@/components/Header";
@@ -364,91 +365,121 @@ const ProductDetail = () => {
             </div>
           </section>
           
-          {/* Grundrisse (Layouts) Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modelDetails.layouts && modelDetails.layouts.map((layout) => (
-                <Card key={layout.id} className="overflow-hidden">
+          {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
+          {modelDetails.layouts && modelDetails.layouts.length > 0 && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {modelDetails.layouts.map((layout) => (
+                  <Card key={layout.id} className="overflow-hidden">
+                    <AspectRatio ratio={16/9}>
+                      <img 
+                        src={layout.image} 
+                        alt={layout.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </AspectRatio>
+                    <CardContent className="p-4">
+                      <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
+                      <div className="grid grid-cols-2 gap-2 text-sm">
+                        <div>
+                          <span className="text-gray-600">Länge:</span> {layout.length}
+                        </div>
+                        <div>
+                          <span className="text-gray-600">Schlafplätze:</span> {layout.sleepingPlaces}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          )}
+          
+          {/* Innenraum (Interior) Section - Only shown if interior exists */}
+          {modelDetails.interior && modelDetails.interior.length > 0 && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div className="lg:col-span-3">
                   <AspectRatio ratio={16/9}>
                     <img 
-                      src={layout.image} 
-                      alt={layout.name}
-                      className="w-full h-full object-cover"
+                      src={modelDetails.galleryImages[0]} 
+                      alt="Innenraum"
+                      className="w-full h-full object-cover rounded-lg"
                     />
                   </AspectRatio>
-                  <CardContent className="p-4">
-                    <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-gray-600">Länge:</span> {layout.length}
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Schlafplätze:</span> {layout.sleepingPlaces}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-          
-          {/* Innenraum (Interior) Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <div className="lg:col-span-3">
-                <AspectRatio ratio={16/9}>
-                  <img 
-                    src={modelDetails.galleryImages[0]} 
-                    alt="Innenraum"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </AspectRatio>
-              </div>
-              <div className="lg:col-span-2">
-                <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                  <ul className="space-y-4 divide-y">
-                    {modelDetails.interior && modelDetails.interior.map((item, index) => (
-                      <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
-                        <div className="font-medium">{item.name}</div>
-                        <div className="text-gray-600">{item.description}</div>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-              </div>
-            </div>
-          </section>
-          
-          {/* Polster (Upholstery) Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {modelDetails.upholsteryTypes && modelDetails.upholsteryTypes.map((type, index) => (
-                <div key={index} className="border rounded-lg overflow-hidden">
-                  <div className="bg-gray-200 h-40"></div>
-                  <div className="p-3">
-                    <h3 className="font-medium">{type}</h3>
+                <div className="lg:col-span-2">
+                  <div className="bg-white rounded-lg p-4 shadow-sm h-full">
+                    <ul className="space-y-4 divide-y">
+                      {modelDetails.interior.map((item, index) => (
+                        <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
+                          <div className="font-medium">{item.name}</div>
+                          <div className="text-gray-600">{item.description}</div>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              ))}
-            </div>
-          </section>
+              </div>
+            </section>
+          )}
           
-          {/* Serienausstattung (Standard Equipment) Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
-            
-            {isMobile ? (
-              <Accordion type="single" collapsible className="w-full">
-                {modelDetails.equipment && Object.entries(modelDetails.equipment).map(([key, items]) => (
-                  <AccordionItem key={key} value={key}>
-                    <AccordionTrigger className="py-4 px-0">
-                      <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2 pl-1">
+          {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
+          {modelDetails.upholsteryTypes && modelDetails.upholsteryTypes.length > 0 && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {modelDetails.upholsteryTypes.map((type, index) => (
+                  <div key={index} className="border rounded-lg overflow-hidden">
+                    <div className="bg-gray-200 h-40"></div>
+                    <div className="p-3">
+                      <h3 className="font-medium">{type}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+          
+          {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
+          {modelDetails.equipment && Object.keys(modelDetails.equipment).length > 0 && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
+              
+              {isMobile ? (
+                <Accordion type="single" collapsible className="w-full">
+                  {Object.entries(modelDetails.equipment).map(([key, items]) => (
+                    <AccordionItem key={key} value={key}>
+                      <AccordionTrigger className="py-4 px-0">
+                        <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="space-y-2 pl-1">
+                          {items.map((item, i) => (
+                            <li key={i} className="flex items-start gap-2">
+                              <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              ) : (
+                <Tabs defaultValue="chassis" className="w-full">
+                  <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
+                    {Object.entries(equipmentTabs).map(([key, label]) => (
+                      <TabsTrigger key={key} value={key} className="text-sm flex-grow">
+                        {label}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                  {Object.entries(modelDetails.equipment).map(([key, items]) => (
+                    <TabsContent key={key} value={key} className="mt-4">
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
                         {items.map((item, i) => (
                           <li key={i} className="flex items-start gap-2">
                             <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -456,38 +487,16 @@ const ProductDetail = () => {
                           </li>
                         ))}
                       </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            ) : (
-              <Tabs defaultValue="chassis" className="w-full">
-                <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
-                  {Object.entries(equipmentTabs).map(([key, label]) => (
-                    <TabsTrigger key={key} value={key} className="text-sm flex-grow">
-                      {label}
-                    </TabsTrigger>
+                    </TabsContent>
                   ))}
-                </TabsList>
-                {modelDetails.equipment && Object.entries(modelDetails.equipment).map(([key, items]) => (
-                  <TabsContent key={key} value={key} className="mt-4">
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                      {items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </TabsContent>
-                ))}
-              </Tabs>
-            )}
-          </section>
+                </Tabs>
+              )}
+            </section>
+          )}
           
           {/* Bottom CTA Section */}
           <section className="my-10 bg-gray-50 p-6 rounded-lg">
-            <h2 className="text-2xl font-semibold mb-4 text-center">Interessiert am Van?</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-center">Interessiert am {modelDetails.name}?</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
               <Button 
                 className="flex items-center justify-center gap-2"
