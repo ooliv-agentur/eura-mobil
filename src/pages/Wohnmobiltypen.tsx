@@ -5,7 +5,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Caravan, Truck, Bus, Home } from "lucide-react";
 
 const Wohnmobiltypen = () => {
   const wohnmobiltypen = [
@@ -14,28 +13,24 @@ const Wohnmobiltypen = () => {
       title: "Vans",
       description: "Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den EURA MOBIL Van zu Ihrem ganz persönlichen mobilen Zuhause machen.",
       buttonText: "Jetzt Vans entdecken",
-      icon: <Caravan className="h-12 w-12 mb-4" />,
     },
     {
       id: "alkoven",
       title: "Alkoven-Wohnmobile",
       description: "In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit.",
       buttonText: "Alkoven-Modelle anzeigen",
-      icon: <Home className="h-12 w-12 mb-4" />,
     },
     {
       id: "teilintegriert",
       title: "Teilintegrierte Wohnmobile",
       description: "Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik.",
       buttonText: "Teilintegrierte entdecken",
-      icon: <Bus className="h-12 w-12 mb-4" />,
     },
     {
       id: "integriert",
       title: "Integrierte Wohnmobile",
       description: "Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl.",
       buttonText: "Integrierte anzeigen",
-      icon: <Truck className="h-12 w-12 mb-4" />,
     },
   ];
 
@@ -56,9 +51,7 @@ const Wohnmobiltypen = () => {
             <Card key={typ.id} className="overflow-hidden">
               <CardContent className="p-6">
                 <div className="aspect-video bg-gray-100 mb-4 flex items-center justify-center">
-                  <div className="text-blue-600">
-                    {typ.icon}
-                  </div>
+                  {/* Empty placeholder box - no icons or images as requested */}
                 </div>
                 <h2 className="text-2xl font-bold mb-3">{typ.title}</h2>
                 <p className="text-gray-600 mb-6">{typ.description}</p>
