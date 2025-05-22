@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ArrowDown, Check, Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowDown, Check, Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight, X, Maximize2, Minimize2 } from "lucide-react";
 import {
   Tabs,
   TabsContent,
@@ -15,6 +15,8 @@ import { ProductLayout } from "@/components/ProductLayout";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogContent, AlertDialogClose } from "@/components/ui/alert-dialog";
 
 // Model data repository
 const modelsData = {
@@ -402,7 +404,8 @@ const sections = [
 // New component for Model Card with URL transformation
 const ModelCard = ({ 
   model,
-  onCompare 
+  onCompare,
+  isSelected = false 
 }: { 
   model: { 
     id: string, 
@@ -412,7 +415,8 @@ const ModelCard = ({
     sleepingPlaces: string, 
     detailUrl?: string 
   }, 
-  onCompare: (id: string) => void 
+  onCompare: (id: string) => void,
+  isSelected?: boolean
 }) => {
   // Transform old URLs to new URL structure
   const getTransformedUrl = (url: string | undefined): string => {
@@ -477,7 +481,7 @@ const ModelCard = ({
   };
 
   return (
-    <Card className="overflow-hidden">
+    <Card className={`overflow-hidden ${isSelected ? 'ring-2 ring-blue-500' : ''}`}>
       <AspectRatio ratio={4/3} className="bg-gray-200">
         <div className="w-full h-full flex items-center justify-center text-gray-500">
           Grundriss
@@ -501,16 +505,106 @@ const ModelCard = ({
             </Link>
           </Button>
           <Button 
-            variant="secondary" 
+            variant={isSelected ? "default" : "secondary"}
             onClick={() => onCompare(model.id)} 
             className="w-full"
           >
             <ArrowLeftRight className="mr-2 h-4 w-4" />
-            Vergleichen
+            {isSelected ? "Ausgewählt" : "Vergleichen"}
           </Button>
         </div>
       </CardContent>
     </Card>
+  );
+};
+
+// New component for the comparison overlay
+const ComparisonOverlay = ({
+  isOpen,
+  onClose,
+  models,
+  modelData,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  models: string[];
+  modelData: FullModelData;
+}) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  
+  // Find the model data for the selected models
+  const selectedModels = models.map(modelId => 
+    modelData.layouts.find(layout => layout.id === modelId)
+  ).filter(Boolean);
+  
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+  
+  if (selectedModels.length < 2) return null;
+  
+  return (
+    <AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <AlertDialogContent className={`${isFullscreen ? 'max-w-[95vw] h-[90vh]' : 'max-w-5xl'} p-0 gap-0 overflow-hidden`}>
+        <div className="sticky top-0 w-full bg-white p-4 flex justify-between items-center border-b z-10">
+          <h2 className="text-xl font-semibold">Grundriss-Vergleich</h2>
+          <div className="flex gap-2">
+            <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
+              {isFullscreen ? <Minimize2 className="h-5 w-5" /> : <Maximize2 className="h-5 w-5" />}
+            </Button>
+            <AlertDialogClose asChild>
+              <Button variant="ghost" size="icon">
+                <X className="h-5 w-5" />
+                <span className="sr-only">Schließen</span>
+              </Button>
+            </AlertDialogClose>
+          </div>
+        </div>
+        
+        <div className="overflow-y-auto p-6" style={{ maxHeight: isFullscreen ? 'calc(90vh - 66px)' : '70vh' }}>
+          <div className="grid grid-cols-2 gap-8">
+            {selectedModels.map((model, index) => (
+              <div key={index} className="space-y-8">
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold">{model?.name}</h3>
+                </div>
+                
+                <div className="bg-gray-100 aspect-ratio-4/3 flex items-center justify-center p-4 rounded-md">
+                  <div className="text-gray-500">Grundriss-Bild</div>
+                </div>
+                
+                <div>
+                  <h4 className="text-lg font-medium mb-3">Technische Daten</h4>
+                  <div className="grid gap-2">
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="text-gray-600">Länge:</span>
+                      <span className="font-medium">{model?.length}</span>
+                    </div>
+                    <div className="flex justify-between border-b pb-2">
+                      <span className="text-gray-600">Schlafplätze:</span>
+                      <span className="font-medium">{model?.sleepingPlaces}</span>
+                    </div>
+                    {/* Additional data could be added here */}
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 className="text-lg font-medium mb-3">Highlights</h4>
+                  <ul className="space-y-2">
+                    {modelData.highlights.slice(0, 3).map((highlight, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <div className="h-2 w-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 
@@ -520,6 +614,8 @@ const ProductDetail = () => {
   const isMobile = useIsMobile();
   const [activeSection, setActiveSection] = useState("highlights");
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedForComparison, setSelectedForComparison] = useState<string[]>([]);
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
   const { toast } = useToast();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   
@@ -563,15 +659,33 @@ const ProductDetail = () => {
 
   // Handler for adding to comparison
   const handleCompareModel = (modelId: string) => {
-    // Here you would implement the session/cookie-based comparison logic
-    // Redirect to the new comparison URL
-    window.location.href = `/wohnmobile/modellvergleich?v1=${currentModelId}&v2=${modelId}`;
+    // If the model is already selected, remove it
+    if (selectedForComparison.includes(modelId)) {
+      setSelectedForComparison(selectedForComparison.filter(id => id !== modelId));
+      return;
+    }
     
-    toast({
-      title: "Modell zum Vergleich hinzugefügt",
-      description: `${modelId} wurde zum Vergleich hinzugefügt.`,
-      duration: 3000,
-    });
+    // If we already have 2 models selected, replace the oldest one
+    if (selectedForComparison.length >= 2) {
+      setSelectedForComparison([selectedForComparison[1], modelId]);
+    } else {
+      setSelectedForComparison([...selectedForComparison, modelId]);
+    }
+    
+    // If we now have 2 models selected, open the comparison overlay
+    if (selectedForComparison.length === 1) {
+      setIsComparisonOpen(true);
+      
+      toast({
+        title: "Grundrisse zum Vergleich ausgewählt",
+        description: "Die Grundrisse werden jetzt verglichen.",
+        duration: 3000,
+      });
+    }
+  };
+  
+  const handleCloseComparison = () => {
+    setIsComparisonOpen(false);
   };
   
   // Helper functions for handlers
@@ -770,6 +884,11 @@ const ProductDetail = () => {
           <section id="grundrisse" className="py-24 scroll-mt-8">
             <h2 className="text-2xl font-semibold mb-8">Grundrisse</h2>
             
+            {/* New comparison instructions */}
+            <p className="text-center mb-6 text-gray-600">
+              Vergleichen Sie zwei Grundrisse dieser Baureihe
+            </p>
+            
             {/* Desktop view - Grid layout */}
             <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {modelData.layouts.map((layout) => (
@@ -777,6 +896,7 @@ const ProductDetail = () => {
                   key={layout.id}
                   model={layout}
                   onCompare={handleCompareModel}
+                  isSelected={selectedForComparison.includes(layout.id)}
                 />
               ))}
             </div>
@@ -789,6 +909,7 @@ const ProductDetail = () => {
                     <ModelCard
                       model={modelData.layouts[currentSlide]}
                       onCompare={handleCompareModel}
+                      isSelected={selectedForComparison.includes(modelData.layouts[currentSlide].id)}
                     />
                   </div>
                 )}
@@ -830,6 +951,16 @@ const ProductDetail = () => {
                 </div>
               )}
             </div>
+            
+            {/* Comparison overlay */}
+            {hasLayouts(modelData) && (
+              <ComparisonOverlay
+                isOpen={isComparisonOpen && selectedForComparison.length === 2}
+                onClose={handleCloseComparison}
+                models={selectedForComparison}
+                modelData={modelData}
+              />
+            )}
           </section>
         )}
         
