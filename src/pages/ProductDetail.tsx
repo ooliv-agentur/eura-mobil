@@ -1,31 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Check, Download, MapPin, Settings } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight, X, Maximize2, Minimize2 } from "lucide-react";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Skeleton } from "@/components/ui/skeleton";
 import { ProductLayout } from "@/components/ProductLayout";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useToast } from "@/hooks/use-toast";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
-import { AlertDialog, AlertDialogContent, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
-import { Skeleton } from "@/components/ui/skeleton";
 
-// Model data repository
+// Model data repository - could later be moved to a separate file
 const modelsData = {
   "van": {
     id: "van",
     name: "Van",
-    intro: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen.",
+    intro: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -41,11 +44,11 @@ const modelsData = {
       sitzplätze: "4"
     },
     highlights: [
-      "Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung.",
-      "Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen.",
-      "Waschraum mit schwenkbarer Duschwand.",
-      "Staufächer im Doppelboden.",
-      "Mineralstoff-Spüle."
+      "Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung",
+      "Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen",
+      "Waschraum mit schwenkbarer Duschwand",
+      "Staufächer im Doppelboden",
+      "Mineralstoff-Spüle"
     ],
     layouts: [
       {
@@ -53,24 +56,21 @@ const modelsData = {
         name: "V 635 EB",
         image: "/placeholder.svg",
         length: "6,36 m",
-        sleepingPlaces: "2",
-        detailUrl: "/wohnmobile/vans/v-635-eb-2-2/"
+        sleepingPlaces: "2"
       },
       {
         id: "v-635-hb",
         name: "V 635 HB",
         image: "/placeholder.svg",
         length: "6,36 m",
-        sleepingPlaces: "2",
-        detailUrl: "/wohnmobile/vans/v-635-hb-2-2/"
+        sleepingPlaces: "2"
       },
       {
         id: "v-595-hb",
         name: "V 595 HB",
         image: "/placeholder.svg",
         length: "5,99 m",
-        sleepingPlaces: "2",
-        detailUrl: "/wohnmobile/vans/v-595-hb-2-2/"
+        sleepingPlaces: "2"
       }
     ],
     interior: [
@@ -185,17 +185,12 @@ const modelsData = {
         "Control Panel über Eingang",
         "CP+ Heizungssteuerung mit Crashsensor"
       ]
-    },
-    modelText: {
-      headline: "Vans",
-      subheadline: "Für Aktive und Unabhängige",
-      description: "Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit Eco-Leder Applikationen machen den spürbaren Unterschied."
     }
   },
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
-    intro: "Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit.",
+    intro: "Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, beginnt die Entspannung sofort mit der Abfahrt.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -209,11 +204,13 @@ const modelsData = {
       schlafplätze: "4-6"
     },
     highlights: [
-      "Ausziehbares Doppelstockbett (AO 690 VB).",
-      "Maximaler Stauraum dank 37 cm hohem Doppelboden.",
-      "Isolierter und beheizter Alkoven.",
-      "Praktische Familien-Grundrisse.",
-      "Wassertanks im isolierten und beheizten Doppelboden."
+      "Ausziehbares Doppelstockbett (AO 690 VB)",
+      "Maximaler Stauraum dank 37 cm hohem Doppelboden",
+      "Isolierter und beheizter Alkoven",
+      "Praktische Familien-Grundrisse",
+      "Wassertanks im isolierten und beheizten Doppelboden",
+      "Jetzt mit 2× Isofix in Fahrtrichtung (außer HS-Grundrisse)",
+      "Beach Home Interieur optional verfügbar"
     ],
     layouts: [
       {
@@ -221,40 +218,35 @@ const modelsData = {
         name: "AO 570 HS",
         image: "/placeholder.svg",
         length: "5,99 m",
-        sleepingPlaces: "4",
-        detailUrl: "/wohnmobile/activa-one/ao-570-hs-4-4/"
+        sleepingPlaces: "4"
       },
       {
         id: "ao-630-ls",
         name: "AO 630 LS",
         image: "/placeholder.svg",
         length: "6,44 m",
-        sleepingPlaces: "5",
-        detailUrl: "/wohnmobile/activa-one/ao-630-ls-5-5/"
+        sleepingPlaces: "5"
       },
       {
         id: "ao-650-hs",
         name: "AO 650 HS",
         image: "/placeholder.svg",
         length: "6,50 m",
-        sleepingPlaces: "4",
-        detailUrl: "/wohnmobile/activa-one/ao-650-hs-4-4/"
+        sleepingPlaces: "4"
       },
       {
         id: "ao-690-hb",
         name: "AO 690 HB",
         image: "/placeholder.svg",
         length: "6,99 m",
-        sleepingPlaces: "6",
-        detailUrl: "/wohnmobile/activa-one/ao-690-hb-6-6/"
+        sleepingPlaces: "6"
       },
       {
         id: "ao-690-vb",
         name: "AO 690 VB",
         image: "/placeholder.svg",
         length: "6,99 m",
-        sleepingPlaces: "6",
-        detailUrl: "/wohnmobile/activa-one/ao-690-vb-6-6/"
+        sleepingPlaces: "6"
       }
     ],
     interior: [
@@ -307,11 +299,6 @@ const modelsData = {
         "Ladegerät 21 A",
         "Haushaltslogik Lichtsystem"
       ]
-    },
-    modelText: {
-      headline: "Activa One",
-      subheadline: "Praktische Wohnmobile für Einsteiger",
-      description: "Praktische Wohnmobile für Einsteiger. Bieten Platz für bis zu 6 Personen und viel Komfort."
     }
   }
 };
@@ -329,7 +316,7 @@ const equipmentTabs = {
   electrical: "Elektroinstallation"
 };
 
-// Define types for our different model types
+// Define more specific types for our different model types
 type BaseModelData = {
   id: string;
   name: string;
@@ -340,6 +327,7 @@ type BaseModelData = {
   highlights: string[];
 };
 
+// Full model with all features
 type FullModelData = BaseModelData & {
   layouts: Array<{
     id: string;
@@ -347,7 +335,6 @@ type FullModelData = BaseModelData & {
     image: string;
     length: string;
     sleepingPlaces: string;
-    detailUrl?: string;
   }>;
   interior: Array<{
     name: string;
@@ -355,13 +342,9 @@ type FullModelData = BaseModelData & {
   }>;
   upholsteryTypes: string[];
   equipment: Record<string, string[]>;
-  modelText?: {
-    headline: string;
-    subheadline: string;
-    description: string;
-  };
 };
 
+// Download-only model with download items
 type DownloadModelData = BaseModelData & {
   downloadItems: Array<{
     name: string;
@@ -370,505 +353,42 @@ type DownloadModelData = BaseModelData & {
   }>;
 };
 
+// Union type for all possible model types
 type ModelData = FullModelData | DownloadModelData;
+
+// Type for our models data object
 type ModelsDataType = Record<string, ModelData>;
 
-// Type guards
-function hasLayouts(model: ModelData | undefined): model is FullModelData {
-  return !!model && 'layouts' in model && Array.isArray(model.layouts);
+// Type guard to check if a model has layouts
+function hasLayouts(model: ModelData): model is FullModelData {
+  return 'layouts' in model && Array.isArray(model.layouts);
 }
 
-function hasInterior(model: ModelData | undefined): model is FullModelData {
-  return !!model && 'interior' in model && Array.isArray(model.interior);
+// Type guard to check if a model has interior details
+function hasInterior(model: ModelData): model is FullModelData {
+  return 'interior' in model && Array.isArray(model.interior);
 }
 
-function hasUpholstery(model: ModelData | undefined): model is FullModelData {
-  return !!model && 'upholsteryTypes' in model && Array.isArray(model.upholsteryTypes);
+// Type guard to check if a model has upholstery types
+function hasUpholstery(model: ModelData): model is FullModelData {
+  return 'upholsteryTypes' in model && Array.isArray(model.upholsteryTypes);
 }
 
-function hasEquipment(model: ModelData | undefined): model is FullModelData {
-  return !!model && 'equipment' in model && model.equipment !== undefined;
+// Type guard to check if a model has equipment details
+function hasEquipment(model: ModelData): model is FullModelData {
+  return 'equipment' in model && model.equipment !== undefined;
 }
-
-function hasModelText(model: ModelData | undefined): model is FullModelData & { modelText: { headline: string; subheadline: string; description: string; } } {
-  return !!model && 'modelText' in model && model.modelText !== undefined;
-}
-
-// Sections for navigation
-const sections = [
-  { id: "highlights", label: "Highlights" },
-  { id: "grundrisse", label: "Grundrisse" },
-  { id: "innenraum", label: "Innenraum" },
-  { id: "polster", label: "Polster" },
-  { id: "serienausstattung", label: "Serienausstattung" }
-];
-
-// New component for Model Card with URL transformation
-const ModelCard = ({ 
-  model,
-  onCompare,
-  isSelected = false 
-}: { 
-  model: { 
-    id: string, 
-    name: string, 
-    image: string, 
-    length: string, 
-    sleepingPlaces: string, 
-    detailUrl?: string 
-  }, 
-  onCompare: (id: string) => void,
-  isSelected?: boolean
-}) => {
-  // Transform old URLs to new URL structure
-  const getTransformedUrl = (url: string | undefined): string => {
-    if (!url) return "#";
-    
-    // Extract info from the original URL format (e.g. /wohnmobile/vans/v-635-eb-2-2/)
-    const urlParts = url.split('/');
-    const modelId = urlParts[urlParts.length - 2] || '';
-    const floorplanId = urlParts[urlParts.length - 1] || '';
-    
-    // Determine category based on model ID
-    let category = "";
-    if (modelId.startsWith('v-') || modelId === 'van') {
-      category = 'vans';
-    } else if (modelId.startsWith('ao-') || modelId === 'activa-one') {
-      category = 'alkoven';
-    } else if (
-      modelId.startsWith('pt-') || 
-      modelId.startsWith('ptm-') ||
-      modelId.startsWith('prs-') ||
-      modelId.startsWith('c-') ||
-      modelId === 'profila-t-fiat' ||
-      modelId === 'profila-rs' ||
-      modelId === 'profila-t-mercedes' ||
-      modelId === 'contura' ||
-      modelId === 'xtura'
-    ) {
-      category = 'teilintegrierte';
-      // Determine specific teilintegrierte model
-      if (modelId === 'profila-t-fiat' || modelId.startsWith('pt-')) {
-        return `/wohnmobile/teilintegrierte/profila-t-fiat/${floorplanId}`;
-      } else if (modelId === 'profila-rs' || modelId.startsWith('prs-')) {
-        return `/wohnmobile/teilintegrierte/profila-rs/${floorplanId}`;
-      } else if (modelId === 'profila-t-mercedes' || modelId.startsWith('ptm-')) {
-        return `/wohnmobile/teilintegrierte/profila-t-mercedes/${floorplanId}`;
-      } else if (modelId === 'contura' || modelId.startsWith('c-')) {
-        return `/wohnmobile/teilintegrierte/contura/${floorplanId}`;
-      } else if (modelId === 'xtura' || modelId.startsWith('x-')) {
-        return `/wohnmobile/teilintegrierte/xtura/${floorplanId}`;
-      }
-    } else if (
-      modelId.startsWith('il-') || 
-      modelId.startsWith('ilgt-') ||
-      modelId.startsWith('i-') ||
-      modelId === 'integra-line-fiat' ||
-      modelId === 'integra-line-gt-mercedes' ||
-      modelId === 'integra'
-    ) {
-      category = 'integrierte';
-      // Determine specific integrierte model
-      if (modelId === 'integra-line-fiat' || modelId.startsWith('il-')) {
-        return `/wohnmobile/integrierte/integra-line-fiat/${floorplanId}`;
-      } else if (modelId === 'integra-line-gt-mercedes' || modelId.startsWith('ilgt-')) {
-        return `/wohnmobile/integrierte/integra-line-gt-mercedes/${floorplanId}`;
-      } else if (modelId === 'integra' || modelId.startsWith('i-')) {
-        return `/wohnmobile/integrierte/integra/${floorplanId}`;
-      }
-    }
-    
-    // Default URL format for vans and alkoven
-    return `/wohnmobile/${category}/${floorplanId}`;
-  };
-
-  return (
-    <Card className={`overflow-hidden ${isSelected ? 'ring-2 ring-blue-500' : ''}`}>
-      <AspectRatio ratio={4/3} className="bg-gray-200">
-        <div className="w-full h-full flex items-center justify-center text-gray-500">
-          Grundriss
-        </div>
-      </AspectRatio>
-      <CardContent className="p-4">
-        <h3 className="text-lg font-semibold mb-3">{model.name}</h3>
-        <div className="grid grid-cols-2 gap-2 text-sm mb-4">
-          <div>
-            <span className="text-gray-600">Länge:</span> {model.length}
-          </div>
-          <div>
-            <span className="text-gray-600">Schlafplätze:</span> {model.sleepingPlaces}
-          </div>
-        </div>
-        <div className="grid grid-cols-1 gap-2">
-          <Button asChild variant="outline" className="w-full">
-            <Link to={getTransformedUrl(model.detailUrl)}>
-              <Eye className="mr-2 h-4 w-4" />
-              Modell ansehen
-            </Link>
-          </Button>
-          <Button 
-            variant={isSelected ? "default" : "secondary"}
-            onClick={() => onCompare(model.id)} 
-            className="w-full"
-          >
-            <ArrowLeftRight className="mr-2 h-4 w-4" />
-            {isSelected ? "Ausgewählt" : "Vergleichen"}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-// New component for the comparison overlay
-const ComparisonOverlay = ({
-  isOpen,
-  onClose,
-  models,
-  modelData,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  models: string[];
-  modelData: FullModelData;
-}) => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  
-  // Find the model data for the selected models
-  const selectedModels = models.map(modelId => 
-    modelData.layouts.find(layout => layout.id === modelId)
-  ).filter(Boolean);
-  
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-  
-  if (selectedModels.length < 2) return null;
-
-  // Determine if highlights should be shown
-  // We only show highlights if the model has different highlight sets
-  // In this simplified example, we're checking if the first 3 highlights for each model would be different
-  // In a real implementation, each model might have its own set of highlights
-  // For now, we'll assume highlights are the same for all models in a product line
-  const shouldShowHighlights = false; // Since highlights are the same for all models in a product line
-  
-  return (
-    <AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <AlertDialogContent className={`${isFullscreen ? 'max-w-[95vw] h-[90vh]' : 'max-w-5xl'} p-0 gap-0 overflow-hidden`}>
-        <div className="sticky top-0 w-full bg-white p-4 flex justify-between items-center border-b z-10">
-          <h2 className="text-xl font-semibold">Grundriss-Vergleich</h2>
-          <div className="flex gap-2">
-            <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
-              {isFullscreen ? <Minimize2 className="h-5 w-5" /> : <Maximize2 className="h-5 w-5" />}
-            </Button>
-            <AlertDialogCancel asChild>
-              <Button variant="ghost" size="icon">
-                <X className="h-5 w-5" />
-                <span className="sr-only">Schließen</span>
-              </Button>
-            </AlertDialogCancel>
-          </div>
-        </div>
-        
-        <div className="overflow-y-auto p-6" style={{ maxHeight: isFullscreen ? 'calc(90vh - 66px)' : '70vh' }}>
-          <div className="grid grid-cols-2 gap-8">
-            {selectedModels.map((model, index) => (
-              <div key={index} className="space-y-8">
-                <div className="text-center">
-                  <h3 className="text-xl font-semibold">{model?.name}</h3>
-                </div>
-                
-                <div className="bg-gray-100 aspect-ratio-4/3 flex items-center justify-center p-4 rounded-md">
-                  <div className="text-gray-500">Grundriss-Bild</div>
-                </div>
-                
-                <div>
-                  <h4 className="text-lg font-medium mb-3">Technische Daten</h4>
-                  <div className="grid gap-2">
-                    <div className="flex justify-between border-b pb-2">
-                      <span className="text-gray-600">Länge:</span>
-                      <span className="font-medium">{model?.length}</span>
-                    </div>
-                    <div className="flex justify-between border-b pb-2">
-                      <span className="text-gray-600">Schlafplätze:</span>
-                      <span className="font-medium">{model?.sleepingPlaces}</span>
-                    </div>
-                    {/* Additional data could be added here */}
-                  </div>
-                </div>
-                
-                {/* Only render Highlights section if they differ between models */}
-                {shouldShowHighlights && (
-                  <div>
-                    <h4 className="text-lg font-medium mb-3">Highlights</h4>
-                    <ul className="space-y-2">
-                      {modelData.highlights.slice(0, 3).map((highlight, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <div className="h-2 w-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-};
-
-// New component for inline comparison module
-const InlineComparisonModule = ({
-  selectedModels,
-  modelData,
-  onClose,
-}: {
-  selectedModels: string[];
-  modelData: FullModelData;
-  onClose: () => void;
-}) => {
-  // Find the model data for the selected models
-  const selectedModelDetails = selectedModels.map(modelId => 
-    modelData.layouts.find(layout => layout.id === modelId)
-  ).filter(Boolean);
-  
-  if (selectedModelDetails.length !== 2) return null;
-  
-  const model1 = selectedModelDetails[0];
-  const model2 = selectedModelDetails[1];
-  
-  const attributeRows = [
-    { name: "Länge", value1: model1?.length, value2: model2?.length },
-    { name: "Schlafplätze", value1: model1?.sleepingPlaces, value2: model2?.sleepingPlaces },
-    { name: "Badezimmer", value1: "Ja", value2: "Ja" },
-    { name: "Staukapazität", value1: "120L", value2: "150L" },
-    { name: "Gesamtgewicht", value1: "3.500 kg", value2: "3.500 kg" },
-  ];
-
-  const getTransformedUrl = (url: string | undefined): string => {
-    if (!url) return "#";
-    
-    // Extract info from the original URL format (e.g. /wohnmobile/vans/v-635-eb-2-2/)
-    const urlParts = url.split('/');
-    const modelId = urlParts[urlParts.length - 2] || '';
-    const floorplanId = urlParts[urlParts.length - 1] || '';
-    
-    // Determine category based on model ID
-    let category = "";
-    if (modelId.startsWith('v-') || modelId === 'van') {
-      category = 'vans';
-    } else if (modelId.startsWith('ao-') || modelId === 'activa-one') {
-      category = 'alkoven';
-    } else if (
-      modelId.startsWith('pt-') || 
-      modelId.startsWith('ptm-') ||
-      modelId.startsWith('prs-') ||
-      modelId.startsWith('c-') ||
-      modelId === 'profila-t-fiat' ||
-      modelId === 'profila-rs' ||
-      modelId === 'profila-t-mercedes' ||
-      modelId === 'contura' ||
-      modelId === 'xtura'
-    ) {
-      category = 'teilintegrierte';
-      // Determine specific teilintegrierte model
-      if (modelId === 'profila-t-fiat' || modelId.startsWith('pt-')) {
-        return `/wohnmobile/teilintegrierte/profila-t-fiat/${floorplanId}`;
-      } else if (modelId === 'profila-rs' || modelId.startsWith('prs-')) {
-        return `/wohnmobile/teilintegrierte/profila-rs/${floorplanId}`;
-      } else if (modelId === 'profila-t-mercedes' || modelId.startsWith('ptm-')) {
-        return `/wohnmobile/teilintegrierte/profila-t-mercedes/${floorplanId}`;
-      } else if (modelId === 'contura' || modelId.startsWith('c-')) {
-        return `/wohnmobile/teilintegrierte/contura/${floorplanId}`;
-      } else if (modelId === 'xtura' || modelId.startsWith('x-')) {
-        return `/wohnmobile/teilintegrierte/xtura/${floorplanId}`;
-      }
-    } else if (
-      modelId.startsWith('il-') || 
-      modelId.startsWith('ilgt-') ||
-      modelId.startsWith('i-') ||
-      modelId === 'integra-line-fiat' ||
-      modelId === 'integra-line-gt-mercedes' ||
-      modelId === 'integra'
-    ) {
-      category = 'integrierte';
-      // Determine specific integrierte model
-      if (modelId === 'integra-line-fiat' || modelId.startsWith('il-')) {
-        return `/wohnmobile/integrierte/integra-line-fiat/${floorplanId}`;
-      } else if (modelId === 'integra-line-gt-mercedes' || modelId.startsWith('ilgt-')) {
-        return `/wohnmobile/integrierte/integra-line-gt-mercedes/${floorplanId}`;
-      } else if (modelId === 'integra' || modelId.startsWith('i-')) {
-        return `/wohnmobile/integrierte/integra/${floorplanId}`;
-      }
-    }
-    
-    // Default URL format for vans and alkoven
-    return `/wohnmobile/${category}/${floorplanId}`;
-  };
-
-  return (
-    <div className="py-8 px-4 bg-gray-50 rounded-lg mb-16">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold">
-          Technischer Vergleich: {model1?.name} vs. {model2?.name}
-        </h3>
-        <button 
-          onClick={onClose} 
-          className="text-gray-600 hover:text-gray-900"
-        >
-          Schließen
-        </button>
-      </div>
-      
-      <div className="grid grid-cols-3 gap-6 mb-6">
-        <div></div>
-        <div className="text-center">
-          <div className="bg-gray-200 aspect-square mb-2 flex items-center justify-center">
-            <span className="text-gray-500">Grundriss {model1?.name}</span>
-          </div>
-        </div>
-        <div className="text-center">
-          <div className="bg-gray-200 aspect-square mb-2 flex items-center justify-center">
-            <span className="text-gray-500">Grundriss {model2?.name}</span>
-          </div>
-        </div>
-      </div>
-      
-      <ScrollArea className="w-full">
-        <div className="min-w-[600px]">
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            <div className="font-semibold">Attribut</div>
-            <div className="font-semibold text-center">{model1?.name}</div>
-            <div className="font-semibold text-center">{model2?.name}</div>
-            
-            {attributeRows.map((row, index) => (
-              <React.Fragment key={index}>
-                <div className="py-2 border-t">{row.name}</div>
-                <div className="py-2 border-t text-center">{row.value1}</div>
-                <div className="py-2 border-t text-center">{row.value2}</div>
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </ScrollArea>
-      
-      <div className="grid grid-cols-2 gap-4">
-        <Button asChild variant="outline">
-          <Link to={getTransformedUrl(model1?.detailUrl)}>
-            <Eye className="mr-2 h-4 w-4" />
-            Modell {model1?.name} ansehen
-          </Link>
-        </Button>
-        <Button asChild variant="outline">
-          <Link to={getTransformedUrl(model2?.detailUrl)}>
-            <Eye className="mr-2 h-4 w-4" />
-            Modell {model2?.name} ansehen
-          </Link>
-        </Button>
-      </div>
-    </div>
-  );
-};
 
 const ProductDetail = () => {
-  const { modelId, floorplanId } = useParams();
-  const location = useLocation();
+  const { modelId } = useParams();
   const isMobile = useIsMobile();
-  const [activeSection, setActiveSection] = useState("");
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [selectedForComparison, setSelectedForComparison] = useState<string[]>([]);
-  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
-  const [showInlineComparison, setShowInlineComparison] = useState(false);
-  const { toast } = useToast();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   
-  // Determine the correct model based on the new URL structure
-  const getCurrentModelId = () => {
-    // Extract model type from pathname
-    const path = location.pathname;
-    
-    if (path.includes('/wohnmobile/vans')) {
-      return "van";
-    } else if (path.includes('/wohnmobile/alkoven')) {
-      return "activa-one";
-    } else if (path.includes('/wohnmobile/teilintegrierte/profila-t-fiat')) {
-      return "profila-t-fiat";
-    } else if (path.includes('/wohnmobile/teilintegrierte/profila-rs')) {
-      return "profila-rs";
-    } else if (path.includes('/wohnmobile/teilintegrierte/profila-t-mercedes')) {
-      return "profila-t-mercedes";
-    } else if (path.includes('/wohnmobile/teilintegrierte/contura')) {
-      return "contura";
-    } else if (path.includes('/wohnmobile/teilintegrierte/xtura')) {
-      return "xtura";
-    } else if (path.includes('/wohnmobile/integrierte/integra-line-fiat')) {
-      return "integra-line-fiat";
-    } else if (path.includes('/wohnmobile/integrierte/integra-line-gt-mercedes')) {
-      return "integra-line-gt-mercedes";
-    } else if (path.includes('/wohnmobile/integrierte/integra')) {
-      return "integra";
-    }
-    
-    return modelId || "van"; // Default to van if no match
-  };
-  
-  // Use the function to determine the current model
-  const currentModelId = getCurrentModelId();
-  
   // Default to van if no model ID or model not found
-  const modelData = currentModelId in modelsData 
-    ? modelsData[currentModelId as keyof typeof modelsData] 
+  const modelDetails = modelId && modelId in modelsData 
+    ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
-
-  // Handler for adding to comparison
-  const handleCompareModel = (modelId: string) => {
-    // If the model is already selected, remove it
-    if (selectedForComparison.includes(modelId)) {
-      setSelectedForComparison(selectedForComparison.filter(id => id !== modelId));
-      return;
-    }
-    
-    // If we already have 2 models selected, replace the oldest one
-    if (selectedForComparison.length >= 2) {
-      setSelectedForComparison([selectedForComparison[1], modelId]);
-    } else {
-      setSelectedForComparison([...selectedForComparison, modelId]);
-    }
-    
-    // If we now have 2 models selected, open the comparison overlay
-    if (selectedForComparison.length === 1) {
-      setIsComparisonOpen(true);
-      
-      toast({
-        title: "Grundrisse zum Vergleich ausgewählt",
-        description: "Die Grundrisse werden jetzt verglichen.",
-        duration: 3000,
-      });
-    }
-  };
   
-  // Effect to control the appearance of the inline comparison
-  useEffect(() => {
-    if (selectedForComparison.length === 2) {
-      setShowInlineComparison(true);
-    } else {
-      setShowInlineComparison(false);
-    }
-  }, [selectedForComparison]);
-  
-  const handleCloseInlineComparison = () => {
-    setShowInlineComparison(false);
-    setSelectedForComparison([]);
-  };
-  
-  const handleCloseComparison = () => {
-    setIsComparisonOpen(false);
-  };
-  
-  // Helper functions for handlers
   const handleKonfiguratorClick = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
@@ -878,367 +398,225 @@ const ProductDetail = () => {
   };
   
   // Simple gray box placeholder component
-  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9, label = "" }: { className?: string, ratio?: number, label?: string }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] flex items-center justify-center ${className}`}>
-      {label && <p className="text-gray-500 text-lg">{label}</p>}
-    </AspectRatio>
+  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
   );
   
-  // Mobile slider navigation
-  const handlePrevSlide = () => {
-    if (hasLayouts(modelData) && currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    }
-  };
-  
-  const handleNextSlide = () => {
-    if (hasLayouts(modelData) && currentSlide < modelData.layouts.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
-  
-  // Intersection observer for scroll sections
-  useEffect(() => {
-    // Modified observer options to make detection more precise
-    const observerOptions = {
-      // Adjusted to ensure dots are highlighted at appropriate scroll points
-      rootMargin: "-120px 0px -60% 0px",
-      threshold: [0.1, 0.5]
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        // Only update active section when a section comes into view
-        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
-          // Set activeSection to the id of the section that's currently visible
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+  // Helper function for layout rendering
+  const renderLayouts = () => {
+    if (!hasLayouts(modelDetails)) return null;
     
-    // Add all section elements to be observed
-    sections.forEach(section => {
-      const element = document.getElementById(section.id);
-      if (element) observer.observe(element);
-    });
-
-    // Add an observer for the hero section to clear the active section
-    const heroSection = document.getElementById('hero-section');
-    if (heroSection) {
-      const heroObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            // Clear active section when hero section is in view
-            setActiveSection("");
-          }
-        });
-      }, { threshold: 0.5 });
-      
-      heroObserver.observe(heroSection);
-    }
-
-    return () => {
-      observer.disconnect();
-      // Disconnect the hero observer if it exists
-      if (heroSection) {
-        const heroObserver = new IntersectionObserver(() => {});
-        heroObserver.disconnect();
-      }
-    };
-  }, []);
-
-  // Scroll to section function
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {modelDetails.layouts.map((layout) => (
+          <Card key={layout.id} className="overflow-hidden">
+            <GrayBoxPlaceholder ratio={4/3} />
+            <CardContent className="p-4">
+              <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <span className="text-gray-600">Länge:</span> {layout.length}
+                </div>
+                <div>
+                  <span className="text-gray-600">Schlafplätze:</span> {layout.sleepingPlaces}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function for interior rendering
+  const renderInterior = () => {
+    if (!hasInterior(modelDetails)) return null;
+    
+    return (
+      <ul className="space-y-4 divide-y">
+        {modelDetails.interior.map((item, index) => (
+          <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
+            <div className="font-medium">{item.name}</div>
+            <div className="text-gray-600">{item.description}</div>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+  
+  // Helper function for upholstery rendering
+  const renderUpholstery = () => {
+    if (!hasUpholstery(modelDetails)) return null;
+    
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {modelDetails.upholsteryTypes.map((type, index) => (
+          <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
+            <AspectRatio ratio={4/3} className="h-40" />
+            <div className="p-3">
+              <h3 className="font-medium">{type}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function for equipment rendering on mobile
+  const renderEquipmentMobile = () => {
+    if (!hasEquipment(modelDetails)) return null;
+    
+    return (
+      <Accordion type="single" collapsible className="w-full">
+        {Object.entries(modelDetails.equipment).map(([key, items]) => (
+          <AccordionItem key={key} value={key}>
+            <AccordionTrigger className="py-4 px-0">
+              <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <ul className="space-y-2 pl-1">
+                {items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
+  };
+  
+  // Helper function for equipment rendering on desktop
+  const renderEquipmentDesktop = () => {
+    if (!hasEquipment(modelDetails)) return null;
+    
+    const equipmentKeys = Object.keys(modelDetails.equipment);
+    if (equipmentKeys.length === 0) return null;
+    
+    return (
+      <Tabs defaultValue={equipmentKeys[0]} className="w-full">
+        <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
+          {equipmentKeys.map((key) => (
+            <TabsTrigger key={key} value={key} className="text-sm flex-grow">
+              {equipmentTabs[key as keyof typeof equipmentTabs]}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {Object.entries(modelDetails.equipment).map(([key, items]) => (
+          <TabsContent key={key} value={key} className="mt-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+              {items.map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </TabsContent>
+        ))}
+      </Tabs>
+    );
   };
   
   return (
-    <ProductLayout modelName={modelData?.name || ""}>
-      {/* 1. Hero Section - Full width with max height 60vh */}
-      <div id="hero-section" className="relative w-full" style={{ maxHeight: '60vh' }}>
-        <GrayBoxPlaceholder ratio={16/9} label="Modellbild (Hero)" className="h-full max-h-[60vh]" />
+    <ProductLayout modelName={modelDetails.name}>
+      {/* Hero Section */}
+      <div className="relative">
+        <div className="w-full h-72 sm:h-96">
+          <GrayBoxPlaceholder ratio={21/9} className="h-full" />
+        </div>
       </div>
       
-      {/* Mobile horizontal scroll anchor navigation */}
-      {isMobile && (
-        <div className="px-4 py-6 overflow-x-auto">
-          <div className="flex space-x-4">
-            {sections.map(section => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className="bg-gray-100 px-4 py-2 rounded whitespace-nowrap"
-              >
-                {section.label}
-              </button>
-            ))}
-          </div>
+      <div className="container mx-auto px-4 mt-6">
+        {/* Model Title and Introduction */}
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
+          <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
         </div>
-      )}
-      
-      <div className="container mx-auto px-4">
-        {/* 2. Intro + Interactive View Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 py-16">
-          {/* Left column - 60% width */}
-          <div className="lg:col-span-3 space-y-6">
-            <h1 className="text-3xl md:text-4xl font-bold">
-              {hasModelText(modelData) && modelData.modelText ? modelData.modelText.headline : modelData?.name || ""}
-            </h1>
-            <h2 className="text-xl md:text-2xl text-gray-600">
-              {hasModelText(modelData) && modelData.modelText ? modelData.modelText.subheadline : 'Für Aktive und Unabhängige'}
-            </h2>
-            <div className="space-y-4 text-gray-700">
-              <p>
-                {hasModelText(modelData) && modelData.modelText
-                  ? modelData.modelText.description 
-                  : modelData?.intro || ""}
-              </p>
-              <p>
-                Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit Eco-Leder Applikationen machen den spürbaren Unterschied bei diesem Modell. Erleben Sie modernen Wohnkomfort auf kleinstem Raum.
-              </p>
-            </div>
-            
-            {/* Technical specs in 3-column row */}
-            <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t">
-              <div>
-                <span className="text-sm text-gray-600">Länge</span>
-                <p className="font-semibold">{modelData?.technicalData?.länge || "5,99 – 6,36 m"}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">Sitzplätze</span>
-                <p className="font-semibold">{modelData?.technicalData?.sitzplätze || "4"}</p>
-              </div>
-              <div>
-                <span className="text-sm text-gray-600">Schlafplätze</span>
-                <p className="font-semibold">{modelData?.technicalData?.schlafplätze || "2–3"}</p>
-              </div>
-            </div>
+        
+        {/* Technical Data Summary */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+          <div className="flex flex-col items-center p-2">
+            <span className="text-sm text-gray-600">Länge</span>
+            <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
           </div>
-          
-          {/* Right column - 40% width */}
-          <div className="lg:col-span-2">
-            <GrayBoxPlaceholder ratio={4/3} label="Interaktive Innenansicht (Hotspot-Placeholder)" />
+          <div className="flex flex-col items-center p-2">
+            <span className="text-sm text-gray-600">Sitzplätze</span>
+            <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
+          </div>
+          <div className="flex flex-col items-center p-2">
+            <span className="text-sm text-gray-600">Schlafplätze</span>
+            <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
           </div>
         </div>
         
-        {/* 3. Vertical Scroll Navigation - Desktop only - Updated to use activeSection */}
-        {!isMobile && (
-          <nav className="hidden lg:flex flex-col items-center fixed left-8 top-1/2 transform -translate-y-1/2 z-10 space-y-8">
-            {sections.map(section => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`flex flex-col items-center space-y-3 group transition-colors`}
-              >
-                <div className={`rounded-full h-12 w-12 flex items-center justify-center ${
-                  activeSection === section.id 
-                    ? 'bg-gray-300' 
-                    : 'bg-gray-200 group-hover:bg-gray-300'
-                } transition-colors`}>
-                  <Circle className={`h-6 w-6 ${
-                    activeSection === section.id 
-                      ? 'text-gray-800' 
-                      : 'text-gray-500'
-                  }`} />
-                </div>
-                <span className={`text-sm ${
-                  activeSection === section.id 
-                    ? 'font-bold text-gray-900' 
-                    : 'text-gray-600 group-hover:text-gray-900'
-                } transition-colors`}>
-                  {section.label}
-                </span>
-              </button>
-            ))}
-          </nav>
-        )}
-        
-        {/* 4. Highlights Section - UPDATED */}
-        <section id="highlights" className="py-24 scroll-mt-8">
-          <h2 className="text-2xl font-semibold mb-8 text-center">Highlights der Baureihe</h2>
-          
-          {/* New card-based highlights layout */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {modelData?.highlights?.map((highlight, index) => (
-              <Card key={index} className="bg-gray-100 border-0">
-                <CardContent className="p-6 flex flex-col items-center text-center">
-                  {/* Icon placeholder circle */}
-                  <div className="w-16 h-16 bg-gray-300 rounded-full mb-4 flex items-center justify-center">
-                    <Circle className="h-8 w-8 text-gray-500" />
-                  </div>
-                  
-                  {/* Highlight text */}
-                  <p className="text-gray-800">{highlight}</p>
-                </CardContent>
-              </Card>
-            )) || []}
+        {/* Highlights Section */}
+        <section className="my-10">
+          <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <ul className="space-y-3">
+              {modelDetails.highlights.map((highlight, index) => (
+                <li key={index} className="flex gap-2">
+                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
         
-        {/* 5. Grundrisse (Floorplans) Section - Enhanced with cards and buttons */}
-        {hasLayouts(modelData) && (
-          <section id="grundrisse" className="py-24 scroll-mt-8">
-            <h2 className="text-2xl font-semibold mb-8">Grundrisse</h2>
-            
-            {/* New comparison instructions */}
-            <p className="text-center mb-6 text-gray-600">
-              Vergleichen Sie zwei Grundrisse dieser Baureihe
-            </p>
-            
-            {/* Desktop view - Grid layout */}
-            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {modelData.layouts.map((layout) => (
-                <ModelCard 
-                  key={layout.id}
-                  model={layout}
-                  onCompare={handleCompareModel}
-                  isSelected={selectedForComparison.includes(layout.id)}
-                />
-              ))}
-            </div>
-            
-            {/* Mobile view - Horizontal slider with controls */}
-            <div className="md:hidden relative">
-              <div className="overflow-hidden">
-                {modelData.layouts.length > 0 && (
-                  <div className="w-full">
-                    <ModelCard
-                      model={modelData.layouts[currentSlide]}
-                      onCompare={handleCompareModel}
-                      isSelected={selectedForComparison.includes(modelData.layouts[currentSlide].id)}
-                    />
-                  </div>
-                )}
-              </div>
-              
-              {/* Slider navigation */}
-              {modelData.layouts.length > 1 && (
-                <div className="flex justify-between mt-4">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={handlePrevSlide}
-                    disabled={currentSlide === 0}
-                    className="rounded-full"
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                  </Button>
-                  
-                  <div className="flex items-center space-x-2">
-                    {modelData.layouts.map((_, index) => (
-                      <div 
-                        key={index}
-                        className={`h-2 w-2 rounded-full ${
-                          index === currentSlide ? 'bg-gray-800' : 'bg-gray-300'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    onClick={handleNextSlide}
-                    disabled={currentSlide === modelData.layouts.length - 1}
-                    className="rounded-full"
-                  >
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              )}
-            </div>
-            
-            {/* New inline comparison module */}
-            {showInlineComparison && hasLayouts(modelData) && (
-              <InlineComparisonModule
-                selectedModels={selectedForComparison}
-                modelData={modelData}
-                onClose={handleCloseInlineComparison}
-              />
-            )}
-            
-            {/* Comparison overlay (keeping original overlay for backward compatibility) */}
-            {hasLayouts(modelData) && (
-              <ComparisonOverlay
-                isOpen={isComparisonOpen && selectedForComparison.length === 2}
-                onClose={handleCloseComparison}
-                models={selectedForComparison}
-                modelData={modelData}
-              />
-            )}
+        {/* Gallery Section */}
+        <section className="my-10">
+          <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <GrayBoxPlaceholder ratio={4/3} />
+            <GrayBoxPlaceholder ratio={4/3} />
+            <GrayBoxPlaceholder ratio={4/3} />
+            <GrayBoxPlaceholder ratio={4/3} />
+          </div>
+        </section>
+        
+        {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
+        {hasLayouts(modelDetails) && (
+          <section className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
+            {renderLayouts()}
           </section>
         )}
         
-        {/* 6. Innenraum (Interior) Section - Only shown if interior exists */}
-        {hasInterior(modelData) && (
-          <section id="innenraum" className="py-24 scroll-mt-8">
-            <h2 className="text-2xl font-semibold mb-8">Innenraum</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        {/* Innenraum (Interior) Section - Only shown if interior exists */}
+        {hasInterior(modelDetails) && (
+          <section className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
               <div className="lg:col-span-3">
                 <GrayBoxPlaceholder ratio={16/9} />
               </div>
               <div className="lg:col-span-2">
-                <ul className="space-y-6 divide-y">
-                  {modelData.interior.slice(0, 3).map((item, index) => (
-                    <li key={index} className={`${index > 0 ? 'pt-6' : ''}`}>
-                      <div className="font-medium mb-2">{item.name}</div>
-                      <div className="text-gray-600">{item.description}</div>
-                    </li>
-                  ))}
-                </ul>
+                <div className="bg-white rounded-lg p-4 shadow-sm h-full">
+                  {renderInterior()}
+                </div>
               </div>
             </div>
           </section>
         )}
         
-        {/* 7. Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
-        {hasUpholstery(modelData) && (
-          <section id="polster" className="py-24 scroll-mt-8">
-            <h2 className="text-2xl font-semibold mb-8">Polster</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {modelData.upholsteryTypes.map((type, index) => (
-                <div key={index} className="bg-white rounded-lg overflow-hidden">
-                  <GrayBoxPlaceholder ratio={1} />
-                  <div className="p-3 text-center">
-                    <p>{type}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
+        {hasUpholstery(modelDetails) && (
+          <section className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+            {renderUpholstery()}
           </section>
         )}
         
-        {/* 8. Serienausstattung (Standard Equipment) Section */}
-        {hasEquipment(modelData) && (
-          <section id="serienausstattung" className="py-24 scroll-mt-8">
-            <h2 className="text-2xl font-semibold mb-8">Serienausstattung</h2>
-            <Tabs defaultValue={Object.keys(modelData.equipment)[0]} className="w-full">
-              <TabsList className="w-full flex flex-wrap h-auto mb-8 bg-gray-100 p-1">
-                {Object.entries(modelData.equipment).map(([key]) => (
-                  <TabsTrigger key={key} value={key} className="text-sm flex-grow">
-                    {equipmentTabs[key as keyof typeof equipmentTabs]}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              
-              {Object.entries(modelData.equipment).map(([key, items]) => (
-                <TabsContent key={key} value={key} className="mt-4">
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                    {items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <div className="h-2 w-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </TabsContent>
-              ))}
-            </Tabs>
+        {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
+        {hasEquipment(modelDetails) && (
+          <section className="my-10 pt-8">
+            <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+            {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
           </section>
         )}
       </div>
