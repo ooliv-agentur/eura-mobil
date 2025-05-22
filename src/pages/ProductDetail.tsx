@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -27,6 +26,7 @@ import { ComparisonProvider } from "@/context/ComparisonContext";
 import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 // Model data repository - could later be moved to a separate file
 const modelsData = {
@@ -395,6 +395,15 @@ const ProductDetail = () => {
     ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
   
+  // Define sidebar navigation items
+  const navigationItems = [
+    { id: "highlights", label: "Highlights" },
+    { id: "grundrisse", label: "Grundrisse" },
+    { id: "innenraum", label: "Innenraum" },
+    { id: "polster", label: "Polster" },
+    { id: "serienausstattung", label: "Serienausstattung" },
+  ];
+  
   const handleKonfiguratorClick = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
@@ -523,6 +532,9 @@ const ProductDetail = () => {
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
+        {/* Add Sidebar Navigation - desktop only */}
+        <SidebarNavigation items={navigationItems} />
+        
         {/* Hero Section */}
         <div className="relative">
           <div className="w-full h-72 sm:h-96">
@@ -553,8 +565,8 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Highlights Section */}
-          <section className="my-10">
+          {/* Highlights Section - Add anchor ID */}
+          <section id="highlights" className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <ul className="space-y-3">
@@ -579,17 +591,17 @@ const ProductDetail = () => {
             </div>
           </section>
           
-          {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
+          {/* Grundrisse (Layouts) Section - Add anchor ID */}
           {hasLayouts(modelDetails) && (
-            <section className="my-10">
+            <section id="grundrisse" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
               {renderLayouts()}
             </section>
           )}
           
-          {/* Innenraum (Interior) Section - Only shown if interior exists */}
+          {/* Innenraum (Interior) Section - Add anchor ID */}
           {hasInterior(modelDetails) && (
-            <section className="my-10">
+            <section id="innenraum" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3">
@@ -604,17 +616,17 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
+          {/* Polster (Upholstery) Section - Add anchor ID */}
           {hasUpholstery(modelDetails) && (
-            <section className="my-10">
+            <section id="polster" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
               {renderUpholstery()}
             </section>
           )}
           
-          {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
+          {/* Serienausstattung (Standard Equipment) Section - Add anchor ID */}
           {hasEquipment(modelDetails) && (
-            <section className="my-10 pt-8">
+            <section id="serienausstattung" className="my-10 pt-8">
               <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
               {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
             </section>
