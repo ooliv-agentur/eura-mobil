@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -537,20 +538,20 @@ const ProductDetail = () => {
         
         <div className="container mx-auto">
           {/* Hero Section - Clean, without text overlay */}
-          <div className="relative w-full mb-16 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
+          <div className="relative w-full mb-8 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
             <div className="w-full h-80 sm:h-[400px]">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
-            {/* No text overlay in hero section as requested */}
           </div>
           
-          {/* Introduction Section - Updated with proper headline structure */}
+          {/* Main headline moved outside the hero with increased spacing */}
+          <div className="text-center mx-auto max-w-4xl px-4 mb-20 mt-12">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">Für Deine beste Zeit.</h1>
+            <h2 className="text-2xl md:text-3xl font-semibold">Eura Mobil Vans</h2>
+          </div>
+          
+          {/* Introduction Section */}
           <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4">
-            <div className="mb-16 text-center">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">Für Deine beste Zeit.</h1>
-              <h2 className="text-2xl md:text-3xl font-semibold">Eura Mobil Vans</h2>
-            </div>
-            
             {/* Two column content with hotspot image and increased spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
               <div className="space-y-10">
