@@ -95,6 +95,28 @@ const ctaCards = [
   }
 ];
 
+// Content for the "Entdecken Sie EURA MOBIL" cards
+const euraCards = [
+  {
+    title: "Über EURA MOBIL",
+    content: "Seit 1959 steht EURA MOBIL für Qualität und Ingenieurskunst im Wohnmobilbau.\nIn Sprendlingen entstehen unsere Fahrzeuge mit Präzision, Sorgfalt und Leidenschaft.\nAls Teil der Trigano-Gruppe kombinieren wir deutsche Fertigung mit europäischem Weitblick – für langlebige, moderne Reisemobile.",
+    linkText: "Mehr erfahren",
+    linkPath: "/ueber-eura-mobil"
+  },
+  {
+    title: "Qualität & Vorteile",
+    content: "EURA MOBIL steht für winterfeste Isolation, langlebige Materialien und clevere Raumnutzung.\nUnsere Sealed Structure, durchdachter Möbelbau und doppelte Böden machen den Unterschied – erleben Sie kompromisslose Qualität auf allen Ebenen.",
+    linkText: "Mehr erfahren",
+    linkPath: "/qualitaet"
+  },
+  {
+    title: "Werksführung",
+    content: "Unsere Fertigung in Sprendlingen zeigt, was moderne Produktion bedeutet:\ndigital geplant, handwerklich umgesetzt, geprüft nach höchsten Standards.\nEntdecken Sie, wie echte Qualität entsteht – Schritt für Schritt, live vor Ort.",
+    linkText: "Mehr erfahren",
+    linkPath: "/werksfuehrung"
+  }
+];
+
 // News items data - expanded to 4 items with more details
 const newsItems = [
   {
@@ -455,63 +477,32 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* New Stacked Horizontal Content Boxes Section: About EURA MOBIL - UPDATED */}
+        {/* New Three-Column Cards Section: About EURA MOBIL */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold mb-10 text-center">Entdecken Sie EURA MOBIL</h2>
             
-            <div className="space-y-8">
-              {/* Block 1: Über EURA MOBIL */}
-              <div className="bg-white p-6 rounded-md shadow-sm">
-                <h3 className="text-xl font-bold mb-4">Über EURA MOBIL</h3>
-                <div className="text-gray-600 space-y-2 mb-6">
-                  <p>
-                    Seit über 60 Jahren steht EURA MOBIL für höchste Qualität, deutsche Ingenieurskunst und Innovation im Wohnmobilbau.
-                    Unsere Modelle entstehen in Sprendlingen und verbinden langlebige Bauweise mit modernem Komfort.
-                    Als Teil der Trigano-Gruppe setzen wir Maßstäbe in Funktionalität und Design.
-                  </p>
-                </div>
-                
-                <Button asChild variant="outline" className="px-6 mb-6">
-                  <Link to="/ueber-eura-mobil">Mehr erfahren</Link>
-                </Button>
-                
-                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full" />
-              </div>
-              
-              {/* Block 2: Qualität & Vorteile */}
-              <div className="bg-white p-6 rounded-md shadow-sm">
-                <h3 className="text-xl font-bold mb-4">Qualität & Vorteile</h3>
-                <div className="text-gray-600 space-y-2 mb-6">
-                  <p>
-                    Ob Sealed Structure, winterfeste Isolation oder langlebige Materialien – EURA MOBIL setzt konsequent auf geprüfte Qualität.
-                    Unsere Vorteile zeigen sich im Detail und begleiten Sie auf jeder Reise.
-                  </p>
-                </div>
-                
-                <Button asChild variant="outline" className="px-6 mb-6">
-                  <Link to="/qualitaet">Mehr erfahren</Link>
-                </Button>
-                
-                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full" />
-              </div>
-              
-              {/* Block 3: Werksführung */}
-              <div className="bg-white p-6 rounded-md shadow-sm">
-                <h3 className="text-xl font-bold mb-4">Werksführung</h3>
-                <div className="text-gray-600 space-y-2 mb-6">
-                  <p>
-                    Begleiten Sie uns auf einen Rundgang durch unsere moderne Fertigung in Sprendlingen.
-                    Erleben Sie, wie aus hochwertigen Komponenten und handwerklicher Präzision eines der besten Wohnmobile Europas entsteht.
-                  </p>
-                </div>
-                
-                <Button asChild variant="outline" className="px-6 mb-6">
-                  <Link to="/werksfuehrung">Mehr erfahren</Link>
-                </Button>
-                
-                <AspectRatio ratio={16/9} className="bg-gray-300 rounded-md w-full" />
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {euraCards.map((card, index) => (
+                <Card key={index} className="h-full bg-white shadow-sm hover:shadow transition-shadow duration-300">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <h3 className="text-xl font-bold mb-4">{card.title}</h3>
+                    
+                    <p className="text-gray-600 mb-6 whitespace-pre-line flex-grow">
+                      {card.content}
+                    </p>
+                    
+                    {/* Small square grey icon placeholder */}
+                    <div className="w-12 h-12 bg-gray-200 rounded mb-6 flex items-center justify-center">
+                      <Circle className="h-6 w-6 text-gray-400" />
+                    </div>
+                    
+                    <Button asChild variant="outline" className="mt-auto w-fit">
+                      <Link to={card.linkPath}>{card.linkText}</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
