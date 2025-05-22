@@ -367,7 +367,7 @@ export const FloorplanMatrix: React.FC = () => {
         onStartComparison={handleStartComparison}
       />
 
-      {/* Comparison Overlay - ONLY in Dialog, no inline rendering */}
+      {/* ComparisonOverlay - ONLY rendered as a Dialog, never inline */}
       <ComparisonOverlay
         isOpen={isComparisonOpen}
         onClose={() => setIsComparisonOpen(false)}
