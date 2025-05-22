@@ -451,8 +451,8 @@ const ProductDetail = () => {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {modelDetails.upholsteryTypes.map((type, index) => (
-          <div key={index} className="border rounded-lg overflow-hidden">
-            <GrayBoxPlaceholder ratio={4/3} className="h-40" />
+          <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
+            <AspectRatio ratio={4/3} className="h-40" />
             <div className="p-3">
               <h3 className="font-medium">{type}</h3>
             </div>
@@ -614,9 +614,9 @@ const ProductDetail = () => {
         
         {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
         {hasEquipment(modelDetails) && (
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
-              {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+          <section className="my-10 pt-8">
+            <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+            {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
           </section>
         )}
       </div>
