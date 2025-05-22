@@ -30,18 +30,18 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
-// Updated with correct category assignments
+// Updated with correct category assignments and improved descriptions for consistent display
 const modelTypes = [
-  { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen", path: "/modelle/van", type: "vans" },
-  { name: "Activa One", description: "Kompakte Wohnmobile für Einsteiger und Familien", path: "/modelle/activa-one", type: "alkoven" },
-  { name: "Profila T – Fiat", description: "Komfort und Flexibilität auf Fiat-Basis", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
-  { name: "Profila RS", description: "Großzügiger Wohnraum mit praktischer Aufteilung", path: "/modelle/profila-rs", type: "teilintegriert" },
-  { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
-  { name: "Contura", description: "Design und Komfort in perfekter Harmonie", path: "/modelle/contura", type: "teilintegriert" },
-  { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf Fiat-Basis", path: "/modelle/integra-line-fiat", type: "integriert" },
-  { name: "Integra Line GT – Mercedes", description: "Premium Integrierte mit Mercedes Fahrgestell", path: "/modelle/integra-line-gt", type: "integriert" },
-  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung", path: "/modelle/integra", type: "integriert" },
-  { name: "Xtura", description: "Für Abenteurer mit höchsten Ansprüchen", path: "/modelle/xtura", type: "teilintegriert" }
+  { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer und spontane Ausflüge mit maximaler Wendigkeit.", path: "/modelle/van", type: "vans" },
+  { name: "Activa One", description: "Praktische Wohnmobile für Einsteiger und Familien. Bietet ausreichend Platz für bis zu 6 Personen mit optimierter Raumnutzung.", path: "/modelle/activa-one", type: "alkoven" },
+  { name: "Profila T – Fiat", description: "Komfortables Reisemobil auf Fiat-Basis mit durchdachtem Grundriss. Verbindet Fahrkomfort mit praktischen Wohnlösungen.", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
+  { name: "Profila RS", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Bietet hohen Reisekomfort und flexible Nutzungsmöglichkeiten für längere Touren.", path: "/modelle/profila-rs", type: "teilintegriert" },
+  { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis mit erstklassigem Fahrgefühl. Kombiniert Fahrdynamik mit elegantem Wohnambiente.", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
+  { name: "Contura", description: "Design und Komfort in perfekter Harmonie vereint. Zeitlose Eleganz trifft auf durchdachte Funktionalität für anspruchsvolle Reisende.", path: "/modelle/contura", type: "teilintegriert" },
+  { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf solider Fiat-Basis. Überzeugt durch großzügigen Raumeindruck und intelligente Ausstattungsdetails.", path: "/modelle/integra-line-fiat", type: "integriert" },
+  { name: "Integra Line GT – Mercedes", description: "Premium Integrierte mit Mercedes Fahrgestell für höchste Ansprüche. Vereint souveräne Fahreigenschaften mit luxuriösem Wohnambiente.", path: "/modelle/integra-line-gt", type: "integriert" },
+  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung für höchste Ansprüche. Maximaler Komfort und innovative Technik für uneingeschränkten Reisegenuss.", path: "/modelle/integra", type: "integriert" },
+  { name: "Xtura", description: "Das Abenteuer-Wohnmobil für Entdecker mit Komfortanspruch. Robuste Technik und durchdachte Details machen es zum perfekten Begleiter abseits der Straße.", path: "/modelle/xtura", type: "teilintegriert" }
 ];
 
 // Wohnmobiltypen Erklärungen with generic icon placeholders
@@ -412,14 +412,20 @@ const Home = () => {
                       className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4"
                     >
                       <Card className="h-full transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
-                        <CardContent className="p-4">
+                        <CardContent className="p-4 flex flex-col h-full">
                           {/* Fixed aspect ratio for consistent image dimensions */}
                           <div className="mb-4">
-                            <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md" />
+                            <AspectRatio ratio={16 / 9}>
+                              <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
+                                <span className="text-xs text-gray-400">Modellbild</span>
+                              </div>
+                            </AspectRatio>
                           </div>
-                          <h3 className="text-lg font-bold mb-2 line-clamp-2">{model.name}</h3>
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-1">{model.description}</p>
-                          <Button variant="outline" asChild className="w-full">
+                          <h3 className="text-lg font-bold mb-2">{model.name}</h3>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow h-[60px] overflow-hidden">
+                            {model.description}
+                          </p>
+                          <Button variant="outline" asChild className="w-full mt-auto">
                             <Link to={model.path}>Mehr erfahren</Link>
                           </Button>
                         </CardContent>
