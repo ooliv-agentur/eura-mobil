@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -536,13 +535,14 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        {/* Hero Section */}
+        {/* Hero Section with Text Overlay */}
         <div className="relative">
           <div className="w-full h-72 sm:h-96">
             <GrayBoxPlaceholder ratio={21/9} className="h-full" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
-            </div>
+          </div>
+          {/* Hero Text Overlay - Centered */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
           </div>
         </div>
         
@@ -550,7 +550,7 @@ const ProductDetail = () => {
           {/* Introduction Section */}
           <div className="mb-8 text-center">
             <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
-            <h3 className="text-xl md:text-2xl font-medium mt-1">Eura Mobil Vans</h3>
+            <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
           </div>
           
           {/* Model Title and Introduction */}
