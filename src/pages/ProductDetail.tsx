@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -537,18 +536,19 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         <div className="container mx-auto px-4">
-          {/* Hero Section with Text Overlay */}
-          <div className="relative mb-8">
+          {/* Hero Section with Text Overlay - Full Width */}
+          <div className="relative mb-8 w-full">
             <div className="w-full h-72 sm:h-96">
               <GrayBoxPlaceholder ratio={21/9} className="h-full" />
             </div>
             {/* Hero Text Overlay - Centered */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="text-gray-400 text-5xl md:text-6xl font-light mb-2 opacity-60">VANS</div>
               <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
             </div>
           </div>
           
-          {/* Introduction Section - Properly placed after hero */}
+          {/* Introduction Section - Two Column Layout */}
           <div className="py-8 mb-10 rounded-lg shadow-sm bg-white">
             {/* Headings */}
             <div className="mb-8 text-center">
@@ -556,26 +556,33 @@ const ProductDetail = () => {
               <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
             </div>
             
-            {/* Two column content */}
+            {/* Two column content with hotspot image */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
-                <p className="text-gray-700">{modelDetails.intro}</p>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
+                  <p className="text-gray-700">{modelDetails.intro}</p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
+                  <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
+                </div>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
-                <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
+                {/* Hotspot Image Placeholder in 16:9 format */}
+                <div className="h-full flex items-center">
+                  <div className="w-full">
+                    <AspectRatio ratio={16/9} className="bg-gray-200 rounded-lg">
+                      <div className="flex items-center justify-center h-full text-gray-600">
+                        Hotspot Bild Placeholder – Innenraum interaktiv
+                      </div>
+                    </AspectRatio>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Hotspot Image Placeholder */}
-          <div className="w-full mb-8">
-            <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
-              Hotspot Bild Placeholder – Innenraum interaktiv
-            </div>
-          </div>
-          
           {/* Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
             <div className="flex flex-col items-center p-2">
@@ -618,7 +625,7 @@ const ProductDetail = () => {
             </div>
           </section>
           
-          {/* Grundrisse (Layouts) Section - Add anchor ID */}
+          {/* Grundrisse (Layouts) Section */}
           {hasLayouts(modelDetails) && (
             <section id="grundrisse" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
@@ -626,7 +633,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Innenraum (Interior) Section - Add anchor ID */}
+          {/* Innenraum (Interior) Section */}
           {hasInterior(modelDetails) && (
             <section id="innenraum" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
@@ -643,7 +650,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Polster (Upholstery) Section - Add anchor ID */}
+          {/* Polster (Upholstery) Section */}
           {hasUpholstery(modelDetails) && (
             <section id="polster" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
@@ -651,7 +658,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Serienausstattung (Standard Equipment) Section - Add anchor ID */}
+          {/* Serienausstattung (Standard Equipment) Section */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
               <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
