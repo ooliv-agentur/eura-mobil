@@ -1,6 +1,7 @@
 
 import React from "react";
 import { MapPin } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface Dealer {
   id: number;
@@ -29,14 +30,15 @@ const MapComponent: React.FC<MapComponentProps> = ({
   selectedDealer
 }) => {
   return (
-    <div className="w-full h-64 md:h-96 lg:h-[400px] bg-gray-200 rounded-lg mb-6 border border-gray-300">
-      {/* Static map placeholder */}
-      <div className="h-full w-full flex items-center justify-center">
-        <div className="text-center text-gray-500">
-          <MapPin size={36} className="mx-auto mb-2" />
-          <p>Kartenbereich</p>
+    <div className="w-full rounded-lg mb-6 overflow-hidden">
+      <AspectRatio ratio={16/9} className="bg-gray-200 border border-gray-300">
+        <div className="h-full w-full flex items-center justify-center">
+          <div className="text-center text-gray-500">
+            <MapPin size={36} className="mx-auto mb-2" />
+            <p>Kartenbereich</p>
+          </div>
         </div>
-      </div>
+      </AspectRatio>
     </div>
   );
 };

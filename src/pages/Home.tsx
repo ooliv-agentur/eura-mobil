@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -481,14 +480,15 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Video Placeholder Section - Updated with reduced height */}
+        {/* Video Placeholder Section - Updated with consistent width and 16:9 aspect ratio */}
         <section className="py-16 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative max-h-[480px]">
-              <AspectRatio ratio={16/9} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Video className="h-16 w-16 text-gray-400" />
-              </div>
+          <div className="max-w-5xl mx-auto"> {/* Updated to match dealer map width */}
+            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
+              <AspectRatio ratio={16/9}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Video className="h-16 w-16 text-gray-400" />
+                </div>
+              </AspectRatio>
             </div>
           </div>
         </section>
@@ -526,7 +526,7 @@ const Home = () => {
         {/* Include the Wohnmobilberater component */}
         <Wohnmobilberater />
 
-        {/* Section 6: Händlersuche - Updated with static map placeholder */}
+        {/* Section 6: Händlersuche - Updated with 16:9 aspect ratio map placeholder */}
         <section className="py-16 px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold mb-4">Händler in Ihrer Nähe</h2>
@@ -572,12 +572,13 @@ const Home = () => {
               </Button>
             </div>
             
-            {/* Static map placeholder */}
-            <div className="w-full h-64 bg-gray-200 rounded-lg border border-gray-300 flex items-center justify-center">
-              <div className="text-center text-gray-500">
-                <MapPin size={36} className="mx-auto mb-2" />
-                <p>Kartenbereich</p>
-              </div>
+            {/* Updated MapComponent with 16:9 aspect ratio */}
+            <div className="w-full">
+              <MapComponent 
+                dealers={[]} 
+                googleMapsLoaded={false}
+                onSelectDealer={() => {}}
+              />
             </div>
           </div>
         </section>
