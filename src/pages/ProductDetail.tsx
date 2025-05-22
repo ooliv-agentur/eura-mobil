@@ -553,7 +553,7 @@ const ProductDetail = () => {
         <div className="container mx-auto overflow-visible">
           {/* Hero Section - Clean, without text overlay */}
           <div className="relative w-full -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] overflow-visible">
-            <div className="w-full h-80 sm:h-[400px]">
+            <div className="w-full h-80 sm:h-[500px]">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
           </div>
@@ -561,9 +561,9 @@ const ProductDetail = () => {
           {/* Main headline with guaranteed visibility on all screen sizes */}
           <div 
             id="product-headline" 
-            className="text-center mx-auto max-w-4xl px-4 my-16 md:mt-24 md:mb-20 relative z-10 overflow-visible min-h-[150px]"
+            className="text-center mx-auto max-w-4xl px-4 my-20 md:mt-32 md:mb-24 relative z-10 overflow-visible min-h-[180px]"
           >
-            <h1 className="text-3xl md:text-5xl font-bold mb-6 overflow-visible">Für Deine beste Zeit.</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-8 overflow-visible">Für Deine beste Zeit.</h1>
             <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil Vans</h2>
           </div>
           
