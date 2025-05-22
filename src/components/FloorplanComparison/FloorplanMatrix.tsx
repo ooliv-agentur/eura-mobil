@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FloorplanCard } from "./FloorplanCard";
@@ -359,7 +360,7 @@ export const FloorplanMatrix: React.FC = () => {
         </div>
       </section>
 
-      {/* Comparison Bar */}
+      {/* Comparison Bar - Only shows when models are selected */}
       <ComparisonBar
         selectedModels={selectedModelsForBar}
         onRemoveModel={handleRemoveModel}
