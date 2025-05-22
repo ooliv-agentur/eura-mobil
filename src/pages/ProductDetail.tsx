@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -561,14 +562,14 @@ const ProductDetail = () => {
           {/* Main headline with guaranteed visibility on all screen sizes */}
           <div 
             id="product-headline" 
-            className="text-center mx-auto max-w-4xl px-4 my-20 md:mt-32 md:mb-24 relative z-10 overflow-visible min-h-[180px]"
+            className="text-center mx-auto max-w-4xl px-4 my-20 md:mt-32 md:mb-12 relative z-10 overflow-visible min-h-[180px]"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-8 overflow-visible">Für Deine beste Zeit.</h1>
             <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil Vans</h2>
           </div>
           
-          {/* Introduction Section */}
-          <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4 overflow-visible">
+          {/* Introduction Section - Reduced top padding by 50% */}
+          <div className="px-6 py-6 mb-16 rounded-lg shadow-sm bg-white mx-4 overflow-visible">
             {/* Two column content with hotspot image and increased spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
               <div className="space-y-10">
