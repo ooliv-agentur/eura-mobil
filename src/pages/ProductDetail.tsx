@@ -1,6 +1,6 @@
 
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check, Download, MapPin, Settings } from "lucide-react";
@@ -390,6 +390,7 @@ const ProductDetail = () => {
   const isMobile = useIsMobile();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const location = useLocation();
   
   // Default to van if no model ID or model not found
   const modelDetails = modelId && modelId in modelsData 
@@ -404,6 +405,20 @@ const ProductDetail = () => {
     { id: "polster", label: "Polster" },
     { id: "serienausstattung", label: "Serienausstattung" },
   ];
+  
+  // Effect to handle hash anchor scrolling
+  useEffect(() => {
+    if (location.hash) {
+      // Add a small delay to ensure DOM is fully rendered before scrolling
+      const timer = setTimeout(() => {
+        const element = document.getElementById(location.hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location.hash]);
   
   const handleKonfiguratorClick = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
@@ -544,8 +559,8 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Main headline with increased spacing and better positioning */}
-          <div className="text-center mx-auto max-w-4xl px-4 my-16">
+          {/* Main headline with guaranteed visibility on all screen sizes */}
+          <div id="product-headline" className="text-center mx-auto max-w-4xl px-4 my-16 md:mt-24 md:mb-20">
             <h1 className="text-3xl md:text-5xl font-bold mb-6">Für Deine beste Zeit.</h1>
             <h2 className="text-2xl md:text-4xl font-semibold">Eura Mobil Vans</h2>
           </div>
