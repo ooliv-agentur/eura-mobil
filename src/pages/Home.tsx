@@ -31,18 +31,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MapComponent from "@/components/dealers/MapComponent";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
-// Updated with requested text revisions ensuring all descriptions end with a full stop
+// Updated with requested text revisions ensuring all descriptions are consistent in length
 const modelTypes = [
-  { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer und spontane Ausflüge mit maximaler Wendigkeit.", path: "/modelle/van", type: "vans" },
-  { name: "Activa One", description: "Praktische Wohnmobile für Einsteiger und Familien. Bietet ausreichend Platz für bis zu 6 Personen mit optimierter Raumnutzung.", path: "/modelle/activa-one", type: "alkoven" },
-  { name: "Profila T – Fiat", description: "Komfortables Reisemobil auf Fiat-Basis mit durchdachtem Grundriss. Verbindet Fahrkomfort mit praktischen Details.", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
-  { name: "Profila RS", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Bietet hohen Reisekomfort und flexible Nutzungsmöglichkeiten.", path: "/modelle/profila-rs", type: "teilintegriert" },
-  { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis mit erstklassigem Fahrgefühl. Kombiniert Fahrdynamik mit elegantem Wohnambiente.", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
-  { name: "Contura", description: "Design und Komfort in perfekter Harmonie vereint. Zeitlose Eleganz trifft auf durchdachte Funktionalität für anspruchsvolle Reisende.", path: "/modelle/contura", type: "teilintegriert" },
-  { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf solider Fiat-Basis. Überzeugt durch großzügigen Raumeindruck und intelligente Ausstattungsdetails.", path: "/modelle/integra-line-fiat", type: "integriert" },
-  { name: "Integra Line GT – Mercedes", description: "Premium Integrierte mit Mercedes Fahrgestell für höchste Ansprüche. Vereint souveräne Fahreigenschaften mit luxuriösem Wohnambiente.", path: "/modelle/integra-line-gt", type: "integriert" },
-  { name: "Integra", description: "Luxus auf Rädern mit erstklassiger Ausstattung für höchste Ansprüche. Maximaler Komfort und innovative Technik für uneingeschränkten Reisegenuss.", path: "/modelle/integra", type: "integriert" },
-  { name: "Xtura", description: "Das Abenteuer-Wohnmobil für Entdecker mit Komfortanspruch. Robuste Technik und durchdachte Details machen es zum perfekten Begleiter abseits der Straße.", path: "/modelle/xtura", type: "teilintegriert" }
+  { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer mit maximaler Wendigkeit.", path: "/modelle/van", type: "vans" },
+  { name: "Activa One", description: "Praktische Wohnmobile für Einsteiger und Familien. Bis 6 Personen reisen mit optimiertem Platz.", path: "/modelle/activa-one", type: "alkoven" },
+  { name: "Profila T – Fiat", description: "Komfortabler Teilintegrierter auf Fiat-Basis. Grundriss, Technik und Fahrkomfort im perfekten Mix.", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
+  { name: "Profila RS", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Hoher Reisekomfort und flexible Nutzung.", path: "/modelle/profila-rs", type: "teilintegriert" },
+  { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis. Erstklassiger Fahrkomfort trifft auf elegantes Design.", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
+  { name: "Contura", description: "Design und Komfort in perfekter Harmonie. Zeitlose Eleganz mit cleverer Funktionalität.", path: "/modelle/contura", type: "teilintegriert" },
+  { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf solider Fiat-Basis. Großzügige Raumwirkung und intelligente Technik.", path: "/modelle/integra-line-fiat", type: "integriert" },
+  { name: "Integra Line GT – Mercedes", description: "Premium Integrierter auf Mercedes-Basis. Fahrgefühl, Ausstattung und Qualität auf Top-Niveau.", path: "/modelle/integra-line-gt", type: "integriert" },
+  { name: "Integra", description: "Luxus auf Rädern für höchste Ansprüche. Maximale Autarkie, Top-Komfort und innovative Technik.", path: "/modelle/integra", type: "integriert" },
+  { name: "Xtura", description: "Das Abenteuer-Wohnmobil für Entdecker. Robuste Technik und smarte Details für jedes Terrain.", path: "/modelle/xtura", type: "teilintegriert" }
 ];
 
 // Wohnmobiltypen Erklärungen with generic icon placeholders
