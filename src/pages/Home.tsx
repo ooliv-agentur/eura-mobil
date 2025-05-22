@@ -24,7 +24,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ArrowDown, Circle, Search, MapPin } from "lucide-react";
+import { ChevronDown, ArrowDown, Circle, Search, MapPin, Video } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -342,11 +342,14 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Video Placeholder Section - 16:9 ratio grey block */}
+        {/* Video Placeholder Section - 16:9 ratio grey block with video icon */}
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="w-full bg-gray-200 rounded-lg overflow-hidden">
+            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
               <AspectRatio ratio={16/9} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Video className="h-16 w-16 text-gray-400" />
+              </div>
             </div>
           </div>
         </section>
