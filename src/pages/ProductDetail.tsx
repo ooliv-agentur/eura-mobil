@@ -550,9 +550,9 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        <div className="container mx-auto">
+        <div className="container mx-auto overflow-visible">
           {/* Hero Section - Clean, without text overlay */}
-          <div className="relative w-full -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
+          <div className="relative w-full -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] overflow-visible">
             <div className="w-full h-80 sm:h-[400px]">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
@@ -561,14 +561,14 @@ const ProductDetail = () => {
           {/* Main headline with guaranteed visibility on all screen sizes */}
           <div 
             id="product-headline" 
-            className="text-center mx-auto max-w-4xl px-4 my-16 md:mt-24 md:mb-20 relative z-10 overflow-visible"
+            className="text-center mx-auto max-w-4xl px-4 my-16 md:mt-24 md:mb-20 relative z-10 overflow-visible min-h-[150px]"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-6 overflow-visible">Für Deine beste Zeit.</h1>
             <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil Vans</h2>
           </div>
           
           {/* Introduction Section */}
-          <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4">
+          <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4 overflow-visible">
             {/* Two column content with hotspot image and increased spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
               <div className="space-y-10">

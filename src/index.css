@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +98,26 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Fix for potential overflow issues */
+  .container {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+  }
+  
+  /* Fix for headline visibility */
+  #product-headline {
+    position: relative;
+    z-index: 10;
+    height: auto;
+    min-height: 150px;
+    overflow: visible;
+  }
+  
+  #product-headline h1,
+  #product-headline h2 {
+    position: relative;
+    overflow: visible;
   }
 }
