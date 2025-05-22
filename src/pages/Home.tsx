@@ -342,6 +342,15 @@ const Home = () => {
           </div>
         </section>
 
+        {/* Video Placeholder Section - 16:9 ratio grey block */}
+        <section className="py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="w-full bg-gray-200 rounded-lg overflow-hidden">
+              <AspectRatio ratio={16/9} />
+            </div>
+          </div>
+        </section>
+
         {/* Models & CTA Section */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
