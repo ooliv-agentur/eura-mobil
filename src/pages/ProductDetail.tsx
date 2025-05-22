@@ -553,12 +553,12 @@ const ProductDetail = () => {
             <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
           </div>
           
-          {/* Model Title and Introduction */}
+          {/* Model Title and Introduction - Updated with full text */}
           <div className="mb-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
-                <p className="text-gray-700">{modelDetails.intro}</p>
+                <p className="text-gray-700">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
