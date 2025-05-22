@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -536,7 +537,7 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         {/* Hero Section with Text Overlay */}
-        <div className="relative mb-12">
+        <div className="relative mb-8">
           <div className="w-full h-72 sm:h-96">
             <GrayBoxPlaceholder ratio={21/9} className="h-full" />
           </div>
@@ -547,8 +548,8 @@ const ProductDetail = () => {
         </div>
         
         <div className="container mx-auto px-4">
-          {/* Introduction Section - Integrated in main container flow */}
-          <div className="py-8 bg-white mb-10">
+          {/* Introduction Section - Properly placed after hero and before hotspot */}
+          <div className="py-8 bg-white mb-10 rounded-lg shadow-sm">
             {/* Headings */}
             <div className="mb-8 text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
@@ -559,7 +560,7 @@ const ProductDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
               <div>
                 <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
-                <p className="text-gray-700">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
+                <p className="text-gray-700">{modelDetails.intro}</p>
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
