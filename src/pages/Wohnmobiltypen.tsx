@@ -1,8 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -13,32 +12,34 @@ const Wohnmobiltypen = () => {
       title: "Vans",
       description: "Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den EURA MOBIL Van zu Ihrem ganz persönlichen mobilen Zuhause machen.",
       buttonText: "Jetzt Vans entdecken",
+      url: "/wohnmobile/vans"
     },
     {
       id: "alkoven",
       title: "Alkoven-Wohnmobile",
       description: "In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit.",
       buttonText: "Alkoven-Modelle anzeigen",
+      url: "/wohnmobile/alkoven"
     },
     {
       id: "teilintegriert",
       title: "Teilintegrierte Wohnmobile",
       description: "Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik.",
       buttonText: "Teilintegrierte entdecken",
+      url: "/wohnmobile"
     },
     {
       id: "integriert",
       title: "Integrierte Wohnmobile",
       description: "Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl.",
       buttonText: "Integrierte anzeigen",
+      url: "/wohnmobile"
     },
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      
-      <main className="flex-1 container mx-auto px-4 py-8">
+    <Layout>
+      <main className="container mx-auto px-4 py-8">
         <section className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Unsere Wohnmobiltypen im Überblick</h1>
           <p className="text-gray-600 max-w-3xl mx-auto">
@@ -56,16 +57,14 @@ const Wohnmobiltypen = () => {
                 <h2 className="text-2xl font-bold mb-3">{typ.title}</h2>
                 <p className="text-gray-600 mb-6">{typ.description}</p>
                 <Button className="w-full sm:w-auto" asChild>
-                  <Link to={`/modelle?typ=${typ.id}`}>{typ.buttonText}</Link>
+                  <Link to={typ.url}>{typ.buttonText}</Link>
                 </Button>
               </CardContent>
             </Card>
           ))}
         </section>
       </main>
-      
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 

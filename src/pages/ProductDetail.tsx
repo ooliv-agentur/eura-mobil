@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ArrowDown, Check, Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight } from "lucide-react";
@@ -399,7 +399,7 @@ const sections = [
   { id: "serienausstattung", label: "Serienausstattung" }
 ];
 
-// New component for Model Card
+// New component for Model Card with URL transformation
 const ModelCard = ({ 
   model,
   onCompare 
@@ -414,6 +414,68 @@ const ModelCard = ({
   }, 
   onCompare: (id: string) => void 
 }) => {
+  // Transform old URLs to new URL structure
+  const getTransformedUrl = (url: string | undefined): string => {
+    if (!url) return "#";
+    
+    // Extract info from the original URL format (e.g. /wohnmobile/vans/v-635-eb-2-2/)
+    const urlParts = url.split('/');
+    const modelId = urlParts[urlParts.length - 2] || '';
+    const floorplanId = urlParts[urlParts.length - 1] || '';
+    
+    // Determine category based on model ID
+    let category = "";
+    if (modelId.startsWith('v-') || modelId === 'van') {
+      category = 'vans';
+    } else if (modelId.startsWith('ao-') || modelId === 'activa-one') {
+      category = 'alkoven';
+    } else if (
+      modelId.startsWith('pt-') || 
+      modelId.startsWith('ptm-') ||
+      modelId.startsWith('prs-') ||
+      modelId.startsWith('c-') ||
+      modelId === 'profila-t-fiat' ||
+      modelId === 'profila-rs' ||
+      modelId === 'profila-t-mercedes' ||
+      modelId === 'contura' ||
+      modelId === 'xtura'
+    ) {
+      category = 'teilintegrierte';
+      // Determine specific teilintegrierte model
+      if (modelId === 'profila-t-fiat' || modelId.startsWith('pt-')) {
+        return `/wohnmobile/teilintegrierte/profila-t-fiat/${floorplanId}`;
+      } else if (modelId === 'profila-rs' || modelId.startsWith('prs-')) {
+        return `/wohnmobile/teilintegrierte/profila-rs/${floorplanId}`;
+      } else if (modelId === 'profila-t-mercedes' || modelId.startsWith('ptm-')) {
+        return `/wohnmobile/teilintegrierte/profila-t-mercedes/${floorplanId}`;
+      } else if (modelId === 'contura' || modelId.startsWith('c-')) {
+        return `/wohnmobile/teilintegrierte/contura/${floorplanId}`;
+      } else if (modelId === 'xtura' || modelId.startsWith('x-')) {
+        return `/wohnmobile/teilintegrierte/xtura/${floorplanId}`;
+      }
+    } else if (
+      modelId.startsWith('il-') || 
+      modelId.startsWith('ilgt-') ||
+      modelId.startsWith('i-') ||
+      modelId === 'integra-line-fiat' ||
+      modelId === 'integra-line-gt-mercedes' ||
+      modelId === 'integra'
+    ) {
+      category = 'integrierte';
+      // Determine specific integrierte model
+      if (modelId === 'integra-line-fiat' || modelId.startsWith('il-')) {
+        return `/wohnmobile/integrierte/integra-line-fiat/${floorplanId}`;
+      } else if (modelId === 'integra-line-gt-mercedes' || modelId.startsWith('ilgt-')) {
+        return `/wohnmobile/integrierte/integra-line-gt-mercedes/${floorplanId}`;
+      } else if (modelId === 'integra' || modelId.startsWith('i-')) {
+        return `/wohnmobile/integrierte/integra/${floorplanId}`;
+      }
+    }
+    
+    // Default URL format for vans and alkoven
+    return `/wohnmobile/${category}/${floorplanId}`;
+  };
+
   return (
     <Card className="overflow-hidden">
       <AspectRatio ratio={4/3} className="bg-gray-200">
@@ -433,7 +495,7 @@ const ModelCard = ({
         </div>
         <div className="grid grid-cols-1 gap-2">
           <Button asChild variant="outline" className="w-full">
-            <Link to={model.detailUrl || "#"}>
+            <Link to={getTransformedUrl(model.detailUrl)}>
               <Eye className="mr-2 h-4 w-4" />
               Modell ansehen
             </Link>
@@ -453,21 +515,58 @@ const ModelCard = ({
 };
 
 const ProductDetail = () => {
-  const { modelId } = useParams();
+  const { modelId, floorplanId } = useParams();
+  const location = useLocation();
   const isMobile = useIsMobile();
   const [activeSection, setActiveSection] = useState("highlights");
   const [currentSlide, setCurrentSlide] = useState(0);
   const { toast } = useToast();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   
+  // Determine the correct model based on the new URL structure
+  const getCurrentModelId = () => {
+    // Extract model type from pathname
+    const path = location.pathname;
+    
+    if (path.includes('/wohnmobile/vans')) {
+      return "van";
+    } else if (path.includes('/wohnmobile/alkoven')) {
+      return "activa-one";
+    } else if (path.includes('/wohnmobile/teilintegrierte/profila-t-fiat')) {
+      return "profila-t-fiat";
+    } else if (path.includes('/wohnmobile/teilintegrierte/profila-rs')) {
+      return "profila-rs";
+    } else if (path.includes('/wohnmobile/teilintegrierte/profila-t-mercedes')) {
+      return "profila-t-mercedes";
+    } else if (path.includes('/wohnmobile/teilintegrierte/contura')) {
+      return "contura";
+    } else if (path.includes('/wohnmobile/teilintegrierte/xtura')) {
+      return "xtura";
+    } else if (path.includes('/wohnmobile/integrierte/integra-line-fiat')) {
+      return "integra-line-fiat";
+    } else if (path.includes('/wohnmobile/integrierte/integra-line-gt-mercedes')) {
+      return "integra-line-gt-mercedes";
+    } else if (path.includes('/wohnmobile/integrierte/integra')) {
+      return "integra";
+    }
+    
+    return modelId || "van"; // Default to van if no match
+  };
+  
+  // Use the function to determine the current model
+  const currentModelId = getCurrentModelId();
+  
   // Default to van if no model ID or model not found
-  const modelData = modelId && modelId in modelsData 
-    ? modelsData[modelId as keyof typeof modelsData] 
+  const modelData = currentModelId in modelsData 
+    ? modelsData[currentModelId as keyof typeof modelsData] 
     : modelsData["van"];
 
   // Handler for adding to comparison
   const handleCompareModel = (modelId: string) => {
     // Here you would implement the session/cookie-based comparison logic
+    // Redirect to the new comparison URL
+    window.location.href = `/wohnmobile/modellvergleich?v1=${currentModelId}&v2=${modelId}`;
+    
     toast({
       title: "Modell zum Vergleich hinzugefügt",
       description: `${modelId} wurde zum Vergleich hinzugefügt.`,

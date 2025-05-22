@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -105,8 +104,8 @@ const Modellvergleich = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
-  const modelAFromQuery = queryParams.get('modelA');
-  const modelBFromQuery = queryParams.get('modelB');
+  const modelAFromQuery = queryParams.get('v1');
+  const modelBFromQuery = queryParams.get('v2');
 
   const [selectedModelA, setSelectedModelA] = useState<string>(modelAFromQuery || "");
   const [selectedModelB, setSelectedModelB] = useState<string>(modelBFromQuery || "");
@@ -116,7 +115,7 @@ const Modellvergleich = () => {
   // Update URL when models change
   useEffect(() => {
     if (selectedModelA && selectedModelB) {
-      navigate(`/modellvergleich?modelA=${selectedModelA}&modelB=${selectedModelB}`, { replace: true });
+      navigate(`/wohnmobile/modellvergleich?v1=${selectedModelA}&v2=${selectedModelB}`, { replace: true });
       
       // Scroll to comparison section with animation
       setTimeout(() => {
@@ -342,6 +341,34 @@ const Modellvergleich = () => {
     </Card>
   );
 
+  // Get URL for a model category
+  const getCategoryUrl = (modelId: string): string => {
+    switch(modelId) {
+      case "van":
+        return "/wohnmobile/vans";
+      case "activa-one":
+        return "/wohnmobile/alkoven";
+      case "profila-t-fiat":
+        return "/wohnmobile/teilintegrierte/profila-t-fiat";
+      case "profila-rs":
+        return "/wohnmobile/teilintegrierte/profila-rs";
+      case "profila-t-mercedes":
+        return "/wohnmobile/teilintegrierte/profila-t-mercedes";
+      case "contura":
+        return "/wohnmobile/teilintegrierte/contura";
+      case "integra-line-fiat":
+        return "/wohnmobile/integrierte/integra-line-fiat";
+      case "integra-line-gt-mercedes":
+        return "/wohnmobile/integrierte/integra-line-gt-mercedes";
+      case "integra":
+        return "/wohnmobile/integrierte/integra";
+      case "xtura":
+        return "/wohnmobile/teilintegrierte/xtura";
+      default:
+        return "/wohnmobile";
+    }
+  };
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-6 md:py-8">
@@ -446,7 +473,7 @@ const Modellvergleich = () => {
 
         <div className="flex flex-col sm:flex-row justify-center gap-2 md:gap-4 mt-6 md:mt-8">
           <Button asChild size="sm" className="md:text-base md:py-6">
-            <Link to="/modelle">Zur Modellübersicht</Link>
+            <Link to="/wohnmobile">Zur Modellübersicht</Link>
           </Button>
           <Button variant="outline" asChild size="sm" className="md:text-base md:py-6">
             <Link to="/konfigurator">Jetzt konfigurieren</Link>

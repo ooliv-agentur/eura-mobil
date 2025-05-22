@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -49,24 +48,46 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/berater" element={<Index />} />
-              <Route path="/modelle" element={<ModelleOverview />} />
+              
+              {/* New URLs for model pages */}
+              <Route path="/wohnmobile" element={<ModelleOverview />} />
+              <Route path="/wohnmobile/vans" element={<ProductDetail />} />
+              <Route path="/wohnmobile/alkoven" element={<ProductDetail />} />
+              <Route path="/wohnmobile/teilintegrierte/profila-t-fiat" element={<ProductDetail />} />
+              <Route path="/wohnmobile/teilintegrierte/profila-t-mercedes" element={<ProductDetail />} />
+              <Route path="/wohnmobile/teilintegrierte/profila-rs" element={<ProductDetail />} />
+              <Route path="/wohnmobile/teilintegrierte/contura" element={<ProductDetail />} />
+              <Route path="/wohnmobile/teilintegrierte/xtura" element={<ProductDetail />} />
+              <Route path="/wohnmobile/integrierte/integra-line-fiat" element={<ProductDetail />} />
+              <Route path="/wohnmobile/integrierte/integra-line-gt-mercedes" element={<ProductDetail />} />
+              <Route path="/wohnmobile/integrierte/integra" element={<ProductDetail />} />
+              
+              {/* Floor plan detail pages */}
+              <Route path="/wohnmobile/vans/:floorplanId" element={<ProductDetail />} />
+              <Route path="/wohnmobile/alkoven/:floorplanId" element={<ProductDetail />} />
+              <Route path="/wohnmobile/teilintegrierte/:modelId/:floorplanId" element={<ProductDetail />} />
+              <Route path="/wohnmobile/integrierte/:modelId/:floorplanId" element={<ProductDetail />} />
+              
+              {/* Model comparison page with query params */}
+              <Route path="/wohnmobile/modellvergleich" element={<Modellvergleich />} />
+              
+              {/* Redirects from old to new URLs */}
+              <Route path="/modelle" element={<Navigate to="/wohnmobile" replace />} />
+              <Route path="/modellvergleich" element={<Navigate to="/wohnmobile/modellvergleich" replace />} />
+              <Route path="/modelle/van" element={<Navigate to="/wohnmobile/vans" replace />} />
+              <Route path="/modelle/activa-one" element={<Navigate to="/wohnmobile/alkoven" replace />} />
+              <Route path="/modelle/profila-t-fiat" element={<Navigate to="/wohnmobile/teilintegrierte/profila-t-fiat" replace />} />
+              <Route path="/modelle/profila-rs" element={<Navigate to="/wohnmobile/teilintegrierte/profila-rs" replace />} />
+              <Route path="/modelle/profila-t-mercedes" element={<Navigate to="/wohnmobile/teilintegrierte/profila-t-mercedes" replace />} />
+              <Route path="/modelle/contura" element={<Navigate to="/wohnmobile/teilintegrierte/contura" replace />} />
+              <Route path="/modelle/integra-line-fiat" element={<Navigate to="/wohnmobile/integrierte/integra-line-fiat" replace />} />
+              <Route path="/modelle/integra-line-gt-mercedes" element={<Navigate to="/wohnmobile/integrierte/integra-line-gt-mercedes" replace />} />
+              <Route path="/modelle/integra" element={<Navigate to="/wohnmobile/integrierte/integra" replace />} />
+              <Route path="/modelle/xtura" element={<Navigate to="/wohnmobile/teilintegrierte/xtura" replace />} />
+              <Route path="/modelle/:modelId" element={<Navigate to="/wohnmobile" replace />} />
+              
+              {/* Keep existing non-model related routes */}
               <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
-              
-              {/* Explicit routes for models in the correct order matching the specified sequence */}
-              <Route path="/modelle/van" element={<ProductDetail />} />
-              <Route path="/modelle/activa-one" element={<ProductDetail />} />
-              <Route path="/modelle/profila-t-fiat" element={<ProductDetail />} />
-              <Route path="/modelle/profila-rs" element={<ProductDetail />} />
-              <Route path="/modelle/profila-t-mercedes" element={<ProductDetail />} />
-              <Route path="/modelle/contura" element={<ProductDetail />} />
-              <Route path="/modelle/integra-line-fiat" element={<ProductDetail />} />
-              <Route path="/modelle/integra-line-gt-mercedes" element={<ProductDetail />} />
-              <Route path="/modelle/integra" element={<ProductDetail />} />
-              <Route path="/modelle/xtura" element={<ProductDetail />} />
-              
-              {/* Dynamic route as fallback for other models */}
-              <Route path="/modelle/:modelId" element={<ProductDetail />} />
-              
               <Route path="/haendler" element={<Haendlersuche />} />
               <Route path="/karriere" element={<Karriere />} />
               <Route path="/unternehmen" element={<Unternehmen />} />
@@ -74,7 +95,6 @@ const App = () => (
               <Route path="/downloads" element={<Downloads />} />
               <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
               <Route path="/konfigurator" element={<Konfigurator />} />
-              <Route path="/modellvergleich" element={<Modellvergleich />} />
               <Route path="/qualitaet" element={<QualitaetVorteile />} />
               <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
               <Route path="/qualitaet/winterfestigkeit" element={<Winterfestigkeit />} />
@@ -92,7 +112,7 @@ const App = () => (
               <Route path="/ueber-uns" element={<NotFound />} />
               <Route path="/ueber-eura-mobil" element={<Navigate to="/unternehmen" replace />} />
               <Route path="/haendler-login" element={<NotFound />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              {/* Catch-all route */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
