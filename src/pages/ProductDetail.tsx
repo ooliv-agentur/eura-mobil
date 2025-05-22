@@ -743,18 +743,25 @@ const ProductDetail = () => {
           </nav>
         )}
         
-        {/* 4. Highlights Section */}
+        {/* 4. Highlights Section - UPDATED */}
         <section id="highlights" className="py-24 scroll-mt-8">
-          <h2 className="text-2xl font-semibold mb-8">Highlights der Baureihe</h2>
-          <div className="bg-white rounded-lg p-6">
-            <ul className="space-y-4">
-              {modelData?.highlights?.map((highlight, index) => (
-                <li key={index} className="flex gap-3 items-start">
-                  <Check className="h-5 w-5 text-gray-600 flex-shrink-0 mt-1" />
-                  <span>{highlight}</span>
-                </li>
-              )) || []}
-            </ul>
+          <h2 className="text-2xl font-semibold mb-8 text-center">Highlights der Baureihe</h2>
+          
+          {/* New card-based highlights layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {modelData?.highlights?.map((highlight, index) => (
+              <Card key={index} className="bg-gray-100 border-0">
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  {/* Icon placeholder circle */}
+                  <div className="w-16 h-16 bg-gray-300 rounded-full mb-4 flex items-center justify-center">
+                    <Circle className="h-8 w-8 text-gray-500" />
+                  </div>
+                  
+                  {/* Highlight text */}
+                  <p className="text-gray-800">{highlight}</p>
+                </CardContent>
+              </Card>
+            )) || []}
           </div>
         </section>
         
