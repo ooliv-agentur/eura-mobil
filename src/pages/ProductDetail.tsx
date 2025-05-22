@@ -767,7 +767,7 @@ const ProductDetail = () => {
   const { modelId, floorplanId } = useParams();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const [activeSection, setActiveSection] = useState("highlights");
+  const [activeSection, setActiveSection] = useState("");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedForComparison, setSelectedForComparison] = useState<string[]>([]);
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
@@ -889,14 +889,18 @@ const ProductDetail = () => {
   
   // Intersection observer for scroll sections
   useEffect(() => {
+    // Modified observer options to make detection more precise
     const observerOptions = {
-      rootMargin: "-100px 0px -300px 0px",
-      threshold: 0.1
+      // Adjusted to ensure dots are highlighted at appropriate scroll points
+      rootMargin: "-120px 0px -60% 0px",
+      threshold: [0.1, 0.5]
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        // Only update active section when a section comes into view
+        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+          // Set activeSection to the id of the section that's currently visible
           setActiveSection(entry.target.id);
         }
       });
@@ -904,12 +908,35 @@ const ProductDetail = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     
+    // Add all section elements to be observed
     sections.forEach(section => {
       const element = document.getElementById(section.id);
       if (element) observer.observe(element);
     });
 
-    return () => observer.disconnect();
+    // Add an observer for the hero section to clear the active section
+    const heroSection = document.getElementById('hero-section');
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+            // Clear active section when hero section is in view
+            setActiveSection("");
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      heroObserver.observe(heroSection);
+    }
+
+    return () => {
+      observer.disconnect();
+      // Disconnect the hero observer if it exists
+      if (heroSection) {
+        const heroObserver = new IntersectionObserver(() => {});
+        heroObserver.disconnect();
+      }
+    };
   }, []);
 
   // Scroll to section function
@@ -923,7 +950,7 @@ const ProductDetail = () => {
   return (
     <ProductLayout modelName={modelData?.name || ""}>
       {/* 1. Hero Section - Full width with max height 60vh */}
-      <div className="relative w-full" style={{ maxHeight: '60vh' }}>
+      <div id="hero-section" className="relative w-full" style={{ maxHeight: '60vh' }}>
         <GrayBoxPlaceholder ratio={16/9} label="Modellbild (Hero)" className="h-full max-h-[60vh]" />
         
         {/* Scroll indicator */}
@@ -995,7 +1022,7 @@ const ProductDetail = () => {
           </div>
         </div>
         
-        {/* 3. Vertical Scroll Navigation - Desktop only */}
+        {/* 3. Vertical Scroll Navigation - Desktop only - Updated to use activeSection */}
         {!isMobile && (
           <nav className="hidden lg:flex flex-col items-center fixed left-8 top-1/2 transform -translate-y-1/2 z-10 space-y-8">
             {sections.map(section => (
