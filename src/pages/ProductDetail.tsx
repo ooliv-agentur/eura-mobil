@@ -3,16 +3,19 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ArrowDown, Check, Circle } from "lucide-react";
+import { ArrowDown, Check, Circle, Eye, ArrowsRightLeft, ArrowLeft, ArrowRight } from "lucide-react";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import { Card, CardContent } from "@/components/ui/card";
+import { Slider } from "@/components/ui/slider";
 import { ProductLayout } from "@/components/ProductLayout";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useToast } from "@/hooks/use-toast";
 
 // Model data repository
 const modelsData = {
@@ -47,21 +50,24 @@ const modelsData = {
         name: "V 635 EB",
         image: "/placeholder.svg",
         length: "6,36 m",
-        sleepingPlaces: "2"
+        sleepingPlaces: "2",
+        detailUrl: "/wohnmobile/vans/v-635-eb-2-2/"
       },
       {
         id: "v-635-hb",
         name: "V 635 HB",
         image: "/placeholder.svg",
         length: "6,36 m",
-        sleepingPlaces: "2"
+        sleepingPlaces: "2",
+        detailUrl: "/wohnmobile/vans/v-635-hb-2-2/"
       },
       {
         id: "v-595-hb",
         name: "V 595 HB",
         image: "/placeholder.svg",
         length: "5,99 m",
-        sleepingPlaces: "2"
+        sleepingPlaces: "2",
+        detailUrl: "/wohnmobile/vans/v-595-hb-2-2/"
       }
     ],
     interior: [
@@ -212,35 +218,40 @@ const modelsData = {
         name: "AO 570 HS",
         image: "/placeholder.svg",
         length: "5,99 m",
-        sleepingPlaces: "4"
+        sleepingPlaces: "4",
+        detailUrl: "/wohnmobile/activa-one/ao-570-hs-4-4/"
       },
       {
         id: "ao-630-ls",
         name: "AO 630 LS",
         image: "/placeholder.svg",
         length: "6,44 m",
-        sleepingPlaces: "5"
+        sleepingPlaces: "5",
+        detailUrl: "/wohnmobile/activa-one/ao-630-ls-5-5/"
       },
       {
         id: "ao-650-hs",
         name: "AO 650 HS",
         image: "/placeholder.svg",
         length: "6,50 m",
-        sleepingPlaces: "4"
+        sleepingPlaces: "4",
+        detailUrl: "/wohnmobile/activa-one/ao-650-hs-4-4/"
       },
       {
         id: "ao-690-hb",
         name: "AO 690 HB",
         image: "/placeholder.svg",
         length: "6,99 m",
-        sleepingPlaces: "6"
+        sleepingPlaces: "6",
+        detailUrl: "/wohnmobile/activa-one/ao-690-hb-6-6/"
       },
       {
         id: "ao-690-vb",
         name: "AO 690 VB",
         image: "/placeholder.svg",
         length: "6,99 m",
-        sleepingPlaces: "6"
+        sleepingPlaces: "6",
+        detailUrl: "/wohnmobile/activa-one/ao-690-vb-6-6/"
       }
     ],
     interior: [
@@ -333,6 +344,7 @@ type FullModelData = BaseModelData & {
     image: string;
     length: string;
     sleepingPlaces: string;
+    detailUrl?: string;
   }>;
   interior: Array<{
     name: string;
@@ -359,24 +371,24 @@ type ModelData = FullModelData | DownloadModelData;
 type ModelsDataType = Record<string, ModelData>;
 
 // Type guards
-function hasLayouts(model: ModelData): model is FullModelData {
-  return 'layouts' in model && Array.isArray(model.layouts);
+function hasLayouts(model: ModelData | undefined): model is FullModelData {
+  return !!model && 'layouts' in model && Array.isArray(model.layouts);
 }
 
-function hasInterior(model: ModelData): model is FullModelData {
-  return 'interior' in model && Array.isArray(model.interior);
+function hasInterior(model: ModelData | undefined): model is FullModelData {
+  return !!model && 'interior' in model && Array.isArray(model.interior);
 }
 
-function hasUpholstery(model: ModelData): model is FullModelData {
-  return 'upholsteryTypes' in model && Array.isArray(model.upholsteryTypes);
+function hasUpholstery(model: ModelData | undefined): model is FullModelData {
+  return !!model && 'upholsteryTypes' in model && Array.isArray(model.upholsteryTypes);
 }
 
-function hasEquipment(model: ModelData): model is FullModelData {
-  return 'equipment' in model && model.equipment !== undefined;
+function hasEquipment(model: ModelData | undefined): model is FullModelData {
+  return !!model && 'equipment' in model && model.equipment !== undefined;
 }
 
-function hasModelText(model: ModelData): model is FullModelData & { modelText: { headline: string; subheadline: string; description: string; } } {
-  return 'modelText' in model && model.modelText !== undefined;
+function hasModelText(model: ModelData | undefined): model is FullModelData & { modelText: { headline: string; subheadline: string; description: string; } } {
+  return !!model && 'modelText' in model && model.modelText !== undefined;
 }
 
 // Sections for navigation
@@ -388,17 +400,82 @@ const sections = [
   { id: "serienausstattung", label: "Serienausstattung" }
 ];
 
+// New component for Model Card
+const ModelCard = ({ 
+  model,
+  onCompare 
+}: { 
+  model: { 
+    id: string, 
+    name: string, 
+    image: string, 
+    length: string, 
+    sleepingPlaces: string, 
+    detailUrl?: string 
+  }, 
+  onCompare: (id: string) => void 
+}) => {
+  return (
+    <Card className="overflow-hidden">
+      <AspectRatio ratio={4/3} className="bg-gray-200">
+        <div className="w-full h-full flex items-center justify-center text-gray-500">
+          Grundriss
+        </div>
+      </AspectRatio>
+      <CardContent className="p-4">
+        <h3 className="text-lg font-semibold mb-3">{model.name}</h3>
+        <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+          <div>
+            <span className="text-gray-600">Länge:</span> {model.length}
+          </div>
+          <div>
+            <span className="text-gray-600">Schlafplätze:</span> {model.sleepingPlaces}
+          </div>
+        </div>
+        <div className="grid grid-cols-1 gap-2">
+          <Button asChild variant="outline" className="w-full">
+            <Link to={model.detailUrl || "#"}>
+              <Eye className="mr-2 h-4 w-4" />
+              Modell ansehen
+            </Link>
+          </Button>
+          <Button 
+            variant="secondary" 
+            onClick={() => onCompare(model.id)} 
+            className="w-full"
+          >
+            <ArrowsRightLeft className="mr-2 h-4 w-4" />
+            Vergleichen
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
 const ProductDetail = () => {
   const { modelId } = useParams();
   const isMobile = useIsMobile();
-  const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const [activeSection, setActiveSection] = useState("highlights");
-
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const { toast } = useToast();
+  const { startBeraterFlow } = useWohnmobilberaterTrigger();
+  
   // Default to van if no model ID or model not found
   const modelData = modelId && modelId in modelsData 
     ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
 
+  // Handler for adding to comparison
+  const handleCompareModel = (modelId: string) => {
+    // Here you would implement the session/cookie-based comparison logic
+    toast({
+      title: "Modell zum Vergleich hinzugefügt",
+      description: `${modelId} wurde zum Vergleich hinzugefügt.`,
+      duration: 3000,
+    });
+  };
+  
   // Helper functions for handlers
   const handleKonfiguratorClick = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
@@ -414,6 +491,19 @@ const ProductDetail = () => {
       {label && <p className="text-gray-500 text-lg">{label}</p>}
     </AspectRatio>
   );
+  
+  // Mobile slider navigation
+  const handlePrevSlide = () => {
+    if (hasLayouts(modelData) && currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
+    }
+  };
+  
+  const handleNextSlide = () => {
+    if (hasLayouts(modelData) && currentSlide < modelData.layouts.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+  };
   
   // Intersection observer for scroll sections
   useEffect(() => {
@@ -484,7 +574,7 @@ const ProductDetail = () => {
           {/* Left column - 60% width */}
           <div className="lg:col-span-3 space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold">
-              {hasModelText(modelData) ? modelData.modelText.headline : modelData.name || ""}
+              {hasModelText(modelData) ? modelData.modelText.headline : modelData?.name || ""}
             </h1>
             <h2 className="text-xl md:text-2xl text-gray-600">
               {hasModelText(modelData) ? modelData.modelText.subheadline : 'Für Aktive und Unabhängige'}
@@ -493,7 +583,7 @@ const ProductDetail = () => {
               <p>
                 {hasModelText(modelData) 
                   ? modelData.modelText.description 
-                  : modelData.intro || ""}
+                  : modelData?.intro || ""}
               </p>
               <p>
                 Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit Eco-Leder Applikationen machen den spürbaren Unterschied bei diesem Modell. Erleben Sie modernen Wohnkomfort auf kleinstem Raum.
@@ -523,7 +613,7 @@ const ProductDetail = () => {
           </div>
         </div>
         
-        {/* 3. Vertical Scroll Navigation - Desktop only - Now styled as requested */}
+        {/* 3. Vertical Scroll Navigation - Desktop only */}
         {!isMobile && (
           <nav className="hidden lg:flex flex-col items-center fixed left-8 top-1/2 transform -translate-y-1/2 z-10 space-y-8">
             {sections.map(section => (
@@ -570,27 +660,70 @@ const ProductDetail = () => {
           </div>
         </section>
         
-        {/* 5. Grundrisse (Floorplans) Section - Only shown if layouts exist */}
+        {/* 5. Grundrisse (Floorplans) Section - Enhanced with cards and buttons */}
         {hasLayouts(modelData) && (
           <section id="grundrisse" className="py-24 scroll-mt-8">
             <h2 className="text-2xl font-semibold mb-8">Grundrisse</h2>
-            <div className="flex overflow-x-auto space-x-6 pb-4">
-              {modelData.layouts.slice(0, 3).map((layout) => (
-                <div key={layout.id} className="min-w-[280px] bg-white rounded-lg overflow-hidden">
-                  <GrayBoxPlaceholder ratio={4/3} />
-                  <div className="p-4">
-                    <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
-                    <div className="grid grid-cols-2 gap-2 text-sm">
-                      <div>
-                        <span className="text-gray-600">Länge:</span> {layout.length}
-                      </div>
-                      <div>
-                        <span className="text-gray-600">Schlafplätze:</span> {layout.sleepingPlaces}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            
+            {/* Desktop view - Grid layout */}
+            <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {modelData.layouts.map((layout) => (
+                <ModelCard 
+                  key={layout.id}
+                  model={layout}
+                  onCompare={handleCompareModel}
+                />
               ))}
+            </div>
+            
+            {/* Mobile view - Horizontal slider with controls */}
+            <div className="md:hidden relative">
+              <div className="overflow-hidden">
+                {modelData.layouts.length > 0 && (
+                  <div className="w-full">
+                    <ModelCard
+                      model={modelData.layouts[currentSlide]}
+                      onCompare={handleCompareModel}
+                    />
+                  </div>
+                )}
+              </div>
+              
+              {/* Slider navigation */}
+              {modelData.layouts.length > 1 && (
+                <div className="flex justify-between mt-4">
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={handlePrevSlide}
+                    disabled={currentSlide === 0}
+                    className="rounded-full"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                  </Button>
+                  
+                  <div className="flex items-center space-x-2">
+                    {modelData.layouts.map((_, index) => (
+                      <div 
+                        key={index}
+                        className={`h-2 w-2 rounded-full ${
+                          index === currentSlide ? 'bg-gray-800' : 'bg-gray-300'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={handleNextSlide}
+                    disabled={currentSlide === modelData.layouts.length - 1}
+                    className="rounded-full"
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
             </div>
           </section>
         )}
@@ -663,7 +796,7 @@ const ProductDetail = () => {
           </section>
         )}
         
-        {/* 9. CTA section - Only the final CTA section remains */}
+        {/* 9. CTA section */}
         <section className="py-16 text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Button onClick={handleKonfiguratorClick} variant="outline" size="lg" className="h-14 bg-gray-100 text-gray-800">
