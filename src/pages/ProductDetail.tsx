@@ -536,15 +536,15 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         <div className="container mx-auto">
-          {/* Hero Section - Full Width */}
+          {/* Hero Section - Full Width with improved text alignment */}
           <div className="relative w-full mb-16 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
             <div className="w-full h-72 sm:h-96">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
-            {/* Hero Text Overlay - Centered */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="text-gray-400 text-5xl md:text-6xl font-light mb-2 opacity-60">VANS</div>
-              <h1 className="text-4xl md:text-5xl text-gray-400 font-bold">Für Aktive und Unabhängige</h1>
+            {/* Hero Text Overlay - Better Centered with improved typography */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
+              <div className="text-gray-400 text-5xl md:text-7xl font-light mb-4 opacity-80 tracking-wide">VANS</div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-400 font-semibold tracking-tight">Für Aktive und Unabhängige</h1>
             </div>
           </div>
           
