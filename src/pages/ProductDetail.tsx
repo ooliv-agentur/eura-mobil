@@ -536,27 +536,19 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         <div className="container mx-auto">
-          {/* Hero Section - Improved vertical and horizontal alignment */}
+          {/* Hero Section - Clean, without text overlay */}
           <div className="relative w-full mb-16 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
             <div className="w-full h-80 sm:h-[400px]">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
-            {/* Hero Text Overlay - Enhanced centering and typography hierarchy */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-              <div className="flex flex-col items-center">
-                <span className="text-6xl md:text-7xl lg:text-8xl font-light text-gray-400 mb-6 opacity-80 tracking-wider">VANS</span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-500 font-semibold tracking-tight text-center">
-                  Für Aktive und Unabhängige
-                </h1>
-              </div>
-            </div>
+            {/* No text overlay in hero section as requested */}
           </div>
           
-          {/* Introduction Section - Two Column Layout with increased spacing and improved readability */}
+          {/* Introduction Section - Updated with proper headline structure */}
           <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4">
-            <div className="mb-12 text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
-              <h3 className="text-xl md:text-2xl font-medium mt-3 mb-10">Eura Mobil Vans</h3>
+            <div className="mb-16 text-center">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">Für Deine beste Zeit.</h1>
+              <h2 className="text-2xl md:text-3xl font-semibold">Eura Mobil Vans</h2>
             </div>
             
             {/* Two column content with hotspot image and increased spacing */}
