@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,7 @@ import { ProductLayout } from "@/components/ProductLayout";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-// Model data repository - Use existing data
+// Model data repository
 const modelsData = {
   "van": {
     id: "van",
@@ -394,7 +395,7 @@ const ProductDetail = () => {
   const [activeSection, setActiveSection] = useState("highlights");
 
   // Default to van if no model ID or model not found
-  const modelDetails = modelId && modelId in modelsData 
+  const modelData = modelId && modelId in modelsData 
     ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
 
@@ -406,6 +407,13 @@ const ProductDetail = () => {
   const handleBeratungClick = () => {
     startBeraterFlow();
   };
+  
+  // Simple gray box placeholder component
+  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9, label = "" }: { className?: string, ratio?: number, label?: string }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] flex items-center justify-center ${className}`}>
+      {label && <p className="text-gray-500 text-lg">{label}</p>}
+    </AspectRatio>
+  );
   
   // Intersection observer for scroll sections
   useEffect(() => {
@@ -432,13 +440,6 @@ const ProductDetail = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Simple gray box placeholder component
-  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9, label = "" }: { className?: string, ratio?: number, label?: string }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] flex items-center justify-center ${className}`}>
-      {label && <p className="text-gray-500 text-lg">{label}</p>}
-    </AspectRatio>
-  );
-
   // Scroll to section function
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -448,7 +449,7 @@ const ProductDetail = () => {
   };
   
   return (
-    <ProductLayout modelName={modelDetails?.name || ""}>
+    <ProductLayout modelName={modelData.name}>
       {/* 1. Hero Section - Full width with max height 60vh */}
       <div className="relative w-full" style={{ maxHeight: '60vh' }}>
         <GrayBoxPlaceholder ratio={16/9} label="Modellbild (Hero)" className="h-full max-h-[60vh]" />
@@ -483,16 +484,16 @@ const ProductDetail = () => {
           {/* Left column - 60% width */}
           <div className="lg:col-span-3 space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold">
-              {hasModelText(modelDetails) ? modelDetails.modelText.headline : modelDetails?.name || "Vans"}
+              {hasModelText(modelData) ? modelData.modelText.headline : modelData.name}
             </h1>
             <h2 className="text-xl md:text-2xl text-gray-600">
-              {hasModelText(modelDetails) ? modelDetails.modelText.subheadline : 'Für Aktive und Unabhängige'}
+              {hasModelText(modelData) ? modelData.modelText.subheadline : 'Für Aktive und Unabhängige'}
             </h2>
             <div className="space-y-4 text-gray-700">
               <p>
-                {hasModelText(modelDetails) 
-                  ? modelDetails.modelText.description 
-                  : modelDetails?.intro || "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen."}
+                {hasModelText(modelData) 
+                  ? modelData.modelText.description 
+                  : modelData.intro}
               </p>
               <p>
                 Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit Eco-Leder Applikationen machen den spürbaren Unterschied bei diesem Modell. Erleben Sie modernen Wohnkomfort auf kleinstem Raum.
@@ -503,15 +504,15 @@ const ProductDetail = () => {
             <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t">
               <div>
                 <span className="text-sm text-gray-600">Länge</span>
-                <p className="font-semibold">{modelDetails.technicalData.länge || "5,99 – 6,36 m"}</p>
+                <p className="font-semibold">{modelData.technicalData.länge || "5,99 – 6,36 m"}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600">Sitzplätze</span>
-                <p className="font-semibold">{modelDetails.technicalData.sitzplätze || "4"}</p>
+                <p className="font-semibold">{modelData.technicalData.sitzplätze || "4"}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600">Schlafplätze</span>
-                <p className="font-semibold">{modelDetails.technicalData.schlafplätze || "2–3"}</p>
+                <p className="font-semibold">{modelData.technicalData.schlafplätze || "2–3"}</p>
               </div>
             </div>
           </div>
@@ -522,19 +523,33 @@ const ProductDetail = () => {
           </div>
         </div>
         
-        {/* 3. Vertical Scroll Navigation - Desktop only */}
+        {/* 3. Vertical Scroll Navigation - Desktop only - Now styled as requested */}
         {!isMobile && (
-          <nav className="hidden lg:flex flex-col items-center fixed left-8 top-1/2 transform -translate-y-1/2 z-10 space-y-6">
+          <nav className="hidden lg:flex flex-col items-center fixed left-8 top-1/2 transform -translate-y-1/2 z-10 space-y-8">
             {sections.map(section => (
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`flex flex-col items-center space-y-2 group ${activeSection === section.id ? 'font-bold' : ''}`}
+                className={`flex flex-col items-center space-y-3 group transition-colors`}
               >
-                <Circle 
-                  className={`h-10 w-10 p-2 rounded-full ${activeSection === section.id ? 'bg-gray-200' : 'bg-gray-100'}`} 
-                />
-                <span className="text-sm transform -rotate-90 w-24 text-center">{section.label}</span>
+                <div className={`rounded-full h-12 w-12 flex items-center justify-center ${
+                  activeSection === section.id 
+                    ? 'bg-gray-300' 
+                    : 'bg-gray-200 group-hover:bg-gray-300'
+                } transition-colors`}>
+                  <Circle className={`h-6 w-6 ${
+                    activeSection === section.id 
+                      ? 'text-gray-800' 
+                      : 'text-gray-500'
+                  }`} />
+                </div>
+                <span className={`text-sm ${
+                  activeSection === section.id 
+                    ? 'font-bold text-gray-900' 
+                    : 'text-gray-600 group-hover:text-gray-900'
+                } transition-colors`}>
+                  {section.label}
+                </span>
               </button>
             ))}
           </nav>
@@ -545,7 +560,7 @@ const ProductDetail = () => {
           <h2 className="text-2xl font-semibold mb-8">Highlights der Baureihe</h2>
           <div className="bg-white rounded-lg p-6">
             <ul className="space-y-4">
-              {modelDetails.highlights.map((highlight, index) => (
+              {modelData.highlights.map((highlight, index) => (
                 <li key={index} className="flex gap-3 items-start">
                   <Check className="h-5 w-5 text-gray-600 flex-shrink-0 mt-1" />
                   <span>{highlight}</span>
@@ -556,11 +571,11 @@ const ProductDetail = () => {
         </section>
         
         {/* 5. Grundrisse (Floorplans) Section - Only shown if layouts exist */}
-        {hasLayouts(modelDetails) && (
+        {hasLayouts(modelData) && (
           <section id="grundrisse" className="py-24 scroll-mt-8">
             <h2 className="text-2xl font-semibold mb-8">Grundrisse</h2>
             <div className="flex overflow-x-auto space-x-6 pb-4">
-              {modelDetails.layouts.slice(0, 3).map((layout) => (
+              {modelData.layouts.slice(0, 3).map((layout) => (
                 <div key={layout.id} className="min-w-[280px] bg-white rounded-lg overflow-hidden">
                   <GrayBoxPlaceholder ratio={4/3} />
                   <div className="p-4">
@@ -581,7 +596,7 @@ const ProductDetail = () => {
         )}
         
         {/* 6. Innenraum (Interior) Section - Only shown if interior exists */}
-        {hasInterior(modelDetails) && (
+        {hasInterior(modelData) && (
           <section id="innenraum" className="py-24 scroll-mt-8">
             <h2 className="text-2xl font-semibold mb-8">Innenraum</h2>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -590,7 +605,7 @@ const ProductDetail = () => {
               </div>
               <div className="lg:col-span-2">
                 <ul className="space-y-6 divide-y">
-                  {modelDetails.interior.slice(0, 3).map((item, index) => (
+                  {modelData.interior.slice(0, 3).map((item, index) => (
                     <li key={index} className={`${index > 0 ? 'pt-6' : ''}`}>
                       <div className="font-medium mb-2">{item.name}</div>
                       <div className="text-gray-600">{item.description}</div>
@@ -603,11 +618,11 @@ const ProductDetail = () => {
         )}
         
         {/* 7. Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
-        {hasUpholstery(modelDetails) && (
+        {hasUpholstery(modelData) && (
           <section id="polster" className="py-24 scroll-mt-8">
             <h2 className="text-2xl font-semibold mb-8">Polster</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {modelDetails.upholsteryTypes.map((type, index) => (
+              {modelData.upholsteryTypes.map((type, index) => (
                 <div key={index} className="bg-white rounded-lg overflow-hidden">
                   <GrayBoxPlaceholder ratio={1} />
                   <div className="p-3 text-center">
@@ -620,19 +635,19 @@ const ProductDetail = () => {
         )}
         
         {/* 8. Serienausstattung (Standard Equipment) Section */}
-        {hasEquipment(modelDetails) && (
+        {hasEquipment(modelData) && (
           <section id="serienausstattung" className="py-24 scroll-mt-8">
             <h2 className="text-2xl font-semibold mb-8">Serienausstattung</h2>
-            <Tabs defaultValue={Object.keys(modelDetails.equipment)[0]} className="w-full">
+            <Tabs defaultValue={Object.keys(modelData.equipment)[0]} className="w-full">
               <TabsList className="w-full flex flex-wrap h-auto mb-8 bg-gray-100 p-1">
-                {Object.entries(modelDetails.equipment).map(([key]) => (
+                {Object.entries(modelData.equipment).map(([key]) => (
                   <TabsTrigger key={key} value={key} className="text-sm flex-grow">
                     {equipmentTabs[key as keyof typeof equipmentTabs]}
                   </TabsTrigger>
                 ))}
               </TabsList>
               
-              {Object.entries(modelDetails.equipment).map(([key, items]) => (
+              {Object.entries(modelData.equipment).map(([key, items]) => (
                 <TabsContent key={key} value={key} className="mt-4">
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
                     {items.map((item, i) => (
@@ -648,7 +663,7 @@ const ProductDetail = () => {
           </section>
         )}
         
-        {/* 9. CTA section */}
+        {/* 9. CTA section - Only the final CTA section remains */}
         <section className="py-16 text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Button onClick={handleKonfiguratorClick} variant="outline" size="lg" className="h-14 bg-gray-100 text-gray-800">
