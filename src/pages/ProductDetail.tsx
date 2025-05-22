@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -560,9 +559,12 @@ const ProductDetail = () => {
           </div>
           
           {/* Main headline with guaranteed visibility on all screen sizes */}
-          <div id="product-headline" className="text-center mx-auto max-w-4xl px-4 my-16 md:mt-24 md:mb-20">
-            <h1 className="text-3xl md:text-5xl font-bold mb-6">Für Deine beste Zeit.</h1>
-            <h2 className="text-2xl md:text-4xl font-semibold">Eura Mobil Vans</h2>
+          <div 
+            id="product-headline" 
+            className="text-center mx-auto max-w-4xl px-4 my-16 md:mt-24 md:mb-20 relative z-10 overflow-visible"
+          >
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 overflow-visible">Für Deine beste Zeit.</h1>
+            <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil Vans</h2>
           </div>
           
           {/* Introduction Section */}
