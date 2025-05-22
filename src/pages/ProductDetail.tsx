@@ -539,6 +539,19 @@ const ProductDetail = () => {
       </Tabs>
     );
   };
+
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+  };
+  
+  const handleBeratungClick = () => {
+    startBeraterFlow();
+  };
+  
+  // Simple gray box placeholder component
+  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
+  );
   
   return (
     <ProductLayout modelName={modelDetails.name}>
