@@ -546,129 +546,116 @@ const ProductDetail = () => {
           </div>
         </div>
         
-        {/* Introduction Section - Full width with container */}
-        <div className="w-full py-8 bg-white">
-          <div className="container mx-auto px-4">
-            {/* Headings */}
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
-              <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
+        {/* Introduction Section */}
+        <div className="w-full py-8 bg-white mb-12">
+          {/* Headings */}
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
+            <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
+          </div>
+          
+          {/* Two column content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
+              <p className="text-gray-700">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
             </div>
-            
-            {/* Two column content */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
-                <p className="text-gray-700">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
-                <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
-              </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
+              <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
             </div>
           </div>
         </div>
         
-        <div className="container mx-auto px-4">
-          {/* Hotspot Image Placeholder - Fixed styling */}
-          <div className="w-full mb-8">
-            <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
-              Hotspot Bild Placeholder – Innenraum interaktiv
-            </div>
+        {/* Hotspot Image Placeholder - Fixed styling */}
+        <div className="w-full mb-8">
+          <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
+            Hotspot Bild Placeholder – Innenraum interaktiv
           </div>
-          
-          {/* Technical Data Summary */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
-            <div className="flex flex-col items-center p-2">
-              <span className="text-sm text-gray-600">Länge</span>
-              <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
-            </div>
-            <div className="flex flex-col items-center p-2">
-              <span className="text-sm text-gray-600">Sitzplätze</span>
-              <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
-            </div>
-            <div className="flex flex-col items-center p-2">
-              <span className="text-sm text-gray-600">Schlafplätze</span>
-              <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
-            </div>
-          </div>
-          
-          {/* Highlights Section - Add anchor ID */}
-          <section id="highlights" className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
-              <ul className="space-y-3">
-                {modelDetails.highlights.map((highlight, index) => (
-                  <li key={index} className="flex gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-          
-          {/* Gallery Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-            </div>
-          </section>
-          
-          {/* Grundrisse (Layouts) Section - Add anchor ID */}
-          {hasLayouts(modelDetails) && (
-            <section id="grundrisse" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
-              {renderLayouts()}
-            </section>
-          )}
-          
-          {/* Innenraum (Interior) Section - Add anchor ID */}
-          {hasInterior(modelDetails) && (
-            <section id="innenraum" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                <div className="lg:col-span-3">
-                  <GrayBoxPlaceholder ratio={16/9} />
-                </div>
-                <div className="lg:col-span-2">
-                  <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                    {renderInterior()}
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-          
-          {/* Polster (Upholstery) Section - Add anchor ID */}
-          {hasUpholstery(modelDetails) && (
-            <section id="polster" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
-              {renderUpholstery()}
-            </section>
-          )}
-          
-          {/* Serienausstattung (Standard Equipment) Section - Add anchor ID */}
-          {hasEquipment(modelDetails) && (
-            <section id="serienausstattung" className="my-10 pt-8">
-              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-              {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
-            </section>
-          )}
         </div>
         
-        {/* Comparison Modal */}
-        <ComparisonModal 
-          open={isComparisonOpen}
-          onOpenChange={setIsComparisonOpen}
-        />
+        {/* Technical Data Summary */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+          <div className="flex flex-col items-center p-2">
+            <span className="text-sm text-gray-600">Länge</span>
+            <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
+          </div>
+          <div className="flex flex-col items-center p-2">
+            <span className="text-sm text-gray-600">Sitzplätze</span>
+            <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
+          </div>
+          <div className="flex flex-col items-center p-2">
+            <span className="text-sm text-gray-600">Schlafplätze</span>
+            <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
+          </div>
+        </div>
         
-        {/* Comparison Bar */}
-        <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
+        {/* Highlights Section - Add anchor ID */}
+        <section id="highlights" className="my-10">
+          <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <ul className="space-y-3">
+              {modelDetails.highlights.map((highlight, index) => (
+                <li key={index} className="flex gap-2">
+                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+        
+        {/* Gallery Section */}
+        <section className="my-10">
+          <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <GrayBoxPlaceholder ratio={4/3} />
+            <GrayBoxPlaceholder ratio={4/3} />
+            <GrayBoxPlaceholder ratio={4/3} />
+            <GrayBoxPlaceholder ratio={4/3} />
+          </div>
+        </section>
+        
+        {/* Grundrisse (Layouts) Section - Add anchor ID */}
+        {hasLayouts(modelDetails) && (
+          <section id="grundrisse" className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
+            {renderLayouts()}
+          </section>
+        )}
+        
+        {/* Innenraum (Interior) Section - Add anchor ID */}
+        {hasInterior(modelDetails) && (
+          <section id="innenraum" className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+              <div className="lg:col-span-3">
+                <GrayBoxPlaceholder ratio={16/9} />
+              </div>
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-lg p-4 shadow-sm h-full">
+                  {renderInterior()}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+        
+        {/* Polster (Upholstery) Section - Add anchor ID */}
+        {hasUpholstery(modelDetails) && (
+          <section id="polster" className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+            {renderUpholstery()}
+          </section>
+        )}
+        
+        {/* Serienausstattung (Standard Equipment) Section - Add anchor ID */}
+        {hasEquipment(modelDetails) && (
+          <section id="serienausstattung" className="my-10 pt-8">
+            <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+            {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+          </section>
+        )}
       </ProductLayout>
     </ComparisonProvider>
   );
