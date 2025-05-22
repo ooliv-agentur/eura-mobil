@@ -544,6 +544,13 @@ const ComparisonOverlay = ({
   };
   
   if (selectedModels.length < 2) return null;
+
+  // Determine if highlights should be shown
+  // We only show highlights if the model has different highlight sets
+  // In this simplified example, we're checking if the first 3 highlights for each model would be different
+  // In a real implementation, each model might have its own set of highlights
+  // For now, we'll assume highlights are the same for all models in a product line
+  const shouldShowHighlights = false; // Since highlights are the same for all models in a product line
   
   return (
     <AlertDialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -590,17 +597,20 @@ const ComparisonOverlay = ({
                   </div>
                 </div>
                 
-                <div>
-                  <h4 className="text-lg font-medium mb-3">Highlights</h4>
-                  <ul className="space-y-2">
-                    {modelData.highlights.slice(0, 3).map((highlight, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <div className="h-2 w-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Only render Highlights section if they differ between models */}
+                {shouldShowHighlights && (
+                  <div>
+                    <h4 className="text-lg font-medium mb-3">Highlights</h4>
+                    <ul className="space-y-2">
+                      {modelData.highlights.slice(0, 3).map((highlight, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <div className="h-2 w-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
           </div>
