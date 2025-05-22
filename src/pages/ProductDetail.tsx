@@ -449,7 +449,7 @@ const ProductDetail = () => {
   };
   
   return (
-    <ProductLayout modelName={modelData.name}>
+    <ProductLayout modelName={modelData?.name || ""}>
       {/* 1. Hero Section - Full width with max height 60vh */}
       <div className="relative w-full" style={{ maxHeight: '60vh' }}>
         <GrayBoxPlaceholder ratio={16/9} label="Modellbild (Hero)" className="h-full max-h-[60vh]" />
@@ -484,7 +484,7 @@ const ProductDetail = () => {
           {/* Left column - 60% width */}
           <div className="lg:col-span-3 space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold">
-              {hasModelText(modelData) ? modelData.modelText.headline : modelData.name}
+              {hasModelText(modelData) ? modelData.modelText.headline : modelData.name || ""}
             </h1>
             <h2 className="text-xl md:text-2xl text-gray-600">
               {hasModelText(modelData) ? modelData.modelText.subheadline : 'Für Aktive und Unabhängige'}
@@ -493,7 +493,7 @@ const ProductDetail = () => {
               <p>
                 {hasModelText(modelData) 
                   ? modelData.modelText.description 
-                  : modelData.intro}
+                  : modelData.intro || ""}
               </p>
               <p>
                 Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit Eco-Leder Applikationen machen den spürbaren Unterschied bei diesem Modell. Erleben Sie modernen Wohnkomfort auf kleinstem Raum.
@@ -504,15 +504,15 @@ const ProductDetail = () => {
             <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t">
               <div>
                 <span className="text-sm text-gray-600">Länge</span>
-                <p className="font-semibold">{modelData.technicalData.länge || "5,99 – 6,36 m"}</p>
+                <p className="font-semibold">{modelData?.technicalData?.länge || "5,99 – 6,36 m"}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600">Sitzplätze</span>
-                <p className="font-semibold">{modelData.technicalData.sitzplätze || "4"}</p>
+                <p className="font-semibold">{modelData?.technicalData?.sitzplätze || "4"}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600">Schlafplätze</span>
-                <p className="font-semibold">{modelData.technicalData.schlafplätze || "2–3"}</p>
+                <p className="font-semibold">{modelData?.technicalData?.schlafplätze || "2–3"}</p>
               </div>
             </div>
           </div>
@@ -560,12 +560,12 @@ const ProductDetail = () => {
           <h2 className="text-2xl font-semibold mb-8">Highlights der Baureihe</h2>
           <div className="bg-white rounded-lg p-6">
             <ul className="space-y-4">
-              {modelData.highlights.map((highlight, index) => (
+              {modelData?.highlights?.map((highlight, index) => (
                 <li key={index} className="flex gap-3 items-start">
                   <Check className="h-5 w-5 text-gray-600 flex-shrink-0 mt-1" />
                   <span>{highlight}</span>
                 </li>
-              ))}
+              )) || []}
             </ul>
           </div>
         </section>
