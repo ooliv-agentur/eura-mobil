@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,9 +20,14 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ComparisonBar } from "@/components/comparison/ComparisonBar";
+import { ComparisonModal } from "@/components/comparison/ComparisonModal";
+import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { useComparison } from "@/context/ComparisonContext";
 
 const ActivaOneDetail = () => {
   const isMobile = useIsMobile();
+  const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   
   // Simple gray box placeholder component
   const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
@@ -130,11 +135,11 @@ const ActivaOneDetail = () => {
 
   // Floor plans data
   const floorplans = [
-    { name: "AO 570 HS", length: "5,99 m", sleepingPlaces: "4" },
-    { name: "AO 630 LS", length: "6,44 m", sleepingPlaces: "5" },
-    { name: "AO 650 HS", length: "6,50 m", sleepingPlaces: "4" },
-    { name: "AO 690 HB", length: "6,99 m", sleepingPlaces: "6" },
-    { name: "AO 690 VB", length: "6,99 m", sleepingPlaces: "6" }
+    { id: "activa-one-570-hs", name: "AO 570 HS", length: "5,99 m", sleepingPlaces: "4" },
+    { id: "activa-one-630-ls", name: "AO 630 LS", length: "6,44 m", sleepingPlaces: "5" },
+    { id: "activa-one-650-hs", name: "AO 650 HS", length: "6,50 m", sleepingPlaces: "4" },
+    { id: "activa-one-690-hb", name: "AO 690 HB", length: "6,99 m", sleepingPlaces: "6" },
+    { id: "activa-one-690-vb", name: "AO 690 VB", length: "6,99 m", sleepingPlaces: "6" }
   ];
 
   // Helper function for equipment rendering on mobile
@@ -282,21 +287,14 @@ const ActivaOneDetail = () => {
         <section className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {floorplans.map((floorplan, index) => (
-              <div key={index} className="border rounded-lg overflow-hidden shadow-sm">
-                <GrayBoxPlaceholder ratio={4/3} />
-                <div className="p-4">
-                  <h3 className="font-medium text-lg">{floorplan.name}</h3>
-                  <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
-                    <div>
-                      <span className="text-gray-600">Länge:</span> {floorplan.length}
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Schlafplätze:</span> {floorplan.sleepingPlaces}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {floorplans.map((floorplan) => (
+              <SelectableModelCard
+                key={floorplan.id}
+                id={floorplan.id}
+                name={floorplan.name}
+                length={floorplan.length}
+                sleepingPlaces={floorplan.sleepingPlaces}
+              />
             ))}
           </div>
         </section>
@@ -345,6 +343,17 @@ const ActivaOneDetail = () => {
           {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
         </section>
       </div>
+
+      {/* Comparison Modal */}
+      <ComparisonModal 
+        open={isComparisonModalOpen}
+        onOpenChange={setIsComparisonModalOpen}
+      />
+
+      {/* Comparison Bar */}
+      <ComparisonBar 
+        onCompareClick={() => setIsComparisonModalOpen(true)}
+      />
     </ProductLayout>
   );
 };
