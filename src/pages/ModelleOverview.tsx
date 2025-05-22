@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { 
   Select, 
@@ -8,16 +8,10 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
-import { 
-  Card, 
-  CardContent,
-  CardFooter
-} from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@radix-ui/react-label";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { ComparisonBar } from "@/components/comparison/ComparisonBar";
+import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 
 // Low-fidelity model interface
 interface ModelData {
@@ -33,6 +27,7 @@ const ModelleOverview = () => {
   const [lengthFilter, setLengthFilter] = useState<string>("all");
   const [seatsFilter, setSeatsFilter] = useState<string>("all");
   const [priceRange, setPriceRange] = useState<number[]>([160]); // Default to max price
+  const [comparisonModalOpen, setComparisonModalOpen] = useState(false);
   
   // Simple model data with placeholder info
   const models: ModelData[] = [
@@ -107,6 +102,10 @@ const ModelleOverview = () => {
       sleepingPlaces: "4"
     }
   ];
+
+  const handleCompareClick = () => {
+    setComparisonModalOpen(true);
+  };
 
   return (
     <Layout>
@@ -185,6 +184,15 @@ const ModelleOverview = () => {
             />
           ))}
         </div>
+
+        {/* Comparison Bar */}
+        <ComparisonBar onCompareClick={handleCompareClick} />
+
+        {/* Comparison Modal */}
+        <ComparisonModal 
+          open={comparisonModalOpen} 
+          onOpenChange={setComparisonModalOpen} 
+        />
       </div>
     </Layout>
   );
