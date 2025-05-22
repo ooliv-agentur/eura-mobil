@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ArrowDown, Check, Circle, Eye, ArrowsRightLeft, ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowDown, Check, Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight } from "lucide-react";
 import {
   Tabs,
   TabsContent,
@@ -444,7 +443,7 @@ const ModelCard = ({
             onClick={() => onCompare(model.id)} 
             className="w-full"
           >
-            <ArrowsRightLeft className="mr-2 h-4 w-4" />
+            <ArrowLeftRight className="mr-2 h-4 w-4" />
             Vergleichen
           </Button>
         </div>
@@ -574,14 +573,14 @@ const ProductDetail = () => {
           {/* Left column - 60% width */}
           <div className="lg:col-span-3 space-y-6">
             <h1 className="text-3xl md:text-4xl font-bold">
-              {hasModelText(modelData) ? modelData.modelText.headline : modelData?.name || ""}
+              {hasModelText(modelData) && modelData.modelText ? modelData.modelText.headline : modelData?.name || ""}
             </h1>
             <h2 className="text-xl md:text-2xl text-gray-600">
-              {hasModelText(modelData) ? modelData.modelText.subheadline : 'Für Aktive und Unabhängige'}
+              {hasModelText(modelData) && modelData.modelText ? modelData.modelText.subheadline : 'Für Aktive und Unabhängige'}
             </h2>
             <div className="space-y-4 text-gray-700">
               <p>
-                {hasModelText(modelData) 
+                {hasModelText(modelData) && modelData.modelText
                   ? modelData.modelText.description 
                   : modelData?.intro || ""}
               </p>
