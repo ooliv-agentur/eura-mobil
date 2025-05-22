@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -535,22 +536,21 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        <div className="container mx-auto px-4">
-          {/* Hero Section with Text Overlay - Full Width */}
-          <div className="relative mb-8 w-full">
+        <div className="container mx-auto">
+          {/* Hero Section - Full Width */}
+          <div className="relative w-full mb-8 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
             <div className="w-full h-72 sm:h-96">
-              <GrayBoxPlaceholder ratio={21/9} className="h-full" />
+              <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
             {/* Hero Text Overlay - Centered */}
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <div className="text-gray-400 text-5xl md:text-6xl font-light mb-2 opacity-60">VANS</div>
-              <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
+              <h1 className="text-4xl md:text-5xl text-gray-400 font-bold">Für Aktive und Unabhängige</h1>
             </div>
           </div>
           
           {/* Introduction Section - Two Column Layout */}
-          <div className="py-8 mb-10 rounded-lg shadow-sm bg-white">
-            {/* Headings */}
+          <div className="px-4 py-8 mb-10 rounded-lg shadow-sm bg-white">
             <div className="mb-8 text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
               <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
@@ -584,7 +584,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Technical Data Summary */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg mx-4">
             <div className="flex flex-col items-center p-2">
               <span className="text-sm text-gray-600">Länge</span>
               <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
