@@ -40,7 +40,7 @@ const mockFloorplans = [
     name: "V 595 HB",
     length: "5990 mm",
     beds: "2",
-    detailUrl: "/wohnmobile/vans/v-595-hb-2-2",
+    detailUrl: "/wohnmobile/teilintegrierte/profila-rs/v-595-hb-2-2",
     specs: {
       length: "5990 mm",
       rearBed: "1860 × 1490 mm",
@@ -226,14 +226,6 @@ export const FloorplanMatrix: React.FC = () => {
     name: model.name
   }));
 
-  // Scroll to a section
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <div className="py-10">
       <h2 className="text-2xl font-semibold mb-8" id="grundrisse">Welche Van-Grundrisse passen zu Ihnen?</h2>
@@ -374,7 +366,7 @@ export const FloorplanMatrix: React.FC = () => {
         onStartComparison={handleStartComparison}
       />
 
-      {/* Comparison Overlay */}
+      {/* Comparison Overlay - ONLY in Dialog, no inline rendering */}
       <ComparisonOverlay
         isOpen={isComparisonOpen}
         onClose={() => setIsComparisonOpen(false)}

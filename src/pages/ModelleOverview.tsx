@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Layout } from "../components/Layout";
 import { FloorplanMatrix } from "@/components/FloorplanComparison/FloorplanMatrix";
 
@@ -19,7 +19,7 @@ const ModelleOverview: React.FC = () => {
           <p className="mb-6">Vans von EURA MOBIL – kompakt, winterfest, komfortabel.</p>
         </div>
         
-        {/* Floorplan Matrix Section - This component will handle all the comparison logic */}
+        {/* Floorplan Matrix Section - This component handles all comparison logic */}
         <FloorplanMatrix />
       </div>
     </Layout>
