@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Download, MapPin, Settings } from "lucide-react";
+import { Check, Download, MapPin, Settings, Circle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Tabs,
@@ -28,7 +28,7 @@ const modelsData = {
   "van": {
     id: "van",
     name: "Van",
-    intro: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...",
+    intro: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -44,11 +44,11 @@ const modelsData = {
       sitzplätze: "4"
     },
     highlights: [
-      "Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung",
-      "Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen",
-      "Waschraum mit schwenkbarer Duschwand",
-      "Staufächer im Doppelboden",
-      "Mineralstoff-Spüle"
+      "Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung.",
+      "Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen.",
+      "Waschraum mit schwenkbarer Duschwand.",
+      "Staufächer im Doppelboden.",
+      "Mineralstoff-Spüle."
     ],
     layouts: [
       {
@@ -185,12 +185,17 @@ const modelsData = {
         "Control Panel über Eingang",
         "CP+ Heizungssteuerung mit Crashsensor"
       ]
+    },
+    modelText: {
+      headline: "Vans",
+      subheadline: "Für Aktive und Unabhängige",
+      description: "Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit Eco-Leder Applikationen machen den spürbaren Unterschied."
     }
   },
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
-    intro: "Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, beginnt die Entspannung sofort mit der Abfahrt.",
+    intro: "Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -204,13 +209,11 @@ const modelsData = {
       schlafplätze: "4-6"
     },
     highlights: [
-      "Ausziehbares Doppelstockbett (AO 690 VB)",
-      "Maximaler Stauraum dank 37 cm hohem Doppelboden",
-      "Isolierter und beheizter Alkoven",
-      "Praktische Familien-Grundrisse",
-      "Wassertanks im isolierten und beheizten Doppelboden",
-      "Jetzt mit 2× Isofix in Fahrtrichtung (außer HS-Grundrisse)",
-      "Beach Home Interieur optional verfügbar"
+      "Ausziehbares Doppelstockbett (AO 690 VB).",
+      "Maximaler Stauraum dank 37 cm hohem Doppelboden.",
+      "Isolierter und beheizter Alkoven.",
+      "Praktische Familien-Grundrisse.",
+      "Wassertanks im isolierten und beheizten Doppelboden."
     ],
     layouts: [
       {
@@ -299,6 +302,11 @@ const modelsData = {
         "Ladegerät 21 A",
         "Haushaltslogik Lichtsystem"
       ]
+    },
+    modelText: {
+      headline: "Activa One",
+      subheadline: "Praktische Wohnmobile für Einsteiger",
+      description: "Praktische Wohnmobile für Einsteiger. Bieten Platz für bis zu 6 Personen und viel Komfort."
     }
   }
 };
@@ -453,7 +461,7 @@ const ProductDetail = () => {
         {modelDetails.upholsteryTypes.map((type, index) => (
           <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
             <AspectRatio ratio={4/3} className="h-40" />
-            <div className="p-3">
+            <div className="p-3 text-center">
               <h3 className="font-medium">{type}</h3>
             </div>
           </div>
@@ -526,50 +534,56 @@ const ProductDetail = () => {
       {/* Hero Section - Reduced height */}
       <div className="relative">
         <div className="w-full">
-          <GrayBoxPlaceholder ratio={21/6} className="h-full" />
+          <GrayBoxPlaceholder ratio={16/9} className="h-full" />
         </div>
       </div>
       
-      <div className="container mx-auto px-4">
-        {/* New Introduction Section */}
-        <div className="py-8 md:py-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Vans</h1>
-          <h2 className="text-xl md:text-2xl text-gray-600 mb-6">Für Aktive und Unabhängige</h2>
+      <div className="container mx-auto px-4 mt-8">
+        {/* Introduction Section */}
+        <div className="py-6 md:py-8 text-center max-w-4xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            {'modelText' in modelDetails ? modelDetails.modelText.headline : modelDetails.name}
+          </h1>
+          <h2 className="text-xl md:text-2xl text-gray-600 mb-6">
+            {'modelText' in modelDetails ? modelDetails.modelText.subheadline : 'Für Aktive und Unabhängige'}
+          </h2>
           <div className="space-y-4 text-gray-700">
             <p>
-              Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. 
-              Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz 
-              persönlichen mobilen Zuhause machen.
-            </p>
-            <p>
-              Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit 
-              Eco-Leder Applikationen machen den spürbaren Unterschied.
+              {'modelText' in modelDetails ? modelDetails.modelText.description : modelDetails.intro}
             </p>
           </div>
         </div>
         
-        {/* Interactive Model View - new section */}
-        <div className="w-full my-8">
+        {/* Interactive Model View */}
+        <div className="w-full my-10">
           <div className="relative bg-[#E5E7EB] w-full">
             <AspectRatio ratio={16/9}>
-              <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <p className="text-gray-700 font-medium text-xl">Interaktive Innenansicht</p>
-                  <p className="text-gray-500 text-sm mt-2">Modellansicht (interaktiv)</p>
-                </div>
+              <div className="flex items-center justify-center h-full flex-col">
+                <Circle className="h-10 w-10 text-gray-500 mb-3" />
+                <p className="text-gray-700 font-medium text-xl">Interaktive Innenansicht</p>
+                <p className="text-gray-500 text-sm mt-1">(Hotspot-Placeholder)</p>
               </div>
             </AspectRatio>
           </div>
         </div>
         
-        {/* Model Title and Introduction - Keep existing but adjust margin to work with new section */}
-        <div className="mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold">{modelDetails.name}</h3>
-          <p className="text-gray-700 mt-3">{modelDetails.intro}</p>
-        </div>
+        {/* Highlights Section */}
+        <section className="my-10 max-w-3xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-4 text-center">Highlights der Baureihe</h2>
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <ul className="space-y-3">
+              {modelDetails.highlights.map((highlight, index) => (
+                <li key={index} className="flex gap-3 items-start">
+                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
         
         {/* Technical Data Summary */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-10 bg-gray-50 p-6 rounded-lg">
           <div className="flex flex-col items-center p-2">
             <span className="text-sm text-gray-600">Länge</span>
             <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
@@ -583,21 +597,6 @@ const ProductDetail = () => {
             <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
           </div>
         </div>
-        
-        {/* Highlights Section */}
-        <section className="my-10">
-          <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <ul className="space-y-3">
-              {modelDetails.highlights.map((highlight, index) => (
-                <li key={index} className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>{highlight}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
         
         {/* Gallery Section */}
         <section className="my-10">
@@ -645,11 +644,27 @@ const ProductDetail = () => {
         
         {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
         {hasEquipment(modelDetails) && (
-          <section className="my-10 pt-8">
+          <section className="my-10 pt-4">
             <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
             {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
           </section>
         )}
+        
+        {/* CTA section */}
+        <section className="my-16 text-center">
+          <h2 className="text-2xl font-semibold mb-8">Erfahren Sie mehr über den {modelDetails.name}</h2>
+          <div className="flex flex-col md:flex-row gap-4 justify-center">
+            <Button onClick={handleKonfiguratorClick} size="lg" className="min-w-[200px]">
+              Jetzt konfigurieren
+            </Button>
+            <Button asChild variant="outline" size="lg" className="min-w-[200px]">
+              <Link to="/haendler">Händler finden</Link>
+            </Button>
+            <Button onClick={handleBeratungClick} variant="secondary" size="lg" className="min-w-[200px]">
+              Beratung starten
+            </Button>
+          </div>
+        </section>
       </div>
     </ProductLayout>
   );
