@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ModelleOverview from "./pages/ModelleOverview";
 import ProductDetail from "./pages/ProductDetail";
+import ActivaOneDetail from "./pages/ActivaOneDetail";
 import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
 import Unternehmen from "./pages/Unternehmen";
@@ -55,7 +56,7 @@ const App = () => (
                 
                 {/* Explicit routes for models in the correct order matching the specified sequence */}
                 <Route path="/modelle/van" element={<ProductDetail />} />
-                <Route path="/modelle/activa-one" element={<ProductDetail />} />
+                <Route path="/modelle/activa-one" element={<ActivaOneDetail />} />
                 <Route path="/modelle/profila-t-fiat" element={<ProductDetail />} />
                 <Route path="/modelle/profila-rs" element={<ProductDetail />} />
                 <Route path="/modelle/profila-t-mercedes" element={<ProductDetail />} />
