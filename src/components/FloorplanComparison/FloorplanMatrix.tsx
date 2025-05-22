@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FloorplanCard } from "./FloorplanCard";
@@ -241,7 +240,7 @@ export const FloorplanMatrix: React.FC = () => {
       
       {/* Floorplan Horizontal Scrollable Cards */}
       <div className="mb-12">
-        <ScrollArea className="w-full" orientation="horizontal">
+        <ScrollArea className="w-full">
           <div className="flex gap-4 pb-4" style={{ minWidth: "max-content" }}>
             {mockFloorplans.map((floorplan) => (
               <div key={floorplan.id} className="w-[280px] flex-shrink-0">
