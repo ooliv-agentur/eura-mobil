@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ModelleOverview from "./pages/ModelleOverview";
 import ProductDetail from "./pages/ProductDetail";
+import VanModelDetail from "./pages/VanModelDetail";
 import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
 import Unternehmen from "./pages/Unternehmen";
@@ -72,6 +74,9 @@ function App() {
                 {/* Model comparison page with query params */}
                 <Route path="/wohnmobile/modellvergleich" element={<Modellvergleich />} />
                 
+                {/* Specific van model detail routes */}
+                <Route path="/wohnmobile/vans/v-635-eb-2-2" element={<VanModelDetail />} />
+                
                 {/* Redirects from old to new URLs */}
                 <Route path="/modelle" element={<Navigate to="/wohnmobile" replace />} />
                 <Route path="/modellvergleich" element={<Navigate to="/wohnmobile/modellvergleich" replace />} />
@@ -116,9 +121,6 @@ function App() {
                 
                 {/* Product detail routes */}
                 <Route path="/wohnmobile/:modelId/:floorplanId/*" element={<ProductDetail />} />
-                
-                {/* Specific van model detail routes */}
-                <Route path="/wohnmobile/vans/v-635-eb-2-2" element={<VanModelDetail />} />
                 
                 {/* Catch-all route */}
                 <Route path="*" element={<NotFound />} />
