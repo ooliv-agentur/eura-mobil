@@ -523,18 +523,35 @@ const ProductDetail = () => {
   
   return (
     <ProductLayout modelName={modelDetails.name}>
-      {/* Hero Section */}
+      {/* Hero Section - Reduced height */}
       <div className="relative">
-        <div className="w-full h-72 sm:h-96">
-          <GrayBoxPlaceholder ratio={21/9} className="h-full" />
+        <div className="w-full">
+          <GrayBoxPlaceholder ratio={21/6} className="h-full" />
         </div>
       </div>
       
-      <div className="container mx-auto px-4 mt-6">
-        {/* Model Title and Introduction */}
+      <div className="container mx-auto px-4">
+        {/* New Introduction Section */}
+        <div className="py-8 md:py-12">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Vans</h1>
+          <h2 className="text-xl md:text-2xl text-gray-600 mb-6">Für Aktive und Unabhängige</h2>
+          <div className="space-y-4 text-gray-700">
+            <p>
+              Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. 
+              Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz 
+              persönlichen mobilen Zuhause machen.
+            </p>
+            <p>
+              Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und textile Wandbespannungen mit 
+              Eco-Leder Applikationen machen den spürbaren Unterschied.
+            </p>
+          </div>
+        </div>
+        
+        {/* Model Title and Introduction - Keep existing but adjust margin to work with new section */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
-          <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
+          <h3 className="text-2xl md:text-3xl font-bold">{modelDetails.name}</h3>
+          <p className="text-gray-700 mt-3">{modelDetails.intro}</p>
         </div>
         
         {/* Technical Data Summary */}
