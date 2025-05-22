@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { ArrowDown, Check, Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight, X, Maximize2, Minimize2 } from "lucide-react";
+import { Circle, Eye, ArrowLeftRight, ArrowLeft, ArrowRight, X, Maximize2, Minimize2 } from "lucide-react";
 import {
   Tabs,
   TabsContent,
@@ -952,12 +952,6 @@ const ProductDetail = () => {
       {/* 1. Hero Section - Full width with max height 60vh */}
       <div id="hero-section" className="relative w-full" style={{ maxHeight: '60vh' }}>
         <GrayBoxPlaceholder ratio={16/9} label="Modellbild (Hero)" className="h-full max-h-[60vh]" />
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center justify-center text-gray-500 animate-bounce">
-          <span className="mb-2">Scrollen</span>
-          <ArrowDown size={24} />
-        </div>
       </div>
       
       {/* Mobile horizontal scroll anchor navigation */}
