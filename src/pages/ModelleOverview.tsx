@@ -1,7 +1,5 @@
-
 import React from "react";
 import { Layout } from "../components/Layout";
-import { FloorplanMatrix } from "../components/FloorplanComparison/FloorplanMatrix";
 
 const ModelleOverview: React.FC = () => {
   return (
@@ -13,9 +11,6 @@ const ModelleOverview: React.FC = () => {
         <div className="mb-16">
           {/* Existing content */}
         </div>
-        
-        {/* Add our new FloorplanMatrix component */}
-        <FloorplanMatrix />
       </div>
     </Layout>
   );
