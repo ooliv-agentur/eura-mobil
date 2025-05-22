@@ -33,96 +33,34 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   
-  // Van model specifications data
-  const vanModelsData = {
-    "v-635-eb": {
-      name: "V 635 EB",
-      specs: {
-        "basisfahrzeug": "Fiat Ducato",
-        "motorisierungSerie": "2,2 ltr. (103 kW / 140 PS)",
-        "motorisierungOption": "2,2 ltr.",
-        "radstand": "4035 mm",
-        "bereifungSerie": "215/70 R15",
-        "zulaessigeGesamtmasse": "3500 / 4250 kg",
-        "masseFahrbereit": "3031 (2879–3183) kg",
-        "zulaessigeAnhaengelast": "2500 / 3000 kg",
-        "gesamtlaenge": "6360 mm",
-        "gesamtbreite": "2050 mm",
-        "gesamthoehe": "2650 mm",
-        "innenbreite": "1940 mm",
-        "stehhoehe": "1890 mm",
-        "bettumbauSitzgruppe": "1560 × 950 (500) mm",
-        "heckbett": "1950×800 + 1860×800 mm",
-        "erweiterungSchlafplaetze": "3",
-        "zulaessigePersonenzahl": "4",
-        "sitzplatzerweiterung": "4",
-        "bodenstaerke": "38 mm (inkl. Isolierung)",
-        "frischwassertankgroesse": "85 l",
-        "batteriekapazitaet": "100 Ah",
-        "abwasserkapazitaet": "75 l"
-      }
-    },
-    "v-635-hb": {
-      name: "V 635 HB",
-      specs: {
-        "basisfahrzeug": "Fiat Ducato",
-        "motorisierungSerie": "2,2 ltr. (103 kW / 140 PS)",
-        "motorisierungOption": "2,2 ltr.",
-        "radstand": "4035 mm",
-        "bereifungSerie": "215/70 R15",
-        "zulaessigeGesamtmasse": "3500 / 4250 kg",
-        "masseFahrbereit": "3031 (2879–3183) kg",
-        "zulaessigeAnhaengelast": "2500 / 3000 kg",
-        "gesamtlaenge": "6360 mm",
-        "gesamtbreite": "2050 mm",
-        "gesamthoehe": "2650 mm",
-        "innenbreite": "1940 mm",
-        "stehhoehe": "1890 mm",
-        "bettumbauSitzgruppe": "1560 × 950 (500) mm",
-        "heckbett": "1850 (1700) × 1600 mm",
-        "erweiterungSchlafplaetze": "3",
-        "zulaessigePersonenzahl": "4",
-        "sitzplatzerweiterung": "4",
-        "bodenstaerke": "38 mm (inkl. Isolierung)",
-        "frischwassertankgroesse": "85 l",
-        "batteriekapazitaet": "100 Ah",
-        "abwasserkapazitaet": "75 l"
-      }
-    },
-    "v-595-hb": {
-      name: "V 595 HB",
-      specs: {
-        "basisfahrzeug": "Fiat Ducato",
-        "motorisierungSerie": "2,2 ltr. (103 kW / 140 PS)",
-        "motorisierungOption": "2,2 ltr.",
-        "radstand": "4035 mm",
-        "bereifungSerie": "215/70 R15",
-        "zulaessigeGesamtmasse": "3500 / 4250 kg",
-        "masseFahrbereit": "2921 (2775–3067) kg",
-        "zulaessigeAnhaengelast": "2500 / 3000 kg",
-        "gesamtlaenge": "5990 mm",
-        "gesamtbreite": "2050 mm",
-        "gesamthoehe": "2650 mm",
-        "innenbreite": "1940 mm",
-        "stehhoehe": "1890 mm",
-        "bettumbauSitzgruppe": "1600 × 950 (500) mm",
-        "heckbett": "1860 × 1490 mm",
-        "erweiterungSchlafplaetze": "3",
-        "zulaessigePersonenzahl": "4",
-        "sitzplatzerweiterung": "–",
-        "bodenstaerke": "38 mm (inkl. Isolierung)",
-        "frischwassertankgroesse": "85 l",
-        "batteriekapazitaet": "100 Ah",
-        "abwasserkapazitaet": "75 l"
-      }
-    }
-  };
-
   // Get the models to compare
-  const modelsToCompare = models.map(model => {
-    const modelKey = model.id;
-    return vanModelsData[modelKey as keyof typeof vanModelsData] || model;
-  });
+  const modelsToCompare = models;
+
+  // Map of spec keys to display names
+  const specLabels: Record<string, string> = {
+    "basisfahrzeug": "Basisfahrzeug",
+    "motorisierungSerie": "Motorisierung Serie",
+    "motorisierungOption": "Motorisierung Option",
+    "radstand": "Radstand",
+    "bereifungSerie": "Bereifung Serie",
+    "zulaessigeGesamtmasse": "Zulässige Gesamtmasse",
+    "masseFahrbereit": "Masse fahrbereit",
+    "zulaessigeAnhaengelast": "Zulässige Anhängelast",
+    "gesamtlaenge": "Gesamtlänge",
+    "gesamtbreite": "Gesamtbreite",
+    "gesamthoehe": "Gesamthöhe",
+    "innenbreite": "Innenbreite",
+    "stehhoehe": "Stehhöhe",
+    "bettumbauSitzgruppe": "Bettumbau Sitzgruppe",
+    "heckbett": "Heckbett",
+    "erweiterungSchlafplaetze": "Erweiterung auf X Schlafplätze",
+    "zulaessigePersonenzahl": "Zulässige Personenzahl (3-Pkt.)",
+    "sitzplatzerweiterung": "Sitzplatzerweiterung",
+    "bodenstaerke": "Bodenstärke",
+    "frischwassertankgroesse": "Frischwassertankgröße",
+    "batteriekapazitaet": "Batteriekapazität",
+    "abwasserkapazitaet": "Abwasserkapazität"
+  };
 
   // Identify which specs are common across all models
   const getCommonSpecs = () => {
@@ -166,32 +104,6 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
 
   const commonSpecs = getCommonSpecs();
   const differingSpecs = getDifferingSpecs();
-
-  // Map of spec keys to display names
-  const specLabels: Record<string, string> = {
-    "basisfahrzeug": "Basisfahrzeug",
-    "motorisierungSerie": "Motorisierung Serie",
-    "motorisierungOption": "Motorisierung Option",
-    "radstand": "Radstand",
-    "bereifungSerie": "Bereifung Serie",
-    "zulaessigeGesamtmasse": "Zulässige Gesamtmasse",
-    "masseFahrbereit": "Masse fahrbereit",
-    "zulaessigeAnhaengelast": "Zulässige Anhängelast",
-    "gesamtlaenge": "Gesamtlänge",
-    "gesamtbreite": "Gesamtbreite",
-    "gesamthoehe": "Gesamthöhe",
-    "innenbreite": "Innenbreite",
-    "stehhoehe": "Stehhöhe",
-    "bettumbauSitzgruppe": "Bettumbau Sitzgruppe",
-    "heckbett": "Heckbett",
-    "erweiterungSchlafplaetze": "Erweiterung auf X Schlafplätze",
-    "zulaessigePersonenzahl": "Zulässige Personenzahl (3-Pkt.)",
-    "sitzplatzerweiterung": "Sitzplatzerweiterung",
-    "bodenstaerke": "Bodenstärke",
-    "frischwassertankgroesse": "Frischwassertankgröße",
-    "batteriekapazitaet": "Batteriekapazität",
-    "abwasserkapazitaet": "Abwasserkapazität"
-  };
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
@@ -262,9 +174,9 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
                           <TableCell className="font-medium bg-gray-50 sticky left-0 z-10">
                             {specLabels[key] || key}
                           </TableCell>
-                          {modelsToCompare.map((model) => (
+                          {modelsToCompare.map((model, modelIndex) => (
                             <TableCell key={`${model.name}-${key}`} className="text-center">
-                              {model.specs[key]}
+                              <span className="font-bold">{model.specs[key]}</span>
                             </TableCell>
                           ))}
                         </TableRow>
@@ -273,6 +185,10 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
                   </Table>
                 </div>
               </ScrollArea>
+            </div>
+            
+            <div className="mt-6 text-sm text-gray-500 italic text-center">
+              Nur Unterschiede hervorgehoben. Angaben vorbehaltlich technischer Änderungen.
             </div>
           </div>
         </div>
