@@ -28,6 +28,7 @@ import { ChevronDown, ArrowDown, Circle, Search, MapPin, Video } from "lucide-re
 import { Input } from "@/components/ui/input";
 import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import MapComponent from "@/components/dealers/MapComponent";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
 // Updated with requested text revisions ensuring all descriptions end with a full stop
