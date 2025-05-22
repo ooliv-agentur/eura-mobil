@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ProductLayout } from "@/components/ProductLayout";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogContent, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Model data repository
 const modelsData = {
@@ -608,6 +610,159 @@ const ComparisonOverlay = ({
   );
 };
 
+// New component for inline comparison module
+const InlineComparisonModule = ({
+  selectedModels,
+  modelData,
+  onClose,
+}: {
+  selectedModels: string[];
+  modelData: FullModelData;
+  onClose: () => void;
+}) => {
+  // Find the model data for the selected models
+  const selectedModelDetails = selectedModels.map(modelId => 
+    modelData.layouts.find(layout => layout.id === modelId)
+  ).filter(Boolean);
+  
+  if (selectedModelDetails.length !== 2) return null;
+  
+  const model1 = selectedModelDetails[0];
+  const model2 = selectedModelDetails[1];
+  
+  const attributeRows = [
+    { name: "Länge", value1: model1?.length, value2: model2?.length },
+    { name: "Schlafplätze", value1: model1?.sleepingPlaces, value2: model2?.sleepingPlaces },
+    { name: "Badezimmer", value1: "Ja", value2: "Ja" },
+    { name: "Staukapazität", value1: "120L", value2: "150L" },
+    { name: "Gesamtgewicht", value1: "3.500 kg", value2: "3.500 kg" },
+  ];
+
+  const getTransformedUrl = (url: string | undefined): string => {
+    if (!url) return "#";
+    
+    // Extract info from the original URL format (e.g. /wohnmobile/vans/v-635-eb-2-2/)
+    const urlParts = url.split('/');
+    const modelId = urlParts[urlParts.length - 2] || '';
+    const floorplanId = urlParts[urlParts.length - 1] || '';
+    
+    // Determine category based on model ID
+    let category = "";
+    if (modelId.startsWith('v-') || modelId === 'van') {
+      category = 'vans';
+    } else if (modelId.startsWith('ao-') || modelId === 'activa-one') {
+      category = 'alkoven';
+    } else if (
+      modelId.startsWith('pt-') || 
+      modelId.startsWith('ptm-') ||
+      modelId.startsWith('prs-') ||
+      modelId.startsWith('c-') ||
+      modelId === 'profila-t-fiat' ||
+      modelId === 'profila-rs' ||
+      modelId === 'profila-t-mercedes' ||
+      modelId === 'contura' ||
+      modelId === 'xtura'
+    ) {
+      category = 'teilintegrierte';
+      // Determine specific teilintegrierte model
+      if (modelId === 'profila-t-fiat' || modelId.startsWith('pt-')) {
+        return `/wohnmobile/teilintegrierte/profila-t-fiat/${floorplanId}`;
+      } else if (modelId === 'profila-rs' || modelId.startsWith('prs-')) {
+        return `/wohnmobile/teilintegrierte/profila-rs/${floorplanId}`;
+      } else if (modelId === 'profila-t-mercedes' || modelId.startsWith('ptm-')) {
+        return `/wohnmobile/teilintegrierte/profila-t-mercedes/${floorplanId}`;
+      } else if (modelId === 'contura' || modelId.startsWith('c-')) {
+        return `/wohnmobile/teilintegrierte/contura/${floorplanId}`;
+      } else if (modelId === 'xtura' || modelId.startsWith('x-')) {
+        return `/wohnmobile/teilintegrierte/xtura/${floorplanId}`;
+      }
+    } else if (
+      modelId.startsWith('il-') || 
+      modelId.startsWith('ilgt-') ||
+      modelId.startsWith('i-') ||
+      modelId === 'integra-line-fiat' ||
+      modelId === 'integra-line-gt-mercedes' ||
+      modelId === 'integra'
+    ) {
+      category = 'integrierte';
+      // Determine specific integrierte model
+      if (modelId === 'integra-line-fiat' || modelId.startsWith('il-')) {
+        return `/wohnmobile/integrierte/integra-line-fiat/${floorplanId}`;
+      } else if (modelId === 'integra-line-gt-mercedes' || modelId.startsWith('ilgt-')) {
+        return `/wohnmobile/integrierte/integra-line-gt-mercedes/${floorplanId}`;
+      } else if (modelId === 'integra' || modelId.startsWith('i-')) {
+        return `/wohnmobile/integrierte/integra/${floorplanId}`;
+      }
+    }
+    
+    // Default URL format for vans and alkoven
+    return `/wohnmobile/${category}/${floorplanId}`;
+  };
+
+  return (
+    <div className="py-8 px-4 bg-gray-50 rounded-lg mb-16">
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-semibold">
+          Technischer Vergleich: {model1?.name} vs. {model2?.name}
+        </h3>
+        <button 
+          onClick={onClose} 
+          className="text-gray-600 hover:text-gray-900"
+        >
+          Schließen
+        </button>
+      </div>
+      
+      <div className="grid grid-cols-3 gap-6 mb-6">
+        <div></div>
+        <div className="text-center">
+          <div className="bg-gray-200 aspect-square mb-2 flex items-center justify-center">
+            <span className="text-gray-500">Grundriss {model1?.name}</span>
+          </div>
+        </div>
+        <div className="text-center">
+          <div className="bg-gray-200 aspect-square mb-2 flex items-center justify-center">
+            <span className="text-gray-500">Grundriss {model2?.name}</span>
+          </div>
+        </div>
+      </div>
+      
+      <ScrollArea className="w-full">
+        <div className="min-w-[600px]">
+          <div className="grid grid-cols-3 gap-6 mb-8">
+            <div className="font-semibold">Attribut</div>
+            <div className="font-semibold text-center">{model1?.name}</div>
+            <div className="font-semibold text-center">{model2?.name}</div>
+            
+            {attributeRows.map((row, index) => (
+              <React.Fragment key={index}>
+                <div className="py-2 border-t">{row.name}</div>
+                <div className="py-2 border-t text-center">{row.value1}</div>
+                <div className="py-2 border-t text-center">{row.value2}</div>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </ScrollArea>
+      
+      <div className="grid grid-cols-2 gap-4">
+        <Button asChild variant="outline">
+          <Link to={getTransformedUrl(model1?.detailUrl)}>
+            <Eye className="mr-2 h-4 w-4" />
+            Modell {model1?.name} ansehen
+          </Link>
+        </Button>
+        <Button asChild variant="outline">
+          <Link to={getTransformedUrl(model2?.detailUrl)}>
+            <Eye className="mr-2 h-4 w-4" />
+            Modell {model2?.name} ansehen
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 const ProductDetail = () => {
   const { modelId, floorplanId } = useParams();
   const location = useLocation();
@@ -616,6 +771,7 @@ const ProductDetail = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedForComparison, setSelectedForComparison] = useState<string[]>([]);
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const [showInlineComparison, setShowInlineComparison] = useState(false);
   const { toast } = useToast();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   
@@ -682,6 +838,20 @@ const ProductDetail = () => {
         duration: 3000,
       });
     }
+  };
+  
+  // Effect to control the appearance of the inline comparison
+  useEffect(() => {
+    if (selectedForComparison.length === 2) {
+      setShowInlineComparison(true);
+    } else {
+      setShowInlineComparison(false);
+    }
+  }, [selectedForComparison]);
+  
+  const handleCloseInlineComparison = () => {
+    setShowInlineComparison(false);
+    setSelectedForComparison([]);
   };
   
   const handleCloseComparison = () => {
@@ -952,7 +1122,16 @@ const ProductDetail = () => {
               )}
             </div>
             
-            {/* Comparison overlay */}
+            {/* New inline comparison module */}
+            {showInlineComparison && hasLayouts(modelData) && (
+              <InlineComparisonModule
+                selectedModels={selectedForComparison}
+                modelData={modelData}
+                onClose={handleCloseInlineComparison}
+              />
+            )}
+            
+            {/* Comparison overlay (keeping original overlay for backward compatibility) */}
             {hasLayouts(modelData) && (
               <ComparisonOverlay
                 isOpen={isComparisonOpen && selectedForComparison.length === 2}
