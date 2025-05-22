@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -537,7 +536,7 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         {/* Hero Section with Text Overlay */}
-        <div className="relative">
+        <div className="relative mb-12">
           <div className="w-full h-72 sm:h-96">
             <GrayBoxPlaceholder ratio={21/9} className="h-full" />
           </div>
@@ -547,16 +546,17 @@ const ProductDetail = () => {
           </div>
         </div>
         
-        <div className="container mx-auto px-4 mt-6">
-          {/* Introduction Section - Moved outside the container */}
-          <div className="mb-8 text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
-            <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
-          </div>
-          
-          {/* Model Title and Introduction - Updated with full text */}
-          <div className="mb-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Introduction Section - Full width with container */}
+        <div className="w-full py-8 bg-white">
+          <div className="container mx-auto px-4">
+            {/* Headings */}
+            <div className="mb-8 text-center">
+              <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
+              <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
+            </div>
+            
+            {/* Two column content */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               <div>
                 <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
                 <p className="text-gray-700">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
@@ -567,7 +567,9 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-          
+        </div>
+        
+        <div className="container mx-auto px-4">
           {/* Hotspot Image Placeholder - Fixed styling */}
           <div className="w-full mb-8">
             <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
