@@ -8,7 +8,7 @@ import { ArrowLeftRight, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ComparisonOverlay } from "../components/FloorplanComparison/ComparisonOverlay";
 
-// Van model data
+// Van model data with specs included
 const vanModels = [
   {
     id: "v-635-eb",
@@ -16,7 +16,31 @@ const vanModels = [
     image: "/placeholder.svg",
     length: "6,36 m",
     sleepingPlaces: "2",
-    detailUrl: "/wohnmobile/vans/v-635-eb-2-2"
+    detailUrl: "/wohnmobile/vans/v-635-eb-2-2",
+    specs: {
+      "basisfahrzeug": "Fiat Ducato",
+      "motorisierungSerie": "2,2 ltr. (103 kW / 140 PS)",
+      "motorisierungOption": "2,2 ltr.",
+      "radstand": "4035 mm",
+      "bereifungSerie": "215/70 R15",
+      "zulaessigeGesamtmasse": "3500 / 4250 kg",
+      "masseFahrbereit": "3031 (2879–3183) kg",
+      "zulaessigeAnhaengelast": "2500 / 3000 kg",
+      "gesamtlaenge": "6360 mm",
+      "gesamtbreite": "2050 mm",
+      "gesamthoehe": "2650 mm",
+      "innenbreite": "1940 mm",
+      "stehhoehe": "1890 mm",
+      "bettumbauSitzgruppe": "1560 × 950 (500) mm",
+      "heckbett": "1950×800 + 1860×800 mm",
+      "erweiterungSchlafplaetze": "3",
+      "zulaessigePersonenzahl": "4",
+      "sitzplatzerweiterung": "4",
+      "bodenstaerke": "38 mm (inkl. Isolierung)",
+      "frischwassertankgroesse": "85 l",
+      "batteriekapazitaet": "100 Ah",
+      "abwasserkapazitaet": "75 l"
+    }
   },
   {
     id: "v-635-hb",
@@ -24,7 +48,31 @@ const vanModels = [
     image: "/placeholder.svg",
     length: "6,36 m",
     sleepingPlaces: "2",
-    detailUrl: "/wohnmobile/vans/v-635-hb-2-2"
+    detailUrl: "/wohnmobile/vans/v-635-hb-2-2",
+    specs: {
+      "basisfahrzeug": "Fiat Ducato",
+      "motorisierungSerie": "2,2 ltr. (103 kW / 140 PS)",
+      "motorisierungOption": "2,2 ltr.",
+      "radstand": "4035 mm",
+      "bereifungSerie": "215/70 R15",
+      "zulaessigeGesamtmasse": "3500 / 4250 kg",
+      "masseFahrbereit": "3031 (2879–3183) kg",
+      "zulaessigeAnhaengelast": "2500 / 3000 kg",
+      "gesamtlaenge": "6360 mm",
+      "gesamtbreite": "2050 mm",
+      "gesamthoehe": "2650 mm",
+      "innenbreite": "1940 mm",
+      "stehhoehe": "1890 mm",
+      "bettumbauSitzgruppe": "1560 × 950 (500) mm",
+      "heckbett": "1850 (1700) × 1600 mm",
+      "erweiterungSchlafplaetze": "3",
+      "zulaessigePersonenzahl": "4",
+      "sitzplatzerweiterung": "4",
+      "bodenstaerke": "38 mm (inkl. Isolierung)",
+      "frischwassertankgroesse": "85 l",
+      "batteriekapazitaet": "100 Ah",
+      "abwasserkapazitaet": "75 l"
+    }
   },
   {
     id: "v-595-hb",
@@ -32,7 +80,31 @@ const vanModels = [
     image: "/placeholder.svg",
     length: "5,99 m",
     sleepingPlaces: "2",
-    detailUrl: "/wohnmobile/vans/v-595-hb-2-2"
+    detailUrl: "/wohnmobile/vans/v-595-hb-2-2",
+    specs: {
+      "basisfahrzeug": "Fiat Ducato",
+      "motorisierungSerie": "2,2 ltr. (103 kW / 140 PS)",
+      "motorisierungOption": "2,2 ltr.",
+      "radstand": "4035 mm",
+      "bereifungSerie": "215/70 R15",
+      "zulaessigeGesamtmasse": "3500 / 4250 kg",
+      "masseFahrbereit": "2921 (2775–3067) kg",
+      "zulaessigeAnhaengelast": "2500 / 3000 kg",
+      "gesamtlaenge": "5990 mm",
+      "gesamtbreite": "2050 mm",
+      "gesamthoehe": "2650 mm",
+      "innenbreite": "1940 mm",
+      "stehhoehe": "1890 mm",
+      "bettumbauSitzgruppe": "1600 × 950 (500) mm",
+      "heckbett": "1860 × 1490 mm",
+      "erweiterungSchlafplaetze": "3",
+      "zulaessigePersonenzahl": "4",
+      "sitzplatzerweiterung": "–",
+      "bodenstaerke": "38 mm (inkl. Isolierung)",
+      "frischwassertankgroesse": "85 l",
+      "batteriekapazitaet": "100 Ah",
+      "abwasserkapazitaet": "75 l"
+    }
   }
 ];
 
