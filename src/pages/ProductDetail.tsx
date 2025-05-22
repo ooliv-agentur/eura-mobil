@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Download, MapPin, Settings } from "lucide-react";
+import { Check, Download, MapPin, Settings, Circle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Tabs,
@@ -384,6 +383,47 @@ function hasEquipment(model: ModelData): model is FullModelData {
   return 'equipment' in model && model.equipment !== undefined;
 }
 
+// Sidebar Navigation Component for Desktop
+const SidebarNavigation = () => {
+  return (
+    <div className="hidden md:block sticky top-20 space-y-4 pr-6 self-start">
+      <h3 className="font-medium text-base mb-2">Navigation</h3>
+      <ul className="space-y-3">
+        <li>
+          <a href="#highlights" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Circle className="h-4 w-4 mr-2" />
+            <span>Highlights</span>
+          </a>
+        </li>
+        <li>
+          <a href="#grundrisse" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Circle className="h-4 w-4 mr-2" />
+            <span>Grundrisse</span>
+          </a>
+        </li>
+        <li>
+          <a href="#innenraum" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Circle className="h-4 w-4 mr-2" />
+            <span>Innenraum</span>
+          </a>
+        </li>
+        <li>
+          <a href="#polster" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Circle className="h-4 w-4 mr-2" />
+            <span>Polster</span>
+          </a>
+        </li>
+        <li>
+          <a href="#ausstattung" className="flex items-center text-gray-600 hover:text-gray-900">
+            <Circle className="h-4 w-4 mr-2" />
+            <span>Serienausstattung</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 const ProductDetail = () => {
   const { modelId } = useParams();
   const isMobile = useIsMobile();
@@ -531,94 +571,133 @@ const ProductDetail = () => {
         </div>
         
         <div className="container mx-auto px-4 mt-6">
-          {/* Model Title and Introduction */}
-          <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
-            <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
-          </div>
-          
-          {/* Technical Data Summary */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
-            <div className="flex flex-col items-center p-2">
-              <span className="text-sm text-gray-600">Länge</span>
-              <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
-            </div>
-            <div className="flex flex-col items-center p-2">
-              <span className="text-sm text-gray-600">Sitzplätze</span>
-              <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
-            </div>
-            <div className="flex flex-col items-center p-2">
-              <span className="text-sm text-gray-600">Schlafplätze</span>
-              <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
-            </div>
-          </div>
-          
-          {/* Highlights Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
-              <ul className="space-y-3">
-                {modelDetails.highlights.map((highlight, index) => (
-                  <li key={index} className="flex gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-          
-          {/* Gallery Section */}
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-            </div>
-          </section>
-          
-          {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
-          {hasLayouts(modelDetails) && (
-            <section className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
-              {renderLayouts()}
-            </section>
-          )}
-          
-          {/* Innenraum (Interior) Section - Only shown if interior exists */}
-          {hasInterior(modelDetails) && (
-            <section className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                <div className="lg:col-span-3">
-                  <GrayBoxPlaceholder ratio={16/9} />
-                </div>
-                <div className="lg:col-span-2">
-                  <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                    {renderInterior()}
+          {/* Two-Column Layout with Sidebar Navigation */}
+          <div className="flex flex-col md:flex-row">
+            {/* Sidebar Navigation for Desktop */}
+            <SidebarNavigation />
+            
+            {/* Main Content Area */}
+            <div className="flex-1">
+              {/* Model Title and Introduction */}
+              <div className="mb-8">
+                <h1 className="text-3xl md:text-4xl font-bold">Für Deine beste Zeit. Eura Mobil Vans</h1>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                  <div className="lg:col-span-7">
+                    <div className="space-y-4">
+                      <div>
+                        <p className="font-semibold">Sichtbar anders:</p>
+                        <p className="text-gray-700">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken…</p>
+                      </div>
+                      
+                      <div>
+                        <p className="font-semibold">Spürbar anders:</p>
+                        <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blankem Kunststoffoberflächen machen den spürbaren Unterschied. Fühlen Sie mal …</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="lg:col-span-5">
+                    <div className="space-y-4">
+                      <GrayBoxPlaceholder ratio={3/4} className="rounded-lg" />
+                      
+                      {/* Image markers */}
+                      <div className="flex flex-wrap gap-2 justify-center">
+                        {[...Array(6)].map((_, i) => (
+                          <div key={i} className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                            <Circle className="h-5 w-5 text-gray-400" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </section>
-          )}
-          
-          {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
-          {hasUpholstery(modelDetails) && (
-            <section className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
-              {renderUpholstery()}
-            </section>
-          )}
-          
-          {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
-          {hasEquipment(modelDetails) && (
-            <section className="my-10 pt-8">
-              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-              {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
-            </section>
-          )}
+              
+              {/* Technical Data Summary */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+                <div className="flex flex-col items-center p-2">
+                  <span className="text-sm text-gray-600">Länge</span>
+                  <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
+                </div>
+                <div className="flex flex-col items-center p-2">
+                  <span className="text-sm text-gray-600">Sitzplätze</span>
+                  <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
+                </div>
+                <div className="flex flex-col items-center p-2">
+                  <span className="text-sm text-gray-600">Schlafplätze</span>
+                  <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
+                </div>
+              </div>
+              
+              {/* Highlights Section */}
+              <section id="highlights" className="my-10 scroll-mt-16">
+                <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
+                <div className="bg-white rounded-lg p-4 shadow-sm">
+                  <ul className="space-y-3">
+                    {modelDetails.highlights.map((highlight, index) => (
+                      <li key={index} className="flex gap-2">
+                        <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </section>
+              
+              {/* Gallery Section */}
+              <section className="my-10">
+                <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <GrayBoxPlaceholder ratio={4/3} />
+                  <GrayBoxPlaceholder ratio={4/3} />
+                  <GrayBoxPlaceholder ratio={4/3} />
+                  <GrayBoxPlaceholder ratio={4/3} />
+                </div>
+              </section>
+              
+              {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
+              {hasLayouts(modelDetails) && (
+                <section id="grundrisse" className="my-10 scroll-mt-16">
+                  <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
+                  {renderLayouts()}
+                </section>
+              )}
+              
+              {/* Innenraum (Interior) Section - Only shown if interior exists */}
+              {hasInterior(modelDetails) && (
+                <section id="innenraum" className="my-10 scroll-mt-16">
+                  <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                    <div className="lg:col-span-3">
+                      <GrayBoxPlaceholder ratio={16/9} />
+                    </div>
+                    <div className="lg:col-span-2">
+                      <div className="bg-white rounded-lg p-4 shadow-sm h-full">
+                        {renderInterior()}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )}
+              
+              {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
+              {hasUpholstery(modelDetails) && (
+                <section id="polster" className="my-10 scroll-mt-16">
+                  <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+                  {renderUpholstery()}
+                </section>
+              )}
+              
+              {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
+              {hasEquipment(modelDetails) && (
+                <section id="ausstattung" className="my-10 pt-8 scroll-mt-16">
+                  <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+                  {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+                </section>
+              )}
+            </div>
+          </div>
         </div>
         
         {/* Comparison Modal */}
