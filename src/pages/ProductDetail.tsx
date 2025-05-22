@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,10 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ProductLayout } from "@/components/ProductLayout";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
+import { ComparisonProvider } from "@/context/ComparisonContext";
+import { ComparisonBar } from "@/components/comparison/ComparisonBar";
+import { ComparisonModal } from "@/components/comparison/ComparisonModal";
+import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
 
 // Model data repository - could later be moved to a separate file
 const modelsData = {
@@ -383,6 +388,7 @@ const ProductDetail = () => {
   const { modelId } = useParams();
   const isMobile = useIsMobile();
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
   
   // Default to van if no model ID or model not found
   const modelDetails = modelId && modelId in modelsData 
@@ -409,20 +415,13 @@ const ProductDetail = () => {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {modelDetails.layouts.map((layout) => (
-          <Card key={layout.id} className="overflow-hidden">
-            <GrayBoxPlaceholder ratio={4/3} />
-            <CardContent className="p-4">
-              <h3 className="text-xl font-semibold mb-2">{layout.name}</h3>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                <div>
-                  <span className="text-gray-600">Länge:</span> {layout.length}
-                </div>
-                <div>
-                  <span className="text-gray-600">Schlafplätze:</span> {layout.sleepingPlaces}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <SelectableModelCard 
+            key={layout.id}
+            id={layout.id}
+            name={layout.name}
+            length={layout.length}
+            sleepingPlaces={layout.sleepingPlaces}
+          />
         ))}
       </div>
     );
@@ -522,105 +521,116 @@ const ProductDetail = () => {
   };
   
   return (
-    <ProductLayout modelName={modelDetails.name}>
-      {/* Hero Section */}
-      <div className="relative">
-        <div className="w-full h-72 sm:h-96">
-          <GrayBoxPlaceholder ratio={21/9} className="h-full" />
-        </div>
-      </div>
-      
-      <div className="container mx-auto px-4 mt-6">
-        {/* Model Title and Introduction */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
-          <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
-        </div>
-        
-        {/* Technical Data Summary */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
-          <div className="flex flex-col items-center p-2">
-            <span className="text-sm text-gray-600">Länge</span>
-            <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
-          </div>
-          <div className="flex flex-col items-center p-2">
-            <span className="text-sm text-gray-600">Sitzplätze</span>
-            <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
-          </div>
-          <div className="flex flex-col items-center p-2">
-            <span className="text-sm text-gray-600">Schlafplätze</span>
-            <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
+    <ComparisonProvider>
+      <ProductLayout modelName={modelDetails.name}>
+        {/* Hero Section */}
+        <div className="relative">
+          <div className="w-full h-72 sm:h-96">
+            <GrayBoxPlaceholder ratio={21/9} className="h-full" />
           </div>
         </div>
         
-        {/* Highlights Section */}
-        <section className="my-10">
-          <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <ul className="space-y-3">
-              {modelDetails.highlights.map((highlight, index) => (
-                <li key={index} className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>{highlight}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="container mx-auto px-4 mt-6">
+          {/* Model Title and Introduction */}
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
+            <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
           </div>
-        </section>
-        
-        {/* Gallery Section */}
-        <section className="my-10">
-          <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <GrayBoxPlaceholder ratio={4/3} />
-            <GrayBoxPlaceholder ratio={4/3} />
-            <GrayBoxPlaceholder ratio={4/3} />
-            <GrayBoxPlaceholder ratio={4/3} />
+          
+          {/* Technical Data Summary */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+            <div className="flex flex-col items-center p-2">
+              <span className="text-sm text-gray-600">Länge</span>
+              <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
+            </div>
+            <div className="flex flex-col items-center p-2">
+              <span className="text-sm text-gray-600">Sitzplätze</span>
+              <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
+            </div>
+            <div className="flex flex-col items-center p-2">
+              <span className="text-sm text-gray-600">Schlafplätze</span>
+              <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
+            </div>
           </div>
-        </section>
-        
-        {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
-        {hasLayouts(modelDetails) && (
+          
+          {/* Highlights Section */}
           <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
-            {renderLayouts()}
-          </section>
-        )}
-        
-        {/* Innenraum (Interior) Section - Only shown if interior exists */}
-        {hasInterior(modelDetails) && (
-          <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <div className="lg:col-span-3">
-                <GrayBoxPlaceholder ratio={16/9} />
-              </div>
-              <div className="lg:col-span-2">
-                <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                  {renderInterior()}
-                </div>
-              </div>
+            <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
+            <div className="bg-white rounded-lg p-4 shadow-sm">
+              <ul className="space-y-3">
+                {modelDetails.highlights.map((highlight, index) => (
+                  <li key={index} className="flex gap-2">
+                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
-        )}
-        
-        {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
-        {hasUpholstery(modelDetails) && (
+          
+          {/* Gallery Section */}
           <section className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
-            {renderUpholstery()}
+            <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+            </div>
           </section>
-        )}
+          
+          {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
+          {hasLayouts(modelDetails) && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
+              {renderLayouts()}
+            </section>
+          )}
+          
+          {/* Innenraum (Interior) Section - Only shown if interior exists */}
+          {hasInterior(modelDetails) && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div className="lg:col-span-3">
+                  <GrayBoxPlaceholder ratio={16/9} />
+                </div>
+                <div className="lg:col-span-2">
+                  <div className="bg-white rounded-lg p-4 shadow-sm h-full">
+                    {renderInterior()}
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+          
+          {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
+          {hasUpholstery(modelDetails) && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+              {renderUpholstery()}
+            </section>
+          )}
+          
+          {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
+          {hasEquipment(modelDetails) && (
+            <section className="my-10 pt-8">
+              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+              {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+            </section>
+          )}
+        </div>
         
-        {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
-        {hasEquipment(modelDetails) && (
-          <section className="my-10 pt-8">
-            <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-            {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
-          </section>
-        )}
-      </div>
-    </ProductLayout>
+        {/* Comparison Modal */}
+        <ComparisonModal 
+          open={isComparisonOpen}
+          onOpenChange={setIsComparisonOpen}
+        />
+        
+        {/* Comparison Bar */}
+        <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
+      </ProductLayout>
+    </ComparisonProvider>
   );
 };
 
