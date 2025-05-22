@@ -548,6 +548,20 @@ const ProductDetail = () => {
           </div>
         </div>
         
+        {/* Interactive Model View - new section */}
+        <div className="w-full my-8">
+          <div className="relative bg-[#E5E7EB] w-full">
+            <AspectRatio ratio={16/9}>
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <p className="text-gray-700 font-medium text-xl">Interaktive Innenansicht</p>
+                  <p className="text-gray-500 text-sm mt-2">Modellansicht (interaktiv)</p>
+                </div>
+              </div>
+            </AspectRatio>
+          </div>
+        </div>
+        
         {/* Model Title and Introduction - Keep existing but adjust margin to work with new section */}
         <div className="mb-8">
           <h3 className="text-2xl md:text-3xl font-bold">{modelDetails.name}</h3>
