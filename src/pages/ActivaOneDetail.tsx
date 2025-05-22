@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
@@ -29,45 +28,91 @@ const ActivaOneDetail = () => {
     <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
   );
   
-  // Equipment sections
+  // Equipment sections with real content
   const equipment = {
     chassis: [
       "140 PS Motor, Euro 6d-Final",
-      "CCS Breitspur-Tiefrahmen (1.980 mm)",
-      "ESP inkl. Traction+, Hill-Descent-Control",
-      "16\" Räder, Tagfahrlicht, Tempomat"
+      "CCS Breitspur-Tiefrahmen (Spurbreite 1.980 mm)",
+      "Tempomat",
+      "Manuelle Klimaanlage",
+      "ABS + ASR",
+      "Fahrer-/Beifahrerairbag",
+      "Fix and Go Pannenset",
+      "Tagfahrlicht",
+      "ESP inkl. Traction+ & Hill-Descent-Control",
+      "16\" Räder"
     ],
     body: [
-      "Leichtbaudoppelboden, isoliert & beheizt",
-      "Wände/Dach/Boden: 30/32/38mm",
-      "Beheizter Alkoven mit klappbarem Boden",
-      "2 Fenster + Sicherheitsnetz im Alkoven",
-      "Karosserie GFK + Aluminium, winterfest EN 1646"
+      "Aufbau winterfest nach EN 1646",
+      "Karosserie rundum vor Hagel geschützt durch Wände und Dach aus GFK",
+      "Leichtbaudoppelboden durchgehend, isoliert und beheizt",
+      "Stauraum im Doppelboden GFK-beschichtet (Boden und Wände)",
+      "Leichtbau-Bodenplatte aus GFK und zusätzlichen Aluminiumprofil-Verstärkungen",
+      "Holzfreie GFK-Wände, durchgehend isoliert",
+      "Boden-Wandverbindung ohne Kältebrücken",
+      "Dachkantenprofil aus lackiertem Aluminium mit Fugenversiegelung",
+      "Alkovenkantenprofil aus GFK mit Fugenversiegelung",
+      "Robuste Karosserieschweller aus lackiertem Aluminium",
+      "Beheizter und isolierter Alkoven",
+      "2 Fenster im Alkoven",
+      "Alkovenboden klappbar",
+      "Sicherheitsnetz im Alkoven",
+      "Wandstärke Wände/Dach/Boden: 30/32/38 mm",
+      "Isofix, 2× in Fahrtrichtung (außer AO 650 HS & AO 570 HS)",
+      "Extra große Garagen dank 37 cm hohem Doppelboden",
+      "Elektrische Einstiegsstufe",
+      "Heizung Trumatic Combi 4",
+      "Außenwandbündige Seitz-Isolierfenster mit Mückengitter",
+      "Serviceklappen mit doppelter Dichtung, isoliertem Inlay & Selbsteinzug",
+      "Ein-Schlüsselsystem für den gesamten Aufbau",
+      "Aufbautür mit Fenster und Mülleimer",
+      "Große Rückleuchten im modernen Design",
+      "Mini-Heki über Heckbereich",
+      "Mini-Heki über Frontbereich"
     ],
     livingArea: [
-      "Möbeldekor Wildeiche & Strandweiß",
-      "Oberschränke mit Geräuschdämpfung",
-      "7-Zonen-Kaltschaummatratzen",
-      "Fußboden mit Trittschalldämpfung"
+      "Zweifarbiges Möbeldekor in Wildeiche und Strandweiß",
+      "Vorhang zum Fahrerhaus (grundrissabhängig)",
+      "Oberschränke mit Aluminiumprofil-Verstärkung",
+      "Geräuschdämpfung für Oberschrank-Klappen",
+      "7-Zonen-Kaltschaum-Matratzen",
+      "Fußbodenbelag mit Trittschalldämpfung",
+      "Polsterstoff: Dara"
     ],
     kitchen: [
-      "3-Flamm Kocher mit Zündung",
       "Kühlschrank 142 Liter",
-      "Wasserhahn mit Anti-Tropf-Auslass"
+      "3-Flamm-Kocher mit elektrischer Zündung, Glasabdeckung & großer Arbeitsfläche",
+      "Auszüge mit Rollschubführung aus Metall",
+      "Tiefe Oberschränke, unterteilt, mit Rüttelkante",
+      "Wasserhahn mit drehbarem Anti-Tropf-Auslass"
     ],
     bathroom: [
-      "Ergonomisch optimierte Mittelwaschräume",
-      "Duschkabine, Spiegelschrank, Cassetten-WC"
+      "Viel Bewegungsfreiraum durch optimierte Raumaufteilung",
+      "Mittelwaschräume mit integrierter Duschkabine (570 HS, 650 HS, 690 HB, 690 VB)",
+      "Stauschrank und Spiegel",
+      "Cassetten-WC mit großem Rolltank"
     ],
     installation: [
-      "143–150 l Frischwasser, 150 l Abwasser (beheizt, isoliert)",
-      "Schnellverschlussventile, Keramikkartuschen"
+      "Frischwasser-System aus Hartflex-Kunststoff",
+      "Frischwassertank 143–150 Liter (abhängig vom Grundriss), isoliert & beheizt im Innenraum",
+      "Wassermenge in Fahrstellung: 25 Liter",
+      "2 Schnellverschluss-Entleerungsventile im Doppelboden",
+      "Abwassertank 150 Liter, isoliert & beheizt im Doppelboden",
+      "Armaturen mit Keramikkartuschen",
+      "Syphons gegen Geruchsbildung",
+      "Druckwassersystem"
     ],
     electrical: [
-      "80 Ah Gel-Batterie",
-      "LED-Spots, 2× 230 V, 1× 12 V, 1× USB",
+      "Elektrozentrale gut zugänglich unter dem Beifahrersitz",
+      "Gel-Batterie 80 Ah",
+      "Bord-Control-Panel mit separater Anzeige für Wasser, Batterie & Ladespannung",
+      "LED-Lesespots mit Echtglas",
+      "Lichtschaltersystem mit Haushaltslogik",
+      "Deckenleuchte",
+      "2× Steckdosen 230 V",
+      "1× Steckdose 12 V",
       "Ladegerät 21 A",
-      "Haushaltslogik Lichtsystem"
+      "1× USB-Port"
     ]
   };
 
