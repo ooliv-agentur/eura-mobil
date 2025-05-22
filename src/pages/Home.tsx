@@ -480,10 +480,10 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Video Placeholder Section - 16:9 ratio grey block with video icon */}
+        {/* Video Placeholder Section - Updated with reduced height */}
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
+            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative max-h-[480px]">
               <AspectRatio ratio={16/9} />
               <div className="absolute inset-0 flex items-center justify-center">
                 <Video className="h-16 w-16 text-gray-400" />
