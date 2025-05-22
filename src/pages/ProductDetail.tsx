@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -547,7 +548,7 @@ const ProductDetail = () => {
         </div>
         
         <div className="container mx-auto px-4 mt-6">
-          {/* Introduction Section */}
+          {/* Introduction Section - Moved outside the container */}
           <div className="mb-8 text-center">
             <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
             <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
@@ -567,7 +568,7 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Hotspot Image Placeholder */}
+          {/* Hotspot Image Placeholder - Fixed styling */}
           <div className="w-full mb-8">
             <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
               Hotspot Bild Placeholder – Innenraum interaktiv
