@@ -16,7 +16,7 @@ import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
-import { AlertDialog, AlertDialogContent, AlertDialogClose } from "@/components/ui/alert-dialog";
+import { AlertDialog, AlertDialogContent, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
 
 // Model data repository
 const modelsData = {
@@ -552,12 +552,12 @@ const ComparisonOverlay = ({
             <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
               {isFullscreen ? <Minimize2 className="h-5 w-5" /> : <Maximize2 className="h-5 w-5" />}
             </Button>
-            <AlertDialogClose asChild>
+            <AlertDialogCancel asChild>
               <Button variant="ghost" size="icon">
                 <X className="h-5 w-5" />
                 <span className="sr-only">Schließen</span>
               </Button>
-            </AlertDialogClose>
+            </AlertDialogCancel>
           </div>
         </div>
         
