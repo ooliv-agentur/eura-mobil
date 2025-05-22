@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogContent, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
+import { ModelComparison } from "@/components/ModelComparison";
 
 // Van model data with specs included
 const vanModels = [
@@ -346,13 +347,18 @@ const ModelleOverview: React.FC = () => {
     if (selectedModels.includes(modelId)) {
       setSelectedModels(selectedModels.filter(id => id !== modelId)); 
     } else {
-      // If we already have 3 models selected, remove the first one
-      if (selectedModels.length >= 3) {
-        setSelectedModels([...selectedModels.slice(1), modelId]);
+      // If we already have 2 models selected, remove the first one
+      if (selectedModels.length >= 2) {
+        setSelectedModels([selectedModels[1], modelId]);
       } else {
         setSelectedModels([...selectedModels, modelId]);
       }
     }
+  };
+
+  // Get the selected models' data
+  const getSelectedModelsData = () => {
+    return vanModels.filter(model => selectedModels.includes(model.id));
   };
 
   // Handler for opening comparison overlay
@@ -366,6 +372,11 @@ const ModelleOverview: React.FC = () => {
         duration: 3000,
       });
     }
+  };
+  
+  // Handler for clearing selection
+  const handleClearSelection = () => {
+    setSelectedModels([]);
   };
   
   const handleKonfiguratorClick = () => {
@@ -438,6 +449,14 @@ const ModelleOverview: React.FC = () => {
               </Card>
             ))}
           </div>
+          
+          {/* Embedded comparison section (only when exactly 2 models are selected) */}
+          {selectedModels.length === 2 && (
+            <ModelComparison
+              models={getSelectedModelsData()}
+              onClose={handleClearSelection}
+            />
+          )}
         </section>
         
         {/* 5. Highlights Section */}
