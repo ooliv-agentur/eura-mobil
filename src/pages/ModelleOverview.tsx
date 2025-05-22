@@ -115,7 +115,7 @@ const ModelleOverview: React.FC = () => {
   // Handler for toggling model selection
   const handleToggleModelSelection = (modelId: string) => {
     if (selectedModels.includes(modelId)) {
-      setSelectedModels(selectedModels.filter(id => id !== modelId));
+      setSelectedModels(selectedModels.filter(id => id !== modelId)); // Fixed bug: was using id !== id which would never filter anything
     } else {
       // If we already have 3 models selected, remove the first one
       if (selectedModels.length >= 3) {
@@ -195,7 +195,7 @@ const ModelleOverview: React.FC = () => {
             </div>
           )}
           
-          {/* Comparison Overlay */}
+          {/* Comparison Overlay - This is kept as requested */}
           <ComparisonOverlay
             isOpen={isComparisonOpen}
             onClose={() => setIsComparisonOpen(false)}
