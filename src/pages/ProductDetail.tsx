@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -350,6 +351,11 @@ type FullModelData = BaseModelData & {
   }>;
   upholsteryTypes: string[];
   equipment: Record<string, string[]>;
+  modelText?: {
+    headline: string;
+    subheadline: string;
+    description: string;
+  };
 };
 
 // Download-only model with download items
@@ -385,6 +391,11 @@ function hasUpholstery(model: ModelData): model is FullModelData {
 // Type guard to check if a model has equipment details
 function hasEquipment(model: ModelData): model is FullModelData {
   return 'equipment' in model && model.equipment !== undefined;
+}
+
+// Type guard to check if a model has model text
+function hasModelText(model: ModelData): model is FullModelData & { modelText: { headline: string; subheadline: string; description: string; } } {
+  return 'modelText' in model && model.modelText !== undefined;
 }
 
 const ProductDetail = () => {
@@ -542,14 +553,14 @@ const ProductDetail = () => {
         {/* Introduction Section */}
         <div className="py-6 md:py-8 text-center max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            {'modelText' in modelDetails ? modelDetails.modelText.headline : modelDetails.name}
+            {hasModelText(modelDetails) ? modelDetails.modelText.headline : modelDetails.name}
           </h1>
           <h2 className="text-xl md:text-2xl text-gray-600 mb-6">
-            {'modelText' in modelDetails ? modelDetails.modelText.subheadline : 'Für Aktive und Unabhängige'}
+            {hasModelText(modelDetails) ? modelDetails.modelText.subheadline : 'Für Aktive und Unabhängige'}
           </h2>
           <div className="space-y-4 text-gray-700">
             <p>
-              {'modelText' in modelDetails ? modelDetails.modelText.description : modelDetails.intro}
+              {hasModelText(modelDetails) ? modelDetails.modelText.description : modelDetails.intro}
             </p>
           </div>
         </div>
