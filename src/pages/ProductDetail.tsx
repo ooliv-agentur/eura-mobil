@@ -539,14 +539,31 @@ const ProductDetail = () => {
         <div className="relative">
           <div className="w-full h-72 sm:h-96">
             <GrayBoxPlaceholder ratio={21/9} className="h-full" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
+            </div>
           </div>
         </div>
         
         <div className="container mx-auto px-4 mt-6">
+          {/* Introduction Section */}
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
+            <h3 className="text-xl md:text-2xl font-medium mt-1">Eura Mobil Vans</h3>
+          </div>
+          
           {/* Model Title and Introduction */}
           <div className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
-            <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
+                <p className="text-gray-700">{modelDetails.intro}</p>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
+                <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
+              </div>
+            </div>
           </div>
           
           {/* Technical Data Summary */}
@@ -603,6 +620,12 @@ const ProductDetail = () => {
           {hasInterior(modelDetails) && (
             <section id="innenraum" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+              {/* Hotspot Bild Placeholder */}
+              <div className="w-full mb-6">
+                <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
+                  Hotspot Bild Placeholder
+                </div>
+              </div>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3">
                   <GrayBoxPlaceholder ratio={16/9} />
