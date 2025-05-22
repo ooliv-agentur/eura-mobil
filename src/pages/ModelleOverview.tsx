@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Layout } from "../components/Layout";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,6 @@ import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogContent, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
 import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
-import { ModelComparison } from "@/components/ModelComparison";
 
 // Van model data with specs included
 const vanModels = [
@@ -450,13 +448,7 @@ const ModelleOverview: React.FC = () => {
             ))}
           </div>
           
-          {/* Embedded comparison section (only when exactly 2 models are selected) */}
-          {selectedModels.length === 2 && (
-            <ModelComparison
-              models={getSelectedModelsData()}
-              onClose={handleClearSelection}
-            />
-          )}
+          {/* Removed inline ModelComparison component */}
         </section>
         
         {/* 5. Highlights Section */}
