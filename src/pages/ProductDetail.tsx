@@ -537,7 +537,7 @@ const ProductDetail = () => {
         
         <div className="container mx-auto">
           {/* Hero Section - Full Width */}
-          <div className="relative w-full mb-12 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
+          <div className="relative w-full mb-16 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
             <div className="w-full h-72 sm:h-96">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
@@ -548,23 +548,23 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Introduction Section - Two Column Layout */}
-          <div className="px-6 py-10 mb-12 rounded-lg shadow-sm bg-white mx-4">
-            <div className="mb-8 text-center">
+          {/* Introduction Section - Two Column Layout with increased spacing */}
+          <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4">
+            <div className="mb-10 text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
-              <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
+              <h3 className="text-xl md:text-2xl font-medium mt-2 mb-8">Eura Mobil Vans</h3>
             </div>
             
-            {/* Two column content with hotspot image */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6">
-              <div className="space-y-6">
+            {/* Two column content with hotspot image and increased spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-8">
+              <div className="space-y-8">
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Sichtbar anders:</h3>
-                  <p className="text-gray-700">{modelDetails.intro}</p>
+                  <h3 className="text-xl font-semibold mb-4">Sichtbar anders:</h3>
+                  <p className="text-gray-700 leading-relaxed">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Spürbar anders:</h3>
-                  <p className="text-gray-700">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
+                  <h3 className="text-xl font-semibold mb-4">Spürbar anders:</h3>
+                  <p className="text-gray-700 leading-relaxed">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
                 </div>
               </div>
               <div>
@@ -583,7 +583,7 @@ const ProductDetail = () => {
           </div>
 
           {/* Technical Data Summary */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg mx-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
             <div className="flex flex-col items-center p-2">
               <span className="text-sm text-gray-600">Länge</span>
               <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
