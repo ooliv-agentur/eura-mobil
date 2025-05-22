@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,12 +31,12 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // Modellliste in der spezifischen Reihenfolge (nicht alphabetisch sortiert)
-// Updated with correct category assignments and improved descriptions for consistent display
+// Updated with requested text revisions ensuring all descriptions end with a full stop
 const modelTypes = [
   { name: "Van", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer und spontane Ausflüge mit maximaler Wendigkeit.", path: "/modelle/van", type: "vans" },
   { name: "Activa One", description: "Praktische Wohnmobile für Einsteiger und Familien. Bietet ausreichend Platz für bis zu 6 Personen mit optimierter Raumnutzung.", path: "/modelle/activa-one", type: "alkoven" },
-  { name: "Profila T – Fiat", description: "Komfortables Reisemobil auf Fiat-Basis mit durchdachtem Grundriss. Verbindet Fahrkomfort mit praktischen Wohnlösungen.", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
-  { name: "Profila RS", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Bietet hohen Reisekomfort und flexible Nutzungsmöglichkeiten für längere Touren.", path: "/modelle/profila-rs", type: "teilintegriert" },
+  { name: "Profila T – Fiat", description: "Komfortables Reisemobil auf Fiat-Basis mit durchdachtem Grundriss. Verbindet Fahrkomfort mit praktischen Details.", path: "/modelle/profila-t-fiat", type: "teilintegriert" },
+  { name: "Profila RS", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Bietet hohen Reisekomfort und flexible Nutzungsmöglichkeiten.", path: "/modelle/profila-rs", type: "teilintegriert" },
   { name: "Profila T – Mercedes", description: "Premium Teilintegrierte auf Mercedes-Basis mit erstklassigem Fahrgefühl. Kombiniert Fahrdynamik mit elegantem Wohnambiente.", path: "/modelle/profila-t-mercedes", type: "teilintegriert" },
   { name: "Contura", description: "Design und Komfort in perfekter Harmonie vereint. Zeitlose Eleganz trifft auf durchdachte Funktionalität für anspruchsvolle Reisende.", path: "/modelle/contura", type: "teilintegriert" },
   { name: "Integra Line – Fiat", description: "Luxuriöser Wohnkomfort auf solider Fiat-Basis. Überzeugt durch großzügigen Raumeindruck und intelligente Ausstattungsdetails.", path: "/modelle/integra-line-fiat", type: "integriert" },
