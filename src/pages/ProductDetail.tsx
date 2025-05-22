@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -566,6 +567,13 @@ const ProductDetail = () => {
             </div>
           </div>
           
+          {/* Hotspot Image Placeholder */}
+          <div className="w-full mb-8">
+            <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
+              Hotspot Bild Placeholder – Innenraum interaktiv
+            </div>
+          </div>
+          
           {/* Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
             <div className="flex flex-col items-center p-2">
@@ -620,12 +628,6 @@ const ProductDetail = () => {
           {hasInterior(modelDetails) && (
             <section id="innenraum" className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-              {/* Hotspot Bild Placeholder */}
-              <div className="w-full mb-6">
-                <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
-                  Hotspot Bild Placeholder
-                </div>
-              </div>
               <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
                 <div className="lg:col-span-3">
                   <GrayBoxPlaceholder ratio={16/9} />
