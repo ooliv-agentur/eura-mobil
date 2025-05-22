@@ -115,7 +115,7 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-4 border-b">
             <h2 className="text-xl font-semibold">
-              Grundriss-Vergleich: {modelsToCompare.map(m => m.name).join(" vs. ")}
+              Grundriss-Vergleich
             </h2>
             <div className="flex gap-2">
               <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
@@ -132,7 +132,10 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
             {/* Floorplan images */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {modelsToCompare.map((model) => (
-                <div key={model.name} className="flex flex-col">
+                <div key={model.id} className="flex flex-col">
+                  <div className="text-center mb-2">
+                    <h3 className="font-semibold">{model.name}</h3>
+                  </div>
                   <AspectRatio ratio={4/3} className="bg-gray-200 flex items-center justify-center">
                     <p className="text-gray-500">Grundriss {model.name}</p>
                   </AspectRatio>
@@ -140,51 +143,65 @@ export const ComparisonOverlay: React.FC<ComparisonOverlayProps> = ({
               ))}
             </div>
             
-            {/* Shared specifications section */}
+            {/* Technical data section */}
             <div className="mb-8">
-              <h3 className="text-lg font-medium mb-4">Gemeinsam bei allen Grundrissen dieser Baureihe</h3>
-              <div className="bg-gray-100 p-4 rounded-lg">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {Object.entries(commonSpecs).map(([key, value]) => (
-                    <div key={key}>
-                      <p className="text-sm text-gray-600">{specLabels[key] || key}</p>
-                      <p className="font-medium">{value}</p>
-                    </div>
-                  ))}
+              <h3 className="text-lg font-medium mb-4">Technische Daten</h3>
+              
+              {/* Shared specifications section */}
+              <div className="mb-6">
+                <h4 className="text-md font-medium mb-3">Gemeinsam bei allen Grundrissen dieser Baureihe</h4>
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {Object.entries(commonSpecs).map(([key, value]) => (
+                      <div key={key}>
+                        <p className="text-sm text-gray-600">{specLabels[key] || key}</p>
+                        <p className="font-medium">{value}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Comparison table - scrollable on mobile with sticky first column */}
-            <div className="border rounded-lg">
-              <ScrollArea className="w-full overflow-auto">
-                <div className="min-w-[600px]">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="bg-gray-50 w-[200px] sticky left-0 z-10">Merkmal</TableHead>
-                        {modelsToCompare.map((model) => (
-                          <TableHead key={model.name} className="text-center">{model.name}</TableHead>
-                        ))}
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {Object.entries(differingSpecs).map(([key]) => (
-                        <TableRow key={key}>
-                          <TableCell className="font-medium bg-gray-50 sticky left-0 z-10">
-                            {specLabels[key] || key}
-                          </TableCell>
-                          {modelsToCompare.map((model, modelIndex) => (
-                            <TableCell key={`${model.name}-${key}`} className="text-center">
-                              <span className="font-bold">{model.specs[key]}</span>
-                            </TableCell>
+              
+              {/* Comparison table - scrollable on mobile with sticky first column */}
+              <div className="border rounded-lg">
+                <ScrollArea className="w-full overflow-auto">
+                  <div className="min-w-[600px]">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="bg-gray-50 w-[200px] sticky left-0 z-10">Merkmal</TableHead>
+                          {modelsToCompare.map((model) => (
+                            <TableHead key={model.id} className="text-center">{model.name}</TableHead>
                           ))}
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </ScrollArea>
+                      </TableHeader>
+                      <TableBody>
+                        {Object.entries(differingSpecs).map(([key]) => (
+                          <TableRow key={key}>
+                            <TableCell className="font-medium bg-gray-50 sticky left-0 z-10">
+                              {specLabels[key] || key}
+                            </TableCell>
+                            {modelsToCompare.map((model) => {
+                              const value = model.specs[key];
+                              const isDifferent = modelsToCompare.some(m => m.specs[key] !== value);
+                              
+                              return (
+                                <TableCell key={`${model.id}-${key}`} className="text-center">
+                                  {isDifferent ? (
+                                    <span className="font-bold">{value}</span>
+                                  ) : (
+                                    <span>{value}</span>
+                                  )}
+                                </TableCell>
+                              );
+                            })}
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </ScrollArea>
+              </div>
             </div>
             
             <div className="mt-6 text-sm text-gray-500 italic text-center">
