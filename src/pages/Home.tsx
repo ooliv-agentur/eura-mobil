@@ -342,18 +342,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Video Placeholder Section - 16:9 ratio grey block with video icon */}
-        <section className="py-16 px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
-              <AspectRatio ratio={16/9} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Video className="h-16 w-16 text-gray-400" />
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Models & CTA Section */}
         <section className="py-16 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
@@ -486,8 +474,17 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Include the Wohnmobilberater component */}
-        <Wohnmobilberater />
+        {/* Video Placeholder Section - 16:9 ratio grey block with video icon */}
+        <section className="py-16 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
+              <AspectRatio ratio={16/9} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Video className="h-16 w-16 text-gray-400" />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* New Three-Column Cards Section: About EURA MOBIL */}
         <section className="py-16 px-4 bg-gray-50">
@@ -518,6 +515,9 @@ const Home = () => {
             </div>
           </div>
         </section>
+
+        {/* Include the Wohnmobilberater component */}
+        <Wohnmobilberater />
 
         {/* Section 6: Händlersuche - Updated with static map placeholder */}
         <section className="py-16 px-4">
