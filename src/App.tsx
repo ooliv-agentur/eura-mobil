@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import ModelleOverview from "./pages/ModelleOverview";
 import ProductDetail from "./pages/ProductDetail";
 import VanModelDetail from "./pages/VanModelDetail";
+import VanModelsOverview from "./pages/VanModelsOverview";
 import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
 import Unternehmen from "./pages/Unternehmen";
@@ -54,7 +55,7 @@ function App() {
                 
                 {/* New URLs for model pages */}
                 <Route path="/wohnmobile" element={<ModelleOverview />} />
-                <Route path="/wohnmobile/vans" element={<ProductDetail />} />
+                <Route path="/wohnmobile/vans" element={<VanModelsOverview />} />
                 <Route path="/wohnmobile/alkoven" element={<ProductDetail />} />
                 <Route path="/wohnmobile/teilintegrierte/profila-t-fiat" element={<ProductDetail />} />
                 <Route path="/wohnmobile/teilintegrierte/profila-t-mercedes" element={<ProductDetail />} />
