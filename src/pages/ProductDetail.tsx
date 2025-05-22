@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,6 @@ import { ComparisonProvider } from "@/context/ComparisonContext";
 import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
-import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 // Model data repository - could later be moved to a separate file
 const modelsData = {
@@ -395,15 +395,6 @@ const ProductDetail = () => {
     ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
   
-  // Sidebar navigation items
-  const sidebarNavItems = [
-    { id: "highlights", label: "Highlights" },
-    { id: "grundrisse", label: "Grundrisse" },
-    { id: "innenraum", label: "Innenraum" },
-    { id: "polster", label: "Polster" },
-    { id: "serienausstattung", label: "Serienausstattung" },
-  ];
-  
   const handleKonfiguratorClick = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
@@ -417,12 +408,121 @@ const ProductDetail = () => {
     <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
   );
   
+  // Helper function for layout rendering
+  const renderLayouts = () => {
+    if (!hasLayouts(modelDetails)) return null;
+    
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {modelDetails.layouts.map((layout) => (
+          <SelectableModelCard 
+            key={layout.id}
+            id={layout.id}
+            name={layout.name}
+            length={layout.length}
+            sleepingPlaces={layout.sleepingPlaces}
+          />
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function for interior rendering
+  const renderInterior = () => {
+    if (!hasInterior(modelDetails)) return null;
+    
+    return (
+      <ul className="space-y-4 divide-y">
+        {modelDetails.interior.map((item, index) => (
+          <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
+            <div className="font-medium">{item.name}</div>
+            <div className="text-gray-600">{item.description}</div>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+  
+  // Helper function for upholstery rendering
+  const renderUpholstery = () => {
+    if (!hasUpholstery(modelDetails)) return null;
+    
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {modelDetails.upholsteryTypes.map((type, index) => (
+          <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
+            <AspectRatio ratio={4/3} className="h-40" />
+            <div className="p-3">
+              <h3 className="font-medium">{type}</h3>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function for equipment rendering on mobile
+  const renderEquipmentMobile = () => {
+    if (!hasEquipment(modelDetails)) return null;
+    
+    return (
+      <Accordion type="single" collapsible className="w-full">
+        {Object.entries(modelDetails.equipment).map(([key, items]) => (
+          <AccordionItem key={key} value={key}>
+            <AccordionTrigger className="py-4 px-0">
+              <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <ul className="space-y-2 pl-1">
+                {items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
+  };
+  
+  // Helper function for equipment rendering on desktop
+  const renderEquipmentDesktop = () => {
+    if (!hasEquipment(modelDetails)) return null;
+    
+    const equipmentKeys = Object.keys(modelDetails.equipment);
+    if (equipmentKeys.length === 0) return null;
+    
+    return (
+      <Tabs defaultValue={equipmentKeys[0]} className="w-full">
+        <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
+          {equipmentKeys.map((key) => (
+            <TabsTrigger key={key} value={key} className="text-sm flex-grow">
+              {equipmentTabs[key as keyof typeof equipmentTabs]}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {Object.entries(modelDetails.equipment).map(([key, items]) => (
+          <TabsContent key={key} value={key} className="mt-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+              {items.map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </TabsContent>
+        ))}
+      </Tabs>
+    );
+  };
+  
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
-        {/* Sidebar Navigation (Desktop only) */}
-        <SidebarNavigation items={sidebarNavItems} />
-        
         {/* Hero Section */}
         <div className="relative">
           <div className="w-full h-72 sm:h-96">
@@ -434,16 +534,7 @@ const ProductDetail = () => {
           {/* Model Title and Introduction */}
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold">{modelDetails.name}</h1>
-            <p className="text-gray-700 mt-3 text-lg">
-              Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken....
-            </p>
-          </div>
-          
-          {/* Interactive Interior Image */}
-          <div className="my-10">
-            <div className="bg-gray-200 h-[400px] rounded-lg flex items-center justify-center">
-              <span className="text-gray-500 text-xl">Interactive Interior Image</span>
-            </div>
+            <p className="text-gray-700 mt-3 text-lg">{modelDetails.intro}</p>
           </div>
           
           {/* Technical Data Summary */}
@@ -463,175 +554,71 @@ const ProductDetail = () => {
           </div>
           
           {/* Highlights Section */}
-          <section id="highlights" className="my-10 scroll-mt-10">
+          <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <ul className="space-y-3">
-                <li className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>Waschraum mit schwenkbarer Duschwand</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>Staufächer im Doppelboden</span>
-                </li>
-                <li className="flex gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                  <span>Mineralstoff-Spüle</span>
-                </li>
+                {modelDetails.highlights.map((highlight, index) => (
+                  <li key={index} className="flex gap-2">
+                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </section>
           
-          {/* Grundrisse (Layouts) Section */}
+          {/* Gallery Section */}
+          <section className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+              <GrayBoxPlaceholder ratio={4/3} />
+            </div>
+          </section>
+          
+          {/* Grundrisse (Layouts) Section - Only shown if layouts exist */}
           {hasLayouts(modelDetails) && (
-            <section id="grundrisse" className="my-10 scroll-mt-10">
+            <section className="my-10">
               <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-gray-200 p-4 rounded-lg">
-                  <AspectRatio ratio={4/3} className="mb-3" />
-                  <h3 className="font-medium">V 635 EB</h3>
-                  <p className="text-sm text-gray-600">Länge: 6,36 m – Schlafplätze: 2</p>
+              {renderLayouts()}
+            </section>
+          )}
+          
+          {/* Innenraum (Interior) Section - Only shown if interior exists */}
+          {hasInterior(modelDetails) && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <div className="lg:col-span-3">
+                  <GrayBoxPlaceholder ratio={16/9} />
                 </div>
-                <div className="bg-gray-200 p-4 rounded-lg">
-                  <AspectRatio ratio={4/3} className="mb-3" />
-                  <h3 className="font-medium">V 635 HB</h3>
-                  <p className="text-sm text-gray-600">Länge: 6,36 m – Schlafplätze: 2</p>
-                </div>
-                <div className="bg-gray-200 p-4 rounded-lg">
-                  <AspectRatio ratio={4/3} className="mb-3" />
-                  <h3 className="font-medium">V 595 HB</h3>
-                  <p className="text-sm text-gray-600">Länge: 5,99 m – Schlafplätze: 2</p>
+                <div className="lg:col-span-2">
+                  <div className="bg-white rounded-lg p-4 shadow-sm h-full">
+                    {renderInterior()}
+                  </div>
                 </div>
               </div>
             </section>
           )}
           
-          {/* Innenraum (Interior) Section */}
-          <section id="innenraum" className="my-10 scroll-mt-10">
-            <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <div className="lg:col-span-3">
-                <GrayBoxPlaceholder ratio={16/9} />
-              </div>
-              <div className="lg:col-span-2">
-                <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                  <ul className="space-y-4">
-                    <li>
-                      <div className="font-medium">Kommunikation</div>
-                      <div className="text-gray-600">Boxen, LED-Lampen und USB-Steckdosen</div>
-                    </li>
-                    <li>
-                      <div className="font-medium">Spüle</div>
-                      <div className="text-gray-600">Mineralstoff-Spüle</div>
-                    </li>
-                    <li>
-                      <div className="font-medium">Dinetten-Tisch</div>
-                      <div className="text-gray-600">Mit abgesenkter Ablage</div>
-                    </li>
-                    <li>
-                      <div className="font-medium">Küche</div>
-                      <div className="text-gray-600">Mit Gewürzregal</div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </section>
+          {/* Polster (Upholstery) Section - Only shown if upholsteryTypes exist */}
+          {hasUpholstery(modelDetails) && (
+            <section className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+              {renderUpholstery()}
+            </section>
+          )}
           
-          {/* Polster (Upholstery) Section */}
-          <section id="polster" className="my-10 scroll-mt-10">
-            <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-gray-200 rounded-lg overflow-hidden">
-                <AspectRatio ratio={4/3} className="h-40" />
-                <div className="p-3">
-                  <h3 className="font-medium">Eco-Leder Schwarz</h3>
-                </div>
-              </div>
-              <div className="bg-gray-200 rounded-lg overflow-hidden">
-                <AspectRatio ratio={4/3} className="h-40" />
-                <div className="p-3">
-                  <h3 className="font-medium">Eco-Leder Beige</h3>
-                </div>
-              </div>
-              <div className="bg-gray-200 rounded-lg overflow-hidden">
-                <AspectRatio ratio={4/3} className="h-40" />
-                <div className="p-3">
-                  <h3 className="font-medium">Stoff-Kombination Grau</h3>
-                </div>
-              </div>
-            </div>
-          </section>
-          
-          {/* Serienausstattung (Standard Equipment) Section */}
-          <section id="serienausstattung" className="my-10 pt-8 scroll-mt-10">
-            <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
-              <ul className="space-y-2">
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Chassis: Fiat Ducato 35L Chassis, Kastenwagen</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Euro 6D Final inkl. Ad Blue und Rußpartikelfilter</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Fahrer- + Beifahrerairbag</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>ABS, ASR, ESP inkl. Traktion+, Hilldescent</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Klimaanlage manuell</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Tempomat</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Kraftstofftank 90 Liter</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Zentralverriegelung mit Funkfernbedienung</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Tagfahrlicht</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Elektrische Fensterheber vorn</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Radzierblenden</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Fix and Go Pannenset</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>Stoßfänger hinten schwarz</span>
-                </li>
-              </ul>
-            </div>
-          </section>
+          {/* Serienausstattung (Standard Equipment) Section - Only shown if equipment exists */}
+          {hasEquipment(modelDetails) && (
+            <section className="my-10 pt-8">
+              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+              {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+            </section>
+          )}
         </div>
         
         {/* Comparison Modal */}
