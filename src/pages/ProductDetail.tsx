@@ -536,20 +536,20 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        {/* Hero Section with Text Overlay */}
-        <div className="relative mb-8">
-          <div className="w-full h-72 sm:h-96">
-            <GrayBoxPlaceholder ratio={21/9} className="h-full" />
-          </div>
-          {/* Hero Text Overlay - Centered */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
-          </div>
-        </div>
-        
         <div className="container mx-auto px-4">
-          {/* Introduction Section - Properly placed after hero and before hotspot */}
-          <div className="py-8 bg-white mb-10 rounded-lg shadow-sm">
+          {/* Hero Section with Text Overlay */}
+          <div className="relative mb-8">
+            <div className="w-full h-72 sm:h-96">
+              <GrayBoxPlaceholder ratio={21/9} className="h-full" />
+            </div>
+            {/* Hero Text Overlay - Centered */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <h1 className="text-4xl md:text-5xl text-white font-bold">Für Aktive und Unabhängige</h1>
+            </div>
+          </div>
+          
+          {/* Introduction Section - Properly placed after hero */}
+          <div className="py-8 mb-10 rounded-lg shadow-sm bg-white">
             {/* Headings */}
             <div className="mb-8 text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
@@ -569,7 +569,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          {/* Hotspot Image Placeholder - Fixed styling */}
+          {/* Hotspot Image Placeholder */}
           <div className="w-full mb-8">
             <div className="bg-gray-200 p-4 rounded-lg flex items-center justify-center h-64 text-gray-600">
               Hotspot Bild Placeholder – Innenraum interaktiv
