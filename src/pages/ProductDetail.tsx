@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -538,7 +537,7 @@ const ProductDetail = () => {
         
         <div className="container mx-auto">
           {/* Hero Section - Full Width */}
-          <div className="relative w-full mb-8 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
+          <div className="relative w-full mb-12 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
             <div className="w-full h-72 sm:h-96">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
@@ -550,7 +549,7 @@ const ProductDetail = () => {
           </div>
           
           {/* Introduction Section - Two Column Layout */}
-          <div className="px-4 py-8 mb-10 rounded-lg shadow-sm bg-white">
+          <div className="px-6 py-10 mb-12 rounded-lg shadow-sm bg-white mx-4">
             <div className="mb-8 text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
               <h3 className="text-xl md:text-2xl font-medium mt-1 mb-6">Eura Mobil Vans</h3>
