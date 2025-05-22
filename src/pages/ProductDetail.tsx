@@ -19,7 +19,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogContent, AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { VanModelsComparisonTable } from "@/components/VanModelsComparisonTable";
 
 // Model data repository
 const modelsData = {
@@ -1241,11 +1240,6 @@ const ProductDetail = () => {
               ))}
             </Tabs>
           </section>
-        )}
-        
-        {/* Add Van Models Comparison Table - Only show for van models */}
-        {currentModelId === "van" && (
-          <VanModelsComparisonTable />
         )}
       </div>
     </ProductLayout>
