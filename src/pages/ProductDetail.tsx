@@ -1031,21 +1031,6 @@ const ProductDetail = () => {
             </Tabs>
           </section>
         )}
-        
-        {/* 9. CTA section */}
-        <section className="py-16 text-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button onClick={handleKonfiguratorClick} variant="outline" size="lg" className="h-14 bg-gray-100 text-gray-800">
-              Jetzt konfigurieren
-            </Button>
-            <Button onClick={handleBeratungClick} variant="outline" size="lg" className="h-14 bg-gray-100 text-gray-800">
-              Beratung starten
-            </Button>
-            <Button asChild variant="outline" size="lg" className="h-14 bg-gray-100 text-gray-800">
-              <Link to="/haendler">Händler finden</Link>
-            </Button>
-          </div>
-        </section>
       </div>
     </ProductLayout>
   );
