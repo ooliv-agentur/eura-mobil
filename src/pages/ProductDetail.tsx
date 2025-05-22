@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -539,22 +538,9 @@ const ProductDetail = () => {
       </Tabs>
     );
   };
-
-  const handleKonfiguratorClick = () => {
-    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
-  };
-  
-  const handleBeratungClick = () => {
-    startBeraterFlow();
-  };
-  
-  // Simple gray box placeholder component
-  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
-  );
   
   return (
-    <ProductLayout modelName={modelDetails.name}>
+    <ProductLayout modelName={modelDetails?.name || ""}>
       {/* Hero Section - Reduced height */}
       <div className="relative">
         <div className="w-full">
@@ -566,14 +552,14 @@ const ProductDetail = () => {
         {/* Introduction Section */}
         <div className="py-6 md:py-8 text-center max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            {hasModelText(modelDetails) ? modelDetails.modelText.headline : modelDetails.name}
+            {hasModelText(modelDetails) ? modelDetails.modelText.headline : modelDetails?.name || ""}
           </h1>
           <h2 className="text-xl md:text-2xl text-gray-600 mb-6">
             {hasModelText(modelDetails) ? modelDetails.modelText.subheadline : 'Für Aktive und Unabhängige'}
           </h2>
           <div className="space-y-4 text-gray-700">
             <p>
-              {hasModelText(modelDetails) ? modelDetails.modelText.description : modelDetails.intro}
+              {hasModelText(modelDetails) ? modelDetails.modelText.description : modelDetails?.intro || ""}
             </p>
           </div>
         </div>
@@ -676,7 +662,7 @@ const ProductDetail = () => {
         
         {/* CTA section */}
         <section className="my-16 text-center">
-          <h2 className="text-2xl font-semibold mb-8">Erfahren Sie mehr über den {modelDetails.name}</h2>
+          <h2 className="text-2xl font-semibold mb-8">Erfahren Sie mehr über den {modelDetails?.name || ""}</h2>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <Button onClick={handleKonfiguratorClick} size="lg" className="min-w-[200px]">
               Jetzt konfigurieren
