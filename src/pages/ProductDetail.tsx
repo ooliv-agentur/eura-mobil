@@ -536,34 +536,38 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         <div className="container mx-auto">
-          {/* Hero Section - Full Width with improved text alignment */}
+          {/* Hero Section - Improved vertical and horizontal alignment */}
           <div className="relative w-full mb-16 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)]">
-            <div className="w-full h-72 sm:h-96">
+            <div className="w-full h-80 sm:h-[400px]">
               <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
             </div>
-            {/* Hero Text Overlay - Better Centered with improved typography */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-              <div className="text-gray-400 text-5xl md:text-7xl font-light mb-4 opacity-80 tracking-wide">VANS</div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-400 font-semibold tracking-tight">Für Aktive und Unabhängige</h1>
+            {/* Hero Text Overlay - Enhanced centering and typography hierarchy */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
+              <div className="flex flex-col items-center">
+                <span className="text-6xl md:text-7xl lg:text-8xl font-light text-gray-400 mb-6 opacity-80 tracking-wider">VANS</span>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl text-gray-500 font-semibold tracking-tight text-center">
+                  Für Aktive und Unabhängige
+                </h1>
+              </div>
             </div>
           </div>
           
-          {/* Introduction Section - Two Column Layout with increased spacing */}
+          {/* Introduction Section - Two Column Layout with increased spacing and improved readability */}
           <div className="px-6 py-12 mb-16 rounded-lg shadow-sm bg-white mx-4">
-            <div className="mb-10 text-center">
+            <div className="mb-12 text-center">
               <h2 className="text-2xl md:text-3xl font-semibold">Für Deine beste Zeit.</h2>
-              <h3 className="text-xl md:text-2xl font-medium mt-2 mb-8">Eura Mobil Vans</h3>
+              <h3 className="text-xl md:text-2xl font-medium mt-3 mb-10">Eura Mobil Vans</h3>
             </div>
             
             {/* Two column content with hotspot image and increased spacing */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-8">
-              <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
+              <div className="space-y-10">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Sichtbar anders:</h3>
+                  <h3 className="text-xl font-semibold mb-5">Sichtbar anders:</h3>
                   <p className="text-gray-700 leading-relaxed">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Spürbar anders:</h3>
+                  <h3 className="text-xl font-semibold mb-5">Spürbar anders:</h3>
                   <p className="text-gray-700 leading-relaxed">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
                 </div>
               </div>
@@ -598,7 +602,7 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Highlights Section - Add anchor ID */}
+          {/* Highlights Section */}
           <section id="highlights" className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
             <div className="bg-white rounded-lg p-4 shadow-sm">
