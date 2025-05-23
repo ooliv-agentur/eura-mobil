@@ -40,6 +40,7 @@ import {
   CarouselPrevious,
   CarouselIndicators,
 } from "@/components/ui/carousel";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Model data repository - could later be moved to a separate file
 const modelsData = {
@@ -464,22 +465,20 @@ const ProductDetail = () => {
     );
   };
   
-  // Helper function for interior rendering with new 2-column layout
+  // Helper function for interior rendering with new 4-column grid layout
   const renderInterior = () => {
     if (!hasInterior(modelDetails)) return null;
     
     return (
-      <div className="space-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {modelDetails.interior.map((item, index) => (
-          <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div>
-              <GrayBoxPlaceholder ratio={1/1} className="rounded-lg" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
-              <p className="text-gray-600">{item.description}</p>
-            </div>
-          </div>
+          <Card key={index} className="overflow-hidden border shadow-sm">
+            <AspectRatio ratio={1/1} className="bg-gray-200" />
+            <CardContent className="p-4">
+              <h3 className="font-medium mb-1">{item.name}</h3>
+              <p className="text-gray-600 text-sm">{item.description}</p>
+            </CardContent>
+          </Card>
         ))}
       </div>
     );
@@ -555,7 +554,7 @@ const ProductDetail = () => {
             <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil Vans</h2>
           </div>
           
-          {/* Introduction Section - Reduced top padding by 50% */}
+          {/* Introduction Section */}
           <div className="px-6 py-6 mb-16 rounded-lg shadow-sm bg-white mx-4 overflow-visible">
             {/* Two column content with hotspot image and increased spacing */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
@@ -600,33 +599,35 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* NEW Highlights Section - Full width feature area */}
+          {/* IMPROVED Highlights Section - Card-like layout with icons */}
           <section id="highlights" className="my-12 bg-gray-50 py-10 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] px-4 md:px-8">
             <div className="container mx-auto">
               <h2 className="text-2xl font-semibold mb-6">Highlights der Baureihe</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {modelDetails.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
-                    <div className="bg-gray-200 rounded-full p-2 flex-shrink-0">
-                      <Circle className="h-5 w-5 text-gray-500" />
-                    </div>
-                    <div>
-                      <span>{highlight}</span>
-                    </div>
-                  </div>
+                  <Card key={index} className="overflow-hidden border-0 shadow-md">
+                    <CardContent className="p-4 flex items-start gap-4">
+                      <div className="bg-white rounded-full p-3 shadow-sm flex-shrink-0">
+                        <Circle className="h-6 w-6 text-blue-500" />
+                      </div>
+                      <div>
+                        <p className="text-gray-800 font-medium">{highlight}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             </div>
           </section>
           
-          {/* NEW Gallery Section with Carousel */}
+          {/* IMPROVED Gallery Section with horizontal scrolling Carousel */}
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
             <Carousel className="w-full" showIndicators={true}>
               <CarouselContent>
-                {[1, 2, 3, 4].map((_, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                    <GrayBoxPlaceholder ratio={4/3} className="h-full" />
+                {[1, 2, 3, 4, 5, 6].map((_, index) => (
+                  <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <AspectRatio ratio={4/3} className="bg-gray-200 rounded-md" />
                   </CarouselItem>
                 ))}
               </CarouselContent>
@@ -646,7 +647,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* NEW Innenraum (Interior) Section with 2-column grid per item */}
+          {/* IMPROVED Innenraum (Interior) Section with 4-column grid */}
           {hasInterior(modelDetails) && (
             <section id="innenraum" className="my-10">
               <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
@@ -662,7 +663,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* NEW Serienausstattung (Standard Equipment) Section with vertical accordion */}
+          {/* IMPROVED Serienausstattung (Standard Equipment) Section with vertical accordion */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
               <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
