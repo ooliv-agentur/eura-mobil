@@ -34,6 +34,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import AGB from "./pages/AGB";
 import Werksfuehrung from "./pages/Werksfuehrung";
+import Berater from "./pages/Berater";
 
 const queryClient = new QueryClient();
 
