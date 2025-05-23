@@ -369,6 +369,15 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             <ul className="space-y-2">
               <li>
                 <Link 
+                  to="/qualitaet" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Alle Vorteile im Überblick
+                </Link>
+              </li>
+              <li>
+                <Link 
                   to="/qualitaet/sealed-structure" 
                   onClick={onClose}
                   className="hover:text-blue-600 transition-colors block py-1"
