@@ -3,10 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { MapPin } from "lucide-react";
-import { useComparison } from "@/context/ComparisonContext";
+import { ChevronRight, MapPin } from "lucide-react";
 
 type Model = {
   id: string;
@@ -20,17 +17,19 @@ interface ResultsDisplayProps {
 }
 
 const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ models }) => {
-  const { addModel, removeModel, isSelected, selectedModels } = useComparison();
-
-  const handleCheckboxChange = (checked: boolean, model: Model) => {
-    if (checked) {
-      addModel({ id: model.id, name: model.name });
+  const handleCompare = (modelId: string) => {
+    // Store model ID for comparison
+    const existingModelId = localStorage.getItem("compareModelA");
+    
+    if (existingModelId) {
+      localStorage.setItem("compareModelB", modelId);
+      // Would navigate to comparison page in a full implementation
+      console.log(`Comparing ${existingModelId} with ${modelId}`);
     } else {
-      removeModel(model.id);
+      localStorage.setItem("compareModelA", modelId);
+      console.log(`Added ${modelId} to comparison. Select another model to compare.`);
     }
   };
-
-  const disabled = (modelId: string) => selectedModels.length >= 2 && !isSelected(modelId);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -55,17 +54,15 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ models }) => {
                 </Link>
               </Button>
               
-              <div className="flex items-center space-x-2">
-                <Checkbox 
-                  id={`compare-${model.id}`} 
-                  checked={isSelected(model.id)}
-                  onCheckedChange={(checked) => handleCheckboxChange(checked as boolean, model)}
-                  disabled={disabled(model.id)}
-                />
-                <Label htmlFor={`compare-${model.id}`} className="text-sm cursor-pointer">
-                  Zum Vergleich auswählen
-                </Label>
-              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full"
+                onClick={() => handleCompare(model.id)}
+              >
+                <ChevronRight className="mr-1 h-4 w-4" />
+                Zum Vergleich
+              </Button>
               
               <Button variant="outline" size="sm" className="w-full" asChild>
                 <Link to="/haendler">

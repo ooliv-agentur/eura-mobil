@@ -10,8 +10,6 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ResultsDisplay from "./ResultsDisplay";
 import { useNavigate } from "react-router-dom";
-import BeraterComparisonBar from "./BeraterComparisonBar";
-import BeraterComparisonModal from "./BeraterComparisonModal";
 
 // Mock data for models to display in results
 const mockModels = [
@@ -20,13 +18,6 @@ const mockModels = [
   { id: "integra-line", name: "Integra Line", length: "8,1 m", sleepingPlaces: "4" },
   { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2" },
   { id: "contura", name: "Contura", length: "8,8 m", sleepingPlaces: "4" },
-];
-
-// Fallback models to show when no results match
-const fallbackModels = [
-  { id: "activa-one", name: "Activa One", length: "6,5 m", sleepingPlaces: "4" },
-  { id: "profila-t", name: "Profila T", length: "7,2 m", sleepingPlaces: "3" },
-  { id: "integra-line", name: "Integra Line", length: "8,1 m", sleepingPlaces: "4" },
 ];
 
 export type BeraterAnswer = {
@@ -52,7 +43,6 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
     weight: "",
     budget: "",
   });
-  const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
 
   const totalSteps = 6;
   
@@ -109,15 +99,8 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
   
   // Helper function to check if we have results that match criteria
   const hasMatchingResults = () => {
-    // In a real application, this would filter models based on actual criteria
-    // For this demo, we'll simulate having no matches when the user selects specific criteria
-    
-    // For example, no matches if user selected "5+" persons and budget "unter 70.000 €"
-    if (answers.persons === "5+" && answers.budget === "unter 70.000 €") {
-      return false;
-    }
-    
-    return true; // Otherwise show results
+    // This would be replaced with actual filtering logic
+    return true; // For demo purposes, always show results
   };
   
   const renderContent = () => {
@@ -262,11 +245,11 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
             
             {!hasMatchingResults() && (
               <p className="text-center text-gray-700 my-2">
-                Diese Wohnmobile könnten trotzdem passen …
+                Diese Modelle könnten trotzdem passen…
               </p>
             )}
             
-            <ResultsDisplay models={hasMatchingResults() ? mockModels : fallbackModels} />
+            <ResultsDisplay models={mockModels} />
             
             <div className="flex justify-center mt-4">
               <Button 
@@ -334,19 +317,8 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
               )}
             </div>
           )}
-          
-          {/* Comparison bar at bottom of results step */}
-          {step === 6 && (
-            <BeraterComparisonBar onCompareClick={() => setIsComparisonModalOpen(true)} />
-          )}
         </div>
       </DialogContent>
-      
-      {/* Comparison modal */}
-      <BeraterComparisonModal 
-        open={isComparisonModalOpen} 
-        onOpenChange={setIsComparisonModalOpen} 
-      />
     </Dialog>
   );
 };
