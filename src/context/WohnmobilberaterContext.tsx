@@ -128,7 +128,6 @@ export const WohnmobilberaterProvider: React.FC<{
       }}
     >
       {children}
-      {isOpen && <BeraterOverlay isOpen={isOpen} onClose={closeBerater} />}
     </WohnmobilberaterContext.Provider>
   );
 };
@@ -140,6 +139,3 @@ export const useWohnmobilberater = (): WohnmobilberaterContextType => {
   }
   return context;
 };
-
-// Import at the end to avoid circular dependency issues
-import BeraterOverlay from "@/components/Wohnmobilberater/BeraterOverlay";
