@@ -20,6 +20,13 @@ const mockModels = [
   { id: "contura", name: "Contura", length: "8,8 m", sleepingPlaces: "4" },
 ];
 
+// Fallback models to show when no results match
+const fallbackModels = [
+  { id: "activa-one", name: "Activa One", length: "6,5 m", sleepingPlaces: "4" },
+  { id: "profila-t", name: "Profila T", length: "7,2 m", sleepingPlaces: "3" },
+  { id: "integra-line", name: "Integra Line", length: "8,1 m", sleepingPlaces: "4" },
+];
+
 export type BeraterAnswer = {
   persons: string;
   bedTypes: string[];
@@ -99,8 +106,15 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
   
   // Helper function to check if we have results that match criteria
   const hasMatchingResults = () => {
-    // This would be replaced with actual filtering logic
-    return true; // For demo purposes, always show results
+    // In a real application, this would filter models based on actual criteria
+    // For this demo, we'll simulate having no matches when the user selects specific criteria
+    
+    // For example, no matches if user selected "5+" persons and budget "unter 70.000 €"
+    if (answers.persons === "5+" && answers.budget === "unter 70.000 €") {
+      return false;
+    }
+    
+    return true; // Otherwise show results
   };
   
   const renderContent = () => {
@@ -245,11 +259,11 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
             
             {!hasMatchingResults() && (
               <p className="text-center text-gray-700 my-2">
-                Diese Modelle könnten trotzdem passen…
+                Diese Wohnmobile könnten trotzdem passen …
               </p>
             )}
             
-            <ResultsDisplay models={mockModels} />
+            <ResultsDisplay models={hasMatchingResults() ? mockModels : fallbackModels} />
             
             <div className="flex justify-center mt-4">
               <Button 
