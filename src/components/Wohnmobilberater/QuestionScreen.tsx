@@ -1,11 +1,13 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { QuestionData } from "@/context/WohnmobilberaterContext";
 import { useEffect, useState } from "react";
 
 interface QuestionScreenProps {
-  questionData: QuestionData;
+  questionData: {
+    question: string;
+    options: string[];
+  };
   currentStep: number;
   totalSteps: number;
   selectedOption: string;
