@@ -56,19 +56,26 @@ const Footer = () => {
           </div>
           
           <div>
+            <h3 className="font-bold mb-3">Qualität & Vorteile</h3>
+            <ul className="space-y-2">
+              <li><Link to="/qualitaet" className="text-gray-600 hover:text-blue-600 block py-1">Alle Vorteile im Überblick</Link></li>
+              <li><Link to="/qualitaet/sealed-structure" className="text-gray-600 hover:text-blue-600 block py-1">Sealed Structure</Link></li>
+              <li><Link to="/qualitaet/winterfestigkeit" className="text-gray-600 hover:text-blue-600 block py-1">Winterfestigkeit</Link></li>
+              <li><Link to="/qualitaet/leichtbau" className="text-gray-600 hover:text-blue-600 block py-1">Leichtbau</Link></li>
+              <li><Link to="/qualitaet/moebelbau" className="text-gray-600 hover:text-blue-600 block py-1">Möbelbau</Link></li>
+              <li><Link to="/qualitaet/doppelboden" className="text-gray-600 hover:text-blue-600 block py-1">Doppelboden</Link></li>
+              <li><Link to="/qualitaet/schlafkomfort" className="text-gray-600 hover:text-blue-600 block py-1">Schlafkomfort</Link></li>
+              <li><Link to="/qualitaet/kuechenwelt" className="text-gray-600 hover:text-blue-600 block py-1">Küchen</Link></li>
+              <li><Link to="/qualitaet/wellnessbereich" className="text-gray-600 hover:text-blue-600 block py-1">Wellness</Link></li>
+            </ul>
+          </div>
+          
+          <div>
             <h3 className="font-bold mb-3">Service</h3>
             <ul className="space-y-2">
               <li><Link to="/berater?step=1" className="text-gray-600 hover:text-blue-600 block py-1">Wohnmobilberater</Link></li>
               <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
               <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-bold mb-3">Karriere</h3>
-            <ul className="space-y-2">
-              <li><Link to="/karriere" className="text-gray-600 hover:text-blue-600 block py-1">Stellenangebote</Link></li>
-              <li><Link to="/karriere#ausbildung" className="text-gray-600 hover:text-blue-600 block py-1">Ausbildung</Link></li>
             </ul>
           </div>
           
