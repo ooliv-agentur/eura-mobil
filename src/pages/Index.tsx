@@ -1,11 +1,17 @@
 
-import { useLocation, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Layout } from "@/components/Layout";
-import { Button } from "@/components/ui/button";
-import BeraterButton from "@/components/BeraterButton";
+import BeraterOverlay from "@/components/Wohnmobilberater/BeraterOverlay";
 
 const Index = () => {
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const location = useLocation();
+  
+  useEffect(() => {
+    // Open berater overlay immediately when page loads
+    setIsOverlayOpen(true);
+  }, []);
 
   return (
     <Layout>
@@ -15,11 +21,21 @@ const Index = () => {
           <p className="mb-6">
             Finden Sie das perfekte Wohnmobil für Ihre Bedürfnisse.
           </p>
-          <div className="flex flex-col gap-4 items-center">
-            <BeraterButton />
-          </div>
+          {!isOverlayOpen && (
+            <button 
+              onClick={() => setIsOverlayOpen(true)}
+              className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Berater starten
+            </button>
+          )}
         </div>
       </div>
+      
+      <BeraterOverlay 
+        isOpen={isOverlayOpen} 
+        onClose={() => setIsOverlayOpen(false)} 
+      />
     </Layout>
   );
 };
