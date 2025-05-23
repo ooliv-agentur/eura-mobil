@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ChevronRight, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useComparison } from "@/context/ComparisonContext";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -21,6 +21,7 @@ interface ResultsDisplayProps {
 
 const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ models, onViewModel }) => {
   const { selectedModels, addModel, removeModel, isSelected } = useComparison();
+  const navigate = useNavigate();
 
   // Handle checkbox change for comparison selection
   const handleCompareToggle = (model: Model, checked: boolean) => {
@@ -29,6 +30,11 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ models, onViewModel }) 
     } else {
       removeModel(model.id);
     }
+  };
+
+  // Handle view model click - navigate to model page
+  const handleViewModelClick = (modelId: string) => {
+    navigate(`/modelle/${modelId}`);
   };
 
   return (
@@ -57,7 +63,7 @@ const ResultsDisplay: React.FC<ResultsDisplayProps> = ({ models, onViewModel }) 
                   variant="outline" 
                   size="sm" 
                   className="w-full"
-                  onClick={() => onViewModel(model.id)}
+                  onClick={() => handleViewModelClick(model.id)}
                 >
                   Modell ansehen
                 </Button>

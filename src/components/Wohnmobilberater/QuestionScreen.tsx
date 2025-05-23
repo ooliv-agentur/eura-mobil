@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface QuestionScreenProps {
   questionData: {
@@ -24,6 +25,7 @@ const QuestionScreen = ({
   onBack,
 }: QuestionScreenProps) => {
   const [localSelection, setLocalSelection] = useState<string>(selectedOption);
+  const navigate = useNavigate();
 
   // Update local selection when prop changes
   useEffect(() => {
@@ -39,6 +41,15 @@ const QuestionScreen = ({
     setTimeout(() => {
       onNext(option);
     }, 50);
+  };
+
+  // Handle back button - on first step, go to home
+  const handleBack = () => {
+    if (currentStep <= 1) {
+      navigate('/');
+    } else {
+      onBack();
+    }
   };
 
   return (
@@ -74,7 +85,7 @@ const QuestionScreen = ({
       </div>
 
       <div className="flex justify-start mt-auto relative z-50">
-        <Button variant="outline" onClick={onBack} className="z-50">
+        <Button variant="outline" onClick={handleBack} className="z-50">
           Zurück
         </Button>
       </div>

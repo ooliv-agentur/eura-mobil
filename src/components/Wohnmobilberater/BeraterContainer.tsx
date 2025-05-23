@@ -1,20 +1,18 @@
 
 import React from 'react';
 import { useWohnmobilberater } from '@/context/WohnmobilberaterContext';
-import BeraterOverlay from './BeraterOverlay';
-import { useComparison } from '@/context/ComparisonContext';
+import { Navigate } from 'react-router-dom';
 
 const BeraterContainer: React.FC = () => {
   const { isOpen, closeBerater } = useWohnmobilberater();
   
-  // Ensure proper cleanup when closing the berater
-  const handleClose = () => {
-    closeBerater();
-  };
+  // If berater is opened via context, redirect to the berater page
+  if (isOpen) {
+    closeBerater(); // Close the modal state
+    return <Navigate to="/berater" replace />;
+  }
   
-  if (!isOpen) return null;
-  
-  return <BeraterOverlay isOpen={isOpen} onClose={handleClose} />;
+  return null;
 };
 
 export default BeraterContainer;

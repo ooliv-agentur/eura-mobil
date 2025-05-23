@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { useWohnmobilberater } from "@/context/WohnmobilberaterContext";
+import { Link } from "react-router-dom";
 
 interface BeraterButtonProps {
   className?: string;
@@ -14,16 +14,16 @@ const BeraterButton: React.FC<BeraterButtonProps> = ({
   variant = "default",
   size = "default",
 }) => {
-  const { openBerater } = useWohnmobilberater();
-
   return (
     <Button 
-      onClick={openBerater} 
       className={className}
       variant={variant}
       size={size}
+      asChild
     >
-      Beratung starten
+      <Link to="/berater">
+        Beratung starten
+      </Link>
     </Button>
   );
 };
