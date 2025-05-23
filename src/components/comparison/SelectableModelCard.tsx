@@ -30,8 +30,8 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({ id, name, length
   
   return (
     <Card className="border border-gray-300">
-      {/* Grey placeholder for image */}
-      <AspectRatio ratio={4/3} className="bg-gray-300" />
+      {/* Using CSS variable for consistent placeholder styling */}
+      <AspectRatio ratio={4/3} className="bg-[color:var(--placeholder-color)]" />
       <CardContent className="p-4">
         <h3 className="text-xl font-semibold mb-2">{name}</h3>
         <div className="grid grid-cols-2 gap-2 text-sm mb-4">
