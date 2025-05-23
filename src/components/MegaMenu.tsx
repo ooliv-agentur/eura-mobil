@@ -101,18 +101,17 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-2">
-              <div><MenuLink to="/qualitaet">Alle Vorteile im Überblick</MenuLink></div>
               <div><MenuLink to="/qualitaet/sealed-structure">Sealed Structure</MenuLink></div>
               <div><MenuLink to="/qualitaet/winterfestigkeit">Winterfestigkeit</MenuLink></div>
+              <div><MenuLink to="/qualitaet/leichtbau">Leichtbau</MenuLink></div>
             </div>
             <div className="space-y-2">
-              <div><MenuLink to="/qualitaet/leichtbau">Leichtbau</MenuLink></div>
               <div><MenuLink to="/qualitaet/moebelbau">Möbelbau</MenuLink></div>
               <div><MenuLink to="/qualitaet/schlafkomfort">Schlafkomfort</MenuLink></div>
+              <div><MenuLink to="/qualitaet/kuechenwelt">Küche</MenuLink></div>
             </div>
             <div className="space-y-2">
               <div><MenuLink to="/qualitaet/doppelboden">Doppelboden</MenuLink></div>
-              <div><MenuLink to="/qualitaet/kuechenwelt">Küche</MenuLink></div>
               <div><MenuLink to="/qualitaet/wellnessbereich">Wellness</MenuLink></div>
             </div>
             <div className="col-span-1 md:col-span-3 mt-4">

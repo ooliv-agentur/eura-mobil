@@ -1,187 +1,704 @@
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { useOverlay } from "@/context/OverlayContext";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 
-import React from "react";
-import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+interface FullscreenMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-const FullscreenMenu = ({ isOpen, onClose }) => {
+// Dummy data for model previews - Updated order to match the specified sequence
+const modelPreviewData = {
+  "van": {
+    title: "Van",
+    text: "Kompakter Van mit flexiblem Innenraum. Ideal für Reisende, die ein wendiges Fahrzeug für Städte und kleine Straßen suchen.",
+    facts: [
+      { label: "Länge", value: "5,4 - 6,0 m" },
+      { label: "Sitzplätze", value: "2 - 4" },
+      { label: "Schlafplätze", value: "2 - 3" }
+    ]
+  },
+  "activa-one": {
+    title: "Activa One",
+    text: "Teilintegriertes Wohnmobil mit optimiertem Raumangebot. Perfekt für Paare und kleine Familien auf der Suche nach Komfort.",
+    facts: [
+      { label: "Länge", value: "6,5 - 7,1 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
+    ]
+  },
+  "profila-t-fiat": {
+    title: "Profila T – Fiat",
+    text: "Teilintegriertes Wohnmobil auf Fiat-Basis mit flexiblem Grundriss. Ideal für komfortable Reisen mit praktischer Ausstattung.",
+    facts: [
+      { label: "Länge", value: "7,1 - 7,4 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
+    ]
+  },
+  "profila-rs": {
+    title: "Profila RS",
+    text: "Sportliches Reisemobil mit dynamischer Linie. Kombiniert Fahrkomfort mit praktischer Raumnutzung für aktive Reisende.",
+    facts: [
+      { label: "Länge", value: "7,1 - 7,5 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "profila-t-mercedes": {
+    title: "Profila T – Mercedes",
+    text: "Premium-Teilintegrierten auf Mercedes-Basis. Bietet hohen Fahrkomfort und erstklassige Verarbeitung für anspruchsvolle Reisende.",
+    facts: [
+      { label: "Länge", value: "7,2 - 7,5 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2 - 4" }
+    ]
+  },
+  "contura": {
+    title: "Contura",
+    text: "Elegantes Wohnmobil mit großzügigem Raumkonzept. Bietet Wohnkomfort auf höchstem Niveau mit durchdachten Details.",
+    facts: [
+      { label: "Länge", value: "7,6 - 8,0 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "integra-line-fiat": {
+    title: "Integra Line – Fiat",
+    text: "Vollintegriertes Reisemobil auf Fiat-Basis. Überzeugt durch harmonisches Raumkonzept und hochwertige Verarbeitung.",
+    facts: [
+      { label: "Länge", value: "7,1 - 7,6 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "integra-line-gt-mercedes": {
+    title: "Integra Line GT – Mercedes",
+    text: "Premium-Vollintegrierter auf Mercedes-Basis mit GT-Ausstattung. Vereint Luxus und Funktionalität für höchste Ansprüche.",
+    facts: [
+      { label: "Länge", value: "7,2 - 7,7 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "integra": {
+    title: "Integra",
+    text: "Luxuriöses Flaggschiff mit exklusiver Ausstattung. Bietet maximalen Wohnkomfort für anspruchsvolle Reisende auf langen Strecken.",
+    facts: [
+      { label: "Länge", value: "7,9 - 8,9 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  },
+  "xtura": {
+    title: "Xtura",
+    text: "Geräumiges Reisemobil mit luxuriöser Ausstattung. Bietet hohen Komfort für anspruchsvolle Reisende auf langen Strecken.",
+    facts: [
+      { label: "Länge", value: "7,4 - 7,9 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "4" }
+    ]
+  }
+};
+
+// Simplified model preview component with proper aspect ratio and balanced spacing
+const ModelPreviewHero = ({
+  modelId,
+  onClose
+}: {
+  modelId: string | null;
+  onClose: () => void;
+}) => {
+  if (!modelId) return null;
+  
+  const modelData = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  if (!modelData) return null;
+  
+  return (
+    <div className="flex flex-col h-full">
+      {/* Image placeholder with proper 16:9 aspect ratio */}
+      <AspectRatio ratio={16/9} className="mb-4 bg-gray-200 rounded-md overflow-hidden" />
+      
+      <h3 className="text-xl font-medium mb-2">{modelData.title}</h3>
+      
+      <p className="text-sm text-gray-600 mb-4">
+        {modelData.text}
+      </p>
+      
+      <div className="grid grid-cols-3 gap-3 mb-4 text-sm">
+        {modelData.facts.map((fact, index) => (
+          <div key={index} className="flex flex-col">
+            <span className="font-medium text-gray-900 mb-0.5">{fact.label}</span>
+            <span className="text-gray-600">{fact.value}</span>
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-auto">
+        <Button variant="outline" className="w-full" asChild>
+          <Link to={`/modelle/${modelId}`} onClick={onClose}>
+            Mehr erfahren
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+// Mobile Model Item component with expanding preview
+const MobileModelItem = ({ 
+  modelId, 
+  isActive, 
+  onSelect, 
+  onClose 
+}: { 
+  modelId: string; 
+  isActive: boolean; 
+  onSelect: (id: string) => void; 
+  onClose: () => void;
+}) => {
+  const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
+  
+  return (
+    <div className="border-b border-gray-100 last:border-b-0">
+      <button 
+        className={cn(
+          "flex items-center w-full text-left py-3 px-2 transition-colors",
+          isActive ? "text-blue-600" : "text-gray-800"
+        )}
+        onClick={() => onSelect(modelId)}
+      >
+        {/* Small dummy image with consistent size */}
+        <div className="bg-gray-200 w-16 h-10 mr-3 flex-shrink-0 rounded-sm"></div>
+        <span className="font-medium flex-grow">{model.title}</span>
+        {isActive ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
+      </button>
+      
+      {/* Expandable preview section */}
+      {isActive && (
+        <div className="px-2 pb-4 animate-fade-in">
+          <AspectRatio ratio={16/9} className="mb-3 bg-gray-200 rounded-md overflow-hidden" />
+          
+          <p className="text-sm text-gray-600 mb-3">
+            {model.text}
+          </p>
+          
+          <div className="grid grid-cols-3 gap-3 mb-4 text-xs">
+            {model.facts.map((fact, index) => (
+              <div key={index} className="flex flex-col">
+                <span className="font-medium text-gray-900 mb-0.5">{fact.label}</span>
+                <span className="text-gray-600">{fact.value}</span>
+              </div>
+            ))}
+          </div>
+          
+          <Button variant="outline" className="w-full text-sm" asChild>
+            <Link to={`/modelle/${modelId}`} onClick={onClose}>
+              Mehr erfahren
+            </Link>
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
+  const { setActiveOverlay } = useOverlay();
+  const location = useLocation();
+  const isMobile = useIsMobile();
+  const { startBeraterFlow } = useWohnmobilberaterTrigger();
+  const [activeModel, setActiveModel] = useState<string | null>("van"); // Default to first model
+  
+  // Control body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
+  const handleModelSelect = (id: string) => {
+    setActiveModel(id);
+  };
+
+  // Handler for starting berater instead of navigating
+  const handleStartBerater = () => {
+    onClose(); // Close the menu first
+    startBeraterFlow(); // Start the berater with default options
+  };
+
+  // Array of all model IDs in the specified order
+  const modelIds = [
+    "van",
+    "activa-one",
+    "profila-t-fiat",
+    "profila-rs",
+    "profila-t-mercedes",
+    "contura",
+    "integra-line-fiat",
+    "integra-line-gt-mercedes",
+    "integra",
+    "xtura"
+  ];
+
   return (
-    <div className="fixed inset-0 bg-white z-40 overflow-y-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div className="fixed inset-0 z-[9999] bg-white overflow-y-auto">
+      {/* Header with logo and close button */}
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <Link to="/" onClick={onClose} className="font-bold text-xl">
+            EURA MOBIL
+          </Link>
           
-          {/* First Column - Qualität & Vorteile */}
-          <div>
-            <h2 className="font-bold text-xl mb-6">Qualität & Vorteile</h2>
-            <ul className="space-y-4">
-              <li>
-                <Link to="/qualitaet" className="hover:text-blue-600" onClick={onClose}>
-                  Alle Vorteile im Überblick
+          {/* Close button */}
+          <button 
+            onClick={onClose}
+            aria-label="Menü schließen"
+            className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center"
+          >
+            <X className="h-6 w-6 text-gray-800" />
+          </button>
+        </div>
+      </div>
+
+      {/* Main content with 12-column grid */}
+      <div className="container mx-auto px-4 pb-16 md:pb-0">
+        {/* 1. Vehicle models section */}
+        <section className="mb-8">
+          <h2 className="text-xl font-medium mb-3">Wohnmobile & Vans</h2>
+          
+          {/* Card-like wrapper with border */}
+          <div className="rounded-md border border-gray-200 p-4 bg-gray-50/50">
+            {/* Desktop: 12-column grid for model list and preview */}
+            <div className="hidden md:grid grid-cols-12 gap-6">
+              {/* Left side: Model list (4 columns) */}
+              <div className="col-span-4">
+                <ul className="space-y-2">
+                  {modelIds.map(modelId => {
+                    const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
+                    return (
+                      <li key={modelId}>
+                        <button 
+                          className={`flex items-center w-full text-left py-2 pl-2 rounded-sm transition-colors
+                            ${activeModel === modelId 
+                              ? 'text-blue-600 bg-blue-50 border-l-2 border-blue-500' 
+                              : 'hover:bg-gray-100 hover:text-blue-600'}`}
+                          onClick={() => handleModelSelect(modelId)}
+                        >
+                          {/* Small dummy image with consistent size */}
+                          <div className="bg-gray-200 w-16 h-10 mr-3 flex-shrink-0 rounded-sm"></div>
+                          <span className="font-medium">{model.title}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              
+              {/* Right side: Preview (8 columns) */}
+              <div className="col-span-8">
+                <ModelPreviewHero modelId={activeModel} onClose={onClose} />
+              </div>
+            </div>
+            
+            {/* Mobile: Accordion style list with inline previews */}
+            <div className="md:hidden">
+              {modelIds.map(modelId => (
+                <MobileModelItem 
+                  key={modelId}
+                  modelId={modelId}
+                  isActive={activeModel === modelId}
+                  onSelect={handleModelSelect}
+                  onClose={onClose}
+                />
+              ))}
+            </div>
+            
+            {/* CTA Buttons in 3-column grid with proper spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+              <Button variant="outline" asChild>
+                <Link to="/modellvergleich" onClick={onClose}>
+                  Modelle vergleichen
                 </Link>
-              </li>
+              </Button>
+              
+              <Button variant="outline" asChild>
+                <a 
+                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={onClose}
+                  className="flex items-center justify-center"
+                >
+                  <span>Jetzt konfigurieren</span>
+                  <ExternalLink className="ml-1.5 h-4 w-4" />
+                </a>
+              </Button>
+              
+              <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleStartBerater}>
+                Beratung starten
+              </Button>
+            </div>
+          </div>
+        </section>
+        
+        <Separator className="my-6" />
+        
+        {/* 2. Link grid section with 12-column grid for consistent alignment */}
+        <div className="grid grid-cols-12 gap-x-6 gap-y-8 mb-12">
+          {/* Qualität & Vorteile - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
+            <ul className="space-y-2">
               <li>
-                <Link to="/qualitaet/sealed-structure" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/sealed-structure" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Sealed Structure
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/winterfestigkeit" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/winterfestigkeit" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Winterfestigkeit
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/leichtbau" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/leichtbau" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Leichtbau
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/moebelbau" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/moebelbau" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Möbelbau
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/doppelboden" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/doppelboden" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Doppelboden
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/schlafkomfort" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/schlafkomfort" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Schlafkomfort
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/kuechenwelt" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/kuechenwelt" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Küchen
                 </Link>
               </li>
               <li>
-                <Link to="/qualitaet/wellnessbereich" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/qualitaet/wellnessbereich" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Wellness
                 </Link>
               </li>
             </ul>
           </div>
           
-          {/* Second Column - Kaufen & Mieten */}
-          <div>
-            <h2 className="font-bold text-xl mb-6">Kaufen & Mieten</h2>
-            <ul className="space-y-4">
+          {/* Kaufen & Mieten - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
+            <ul className="space-y-2">
               <li>
-                <Link to="/berater" className="hover:text-blue-600" onClick={onClose}>
+                <button 
+                  onClick={handleStartBerater}
+                  className="hover:text-blue-600 transition-colors block py-1 text-left w-full"
+                >
                   Wohnmobilberater
-                </Link>
+                </button>
               </li>
               <li>
-                <Link to="/konfigurator" className="hover:text-blue-600" onClick={onClose}>
-                  Konfigurator
-                </Link>
-                <ExternalLink className="inline-block ml-1 h-4 w-4" />
+                <a 
+                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
+                  onClick={onClose}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center hover:text-blue-600 transition-colors py-1"
+                >
+                  <span>Konfigurator</span>
+                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                </a>
               </li>
               <li>
-                <Link to="/mietfahrzeuge" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/mietfahrzeuge" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Mietfahrzeuge
                 </Link>
               </li>
               <li>
-                <Link to="/gebrauchtfahrzeuge" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/gebrauchtfahrzeuge" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Gebrauchtfahrzeuge
                 </Link>
               </li>
               <li>
-                <Link to="/haendler" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/haendler" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Händlersuche
                 </Link>
               </li>
             </ul>
           </div>
           
-          {/* Third Column - Unternehmen */}
-          <div>
-            <h2 className="font-bold text-xl mb-6">Unternehmen</h2>
-            <ul className="space-y-4">
+          {/* Unternehmen - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-3">Unternehmen</h3>
+            <ul className="space-y-2">
               <li>
-                <Link to="/unternehmen#ueber-uns" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/unternehmen" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Über EURA MOBIL
                 </Link>
               </li>
               <li>
-                <Link to="/werksbesichtigung" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/unternehmen/werksfuehrung" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Werksführung
                 </Link>
               </li>
               <li>
-                <Link to="/reisemobil-forum" className="hover:text-blue-600" onClick={onClose}>
-                  Reisemobil Forum
+                <Link 
+                  to="/unternehmen/club" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Club
                 </Link>
               </li>
               <li>
-                <Link to="/eura-mobil-club" className="hover:text-blue-600" onClick={onClose}>
-                  Eura Mobil Club
-                </Link>
-              </li>
-              <li>
-                <Link to="/eura-mobil-card" className="hover:text-blue-600" onClick={onClose}>
-                  Eura Mobil Card
-                </Link>
-              </li>
-              <li>
-                <Link to="/videos" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/unternehmen/videos" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Videos
                 </Link>
               </li>
             </ul>
           </div>
           
-          {/* Fourth Column - Karriere & Service */}
-          <div>
-            <h2 className="font-bold text-xl mb-6">Karriere & Service</h2>
-            <ul className="space-y-4">
+          {/* Karriere & Service - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-3">Karriere & Service</h3>
+            <ul className="space-y-2">
               <li>
-                <Link to="/karriere/stellenangebote" className="hover:text-blue-600" onClick={onClose}>
-                  Stellenangebote
-                </Link>
-                <ExternalLink className="inline-block ml-1 h-4 w-4" />
+                <a 
+                  href="/karriere" 
+                  onClick={onClose}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center hover:text-blue-600 transition-colors py-1"
+                >
+                  <span>Stellenangebote</span>
+                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                </a>
               </li>
               <li>
-                <Link to="/karriere/ausbildung" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/karriere/ausbildung" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Ausbildung
                 </Link>
               </li>
               <li>
-                <Link to="/kontakt" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/kontakt" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Kontakt
                 </Link>
               </li>
               <li>
-                <Link to="/garantie" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/garantie" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Garantie
                 </Link>
               </li>
               <li>
-                <Link to="/newsletter" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/newsletter" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Newsletter
                 </Link>
               </li>
               <li>
-                <Link to="/downloads" className="hover:text-blue-600" onClick={onClose}>
+                <Link 
+                  to="/downloads" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
                   Downloads
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-        
-        {/* Close button at bottom of menu */}
-        <div className="mt-10 text-center">
-          <button 
-            onClick={onClose}
-            className="px-6 py-3 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors"
-          >
-            Menü schließen
-          </button>
+      </div>
+      
+      {/* Footer with links, social media, and language selector - aligned to the grid */}
+      <div className="mt-auto border-t border-gray-200 bg-gray-50 py-6">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            {/* Legal links */}
+            <div className="mb-4 md:mb-0">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2">
+                <li>
+                  <Link 
+                    to="/impressum" 
+                    onClick={onClose}
+                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    Impressum
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/datenschutz" 
+                    onClick={onClose}
+                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    Datenschutz
+                  </Link>
+                </li>
+                <li>
+                  <Link 
+                    to="/agb" 
+                    onClick={onClose}
+                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+                  >
+                    AGB
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            
+            {/* Language selector and social media */}
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+              {/* Language selector */}
+              <Select defaultValue="de">
+                <SelectTrigger className="w-32 h-9 text-sm">
+                  <SelectValue placeholder="Sprache" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="en">Englisch</SelectItem>
+                  <SelectItem value="fr">Französisch</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              {/* Social media icons - slightly larger hit area */}
+              <div className="flex gap-4">
+                <a 
+                  href="https://www.instagram.com/euramobil/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://www.facebook.com/EuraMobil" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://www.youtube.com/@euramobil" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      
+      {/* Mobile only: Fixed CTA at the bottom - with proper spacing */}
+      {isMobile && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden">
+          <Button className="w-full" onClick={handleStartBerater}>
+            Jetzt Beratung starten
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
