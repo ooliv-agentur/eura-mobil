@@ -50,6 +50,9 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* New variable for consistent placeholder colors */
+    --placeholder-color: 220 13% 91%;
   }
 
   .dark {
@@ -88,6 +91,9 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Dark mode placeholder color */
+    --placeholder-color: 215 14% 16%;
   }
 }
 
@@ -134,5 +140,15 @@
   .card-hover:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Consistent placeholder styling across the site */
+  .placeholder-image {
+    @apply bg-[#E5E7EB] rounded-md;
+  }
+  
+  /* Apply consistent styling to model card placeholders */
+  .model-card-placeholder {
+    @apply bg-[#E5E7EB] rounded-md;
   }
 }
