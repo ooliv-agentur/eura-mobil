@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ResultsDisplay from "./ResultsDisplay";
 import { useNavigate } from "react-router-dom";
+import { useComparison } from "@/context/ComparisonContext";
 
 // Mock data for models to display in results
 const mockModels = [
@@ -34,6 +35,7 @@ type BeraterOverlayProps = {
 
 const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const { selectedModels, clearModels } = useComparison();
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<BeraterAnswer>({
     persons: "",
@@ -91,7 +93,22 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
       length: "",
       weight: "",
     });
+    clearModels(); // Clear any selected models for comparison
     onClose();
+  };
+  
+  // Navigation to model details with overlay closing
+  const handleViewModel = (modelId: string) => {
+    handleCloseOverlay();
+    navigate(`/modelle/${modelId}`);
+  };
+  
+  // Start comparison with selected models
+  const handleStartComparison = () => {
+    if (selectedModels.length === 2) {
+      handleCloseOverlay();
+      navigate(`/modellvergleich?modelA=${selectedModels[0].id}&modelB=${selectedModels[1].id}`);
+    }
   };
   
   // Helper function to check if we have results that match criteria
@@ -226,14 +243,33 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
               </>
             )}
             
-            <ResultsDisplay models={mockModels} />
+            <ResultsDisplay 
+              models={mockModels} 
+              onViewModel={handleViewModel}
+            />
             
-            <div className="flex justify-center mt-4">
+            {selectedModels.length === 2 && (
+              <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4 z-50">
+                <div className="container mx-auto flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold">Ausgewählt:</span>
+                    <span>{selectedModels[0].name} vs. {selectedModels[1].name}</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Button variant="outline" onClick={clearModels}>
+                      Auswahl zurücksetzen
+                    </Button>
+                    <Button onClick={handleStartComparison}>
+                      Modelle vergleichen
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            <div className="flex justify-center mt-4 mb-16">
               <Button 
-                onClick={() => {
-                  handleCloseOverlay();
-                  navigate("/");
-                }}
+                onClick={() => setStep(1)}
               >
                 Neue Beratung starten
               </Button>
