@@ -25,7 +25,6 @@ export type BeraterAnswer = {
   bedTypes: string[];
   length: string;
   weight: string;
-  budget: string;
 };
 
 type BeraterOverlayProps = {
@@ -41,10 +40,9 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
     bedTypes: [],
     length: "",
     weight: "",
-    budget: "",
   });
 
-  const totalSteps = 6;
+  const totalSteps = 5;
   
   // Handle selection for single-select questions
   const handleSingleSelect = (category: keyof BeraterAnswer, value: string) => {
@@ -92,7 +90,6 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
       bedTypes: [],
       length: "",
       weight: "",
-      budget: "",
     });
     onClose();
   };
@@ -109,10 +106,10 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
         return (
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-semibold mb-2 text-center">
-              Wie viele Personen reisen mit?
+              Wieviele Schlafplätze benötigen Sie?
             </h2>
             <div className="flex flex-col gap-3">
-              {["1–2", "3–4", "5+"].map((option) => (
+              {["mindestens 2", "mindestens 4", "mindestens 6"].map((option) => (
                 <Card
                   key={option}
                   className={`p-4 cursor-pointer hover:border-blue-500 transition-colors ${
@@ -136,9 +133,9 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {[
                 "Queensbett",
-                "Einzelbetten",
                 "Alkovenbett",
-                "Hubett",
+                "Einzelbetten",
+                "Hubbett",
                 "Seitenbett",
                 "Heckbett",
                 "Stockbetten",
@@ -212,41 +209,21 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
         return (
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-semibold mb-2 text-center">
-              Welches Budget haben Sie ungefähr?
-            </h2>
-            <div className="flex flex-col gap-3">
-              {[
-                "unter 70.000 €",
-                "70.000–90.000 €",
-                "90.000–110.000 €",
-                "über 110.000 €",
-                "egal"
-              ].map((option) => (
-                <Card
-                  key={option}
-                  className={`p-4 cursor-pointer hover:border-blue-500 transition-colors ${
-                    answers.budget === option ? "border-blue-500 border-2" : ""
-                  }`}
-                  onClick={() => handleSingleSelect("budget", option)}
-                >
-                  <div className="text-center text-lg py-2">{option}</div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        );
-        
-      case 6:
-        return (
-          <div className="flex flex-col gap-4">
-            <h2 className="text-xl font-semibold mb-2 text-center">
-              Unsere Empfehlungen für Sie
+              Diese Wohnmobile könnten zu Ihnen passen...
             </h2>
             
             {!hasMatchingResults() && (
-              <p className="text-center text-gray-700 my-2">
-                Diese Modelle könnten trotzdem passen…
-              </p>
+              <>
+                <p className="text-center text-gray-700 my-2">
+                  Leider passt kein Modell zu Ihrer Auswahl. Bitte starten Sie die Beratung neu.
+                </p>
+                <Button onClick={() => setStep(1)} className="mx-auto mb-4">
+                  Beratung neu starten
+                </Button>
+                <h3 className="text-lg font-semibold text-center">
+                  Diese Wohnmobile könnten trotzdem passen...
+                </h3>
+              </>
             )}
             
             <ResultsDisplay models={mockModels} />
@@ -295,7 +272,7 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
           </div>
           
           {/* Navigation */}
-          {step > 1 && step < 6 && (
+          {step > 1 && step < 5 && (
             <div className="mt-6 flex justify-between">
               <Button
                 variant="outline"
