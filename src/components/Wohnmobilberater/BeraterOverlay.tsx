@@ -10,6 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ResultsDisplay from "./ResultsDisplay";
 import { useNavigate } from "react-router-dom";
+import BeraterComparisonBar from "./BeraterComparisonBar";
+import BeraterComparisonModal from "./BeraterComparisonModal";
 
 // Mock data for models to display in results
 const mockModels = [
@@ -50,6 +52,7 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
     weight: "",
     budget: "",
   });
+  const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
 
   const totalSteps = 6;
   
@@ -331,8 +334,19 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
               )}
             </div>
           )}
+          
+          {/* Comparison bar at bottom of results step */}
+          {step === 6 && (
+            <BeraterComparisonBar onCompareClick={() => setIsComparisonModalOpen(true)} />
+          )}
         </div>
       </DialogContent>
+      
+      {/* Comparison modal */}
+      <BeraterComparisonModal 
+        open={isComparisonModalOpen} 
+        onOpenChange={setIsComparisonModalOpen} 
+      />
     </Dialog>
   );
 };
