@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Download, MapPin, Settings } from "lucide-react";
+import { Check, Download, MapPin, Settings, Circle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Tabs,
@@ -17,6 +16,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -28,6 +32,14 @@ import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselIndicators,
+} from "@/components/ui/carousel";
 
 // Model data repository - could later be moved to a separate file
 const modelsData = {
@@ -452,19 +464,24 @@ const ProductDetail = () => {
     );
   };
   
-  // Helper function for interior rendering
+  // Helper function for interior rendering with new 2-column layout
   const renderInterior = () => {
     if (!hasInterior(modelDetails)) return null;
     
     return (
-      <ul className="space-y-4 divide-y">
+      <div className="space-y-8">
         {modelDetails.interior.map((item, index) => (
-          <li key={index} className={`${index > 0 ? 'pt-4' : ''}`}>
-            <div className="font-medium">{item.name}</div>
-            <div className="text-gray-600">{item.description}</div>
-          </li>
+          <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+            <div>
+              <GrayBoxPlaceholder ratio={1/1} className="rounded-lg" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
+              <p className="text-gray-600">{item.description}</p>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     );
   };
   
@@ -486,62 +503,32 @@ const ProductDetail = () => {
     );
   };
   
-  // Helper function for equipment rendering on mobile
-  const renderEquipmentMobile = () => {
+  // Equipment section with new vertical accordion structure
+  const renderEquipment = () => {
     if (!hasEquipment(modelDetails)) return null;
     
     return (
-      <Accordion type="single" collapsible className="w-full">
+      <div className="space-y-4">
         {Object.entries(modelDetails.equipment).map(([key, items]) => (
-          <AccordionItem key={key} value={key}>
-            <AccordionTrigger className="py-4 px-0">
-              <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
-            </AccordionTrigger>
-            <AccordionContent>
-              <ul className="space-y-2 pl-1">
-                {items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
+          <Accordion type="single" collapsible className="w-full" key={key}>
+            <AccordionItem value={key} className="border rounded-lg bg-white">
+              <AccordionTrigger className="px-4 py-3">
+                <span className="text-lg font-medium">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                  {items.map((item, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         ))}
-      </Accordion>
-    );
-  };
-  
-  // Helper function for equipment rendering on desktop
-  const renderEquipmentDesktop = () => {
-    if (!hasEquipment(modelDetails)) return null;
-    
-    const equipmentKeys = Object.keys(modelDetails.equipment);
-    if (equipmentKeys.length === 0) return null;
-    
-    return (
-      <Tabs defaultValue={equipmentKeys[0]} className="w-full">
-        <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
-          {equipmentKeys.map((key) => (
-            <TabsTrigger key={key} value={key} className="text-sm flex-grow">
-              {equipmentTabs[key as keyof typeof equipmentTabs]}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {Object.entries(modelDetails.equipment).map(([key, items]) => (
-          <TabsContent key={key} value={key} className="mt-4">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-              {items.map((item, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
-        ))}
-      </Tabs>
+      </div>
     );
   };
   
@@ -613,30 +600,42 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Highlights Section */}
-          <section id="highlights" className="my-10">
-            <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
-            <div className="bg-white rounded-lg p-4 shadow-sm">
-              <ul className="space-y-3">
+          {/* NEW Highlights Section - Full width feature area */}
+          <section id="highlights" className="my-12 bg-gray-50 py-10 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] px-4 md:px-8">
+            <div className="container mx-auto">
+              <h2 className="text-2xl font-semibold mb-6">Highlights der Baureihe</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {modelDetails.highlights.map((highlight, index) => (
-                  <li key={index} className="flex gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                    <span>{highlight}</span>
-                  </li>
+                  <div key={index} className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm">
+                    <div className="bg-gray-200 rounded-full p-2 flex-shrink-0">
+                      <Circle className="h-5 w-5 text-gray-500" />
+                    </div>
+                    <div>
+                      <span>{highlight}</span>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </section>
           
-          {/* Gallery Section */}
+          {/* NEW Gallery Section with Carousel */}
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-              <GrayBoxPlaceholder ratio={4/3} />
-            </div>
+            <Carousel className="w-full" showIndicators={true}>
+              <CarouselContent>
+                {[1, 2, 3, 4].map((_, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <GrayBoxPlaceholder ratio={4/3} className="h-full" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden md:flex justify-end gap-2 mt-2">
+                <CarouselPrevious />
+                <CarouselNext />
+              </div>
+              <CarouselIndicators />
+            </Carousel>
           </section>
           
           {/* Grundrisse (Layouts) Section */}
@@ -647,20 +646,11 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Innenraum (Interior) Section */}
+          {/* NEW Innenraum (Interior) Section with 2-column grid per item */}
           {hasInterior(modelDetails) && (
             <section id="innenraum" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                <div className="lg:col-span-3">
-                  <GrayBoxPlaceholder ratio={16/9} />
-                </div>
-                <div className="lg:col-span-2">
-                  <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                    {renderInterior()}
-                  </div>
-                </div>
-              </div>
+              <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
+              {renderInterior()}
             </section>
           )}
           
@@ -672,11 +662,11 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Serienausstattung (Standard Equipment) Section */}
+          {/* NEW Serienausstattung (Standard Equipment) Section with vertical accordion */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
-              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-              {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+              <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
+              {renderEquipment()}
             </section>
           )}
         </div>
