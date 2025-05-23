@@ -16,8 +16,8 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items }) =
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: "0px",
-      threshold: 0.3, // Section is considered in view when 30% visible
+      rootMargin: "-80px 0px -20% 0px", // Adjusted to account for header height
+      threshold: 0.1, // Section is considered in view when 10% visible for faster response
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -52,10 +52,10 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items }) =
   const handleScrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Calculate offset to account for any fixed headers
-      const offset = 24; // Adjust if needed
+      // Calculate offset to account for fixed header
+      const headerHeight = 80; // Adjust based on your header height
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
       window.scrollTo({
         top: offsetPosition,
@@ -75,7 +75,9 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items }) =
             <button
               onClick={() => handleScrollToSection(item.id)}
               className={`flex items-center justify-center w-10 h-10 rounded-full 
-                ${activeSection === item.id ? "bg-gray-300" : "bg-gray-200 hover:bg-gray-300"} 
+                ${activeSection === item.id 
+                  ? "bg-gray-300" 
+                  : "bg-gray-200 hover:bg-gray-300"} 
                 transition-colors`}
               aria-label={`Navigate to ${item.label} section`}
             >
