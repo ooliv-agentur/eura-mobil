@@ -1499,25 +1499,4 @@ const ProductDetail = () => {
           {/* Serienausstattung (Standard Equipment) Section with vertical accordion */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
-              <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
-              {renderEquipment()}
-            </section>
-          )}
-        </div>
-        
-        {/* Comparison Modal */}
-        <ComparisonModal 
-          open={isComparisonOpen}
-          onOpenChange={setIsComparisonOpen}
-        />
-        
-        {/* Comparison Bar - only show if model has multiple layouts */}
-        {hasMultipleLayouts && (
-          <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
-        )}
-      </ProductLayout>
-    </ComparisonProvider>
-  );
-};
-
-export default ProductDetail;
+              <h2 className="text-2xl font-semibold mb
