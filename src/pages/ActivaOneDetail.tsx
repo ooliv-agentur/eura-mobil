@@ -30,15 +30,6 @@ const ActivaOneDetail = () => {
   const isMobile = useIsMobile();
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   
-  // Simple gray box placeholder component
-  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}>
-      <div className="flex items-center justify-center h-full text-gray-600">
-        Hotspot Bild Placeholder – Innenraum interaktiv
-      </div>
-    </AspectRatio>
-  );
-
   // Simple gray box placeholder component without text
   const EmptyGrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
     <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`} />
@@ -68,13 +59,13 @@ const ActivaOneDetail = () => {
       <div className="container mx-auto overflow-visible">
         {/* Intro Section */}
         <section id="highlights" className="mb-16">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-2">Ein Zuhause für Groß und Klein.</h2>
-            <h3 className="text-xl md:text-2xl text-center text-black mb-8">Activa One Alkoven Wohnmobile</h3>
+          <div className="mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Activa One</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
               <div className="space-y-8 text-black leading-relaxed">
                 <div>
+                  <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
                   <p className="text-black">
                     Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: 
                     Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. 
@@ -84,7 +75,16 @@ const ActivaOneDetail = () => {
                     beginnt die Entspannung sofort mit der Abfahrt.
                   </p>
                 </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
+                  <p className="text-black">
+                    Die hochwertige Verarbeitung und durchdachten Details machen jedes Activa One Modell zu einem besonderen Reiseerlebnis. 
+                    Erleben Sie Komfort und Qualität auf höchstem Niveau.
+                  </p>
+                </div>
               </div>
+              
               <div>
                 <EmptyGrayBoxPlaceholder ratio={16/9} />
               </div>
@@ -154,10 +154,10 @@ const ActivaOneDetail = () => {
         <section className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <GrayBoxPlaceholder ratio={4/3} />
-            <GrayBoxPlaceholder ratio={4/3} />
-            <GrayBoxPlaceholder ratio={4/3} />
-            <GrayBoxPlaceholder ratio={4/3} />
+            <EmptyGrayBoxPlaceholder ratio={4/3} />
+            <EmptyGrayBoxPlaceholder ratio={4/3} />
+            <EmptyGrayBoxPlaceholder ratio={4/3} />
+            <EmptyGrayBoxPlaceholder ratio={4/3} />
           </div>
         </section>
         
