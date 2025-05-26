@@ -24,6 +24,7 @@ import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import VansOverview from "./pages/VansOverview";
 import AlkovenOverview from "./pages/AlkovenOverview";
 import IntegrierteOverview from "./pages/IntegrierteOverview";
+import TeilintegrierteOverview from "./pages/TeilintegrierteOverview";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
 import SealedStructure from "./pages/quality/SealedStructure";
@@ -59,6 +60,8 @@ const App = () => (
                 <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
                 <Route path="/wohnmobiltypen/vans" element={<VansOverview />} />
                 <Route path="/wohnmobiltypen/alkoven" element={<AlkovenOverview />} />
+                <Route path="/wohnmobiltypen/integriert" element={<IntegrierteOverview />} />
+                <Route path="/wohnmobiltypen/teilintegriert" element={<TeilintegrierteOverview />} />
                 
                 {/* Explicit routes for models in the correct order matching the specified sequence */}
                 <Route path="/modelle/van" element={<ProductDetail />} />

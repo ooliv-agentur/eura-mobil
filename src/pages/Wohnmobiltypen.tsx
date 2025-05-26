@@ -27,7 +27,7 @@ const Wohnmobiltypen = () => {
       title: "Teilintegrierte Wohnmobile",
       description: "Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik.",
       buttonText: "Teilintegrierte entdecken",
-      linkTo: "/modelle?typ=teilintegriert",
+      linkTo: "/wohnmobiltypen/teilintegriert",
     },
     {
       id: "integriert",
