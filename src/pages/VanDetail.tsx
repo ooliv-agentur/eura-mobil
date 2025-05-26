@@ -1,341 +1,212 @@
 
 import React from "react";
-import { ProductLayout } from "@/components/ProductLayout";
+import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useComparison } from "@/context/ComparisonContext";
+import { Checkbox } from "@/components/ui/checkbox";
+import BeraterButton from "@/components/Wohnmobilberater/BeraterButton";
 
 const VanDetail = () => {
-  return (
-    <ProductLayout modelName="Van">
-      {/* Hero Section */}
-      <section className="bg-gray-300 py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Vans</h1>
-          <p className="text-xl text-gray-700">Für Aktive und Unabhängige</p>
-        </div>
-      </section>
+  const { selectedModels, addModel, removeModel, isSelected } = useComparison();
 
-      {/* Highlights Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  const vanModels = [
+    {
+      id: "v-635-eb",
+      name: "V 635 EB",
+      length: "6,36 m",
+      sleepingPlaces: "2–3",
+    },
+    {
+      id: "v-635-hb", 
+      name: "V 635 HB",
+      length: "6,36 m",
+      sleepingPlaces: "2",
+    },
+    {
+      id: "v-595-hb",
+      name: "V 595 HB", 
+      length: "5,99 m",
+      sleepingPlaces: "2",
+    },
+  ];
+
+  const handleCompareToggle = (model: typeof vanModels[0], checked: boolean) => {
+    if (checked) {
+      addModel({ id: model.id, name: model.name });
+    } else {
+      removeModel(model.id);
+    }
+  };
+
+  return (
+    <Layout>
+      <div className="container mx-auto px-4 py-8">
+        {/* Hero Section - Rebuilt */}
+        <section className="mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left column - Text */}
-            <div className="space-y-6">
-              <h2 className="text-3xl font-bold">Für Deine beste Zeit. Eura Mobil Vans</h2>
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">Vans</h1>
+              <p className="text-xl text-gray-600">Für Aktive und Unabhängige</p>
+            </div>
+            {/* Right column - Interactive Interior Image Placeholder */}
+            <div className="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
+              <span className="text-gray-600 text-center px-4">
+                Hotspot Bild Placeholder – Innenraum interaktiv
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* Highlights Section - Rebuilt */}
+        <section className="mb-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              {/* Left column - Text content */}
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold">Für Deine beste Zeit. Eura Mobil Vans</h2>
+                
+                <p className="text-gray-700 leading-relaxed">
+                  Sichtbar anders: Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken....
+                </p>
+                
+                <p className="text-gray-700 leading-relaxed">
+                  Spürbar anders: "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal....
+                </p>
+                
+                <div>
+                  <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe:</h3>
+                  <ul className="space-y-2 text-gray-700">
+                    <li>• Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</li>
+                    <li>• Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</li>
+                    <li>• Waschraum mit schwenkbarer Duschwand</li>
+                    <li>• Staufächer im Doppelboden</li>
+                    <li>• Mineralstoff-Spüle</li>
+                  </ul>
+                </div>
+              </div>
               
-              <p className="text-gray-700 leading-relaxed">
-                Sichtbar anders: Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken….
-              </p>
-              
-              <p className="text-gray-700 leading-relaxed">
-                Spürbar anders: "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal….
-              </p>
-              
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe:</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</li>
-                  <li>• Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</li>
-                  <li>• Waschraum mit schwenkbarer Duschwand</li>
-                  <li>• Staufächer im Doppelboden</li>
-                  <li>• Mineralstoff-Spüle</li>
-                </ul>
+              {/* Right column - Image with hotspots */}
+              <div className="aspect-video bg-gray-300 rounded-lg relative">
+                {/* 6 circular hotspot placeholders */}
+                <div className="absolute top-4 left-4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
+                <div className="absolute top-8 right-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
+                <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
+                <div className="absolute bottom-1/3 right-1/4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
+                <div className="absolute bottom-8 left-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
+                <div className="absolute bottom-4 right-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
               </div>
             </div>
-            
-            {/* Right column - Image with hotspots */}
-            <div className="aspect-video bg-gray-300 rounded-lg relative">
-              {/* 6 circular hotspot placeholders */}
-              <div className="absolute top-4 left-4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-              <div className="absolute top-8 right-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-              <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-              <div className="absolute bottom-1/3 right-1/4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-              <div className="absolute bottom-8 left-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-              <div className="absolute bottom-4 right-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
+          </div>
+        </section>
+
+        {/* Text Block */}
+        <section className="mb-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="space-y-6 text-gray-700 leading-relaxed">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">EURA MOBIL VAN</h2>
+                <h3 className="text-xl font-semibold mb-4">DER PRIMETIME VAN</h3>
+              </div>
+              
+              <p>
+                Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans.
+              </p>
+              
+              <p>
+                Die Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden.
+              </p>
+              
+              <p>
+                Auch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik.
+              </p>
+              
+              <p>
+                Die Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Grundrisse Section - Placeholder */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Grundrisse</h2>
-          <div className="text-center text-gray-500">
-            <p>Grundrisse component will be integrated here</p>
+        {/* Model Cards Section */}
+        <section className="mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {vanModels.map((model) => {
+              const isModelSelected = isSelected(model.id);
+              const isDisabled = selectedModels.length >= 2 && !isModelSelected;
+
+              return (
+                <Card key={model.id} className="border border-gray-300">
+                  <div className="w-full aspect-video bg-gray-300"></div>
+                  <CardContent className="p-4">
+                    <h3 className="text-xl font-semibold mb-3">{model.name}</h3>
+                    
+                    <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+                      <div>
+                        <span className="text-gray-600">Länge:</span> {model.length}
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Schlafplätze:</span> {model.sleepingPlaces}
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <Button variant="outline" className="w-full" asChild>
+                        <Link to={`/modelle/${model.id}`}>
+                          Modell ansehen
+                        </Link>
+                      </Button>
+                      
+                      <div className="flex items-center space-x-2">
+                        <Checkbox 
+                          id={`compare-${model.id}`}
+                          checked={isModelSelected}
+                          disabled={isDisabled}
+                          onCheckedChange={(checked) => handleCompareToggle(model, checked === true)}
+                        />
+                        <label 
+                          htmlFor={`compare-${model.id}`} 
+                          className={`text-sm cursor-pointer ${isDisabled ? 'text-gray-400' : ''}`}
+                        >
+                          Zum Vergleich
+                        </label>
+                      </div>
+                      
+                      <Button variant="outline" className="w-full" asChild>
+                        <Link to="/haendler">
+                          <MapPin className="mr-2 h-4 w-4" />
+                          Händler finden
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Innenraum Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Innenraum</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Kommunikation</h3>
-                <p className="text-sm text-gray-600">Boxen, LED-Lampen und USB-Steckdosen</p>
-              </CardContent>
-            </Card>
+        {/* CTA Bar */}
+        <section className="bg-gray-300 rounded-lg p-6">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" asChild>
+              <Link to="/konfigurator">
+                Jetzt konfigurieren
+              </Link>
+            </Button>
             
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Oberflächen</h3>
-                <p className="text-sm text-gray-600">Mineralstoff-Spüle</p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Dinetten-Tisch</h3>
-                <p className="text-sm text-gray-600">Inklusive abgesenkter Ablage</p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Küche</h3>
-                <p className="text-sm text-gray-600">Mit Gewürzregal</p>
-              </CardContent>
-            </Card>
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/berater">
+                Beratung starten
+              </Link>
+            </Button>
           </div>
-        </div>
-      </section>
-
-      {/* Polster Section */}
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Polster</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Polster Vans</h3>
-                <p className="text-sm text-gray-600">Eco-Leder</p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Polster Vans</h3>
-                <p className="text-sm text-gray-600">Dinette</p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <div className="aspect-video bg-gray-300"></div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Polster Vans</h3>
-                <p className="text-sm text-gray-600">Gepolstertes Kopfende (V595 HB)</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Serienausstattung Section */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Serienausstattung</h2>
-          
-          <Tabs defaultValue="chassis" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 md:grid-cols-5 lg:grid-cols-9 mb-8">
-              <TabsTrigger value="chassis">Chassis</TabsTrigger>
-              <TabsTrigger value="aufbau">Aufbau</TabsTrigger>
-              <TabsTrigger value="fahrerhaus">Fahrerhaus</TabsTrigger>
-              <TabsTrigger value="wohnraum">Wohnraum</TabsTrigger>
-              <TabsTrigger value="kueche">Küche</TabsTrigger>
-              <TabsTrigger value="bad">Bad</TabsTrigger>
-              <TabsTrigger value="schlafbereich">Schlafbereich</TabsTrigger>
-              <TabsTrigger value="installation">Installation</TabsTrigger>
-              <TabsTrigger value="elektroversorgung">Elektroversorgung</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="chassis">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Fiat Ducato 35L Chassis</li>
-                    <li>• Euro 6D Final</li>
-                    <li>• Fahrer- und Beifahrerairbag</li>
-                    <li>• ABS/ASR/ESP inkl. Traktion+</li>
-                    <li>• manuelle Klimaanlage</li>
-                    <li>• Tempomat</li>
-                    <li>• 90L Tank</li>
-                    <li>• Funkfernbedienung</li>
-                    <li>• Tagfahrlicht</li>
-                    <li>• Fensterheber</li>
-                    <li>• Radzierblenden</li>
-                    <li>• Fix and Go</li>
-                    <li>• schwarzer Stoßfänger</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="aufbau">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Dämmung in Dach/Boden/Seiten</li>
-                    <li>• Farbe weiss</li>
-                    <li>• isolierte Fenster mit Schnellverschluss</li>
-                    <li>• Mückengitter</li>
-                    <li>• Verdunklung</li>
-                    <li>• 2 Fenster im Schlafbereich (595HB: 1)</li>
-                    <li>• Ausstellfenster</li>
-                    <li>• Außenbeleuchtung</li>
-                    <li>• elektrische Trittstufe</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="fahrerhaus">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Sitzbezug in Polsterstoff</li>
-                    <li>• Fahrerhausteppich</li>
-                    <li>• Übergang zum Wohnraum</li>
-                    <li>• Kartenfächer</li>
-                    <li>• Leselampen</li>
-                    <li>• Eco-Leder Blende mit LED</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="wohnraum">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Dinette ergonomisch</li>
-                    <li>• Klapptisch mit Verlängerung</li>
-                    <li>• Cupholder</li>
-                    <li>• Polster Eco-Leder/Stoff</li>
-                    <li>• Staufächer im Boden</li>
-                    <li>• Oberschränke hinterlüftet</li>
-                    <li>• Möbeldekor „Beach Home"</li>
-                    <li>• Kleiderschrank</li>
-                    <li>• Flauschdecke</li>
-                    <li>• textile Wandbespannung</li>
-                    <li>• Blenden in Eco-Leder</li>
-                    <li>• Metallaufsteller</li>
-                    <li>• verchromte Schrankverschlüsse</li>
-                    <li>• LED-Beleuchtung</li>
-                    <li>• USB/TV-Anschluss</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="kueche">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Mineralstoffplatte mit Spüle</li>
-                    <li>• ausziehbare Armatur</li>
-                    <li>• Soft-Close Auszüge</li>
-                    <li>• 2-Flamm Kocher</li>
-                    <li>• zentrale Gasabsperrhähne</li>
-                    <li>• Kompressorkühlschrank</li>
-                    <li>• Gewürzregal mit Beleuchtung</li>
-                    <li>• Ambientebeleuchtung</li>
-                    <li>• 2 Klappfächer (1x Flaschenhalter)</li>
-                    <li>• außen zugänglicher Auszug</li>
-                    <li>• Tischschiene mit Blende</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="bad">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Duschwand „easy open"</li>
-                    <li>• Duschfläche 60x90cm</li>
-                    <li>• Holzrost</li>
-                    <li>• großes Waschbecken mit Click-Clack</li>
-                    <li>• Staufächer</li>
-                    <li>• Spiegelschrank</li>
-                    <li>• 3cm Tür mit Scharnieren</li>
-                    <li>• Eco-Leder Türgriff</li>
-                    <li>• Cassettentoilette</li>
-                    <li>• Fenster mit Mückengitter & Verdunklung</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="schlafbereich">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Heckbetten mit Tellerfedern oder Lattenrost</li>
-                    <li>• aufstellbar für Ladefläche</li>
-                    <li>• Stauboxen (635 EB)</li>
-                    <li>• Auffahrrampe & Abdeckung (635 HB)</li>
-                    <li>• Dachstauschränke</li>
-                    <li>• Lautsprecher in Eckmodulen</li>
-                    <li>• Mini Heki Dachluke</li>
-                    <li>• Fenster mit LED-Blenden</li>
-                    <li>• Leselampen mit USB</li>
-                    <li>• Stoffbespannung an Hecktüren</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="installation">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Dieselheizung 4kW</li>
-                    <li>• Warmwasser mit Mischbatterie</li>
-                    <li>• Druckpumpe</li>
-                    <li>• isolierter Frischwassertank</li>
-                    <li>• beheizter Abwassertank</li>
-                    <li>• frostsichere Ablasshähne</li>
-                    <li>• Gaskasten</li>
-                    <li>• Außendusche (außer V 595 HB)</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="elektroversorgung">
-              <Card>
-                <CardContent className="p-6">
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Lithium-Batterie 100 Ah</li>
-                    <li>• 230V Steckdosen</li>
-                    <li>• schaltbare Lichtzonen</li>
-                    <li>• TV-Vorbereitung</li>
-                    <li>• 12V Dose</li>
-                    <li>• USB-Ports</li>
-                    <li>• Trennschalter</li>
-                    <li>• Ladeautomat</li>
-                    <li>• CEE Anschluss</li>
-                    <li>• FI-Schutzschalter</li>
-                    <li>• Bordpanel</li>
-                    <li>• CP+ Steuerung mit Crashsensor</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-    </ProductLayout>
+        </section>
+      </div>
+    </Layout>
   );
 };
 
