@@ -1018,6 +1018,85 @@ const modelsData = {
         "Solarpanel-System serienmäßig"
       ]
     }
+  },
+  "xtura": {
+    id: "xtura",
+    name: "Xtura",
+    intro: "Die Xtura Baureihe verkörpert Innovation und modernstes Design. Diese exklusiven Reisemobile bieten revolutionäre Raumkonzepte und zukunftsweisende Technologie für Reisende, die das Außergewöhnliche suchen und höchste Ansprüche an Komfort und Funktionalität stellen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "6,88 m",
+      sitzplätze: "2",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Revolutionäres Design mit zukunftsweisender Architektur",
+      "Hochwertige Premium-Materialien und innovative Verarbeitung",
+      "Modernste Technologie und intelligente Raumaufteilung",
+      "Komfortable Schlafbereiche mit erstklassigen Matratzen",
+      "Durchdachte Stauraumlösungen und moderne Annehmlichkeiten",
+      "Elegantes Design mit exklusiven Details"
+    ],
+    layouts: [
+      {
+        id: "xt-686-ef",
+        name: "XT 686 EF",
+        image: "/placeholder.svg",
+        length: "6,88 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Innovativer Wohnbereich", description: "Exklusive Sitzgruppe mit modernsten Premium-Materialien" },
+      { name: "Future Küche", description: "Revolutionäre Küchenausstattung mit neuester Technologie" },
+      { name: "Komfort Schlafbereich", description: "Luxuriöse Betten mit erstklassigen Matratzen" },
+      { name: "Premium Badezimmer", description: "Hochwertiges Badezimmer mit innovativer Ausstattung" }
+    ],
+    upholsteryTypes: ["Xtura Premium", "Leder Future", "Designer Innovation"],
+    equipment: {
+      chassis: [
+        "Innovatives Chassis mit neuester Technologie",
+        "Vollintegrierte Zukunfts-Bauweise",
+        "Umfassende Premium-Sicherheitssysteme",
+        "Komfort-Ausstattung der Zukunft"
+      ],
+      body: [
+        "Revolutionäre Bauweise",
+        "Innovative Isolierung und Premium-Dämmung",
+        "Panoramafenster für optimale Aussicht",
+        "Zukunftsweisende, wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Futuristische Premium-Sitzgruppe",
+        "Innovative Polstermaterialien",
+        "Intelligente LED-Beleuchtung",
+        "Revolutionäre Stauraumlösungen"
+      ],
+      kitchen: [
+        "Innovative Kochstelle",
+        "Intelligenter Kompressor-Kühlschrank",
+        "Future-Küchenausstattung",
+        "Adaptive Arbeitsflächen"
+      ],
+      bathroom: [
+        "Innovative Duschkabine",
+        "Premium-WC mit Future-Ausstattung",
+        "Intelligenter Waschbereich",
+        "Smarte Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Future-Elektroinstallation",
+        "USB-C Anschlüsse in allen Bereichen",
+        "Intelligente LED-Beleuchtung",
+        "Smart Solarpanel-System"
+      ]
+    }
   }
 };
 
