@@ -646,6 +646,92 @@ const modelsData = {
         "Solarpanel-System verfügbar"
       ]
     }
+  },
+  "contura": {
+    id: "contura",
+    name: "Contura",
+    intro: "Die Contura Baureihe vereint elegantes Design mit funktionaler Perfektion. Diese vollintegrierten Reisemobile bieten höchsten Komfort und innovative Lösungen für anspruchsvolle Reisende, die Wert auf Luxus und Qualität legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,84 m",
+      sitzplätze: "4",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Vollintegrierte Bauweise für maximalen Komfort",
+      "Hochwertige Materialien und exklusive Ausstattung",
+      "Innovative Raumaufteilung mit durchdachten Details",
+      "Premium-Schlafbereiche mit erstklassigen Matratzen",
+      "Modernste Technik und luxuriöse Annehmlichkeiten",
+      "Elegantes Design mit hochwertiger Verarbeitung"
+    ],
+    layouts: [
+      {
+        id: "ct-766-eb",
+        name: "CT 766 EB",
+        image: "/placeholder.svg",
+        length: "7,84 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "ct-766-ef",
+        name: "CT 766 EF",
+        image: "/placeholder.svg",
+        length: "7,84 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Luxus Wohnbereich", description: "Exklusive Sitzgruppe mit hochwertigen Premium-Materialien" },
+      { name: "Designer Küche", description: "Vollausgestattete Küche mit modernsten Geräten" },
+      { name: "Komfort Schlafbereich", description: "Luxuriöse Betten mit erstklassigen Matratzen" },
+      { name: "Premium Badezimmer", description: "Hochwertiges Badezimmer mit exklusiver Ausstattung" }
+    ],
+    upholsteryTypes: ["Contura Premium", "Leder Exclusiv", "Designer Stoff"],
+    equipment: {
+      chassis: [
+        "Vollintegriertes Chassis mit modernster Technologie",
+        "Automatikgetriebe serienmäßig",
+        "Umfassende Sicherheitssysteme",
+        "Premium Komfort-Ausstattung"
+      ],
+      body: [
+        "Vollintegrierte Bauweise",
+        "Erstklassige Isolierung und Dämmung",
+        "Panoramafenster für optimale Sicht",
+        "Hochwertige, wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Sitzgruppe im Premium-Design",
+        "Hochwertige Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Stauraumlösungen"
+      ],
+      kitchen: [
+        "Premium-Kochstelle mit 3 Flammen",
+        "Großer Kompressor-Kühlschrank",
+        "Geschirrspüler serienmäßig",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Komfort-WC mit Luxus-Ausstattung",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Modernste Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System serienmäßig"
+      ]
+    }
   }
 };
 
