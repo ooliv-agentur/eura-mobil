@@ -565,7 +565,7 @@ const modelsData = {
   "profila-t-mercedes": {
     id: "profila-t-mercedes",
     name: "Profila T Mercedes",
-    intro: "Der Profila T Mercedes vereint die bewährte Mercedes-Qualität mit innovativem Wohnmobil-Design. Diese Teilintegrierten bieten höchsten Komfort und Zuverlässigkeit für anspruchsvolle Reisende.",
+    intro: "Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures. In der Saison 2024 kommt die speziell für die Mercedes Profila geschaffene Wohnwelt „Natural Heritage" dazu, die den exklusiven Charakter der Top-Modelle noch stärker betont.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -579,12 +579,12 @@ const modelsData = {
       schlafplätze: "2"
     },
     highlights: [
-      "Mercedes-Benz Chassis für höchste Qualität und Zuverlässigkeit",
-      "Teilintegrierte Bauweise für optimale Raumnutzung",
-      "Hochwertige Materialien und erstklassige Verarbeitung",
-      "Komfortable Schlafbereiche mit Premium-Matratzen",
-      "Durchdachte Stauraumlösungen für maximalen Nutzen",
-      "Modernste Technik und luxuriöse Ausstattung"
+      "Basisfahrzeug Mercedes Sprinter",
+      "Al-KO Tiefrahmen",
+      "Alde Warmwasserheizung",
+      "Auf Wunsch exklusive Wohnwelt „Natural Heritage"",
+      "Winterfester, beheizter Doppelboden",
+      "Elektrische Abwassertank – Entleerung"
     ],
     layouts: [
       {
@@ -617,12 +617,22 @@ const modelsData = {
       }
     ],
     interior: [
-      { name: "Premium Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Mercedes-Materialien" },
-      { name: "Designer Küche", description: "Moderne Küchenausstattung mit Premium-Geräten" },
-      { name: "Komfort Schlafbereich", description: "Erstklassige Betten mit hochwertigen Matratzen" },
-      { name: "Luxus Badezimmer", description: "Hochwertiges Bad mit exklusiver Ausstattung" }
+      { name: "726 EF Natural Heritage", description: "" },
+      { name: "726 EF Chalet", description: "" },
+      { name: "726 EF Natural Heritage", description: "" },
+      { name: "726 EF Natural Heritage", description: "" }
     ],
-    upholsteryTypes: ["Mercedes Premium", "Leder Deluxe", "Stoff Luxus"],
+    upholsteryTypes: [
+      "Polster Como, Dekoration Maka",
+      "Polster Como\nDekoration Maka",
+      "Polster Milano, Dekoration Lasca",
+      "Polster Milano\nDekoration Lasca",
+      "Polster Pisa, Dekoration Rana",
+      "Polster Pisa\nDekoration Rana",
+      "Polster Dara, Dekoration Maka",
+      "Polster Dara\nDekoration Maka",
+      "Polster Bergamo\nDekoration Evorno"
+    ],
     equipment: {
       chassis: [
         "Mercedes-Benz Chassis mit neuester Technologie",
@@ -1269,7 +1279,7 @@ const ProductDetail = () => {
       case "activa-one":
         return { title: "Activa One", subtitle: "Familien-Alkoven der Extraklasse" };
       case "profila-t-mercedes":
-        return { title: "Profila T Mercedes", subtitle: "Mercedes-Qualität trifft Wohnkomfort" };
+        return { title: "Profila T auf Mercedes", subtitle: "edelm exklusiv und elegant" };
       case "contura":
         return { title: "Contura", subtitle: "Vollintegrierte Eleganz" };
       case "integra-line-fiat":
@@ -1394,7 +1404,7 @@ const ProductDetail = () => {
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
-                {modelDetails.id === "profila-t-fiat" ? "Feel free!" : modelDetails.id === "profila-rs" ? "Macht einzigartige Erlebnisse noch einzigartiger!" : "Für Deine beste Zeit."} {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : modelDetails.id === "profila-rs" ? "Profila RS Teilintegrierte" : modelDetails.name}
+                {modelDetails.id === "profila-t-fiat" ? "Feel free!" : modelDetails.id === "profila-rs" ? "Macht einzigartige Erlebnisse noch einzigartiger!" : modelDetails.id === "profila-t-mercedes" ? "Edel, exklusiv und elegant" : "Für Deine beste Zeit."} {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : modelDetails.id === "profila-rs" ? "Profila RS Teilintegrierte" : modelDetails.id === "profila-t-mercedes" ? "Profila T auf Mercedes" : modelDetails.name}
               </h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
