@@ -323,3 +323,4 @@ export function hasUpholstery(model: ModelData): model is FullModelData {
 export function hasEquipment(model: ModelData): model is FullModelData {
   return 'equipment' in model && model.equipment !== undefined;
 }
+
