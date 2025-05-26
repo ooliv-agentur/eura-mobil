@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
@@ -114,27 +113,18 @@ const ActivaOneDetail = () => {
         {/* Intro Section */}
         <section id="highlights" className="mb-16">
           <div className="mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Activa One</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Ein Zuhause für Groß und Klein. Activa One</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
               <div className="space-y-8 text-black leading-relaxed">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
                   <p className="text-black">
                     Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: 
                     Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. 
                     Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen 
                     ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große 
-                    Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, 
+                    Familien­gepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, 
                     beginnt die Entspannung sofort mit der Abfahrt.
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
-                  <p className="text-black">
-                    Die hochwertige Verarbeitung und durchdachten Details machen jedes Activa One Modell zu einem besonderen Reiseerlebnis. 
-                    Erleben Sie Komfort und Qualität auf höchstem Niveau.
                   </p>
                 </div>
               </div>
