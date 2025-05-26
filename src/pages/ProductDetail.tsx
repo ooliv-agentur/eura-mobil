@@ -518,10 +518,16 @@ const ProductDetail = () => {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
   const location = useLocation();
   
-  // Default to van if no model ID or model not found
+  // Add debug logging to see what modelId we're getting
+  console.log("Current modelId from URL:", modelId);
+  console.log("Available models in modelsData:", Object.keys(modelsData));
+  
+  // Improved model lookup with better fallback handling
   const modelDetails = modelId && modelId in modelsData 
     ? modelsData[modelId as keyof typeof modelsData] 
     : modelsData["van"];
+    
+  console.log("Selected model details:", modelDetails.name, modelDetails.id);
   
   // Define sidebar navigation items
   const navigationItems = [
@@ -664,7 +670,7 @@ const ProductDetail = () => {
             className="text-center mx-auto max-w-4xl px-4 my-20 md:mt-32 md:mb-12 relative z-10 overflow-visible min-h-[180px]"
           >
             <h1 className="text-3xl md:text-5xl font-bold mb-8 overflow-visible">Für Deine beste Zeit.</h1>
-            <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil Vans</h2>
+            <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil {modelDetails.name}</h2>
           </div>
           
           {/* Introduction Section */}
@@ -674,11 +680,7 @@ const ProductDetail = () => {
               <div className="space-y-10">
                 <div>
                   <h3 className="text-xl font-semibold mb-5">Sichtbar anders:</h3>
-                  <p className="text-gray-700 leading-relaxed">Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-5">Spürbar anders:</h3>
-                  <p className="text-gray-700 leading-relaxed">„Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder-Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...</p>
+                  <p className="text-gray-700 leading-relaxed">{modelDetails.intro}</p>
                 </div>
               </div>
               <div>
