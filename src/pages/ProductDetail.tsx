@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -208,8 +210,8 @@ const modelsData = {
   },
   "profila-t-fiat": {
     id: "profila-t-fiat",
-    name: "Profila T",
-    intro: "Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum. In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige \"Coupé-Einstieg\" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.",
+    name: "Profila T Fiat",
+    intro: "Der Profila T Fiat vereint perfekt durchdachte Raumaufteilung mit höchster Qualität und Komfort. Diese Teilintegrierten bieten optimale Platznutzung und modernstes Design für unvergessliche Reiseerlebnisse.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -219,17 +221,16 @@ const modelsData = {
     ],
     technicalData: {
       länge: "6,99 – 7,58 m",
-      breite: "2,05 m",
-      höhe: "< 2,90 m",
       sitzplätze: "4",
       schlafplätze: "2"
     },
     highlights: [
-      "Winterfester, beheizter Doppelboden",
-      "Große Stauräume durch Garagenabsenkung",
-      "Isolierte & beheizte Wassertanks",
-      "Elektr. Abwassertank-Entleerung",
-      "Isofix (grundrissabhängig)"
+      "Teilintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und moderne Ausstattung",
+      "Flexible Grundrisse für verschiedene Bedürfnisse",
+      "Komfortable Schlafbereiche mit hochwertigen Matratzen",
+      "Durchdachte Stauraumlösungen",
+      "Moderne Küchentechnik und sanitäre Anlagen"
     ],
     layouts: [
       {
@@ -276,19 +277,12 @@ const modelsData = {
       }
     ],
     interior: [
-      { name: "726 EF Chalet – Rustico", description: "" },
-      { name: "726 EF Chalet – Rustico", description: "" },
-      { name: "726 EF Chalet – Rustico", description: "" },
-      { name: "720 EF Chalet – Rustico", description: "" },
-      { name: "720 EF Chalet – Rustico", description: "" }
+      { name: "Wohnbereich", description: "Komfortable Sitzgruppe mit hochwertigen Polstern" },
+      { name: "Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
+      { name: "Schlafbereich", description: "Bequeme Betten mit hochwertigen Matratzen" },
+      { name: "Badezimmer", description: "Funktionales Bad mit Dusche und WC" }
     ],
-    upholsteryTypes: [
-      "Polster Como – Dekoration Maka",
-      "Polster Milano – Dekoration Lasca",
-      "Polster Pisa – Dekoration Rana",
-      "Polster Dara – Dekoration Maka",
-      "Polster Bergamo – Dekoration Evorno"
-    ],
+    upholsteryTypes: ["Polster Standard", "Polster Premium", "Polster Deluxe"],
     equipment: {
       chassis: [
         "Fiat Ducato Chassis mit modernster Technik",
@@ -301,12 +295,6 @@ const modelsData = {
         "Hochwertige Isolierung",
         "Panoramafenster für beste Aussicht",
         "Wetterbeständige Materialien"
-      ],
-      driversCabin: [
-        "Ergonomische Sitze mit Komfortausstattung",
-        "Integrierte Klimaanlage",
-        "Moderne Instrumentierung",
-        "Optimale Sichtverhältnisse"
       ],
       livingArea: [
         "Flexible Sitzgruppe",
@@ -325,12 +313,6 @@ const modelsData = {
         "Komfortables WC",
         "Großzügiger Waschbereich",
         "Praktische Ablagemöglichkeiten"
-      ],
-      installation: [
-        "Beheizter Frischwassertank",
-        "Isolierte Wasserleitungen",
-        "Frostsichere Installation",
-        "Einfache Wartung"
       ],
       electrical: [
         "Moderne Elektroinstallation",
@@ -1268,7 +1250,7 @@ const ProductDetail = () => {
       case "van":
         return { title: "Vans", subtitle: "Für Aktive und Unabhängige" };
       case "profila-t-fiat":
-        return { title: "Profila T", subtitle: "Offen, großzügig, frei", subline: "Feel free!" };
+        return { title: "Profila T Fiat", subtitle: "Teilintegrierte Perfektion" };
       case "profila-rs":
         return { title: "Profila RS", subtitle: "Sportlich. Modern. Funktional." };
       case "activa-one":
@@ -1349,41 +1331,10 @@ const ProductDetail = () => {
     );
   };
   
-  // Equipment section with tabs for Profila T model
+  // Equipment section with new vertical accordion structure
   const renderEquipment = () => {
     if (!hasEquipment(modelDetails)) return null;
     
-    // Use tabs for Profila T model as requested
-    if (modelDetails.id === "profila-t-fiat") {
-      return (
-        <Tabs defaultValue="chassis" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
-            <TabsTrigger value="chassis">Chassis</TabsTrigger>
-            <TabsTrigger value="driversCabin">Fahrerhaus</TabsTrigger>
-            <TabsTrigger value="body">Aufbau</TabsTrigger>
-            <TabsTrigger value="livingArea">Wohnwelt</TabsTrigger>
-            <TabsTrigger value="kitchen">Küche</TabsTrigger>
-            <TabsTrigger value="bathroom">Waschraum</TabsTrigger>
-            <TabsTrigger value="installation">Wasserinstallation</TabsTrigger>
-            <TabsTrigger value="electrical">Elektroinstallation</TabsTrigger>
-          </TabsList>
-          {Object.entries(modelDetails.equipment).map(([key, items]) => (
-            <TabsContent key={key} value={key} className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                {items.map((item, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
-      );
-    }
-    
-    // Use accordion for other models
     return (
       <div className="space-y-4">
         {Object.entries(modelDetails.equipment).map(([key, items]) => (
@@ -1415,27 +1366,12 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        {/* Hero Section - updated for Profila T */}
+        {/* Full-width Hero Section */}
         <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
-          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh]">
-            <div className="container mx-auto px-4 h-full flex items-center">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
-                {/* Left column - Text */}
-                <div className="flex flex-col justify-center">
-                  <div className="text-black">
-                    <p className="text-lg md:text-xl mb-2">{heroContent.title}</p>
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.subtitle}</h1>
-                    {heroContent.subline && (
-                      <p className="text-sm md:text-base text-gray-600">{heroContent.subline}</p>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Right column - Image placeholder */}
-                <div className="flex items-center">
-                  <EmptyGrayBoxPlaceholder ratio={16/9} className="w-full" />
-                </div>
-              </div>
+          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
+            <div className="text-center text-black z-10">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
+              <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
             </div>
           </div>
         </section>
@@ -1444,15 +1380,21 @@ const ProductDetail = () => {
           {/* Highlights Section */}
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
-                Profila T Teilintegrierte
-              </h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. {modelDetails.name}</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-8 text-black leading-relaxed">
                   <div>
+                    <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
                     <p className="text-black">
                       {modelDetails.intro}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
+                    <p className="text-black">
+                      Die hochwertige Verarbeitung und durchdachten Details machen jedes {modelDetails.name} Modell zu einem besonderen Reiseerlebnis. Erleben Sie Komfort und Qualität auf höchstem Niveau.
                     </p>
                   </div>
                 </div>
@@ -1537,7 +1479,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Serienausstattung (Standard Equipment) Section */}
+          {/* Serienausstattung (Standard Equipment) Section with vertical accordion */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
               <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
