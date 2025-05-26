@@ -915,7 +915,7 @@ const modelsData = {
         "Mercedes Premium-Elektroinstallation",
         "USB-Anschlüsse in allen Bereichen",
         "Premium LED-Beleuchtung",
-        "Solarpanel-System verfügbar"
+        "Solarpanel-System serienmäßig"
       ]
     }
   },
@@ -1329,22 +1329,17 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        <div className="container mx-auto overflow-visible">
-          {/* NEW Hero Section - Two-column layout */}
-          <section className="mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Left column - Text */}
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">Vans</h1>
-                <p className="text-xl text-gray-600">Für Aktive und Unabhängige</p>
-              </div>
-              {/* Right column - Hotspot Image */}
-              <div>
-                <GrayBoxPlaceholder />
-              </div>
+        {/* Full-width Hero Section */}
+        <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
+          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
+            <div className="text-center text-white z-10">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">Vans</h1>
+              <p className="text-xl md:text-2xl lg:text-3xl">Für Aktive und Unabhängige</p>
             </div>
-          </section>
+          </div>
+        </section>
 
+        <div className="container mx-auto overflow-visible">
           {/* NEW Highlights Section */}
           <section className="mb-16">
             <div className="max-w-4xl mx-auto">
