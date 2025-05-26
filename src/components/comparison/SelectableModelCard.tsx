@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@radix-ui/react-label";
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { MapPin } from 'lucide-react';
 
 interface ModelCardProps {
   id: string;
@@ -30,8 +31,7 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({ id, name, length
   
   return (
     <Card className="border border-gray-300">
-      {/* Using CSS variable for consistent placeholder styling */}
-      <AspectRatio ratio={4/3} className="bg-[color:var(--placeholder-color)]" />
+      <AspectRatio ratio={4/3} className="bg-[#E5E7EB]" />
       <CardContent className="p-4">
         <h3 className="text-xl font-semibold mb-2">{name}</h3>
         <div className="grid grid-cols-2 gap-2 text-sm mb-4">
@@ -43,8 +43,7 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({ id, name, length
           </div>
         </div>
         
-        {/* Buttons and comparison checkbox */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           <Button variant="outline" className="w-full" asChild>
             <Link to={`/modelle/${id}`}>
               Modell ansehen
@@ -62,6 +61,13 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({ id, name, length
               Zum Vergleich auswählen
             </Label>
           </div>
+          
+          <Button variant="outline" className="w-full flex items-center justify-center gap-2" asChild>
+            <Link to="/haendler">
+              <MapPin size={16} />
+              Händler finden
+            </Link>
+          </Button>
         </div>
       </CardContent>
     </Card>
