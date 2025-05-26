@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -203,6 +204,120 @@ const modelsData = {
         "FI-Schutzschalter",
         "Control Panel über Eingang",
         "CP+ Heizungssteuerung mit Crashsensor"
+      ]
+    }
+  },
+  "profila-t-fiat": {
+    id: "profila-t-fiat",
+    name: "Profila T Fiat",
+    intro: "Der Profila T Fiat vereint perfekt durchdachte Raumaufteilung mit höchster Qualität und Komfort. Diese Teilintegrierten bieten optimale Platznutzung und modernstes Design für unvergessliche Reiseerlebnisse.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "6,99 – 7,58 m",
+      sitzplätze: "4",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Teilintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und moderne Ausstattung",
+      "Flexible Grundrisse für verschiedene Bedürfnisse",
+      "Komfortable Schlafbereiche mit hochwertigen Matratzen",
+      "Durchdachte Stauraumlösungen",
+      "Moderne Küchentechnik und sanitäre Anlagen"
+    ],
+    layouts: [
+      {
+        id: "pt-720-eb",
+        name: "PT 720 EB",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-695-eb",
+        name: "PT 695 EB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-675-sb",
+        name: "PT 675 SB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-720-qf",
+        name: "PT 720 QF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-720-ef",
+        name: "PT 720 EF",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-660-eb",
+        name: "PT 660 EB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Wohnbereich", description: "Komfortable Sitzgruppe mit hochwertigen Polstern" },
+      { name: "Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
+      { name: "Schlafbereich", description: "Bequeme Betten mit hochwertigen Matratzen" },
+      { name: "Badezimmer", description: "Funktionales Bad mit Dusche und WC" }
+    ],
+    upholsteryTypes: ["Polster Standard", "Polster Premium", "Polster Deluxe"],
+    equipment: {
+      chassis: [
+        "Fiat Ducato Chassis mit modernster Technik",
+        "Automatikgetriebe optional verfügbar",
+        "ESP und weitere Sicherheitssysteme",
+        "Komfort-Ausstattung serienmäßig"
+      ],
+      body: [
+        "Teilintegrierte Bauweise",
+        "Hochwertige Isolierung",
+        "Panoramafenster für beste Aussicht",
+        "Wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Flexible Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "Optimal ausgeleuchtete Bereiche",
+        "Praktische Stauraumlösungen"
+      ],
+      kitchen: [
+        "Moderne 3-Flammen-Kochstelle",
+        "Großer Kühlschrank",
+        "Spülmaschine optional",
+        "Reichlich Arbeitsfläche"
+      ],
+      bathroom: [
+        "Separate Duschkabine",
+        "Komfortables WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Moderne Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "LED-Beleuchtung",
+        "Solarpanel optional"
       ]
     }
   },
