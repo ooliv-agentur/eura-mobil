@@ -832,6 +832,92 @@ const modelsData = {
         "Solarpanel-System verfügbar"
       ]
     }
+  },
+  "integra-line-gt-mercedes": {
+    id: "integra-line-gt-mercedes",
+    name: "Integra Line GT Mercedes",
+    intro: "Die Integra Line GT Mercedes vereint die bewährte Mercedes-Qualität mit innovativem vollintegriertem Design. Diese Premium-Baureihe bietet höchsten Komfort und luxuriöse Ausstattung für anspruchsvolle Reisende, die Wert auf Exklusivität und Zuverlässigkeit legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,47 – 7,64 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Mercedes-Benz Chassis für höchste Qualität und Zuverlässigkeit",
+      "Vollintegrierte Bauweise für maximalen Komfort",
+      "Hochwertige Premium-Materialien und erstklassige Verarbeitung",
+      "Flexible Schlafbereiche für bis zu 4 Personen",
+      "Durchdachte Luxus-Stauraumlösungen und modernste Technik",
+      "Elegantes GT-Design mit exklusiven Details"
+    ],
+    layouts: [
+      {
+        id: "il726ef",
+        name: "IL726EF",
+        image: "/placeholder.svg",
+        length: "7,47 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il726qf",
+        name: "IL726QF",
+        image: "/placeholder.svg",
+        length: "7,64 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Premium Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Mercedes-Materialien" },
+      { name: "Designer Küche", description: "Vollausgestattete Premium-Küche mit modernsten Geräten" },
+      { name: "Flexible Schlafbereiche", description: "Variable Premium-Schlafmöglichkeiten für 4 Personen" },
+      { name: "Luxus Badezimmer", description: "Hochwertiges Bad mit exklusiver Mercedes-Ausstattung" }
+    ],
+    upholsteryTypes: ["GT Mercedes Premium", "Leder Exclusiv", "Designer Premium"],
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Chassis mit neuester Technologie",
+        "Vollintegrierte GT-Bauweise",
+        "Umfassende Premium-Sicherheitssysteme",
+        "Mercedes Komfort-Ausstattung serienmäßig"
+      ],
+      body: [
+        "Vollintegrierte Mercedes-Bauweise",
+        "Erstklassige Isolierung und Premium-Dämmung",
+        "Große Panoramafenster für beste Aussicht",
+        "Hochwertige, wetterbeständige Premium-Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Mercedes GT-Sitzgruppe",
+        "Premium Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Luxus-Stauraumlösungen"
+      ],
+      kitchen: [
+        "Premium 3-Flammen-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Mercedes Premium-Küchenausstattung",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Mercedes Komfort-WC",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Mercedes Premium-Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System verfügbar"
+      ]
+    }
   }
 };
 
