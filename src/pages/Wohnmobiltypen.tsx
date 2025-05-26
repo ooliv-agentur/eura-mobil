@@ -34,7 +34,7 @@ const Wohnmobiltypen = () => {
       title: "Integrierte Wohnmobile",
       description: "Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl.",
       buttonText: "Integrierte anzeigen",
-      linkTo: "/modelle?typ=integriert",
+      linkTo: "/wohnmobiltypen/integriert",
     },
   ];
 

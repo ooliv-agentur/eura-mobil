@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +23,7 @@ import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import VansOverview from "./pages/VansOverview";
 import AlkovenOverview from "./pages/AlkovenOverview";
+import IntegrierteOverview from "./pages/IntegrierteOverview";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
 import SealedStructure from "./pages/quality/SealedStructure";
