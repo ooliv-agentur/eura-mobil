@@ -332,7 +332,7 @@ const modelsData = {
   "profila-rs": {
     id: "profila-rs",
     name: "Profila RS",
-    intro: "Der Profila RS kombiniert sportliches Design mit praktischer Funktionalität. Diese Baureihe überzeugt durch innovative Grundrisse und hochwertige Ausstattung für anspruchsvolle Reisende.",
+    intro: "Mit 140 PS Motorisierung und mit State-of-the-art-Fahrzeugtechnik, wie ABS, ESP und 16″-Rädern am CCS-Breitspur-Tiefrahmen mit einer Spurweite von 1.980 mm und weiteren intelligenten Techniklösungen ausgestattet, lässt es sich in den Profila RS Modellen besonders stressfrei in den Traumurlaub starten: Im Fahrerhaus mit seiner schnittigen Silhouette auf dem bequemen Fahrersitz Platz genommen, kann kommen, was will – der verdienten Auszeit stellt sich nichts in den Weg. Im Innenraum des Wohnmobils beeindruckt das großzügige Raumgefühl, das vor allem durch das bündig in der Decke \"versenkte\" Hubbett (Serie) entsteht. Auch der Aufbau mit durchgehend isoliertem Leichtbaudoppelboden, holzfreien GFK-Wänden. Bodenfächern und einfach erreichbaren Serviceklappen lässt dabei keine Wünsche an eine angenehme Reise offen.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -346,12 +346,12 @@ const modelsData = {
       schlafplätze: "4"
     },
     highlights: [
-      "Sportliches und modernes Design",
-      "Innovative Raumaufteilung für maximalen Komfort",
-      "Hochwertige Materialien und Verarbeitung",
-      "Flexible Schlafbereiche für bis zu 4 Personen",
-      "Durchdachte Stauraumlösungen",
-      "Moderne Technik und Ausstattung"
+      "Integriertes Hubbett",
+      "Winterfester, beheizter Doppelboden",
+      "Extra große Stauräume durch Garagenabsenkung",
+      "Isolierte und beheizte Wassertanks",
+      "Elektrisch gesteuerte Abwassertank-Entleerung",
+      "Isofix (grundrissabhängig)"
     ],
     layouts: [
       {
@@ -1259,7 +1259,7 @@ const ProductDetail = () => {
       case "profila-t-fiat":
         return { title: "Profila T", subtitle: "Offen, großzügig, frei" };
       case "profila-rs":
-        return { title: "Profila RS", subtitle: "Sportlich. Modern. Funktional." };
+        return { title: "Profila RS", subtitle: "Wo Anspruch erst der Anfang ist" };
       case "activa-one":
         return { title: "Activa One", subtitle: "Familien-Alkoven der Extraklasse" };
       case "profila-t-mercedes":
@@ -1388,7 +1388,7 @@ const ProductDetail = () => {
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
-                {modelDetails.id === "profila-t-fiat" ? "Feel free!" : "Für Deine beste Zeit."} {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : modelDetails.name}
+                {modelDetails.id === "profila-t-fiat" ? "Feel free!" : modelDetails.id === "profila-rs" ? "Macht einzigartige Erlebnisse noch einzigartiger!" : "Für Deine beste Zeit."} {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : modelDetails.id === "profila-rs" ? "Profila RS Teilintegrierte" : modelDetails.name}
               </h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
