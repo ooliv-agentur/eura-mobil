@@ -254,7 +254,6 @@ export const modelsData = {
       ]
     }
   }
-  // Add other models as needed
 };
 
 // Equipment section tab keys in German
