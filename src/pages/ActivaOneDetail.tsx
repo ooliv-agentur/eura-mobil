@@ -38,6 +38,11 @@ const ActivaOneDetail = () => {
       </div>
     </AspectRatio>
   );
+
+  // Simple gray box placeholder component without text
+  const EmptyGrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`} />
+  );
   
   // Floor plans data
   const floorplans = [
@@ -64,7 +69,8 @@ const ActivaOneDetail = () => {
         {/* Intro Section */}
         <section id="highlights" className="mb-16">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Activa One Alkoven Wohnmobile</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-2">Ein Zuhause für Groß und Klein.</h2>
+            <h3 className="text-xl md:text-2xl text-center text-black mb-8">Activa One Alkoven Wohnmobile</h3>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
               <div className="space-y-8 text-black leading-relaxed">
@@ -80,7 +86,7 @@ const ActivaOneDetail = () => {
                 </div>
               </div>
               <div>
-                <GrayBoxPlaceholder ratio={16/9} />
+                <EmptyGrayBoxPlaceholder ratio={16/9} />
               </div>
             </div>
 
