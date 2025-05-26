@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -55,6 +54,7 @@ const App = () => (
                 <Route path="/berater" element={<Index />} />
                 <Route path="/modelle" element={<ModelleOverview />} />
                 <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
+                <Route path="/wohnmobiltypen/vans" element={<VansOverview />} />
                 
                 {/* Explicit routes for models in the correct order matching the specified sequence */}
                 <Route path="/modelle/van" element={<ProductDetail />} />
