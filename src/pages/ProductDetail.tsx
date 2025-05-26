@@ -565,7 +565,7 @@ const modelsData = {
   "profila-t-mercedes": {
     id: "profila-t-mercedes",
     name: "Profila T Mercedes",
-    intro: "Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures. In der Saison 2024 kommt die speziell für die Mercedes Profila geschaffene Wohnwelt „Natural Heritage" dazu, die den exklusiven Charakter der Top-Modelle noch stärker betont.",
+    intro: "Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures. In der Saison 2024 kommt die speziell für die Mercedes Profila geschaffene Wohnwelt \"Natural Heritage\" dazu, die den exklusiven Charakter der Top-Modelle noch stärker betont.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -582,7 +582,7 @@ const modelsData = {
       "Basisfahrzeug Mercedes Sprinter",
       "Al-KO Tiefrahmen",
       "Alde Warmwasserheizung",
-      "Auf Wunsch exklusive Wohnwelt „Natural Heritage"",
+      "Auf Wunsch exklusive Wohnwelt \"Natural Heritage\"",
       "Winterfester, beheizter Doppelboden",
       "Elektrische Abwassertank – Entleerung"
     ],
