@@ -21,6 +21,7 @@ import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
 import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
+import VansOverview from "./pages/VansOverview";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
 import SealedStructure from "./pages/quality/SealedStructure";
