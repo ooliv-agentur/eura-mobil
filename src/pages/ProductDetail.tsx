@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -210,8 +208,8 @@ const modelsData = {
   },
   "profila-t-fiat": {
     id: "profila-t-fiat",
-    name: "Profila T Fiat",
-    intro: "Der Profila T Fiat vereint perfekt durchdachte Raumaufteilung mit höchster Qualität und Komfort. Diese Teilintegrierten bieten optimale Platznutzung und modernstes Design für unvergessliche Reiseerlebnisse.",
+    name: "Profila T",
+    intro: "Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum. In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -221,16 +219,17 @@ const modelsData = {
     ],
     technicalData: {
       länge: "6,99 – 7,58 m",
+      breite: "2,05 m",
+      höhe: "< 2,90 m",
       sitzplätze: "4",
       schlafplätze: "2"
     },
     highlights: [
-      "Teilintegrierte Bauweise für optimale Raumnutzung",
-      "Hochwertige Materialien und moderne Ausstattung",
-      "Flexible Grundrisse für verschiedene Bedürfnisse",
-      "Komfortable Schlafbereiche mit hochwertigen Matratzen",
-      "Durchdachte Stauraumlösungen",
-      "Moderne Küchentechnik und sanitäre Anlagen"
+      "Winterfester, beheizter Doppelboden",
+      "Große Stauräume durch Garagenabsenkung",
+      "Isolierte & beheizte Wassertanks",
+      "Elektr. Abwassertank-Entleerung",
+      "Isofix (grundrissabhängig)"
     ],
     layouts: [
       {
@@ -277,12 +276,16 @@ const modelsData = {
       }
     ],
     interior: [
-      { name: "Wohnbereich", description: "Komfortable Sitzgruppe mit hochwertigen Polstern" },
-      { name: "Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
-      { name: "Schlafbereich", description: "Bequeme Betten mit hochwertigen Matratzen" },
-      { name: "Badezimmer", description: "Funktionales Bad mit Dusche und WC" }
+      { name: "726 EF Chalet – Rustico", description: "Elegante Innenausstattung mit Chalet-Design" },
+      { name: "720 EF Chalet – Rustico", description: "Hochwertige Materialien im rustikalen Stil" }
     ],
-    upholsteryTypes: ["Polster Standard", "Polster Premium", "Polster Deluxe"],
+    upholsteryTypes: [
+      "Polster Como (Deko: Maka)",
+      "Polster Milano (Deko: Lasca)",
+      "Polster Pisa (Deko: Rana)",
+      "Polster Dara (Deko: Maka)",
+      "Polster Bergamo (Deko: Evorno)"
+    ],
     equipment: {
       chassis: [
         "Fiat Ducato Chassis mit modernster Technik",
@@ -295,6 +298,12 @@ const modelsData = {
         "Hochwertige Isolierung",
         "Panoramafenster für beste Aussicht",
         "Wetterbeständige Materialien"
+      ],
+      driversCabin: [
+        "Ergonomische Sitze mit Komfortausstattung",
+        "Integrierte Klimaanlage",
+        "Moderne Instrumentierung",
+        "Optimale Sichtverhältnisse"
       ],
       livingArea: [
         "Flexible Sitzgruppe",
@@ -313,6 +322,12 @@ const modelsData = {
         "Komfortables WC",
         "Großzügiger Waschbereich",
         "Praktische Ablagemöglichkeiten"
+      ],
+      installation: [
+        "Beheizter Frischwassertank",
+        "Isolierte Wasserleitungen",
+        "Frostsichere Installation",
+        "Einfache Wartung"
       ],
       electrical: [
         "Moderne Elektroinstallation",
@@ -1250,7 +1265,7 @@ const ProductDetail = () => {
       case "van":
         return { title: "Vans", subtitle: "Für Aktive und Unabhängige" };
       case "profila-t-fiat":
-        return { title: "Profila T Fiat", subtitle: "Teilintegrierte Perfektion" };
+        return { title: "Profila T", subtitle: "Offen, großzügig, frei" };
       case "profila-rs":
         return { title: "Profila RS", subtitle: "Sportlich. Modern. Funktional." };
       case "activa-one":
@@ -1380,7 +1395,9 @@ const ProductDetail = () => {
           {/* Highlights Section */}
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. {modelDetails.name}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
+                {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : `Für Deine beste Zeit. ${modelDetails.name}`}
+              </h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-8 text-black leading-relaxed">
