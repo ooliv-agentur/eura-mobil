@@ -286,7 +286,7 @@ const modelsData = {
         "Fiat Ducato Chassis mit modernster Technik",
         "Automatikgetriebe optional verfügbar",
         "ESP und weitere Sicherheitssysteme",
-        "Komfort-Ausstattung serienmäßig"
+        "Komfortable Fahrerausstattung serienmäßig"
       ],
       body: [
         "Teilintegrierte Bauweise",
@@ -628,21 +628,21 @@ const modelsData = {
         "Durchdachte Stauraumlösungen"
       ],
       kitchen: [
-        "3-Flammen Premium-Kochstelle",
-        "Großer Kompressor-Kühlschrank",
-        "Optional: Geschirrspüler",
-        "Großzügige Arbeitsflächen"
+        "3-Flammen-Kochstelle",
+        "Großer Kühlschrank",
+        "Moderne Küchenausstattung",
+        "Ausreichend Arbeitsfläche"
       ],
       bathroom: [
-        "Separate Premium-Duschkabine",
-        "Komfort-WC mit Luxus-Ausstattung",
+        "Separate Duschkabine",
+        "Komfortables WC",
         "Großzügiger Waschbereich",
-        "Hochwertige Ablagemöglichkeiten"
+        "Praktische Ablagemöglichkeiten"
       ],
       electrical: [
         "Modernste Elektroinstallation",
         "USB-Anschlüsse in allen Bereichen",
-        "Premium LED-Beleuchtung",
+        "LED-Beleuchtung",
         "Solarpanel-System verfügbar"
       ]
     }
@@ -916,6 +916,106 @@ const modelsData = {
         "USB-Anschlüsse in allen Bereichen",
         "Premium LED-Beleuchtung",
         "Solarpanel-System verfügbar"
+      ]
+    }
+  },
+  "integra": {
+    id: "integra",
+    name: "Integra",
+    intro: "Die Integra Baureihe verkörpert Vollintegration in ihrer reinsten Form. Diese exklusiven Reisemobile bieten maximalen Komfort, innovative Raumaufteilung und luxuriöse Ausstattung für anspruchsvolle Reisende, die Wert auf höchste Qualität und einzigartiges Design legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,89 – 8,99 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Vollintegrierte Premium-Bauweise für maximalen Komfort",
+      "Hochwertige Materialien und exklusive Verarbeitung",
+      "Innovative Raumaufteilung mit durchdachten Luxus-Details",
+      "Flexible Premium-Schlafbereiche für bis zu 4 Personen",
+      "Modernste Technik und luxuriöse Annehmlichkeiten",
+      "Elegantes Design mit hochwertiger Premium-Ausstattung"
+    ],
+    layouts: [
+      {
+        id: "i-890-qb",
+        name: "I 890 QB",
+        image: "/placeholder.svg",
+        length: "8,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "i-890-eb",
+        name: "I 890 EB",
+        image: "/placeholder.svg",
+        length: "8,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "i-760-ef",
+        name: "I 760 EF",
+        image: "/placeholder.svg",
+        length: "7,89 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "i-760-qf",
+        name: "I 760 QF",
+        image: "/placeholder.svg",
+        length: "7,89 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Luxus Wohnbereich", description: "Exklusive Sitzgruppe mit hochwertigen Premium-Materialien" },
+      { name: "Designer Küche", description: "Vollausgestattete Küche mit modernsten Premium-Geräten" },
+      { name: "Flexible Schlafbereiche", description: "Variable Luxus-Schlafmöglichkeiten für 4 Personen" },
+      { name: "Premium Badezimmer", description: "Hochwertiges Badezimmer mit exklusiver Luxus-Ausstattung" }
+    ],
+    upholsteryTypes: ["Integra Premium", "Leder Exclusiv", "Designer Luxus"],
+    equipment: {
+      chassis: [
+        "Premium Chassis mit neuester Technologie",
+        "Vollintegrierte Luxus-Bauweise",
+        "Umfassende Premium-Sicherheitssysteme",
+        "Komfort-Ausstattung auf höchstem Niveau"
+      ],
+      body: [
+        "Vollintegrierte Premium-Bauweise",
+        "Erstklassige Isolierung und Luxus-Dämmung",
+        "Panoramafenster für optimale Aussicht",
+        "Hochwertige, wetterbeständige Premium-Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Premium-Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Luxus-Stauraumlösungen"
+      ],
+      kitchen: [
+        "Premium 3-Flammen-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Luxus-Küchenausstattung",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Luxus-WC mit Premium-Ausstattung",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Premium-Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System serienmäßig"
       ]
     }
   }
