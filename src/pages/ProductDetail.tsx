@@ -1230,7 +1230,11 @@ const ProductDetail = () => {
   
   // Simple gray box placeholder component
   const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}>
+      <div className="flex items-center justify-center h-full text-gray-600">
+        Hotspot Bild Placeholder – Innenraum interaktiv
+      </div>
+    </AspectRatio>
   );
   
   // Helper function for layout rendering
@@ -1326,46 +1330,69 @@ const ProductDetail = () => {
         <SidebarNavigation items={navigationItems} />
         
         <div className="container mx-auto overflow-visible">
-          {/* Hero Section - Clean, without text overlay */}
-          <div className="relative w-full -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] overflow-visible">
-            <div className="w-full h-80 sm:h-[500px]">
-              <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
+          {/* NEW Hero Section - Two-column layout */}
+          <section className="mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* Left column - Text */}
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">Vans</h1>
+                <p className="text-xl text-gray-600">Für Aktive und Unabhängige</p>
+              </div>
+              {/* Right column - Hotspot Image */}
+              <div>
+                <GrayBoxPlaceholder />
+              </div>
             </div>
-          </div>
-          
-          {/* Main headline with guaranteed visibility on all screen sizes */}
-          <div 
-            id="product-headline" 
-            className="text-center mx-auto max-w-4xl px-4 my-20 md:mt-32 md:mb-12 relative z-10 overflow-visible min-h-[180px]"
-          >
-            <h1 className="text-3xl md:text-5xl font-bold mb-8 overflow-visible">Für Deine beste Zeit.</h1>
-            <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil {modelDetails.name}</h2>
-          </div>
-          
-          {/* Introduction Section */}
-          <div className="px-6 py-6 mb-16 rounded-lg shadow-sm bg-white mx-4 overflow-visible">
-            {/* Two column content with hotspot image and increased spacing */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
-              <div className="space-y-10">
+          </section>
+
+          {/* NEW Highlights Section */}
+          <section className="mb-16">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Für Deine beste Zeit. Eura Mobil Vans</h2>
+              
+              <div className="space-y-8 text-gray-700 leading-relaxed mb-12">
                 <div>
-                  <h3 className="text-xl font-semibold mb-5">Sichtbar anders:</h3>
-                  <p className="text-gray-700 leading-relaxed">{modelDetails.intro}</p>
+                  <h3 className="text-xl font-semibold mb-4">Sichtbar anders:</h3>
+                  <p>
+                    Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...
+                  </p>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-semibold mb-4">Spürbar anders:</h3>
+                  <p>
+                    "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...
+                  </p>
                 </div>
               </div>
+
               <div>
-                {/* Hotspot Image Placeholder in 16:9 format */}
-                <div className="h-full flex items-center">
-                  <div className="w-full">
-                    <AspectRatio ratio={16/9} className="bg-gray-200 rounded-lg">
-                      <div className="flex items-center justify-center h-full text-gray-600">
-                        Hotspot Bild Placeholder – Innenraum interaktiv
-                      </div>
-                    </AspectRatio>
+                <h3 className="text-2xl font-semibold mb-6">Highlights der Baureihe:</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                    <p>Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                    <p>Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                    <p>Waschraum mit schwenkbarer Duschwand</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                    <p>Staufächer im Doppelboden</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
+                    <p>Mineralstoff-Spüle</p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
           {/* Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
@@ -1382,27 +1409,6 @@ const ProductDetail = () => {
               <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
             </div>
           </div>
-          
-          {/* IMPROVED Highlights Section - Card-like layout with icons */}
-          <section id="highlights" className="my-12 bg-gray-50 py-10 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] px-4 md:px-8">
-            <div className="container mx-auto">
-              <h2 className="text-2xl font-semibold mb-6">Highlights der Baureihe</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {modelDetails.highlights.map((highlight, index) => (
-                  <Card key={index} className="overflow-hidden border-0 shadow-md">
-                    <CardContent className="p-4 flex items-start gap-4">
-                      <div className="bg-white rounded-full p-3 shadow-sm flex-shrink-0">
-                        <Circle className="h-6 w-6 text-blue-500" />
-                      </div>
-                      <div>
-                        <p className="text-gray-800 font-medium">{highlight}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
           
           {/* IMPROVED Gallery Section with horizontal scrolling Carousel */}
           <section className="my-10">
