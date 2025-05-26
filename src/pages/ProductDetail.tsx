@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -1229,6 +1228,11 @@ const ProductDetail = () => {
     startBeraterFlow();
   };
   
+  // Simple gray box placeholder component without text
+  const EmptyGrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`} />
+  );
+  
   // Simple gray box placeholder component
   const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
     <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}>
@@ -1346,19 +1350,25 @@ const ProductDetail = () => {
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Eura Mobil Vans</h2>
               
-              <div className="space-y-8 text-black leading-relaxed mb-12">
-                <div>
-                  <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
-                  <p className="text-black">
-                    Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...
-                  </p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div className="space-y-8 text-black leading-relaxed">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
+                    <p className="text-black">
+                      Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
+                    <p className="text-black">
+                      "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...
+                    </p>
+                  </div>
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
-                  <p className="text-black">
-                    "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...
-                  </p>
+                  <EmptyGrayBoxPlaceholder ratio={16/9} />
                 </div>
               </div>
 
