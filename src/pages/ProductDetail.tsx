@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -343,8 +342,7 @@ const modelsData = {
       "Isolierter und beheizter Alkoven",
       "Praktische Familien-Grundrisse",
       "Wassertanks im isolierten und beheizten Doppelboden",
-      "Jetzt mit 2× Isofix in Fahrtrichtung (außer HS-Grundrisse)",
-      "Beach Home Interieur optional verfügbar"
+      "Jetzt mit 2× Isofix in Fahrtrichtung (außer HS-Grundrisse)"
     ],
     layouts: [
       {
