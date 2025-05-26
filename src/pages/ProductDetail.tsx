@@ -1520,8 +1520,11 @@ const ProductDetail = () => {
         {/* Comparison components */}
         {hasMultipleLayouts && (
           <>
-            <ComparisonBar />
-            <ComparisonModal />
+            <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
+            <ComparisonModal 
+              open={isComparisonOpen} 
+              onOpenChange={setIsComparisonOpen} 
+            />
           </>
         )}
       </ProductLayout>
