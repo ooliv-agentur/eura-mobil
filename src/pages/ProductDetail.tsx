@@ -988,7 +988,7 @@ const modelsData = {
         "Komfort-Ausstattung auf höchstem Niveau"
       ],
       body: [
-        "Vollintegrierte Premium-Bauweise",
+        "Vollintegrierte Luxus-Bauweise",
         "Erstklassige Isolierung und Luxus-Dämmung",
         "Panoramafenster für optimale Aussicht",
         "Hochwertige, wetterbeständige Premium-Materialien"
