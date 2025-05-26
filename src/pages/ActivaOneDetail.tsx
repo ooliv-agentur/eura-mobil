@@ -6,12 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Download, Circle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -25,6 +19,14 @@ import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
 import { useComparison } from "@/context/ComparisonContext";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselIndicators,
+} from "@/components/ui/carousel";
 
 const ActivaOneDetail = () => {
   const isMobile = useIsMobile();
@@ -43,6 +45,58 @@ const ActivaOneDetail = () => {
     { id: "activa-one-690-vb", name: "AO 690 VB", length: "6,99 m", sleepingPlaces: "6" },
     { id: "activa-one-630-ls", name: "AO 630 LS", length: "6,44 m", sleepingPlaces: "5" }
   ];
+
+  // Equipment data for accordion
+  const equipmentData = {
+    chassis: [
+      "140 PS Motor, Euro 6d-Final",
+      "CCS Breitspur-Tiefrahmen (1.980 mm)",
+      "ESP inkl. Traction+, Hill-Descent-Control",
+      "16\" Räder, Tagfahrlicht, Tempomat"
+    ],
+    aufbau: [
+      "Leichtbaudoppelboden, isoliert & beheizt",
+      "Wände/Dach/Boden: 30/32/38mm",
+      "Beheizter Alkoven mit klappbarem Boden",
+      "2 Fenster + Sicherheitsnetz im Alkoven",
+      "Karosserie GFK + Aluminium, winterfest EN 1646"
+    ],
+    wohnwelt: [
+      "Möbeldekor Wildeiche & Strandweiß",
+      "Oberschränke mit Geräuschdämpfung",
+      "7-Zonen-Kaltschaummatratzen",
+      "Fußboden mit Trittschalldämpfung"
+    ],
+    kueche: [
+      "3-Flamm Kocher mit Zündung",
+      "Kühlschrank 142 Liter",
+      "Wasserhahn mit Anti-Tropf-Auslass"
+    ],
+    waschraum: [
+      "Ergonomisch optimierte Mittelwaschräume",
+      "Duschkabine, Spiegelschrank, Cassetten-WC"
+    ],
+    wasserinstallation: [
+      "143–150 l Frischwasser, 150 l Abwasser (beheizt, isoliert)",
+      "Schnellverschlussventile, Keramikkartuschen"
+    ],
+    elektroinstallation: [
+      "80 Ah Gel-Batterie",
+      "LED-Spots, 2× 230 V, 1× 12 V, 1× USB",
+      "Ladegerät 21 A",
+      "Haushaltslogik Lichtsystem"
+    ]
+  };
+
+  const equipmentTitles = {
+    chassis: "Chassis",
+    aufbau: "Aufbau",
+    wohnwelt: "Wohnwelt",
+    kueche: "Küche",
+    waschraum: "Waschraum",
+    wasserinstallation: "Wasserinstallation",
+    elektroinstallation: "Elektroinstallation"
+  };
 
   return (
     <ProductLayout modelName="Activa One">
@@ -150,15 +204,23 @@ const ActivaOneDetail = () => {
           </div>
         </div>
         
-        {/* Gallery Section with placeholders */}
+        {/* Gallery Section with horizontal scrolling Carousel */}
         <section className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <EmptyGrayBoxPlaceholder ratio={4/3} />
-            <EmptyGrayBoxPlaceholder ratio={4/3} />
-            <EmptyGrayBoxPlaceholder ratio={4/3} />
-            <EmptyGrayBoxPlaceholder ratio={4/3} />
-          </div>
+          <Carousel className="w-full" showIndicators={true}>
+            <CarouselContent>
+              {[1, 2, 3, 4, 5, 6].map((_, index) => (
+                <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <AspectRatio ratio={4/3} className="bg-gray-200 rounded-md" />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:flex justify-end gap-2 mt-2">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+            <CarouselIndicators />
+          </Carousel>
         </section>
         
         {/* Grundrisse (Floorplans) Section */}
@@ -180,103 +242,84 @@ const ActivaOneDetail = () => {
         {/* Innenraum (Interior) Section */}
         <section id="innenraum" className="my-10">
           <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <Card className="overflow-hidden border shadow-sm">
-              <AspectRatio ratio={1/1} className="bg-gray-200" />
-              <CardContent className="p-4">
-                <h3 className="font-medium mb-1">Deko-Pack "Beach Home"</h3>
-                <p className="text-gray-600 text-sm">
-                  Das optionale Deko-Paket mit farbiger Wandverkleidung, dekorativen Segeltauen, 
-                  zusätzlicher Alkovenverblendung inkl. Stautaschen verleiht dem Activa One eine 
-                  ebenso wertige wie frische Premium-Atmosphäre.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <Carousel className="w-full" showIndicators={true}>
+            <CarouselContent>
+              <CarouselItem className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <Card className="overflow-hidden border shadow-sm">
+                  <AspectRatio ratio={1/1} className="bg-gray-200" />
+                  <CardContent className="p-4">
+                    <h3 className="font-medium mb-1">Deko-Pack "Beach Home"</h3>
+                    <p className="text-gray-600 text-sm">
+                      Das optionale Deko-Paket mit farbiger Wandverkleidung, dekorativen Segeltauen, 
+                      zusätzlicher Alkovenverblendung inkl. Stautaschen verleiht dem Activa One eine 
+                      ebenso wertige wie frische Premium-Atmosphäre.
+                    </p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            </CarouselContent>
+            <div className="hidden md:flex justify-end gap-2 mt-2">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+            <CarouselIndicators />
+          </Carousel>
         </section>
         
         {/* Polster (Upholstery) Section */}
         <section id="polster" className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Polster</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="bg-gray-100 rounded-lg overflow-hidden">
-              <AspectRatio ratio={4/3} className="bg-gray-200" />
-              <div className="p-3 text-center">
-                <h3 className="font-medium">Polster Milano – Dekoration Lasca</h3>
-              </div>
+          <Carousel className="w-full" showIndicators={true}>
+            <CarouselContent>
+              <CarouselItem className="basis-full sm:basis-1/2 md:basis-1/3">
+                <div className="bg-gray-100 rounded-lg overflow-hidden">
+                  <AspectRatio ratio={4/3} className="bg-gray-200" />
+                  <div className="p-3 text-center">
+                    <h3 className="font-medium">Polster Milano – Dekoration Lasca</h3>
+                  </div>
+                </div>
+              </CarouselItem>
+              <CarouselItem className="basis-full sm:basis-1/2 md:basis-1/3">
+                <div className="bg-gray-100 rounded-lg overflow-hidden">
+                  <AspectRatio ratio={4/3} className="bg-gray-200" />
+                  <div className="p-3 text-center">
+                    <h3 className="font-medium">Polster Dara</h3>
+                  </div>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+            <div className="hidden md:flex justify-end gap-2 mt-2">
+              <CarouselPrevious />
+              <CarouselNext />
             </div>
-            <div className="bg-gray-100 rounded-lg overflow-hidden">
-              <AspectRatio ratio={4/3} className="bg-gray-200" />
-              <div className="p-3 text-center">
-                <h3 className="font-medium">Polster Dara</h3>
-              </div>
-            </div>
-          </div>
+            <CarouselIndicators />
+          </Carousel>
         </section>
         
-        {/* Serienausstattung (Standard Equipment) Section */}
+        {/* Serienausstattung (Standard Equipment) Section with Accordion */}
         <section id="serienausstattung" className="my-10 pt-8">
           <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-          <Tabs defaultValue="chassis" className="w-full">
-            <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
-              <TabsTrigger value="chassis" className="text-sm flex-grow">
-                Chassis
-              </TabsTrigger>
-              <TabsTrigger value="aufbau" className="text-sm flex-grow">
-                Aufbau
-              </TabsTrigger>
-              <TabsTrigger value="wohnwelt" className="text-sm flex-grow">
-                Wohnwelt
-              </TabsTrigger>
-              <TabsTrigger value="kueche" className="text-sm flex-grow">
-                Küche
-              </TabsTrigger>
-              <TabsTrigger value="waschraum" className="text-sm flex-grow">
-                Waschraum
-              </TabsTrigger>
-              <TabsTrigger value="wasserinstallation" className="text-sm flex-grow">
-                Wasserinstallation
-              </TabsTrigger>
-              <TabsTrigger value="elektroinstallation" className="text-sm flex-grow">
-                Elektroinstallation
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="chassis" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Chassis</p>
-              </div>
-            </TabsContent>
-            <TabsContent value="aufbau" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Aufbau</p>
-              </div>
-            </TabsContent>
-            <TabsContent value="wohnwelt" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Wohnwelt</p>
-              </div>
-            </TabsContent>
-            <TabsContent value="kueche" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Küche</p>
-              </div>
-            </TabsContent>
-            <TabsContent value="waschraum" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Waschraum</p>
-              </div>
-            </TabsContent>
-            <TabsContent value="wasserinstallation" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Wasserinstallation</p>
-              </div>
-            </TabsContent>
-            <TabsContent value="elektroinstallation" className="mt-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-gray-600">Text Placeholder – Elektroinstallation</p>
-              </div>
-            </TabsContent>
-          </Tabs>
+          <div className="space-y-4">
+            {Object.entries(equipmentData).map(([key, items]) => (
+              <Accordion type="single" collapsible className="w-full" key={key}>
+                <AccordionItem value={key} className="border rounded-lg bg-white">
+                  <AccordionTrigger className="px-4 py-3">
+                    <span className="text-lg font-medium">{equipmentTitles[key as keyof typeof equipmentTitles]}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                      {items.map((item, i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            ))}
+          </div>
         </section>
       </div>
 
