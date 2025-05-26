@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -26,12 +25,13 @@ type CarouselContextProps = {
   api: ReturnType<typeof useEmblaCarousel>[1]
   scrollPrev: () => void
   scrollNext: () => void
-  scrollTo: (index: number) => void // Added scrollTo property to the type definition
+  scrollTo: (index: number) => void
   canScrollPrev: boolean
   canScrollNext: boolean
   selectedIndex: number
   scrollSnaps: number[]
   showIndicators?: boolean
+  hasScrollableContent: boolean
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -74,6 +74,7 @@ const Carousel = React.forwardRef<
     const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
+    const [hasScrollableContent, setHasScrollableContent] = React.useState(false)
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -83,6 +84,11 @@ const Carousel = React.forwardRef<
       setSelectedIndex(api.selectedScrollSnap())
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
+      
+      // Check if content is scrollable by comparing scroll length with container length
+      const scrollSnaps = api.scrollSnapList()
+      const hasScrollable = scrollSnaps.length > 1 && (api.canScrollPrev() || api.canScrollNext() || scrollSnaps.length > 1)
+      setHasScrollableContent(hasScrollable)
     }, [])
 
     const scrollTo = React.useCallback((index: number) => {
@@ -123,14 +129,18 @@ const Carousel = React.forwardRef<
         return
       }
 
-      setScrollSnaps(api.scrollSnapList())
-      onSelect(api)
-      api.on("reInit", onSelect)
-      api.on("reInit", () => setScrollSnaps(api.scrollSnapList()))
+      const updateScrollState = () => {
+        setScrollSnaps(api.scrollSnapList())
+        onSelect(api)
+      }
+
+      updateScrollState()
+      api.on("reInit", updateScrollState)
       api.on("select", onSelect)
 
       return () => {
         api?.off("select", onSelect)
+        api?.off("reInit", updateScrollState)
       }
     }, [api, onSelect])
 
@@ -144,12 +154,13 @@ const Carousel = React.forwardRef<
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
           scrollPrev,
           scrollNext,
-          scrollTo, // Added scrollTo to the context value
+          scrollTo,
           canScrollPrev,
           canScrollNext,
           selectedIndex,
           scrollSnaps,
-          showIndicators
+          showIndicators,
+          hasScrollableContent
         }}
       >
         <div
@@ -216,7 +227,12 @@ const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  const { orientation, scrollPrev, canScrollPrev, hasScrollableContent } = useCarousel()
+
+  // Hide button if there's no scrollable content
+  if (!hasScrollableContent) {
+    return null
+  }
 
   return (
     <Button
@@ -245,7 +261,12 @@ const CarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ComponentProps<typeof Button>
 >(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  const { orientation, scrollNext, canScrollNext, hasScrollableContent } = useCarousel()
+
+  // Hide button if there's no scrollable content
+  if (!hasScrollableContent) {
+    return null
+  }
 
   return (
     <Button
@@ -270,14 +291,14 @@ const CarouselNext = React.forwardRef<
 })
 CarouselNext.displayName = "CarouselNext"
 
-// New Component: CarouselIndicators
 const CarouselIndicators = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { scrollSnaps, selectedIndex, scrollTo, showIndicators, orientation } = useCarousel()
+  const { scrollSnaps, selectedIndex, scrollTo, showIndicators, orientation, hasScrollableContent } = useCarousel()
   
-  if (!showIndicators) {
+  // Hide indicators if showIndicators is false or there's no scrollable content
+  if (!showIndicators || !hasScrollableContent) {
     return null
   }
 
