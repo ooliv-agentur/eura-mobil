@@ -284,7 +284,7 @@ const modelsData = {
       "Polster Como\nDekoration Maka",
       "Polster Milano, Dekoration Lasca",
       "Polster Milano\nDekoration Lasca",
-      "Polster Pisa, Dekoration Rana",
+      "Polster Leider Beige, Dekoration Rana",
       "Polster Pisa\nDekoration Rana",
       "Polster Dara, Dekoration Maka",
       "Polster Dara\nDekoration Maka",
@@ -408,10 +408,7 @@ const modelsData = {
       "Polster Milano, Dekoration Lasca",
       "Polster Milano\nDekoration Lasca",
       "Polster Leider Beige, Dekoration Rana",
-      "Polster Pisa\nDekoration Rana",
-      "Polster Dara, Dekoration Maka",
-      "Polster Dara\nDekoration Maka",
-      "Polster Bergamo\nDekoration Evorno"
+      "Polster Pisa\nDekoration Rana"
     ],
     equipment: {
       chassis: [
