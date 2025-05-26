@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -1347,7 +1348,7 @@ const ProductDetail = () => {
         <div className="container mx-auto overflow-visible">
           {/* NEW Highlights Section */}
           <section id="highlights" className="mb-16">
-            <div className="max-w-4xl mx-auto">
+            <div className="mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Eura Mobil Vans</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
