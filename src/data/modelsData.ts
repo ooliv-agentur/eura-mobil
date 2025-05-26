@@ -1,5 +1,3 @@
-
-
 // Model data repository
 export const modelsData = {
   "van": {
@@ -167,7 +165,7 @@ export const modelsData = {
   "contura": {
     id: "contura",
     name: "Contura",
-    intro: "Der mit einem ALKO-Tiefrahmenfahrgestell verbundene Contura mit Mercedes-Benz Fahrgestell trägt einen besonders verwindungsfesten, langlebigen Aufbau, der mit Warmwasserheizung und stauraumoptimierten Doppelboden zu Reisen von beliebiger Dauer in jeder Jahreszeit einlädt. Sorgfältige Detailarbeit wird dabei nicht nur im Exterieur sondern auch innen sichtbar: der optisch fließende Übergang der Oberschränke vom Wohnraum in das Fahrerhaus wird an der Decke vom „Starlight Dome" getauften, zweiteiligen Panoramaglasdach begleitet, das exklusiv bei Eura Mobil zum Einsatz kommt.",
+    intro: "Der mit einem ALKO-Tiefrahmenfahrgestell verbundene Contura mit Mercedes-Benz Fahrgestell trägt einen besonders verwindungsfesten, langlebigen Aufbau, der mit Warmwasserheizung und stauraumoptimierten Doppelboden zu Reisen von beliebiger Dauer in jeder Jahreszeit einlädt. Sorgfältige Detailarbeit wird dabei nicht nur im Exterieur sondern auch innen sichtbar: der optisch fließende Übergang der Oberschränke vom Wohnraum in das Fahrerhaus wird an der Decke vom \"Starlight Dome\" getauften, zweiteiligen Panoramaglasdach begleitet, das exklusiv bei Eura Mobil zum Einsatz kommt.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -323,4 +321,3 @@ export function hasUpholstery(model: ModelData): model is FullModelData {
 export function hasEquipment(model: ModelData): model is FullModelData {
   return 'equipment' in model && model.equipment !== undefined;
 }
-
