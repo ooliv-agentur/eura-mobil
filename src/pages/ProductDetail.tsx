@@ -320,6 +320,120 @@ const modelsData = {
       ]
     }
   },
+  "profila-rs": {
+    id: "profila-rs",
+    name: "Profila RS",
+    intro: "Der Profila RS kombiniert sportliches Design mit praktischer Funktionalität. Diese Baureihe überzeugt durch innovative Grundrisse und hochwertige Ausstattung für anspruchsvolle Reisende.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "6,99 – 7,58 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Sportliches und modernes Design",
+      "Innovative Raumaufteilung für maximalen Komfort",
+      "Hochwertige Materialien und Verarbeitung",
+      "Flexible Schlafbereiche für bis zu 4 Personen",
+      "Durchdachte Stauraumlösungen",
+      "Moderne Technik und Ausstattung"
+    ],
+    layouts: [
+      {
+        id: "prs-695-eb",
+        name: "PRS 695 EB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-720-eb",
+        name: "PRS 720 EB",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-695-hb",
+        name: "PRS 695 HB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-675-sb",
+        name: "PRS 675 SB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-720-qf",
+        name: "PRS 720 QF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-720-ef",
+        name: "PRS 720 EF",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Sportlicher Wohnbereich", description: "Moderne Sitzgruppe im sportlichen Design" },
+      { name: "Funktionale Küche", description: "Kompakte und vollausgestattete Küche" },
+      { name: "Flexible Schlafbereiche", description: "Variable Schlafmöglichkeiten für 4 Personen" },
+      { name: "Komfortables Bad", description: "Modernes Badezimmer mit allen Annehmlichkeiten" }
+    ],
+    upholsteryTypes: ["Sport Polster", "Premium Polster", "Leder Polster"],
+    equipment: {
+      chassis: [
+        "Modernes Fiat Ducato Chassis",
+        "Sportliche Optik und Fahrwerk",
+        "Umfangreiche Sicherheitsausstattung",
+        "Komfortable Fahrerausstattung"
+      ],
+      body: [
+        "Aerodynamische Bauweise",
+        "Hochwertige Isolierung",
+        "Große Panoramafenster",
+        "Robuste Materialien"
+      ],
+      livingArea: [
+        "Sportliche Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "LED-Ambientebeleuchtung",
+        "Praktische Stauraumlösungen"
+      ],
+      kitchen: [
+        "3-Flammen-Kochstelle",
+        "Großer Kühlschrank",
+        "Moderne Küchenausstattung",
+        "Ausreichend Arbeitsfläche"
+      ],
+      bathroom: [
+        "Separate Duschkabine",
+        "Komfortables WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Moderne Elektroinstallation",
+        "USB-Anschlüsse überall",
+        "LED-Beleuchtung",
+        "Solarpanel verfügbar"
+      ]
+    }
+  },
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
