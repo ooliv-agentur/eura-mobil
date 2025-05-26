@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -1279,7 +1280,7 @@ const ProductDetail = () => {
       case "activa-one":
         return { title: "Activa One", subtitle: "Familien-Alkoven der Extraklasse" };
       case "profila-t-mercedes":
-        return { title: "Profila T auf Mercedes", subtitle: "edelm exklusiv und elegant" };
+        return { title: "Profila T auf Mercedes", subtitle: "Edel, exklusiv und elegant" };
       case "contura":
         return { title: "Contura", subtitle: "Vollintegrierte Eleganz" };
       case "integra-line-fiat":
@@ -1499,4 +1500,25 @@ const ProductDetail = () => {
           {/* Serienausstattung (Standard Equipment) Section with vertical accordion */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
-              <h2 className="text-2xl font-semibold mb
+              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
+              {renderEquipment()}
+            </section>
+          )}
+        </div>
+        
+        {/* Comparison components */}
+        {hasMultipleLayouts && (
+          <>
+            <ComparisonBar onOpenComparison={() => setIsComparisonOpen(true)} />
+            <ComparisonModal 
+              isOpen={isComparisonOpen} 
+              onClose={() => setIsComparisonOpen(false)} 
+            />
+          </>
+        )}
+      </ProductLayout>
+    </ComparisonProvider>
+  );
+};
+
+export default ProductDetail;
