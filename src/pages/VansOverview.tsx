@@ -17,7 +17,7 @@ const VansOverview = () => {
       id: "v-635-eb",
       name: "V 635 EB",
       length: "6,36 m",
-      sleepingPlaces: "2",
+      sleepingPlaces: "2–3",
     },
     {
       id: "v-635-hb", 
@@ -44,30 +44,49 @@ const VansOverview = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        {/* Full-width headline */}
-        <section className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">Vans von EURA MOBIL</h1>
-          
-          {/* Text block describing advantages */}
-          <div className="max-w-4xl mx-auto mb-8">
-            <p className="text-gray-600 text-lg leading-relaxed mb-4">
-              Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den EURA MOBIL Van zu Ihrem ganz persönlichen mobilen Zuhause machen.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Unsere Vans bieten die perfekte Kombination aus Kompaktheit und Komfort für Ihre Reiseabenteuer. Entdecken Sie die Freiheit des Reisens mit maximaler Flexibilität und minimalen Kompromissen.
-            </p>
+        {/* Hero Section */}
+        <section className="mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Left column - Text */}
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">VAN WOHNMOBILE</h1>
+              <p className="text-xl text-gray-600">Für Aktive und Unabhängige</p>
+            </div>
+            {/* Right column - Image hotspot */}
+            <div className="aspect-video bg-gray-300 rounded-lg"></div>
           </div>
         </section>
 
-        {/* Hero image block */}
+        {/* Text Block */}
         <section className="mb-12">
-          <div className="w-full h-64 md:h-96 bg-gray-300 rounded-lg"></div>
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="space-y-6 text-gray-700 leading-relaxed">
+              <div>
+                <h2 className="text-2xl font-bold mb-2">EURA MOBIL VAN</h2>
+                <h3 className="text-xl font-semibold mb-4">DER PRIMETIME VAN</h3>
+              </div>
+              
+              <p>
+                Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans.
+              </p>
+              
+              <p>
+                Die Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden.
+              </p>
+              
+              <p>
+                Auch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik.
+              </p>
+              
+              <p>
+                Die Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!
+              </p>
+            </div>
+          </div>
         </section>
 
-        {/* Model cards section */}
+        {/* Model Cards Section */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold text-center mb-8">Unsere Van-Modelle</h2>
-          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {vanModels.map((model) => {
               const isModelSelected = isSelected(model.id);
@@ -75,7 +94,7 @@ const VansOverview = () => {
 
               return (
                 <Card key={model.id} className="border border-gray-300">
-                  <div className="w-full aspect-video bg-gray-200"></div>
+                  <div className="w-full aspect-video bg-gray-300"></div>
                   <CardContent className="p-4">
                     <h3 className="text-xl font-semibold mb-3">{model.name}</h3>
                     
@@ -106,7 +125,7 @@ const VansOverview = () => {
                           htmlFor={`compare-${model.id}`} 
                           className={`text-sm cursor-pointer ${isDisabled ? 'text-gray-400' : ''}`}
                         >
-                          Zum Vergleich auswählen
+                          Zum Vergleich
                         </label>
                       </div>
                       
@@ -124,13 +143,8 @@ const VansOverview = () => {
           </div>
         </section>
 
-        {/* CTA block at bottom */}
-        <section className="text-center bg-gray-50 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Bereit für Ihr Van-Abenteuer?</h2>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Konfigurieren Sie Ihren Traumvan nach Ihren Wünschen oder lassen Sie sich von unserem Berater das perfekte Modell empfehlen.
-          </p>
-          
+        {/* CTA Bar */}
+        <section className="bg-gray-300 rounded-lg p-6">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
               <Link to="/konfigurator">
@@ -138,10 +152,11 @@ const VansOverview = () => {
               </Link>
             </Button>
             
-            <BeraterButton 
-              variant="outline" 
-              size="lg"
-            />
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/berater">
+                Beratung starten
+              </Link>
+            </Button>
           </div>
         </section>
       </div>
