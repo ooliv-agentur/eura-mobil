@@ -546,6 +546,106 @@ const modelsData = {
         "Haushaltslogik Lichtsystem"
       ]
     }
+  },
+  "profila-t-mercedes": {
+    id: "profila-t-mercedes",
+    name: "Profila T Mercedes",
+    intro: "Der Profila T Mercedes vereint die bewährte Mercedes-Qualität mit innovativem Wohnmobil-Design. Diese Teilintegrierten bieten höchsten Komfort und Zuverlässigkeit für anspruchsvolle Reisende.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,12 – 7,61 m",
+      sitzplätze: "4",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Mercedes-Benz Chassis für höchste Qualität und Zuverlässigkeit",
+      "Teilintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und erstklassige Verarbeitung",
+      "Komfortable Schlafbereiche mit Premium-Matratzen",
+      "Durchdachte Stauraumlösungen für maximalen Nutzen",
+      "Modernste Technik und luxuriöse Ausstattung"
+    ],
+    layouts: [
+      {
+        id: "pt696eb",
+        name: "PT696EB",
+        image: "/placeholder.svg",
+        length: "7,12 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt726ef",
+        name: "PT726EF",
+        image: "/placeholder.svg",
+        length: "7,44 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt726qf",
+        name: "PT726QF",
+        image: "/placeholder.svg",
+        length: "7,61 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt726eb",
+        name: "PT726EB",
+        image: "/placeholder.svg",
+        length: "7,54 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Premium Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Mercedes-Materialien" },
+      { name: "Designer Küche", description: "Moderne Küchenausstattung mit Premium-Geräten" },
+      { name: "Komfort Schlafbereich", description: "Erstklassige Betten mit hochwertigen Matratzen" },
+      { name: "Luxus Badezimmer", description: "Hochwertiges Bad mit exklusiver Ausstattung" }
+    ],
+    upholsteryTypes: ["Mercedes Premium", "Leder Deluxe", "Stoff Luxus"],
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Chassis mit neuester Technologie",
+        "9G-TRONIC Automatikgetriebe verfügbar",
+        "Umfassende Sicherheitssysteme",
+        "Premium Komfort-Ausstattung"
+      ],
+      body: [
+        "Teilintegrierte Mercedes-Bauweise",
+        "Erstklassige Isolierung und Dämmung",
+        "Große Panoramafenster für beste Sicht",
+        "Hochwertige, wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Sitzgruppe im Mercedes-Design",
+        "Premium Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Stauraumlösungen"
+      ],
+      kitchen: [
+        "3-Flammen Premium-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Optional: Geschirrspüler",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Komfort-WC mit Luxus-Ausstattung",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Modernste Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System verfügbar"
+      ]
+    }
   }
 };
 
