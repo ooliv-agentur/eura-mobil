@@ -1,8 +1,9 @@
+
 import React, { useState } from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Check, Download } from "lucide-react";
+import { Check, Download, Circle } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import {
   Tabs,
@@ -16,6 +17,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -30,109 +32,14 @@ const ActivaOneDetail = () => {
   
   // Simple gray box placeholder component
   const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}>
+      <div className="flex items-center justify-center h-full text-gray-600">
+        Hotspot Bild Placeholder – Innenraum interaktiv
+      </div>
+    </AspectRatio>
   );
   
-  // Equipment sections with real content
-  const equipment = {
-    chassis: [
-      "140 PS Motor, Euro 6d-Final",
-      "CCS Breitspur-Tiefrahmen (Spurbreite 1.980 mm)",
-      "Tempomat",
-      "Manuelle Klimaanlage",
-      "ABS + ASR",
-      "Fahrer-/Beifahrerairbag",
-      "Fix and Go Pannenset",
-      "Tagfahrlicht",
-      "ESP inkl. Traction+ & Hill-Descent-Control",
-      "16\" Räder"
-    ],
-    body: [
-      "Aufbau winterfest nach EN 1646",
-      "Karosserie rundum vor Hagel geschützt durch Wände und Dach aus GFK",
-      "Leichtbaudoppelboden durchgehend, isoliert und beheizt",
-      "Stauraum im Doppelboden GFK-beschichtet (Boden und Wände)",
-      "Leichtbau-Bodenplatte aus GFK und zusätzlichen Aluminiumprofil-Verstärkungen",
-      "Holzfreie GFK-Wände, durchgehend isoliert",
-      "Boden-Wandverbindung ohne Kältebrücken",
-      "Dachkantenprofil aus lackiertem Aluminium mit Fugenversiegelung",
-      "Alkovenkantenprofil aus GFK mit Fugenversiegelung",
-      "Robuste Karosserieschweller aus lackiertem Aluminium",
-      "Beheizter und isolierter Alkoven",
-      "2 Fenster im Alkoven",
-      "Alkovenboden klappbar",
-      "Sicherheitsnetz im Alkoven",
-      "Wandstärke Wände/Dach/Boden: 30/32/38 mm",
-      "Isofix, 2× in Fahrtrichtung (außer AO 650 HS & AO 570 HS)",
-      "Extra große Garagen dank 37 cm hohem Doppelboden",
-      "Elektrische Einstiegsstufe",
-      "Heizung Trumatic Combi 4",
-      "Außenwandbündige Seitz-Isolierfenster mit Mückengitter",
-      "Serviceklappen mit doppelter Dichtung, isoliertem Inlay & Selbsteinzug",
-      "Ein-Schlüsselsystem für den gesamten Aufbau",
-      "Aufbautür mit Fenster und Mülleimer",
-      "Große Rückleuchten im modernen Design",
-      "Mini-Heki über Heckbereich",
-      "Mini-Heki über Frontbereich"
-    ],
-    livingArea: [
-      "Zweifarbiges Möbeldekor in Wildeiche und Strandweiß",
-      "Vorhang zum Fahrerhaus (grundrissabhängig)",
-      "Oberschränke mit Aluminiumprofil-Verstärkung",
-      "Geräuschdämpfung für Oberschrank-Klappen",
-      "7-Zonen-Kaltschaum-Matratzen",
-      "Fußbodenbelag mit Trittschalldämpfung",
-      "Polsterstoff: Dara"
-    ],
-    kitchen: [
-      "Kühlschrank 142 Liter",
-      "3-Flamm-Kocher mit elektrischer Zündung, Glasabdeckung & großer Arbeitsfläche",
-      "Auszüge mit Rollschubführung aus Metall",
-      "Tiefe Oberschränke, unterteilt, mit Rüttelkante",
-      "Wasserhahn mit drehbarem Anti-Tropf-Auslass"
-    ],
-    bathroom: [
-      "Viel Bewegungsfreiraum durch optimierte Raumaufteilung",
-      "Mittelwaschräume mit integrierter Duschkabine (570 HS, 650 HS, 690 HB, 690 VB)",
-      "Stauschrank und Spiegel",
-      "Cassetten-WC mit großem Rolltank"
-    ],
-    installation: [
-      "Frischwasser-System aus Hartflex-Kunststoff",
-      "Frischwassertank 143–150 Liter (abhängig vom Grundriss), isoliert & beheizt im Innenraum",
-      "Wassermenge in Fahrstellung: 25 Liter",
-      "2 Schnellverschluss-Entleerungsventile im Doppelboden",
-      "Abwassertank 150 Liter, isoliert & beheizt im Doppelboden",
-      "Armaturen mit Keramikkartuschen",
-      "Syphons gegen Geruchsbildung",
-      "Druckwassersystem"
-    ],
-    electrical: [
-      "Elektrozentrale gut zugänglich unter dem Beifahrersitz",
-      "Gel-Batterie 80 Ah",
-      "Bord-Control-Panel mit separater Anzeige für Wasser, Batterie & Ladespannung",
-      "LED-Lesespots mit Echtglas",
-      "Lichtschaltersystem mit Haushaltslogik",
-      "Deckenleuchte",
-      "2× Steckdosen 230 V",
-      "1× Steckdose 12 V",
-      "Ladegerät 21 A",
-      "1× USB-Port"
-    ]
-  };
-
-  // Equipment section tab keys in German
-  const equipmentTabs = {
-    chassis: "Chassis",
-    body: "Aufbau",
-    livingArea: "Wohnwelt",
-    kitchen: "Küche",
-    bathroom: "Waschraum",
-    installation: "Wasserinstallation",
-    electrical: "Elektroinstallation"
-  };
-
-  // Floor plans data - updated to match the exact order specified
+  // Floor plans data
   const floorplans = [
     { id: "activa-one-690-hb", name: "AO 690 HB", length: "6,99 m", sleepingPlaces: "6" },
     { id: "activa-one-570-hs", name: "AO 570 HS", length: "5,99 m", sleepingPlaces: "4" },
@@ -141,85 +48,88 @@ const ActivaOneDetail = () => {
     { id: "activa-one-630-ls", name: "AO 630 LS", length: "6,44 m", sleepingPlaces: "5" }
   ];
 
-  // Helper function for equipment rendering on mobile
-  const renderEquipmentMobile = () => {
-    return (
-      <Accordion type="single" collapsible className="w-full">
-        {Object.entries(equipment).map(([key, items]) => (
-          <AccordionItem key={key} value={key}>
-            <AccordionTrigger className="py-4 px-0">
-              <span className="text-lg">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
-            </AccordionTrigger>
-            <AccordionContent>
-              <ul className="space-y-2 pl-1">
-                {items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    );
-  };
-  
-  // Helper function for equipment rendering on desktop
-  const renderEquipmentDesktop = () => {
-    const equipmentKeys = Object.keys(equipment);
-    
-    return (
-      <Tabs defaultValue={equipmentKeys[0]} className="w-full">
-        <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
-          {equipmentKeys.map((key) => (
-            <TabsTrigger key={key} value={key} className="text-sm flex-grow">
-              {equipmentTabs[key as keyof typeof equipmentTabs]}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {Object.entries(equipment).map(([key, items]) => (
-          <TabsContent key={key} value={key} className="mt-4">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-              {items.map((item, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
-        ))}
-      </Tabs>
-    );
-  };
-
   return (
     <ProductLayout modelName="Activa One">
-      {/* Hero Section */}
-      <div className="relative">
-        <div className="w-full h-72 sm:h-96">
-          <GrayBoxPlaceholder ratio={21/9} className="h-full" />
+      {/* Full-width Hero Section */}
+      <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
+        <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
+          <div className="text-center text-black z-10">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">Activa One</h1>
+            <p className="text-xl md:text-2xl lg:text-3xl">Entspannung nach Plan</p>
+          </div>
         </div>
-      </div>
-      
-      <div className="container mx-auto px-4 mt-6">
-        {/* Model Title and Introduction */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold">Activa One</h1>
-          <p className="text-gray-700 mt-3 text-lg">
-            Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: 
-            Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. 
-            Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen 
-            ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große 
-            Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, 
-            beginnt die Entspannung sofort mit der Abfahrt.
-          </p>
-        </div>
-        
+      </section>
+
+      <div className="container mx-auto overflow-visible">
+        {/* Intro Section */}
+        <section id="highlights" className="mb-16">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Activa One Alkoven Wohnmobile</h2>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+              <div className="space-y-8 text-black leading-relaxed">
+                <div>
+                  <p className="text-black">
+                    Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: 
+                    Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. 
+                    Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen 
+                    ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große 
+                    Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, 
+                    beginnt die Entspannung sofort mit der Abfahrt.
+                  </p>
+                </div>
+              </div>
+              <div>
+                <GrayBoxPlaceholder ratio={16/9} />
+              </div>
+            </div>
+
+            <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
+              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">Highlights der Baureihe:</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  </div>
+                  <p className="text-black">Ausziehbares Doppelstockbett (AO 690 VB)</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  </div>
+                  <p className="text-black">Maximaler Stauraum dank 37 cm hohem Doppelboden</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  </div>
+                  <p className="text-black">Isolierter und beheizter Alkoven</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  </div>
+                  <p className="text-black">Praktische Familien-Grundrisse</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  </div>
+                  <p className="text-black">Wassertanks im isolierten und beheizten Doppelboden</p>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                    <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  </div>
+                  <p className="text-black">Jetzt mit 2x Isofix in Fahrtrichtung (außer HS-Grundrisse)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Technical Data Summary */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 bg-gray-50 p-4 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
           <div className="flex flex-col items-center p-2">
             <span className="text-sm text-gray-600">Länge</span>
             <span className="font-semibold text-lg">5,99 – 7,57 m</span>
@@ -234,43 +144,6 @@ const ActivaOneDetail = () => {
           </div>
         </div>
         
-        {/* Highlights Section */}
-        <section className="my-10">
-          <h2 className="text-2xl font-semibold mb-4">Highlights der Baureihe</h2>
-          <div className="bg-white rounded-lg p-4 shadow-sm">
-            <ul className="space-y-3">
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Ausziehbares Doppelstockbett (AO 690 VB)</span>
-              </li>
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Maximaler Stauraum dank 37 cm hohem Doppelboden</span>
-              </li>
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Isolierter und beheizter Alkoven</span>
-              </li>
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Praktische Familien-Grundrisse</span>
-              </li>
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Wassertanks im isolierten und beheizten Doppelboden</span>
-              </li>
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Jetzt mit 2x Isofix in Fahrtrichtung (außer HS-Grundrisse)</span>
-              </li>
-              <li className="flex gap-2">
-                <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-1" />
-                <span>Beach Home Interieur optional</span>
-              </li>
-            </ul>
-          </div>
-        </section>
-        
         {/* Gallery Section with placeholders */}
         <section className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
@@ -283,7 +156,7 @@ const ActivaOneDetail = () => {
         </section>
         
         {/* Grundrisse (Floorplans) Section */}
-        <section className="my-10">
+        <section id="grundrisse" className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {floorplans.map((floorplan) => (
@@ -299,47 +172,105 @@ const ActivaOneDetail = () => {
         </section>
         
         {/* Innenraum (Interior) Section */}
-        <section className="my-10">
-          <h2 className="text-2xl font-semibold mb-4">Innenraum</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            <div className="lg:col-span-3">
-              <GrayBoxPlaceholder ratio={16/9} />
-            </div>
-            <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg p-4 shadow-sm h-full">
-                <h3 className="font-semibold mb-2">Beach Home Deko-Paket</h3>
-                <p className="text-gray-600">
-                  Farbige Wandverkleidung, dekorative Segeltaue, zusätzliche Alkovenverblendung mit Stautaschen - 
-                  das Beach Home Deko-Paket verleiht Ihrem Activa One eine wertige, frische Premium-Atmosphäre.
+        <section id="innenraum" className="my-10">
+          <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <Card className="overflow-hidden border shadow-sm">
+              <AspectRatio ratio={1/1} className="bg-gray-200" />
+              <CardContent className="p-4">
+                <h3 className="font-medium mb-1">Deko-Pack "Beach Home"</h3>
+                <p className="text-gray-600 text-sm">
+                  Das optionale Deko-Paket mit farbiger Wandverkleidung, dekorativen Segeltauen, 
+                  zusätzlicher Alkovenverblendung inkl. Stautaschen verleiht dem Activa One eine 
+                  ebenso wertige wie frische Premium-Atmosphäre.
                 </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
         
         {/* Polster (Upholstery) Section */}
-        <section className="my-10">
+        <section id="polster" className="my-10">
           <h2 className="text-2xl font-semibold mb-4">Polster</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div className="bg-gray-100 rounded-lg overflow-hidden">
               <AspectRatio ratio={4/3} className="bg-gray-200" />
               <div className="p-3 text-center">
-                <h3 className="font-medium">Milano</h3>
+                <h3 className="font-medium">Polster Milano – Dekoration Lasca</h3>
               </div>
             </div>
             <div className="bg-gray-100 rounded-lg overflow-hidden">
               <AspectRatio ratio={4/3} className="bg-gray-200" />
               <div className="p-3 text-center">
-                <h3 className="font-medium">Dara</h3>
+                <h3 className="font-medium">Polster Dara</h3>
               </div>
             </div>
           </div>
         </section>
         
         {/* Serienausstattung (Standard Equipment) Section */}
-        <section className="my-10 pt-8">
+        <section id="serienausstattung" className="my-10 pt-8">
           <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-          {isMobile ? renderEquipmentMobile() : renderEquipmentDesktop()}
+          <Tabs defaultValue="chassis" className="w-full">
+            <TabsList className="w-full flex flex-wrap h-auto mb-4 bg-gray-100 p-1">
+              <TabsTrigger value="chassis" className="text-sm flex-grow">
+                Chassis
+              </TabsTrigger>
+              <TabsTrigger value="aufbau" className="text-sm flex-grow">
+                Aufbau
+              </TabsTrigger>
+              <TabsTrigger value="wohnwelt" className="text-sm flex-grow">
+                Wohnwelt
+              </TabsTrigger>
+              <TabsTrigger value="kueche" className="text-sm flex-grow">
+                Küche
+              </TabsTrigger>
+              <TabsTrigger value="waschraum" className="text-sm flex-grow">
+                Waschraum
+              </TabsTrigger>
+              <TabsTrigger value="wasserinstallation" className="text-sm flex-grow">
+                Wasserinstallation
+              </TabsTrigger>
+              <TabsTrigger value="elektroinstallation" className="text-sm flex-grow">
+                Elektroinstallation
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="chassis" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Chassis</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="aufbau" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Aufbau</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="wohnwelt" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Wohnwelt</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="kueche" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Küche</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="waschraum" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Waschraum</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="wasserinstallation" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Wasserinstallation</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="elektroinstallation" className="mt-4">
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">Text Placeholder – Elektroinstallation</p>
+              </div>
+            </TabsContent>
+          </Tabs>
         </section>
       </div>
 
