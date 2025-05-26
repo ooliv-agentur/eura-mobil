@@ -1,327 +1,1473 @@
-
-import React from "react";
-import { useParams } from "react-router-dom";
-import { Layout } from "@/components/Layout";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Check, Download, MapPin, Settings, Circle } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useComparison } from "@/context/ComparisonContext";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ProductLayout } from "@/components/ProductLayout";
+import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
+import { ComparisonProvider } from "@/context/ComparisonContext";
+import { ComparisonBar } from "@/components/comparison/ComparisonBar";
+import { ComparisonModal } from "@/components/comparison/ComparisonModal";
+import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { SidebarNavigation } from "@/components/SidebarNavigation";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselIndicators,
+} from "@/components/ui/carousel";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+// Model data repository - could later be moved to a separate file
+const modelsData = {
+  "van": {
+    id: "van",
+    name: "Van",
+    intro: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "5,99 – 6,36 m",
+      breite: "2,05 m",
+      höhe: "2,65 m",
+      schlafplätze: "2-3",
+      sitzplätze: "4"
+    },
+    highlights: [
+      "Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung",
+      "Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen",
+      "Waschraum mit schwenkbarer Duschwand",
+      "Staufächer im Doppelboden",
+      "Mineralstoff-Spüle"
+    ],
+    layouts: [
+      {
+        id: "v-635-eb",
+        name: "V 635 EB",
+        image: "/placeholder.svg",
+        length: "6,36 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "v-635-hb",
+        name: "V 635 HB",
+        image: "/placeholder.svg",
+        length: "6,36 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "v-595-hb",
+        name: "V 595 HB",
+        image: "/placeholder.svg",
+        length: "5,99 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Kommunikation", description: "Boxen, LED-Lampen und USB-Steckdosen" },
+      { name: "Spüle", description: "Mineralstoff-Spüle" },
+      { name: "Dinetten-Tisch", description: "Mit abgesenkter Ablage" },
+      { name: "Küche", description: "Mit Gewürzregal" }
+    ],
+    upholsteryTypes: ["Eco-Leder Schwarz", "Eco-Leder Beige", "Stoff-Kombination Grau"],
+    equipment: {
+      chassis: [
+        "Fiat Ducato 35L Chassis, Kastenwagen",
+        "Euro 6D Final inkl. Ad Blue und Rußpartikelfilter",
+        "Fahrer- + Beifahrerairbag",
+        "ABS, ASR, ESP inkl. Traktion+, Hilldescent",
+        "Klimaanlage manuell",
+        "Tempomat",
+        "Kraftstofftank 90 Liter",
+        "Zentralverriegelung mit Funkfernbedienung",
+        "Tagfahrlicht",
+        "Elektrische Fensterheber vorn",
+        "Radzierblenden",
+        "Fix and Go Pannenset",
+        "Stoßfänger hinten schwarz"
+      ],
+      body: [
+        "Geräusch- und wärmedämmende Isolierung in Dach, Boden und Seiten",
+        "Aufbaufarbe weiß",
+        "Karosseriebündige, isolierte Rahmenfenster mit Schnellverschlüssen",
+        "Fenster mit Mückengitter und Verdunklung",
+        "Zwei Seitenfenster im Schlafbereich (595 HB: 1)",
+        "Ausstellfenster im Heck",
+        "Außenbeleuchtung",
+        "Elektrische Trittstufe"
+      ],
+      driversCabin: [
+        "Sitzbezüge im Wohnraumpolsterstoff",
+        "Fahrerhausteppich",
+        "Übergangsloser, kopfhoher Durchgang",
+        "Kartenfächer über Türen",
+        "Doppel-Leseleuchten",
+        "Eco-Leder-Blende mit LED-Ambientebeleuchtung"
+      ],
+      livingArea: [
+        "Ergonomische Dinette mit abgerundeten Kanten",
+        "Klapptisch mit schwenkbarer Verlängerung und Cupholder",
+        "Polster in Eco-Leder / Stoff-Kombination",
+        "Doppelboden-Staufächer (1 Auszug, 1 Klappfach, 1 Bodenfach)",
+        "Hinterlüftete Oberschränke mit Ambientebeleuchtung",
+        "Möbeldekor \"Beach Home\"",
+        "Kleiderschrank mit ausziehbarer Stange",
+        "Flauschbespannung an Decke, textile Wandbespannung",
+        "Eco-Leder-Blenden an Fensterrahmen & Dachhauben",
+        "Metall-Klappenaufsteller",
+        "Verchromte Schrankverschlüsse",
+        "LED-Funktions- und Ambientebeleuchtung",
+        "USB-Ports & TV-Vorbereitung"
+      ],
+      kitchen: [
+        "Einteilige Mineralstoff-Arbeitsplatte mit Spüle & Klapp-Erweiterung",
+        "Küchenarmatur ausziehbar/versenkbar",
+        "Breite Auszüge mit Soft-Close",
+        "Zwei-Flammen-Gaskocher",
+        "Zentral angeordnete Gasabsperrhähne",
+        "Kompressorkühlschrank (90 l)",
+        "Gewürzregal mit Acrylglas-Reling & Beleuchtung",
+        "Ambientebeleuchtung am Küchenblock & Oberschrank",
+        "Zwei Klappfächer im Eingangsbereich (1x Flaschenhalter)",
+        "Außenzugänglicher Auszug im Küchenblock",
+        "Einhängbare Tischschiene mit Klappblende"
+      ],
+      bathroom: [
+        "Waschraum mit schwenkbarer Duschwand",
+        "Duschfläche bis zu 60×90 cm",
+        "Holz-Duschrost",
+        "Mineralstoff-Waschbecken mit Click-Clack-Verschluss",
+        "Staufächer & Spiegelschrank",
+        "Raumtür (3 cm stark) mit Eco-Leder-Griff",
+        "Cassettentoilette",
+        "Fenster mit Mückengitter & Verdunklung"
+      ],
+      sleeping: [
+        "Heckbetten mit Tellerfedern (595 HB) oder Kaltschaummatratzen",
+        "Ladefläche unter Betten aufstellbar",
+        "Modul-Stauboxen (635 EB), Auffahrrampe & Abdeckung (635 HB)",
+        "Dachstauschränke mit Beleuchtung",
+        "Eco-Leder-Eckmodule mit Lautsprechern",
+        "Mini Heki Dachluke",
+        "Schwenkbare LED-Lesespots mit USB",
+        "Stoffbespannte Hecktüren mit ausstellbaren Fenstern"
+      ],
+      installation: [
+        "4 kW Dieselheizung",
+        "Warmwasserversorgung mit Einhebel-Mischbatterie",
+        "Druckwasserpumpe",
+        "Beheizter Frischwassertank im Innenraum",
+        "Beheizter Abwassertank unterflur",
+        "Frostsichere Wasserablasshähne",
+        "Gaskasten im Heck",
+        "Außendusche (nicht bei 595 HB)"
+      ],
+      electrical: [
+        "100 Ah Lithium-Ionen-Batterie",
+        "230 V-Steckdosen in Küche, Sitzgruppe & Bad",
+        "Separat schaltbare Funktions-/Ambientebeleuchtung",
+        "TV-Vorbereitung & 12 V-Steckdose",
+        "2× USB in Wohnraum & Schlafbereich",
+        "Trennschalter Starter-/Wohnraumbatterie",
+        "Elektronischer Ladeautomat",
+        "CEE-Außenanschluss mit Sicherungsautomat",
+        "FI-Schutzschalter",
+        "Control Panel über Eingang",
+        "CP+ Heizungssteuerung mit Crashsensor"
+      ]
+    }
+  },
+  "profila-t-fiat": {
+    id: "profila-t-fiat",
+    name: "Profila T Fiat",
+    intro: "Der Profila T Fiat vereint perfekt durchdachte Raumaufteilung mit höchster Qualität und Komfort. Diese Teilintegrierten bieten optimale Platznutzung und modernstes Design für unvergessliche Reiseerlebnisse.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "6,99 – 7,58 m",
+      sitzplätze: "4",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Teilintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und moderne Ausstattung",
+      "Flexible Grundrisse für verschiedene Bedürfnisse",
+      "Komfortable Schlafbereiche mit hochwertigen Matratzen",
+      "Durchdachte Stauraumlösungen",
+      "Moderne Küchentechnik und sanitäre Anlagen"
+    ],
+    layouts: [
+      {
+        id: "pt-720-eb",
+        name: "PT 720 EB",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-695-eb",
+        name: "PT 695 EB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-675-sb",
+        name: "PT 675 SB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-720-qf",
+        name: "PT 720 QF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-720-ef",
+        name: "PT 720 EF",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt-660-eb",
+        name: "PT 660 EB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Wohnbereich", description: "Komfortable Sitzgruppe mit hochwertigen Polstern" },
+      { name: "Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
+      { name: "Schlafbereich", description: "Bequeme Betten mit hochwertigen Matratzen" },
+      { name: "Badezimmer", description: "Funktionales Bad mit Dusche und WC" }
+    ],
+    upholsteryTypes: ["Polster Standard", "Polster Premium", "Polster Deluxe"],
+    equipment: {
+      chassis: [
+        "Fiat Ducato Chassis mit modernster Technik",
+        "Automatikgetriebe optional verfügbar",
+        "ESP und weitere Sicherheitssysteme",
+        "Komfortable Fahrerausstattung serienmäßig"
+      ],
+      body: [
+        "Teilintegrierte Bauweise",
+        "Hochwertige Isolierung",
+        "Panoramafenster für beste Aussicht",
+        "Wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Flexible Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "Optimal ausgeleuchtete Bereiche",
+        "Praktische Stauraumlösungen"
+      ],
+      kitchen: [
+        "Moderne 3-Flammen-Kochstelle",
+        "Großer Kühlschrank",
+        "Spülmaschine optional",
+        "Reichlich Arbeitsfläche"
+      ],
+      bathroom: [
+        "Separate Duschkabine",
+        "Komfortables WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Moderne Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "LED-Beleuchtung",
+        "Solarpanel optional"
+      ]
+    }
+  },
+  "profila-rs": {
+    id: "profila-rs",
+    name: "Profila RS",
+    intro: "Der Profila RS kombiniert sportliches Design mit praktischer Funktionalität. Diese Baureihe überzeugt durch innovative Grundrisse und hochwertige Ausstattung für anspruchsvolle Reisende.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "6,99 – 7,58 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Sportliches und modernes Design",
+      "Innovative Raumaufteilung für maximalen Komfort",
+      "Hochwertige Materialien und Verarbeitung",
+      "Flexible Schlafbereiche für bis zu 4 Personen",
+      "Durchdachte Stauraumlösungen",
+      "Moderne Technik und Ausstattung"
+    ],
+    layouts: [
+      {
+        id: "prs-695-eb",
+        name: "PRS 695 EB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-720-eb",
+        name: "PRS 720 EB",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-695-hb",
+        name: "PRS 695 HB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-675-sb",
+        name: "PRS 675 SB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-720-qf",
+        name: "PRS 720 QF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "prs-720-ef",
+        name: "PRS 720 EF",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Sportlicher Wohnbereich", description: "Moderne Sitzgruppe im sportlichen Design" },
+      { name: "Funktionale Küche", description: "Kompakte und vollausgestattete Küche" },
+      { name: "Flexible Schlafbereiche", description: "Variable Schlafmöglichkeiten für 4 Personen" },
+      { name: "Komfortables Bad", description: "Modernes Badezimmer mit allen Annehmlichkeiten" }
+    ],
+    upholsteryTypes: ["Sport Polster", "Premium Polster", "Leder Polster"],
+    equipment: {
+      chassis: [
+        "Modernes Fiat Ducato Chassis",
+        "Sportliche Optik und Fahrwerk",
+        "Umfangreiche Sicherheitsausstattung",
+        "Komfortable Fahrerausstattung"
+      ],
+      body: [
+        "Aerodynamische Bauweise",
+        "Hochwertige Isolierung",
+        "Große Panoramafenster",
+        "Robuste Materialien"
+      ],
+      livingArea: [
+        "Sportliche Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "LED-Ambientebeleuchtung",
+        "Praktische Stauraumlösungen"
+      ],
+      kitchen: [
+        "3-Flammen-Kochstelle",
+        "Großer Kühlschrank",
+        "Moderne Küchenausstattung",
+        "Ausreichend Arbeitsfläche"
+      ],
+      bathroom: [
+        "Separate Duschkabine",
+        "Komfortables WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Moderne Elektroinstallation",
+        "USB-Anschlüsse überall",
+        "LED-Beleuchtung",
+        "Solarpanel verfügbar"
+      ]
+    }
+  },
+  "activa-one": {
+    id: "activa-one",
+    name: "Activa One",
+    intro: "Die verschiedenen Modelle der Alkoven-Baureihe Activa One sind viel mehr als nur simple Reisemobile: Ihr frisches Interieur steigert noch den ersten Eindruck von robuster Großzügigkeit zu einem echten Gefühl von Freiheit. Egal, aus welcher Perspektive man den Innenraum des Activa One betrachtet – auf insgesamt vier unterschiedlichen Grundrissen ergibt sich eine Vielzahl praktischer Stau- und Ablagemöglichkeiten. Der 37 cm hohe Doppelboden packt auch das große Familiengepäck sicher ein. Und da an dieser Baureihe alles perfekt geplant und professionell umgesetzt ist, beginnt die Entspannung sofort mit der Abfahrt.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "5,99 – 7,57 m",
+      sitzplätze: "4-6",
+      schlafplätze: "4-6"
+    },
+    highlights: [
+      "Ausziehbares Doppelstockbett (AO 690 VB)",
+      "Maximaler Stauraum dank 37 cm hohem Doppelboden",
+      "Isolierter und beheizter Alkoven",
+      "Praktische Familien-Grundrisse",
+      "Wassertanks im isolierten und beheizten Doppelboden",
+      "Jetzt mit 2× Isofix in Fahrtrichtung (außer HS-Grundrisse)"
+    ],
+    layouts: [
+      {
+        id: "ao-570-hs",
+        name: "AO 570 HS",
+        image: "/placeholder.svg",
+        length: "5,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "ao-630-ls",
+        name: "AO 630 LS",
+        image: "/placeholder.svg",
+        length: "6,44 m",
+        sleepingPlaces: "5"
+      },
+      {
+        id: "ao-650-hs",
+        name: "AO 650 HS",
+        image: "/placeholder.svg",
+        length: "6,50 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "ao-690-hb",
+        name: "AO 690 HB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "6"
+      },
+      {
+        id: "ao-690-vb",
+        name: "AO 690 VB",
+        image: "/placeholder.svg",
+        length: "6,99 m",
+        sleepingPlaces: "6"
+      }
+    ],
+    interior: [
+      { 
+        name: "Deko-Pack \"Beach Home\"", 
+        description: "Farbige Wandverkleidung, dekorative Segeltaue, zusätzliche Alkovenverblendung mit Stautaschen" 
+      },
+      { 
+        name: "Atmosphäre", 
+        description: "Wertige, frische Premium-Atmosphäre" 
+      }
+    ],
+    upholsteryTypes: ["Polster Milano", "Polster Dara", "Deko Lasca"],
+    equipment: {
+      chassis: [
+        "140 PS Motor, Euro 6d-Final",
+        "CCS Breitspur-Tiefrahmen (1.980 mm)",
+        "ESP inkl. Traction+, Hill-Descent-Control",
+        "16\" Räder, Tagfahrlicht, Tempomat"
+      ],
+      body: [
+        "Leichtbaudoppelboden, isoliert & beheizt",
+        "Wände/Dach/Boden: 30/32/38mm",
+        "Beheizter Alkoven mit klappbarem Boden",
+        "2 Fenster + Sicherheitsnetz im Alkoven",
+        "Karosserie GFK + Aluminium, winterfest EN 1646"
+      ],
+      livingArea: [
+        "Möbeldekor Wildeiche & Strandweiß",
+        "Oberschränke mit Geräuschdämpfung",
+        "7-Zonen-Kaltschaummatratzen",
+        "Fußboden mit Trittschalldämpfung"
+      ],
+      kitchen: [
+        "3-Flamm Kocher mit Zündung",
+        "Kühlschrank 142 Liter",
+        "Wasserhahn mit Anti-Tropf-Auslass"
+      ],
+      bathroom: [
+        "Ergonomisch optimierte Mittelwaschräume",
+        "Duschkabine, Spiegelschrank, Cassetten-WC"
+      ],
+      installation: [
+        "143–150 l Frischwasser, 150 l Abwasser (beheizt, isoliert)",
+        "Schnellverschlussventile, Keramikkartuschen"
+      ],
+      electrical: [
+        "80 Ah Gel-Batterie",
+        "LED-Spots, 2× 230 V, 1× 12 V, 1× USB",
+        "Ladegerät 21 A",
+        "Haushaltslogik Lichtsystem"
+      ]
+    }
+  },
+  "profila-t-mercedes": {
+    id: "profila-t-mercedes",
+    name: "Profila T Mercedes",
+    intro: "Der Profila T Mercedes vereint die bewährte Mercedes-Qualität mit innovativem Wohnmobil-Design. Diese Teilintegrierten bieten höchsten Komfort und Zuverlässigkeit für anspruchsvolle Reisende.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,12 – 7,61 m",
+      sitzplätze: "4",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Mercedes-Benz Chassis für höchste Qualität und Zuverlässigkeit",
+      "Teilintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und erstklassige Verarbeitung",
+      "Komfortable Schlafbereiche mit Premium-Matratzen",
+      "Durchdachte Stauraumlösungen für maximalen Nutzen",
+      "Modernste Technik und luxuriöse Ausstattung"
+    ],
+    layouts: [
+      {
+        id: "pt696eb",
+        name: "PT696EB",
+        image: "/placeholder.svg",
+        length: "7,12 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt726ef",
+        name: "PT726EF",
+        image: "/placeholder.svg",
+        length: "7,44 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt726qf",
+        name: "PT726QF",
+        image: "/placeholder.svg",
+        length: "7,61 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "pt726eb",
+        name: "PT726EB",
+        image: "/placeholder.svg",
+        length: "7,54 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Premium Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Mercedes-Materialien" },
+      { name: "Designer Küche", description: "Moderne Küchenausstattung mit Premium-Geräten" },
+      { name: "Komfort Schlafbereich", description: "Erstklassige Betten mit hochwertigen Matratzen" },
+      { name: "Luxus Badezimmer", description: "Hochwertiges Bad mit exklusiver Ausstattung" }
+    ],
+    upholsteryTypes: ["Mercedes Premium", "Leder Deluxe", "Stoff Luxus"],
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Chassis mit neuester Technologie",
+        "9G-TRONIC Automatikgetriebe verfügbar",
+        "Umfassende Sicherheitssysteme",
+        "Premium Komfort-Ausstattung"
+      ],
+      body: [
+        "Teilintegrierte Mercedes-Bauweise",
+        "Erstklassige Isolierung und Dämmung",
+        "Große Panoramafenster für beste Sicht",
+        "Hochwertige, wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Sitzgruppe im Mercedes-Design",
+        "Premium Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Stauraumlösungen"
+      ],
+      kitchen: [
+        "3-Flammen-Kochstelle",
+        "Großer Kühlschrank",
+        "Moderne Küchenausstattung",
+        "Ausreichend Arbeitsfläche"
+      ],
+      bathroom: [
+        "Separate Duschkabine",
+        "Komfortables WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Modernste Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "LED-Beleuchtung",
+        "Solarpanel-System verfügbar"
+      ]
+    }
+  },
+  "contura": {
+    id: "contura",
+    name: "Contura",
+    intro: "Die Contura Baureihe vereint elegantes Design mit funktionaler Perfektion. Diese vollintegrierten Reisemobile bieten höchsten Komfort und innovative Lösungen für anspruchsvolle Reisende, die Wert auf Luxus und Qualität legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,84 m",
+      sitzplätze: "4",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Vollintegrierte Bauweise für maximalen Komfort",
+      "Hochwertige Materialien und exklusive Ausstattung",
+      "Innovative Raumaufteilung mit durchdachten Details",
+      "Premium-Schlafbereiche mit erstklassigen Matratzen",
+      "Modernste Technik und luxuriöse Annehmlichkeiten",
+      "Elegantes Design mit hochwertiger Verarbeitung"
+    ],
+    layouts: [
+      {
+        id: "ct-766-eb",
+        name: "CT 766 EB",
+        image: "/placeholder.svg",
+        length: "7,84 m",
+        sleepingPlaces: "2"
+      },
+      {
+        id: "ct-766-ef",
+        name: "CT 766 EF",
+        image: "/placeholder.svg",
+        length: "7,84 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Luxus Wohnbereich", description: "Exklusive Sitzgruppe mit hochwertigen Premium-Materialien" },
+      { name: "Designer Küche", description: "Vollausgestattete Küche mit modernsten Geräten" },
+      { name: "Komfort Schlafbereich", description: "Luxuriöse Betten mit erstklassigen Matratzen" },
+      { name: "Premium Badezimmer", description: "Hochwertiges Badezimmer mit exklusiver Ausstattung" }
+    ],
+    upholsteryTypes: ["Contura Premium", "Leder Exclusiv", "Designer Stoff"],
+    equipment: {
+      chassis: [
+        "Vollintegriertes Chassis mit modernster Technologie",
+        "Automatikgetriebe serienmäßig",
+        "Umfassende Sicherheitssysteme",
+        "Premium Komfort-Ausstattung"
+      ],
+      body: [
+        "Vollintegrierte Bauweise",
+        "Erstklassige Isolierung und Dämmung",
+        "Panoramafenster für optimale Sicht",
+        "Hochwertige, wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Sitzgruppe im Premium-Design",
+        "Hochwertige Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Stauraumlösungen"
+      ],
+      kitchen: [
+        "Premium-Kochstelle mit 3 Flammen",
+        "Großer Kompressor-Kühlschrank",
+        "Geschirrspüler serienmäßig",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Komfort-WC mit Luxus-Ausstattung",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Modernste Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System serienmäßig"
+      ]
+    }
+  },
+  "integra-line-fiat": {
+    id: "integra-line-fiat",
+    name: "Integra Line Fiat",
+    intro: "Die Integra Line Fiat vereint moderne Vollintegration mit durchdachtem Design. Diese Baureihe bietet maximalen Komfort und innovative Raumaufteilung für anspruchsvolle Reisende, die Wert auf Luxus und Funktionalität legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,41 – 7,58 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Vollintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und erstklassige Verarbeitung",
+      "Flexible Schlafbereiche für bis zu 4 Personen",
+      "Durchdachte Stauraumlösungen und moderne Technik",
+      "Komfortable Ausstattung und luxuriöse Annehmlichkeiten",
+      "Elegantes Design mit funktionalen Details"
+    ],
+    layouts: [
+      {
+        id: "il-720-eb",
+        name: "IL 720 EB",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il-720-qf",
+        name: "IL 720 QF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il-720-ef",
+        name: "IL 720 EF",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il-730-ef",
+        name: "IL 730 EF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Vollintegrierter Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Materialien" },
+      { name: "Premium Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
+      { name: "Flexible Schlafbereiche", description: "Variable Schlafmöglichkeiten für 4 Personen" },
+      { name: "Komfort Badezimmer", description: "Hochwertiges Bad mit modernen Annehmlichkeiten" }
+    ],
+    upholsteryTypes: ["Integra Premium", "Leder Komfort", "Stoff Deluxe"],
+    equipment: {
+      chassis: [
+        "Fiat Ducato Chassis mit neuester Technologie",
+        "Vollintegrierte Bauweise",
+        "Umfassende Sicherheitssysteme",
+        "Komfort-Ausstattung serienmäßig"
+      ],
+      body: [
+        "Vollintegrierte Bauweise",
+        "Hochwertige Isolierung und Dämmung",
+        "Panoramafenster für beste Aussicht",
+        "Wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Stauraumlösungen"
+      ],
+      kitchen: [
+        "3-Flammen Premium-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Moderne Küchenausstattung",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Komfort-WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Moderne Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "LED-Beleuchtung",
+        "Solarpanel-System verfügbar"
+      ]
+    }
+  },
+  "integra-line-gt-mercedes": {
+    id: "integra-line-gt-mercedes",
+    name: "Integra Line GT Mercedes",
+    intro: "Die Integra Line GT Mercedes vereint die bewährte Mercedes-Qualität mit innovativem vollintegriertem Design. Diese Premium-Baureihe bietet höchsten Komfort und luxuriöse Ausstattung für anspruchsvolle Reisende, die Wert auf Exklusivität und Zuverlässigkeit legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,47 – 7,64 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Mercedes-Benz Chassis für höchste Qualität und Zuverlässigkeit",
+      "Vollintegrierte Bauweise für maximalen Komfort",
+      "Hochwertige Premium-Materialien und erstklassige Verarbeitung",
+      "Flexible Schlafbereiche für bis zu 4 Personen",
+      "Durchdachte Luxus-Stauraumlösungen und modernste Technik",
+      "Elegantes GT-Design mit exklusiven Details"
+    ],
+    layouts: [
+      {
+        id: "il726ef",
+        name: "IL726EF",
+        image: "/placeholder.svg",
+        length: "7,47 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il726qf",
+        name: "IL726QF",
+        image: "/placeholder.svg",
+        length: "7,64 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Premium Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Mercedes-Materialien" },
+      { name: "Designer Küche", description: "Vollausgestattete Premium-Küche mit modernsten Geräten" },
+      { name: "Flexible Schlafbereiche", description: "Variable Premium-Schlafmöglichkeiten für 4 Personen" },
+      { name: "Luxus Badezimmer", description: "Hochwertiges Bad mit exklusiver Mercedes-Ausstattung" }
+    ],
+    upholsteryTypes: ["GT Mercedes Premium", "Leder Exclusiv", "Designer Premium"],
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Chassis mit neuester Technologie",
+        "Vollintegrierte GT-Bauweise",
+        "Umfassende Premium-Sicherheitssysteme",
+        "Mercedes Komfort-Ausstattung serienmäßig"
+      ],
+      body: [
+        "Vollintegrierte Mercedes-Bauweise",
+        "Erstklassige Isolierung und Premium-Dämmung",
+        "Große Panoramafenster für beste Aussicht",
+        "Hochwertige, wetterbeständige Premium-Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Mercedes GT-Sitzgruppe",
+        "Premium Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Luxus-Stauraumlösungen"
+      ],
+      kitchen: [
+        "Premium 3-Flammen-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Mercedes Premium-Küchenausstattung",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Mercedes Komfort-WC",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Mercedes Premium-Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System verfügbar"
+      ]
+    }
+  },
+  "integra": {
+    id: "integra",
+    name: "Integra",
+    intro: "Die Integra Baureihe verkörpert Vollintegration in ihrer reinsten Form. Diese exklusiven Reisemobile bieten maximalen Komfort, innovative Raumaufteilung und luxuriöse Ausstattung für anspruchsvolle Reisende, die Wert auf höchste Qualität und einzigartiges Design legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,89 – 8,99 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Vollintegrierte Premium-Bauweise für maximalen Komfort",
+      "Hochwertige Materialien und exklusive Verarbeitung",
+      "Innovative Raumaufteilung mit durchdachten Luxus-Details",
+      "Flexible Premium-Schlafbereiche für bis zu 4 Personen",
+      "Modernste Technik und luxuriöse Annehmlichkeiten",
+      "Elegantes Design mit hochwertiger Premium-Ausstattung"
+    ],
+    layouts: [
+      {
+        id: "i-890-qb",
+        name: "I 890 QB",
+        image: "/placeholder.svg",
+        length: "8,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "i-890-eb",
+        name: "I 890 EB",
+        image: "/placeholder.svg",
+        length: "8,99 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "i-760-ef",
+        name: "I 760 EF",
+        image: "/placeholder.svg",
+        length: "7,89 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "i-760-qf",
+        name: "I 760 QF",
+        image: "/placeholder.svg",
+        length: "7,89 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Luxus Wohnbereich", description: "Exklusive Sitzgruppe mit hochwertigen Premium-Materialien" },
+      { name: "Designer Küche", description: "Vollausgestattete Küche mit modernsten Premium-Geräten" },
+      { name: "Flexible Schlafbereiche", description: "Variable Luxus-Schlafmöglichkeiten für 4 Personen" },
+      { name: "Premium Badezimmer", description: "Hochwertiges Badezimmer mit exklusiver Luxus-Ausstattung" }
+    ],
+    upholsteryTypes: ["Integra Premium", "Leder Exclusiv", "Designer Luxus"],
+    equipment: {
+      chassis: [
+        "Premium Chassis mit neuester Technologie",
+        "Vollintegrierte Luxus-Bauweise",
+        "Umfassende Premium-Sicherheitssysteme",
+        "Komfort-Ausstattung auf höchstem Niveau"
+      ],
+      body: [
+        "Vollintegrierte Premium-Bauweise",
+        "Erstklassige Isolierung und Luxus-Dämmung",
+        "Panoramafenster für optimale Aussicht",
+        "Hochwertige, wetterbeständige Premium-Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Premium-Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Luxus-Stauraumlösungen"
+      ],
+      kitchen: [
+        "Premium 3-Flammen-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Luxus-Küchenausstattung",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Luxus-WC mit Premium-Ausstattung",
+        "Großzügiger Waschbereich",
+        "Hochwertige Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Premium-Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "Premium LED-Beleuchtung",
+        "Solarpanel-System serienmäßig"
+      ]
+    }
+  },
+  "xtura": {
+    id: "xtura",
+    name: "Xtura",
+    intro: "Die Xtura Baureihe verkörpert Innovation und modernstes Design. Diese exklusiven Reisemobile bieten revolutionäre Raumkonzepte und zukunftsweisende Technologie für Reisende, die das Außergewöhnliche suchen und höchste Ansprüche an Komfort und Funktionalität stellen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "6,88 m",
+      sitzplätze: "2",
+      schlafplätze: "2"
+    },
+    highlights: [
+      "Revolutionäres Design mit zukunftsweisender Architektur",
+      "Hochwertige Premium-Materialien und innovative Verarbeitung",
+      "Modernste Technologie und intelligente Raumaufteilung",
+      "Komfortable Schlafbereiche mit erstklassigen Matratzen",
+      "Durchdachte Stauraumlösungen und moderne Annehmlichkeiten",
+      "Elegantes Design mit exklusiven Details"
+    ],
+    layouts: [
+      {
+        id: "xt-686-ef",
+        name: "XT 686 EF",
+        image: "/placeholder.svg",
+        length: "6,88 m",
+        sleepingPlaces: "2"
+      }
+    ],
+    interior: [
+      { name: "Innovativer Wohnbereich", description: "Exklusive Sitzgruppe mit modernsten Premium-Materialien" },
+      { name: "Future Küche", description: "Revolutionäre Küchenausstattung mit neuester Technologie" },
+      { name: "Komfort Schlafbereich", description: "Luxuriöse Betten mit erstklassigen Matratzen" },
+      { name: "Premium Badezimmer", description: "Hochwertiges Badezimmer mit innovativer Ausstattung" }
+    ],
+    upholsteryTypes: ["Xtura Premium", "Leder Future", "Designer Innovation"],
+    equipment: {
+      chassis: [
+        "Innovatives Chassis mit neuester Technologie",
+        "Vollintegrierte Zukunfts-Bauweise",
+        "Umfassende Premium-Sicherheitssysteme",
+        "Komfort-Ausstattung der Zukunft"
+      ],
+      body: [
+        "Revolutionäre Bauweise",
+        "Innovative Isolierung und Premium-Dämmung",
+        "Panoramafenster für optimale Aussicht",
+        "Zukunftsweisende, wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Futuristische Premium-Sitzgruppe",
+        "Innovative Polstermaterialien",
+        "Intelligente LED-Beleuchtung",
+        "Revolutionäre Stauraumlösungen"
+      ],
+      kitchen: [
+        "Innovative Kochstelle",
+        "Intelligenter Kompressor-Kühlschrank",
+        "Future-Küchenausstattung",
+        "Adaptive Arbeitsflächen"
+      ],
+      bathroom: [
+        "Innovative Duschkabine",
+        "Premium-WC mit Future-Ausstattung",
+        "Intelligenter Waschbereich",
+        "Smarte Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Future-Elektroinstallation",
+        "USB-C Anschlüsse in allen Bereichen",
+        "Intelligente LED-Beleuchtung",
+        "Smart Solarpanel-System"
+      ]
+    }
+  }
+};
+
+// Equipment section tab keys in German
+const equipmentTabs = {
+  chassis: "Chassis",
+  body: "Aufbau",
+  driversCabin: "Fahrerhaus",
+  livingArea: "Wohnwelt",
+  kitchen: "Küche",
+  bathroom: "Waschraum",
+  sleeping: "Schlafbereich",
+  installation: "Wasserinstallation",
+  electrical: "Elektroinstallation"
+};
+
+// Define more specific types for our different model types
+type BaseModelData = {
+  id: string;
+  name: string;
+  intro: string;
+  heroImage: string;
+  galleryImages: string[];
+  technicalData: Record<string, string>;
+  highlights: string[];
+};
+
+// Full model with all features
+type FullModelData = BaseModelData & {
+  layouts: Array<{
+    id: string;
+    name: string;
+    image: string;
+    length: string;
+    sleepingPlaces: string;
+  }>;
+  interior: Array<{
+    name: string;
+    description: string;
+  }>;
+  upholsteryTypes: string[];
+  equipment: Record<string, string[]>;
+};
+
+// Download-only model with download items
+type DownloadModelData = BaseModelData & {
+  downloadItems: Array<{
+    name: string;
+    type: string;
+    url: string;
+  }>;
+};
+
+// Union type for all possible model types
+type ModelData = FullModelData | DownloadModelData;
+
+// Type for our models data object
+type ModelsDataType = Record<string, ModelData>;
+
+// Type guard to check if a model has layouts
+function hasLayouts(model: ModelData): model is FullModelData {
+  return 'layouts' in model && Array.isArray(model.layouts);
+}
+
+// Type guard to check if a model has interior details
+function hasInterior(model: ModelData): model is FullModelData {
+  return 'interior' in model && Array.isArray(model.interior);
+}
+
+// Type guard to check if a model has upholstery types
+function hasUpholstery(model: ModelData): model is FullModelData {
+  return 'upholsteryTypes' in model && Array.isArray(model.upholsteryTypes);
+}
+
+// Type guard to check if a model has equipment details
+function hasEquipment(model: ModelData): model is FullModelData {
+  return 'equipment' in model && model.equipment !== undefined;
+}
 
 const ProductDetail = () => {
   const { modelId } = useParams();
-  const { selectedModels, addModel, removeModel, isSelected } = useComparison();
-
-  console.log("Current modelId from URL:", modelId);
-
-  // Sample models data - replace with actual data
-  const modelsData = {
-    "van": {
-      name: "Van",
-      type: "van",
-      description: "Für Aktive und Unabhängige"
-    },
-    "profila-t-fiat": {
-      name: "Profila T",
-      type: "teilintegriert",
-      description: "Fiat Basis"
-    },
-    "profila-rs": {
-      name: "Profila RS",
-      type: "teilintegriert", 
-      description: "Mercedes Basis"
-    },
-    "activa-one": {
-      name: "Activa One",
-      type: "integriert",
-      description: "Luxus Integrierter"
-    },
-    "profila-t-mercedes": {
-      name: "Profila T Mercedes",
-      type: "teilintegriert",
-      description: "Mercedes Basis"
-    },
-    "contura": {
-      name: "Contura",
-      type: "teilintegriert",
-      description: "Kompakter Teilintegrierter"
-    },
-    "integra-line-fiat": {
-      name: "Integra Line",
-      type: "integriert",
-      description: "Fiat Basis"
-    },
-    "integra-line-gt-mercedes": {
-      name: "Integra Line GT",
-      type: "integriert",
-      description: "Mercedes Basis"
-    },
-    "integra": {
-      name: "Integra",
-      type: "integriert",
-      description: "Premium Integrierter"
-    },
-    "xtura": {
-      name: "Xtura",
-      type: "alkoven",
-      description: "Alkoven Modell"
-    }
-  };
-
-  const vanModels = [
-    {
-      id: "v-635-eb",
-      name: "V 635 EB",
-      length: "6,36 m",
-      sleepingPlaces: "2–3",
-    },
-    {
-      id: "v-635-hb", 
-      name: "V 635 HB",
-      length: "6,36 m",
-      sleepingPlaces: "2",
-    },
-    {
-      id: "v-595-hb",
-      name: "V 595 HB", 
-      length: "5,99 m",
-      sleepingPlaces: "2",
-    },
-  ];
-
-  console.log("Available models in modelsData:", Object.keys(modelsData));
-
-  const model = modelId ? modelsData[modelId as keyof typeof modelsData] : null;
+  const isMobile = useIsMobile();
+  const { startBeraterFlow } = useWohnmobilberaterTrigger();
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const location = useLocation();
   
-  console.log("Selected model details:", model?.name, model?.type);
-
-  if (!model) {
-    return (
-      <Layout>
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold mb-4">Modell nicht gefunden</h1>
-          <p>Das angeforderte Modell konnte nicht gefunden werden.</p>
-        </div>
-      </Layout>
-    );
-  }
-
-  const handleCompareToggle = (vanModel: typeof vanModels[0], checked: boolean) => {
-    if (checked) {
-      addModel({ id: vanModel.id, name: vanModel.name });
-    } else {
-      removeModel(vanModel.id);
+  // Add debug logging to see what modelId we're getting
+  console.log("Current modelId from URL:", modelId);
+  console.log("Available models in modelsData:", Object.keys(modelsData));
+  
+  // Improved model lookup with better fallback handling
+  const modelDetails = modelId && modelId in modelsData 
+    ? modelsData[modelId as keyof typeof modelsData] 
+    : modelsData["van"];
+    
+  console.log("Selected model details:", modelDetails.name, modelDetails.id);
+  
+  // Check if model has only one layout (for comparison functionality)
+  const hasMultipleLayouts = hasLayouts(modelDetails) && modelDetails.layouts.length > 1;
+  
+  // Define sidebar navigation items
+  const navigationItems = [
+    { id: "highlights", label: "Highlights" },
+    { id: "grundrisse", label: "Grundrisse" },
+    { id: "innenraum", label: "Innenraum" },
+    { id: "polster", label: "Polster" },
+    { id: "serienausstattung", label: "Serienausstattung" },
+  ];
+  
+  // Effect to handle hash anchor scrolling
+  useEffect(() => {
+    if (location.hash) {
+      // Add a small delay to ensure DOM is fully rendered before scrolling
+      const timer = setTimeout(() => {
+        const element = document.getElementById(location.hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
     }
+  }, [location.hash]);
+  
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
-
-  // Special rendering for van model
-  if (modelId === "van") {
+  
+  const handleBeratungClick = () => {
+    startBeraterFlow();
+  };
+  
+  // Simple gray box placeholder component
+  const GrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`}/>
+  );
+  
+  // Helper function for layout rendering
+  const renderLayouts = () => {
+    if (!hasLayouts(modelDetails)) return null;
+    
     return (
-      <Layout>
-        <div className="container mx-auto px-4 py-8">
-          {/* Hero Section */}
-          <section className="mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Left column - Text */}
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">Vans</h1>
-                <p className="text-xl text-gray-600">Für Aktive und Unabhängige</p>
-              </div>
-              {/* Right column - Interactive Interior Image Placeholder */}
-              <div className="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
-                <span className="text-gray-600 text-center px-4">
-                  Hotspot Bild Placeholder – Innenraum interaktiv
-                </span>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {modelDetails.layouts.map((layout) => (
+          <SelectableModelCard 
+            key={layout.id}
+            id={layout.id}
+            name={layout.name}
+            length={layout.length}
+            sleepingPlaces={layout.sleepingPlaces}
+            showComparison={hasMultipleLayouts}
+          />
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function for interior rendering with new 4-column grid layout
+  const renderInterior = () => {
+    if (!hasInterior(modelDetails)) return null;
+    
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {modelDetails.interior.map((item, index) => (
+          <Card key={index} className="overflow-hidden border shadow-sm">
+            <AspectRatio ratio={1/1} className="bg-gray-200" />
+            <CardContent className="p-4">
+              <h3 className="font-medium mb-1">{item.name}</h3>
+              <p className="text-gray-600 text-sm">{item.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
+  };
+  
+  // Helper function for upholstery rendering
+  const renderUpholstery = () => {
+    if (!hasUpholstery(modelDetails)) return null;
+    
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {modelDetails.upholsteryTypes.map((type, index) => (
+          <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
+            <AspectRatio ratio={4/3} className="h-40" />
+            <div className="p-3">
+              <h3 className="font-medium">{type}</h3>
             </div>
-          </section>
-
-          {/* Highlights Section */}
-          <section className="mb-12">
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                {/* Left column - Text content */}
-                <div className="space-y-6">
-                  <h2 className="text-3xl font-bold">Für Deine beste Zeit. Eura Mobil Vans</h2>
-                  
-                  <p className="text-gray-700 leading-relaxed">
-                    Sichtbar anders: Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken....
-                  </p>
-                  
-                  <p className="text-gray-700 leading-relaxed">
-                    Spürbar anders: "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal....
-                  </p>
-                  
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe:</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li>• Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</li>
-                      <li>• Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</li>
-                      <li>• Waschraum mit schwenkbarer Duschwand</li>
-                      <li>• Staufächer im Doppelboden</li>
-                      <li>• Mineralstoff-Spüle</li>
-                    </ul>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  
+  // Equipment section with new vertical accordion structure
+  const renderEquipment = () => {
+    if (!hasEquipment(modelDetails)) return null;
+    
+    return (
+      <div className="space-y-4">
+        {Object.entries(modelDetails.equipment).map(([key, items]) => (
+          <Accordion type="single" collapsible className="w-full" key={key}>
+            <AccordionItem value={key} className="border rounded-lg bg-white">
+              <AccordionTrigger className="px-4 py-3">
+                <span className="text-lg font-medium">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
+              </AccordionTrigger>
+              <AccordionContent className="px-4 pb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                  {items.map((item, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        ))}
+      </div>
+    );
+  };
+  
+  return (
+    <ComparisonProvider>
+      <ProductLayout modelName={modelDetails.name}>
+        {/* Add Sidebar Navigation - desktop only */}
+        <SidebarNavigation items={navigationItems} />
+        
+        <div className="container mx-auto overflow-visible">
+          {/* Hero Section - Clean, without text overlay */}
+          <div className="relative w-full -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] overflow-visible">
+            <div className="w-full h-80 sm:h-[500px]">
+              <GrayBoxPlaceholder ratio={21/9} className="w-screen h-full" />
+            </div>
+          </div>
+          
+          {/* Main headline with guaranteed visibility on all screen sizes */}
+          <div 
+            id="product-headline" 
+            className="text-center mx-auto max-w-4xl px-4 my-20 md:mt-32 md:mb-12 relative z-10 overflow-visible min-h-[180px]"
+          >
+            <h1 className="text-3xl md:text-5xl font-bold mb-8 overflow-visible">Für Deine beste Zeit.</h1>
+            <h2 className="text-2xl md:text-4xl font-semibold overflow-visible">Eura Mobil {modelDetails.name}</h2>
+          </div>
+          
+          {/* Introduction Section */}
+          <div className="px-6 py-6 mb-16 rounded-lg shadow-sm bg-white mx-4 overflow-visible">
+            {/* Two column content with hotspot image and increased spacing */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-8">
+              <div className="space-y-10">
+                <div>
+                  <h3 className="text-xl font-semibold mb-5">Sichtbar anders:</h3>
+                  <p className="text-gray-700 leading-relaxed">{modelDetails.intro}</p>
+                </div>
+              </div>
+              <div>
+                {/* Hotspot Image Placeholder in 16:9 format */}
+                <div className="h-full flex items-center">
+                  <div className="w-full">
+                    <AspectRatio ratio={16/9} className="bg-gray-200 rounded-lg">
+                      <div className="flex items-center justify-center h-full text-gray-600">
+                        Hotspot Bild Placeholder – Innenraum interaktiv
+                      </div>
+                    </AspectRatio>
                   </div>
                 </div>
-                
-                {/* Right column - Image with hotspots */}
-                <div className="aspect-video bg-gray-300 rounded-lg relative">
-                  {/* 6 circular hotspot placeholders */}
-                  <div className="absolute top-4 left-4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                  <div className="absolute top-8 right-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                  <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                  <div className="absolute bottom-1/3 right-1/4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                  <div className="absolute bottom-8 left-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                  <div className="absolute bottom-4 right-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                </div>
               </div>
             </div>
-          </section>
+          </div>
 
-          {/* Text Block */}
-          <section className="mb-12">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="space-y-6 text-gray-700 leading-relaxed">
-                <div>
-                  <h2 className="text-2xl font-bold mb-2">EURA MOBIL VAN</h2>
-                  <h3 className="text-xl font-semibold mb-4">DER PRIMETIME VAN</h3>
-                </div>
-                
-                <p>
-                  Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans.
-                </p>
-                
-                <p>
-                  Die Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden.
-                </p>
-                
-                <p>
-                  Auch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik.
-                </p>
-                
-                <p>
-                  Die Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!
-                </p>
-              </div>
+          {/* Technical Data Summary */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
+            <div className="flex flex-col items-center p-2">
+              <span className="text-sm text-gray-600">Länge</span>
+              <span className="font-semibold text-lg">{modelDetails.technicalData.länge}</span>
             </div>
-          </section>
-
-          {/* Model Cards Section */}
-          <section className="mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {vanModels.map((vanModel) => {
-                const isModelSelected = isSelected(vanModel.id);
-                const isDisabled = selectedModels.length >= 2 && !isModelSelected;
-
-                return (
-                  <Card key={vanModel.id} className="border border-gray-300">
-                    <div className="w-full aspect-video bg-gray-300"></div>
-                    <CardContent className="p-4">
-                      <h3 className="text-xl font-semibold mb-3">{vanModel.name}</h3>
-                      
-                      <div className="grid grid-cols-2 gap-2 text-sm mb-4">
-                        <div>
-                          <span className="text-gray-600">Länge:</span> {vanModel.length}
-                        </div>
-                        <div>
-                          <span className="text-gray-600">Schlafplätze:</span> {vanModel.sleepingPlaces}
-                        </div>
+            <div className="flex flex-col items-center p-2">
+              <span className="text-sm text-gray-600">Sitzplätze</span>
+              <span className="font-semibold text-lg">{modelDetails.technicalData.sitzplätze}</span>
+            </div>
+            <div className="flex flex-col items-center p-2">
+              <span className="text-sm text-gray-600">Schlafplätze</span>
+              <span className="font-semibold text-lg">{modelDetails.technicalData.schlafplätze}</span>
+            </div>
+          </div>
+          
+          {/* IMPROVED Highlights Section - Card-like layout with icons */}
+          <section id="highlights" className="my-12 bg-gray-50 py-10 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[calc(50vw-50%)] px-4 md:px-8">
+            <div className="container mx-auto">
+              <h2 className="text-2xl font-semibold mb-6">Highlights der Baureihe</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {modelDetails.highlights.map((highlight, index) => (
+                  <Card key={index} className="overflow-hidden border-0 shadow-md">
+                    <CardContent className="p-4 flex items-start gap-4">
+                      <div className="bg-white rounded-full p-3 shadow-sm flex-shrink-0">
+                        <Circle className="h-6 w-6 text-blue-500" />
                       </div>
-
-                      <div className="space-y-3">
-                        <Button variant="outline" className="w-full" asChild>
-                          <Link to={`/modelle/${vanModel.id}`}>
-                            Modell ansehen
-                          </Link>
-                        </Button>
-                        
-                        <div className="flex items-center space-x-2">
-                          <Checkbox 
-                            id={`compare-${vanModel.id}`}
-                            checked={isModelSelected}
-                            disabled={isDisabled}
-                            onCheckedChange={(checked) => handleCompareToggle(vanModel, checked === true)}
-                          />
-                          <label 
-                            htmlFor={`compare-${vanModel.id}`} 
-                            className={`text-sm cursor-pointer ${isDisabled ? 'text-gray-400' : ''}`}
-                          >
-                            Zum Vergleich
-                          </label>
-                        </div>
-                        
-                        <Button variant="outline" className="w-full" asChild>
-                          <Link to="/haendler">
-                            <MapPin className="mr-2 h-4 w-4" />
-                            Händler finden
-                          </Link>
-                        </Button>
+                      <div>
+                        <p className="text-gray-800 font-medium">{highlight}</p>
                       </div>
                     </CardContent>
                   </Card>
-                );
-              })}
+                ))}
+              </div>
             </div>
           </section>
-
-          {/* CTA Bar */}
-          <section className="bg-gray-300 rounded-lg p-6">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild>
-                <Link to="/konfigurator">
-                  Jetzt konfigurieren
-                </Link>
-              </Button>
-              
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/berater">
-                  Beratung starten
-                </Link>
-              </Button>
-            </div>
+          
+          {/* IMPROVED Gallery Section with horizontal scrolling Carousel */}
+          <section className="my-10">
+            <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
+            <Carousel className="w-full" showIndicators={true}>
+              <CarouselContent>
+                {[1, 2, 3, 4, 5, 6].map((_, index) => (
+                  <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                    <AspectRatio ratio={4/3} className="bg-gray-200 rounded-md" />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="hidden md:flex justify-end gap-2 mt-2">
+                <CarouselPrevious />
+                <CarouselNext />
+              </div>
+              <CarouselIndicators />
+            </Carousel>
           </section>
-        </div>
-      </Layout>
-    );
-  }
-
-  // Default rendering for other models
-  return (
-    <Layout>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-4">{model.name}</h1>
-        <p className="text-xl text-gray-600 mb-8">{model.description}</p>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Modelldetails</h2>
-            <p className="text-gray-700">
-              Detaillierte Informationen zu diesem Modell folgen in Kürze.
-            </p>
-          </div>
           
-          <div className="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
-            <span className="text-gray-600">Modellbild Placeholder</span>
-          </div>
+          {/* Grundrisse (Layouts) Section */}
+          {hasLayouts(modelDetails) && (
+            <section id="grundrisse" className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
+              {renderLayouts()}
+            </section>
+          )}
+          
+          {/* IMPROVED Innenraum (Interior) Section with 4-column grid */}
+          {hasInterior(modelDetails) && (
+            <section id="innenraum" className="my-10">
+              <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
+              {renderInterior()}
+            </section>
+          )}
+          
+          {/* Polster (Upholstery) Section */}
+          {hasUpholstery(modelDetails) && (
+            <section id="polster" className="my-10">
+              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+              {renderUpholstery()}
+            </section>
+          )}
+          
+          {/* IMPROVED Serienausstattung (Standard Equipment) Section with vertical accordion */}
+          {hasEquipment(modelDetails) && (
+            <section id="serienausstattung" className="my-10 pt-8">
+              <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
+              {renderEquipment()}
+            </section>
+          )}
         </div>
         
-        <div className="mt-8 flex gap-4">
-          <Button size="lg" asChild>
-            <Link to="/konfigurator">
-              Jetzt konfigurieren
-            </Link>
-          </Button>
-          
-          <Button variant="outline" size="lg" asChild>
-            <Link to="/haendler">
-              <MapPin className="mr-2 h-4 w-4" />
-              Händler finden
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </Layout>
+        {/* Comparison Modal */}
+        <ComparisonModal 
+          open={isComparisonOpen}
+          onOpenChange={setIsComparisonOpen}
+        />
+        
+        {/* Comparison Bar - only show if model has multiple layouts */}
+        {hasMultipleLayouts && (
+          <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
+        )}
+      </ProductLayout>
+    </ComparisonProvider>
   );
 };
 

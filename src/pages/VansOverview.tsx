@@ -44,62 +44,16 @@ const VansOverview = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        {/* Hero Section - Rebuilt */}
+        {/* Hero Section */}
         <section className="mb-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Left column - Text */}
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Vans</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">VAN WOHNMOBILE</h1>
               <p className="text-xl text-gray-600">Für Aktive und Unabhängige</p>
             </div>
-            {/* Right column - Interactive Interior Image Placeholder */}
-            <div className="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
-              <span className="text-gray-600 text-center px-4">
-                Hotspot Bild Placeholder – Innenraum interaktiv
-              </span>
-            </div>
-          </div>
-        </section>
-
-        {/* Highlights Section - Rebuilt */}
-        <section className="mb-12">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-              {/* Left column - Text content */}
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold">Für Deine beste Zeit. Eura Mobil Vans</h2>
-                
-                <p className="text-gray-700 leading-relaxed">
-                  Sichtbar anders: Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken....
-                </p>
-                
-                <p className="text-gray-700 leading-relaxed">
-                  Spürbar anders: "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal....
-                </p>
-                
-                <div>
-                  <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe:</h3>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</li>
-                    <li>• Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</li>
-                    <li>• Waschraum mit schwenkbarer Duschwand</li>
-                    <li>• Staufächer im Doppelboden</li>
-                    <li>• Mineralstoff-Spüle</li>
-                  </ul>
-                </div>
-              </div>
-              
-              {/* Right column - Image with hotspots */}
-              <div className="aspect-video bg-gray-300 rounded-lg relative">
-                {/* 6 circular hotspot placeholders */}
-                <div className="absolute top-4 left-4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                <div className="absolute top-8 right-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                <div className="absolute top-1/3 left-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                <div className="absolute bottom-1/3 right-1/4 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                <div className="absolute bottom-8 left-8 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-                <div className="absolute bottom-4 right-1/3 w-4 h-4 bg-white rounded-full border-2 border-gray-600"></div>
-              </div>
-            </div>
+            {/* Right column - Image hotspot */}
+            <div className="aspect-video bg-gray-300 rounded-lg"></div>
           </div>
         </section>
 
