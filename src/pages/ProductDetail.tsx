@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -1242,6 +1243,36 @@ const ProductDetail = () => {
       </div>
     </AspectRatio>
   );
+
+  // Helper function to get hero title and subtitle based on model
+  const getHeroContent = () => {
+    switch (modelDetails.id) {
+      case "van":
+        return { title: "Vans", subtitle: "Für Aktive und Unabhängige" };
+      case "profila-t-fiat":
+        return { title: "Profila T Fiat", subtitle: "Teilintegrierte Perfektion" };
+      case "profila-rs":
+        return { title: "Profila RS", subtitle: "Sportlich. Modern. Funktional." };
+      case "activa-one":
+        return { title: "Activa One", subtitle: "Familien-Alkoven der Extraklasse" };
+      case "profila-t-mercedes":
+        return { title: "Profila T Mercedes", subtitle: "Mercedes-Qualität trifft Wohnkomfort" };
+      case "contura":
+        return { title: "Contura", subtitle: "Vollintegrierte Eleganz" };
+      case "integra-line-fiat":
+        return { title: "Integra Line Fiat", subtitle: "Vollintegrierte Raumwunder" };
+      case "integra-line-gt-mercedes":
+        return { title: "Integra Line GT Mercedes", subtitle: "Mercedes GT-Luxus auf Rädern" };
+      case "integra":
+        return { title: "Integra", subtitle: "Premium-Vollintegration" };
+      case "xtura":
+        return { title: "Xtura", subtitle: "Innovation trifft Design" };
+      default:
+        return { title: modelDetails.name, subtitle: "Reisemobile der Extraklasse" };
+    }
+  };
+
+  const heroContent = getHeroContent();
   
   // Helper function for layout rendering
   const renderLayouts = () => {
@@ -1339,31 +1370,31 @@ const ProductDetail = () => {
         <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
           <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
             <div className="text-center text-black z-10">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">Vans</h1>
-              <p className="text-xl md:text-2xl lg:text-3xl">Für Aktive und Unabhängige</p>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
+              <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
             </div>
           </div>
         </section>
 
         <div className="container mx-auto overflow-visible">
-          {/* NEW Highlights Section */}
+          {/* Highlights Section */}
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Eura Mobil Vans</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. {modelDetails.name}</h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-8 text-black leading-relaxed">
                   <div>
                     <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
                     <p className="text-black">
-                      Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...
+                      {modelDetails.intro}
                     </p>
                   </div>
                   
                   <div>
                     <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
                     <p className="text-black">
-                      "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...
+                      Die hochwertige Verarbeitung und durchdachten Details machen jedes {modelDetails.name} Modell zu einem besonderen Reiseerlebnis. Erleben Sie Komfort und Qualität auf höchstem Niveau.
                     </p>
                   </div>
                 </div>
@@ -1376,36 +1407,14 @@ const ProductDetail = () => {
               <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
                 <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">Highlights der Baureihe:</h3>
                 <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                  {modelDetails.highlights.map((highlight, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                      </div>
+                      <p className="text-black">{highlight}</p>
                     </div>
-                    <p className="text-black">Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
-                    </div>
-                    <p className="text-black">Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
-                    </div>
-                    <p className="text-black">Waschraum mit schwenkbarer Duschwand</p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
-                    </div>
-                    <p className="text-black">Staufächer im Doppelboden</p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
-                    </div>
-                    <p className="text-black">Mineralstoff-Spüle</p>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1427,7 +1436,7 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* IMPROVED Gallery Section with horizontal scrolling Carousel */}
+          {/* Gallery Section with horizontal scrolling Carousel */}
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
             <Carousel className="w-full" showIndicators={true}>
@@ -1454,7 +1463,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* IMPROVED Innenraum (Interior) Section with 4-column grid */}
+          {/* Innenraum (Interior) Section with 4-column grid */}
           {hasInterior(modelDetails) && (
             <section id="innenraum" className="my-10">
               <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
@@ -1470,7 +1479,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* IMPROVED Serienausstattung (Standard Equipment) Section with vertical accordion */}
+          {/* Serienausstattung (Standard Equipment) Section with vertical accordion */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
               <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
