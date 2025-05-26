@@ -276,15 +276,18 @@ const modelsData = {
       }
     ],
     interior: [
-      { name: "726 EF Chalet – Rustico", description: "Elegante Innenausstattung mit Chalet-Design" },
-      { name: "720 EF Chalet – Rustico", description: "Hochwertige Materialien im rustikalen Stil" }
+      { name: "726 EF Chalet – Rustico", description: "" },
+      { name: "726 EF Chalet – Rustico", description: "" },
+      { name: "726 EF Chalet – Rustico", description: "" },
+      { name: "720 EF Chalet – Rustico", description: "" },
+      { name: "720 EF Chalet – Rustico", description: "" }
     ],
     upholsteryTypes: [
-      "Polster Como (Deko: Maka)",
-      "Polster Milano (Deko: Lasca)",
-      "Polster Pisa (Deko: Rana)",
-      "Polster Dara (Deko: Maka)",
-      "Polster Bergamo (Deko: Evorno)"
+      "Polster Como – Dekoration Maka",
+      "Polster Milano – Dekoration Lasca",
+      "Polster Pisa – Dekoration Rana",
+      "Polster Dara – Dekoration Maka",
+      "Polster Bergamo – Dekoration Evorno"
     ],
     equipment: {
       chassis: [
@@ -1265,7 +1268,7 @@ const ProductDetail = () => {
       case "van":
         return { title: "Vans", subtitle: "Für Aktive und Unabhängige" };
       case "profila-t-fiat":
-        return { title: "Profila T", subtitle: "Offen, großzügig, frei" };
+        return { title: "Profila T", subtitle: "Offen, großzügig, frei", subline: "Feel free!" };
       case "profila-rs":
         return { title: "Profila RS", subtitle: "Sportlich. Modern. Funktional." };
       case "activa-one":
@@ -1346,10 +1349,41 @@ const ProductDetail = () => {
     );
   };
   
-  // Equipment section with new vertical accordion structure
+  // Equipment section with tabs for Profila T model
   const renderEquipment = () => {
     if (!hasEquipment(modelDetails)) return null;
     
+    // Use tabs for Profila T model as requested
+    if (modelDetails.id === "profila-t-fiat") {
+      return (
+        <Tabs defaultValue="chassis" className="w-full">
+          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8">
+            <TabsTrigger value="chassis">Chassis</TabsTrigger>
+            <TabsTrigger value="driversCabin">Fahrerhaus</TabsTrigger>
+            <TabsTrigger value="body">Aufbau</TabsTrigger>
+            <TabsTrigger value="livingArea">Wohnwelt</TabsTrigger>
+            <TabsTrigger value="kitchen">Küche</TabsTrigger>
+            <TabsTrigger value="bathroom">Waschraum</TabsTrigger>
+            <TabsTrigger value="installation">Wasserinstallation</TabsTrigger>
+            <TabsTrigger value="electrical">Elektroinstallation</TabsTrigger>
+          </TabsList>
+          {Object.entries(modelDetails.equipment).map(([key, items]) => (
+            <TabsContent key={key} value={key} className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                {items.map((item, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
+      );
+    }
+    
+    // Use accordion for other models
     return (
       <div className="space-y-4">
         {Object.entries(modelDetails.equipment).map(([key, items]) => (
@@ -1381,12 +1415,27 @@ const ProductDetail = () => {
         {/* Add Sidebar Navigation - desktop only */}
         <SidebarNavigation items={navigationItems} />
         
-        {/* Full-width Hero Section */}
+        {/* Hero Section - updated for Profila T */}
         <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
-          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
-            <div className="text-center text-black z-10">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
-              <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
+          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh]">
+            <div className="container mx-auto px-4 h-full flex items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
+                {/* Left column - Text */}
+                <div className="flex flex-col justify-center">
+                  <div className="text-black">
+                    <p className="text-lg md:text-xl mb-2">{heroContent.title}</p>
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.subtitle}</h1>
+                    {heroContent.subline && (
+                      <p className="text-sm md:text-base text-gray-600">{heroContent.subline}</p>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Right column - Image placeholder */}
+                <div className="flex items-center">
+                  <EmptyGrayBoxPlaceholder ratio={16/9} className="w-full" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1396,22 +1445,14 @@ const ProductDetail = () => {
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
-                {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : `Für Deine beste Zeit. ${modelDetails.name}`}
+                Profila T Teilintegrierte
               </h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-8 text-black leading-relaxed">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
                     <p className="text-black">
                       {modelDetails.intro}
-                    </p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
-                    <p className="text-black">
-                      Die hochwertige Verarbeitung und durchdachten Details machen jedes {modelDetails.name} Modell zu einem besonderen Reiseerlebnis. Erleben Sie Komfort und Qualität auf höchstem Niveau.
                     </p>
                   </div>
                 </div>
@@ -1496,7 +1537,7 @@ const ProductDetail = () => {
             </section>
           )}
           
-          {/* Serienausstattung (Standard Equipment) Section with vertical accordion */}
+          {/* Serienausstattung (Standard Equipment) Section */}
           {hasEquipment(modelDetails) && (
             <section id="serienausstattung" className="my-10 pt-8">
               <h2 className="text-2xl font-semibold mb-4">Serienausstattung</h2>
