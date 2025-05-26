@@ -182,7 +182,7 @@ const ActivaOneDetail = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
           <div className="flex flex-col items-center p-2">
             <span className="text-sm text-gray-600">Länge</span>
-            <span className="font-semibold text-lg">5,99 – 7,57 m</span>
+            <span className="font-semibold text-lg">5,99 – 6,99 m</span>
           </div>
           <div className="flex flex-col items-center p-2">
             <span className="text-sm text-gray-600">Sitzplätze</span>
