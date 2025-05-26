@@ -274,12 +274,22 @@ const modelsData = {
       }
     ],
     interior: [
-      { name: "Wohnbereich", description: "Komfortable Sitzgruppe mit hochwertigen Polstern" },
-      { name: "Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
-      { name: "Schlafbereich", description: "Bequeme Betten mit hochwertigen Matratzen" },
-      { name: "Badezimmer", description: "Funktionales Bad mit Dusche und WC" }
+      { name: "726 EF Chalet - Rustico", description: "" },
+      { name: "726 EF Chalet - Rustico", description: "" },
+      { name: "726 EF Chalet - Rustico", description: "" },
+      { name: "720 EF Chalet - Rustico", description: "" },
+      { name: "720 EF Chalet - Rustico", description: "" }
     ],
-    upholsteryTypes: ["Polster Standard", "Polster Premium", "Polster Deluxe"],
+    upholsteryTypes: [
+      "Polster Como\nDekoration Maka",
+      "Polster Milano, Dekoration Lasca",
+      "Polster Milano\nDekoration Lasca",
+      "Polster Pisa, Dekoration Rana",
+      "Polster Pisa\nDekoration Rana",
+      "Polster Dara, Dekoration Maka",
+      "Polster Dara\nDekoration Maka",
+      "Polster Bergamo\nDekoration Evorno"
+    ],
     equipment: {
       chassis: [
         "Fiat Ducato Chassis mit modernster Technik",
