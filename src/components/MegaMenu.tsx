@@ -58,10 +58,10 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
             <div>
               <h3 className="font-bold text-lg mb-3">Typen</h3>
               <div className="space-y-2">
+                <div><MenuLink to="/wohnmobiltypen/vans">Vans</MenuLink></div>
                 <div><MenuLink to="/wohnmobiltypen/alkoven">Alkoven</MenuLink></div>
                 <div><MenuLink to="/wohnmobiltypen/teilintegriert">Teilintegriert</MenuLink></div>
                 <div><MenuLink to="/wohnmobiltypen/integriert">Integriert</MenuLink></div>
-                <div><MenuLink to="/wohnmobiltypen/vans">Vans</MenuLink></div>
               </div>
             </div>
 
