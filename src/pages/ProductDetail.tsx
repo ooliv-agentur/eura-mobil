@@ -398,12 +398,21 @@ const modelsData = {
       }
     ],
     interior: [
-      { name: "Sportlicher Wohnbereich", description: "Moderne Sitzgruppe im sportlichen Design" },
-      { name: "Funktionale Küche", description: "Kompakte und vollausgestattete Küche" },
-      { name: "Flexible Schlafbereiche", description: "Variable Schlafmöglichkeiten für 4 Personen" },
-      { name: "Komfortables Bad", description: "Modernes Badezimmer mit allen Annehmlichkeiten" }
+      { name: "PRS 675 Chalet - Rustico", description: "" },
+      { name: "PRS 675 Chalet - Rustico", description: "" },
+      { name: "PRS 675 Chalet - Rustico", description: "" },
+      { name: "PRS 675 Chalet - Rustico", description: "" }
     ],
-    upholsteryTypes: ["Sport Polster", "Premium Polster", "Leder Polster"],
+    upholsteryTypes: [
+      "Polster Como\nDekoration Maka",
+      "Polster Milano, Dekoration Lasca",
+      "Polster Milano\nDekoration Lasca",
+      "Polster Leider Beige, Dekoration Rana",
+      "Polster Pisa\nDekoration Rana",
+      "Polster Dara, Dekoration Maka",
+      "Polster Dara\nDekoration Maka",
+      "Polster Bergamo\nDekoration Evorno"
+    ],
     equipment: {
       chassis: [
         "Modernes Fiat Ducato Chassis",
@@ -649,7 +658,7 @@ const modelsData = {
         "Praktische Ablagemöglichkeiten"
       ],
       electrical: [
-        "Modernste Elektroinstallation",
+        "Moderne Elektroinstallation",
         "USB-Anschlüsse in allen Bereichen",
         "LED-Beleuchtung",
         "Solarpanel-System verfügbar"
