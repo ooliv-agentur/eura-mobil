@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -1332,7 +1333,7 @@ const ProductDetail = () => {
         {/* Full-width Hero Section */}
         <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
           <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
-            <div className="text-center text-white z-10">
+            <div className="text-center text-black z-10">
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">Vans</h1>
               <p className="text-xl md:text-2xl lg:text-3xl">Für Aktive und Unabhängige</p>
             </div>
@@ -1341,48 +1342,58 @@ const ProductDetail = () => {
 
         <div className="container mx-auto overflow-visible">
           {/* NEW Highlights Section */}
-          <section className="mb-16">
+          <section id="highlights" className="mb-16">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Für Deine beste Zeit. Eura Mobil Vans</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. Eura Mobil Vans</h2>
               
-              <div className="space-y-8 text-gray-700 leading-relaxed mb-12">
+              <div className="space-y-8 text-black leading-relaxed mb-12">
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Sichtbar anders:</h3>
-                  <p>
+                  <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
+                  <p className="text-black">
                     Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken...
                   </p>
                 </div>
                 
                 <div>
-                  <h3 className="text-xl font-semibold mb-4">Spürbar anders:</h3>
-                  <p>
+                  <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
+                  <p className="text-black">
                     "Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal...
                   </p>
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-2xl font-semibold mb-6">Highlights der Baureihe:</h3>
+              <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
+                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">Highlights der Baureihe:</h3>
                 <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-                    <p>Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                    </div>
+                    <p className="text-black">Tisch mit klappbarer Platte, Cupholder und schwenkbarer Verlängerung</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-                    <p>Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                    </div>
+                    <p className="text-black">Komfort-Kaltschaummatratzen mit geteilten und damit klappbaren Bettrahmen</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-                    <p>Waschraum mit schwenkbarer Duschwand</p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                    </div>
+                    <p className="text-black">Waschraum mit schwenkbarer Duschwand</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-                    <p>Staufächer im Doppelboden</p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                    </div>
+                    <p className="text-black">Staufächer im Doppelboden</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <Check className="h-6 w-6 text-green-600 flex-shrink-0 mt-1" />
-                    <p>Mineralstoff-Spüle</p>
+                  <div className="flex items-start gap-4">
+                    <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                    </div>
+                    <p className="text-black">Mineralstoff-Spüle</p>
                   </div>
                 </div>
               </div>
