@@ -20,7 +20,7 @@ const Wohnmobiltypen = () => {
       title: "Alkoven-Wohnmobile",
       description: "In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit.",
       buttonText: "Alkoven-Modelle anzeigen",
-      linkTo: "/modelle?typ=alkoven",
+      linkTo: "/wohnmobiltypen/alkoven",
     },
     {
       id: "teilintegriert",

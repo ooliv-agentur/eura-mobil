@@ -21,6 +21,7 @@ import Downloads from "./pages/Downloads";
 import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import VansOverview from "./pages/VansOverview";
+import AlkovenOverview from "./pages/AlkovenOverview";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
 import SealedStructure from "./pages/quality/SealedStructure";
@@ -55,6 +56,7 @@ const App = () => (
                 <Route path="/modelle" element={<ModelleOverview />} />
                 <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
                 <Route path="/wohnmobiltypen/vans" element={<VansOverview />} />
+                <Route path="/wohnmobiltypen/alkoven" element={<AlkovenOverview />} />
                 
                 {/* Explicit routes for models in the correct order matching the specified sequence */}
                 <Route path="/modelle/van" element={<ProductDetail />} />
