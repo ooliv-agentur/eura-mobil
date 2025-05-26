@@ -1,4 +1,5 @@
 
+
 // Model data repository
 export const modelsData = {
   "van": {
@@ -212,7 +213,7 @@ export const modelsData = {
     ],
     upholsteryTypes: [
       "Polster Leder Beige\nDekoration Maka",
-      "Polster Leder Grau\nDekoration Rana", 
+      "Polster Leder Grau\nDekoration Rana",
       "Polster Como\nDekoration Maka"
     ],
     equipment: {
