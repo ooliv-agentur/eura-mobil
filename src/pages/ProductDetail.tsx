@@ -732,6 +732,106 @@ const modelsData = {
         "Solarpanel-System serienmäßig"
       ]
     }
+  },
+  "integra-line-fiat": {
+    id: "integra-line-fiat",
+    name: "Integra Line Fiat",
+    intro: "Die Integra Line Fiat vereint moderne Vollintegration mit durchdachtem Design. Diese Baureihe bietet maximalen Komfort und innovative Raumaufteilung für anspruchsvolle Reisende, die Wert auf Luxus und Funktionalität legen.",
+    heroImage: "/placeholder.svg",
+    galleryImages: [
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
+    technicalData: {
+      länge: "7,41 – 7,58 m",
+      sitzplätze: "4",
+      schlafplätze: "4"
+    },
+    highlights: [
+      "Vollintegrierte Bauweise für optimale Raumnutzung",
+      "Hochwertige Materialien und erstklassige Verarbeitung",
+      "Flexible Schlafbereiche für bis zu 4 Personen",
+      "Durchdachte Stauraumlösungen und moderne Technik",
+      "Komfortable Ausstattung und luxuriöse Annehmlichkeiten",
+      "Elegantes Design mit funktionalen Details"
+    ],
+    layouts: [
+      {
+        id: "il-720-eb",
+        name: "IL 720 EB",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il-720-qf",
+        name: "IL 720 QF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il-720-ef",
+        name: "IL 720 EF",
+        image: "/placeholder.svg",
+        length: "7,41 m",
+        sleepingPlaces: "4"
+      },
+      {
+        id: "il-730-ef",
+        name: "IL 730 EF",
+        image: "/placeholder.svg",
+        length: "7,58 m",
+        sleepingPlaces: "4"
+      }
+    ],
+    interior: [
+      { name: "Vollintegrierter Wohnbereich", description: "Luxuriöse Sitzgruppe mit hochwertigen Materialien" },
+      { name: "Premium Küche", description: "Moderne Küchenausstattung mit allen Annehmlichkeiten" },
+      { name: "Flexible Schlafbereiche", description: "Variable Schlafmöglichkeiten für 4 Personen" },
+      { name: "Komfort Badezimmer", description: "Hochwertiges Bad mit modernen Annehmlichkeiten" }
+    ],
+    upholsteryTypes: ["Integra Premium", "Leder Komfort", "Stoff Deluxe"],
+    equipment: {
+      chassis: [
+        "Fiat Ducato Chassis mit neuester Technologie",
+        "Vollintegrierte Bauweise",
+        "Umfassende Sicherheitssysteme",
+        "Komfort-Ausstattung serienmäßig"
+      ],
+      body: [
+        "Vollintegrierte Bauweise",
+        "Hochwertige Isolierung und Dämmung",
+        "Panoramafenster für beste Aussicht",
+        "Wetterbeständige Materialien"
+      ],
+      livingArea: [
+        "Luxuriöse Sitzgruppe",
+        "Hochwertige Polstermaterialien",
+        "Optimale LED-Beleuchtung",
+        "Durchdachte Stauraumlösungen"
+      ],
+      kitchen: [
+        "3-Flammen Premium-Kochstelle",
+        "Großer Kompressor-Kühlschrank",
+        "Moderne Küchenausstattung",
+        "Großzügige Arbeitsflächen"
+      ],
+      bathroom: [
+        "Separate Premium-Duschkabine",
+        "Komfort-WC",
+        "Großzügiger Waschbereich",
+        "Praktische Ablagemöglichkeiten"
+      ],
+      electrical: [
+        "Moderne Elektroinstallation",
+        "USB-Anschlüsse in allen Bereichen",
+        "LED-Beleuchtung",
+        "Solarpanel-System verfügbar"
+      ]
+    }
   }
 };
 
