@@ -1337,17 +1337,28 @@ const ProductDetail = () => {
     );
   };
   
-  // Helper function for upholstery rendering
+  // Helper function for upholstery rendering with proper display for profila-t-mercedes
   const renderUpholstery = () => {
     if (!hasUpholstery(modelDetails)) return null;
     
+    // For profila-t-mercedes, use the specific 5 upholstery types
+    const upholsteryData = modelDetails.id === "profila-t-mercedes" 
+      ? [
+          "Polster Como\nDekoration Maka",
+          "Polster Milano\nDekoration Lasca", 
+          "Polster Pisa\nDekoration Rana",
+          "Polster Dara\nDekoration Maka",
+          "Polster Bergamo\nDekoration Evorno"
+        ]
+      : modelDetails.upholsteryTypes;
+    
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {modelDetails.upholsteryTypes.map((type, index) => (
+        {upholsteryData.map((type, index) => (
           <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
             <AspectRatio ratio={4/3} className="h-40" />
             <div className="p-3">
-              <h3 className="font-medium">{type}</h3>
+              <h3 className="font-medium whitespace-pre-line">{type}</h3>
             </div>
           </div>
         ))}
@@ -1509,11 +1520,8 @@ const ProductDetail = () => {
         {/* Comparison components */}
         {hasMultipleLayouts && (
           <>
-            <ComparisonBar onOpenComparison={() => setIsComparisonOpen(true)} />
-            <ComparisonModal 
-              isOpen={isComparisonOpen} 
-              onClose={() => setIsComparisonOpen(false)} 
-            />
+            <ComparisonBar />
+            <ComparisonModal />
           </>
         )}
       </ProductLayout>
