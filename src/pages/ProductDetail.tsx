@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -211,7 +209,7 @@ const modelsData = {
   "profila-t-fiat": {
     id: "profila-t-fiat",
     name: "Profila T Fiat",
-    intro: "Der Profila T Fiat vereint perfekt durchdachte Raumaufteilung mit höchster Qualität und Komfort. Diese Teilintegrierten bieten optimale Platznutzung und modernstes Design für unvergessliche Reiseerlebnisse.",
+    intro: "Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum. In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.",
     heroImage: "/placeholder.svg",
     galleryImages: [
       "/placeholder.svg",
@@ -225,12 +223,11 @@ const modelsData = {
       schlafplätze: "2"
     },
     highlights: [
-      "Teilintegrierte Bauweise für optimale Raumnutzung",
-      "Hochwertige Materialien und moderne Ausstattung",
-      "Flexible Grundrisse für verschiedene Bedürfnisse",
-      "Komfortable Schlafbereiche mit hochwertigen Matratzen",
-      "Durchdachte Stauraumlösungen",
-      "Moderne Küchentechnik und sanitäre Anlagen"
+      "Winterfester, beheizter Doppelboden",
+      "Große Stauräume durch Garagenabsenkung",
+      "Isolierte & beheizte Wassertanks",
+      "Elektr. Abwassertank-Entleerung",
+      "Isofix (grundrissabhängig)"
     ],
     layouts: [
       {
@@ -448,7 +445,7 @@ const modelsData = {
       "/placeholder.svg"
     ],
     technicalData: {
-      länge: "5,99 – 7,57 m",
+      länge: "5,99 – 6,99 m",
       sitzplätze: "4-6",
       schlafplätze: "4-6"
     },
@@ -1250,7 +1247,7 @@ const ProductDetail = () => {
       case "van":
         return { title: "Vans", subtitle: "Für Aktive und Unabhängige" };
       case "profila-t-fiat":
-        return { title: "Profila T Fiat", subtitle: "Teilintegrierte Perfektion" };
+        return { title: "Profila T", subtitle: "Offen, großzügig, frei" };
       case "profila-rs":
         return { title: "Profila RS", subtitle: "Sportlich. Modern. Funktional." };
       case "activa-one":
@@ -1380,21 +1377,15 @@ const ProductDetail = () => {
           {/* Highlights Section */}
           <section id="highlights" className="mb-16">
             <div className="mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Für Deine beste Zeit. {modelDetails.name}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
+                {modelDetails.id === "profila-t-fiat" ? "Feel free!" : "Für Deine beste Zeit."} {modelDetails.id === "profila-t-fiat" ? "Profila T Teilintegrierte" : modelDetails.name}
+              </h2>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 <div className="space-y-8 text-black leading-relaxed">
                   <div>
-                    <h3 className="text-xl font-semibold mb-4 text-black">Sichtbar anders:</h3>
                     <p className="text-black">
                       {modelDetails.intro}
-                    </p>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-black">Spürbar anders:</h3>
-                    <p className="text-black">
-                      Die hochwertige Verarbeitung und durchdachten Details machen jedes {modelDetails.name} Modell zu einem besonderen Reiseerlebnis. Erleben Sie Komfort und Qualität auf höchstem Niveau.
                     </p>
                   </div>
                 </div>
