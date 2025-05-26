@@ -1194,6 +1194,9 @@ const ProductDetail = () => {
     
   console.log("Selected model details:", modelDetails.name, modelDetails.id);
   
+  // Check if model has only one layout (for comparison functionality)
+  const hasMultipleLayouts = hasLayouts(modelDetails) && modelDetails.layouts.length > 1;
+  
   // Define sidebar navigation items
   const navigationItems = [
     { id: "highlights", label: "Highlights" },
@@ -1243,6 +1246,7 @@ const ProductDetail = () => {
             name={layout.name}
             length={layout.length}
             sleepingPlaces={layout.sleepingPlaces}
+            showComparison={hasMultipleLayouts}
           />
         ))}
       </div>
@@ -1458,8 +1462,10 @@ const ProductDetail = () => {
           onOpenChange={setIsComparisonOpen}
         />
         
-        {/* Comparison Bar */}
-        <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
+        {/* Comparison Bar - only show if model has multiple layouts */}
+        {hasMultipleLayouts && (
+          <ComparisonBar onCompareClick={() => setIsComparisonOpen(true)} />
+        )}
       </ProductLayout>
     </ComparisonProvider>
   );

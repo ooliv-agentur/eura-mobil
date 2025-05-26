@@ -14,9 +14,16 @@ interface ModelCardProps {
   name: string;
   length: string;
   sleepingPlaces: string;
+  showComparison?: boolean;
 }
 
-export const SelectableModelCard: React.FC<ModelCardProps> = ({ id, name, length, sleepingPlaces }) => {
+export const SelectableModelCard: React.FC<ModelCardProps> = ({ 
+  id, 
+  name, 
+  length, 
+  sleepingPlaces, 
+  showComparison = true 
+}) => {
   const { addModel, removeModel, isSelected, selectedModels } = useComparison();
   
   const handleCheckboxChange = (checked: boolean) => {
@@ -50,17 +57,19 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({ id, name, length
             </Link>
           </Button>
           
-          <div className="flex items-center space-x-2">
-            <Checkbox 
-              id={`compare-${id}`} 
-              checked={isSelected(id)}
-              onCheckedChange={handleCheckboxChange}
-              disabled={disabled}
-            />
-            <Label htmlFor={`compare-${id}`} className="text-sm cursor-pointer">
-              Zum Vergleich auswählen
-            </Label>
-          </div>
+          {showComparison && (
+            <div className="flex items-center space-x-2">
+              <Checkbox 
+                id={`compare-${id}`} 
+                checked={isSelected(id)}
+                onCheckedChange={handleCheckboxChange}
+                disabled={disabled}
+              />
+              <Label htmlFor={`compare-${id}`} className="text-sm cursor-pointer">
+                Zum Vergleich auswählen
+              </Label>
+            </div>
+          )}
           
           <Button variant="outline" className="w-full flex items-center justify-center gap-2" asChild>
             <Link to="/haendler">
