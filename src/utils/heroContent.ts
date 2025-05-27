@@ -26,6 +26,14 @@ export function getHeroContent(modelDetails: ModelData) {
     };
   }
   
+  // Special case for Profila T Mercedes model
+  if (modelDetails.id === 'profila-t-mercedes') {
+    return {
+      title: 'Für Deine beste Zeit. Profila T Mercedes',
+      subtitle: 'Profila T Mercedes'
+    };
+  }
+  
   // Default case for other models
   return {
     title: `Für Deine beste Zeit. ${modelDetails.name}`,
