@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { Check, Circle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -24,7 +24,6 @@ import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
-import { HighlightsSection } from "@/components/product/HighlightsSection";
 import { modelsData, equipmentTabs, hasLayouts, hasInterior, hasUpholstery, hasEquipment } from "@/data/modelsData";
 import { getHeroContent } from "@/utils/heroContent";
 
@@ -91,17 +90,26 @@ const ProductDetail = () => {
     if (!hasInterior(modelDetails)) return null;
     
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {modelDetails.interior.map((item, index) => (
-          <Card key={index} className="overflow-hidden border shadow-sm">
-            <AspectRatio ratio={1/1} className="bg-gray-200" />
-            <CardContent className="p-4">
-              <h3 className="font-medium mb-1">{item.name}</h3>
-              <p className="text-gray-600 text-sm">{item.description}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Carousel className="w-full" showIndicators={true}>
+        <CarouselContent>
+          {modelDetails.interior.map((item, index) => (
+            <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <Card className="overflow-hidden border shadow-sm">
+                <AspectRatio ratio={1/1} className="bg-gray-200" />
+                <CardContent className="p-4">
+                  <h3 className="font-medium mb-1">{item.name}</h3>
+                  <p className="text-gray-600 text-sm">{item.description}</p>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="hidden md:flex justify-end gap-2 mt-2">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
+        <CarouselIndicators />
+      </Carousel>
     );
   };
   
@@ -119,16 +127,25 @@ const ProductDetail = () => {
       : modelDetails.upholsteryTypes;
     
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {upholsteryData.map((type, index) => (
-          <div key={index} className="bg-[#E5E7EB] rounded-lg overflow-hidden">
-            <AspectRatio ratio={4/3} className="h-40" />
-            <div className="p-3">
-              <h3 className="font-medium whitespace-pre-line">{type}</h3>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Carousel className="w-full" showIndicators={true}>
+        <CarouselContent>
+          {upholsteryData.map((type, index) => (
+            <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3">
+              <div className="bg-gray-100 rounded-lg overflow-hidden">
+                <AspectRatio ratio={4/3} className="bg-gray-200" />
+                <div className="p-3 text-center">
+                  <h3 className="font-medium whitespace-pre-line">{type}</h3>
+                </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="hidden md:flex justify-end gap-2 mt-2">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
+        <CarouselIndicators />
+      </Carousel>
     );
   };
   
@@ -162,32 +179,63 @@ const ProductDetail = () => {
 
   const heroContent = getHeroContent(modelDetails);
   
+  // Split intro text by double line breaks to create paragraphs
+  const introParagraphs = modelDetails.intro.split('\n\n').filter(paragraph => paragraph.trim() !== '');
+  
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
         <SidebarNavigation items={navigationItems} />
         
-        {/* Hero Section with Hotspot Picture */}
+        {/* Full-width Hero Section */}
         <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
-          <div className="relative">
-            <AspectRatio ratio={16/9} className="bg-gray-200">
-              <img 
-                src="https://images.unsplash.com/photo-1721322800607-8c38375eef04" 
-                alt="Van Interior - Living Room"
-                className="w-full h-full object-cover"
-              />
-            </AspectRatio>
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <div className="text-center text-white z-10">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
-                <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
-              </div>
+          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
+            <div className="text-center text-black z-10">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
+              <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
             </div>
           </div>
         </section>
 
         <div className="container mx-auto overflow-visible">
-          <HighlightsSection modelDetails={modelDetails} />
+          {/* Intro Section with Highlights */}
+          <section id="highlights" className="mb-16">
+            <div className="mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
+                Für Deine beste Zeit. Eura Mobil Vans
+              </h2>
+              
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div className="space-y-8 text-black leading-relaxed">
+                  {introParagraphs.map((paragraph, index) => (
+                    <div key={index}>
+                      <p className="text-black">
+                        {paragraph.trim()}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                
+                <div>
+                  <EmptyGrayBoxPlaceholder ratio={16/9} />
+                </div>
+              </div>
+
+              <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
+                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">Highlights:</h3>
+                <div className="space-y-4">
+                  {modelDetails.highlights.map((highlight, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Circle className="h-3 w-3 text-gray-600 fill-current" />
+                      </div>
+                      <p className="text-black">{highlight}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
@@ -243,7 +291,7 @@ const ProductDetail = () => {
           {/* Polster Section */}
           {hasUpholstery(modelDetails) && (
             <section id="polster" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Polstervarianten</h2>
+              <h2 className="text-2xl font-semibold mb-4">Polster</h2>
               {renderUpholstery()}
             </section>
           )}
