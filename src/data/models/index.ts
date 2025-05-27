@@ -1,3 +1,4 @@
+
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -450,7 +451,9 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
       "Besonders verwindungsfester Aufbau mit 85mm starker Bodenplatte",
       "Komfortausstattung u.a. mit Fußbodenheizung, Kompressor-Kühlschrank und Backofen"
     ], 
-    layouts: [], 
+    layouts: [
+      { id: "xtura-standard", name: "Xtura Standard", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" }
+    ], 
     interior: [
       { name: "Dinette mit Panoramafenster", description: "Komfortable Sitzgruppe mit großem Panoramafenster" },
       { name: "Kompakte Küche", description: "Funktionale Küche mit Induktionskochfeld und Kompressor-Kühlschrank" },
@@ -463,8 +466,67 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
       { name: "Xtura Carrier System", description: "Modulares Transportsystem am Heck" },
       { name: "LED-Umfeldbeleuchtung", description: "Integrierte Beleuchtung für Campingplätze" }
     ],
-    upholsteryTypes: [], 
-    equipment: {} 
+    upholsteryTypes: [
+      "Offroad-Polster Robust\nDekoration Canyon",
+      "Expedition-Polster Comfort\nDekoration Desert",
+      "Adventure-Polster Premium\nDekoration Mountain"
+    ], 
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Sprinter 4x4",
+        "170 PS Turbodiesel",
+        "Allradantrieb permanent zuschaltbar",
+        "Differentialsperren vorn und hinten",
+        "Geländeuntersetzung",
+        "ESP mit Offroad-Modus",
+        "Hill Descent Control",
+        "Load Adaptive Control"
+      ],
+      body: [
+        "Besonders verwindungsfester Aufbau",
+        "85mm starke Bodenplatte",
+        "Verstärkte Rahmenkonstruktion",
+        "Offroad-taugliche Türscharniere",
+        "Stoßfeste Außenverkleidung",
+        "Schutzbleche Unterboden"
+      ],
+      electrical: [
+        "330 Ah Lithium-Batterie",
+        "Solarmodule 400 Wp",
+        "Wechselrichter 2000W",
+        "Busgesteuerte Bordtechnik",
+        "12V/24V Steckdosen",
+        "USB-C Schnellladeanschlüsse"
+      ],
+      livingArea: [
+        "Dinette mit Panoramafenster",
+        "LED-Ambientebeleuchtung",
+        "Fußbodenheizung",
+        "Offroad-optimierte Möbelbefestigung",
+        "Sicherheitsgurte an allen Sitzplätzen"
+      ],
+      kitchen: [
+        "Induktionskochfeld 2-flammig",
+        "Kompressor-Kühlschrank 130L",
+        "Backofen mit Grill",
+        "Doppelt gesicherte Küchenauszüge",
+        "Mineralstoff-Arbeitsplatte"
+      ],
+      bathroom: [
+        "Separate Dusche",
+        "Vorbereitung Alternativtoilette",
+        "Waschbecken mit Mineralstoff",
+        "Handtuchheizung",
+        "Lüftung mit Außentemperaturfühler"
+      ],
+      installation: [
+        "Frischwassertank 200 l isoliert",
+        "Abwassertank 150 l isoliert",
+        "Alde Warmwasserheizung",
+        "Druckwasserpumpe",
+        "Externe Wasseranschlüsse"
+      ]
+    }
   }
 };
 
