@@ -186,8 +186,11 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             showComparison={hasMultipleLayouts}
           />
           
-          {/* 7. Interior Hotspots Section - Always show with fallback */}
-          <ModelInteriorHotspots interiorItems={modelDetails.interior || []} />
+          {/* 7. Interior/Exterior Hotspots Section - Enhanced for Xtura */}
+          <ModelInteriorHotspots 
+            interiorItems={modelDetails.interior || []} 
+            exteriorItems={modelDetails.exterior || undefined}
+          />
           
           {/* 8. Upholstery Section - Always show with fallback */}
           <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes || []} />
