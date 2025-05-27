@@ -1,3 +1,4 @@
+
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -401,7 +402,7 @@ export const modelsData = {
     intro: "Mit dem Integra hat Eura Mobil die Messlatte bei den Reisemobilen der Oberklasse auf ein völlig neues Niveau gehoben: Ein emotional markantes, gleichzeitig hochfunktionales und eindeutig sicherheitsorientiertes Lichtdesign innen wie außen untermalt den luxuriösen Charakter in dieser Klasse. Dezente Ambientebeleuchtung und modernste LED-Technik erzeugen eine besonders eindrucksvolle Lichtstimmung, die sich überall sehen lassen kann. Hochwertige Materialien, erstklassige Verarbeitung, formvollendete Architektur und die extrem großzügige Raumgestaltung verbinden sich zu einem unvergleichlichen Wohlfühlambiente. Steigen Sie ein und lassen Sie sich von vorne bis hinten begeistern – während Ihrer gesamten Reise in diesem Luxus-Reisemobil.", 
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg"], 
-    technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" }, 
+    technicalData: { länge: "7,89 – 8,99 m", sitzplätze: "4", schlafplätze: "4" }, 
     highlights: [
       "Modernste LED-Lichttechnik",
       "Automotives Design", 
@@ -410,7 +411,12 @@ export const modelsData = {
       "Isolierte und beheizte Wassertanks",
       "Elektrische Abwassertankentleerung"
     ], 
-    layouts: [], 
+    layouts: [
+      { id: "i-890-qb", name: "I 890 QB", image: "/placeholder.svg", length: "8,99 m", sleepingPlaces: "4" },
+      { id: "i-890-eb", name: "I 890 EB", image: "/placeholder.svg", length: "8,99 m", sleepingPlaces: "4" },
+      { id: "i-760-ef", name: "I 760 EF", image: "/placeholder.svg", length: "7,89 m", sleepingPlaces: "4" },
+      { id: "i-760-qf", name: "I 760 QF", image: "/placeholder.svg", length: "7,89 m", sleepingPlaces: "4" }
+    ], 
     interior: [], 
     upholsteryTypes: [], 
     equipment: {} 
