@@ -1,4 +1,3 @@
-
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -16,7 +15,6 @@ export const modelsData = {
       "Winterfester, beheizter Doppelboden"
     ]
   },
-  // We'll add the other models here as we create their files
   "profila-t-fiat": {
     id: "profila-t-fiat",
     name: "Profila T",
@@ -150,7 +148,6 @@ export const modelsData = {
     ],
     equipment: { chassis: ["Mercedes-Benz Sprinter", "Automatikgetriebe", "Tempomat", "Premium Sicherheitspaket"], body: ["Vollintegrierter Luxus-Aufbau", "Premium Isolierung", "Elektrische Stufe", "LED-Beleuchtungspaket"], livingArea: ["Luxus-Sitzgruppe mit Lederbezug", "Entertainment-System", "Klimaanlage", "Premium-Möbel"], kitchen: ["Induktions-Kochfeld", "Großraum-Kühlschrank", "Backofen mit Grill", "Geschirrspüler"], bathroom: ["Separate Regendusche", "Waschtisch mit Naturstein", "Premium-WC", "Fußbodenheizung"], electrical: ["Lithium-Batterien", "Solaranlage", "Wechselrichter", "Smart-Home-System"] }
   },
-  // Add remaining models with condensed data for now...
   "integra-line-fiat": { 
     id: "integra-line-fiat", 
     name: "Integra Line Fiat", 
