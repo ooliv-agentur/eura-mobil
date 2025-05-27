@@ -1,4 +1,3 @@
-
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -206,8 +205,9 @@ export const modelsData = {
       ],
       bathroom: [
         "Separate Dusche",
-        "Cassetten-WC",
-        "Waschbecken"
+        "Waschtisch mit Naturstein",
+        "Premium-WC",
+        "Fußbodenheizung"
       ],
       electrical: [
         "AGM-Batterien",
@@ -441,7 +441,7 @@ Zur Saison 2025 öffnet sich Eura Mobil gleich in mehrfacher Hinsicht den indivi
 Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26. Januar  auf einer Sonderfläche auf dem Eura Mobil Stand in Halle 1 B52, wir freuen uns auf Ihren Besuch!`, 
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg"], 
-    technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
+    technicalData: { länge: "6,88 m", sitzplätze: "4", schlafplätze: "2" }, 
     highlights: [
       "330 Ah Lithium-Batterie",
       "Allradantrieb",
@@ -452,7 +452,7 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
       "Komfortausstattung u.a. mit Fußbodenheizung, Kompressor-Kühlschrank und Backofen"
     ], 
     layouts: [
-      { id: "xtura-standard", name: "Xtura Standard", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" }
+      { id: "xt-686-ef", name: "XT 686 EF", image: "/placeholder.svg", length: "6,88 m", sleepingPlaces: "2" }
     ], 
     interior: [
       { name: "Dinette mit Panoramafenster", description: "Komfortable Sitzgruppe mit großem Panoramafenster" },
