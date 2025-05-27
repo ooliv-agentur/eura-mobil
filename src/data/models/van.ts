@@ -1,4 +1,3 @@
-
 import { FullModelData } from '../modelsData';
 
 export const vanData: FullModelData = {
