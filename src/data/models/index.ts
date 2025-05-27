@@ -1,4 +1,5 @@
 
+
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -417,8 +418,18 @@ export const modelsData = {
       { id: "i-760-ef", name: "I 760 EF", image: "/placeholder.svg", length: "7,89 m", sleepingPlaces: "4" },
       { id: "i-760-qf", name: "I 760 QF", image: "/placeholder.svg", length: "7,89 m", sleepingPlaces: "4" }
     ], 
-    interior: [], 
-    upholsteryTypes: [], 
+    interior: [
+      { name: "Luxuriöses Innenraumambiente", description: "Luxuriöses Innenraumambiente" },
+      { name: "Küche für Chefköche", description: "Küche für Chefköche" },
+      { name: "Schlafräume werden wahr...", description: "Schlafräume werden wahr..." },
+      { name: "Hubbett", description: "Hubbett" },
+      { name: "Hochglänzende Oberschränke", description: "Hochglänzende Oberschränke" }
+    ], 
+    upholsteryTypes: [
+      "Polster Leder Beige\nDekoration Maka",
+      "Polster Leder Grau\nDekoration Rana", 
+      "Polster Como\nDekoration Maka"
+    ], 
     equipment: {} 
   },
   "xtura": { id: "xtura", name: "Xtura", intro: "Der Xtura verkörpert Innovation und Design in reinster Form.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Zukunftsweisendes Design"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} }
@@ -426,3 +437,4 @@ export const modelsData = {
 
 // Re-export types and other utilities
 export * from '../modelsData';
+
