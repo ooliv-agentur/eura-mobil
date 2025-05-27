@@ -117,7 +117,14 @@ export const modelsData = {
       "Elektrisch gesteuerte Abwassertank-Entleerung",
       "Isofix (grundrissabhängig)"
     ],
-    layouts: [{ id: "prs-899-eb", name: "PRS 899 EB", image: "/placeholder.svg", length: "8,99 m", sleepingPlaces: "2" }],
+    layouts: [
+      { id: "prs-695-eb", name: "PRS 695 EB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "4" },
+      { id: "prs-720-eb", name: "PRS 720 EB", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "4" },
+      { id: "prs-695-hb", name: "PRS 695 HB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "4" },
+      { id: "prs-675-sb", name: "PRS 675 SB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "4" },
+      { id: "prs-720-qf", name: "PRS 720 QF", image: "/placeholder.svg", length: "7,58 m", sleepingPlaces: "4" },
+      { id: "prs-720-ef", name: "PRS 720 EF", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "4" }
+    ],
     interior: [{ name: "Luxus-Lounge", description: "Edle Sitzlandschaft" }, { name: "Designer-Küche", description: "Hochwertige Ausstattung" }, { name: "Master-Bedroom", description: "Komfortables Schlafzimmer" }, { name: "Wellness-Bad", description: "Spa-ähnlicher Komfort" }],
     upholsteryTypes: ["Premium Leder Schwarz", "Premium Leder Cognac", "Luxus-Stoff Anthrazit"],
     equipment: { chassis: ["Mercedes-Benz Sprinter", "Automatikgetriebe", "Tempomat", "Premium Sicherheitspaket"], body: ["Vollintegrierter Luxus-Aufbau", "Premium Isolierung", "Elektrische Stufe", "LED-Beleuchtungspaket"], livingArea: ["Luxus-Sitzgruppe mit Lederbezug", "Entertainment-System", "Klimaanlage", "Premium-Möbel"], kitchen: ["Induktions-Kochfeld", "Großraum-Kühlschrank", "Backofen mit Grill", "Geschirrspüler"], bathroom: ["Separate Regendusche", "Waschtisch mit Naturstein", "Premium-WC", "Fußbodenheizung"], electrical: ["Lithium-Batterien", "Solaranlage", "Wechselrichter", "Smart-Home-System"] }
