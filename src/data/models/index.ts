@@ -1,4 +1,3 @@
-
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -167,22 +166,22 @@ export const modelsData = {
       "Isofix (grundrissabhängig)"
     ], 
     layouts: [
-      { id: "il-700-eb", name: "IL 700 EB", image: "/placeholder.svg", length: "7,30 m", sleepingPlaces: "2" },
+      { id: "il-720-eb", name: "IL 720 EB", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "2" },
+      { id: "il-720-qf", name: "IL 720 QF", image: "/placeholder.svg", length: "7,58 m", sleepingPlaces: "2" },
       { id: "il-720-ef", name: "IL 720 EF", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "2" },
-      { id: "il-726-ef", name: "IL 726 EF", image: "/placeholder.svg", length: "7,61 m", sleepingPlaces: "2" },
-      { id: "il-730-eb", name: "IL 730 EB", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "4" }
+      { id: "il-730-ef", name: "IL 730 EF", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "4" }
     ], 
     interior: [
-      { name: "Interieur Chalet", description: "Interieur Chalet" },
-      { name: "Interieur Natural Heritage", description: "Interieur Natural Heritage" },
-      { name: "Schlafbereich mit Stauraum", description: "Schlafbereich mit Stauraum" },
-      { name: "Küche mit Erweiterung", description: "Küche mit Erweiterung" }
+      { name: "Interieur \"Chalet Rustico\"", description: "Interieur \"Chalet Rustico\"" },
+      { name: "Interieur \"Natural Heritage\"", description: "Interieur \"Natural Heritage\"" },
+      { name: "Durchsicht (Küche mit Mineralstoffoberfläche und Erweiterung)", description: "Durchsicht (Küche mit Mineralstoffoberfläche und Erweiterung)" },
+      { name: "Schlafzimmer mit Chalet Rustico", description: "Schlafzimmer mit Chalet Rustico" }
     ], 
     upholsteryTypes: [
-      "Polster Milano – Dekoration Lasca",
-      "Polster Como – Dekoration Maka",
-      "Polster Pisa – Dekoration Rana",
-      "Polster Bergamo – Dekoration Evorno"
+      "Polster Como\nDekoration Maka",
+      "Polster Milano\nDekoration Lasca",
+      "Polster Pisa\nDekoration Rana",
+      "Polster Dara\nDekoration Maka"
     ], 
     equipment: {
       chassis: [
