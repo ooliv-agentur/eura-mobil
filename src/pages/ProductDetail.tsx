@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -27,6 +28,7 @@ import {
   CarouselIndicators,
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Circle, Check } from "lucide-react";
 
 const ProductDetail = () => {
   const { modelId } = useParams();
@@ -83,6 +85,9 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
     if (modelDetails.id === 'integra-line-fiat') {
       return `Sich einfach mal ganz weit wegträumen – oder einfach gleich hinfahren! Diese Freiheit genießen Sie ganz individuell mit dem Integra Line: das Reisemobil für alle, die ihren eigenen Weg gehen und dabei die ursprüngliche Vielfalt der Landschaft genießen wollen. Für die, die herausragendes Design lieben, vor allem wenn es aus natürlichen Formen entsteht. Und auch für alle, die ihren Traum von individueller Freiheit in die Wirklichkeit verwandeln wollen. Das Fahrzeug schmiegt sich ganz einfach in die natürliche Umgebung ein und lässt dich keine Wünsche an Luxus und Komfort offen.`;
     }
+    if (modelDetails.id === 'integra') {
+      return `Mit dem Integra hat Eura Mobil die Messlatte bei den Reisemobilen der Oberklasse auf ein völlig neues Niveau gehoben: Ein emotional markantes, gleichzeitig hochfunktionales und eindeutig sicherheitsorientiertes Lichtdesign innen wie außen untermalt den luxuriösen Charakter in dieser Klasse. Dezente Ambientebeleuchtung und modernste LED-Technik erzeugen eine besonders eindrucksvolle Lichtstimmung, die sich überall sehen lassen kann. Hochwertige Materialien, erstklassige Verarbeitung, formvollendete Architektur und die extrem großzügige Raumgestaltung verbinden sich zu einem unvergleichlichen Wohlfühlambiente. Steigen Sie ein und lassen Sie sich von vorne bis hinten begeistern – während Ihrer gesamten Reise in diesem Luxus-Reisemobil.`;
+    }
     return modelDetails.intro;
   };
 
@@ -104,12 +109,27 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
       return 'DER GRAND TOURISMO IN DER KÖNIGSKLASSE';
     }
     if (modelDetails.id === 'integra') {
-      return 'Premium-Vollintegration auf höchstem Niveau';
+      return 'Der Freiheit ein Gesicht gegeben.';
     }
     if (modelDetails.id === 'xtura') {
       return 'Innovation und Design in reinster Form';
     }
     return undefined;
+  };
+
+  // Custom highlights for Integra model
+  const getCustomHighlights = () => {
+    if (modelDetails.id === 'integra') {
+      return [
+        'Modernste LED-Lichttechnik',
+        'Automotives Design',
+        'Sitzpolster mit Einzelkissen',
+        'Winterfester, beheizter Doppelboden',
+        'Isolierte und beheizte Wassertanks',
+        'Elektrische Abwassertankentleerung'
+      ];
+    }
+    return modelDetails.highlights || [];
   };
   
   return (
@@ -118,21 +138,110 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
         <SidebarNavigation items={navigationItems} />
         
         {/* 1. Hero Section */}
-        <ModelHero 
-          headline={heroContent.title}
-          subline={heroContent.subtitle}
-        />
+        {modelDetails.id === 'integra' ? (
+          <section id="model-hero" className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
+            <div 
+              className="relative h-[60vh] md:h-[70vh] flex items-center justify-center bg-cover bg-center"
+              style={{
+                backgroundImage: 'url(/lovable-uploads/bdfe8cef-f238-40ad-beea-7ff28054a3e2.png)'
+              }}
+            >
+              <div className="text-center z-10 px-4 max-w-6xl text-white">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">
+                  <span className="text-red-500 italic">Integra</span>
+                </h1>
+                <p className="text-2xl md:text-4xl lg:text-5xl font-bold">Die neue Oberklasse</p>
+              </div>
+            </div>
+          </section>
+        ) : (
+          <ModelHero 
+            headline={heroContent.title}
+            subline={heroContent.subtitle}
+          />
+        )}
 
         <div className="container mx-auto overflow-visible">
           {/* 2. Intro Section */}
-          <ModelIntro 
-            title={introSectionTitle}
-            content={getIntroContent()}
-            topLine={getTopLine()}
-          />
+          {modelDetails.id === 'integra' ? (
+            <section id="model-intro" className="mb-16">
+              <div className="mx-auto">
+                <p className="text-xl md:text-2xl text-center mb-4 text-blue-600 font-semibold">Der Freiheit ein Gesicht gegeben.</p>
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Integra – Oberklasse Integrierte</h2>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                  <div className="space-y-6 leading-relaxed">
+                    <p>
+                      Mit dem Integra hat Eura Mobil die Messlatte bei den Reisemobilen der Oberklasse auf ein völlig neues Niveau gehoben: Ein emotional markantes, gleichzeitig hochfunktionales und eindeutig sicherheitsorientiertes <strong>Lichtdesign</strong> innen wie außen untermalt den luxuriösen Charakter in dieser Klasse. Dezente Ambientebeleuchtung und <strong>modernste LED-Technik</strong> erzeugen eine besonders eindrucksvolle Lichtstimmung, die sich überall sehen lassen kann. Hochwertige Materialien, erstklassige Verarbeitung, formvollendete Architektur und die <strong>extrem großzügige Raumgestaltung</strong> verbinden sich zu einem unvergleichlichen Wohlfühlambiente. Steigen Sie ein und lassen Sie sich von vorne bis hinten begeistern – während Ihrer gesamten Reise in diesem <strong>Luxus-Reisemobil</strong>.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <div className="bg-[#E5E7EB] w-full aspect-video rounded-md" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          ) : (
+            <ModelIntro 
+              title={introSectionTitle}
+              content={getIntroContent()}
+              topLine={getTopLine()}
+            />
+          )}
 
-          {/* 3. Highlights Section - Always show with fallback */}
-          <ModelHighlights highlights={modelDetails.highlights || []} />
+          {/* 3. Highlights Section */}
+          {modelDetails.id === 'integra' ? (
+            <section id="model-highlights" className="mb-16">
+              <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
+                <h3 className="text-2xl md:text-3xl font-bold mb-6">Highlights der Baureihe:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-sm bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <p>Modernste LED-Lichttechnik</p>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-sm bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <p>Sitzpolster mit Einzelkissen</p>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-sm bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <p>Isolierte und beheizte Wassertanks</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-sm bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <p>Automotives Design</p>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-sm bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <p>Winterfester, beheizter Doppelboden</p>
+                    </div>
+                    <div className="flex items-start gap-4">
+                      <div className="w-6 h-6 rounded-sm bg-blue-600 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Check className="h-4 w-4 text-white" />
+                      </div>
+                      <p>Elektrische Abwassertankentleerung</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          ) : (
+            <ModelHighlights highlights={getCustomHighlights()} />
+          )}
 
           {/* 4. Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
