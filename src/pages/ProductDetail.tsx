@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -152,12 +151,12 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
           {/* 3.5. Awards Section - Only for Xtura */}
           {modelDetails.id === 'xtura' && (
             <section className="my-12">
-              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 md:p-8 rounded-lg border border-yellow-200">
+              <div className="bg-gray-50 p-6 md:p-8 rounded-lg border border-gray-200">
                 <h3 className="text-2xl font-bold text-center mb-6 text-gray-800">Ausgezeichnet</h3>
                 <div className="flex flex-col md:flex-row justify-center items-center gap-6">
                   <div className="flex flex-col items-center">
-                    <div className="w-24 h-24 bg-yellow-300 rounded-full flex items-center justify-center mb-3">
-                      <Award className="h-12 w-12 text-yellow-800" />
+                    <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-3">
+                      <div className="w-12 h-12 bg-gray-300 rounded"></div>
                     </div>
                     <div className="text-center">
                       <h4 className="font-semibold text-gray-800">European Innovation Award</h4>
@@ -166,8 +165,8 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
                     </div>
                   </div>
                   <div className="flex flex-col items-center">
-                    <div className="w-24 h-24 bg-yellow-300 rounded-full flex items-center justify-center mb-3">
-                      <Award className="h-12 w-12 text-yellow-800" />
+                    <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-3">
+                      <div className="w-12 h-12 bg-gray-300 rounded"></div>
                     </div>
                     <div className="text-center">
                       <h4 className="font-semibold text-gray-800">European Innovation Award</h4>
