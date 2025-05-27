@@ -1,5 +1,3 @@
-
-
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -432,9 +430,20 @@ export const modelsData = {
     ], 
     equipment: {} 
   },
-  "xtura": { id: "xtura", name: "Xtura", intro: "Der Xtura verkörpert Innovation und Design in reinster Form.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Zukunftsweisendes Design"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} }
+  "xtura": { 
+    id: "xtura", 
+    name: "Xtura", 
+    intro: "Der neue Xtura – Stark autark!", 
+    heroImage: "/placeholder.svg", 
+    galleryImages: ["/placeholder.svg"], 
+    technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
+    highlights: ["Zukunftsweisendes Design"], 
+    layouts: [], 
+    interior: [], 
+    upholsteryTypes: [], 
+    equipment: {} 
+  }
 };
 
 // Re-export types and other utilities
 export * from '../modelsData';
-

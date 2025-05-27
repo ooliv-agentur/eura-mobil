@@ -1,4 +1,3 @@
-
 import { ModelData } from '@/data/modelsData';
 
 export function getHeroContent(modelDetails: ModelData) {
@@ -69,8 +68,8 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Xtura model
   if (modelDetails.id === 'xtura') {
     return {
-      title: 'Innovation und Design',
-      subtitle: 'Xtura'
+      title: 'Stark autark!',
+      subtitle: 'Der neue Xtura'
     };
   }
   
@@ -124,7 +123,7 @@ export function getMainHeading(modelDetails: ModelData) {
   
   // Special case for Xtura model
   if (modelDetails.id === 'xtura') {
-    return 'Xtura - Innovation in reinster Form';
+    return 'Der neue Xtura – Stark autark!';
   }
   
   // Default case for other models
@@ -174,7 +173,7 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   
   // Special case for Xtura model
   if (modelDetails.id === 'xtura') {
-    return 'Xtura - Innovation in reinster Form';
+    return 'Der neue Xtura – Stark autark!';
   }
   
   // Default case for other models
