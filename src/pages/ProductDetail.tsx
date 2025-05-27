@@ -79,8 +79,11 @@ const ProductDetail = () => {
 
   // Get topLine for models that should have one
   const getTopLine = () => {
-    if (modelDetails.id === 'profila-rs' || modelDetails.id === 'profila-t-mercedes') {
+    if (modelDetails.id === 'profila-rs') {
       return mainHeading;
+    }
+    if (modelDetails.id === 'profila-t-mercedes') {
+      return 'Edel, exklusiv und elegant';
     }
     return undefined;
   };

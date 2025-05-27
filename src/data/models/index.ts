@@ -146,19 +146,17 @@ export const modelsData = {
   "profila-t-mercedes": { 
     id: "profila-t-mercedes", 
     name: "Profila T Mercedes", 
-    intro: `Mit 140 PS Motorisierung und mit State-of-the-art-Fahrzeugtechnik, wie ABS, ESP und 16''-Rädern am CCS-Breitspur-Tiefrahmen mit einer Spurweite von 1.980 mm und weiteren intelligenten Techniklösungen ausgestattet, lässt es sich in den Profila T Mercedes Modellen stressfrei in den Traumurlaub starten. Im Fahrerhaus mit seiner schnittigen Silhouette und dem bequemen Fahrersitz Platz genommen, kann kommen, was will – der verdienten Auszeit steht nichts mehr im Weg.
-
-Der Profila T auf Mercedes-Benz Sprinter kombiniert die bewährte Zuverlässigkeit des Sprinter-Chassis mit dem eleganten Design der Profila T Baureihe. Die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum macht das Fahren besonders angenehm, während der bequeme „Coupé-Einstieg" mit integrierten und voll isolierten Einstiegsstufen aus GFK den Komfort unterstreicht.`, 
+    intro: `Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures. In der Saison 2024 kommt die speziell für die Mercedes Profila geschaffene Wohnwelt 'Natural Heritage' dazu, die den exklusiven Charakter der Top-Modelle noch stärker betont.`, 
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], 
     technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
     highlights: [
-      "Mercedes-Benz Sprinter Chassis",
-      "Winterfester, beheizter Doppelboden", 
-      "Große Stauräume durch Garagenabsenkung",
-      "Isolierte & beheizte Wassertanks",
-      "Elektr. Abwassertank-Entleerung",
-      "Niedrige Gesamthöhe unter 2,90 m"
+      "Basisfahrzeug Mercedes Sprinter",
+      "AL-KO Tiefrahmen", 
+      "Alde Warmwasserheizung",
+      "Auf Wunsch exklusive Wohnwelt \"Natural Heritage\"",
+      "Winterfester, beheizter Doppelboden",
+      "Elektrische Abwasserklappen – Entleerung"
     ], 
     layouts: [
       { id: "ptm-784-eb", name: "PTM 784 EB", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" },

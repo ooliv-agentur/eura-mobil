@@ -29,7 +29,7 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Profila T Mercedes model
   if (modelDetails.id === 'profila-t-mercedes') {
     return {
-      title: 'Für Deine beste Zeit. Profila T Mercedes',
+      title: 'Edel, exklusiv und elegant',
       subtitle: 'Profila T Mercedes'
     };
   }
@@ -57,6 +57,11 @@ export function getMainHeading(modelDetails: ModelData) {
     return 'Macht einzigartige Erlebnisse noch einzigartiger!';
   }
   
+  // Special case for Profila T Mercedes model
+  if (modelDetails.id === 'profila-t-mercedes') {
+    return 'Profila T auf Mercedes';
+  }
+  
   // Default case for other models
   return modelDetails.name;
 }
@@ -75,6 +80,11 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   // Special case for Profila RS model
   if (modelDetails.id === 'profila-rs') {
     return 'Profila RS Teilintegrierte';
+  }
+  
+  // Special case for Profila T Mercedes model
+  if (modelDetails.id === 'profila-t-mercedes') {
+    return 'Profila T auf Mercedes';
   }
   
   // Default case for other models
