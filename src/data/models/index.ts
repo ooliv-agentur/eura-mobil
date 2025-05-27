@@ -5,7 +5,17 @@ import { conturaData } from './contura';
 
 export const modelsData = {
   "van": vanData,
-  "contura": conturaData,
+  "contura": {
+    ...conturaData,
+    highlights: [
+      "Mercedes-Benz Sprinter Chassis",
+      "AL-KO-Tiefrahmenfahrgestell",
+      "Hinterleuchteten Duschsäule", 
+      "Starlight Dome – zweiwelliges Panoramaglasdach (Option)",
+      "Warmwasserheizung",
+      "Winterfester, beheizter Doppelboden"
+    ]
+  },
   // We'll add the other models here as we create their files
   "profila-t-fiat": {
     id: "profila-t-fiat",

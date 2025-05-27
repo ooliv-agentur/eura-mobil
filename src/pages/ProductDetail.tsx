@@ -71,6 +71,13 @@ const ProductDetail = () => {
   
   // Custom intro content for specific models
   const getIntroContent = () => {
+    if (modelDetails.id === 'contura') {
+      return `In Gestalt eines automobilen Designs mit markanten Lichtkanten und flacher Anbindung zwischen Fahrerhaus und modernem GFK-Aufbau betont der Contura vom Start weg den hohen Anspruch seiner Konstrukteure.
+
+Mit einem ALKO-Tiefrahmenfahrgestell verbunden mit Mercedes-Benz Fahrgestell trägt er einen besonders verwindungsfesten, langlebigen Aufbau, der mit Warmwasserheizung und stauraumoptimiertem Doppelboden zu Reisen von beliebiger Dauer in jeder Jahreszeit einlädt. Sorgfältige Detaillösungen zeigen sich nicht nur im Exterieur, sondern auch im Innenraum – darunter der optisch fließende Übergang der Oberschränke vom Wohnraum in das Fahrerhaus und die über der Decke vom „Starlight Dome" getaufte, zweiwellige Panoramaglasdachbeleuchtung, die exklusiv bei Eura Mobil zum Einsatz kommt.
+
+Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-Möglichkeiten wie dem Verkehrszeichenassistenten, dem Abstandsassistenten Distronic, dem aktiven Spurhalte-Assistenten und den Fernlichtassistenten. Das sprachgesteuerte MBUX Multimediasystem betont die komfortorientierte Ausstattung des Basisfahrzeugs.`;
+    }
     if (modelDetails.id === 'profila-rs') {
       return `Mit 140 PS Motorisierung und mit State-of-the-art-Fahrzeugtechnik, wie ABS, ESP und 16''-Rädern am CCS-Breitspur-Tiefrahmen mit einer Spurweite von 1.980 mm und weiteren intelligenten Techniklösungen ausgestattet, lässt es sich in den Profila RS Modellen stressfrei in den Traumurlaub starten: Im Fahrerhaus mit seiner schnittigen Silhouette und dem bequemen Fahrersitz Platz genommen, kann kommen, was will – der verdienten Auszeit steht nichts mehr im Weg. Im Innenraum des Wohnmobils beeindruckt das großzügige Raumgefühl, das vor allem durch die in der Decke „versenkte" Hubbett (Serie) entsteht. Auch der Aufbau mit durchgehend isoliertem Leichtbaudoppelboden, holzfreier GFK-Wandung und dem leicht erreichbaren Serviceklappen lässt keine Wünsche an eine angenehme Reise offen.`;
     }
@@ -79,14 +86,14 @@ const ProductDetail = () => {
 
   // Get topLine for models that should have one
   const getTopLine = () => {
+    if (modelDetails.id === 'contura') {
+      return 'Der Wegbereiter Ihrer wertvollsten Zeit';
+    }
     if (modelDetails.id === 'profila-rs') {
       return mainHeading;
     }
     if (modelDetails.id === 'profila-t-mercedes') {
       return 'Edel, exklusiv und elegant';
-    }
-    if (modelDetails.id === 'contura') {
-      return 'Premium-Teilintegrierte mit Mercedes-Benz Sprinter';
     }
     if (modelDetails.id === 'integra-line-fiat') {
       return 'Vollintegrierte Raumwunder auf Fiat Ducato';

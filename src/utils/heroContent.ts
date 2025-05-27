@@ -13,7 +13,7 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Contura model
   if (modelDetails.id === 'contura') {
     return {
-      title: 'Luxus trifft Innovation',
+      title: 'Willkommen auf der Sternenseite des Lebens',
       subtitle: 'Contura'
     };
   }
@@ -89,7 +89,7 @@ export function getMainHeading(modelDetails: ModelData) {
   
   // Special case for Contura model
   if (modelDetails.id === 'contura') {
-    return 'Contura Teilintegrierte';
+    return 'Contura – der Luxus-Teilintegrierte';
   }
   
   // Special case for Profila T Fiat model
@@ -139,7 +139,7 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   
   // Special case for Contura model
   if (modelDetails.id === 'contura') {
-    return 'Contura Teilintegrierte';
+    return 'Contura – der Luxus-Teilintegrierte';
   }
   
   // Special case for Profila T Fiat model
