@@ -88,6 +88,18 @@ const ProductDetail = () => {
     if (modelDetails.id === 'contura') {
       return 'Premium-Teilintegrierte mit Mercedes-Benz Sprinter';
     }
+    if (modelDetails.id === 'integra-line-fiat') {
+      return 'Vollintegrierte Raumwunder auf Fiat Ducato';
+    }
+    if (modelDetails.id === 'integra-line-gt-mercedes') {
+      return 'Luxus und Performance auf Mercedes-Benz Sprinter';
+    }
+    if (modelDetails.id === 'integra') {
+      return 'Premium-Vollintegration auf höchstem Niveau';
+    }
+    if (modelDetails.id === 'xtura') {
+      return 'Innovation und Design in reinster Form';
+    }
     return undefined;
   };
   

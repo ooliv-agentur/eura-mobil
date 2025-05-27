@@ -42,6 +42,38 @@ export function getHeroContent(modelDetails: ModelData) {
     };
   }
   
+  // Special case for Integra Line Fiat model
+  if (modelDetails.id === 'integra-line-fiat') {
+    return {
+      title: 'Vollintegrierte Raumwunder',
+      subtitle: 'Integra Line Fiat'
+    };
+  }
+  
+  // Special case for Integra Line GT Mercedes model
+  if (modelDetails.id === 'integra-line-gt-mercedes') {
+    return {
+      title: 'Luxus und Performance',
+      subtitle: 'Integra Line GT Mercedes'
+    };
+  }
+  
+  // Special case for Integra model
+  if (modelDetails.id === 'integra') {
+    return {
+      title: 'Premium-Vollintegration',
+      subtitle: 'Integra'
+    };
+  }
+  
+  // Special case for Xtura model
+  if (modelDetails.id === 'xtura') {
+    return {
+      title: 'Innovation und Design',
+      subtitle: 'Xtura'
+    };
+  }
+  
   // Default case for other models
   return {
     title: `Für Deine beste Zeit. ${modelDetails.name}`,
@@ -75,6 +107,26 @@ export function getMainHeading(modelDetails: ModelData) {
     return 'Profila T auf Mercedes';
   }
   
+  // Special case for Integra Line Fiat model
+  if (modelDetails.id === 'integra-line-fiat') {
+    return 'Integra Line auf Fiat Ducato';
+  }
+  
+  // Special case for Integra Line GT Mercedes model
+  if (modelDetails.id === 'integra-line-gt-mercedes') {
+    return 'Integra Line GT auf Mercedes-Benz Sprinter';
+  }
+  
+  // Special case for Integra model
+  if (modelDetails.id === 'integra') {
+    return 'Integra Premium-Vollintegration';
+  }
+  
+  // Special case for Xtura model
+  if (modelDetails.id === 'xtura') {
+    return 'Xtura - Innovation in reinster Form';
+  }
+  
   // Default case for other models
   return modelDetails.name;
 }
@@ -103,6 +155,26 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   // Special case for Profila T Mercedes model
   if (modelDetails.id === 'profila-t-mercedes') {
     return 'Profila T auf Mercedes';
+  }
+  
+  // Special case for Integra Line Fiat model
+  if (modelDetails.id === 'integra-line-fiat') {
+    return 'Integra Line auf Fiat Ducato';
+  }
+  
+  // Special case for Integra Line GT Mercedes model
+  if (modelDetails.id === 'integra-line-gt-mercedes') {
+    return 'Integra Line GT auf Mercedes-Benz Sprinter';
+  }
+  
+  // Special case for Integra model
+  if (modelDetails.id === 'integra') {
+    return 'Integra Premium-Vollintegration';
+  }
+  
+  // Special case for Xtura model
+  if (modelDetails.id === 'xtura') {
+    return 'Xtura - Innovation in reinster Form';
   }
   
   // Default case for other models
