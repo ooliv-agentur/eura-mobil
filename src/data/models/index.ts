@@ -221,7 +221,7 @@ export const modelsData = {
     intro: "Der neue Integra Line GT schlägt ein neues Kapitel bei den Integrierten von Eura Mobil auf. Die Funktionalität der Liner Klasse vereint sich mit der Eleganz eines kompakten Integrierten und der Komfort der Luxusklasse paart sich im GT mit der Dynamik eines Teilintegrierten. Die exklusive und individuelle Ausstattung verleiht unserem neuen Grand Tourismo dabei seinen ganz eigenen Charme.", 
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], 
-    technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
+    technicalData: { länge: "7,54 m", sitzplätze: "4", schlafplätze: "2" }, 
     highlights: [
       "Dynamisch elegantes Design",
       "MB Sprinter Chassis mit AL-KO Spezialtiefrahmen",
@@ -236,18 +236,21 @@ export const modelsData = {
       "Top-Ausstattung mit Lithium-Batterie, Alde-Heizung…"
     ], 
     layouts: [
-      { id: "ilgt-730-ef", name: "ILGT 730 EF", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" }
+      { id: "il726-ef", name: "IL726 EF", image: "/placeholder.svg", length: "7,54 m", sleepingPlaces: "2" },
+      { id: "il726-qf", name: "IL726 QF", image: "/placeholder.svg", length: "7,54 m", sleepingPlaces: "2" }
     ], 
     interior: [
-      { name: "Interieur \"Natural Heritage\" (exklusiv für MB)", description: "Interieur \"Natural Heritage\" (exklusiv für MB)" },
-      { name: "Interieur \"Chalet Rustico\"", description: "Interieur \"Chalet Rustico\"" },
-      { name: "Durchsicht Wohnbereich", description: "Durchsicht Wohnbereich" },
-      { name: "Schlafzimmer", description: "Schlafzimmer" }
+      { name: "Dinette", description: "Dinette" },
+      { name: "Küche", description: "Küche" },
+      { name: "Esstisch", description: "Esstisch" },
+      { name: "Bad", description: "Bad" },
+      { name: "Heckbett", description: "Heckbett" },
+      { name: "Hubbett über dem Fahrerhaus", description: "Hubbett über dem Fahrerhaus" }
     ], 
     upholsteryTypes: [
       "Polster Como\nDekoration Maka",
-      "Polster Milano\nDekoration Lasca",
-      "Polster Pisa\nDekoration Rana",
+      "Polster Milano (Option)\nDekoration Lasca",
+      "Polster Pisa (Option)\nDekoration Rana",
       "Polster Dara\nDekoration Maka"
     ], 
     equipment: {
