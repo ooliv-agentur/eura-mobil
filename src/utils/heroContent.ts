@@ -61,7 +61,7 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Integra model
   if (modelDetails.id === 'integra') {
     return {
-      title: 'Premium-Vollintegration',
+      title: 'Die neue Oberklasse',
       subtitle: 'Integra'
     };
   }
