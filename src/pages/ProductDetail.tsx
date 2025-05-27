@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -7,7 +6,7 @@ import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 import { modelsData, hasLayouts, hasInterior, hasUpholstery, hasEquipment } from "@/data/modelsData";
-import { getHeroContent } from "@/utils/heroContent";
+import { getHeroContent, getModelHeroContent } from "@/utils/heroContent";
 
 // Import modular components
 import { ModelHero } from "@/components/model/ModelHero";
@@ -70,6 +69,7 @@ const ProductDetail = () => {
   }, [location.hash]);
 
   const heroContent = getHeroContent(modelDetails);
+  const modelHeroContent = getModelHeroContent(modelDetails);
   
   // Get the appropriate intro title based on model - return empty for Profila T models
   const getIntroTitle = () => {
@@ -94,10 +94,10 @@ const ProductDetail = () => {
           {/* 2. New Model Hero Section */}
           <section id="model-hero-section" className="my-12 text-center">
             <div className="text-lg md:text-xl font-medium text-gray-600 mb-2">
-              Feel free!
+              {modelHeroContent.headline}
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              Profila T Teilintegrierte
+              {modelHeroContent.subline}
             </h2>
           </section>
 
