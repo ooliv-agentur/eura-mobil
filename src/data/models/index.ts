@@ -99,7 +99,7 @@ In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich v
         "Unterflurgas-Anschluss"
       ],
       livingArea: [
-        "Interieur „Chalet Rustico"",
+        'Interieur "Chalet Rustico"',
         "Dinette-Sitzgruppe",
         "LED-Ambientebeleuchtung", 
         "Panoramafenster",
