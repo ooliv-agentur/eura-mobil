@@ -5,8 +5,8 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Van model
   if (modelDetails.id === 'van') {
     return {
-      title: 'Für Deine beste Zeit.',
-      subtitle: 'Eura Mobil Vans'
+      title: 'Für Aktive und Unabhängige',
+      subtitle: 'Vans'
     };
   }
   
@@ -20,7 +20,7 @@ export function getHeroContent(modelDetails: ModelData) {
 export function getMainHeading(modelDetails: ModelData) {
   // Special case for Van model
   if (modelDetails.id === 'van') {
-    return 'Eura Mobil Van';
+    return 'Für Deine beste Zeit.\nEura Mobil Vans';
   }
   
   // Default case for other models
