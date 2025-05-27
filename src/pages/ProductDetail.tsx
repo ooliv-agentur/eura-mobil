@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -132,8 +131,8 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             topLine={getTopLine()}
           />
 
-          {/* 3. Highlights Section */}
-          <ModelHighlights highlights={modelDetails.highlights} />
+          {/* 3. Highlights Section - Always show with fallback */}
+          <ModelHighlights highlights={modelDetails.highlights || []} />
 
           {/* 4. Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
@@ -151,7 +150,7 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             </div>
           </div>
           
-          {/* 5. Gallery Section */}
+          {/* 5. Gallery Section - Always show */}
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
             <Carousel className="w-full" showIndicators={true}>
@@ -170,30 +169,22 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             </Carousel>
           </section>
           
-          {/* 6. Floorplans Section */}
-          {hasLayouts(modelDetails) && (
-            <ModelFloorplans 
-              floorplans={modelDetails.layouts}
-              showComparison={hasMultipleLayouts}
-            />
-          )}
+          {/* 6. Floorplans Section - Always show with fallback */}
+          <ModelFloorplans 
+            floorplans={modelDetails.layouts || []}
+            showComparison={hasMultipleLayouts}
+          />
           
-          {/* 7. Interior Hotspots Section */}
-          {hasInterior(modelDetails) && (
-            <ModelInteriorHotspots interiorItems={modelDetails.interior} />
-          )}
+          {/* 7. Interior Hotspots Section - Always show with fallback */}
+          <ModelInteriorHotspots interiorItems={modelDetails.interior || []} />
           
-          {/* 8. Upholstery Section */}
-          {hasUpholstery(modelDetails) && (
-            <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes} />
-          )}
+          {/* 8. Upholstery Section - Always show with fallback */}
+          <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes || []} />
           
-          {/* 9. Equipment Tabs Section */}
-          {hasEquipment(modelDetails) && (
-            <ModelEquipmentTabs equipment={modelDetails.equipment} />
-          )}
+          {/* 9. Equipment Tabs Section - Always show with fallback */}
+          <ModelEquipmentTabs equipment={modelDetails.equipment || {}} />
 
-          {/* 10. Final CTA Block */}
+          {/* 10. Final CTA Block - Always show */}
           <ModelFinalCTA modelName={modelDetails.name} />
         </div>
         
