@@ -85,6 +85,9 @@ const ProductDetail = () => {
     if (modelDetails.id === 'profila-t-mercedes') {
       return 'Edel, exklusiv und elegant';
     }
+    if (modelDetails.id === 'contura') {
+      return 'Premium-Teilintegrierte mit Mercedes-Benz Sprinter';
+    }
     return undefined;
   };
   
@@ -110,7 +113,7 @@ const ProductDetail = () => {
           {/* 3. Highlights Section */}
           <ModelHighlights highlights={modelDetails.highlights} />
 
-          {/* Technical Data Summary */}
+          {/* 4. Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
             <div className="flex flex-col items-center p-2">
               <span className="text-sm text-gray-600">Länge</span>
@@ -126,7 +129,7 @@ const ProductDetail = () => {
             </div>
           </div>
           
-          {/* Gallery Section */}
+          {/* 5. Gallery Section */}
           <section className="my-10">
             <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
             <Carousel className="w-full" showIndicators={true}>
@@ -145,7 +148,7 @@ const ProductDetail = () => {
             </Carousel>
           </section>
           
-          {/* 4. Floorplans Section */}
+          {/* 6. Floorplans Section */}
           {hasLayouts(modelDetails) && (
             <ModelFloorplans 
               floorplans={modelDetails.layouts}
@@ -153,22 +156,22 @@ const ProductDetail = () => {
             />
           )}
           
-          {/* 5. Interior Hotspots Section */}
+          {/* 7. Interior Hotspots Section */}
           {hasInterior(modelDetails) && (
             <ModelInteriorHotspots interiorItems={modelDetails.interior} />
           )}
           
-          {/* 6. Upholstery Section */}
+          {/* 8. Upholstery Section */}
           {hasUpholstery(modelDetails) && (
             <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes} />
           )}
           
-          {/* 7. Equipment Tabs Section */}
+          {/* 9. Equipment Tabs Section */}
           {hasEquipment(modelDetails) && (
             <ModelEquipmentTabs equipment={modelDetails.equipment} />
           )}
 
-          {/* 8. Final CTA Block */}
+          {/* 10. Final CTA Block */}
           <ModelFinalCTA modelName={modelDetails.name} />
         </div>
         

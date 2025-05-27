@@ -10,6 +10,14 @@ export function getHeroContent(modelDetails: ModelData) {
     };
   }
   
+  // Special case for Contura model
+  if (modelDetails.id === 'contura') {
+    return {
+      title: 'Luxus trifft Innovation',
+      subtitle: 'Contura'
+    };
+  }
+  
   // Special case for Profila T Fiat model
   if (modelDetails.id === 'profila-t-fiat') {
     return {
@@ -47,6 +55,11 @@ export function getMainHeading(modelDetails: ModelData) {
     return 'Für Deine beste Zeit.\nEura Mobil Vans';
   }
   
+  // Special case for Contura model
+  if (modelDetails.id === 'contura') {
+    return 'Contura Teilintegrierte';
+  }
+  
   // Special case for Profila T Fiat model
   if (modelDetails.id === 'profila-t-fiat') {
     return 'Feel free!\nProfila T Teilintegrierte';
@@ -70,6 +83,11 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   // Special case for Van model
   if (modelDetails.id === 'van') {
     return 'Für Deine beste Zeit. Eura Mobil Vans';
+  }
+  
+  // Special case for Contura model
+  if (modelDetails.id === 'contura') {
+    return 'Contura Teilintegrierte';
   }
   
   // Special case for Profila T Fiat model
