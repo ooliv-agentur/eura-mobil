@@ -29,10 +29,11 @@ export const modelsData = {
       { id: "pt-660-eb", name: "PT 660 EB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "2" }
     ],
     interior: [
-      { name: "726 EF Chalet - Rustico", description: "Gemütliche Sitzgruppe" },
-      { name: "720 EF Chalet - Rustico", description: "Moderne Ausstattung" },
-      { name: "Wohnbereich", description: "Komfortable Betten" },
-      { name: "Küche", description: "Funktionaler Waschraum" }
+      { name: "726 EF Chalet – Rustico", description: "726 EF Chalet – Rustico" },
+      { name: "726 EF Chalet – Rustico", description: "726 EF Chalet – Rustico" },
+      { name: "726 EF Chalet – Rustico", description: "726 EF Chalet – Rustico" },
+      { name: "720 EF Chalet – Rustico", description: "720 EF Chalet – Rustico" },
+      { name: "720 EF Chalet – Rustico", description: "720 EF Chalet – Rustico" }
     ],
     upholsteryTypes: [
       "Polster Como\nDekoration Maka", 
