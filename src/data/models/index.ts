@@ -10,7 +10,11 @@ export const modelsData = {
   "profila-t-fiat": {
     id: "profila-t-fiat",
     name: "Profila T",
-    intro: "Offen, großzügig, frei\n\nUnbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.\n\nIn ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.",
+    intro: `Offen, großzügig, frei
+
+Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.
+
+In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.`,
     heroImage: "/placeholder.svg",
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
     technicalData: { länge: "6,99 – 7,58 m", sitzplätze: "4", schlafplätze: "2" },
@@ -103,7 +107,7 @@ export const modelsData = {
   "profila-rs": {
     id: "profila-rs",
     name: "Profila RS",
-    intro: "Der Profila RS steht für Reisemobil-Luxus der Spitzenklasse. Mit seinem durchdachten Design und der hochwertigen Ausstattung bietet er alles, was das Herz von anspruchsvollen Reisenden höher schlagen lässt. Jedes Detail wurde sorgfältig ausgewählt, um maximalen Komfort zu gewährleisten.",
+    intro: `Der Profila RS steht für Reisemobil-Luxus der Spitzenklasse. Mit seinem durchdachten Design und der hochwertigen Ausstattung bietet er alles, was das Herz von anspruchsvollen Reisenden höher schlagen lässt. Jedes Detail wurde sorgfältig ausgewählt, um maximalen Komfort zu gewährleisten.`,
     heroImage: "/placeholder.svg",
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
     technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" },
