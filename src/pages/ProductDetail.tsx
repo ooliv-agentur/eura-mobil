@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -46,14 +45,11 @@ const ProductDetail = () => {
   const hasMultipleLayouts = hasLayouts(modelDetails) && modelDetails.layouts.length > 1;
   
   const navigationItems = [
-    { id: "model-hero", label: "Hero" },
-    { id: "model-intro", label: "Intro" },
     { id: "model-highlights", label: "Highlights" },
     { id: "model-floorplans", label: "Grundrisse" },
     { id: "model-interior-hotspots", label: "Innenraum" },
     { id: "model-upholstery", label: "Polster" },
     { id: "model-equipment-tabs", label: "Serienausstattung" },
-    { id: "model-final-cta", label: "CTA" },
   ];
   
   useEffect(() => {
