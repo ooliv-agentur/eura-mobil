@@ -440,7 +440,7 @@ Zur Saison 2025 öffnet sich Eura Mobil gleich in mehrfacher Hinsicht den indivi
 
 Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26. Januar  auf einer Sonderfläche auf dem Eura Mobil Stand in Halle 1 B52, wir freuen uns auf Ihren Besuch!`, 
     heroImage: "/placeholder.svg", 
-    galleryImages: ["/placeholder.svg"], 
+    galleryImages: ["/placeholder.svg", "/placeholder.svg"], 
     technicalData: { länge: "6,88 m", sitzplätze: "4", schlafplätze: "2" }, 
     highlights: [
       "330 Ah Lithium-Batterie",
@@ -473,9 +473,7 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
       { name: "LED-Umfeldbeleuchtung", description: "Integrierte Beleuchtung für Campingplätze" }
     ],
     upholsteryTypes: [
-      "Offroad-Polster Robust\nDekoration Canyon",
-      "Expedition-Polster Comfort\nDekoration Desert",
-      "Adventure-Polster Premium\nDekoration Mountain"
+      "Polsterdesign Trail"
     ], 
     equipment: {
       chassis: [
