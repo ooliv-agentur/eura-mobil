@@ -1,3 +1,4 @@
+
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -32,6 +33,7 @@ type CarouselContextProps = {
   scrollSnaps: number[]
   showIndicators?: boolean
   hasScrollableContent: boolean
+  itemCount: number
 } & CarouselProps
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
@@ -75,6 +77,7 @@ const Carousel = React.forwardRef<
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
     const [hasScrollableContent, setHasScrollableContent] = React.useState(false)
+    const [itemCount, setItemCount] = React.useState(0)
 
     const onSelect = React.useCallback((api: CarouselApi) => {
       if (!api) {
@@ -85,10 +88,14 @@ const Carousel = React.forwardRef<
       setCanScrollPrev(api.canScrollPrev())
       setCanScrollNext(api.canScrollNext())
       
-      // Check if content is scrollable by comparing scroll length with container length
-      const scrollSnaps = api.scrollSnapList()
-      const hasScrollable = scrollSnaps.length > 1 && (api.canScrollPrev() || api.canScrollNext() || scrollSnaps.length > 1)
-      setHasScrollableContent(hasScrollable)
+      // Get the actual slide count
+      const slideCount = api.slideNodes().length
+      setItemCount(slideCount)
+      
+      // Determine if content needs scrolling based on slide count and viewport
+      // For typical responsive layouts: show navigation only if more than 4 items
+      const needsScrolling = slideCount > 4 && (api.canScrollPrev() || api.canScrollNext())
+      setHasScrollableContent(needsScrolling)
     }, [])
 
     const scrollTo = React.useCallback((index: number) => {
@@ -160,7 +167,8 @@ const Carousel = React.forwardRef<
           selectedIndex,
           scrollSnaps,
           showIndicators,
-          hasScrollableContent
+          hasScrollableContent,
+          itemCount
         }}
       >
         <div
