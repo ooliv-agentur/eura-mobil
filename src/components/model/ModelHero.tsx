@@ -18,8 +18,8 @@ export const ModelHero: React.FC<ModelHeroProps> = ({
       {/* Hero Section */}
       <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
         <div className="text-center z-10">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{headline}</h1>
-          <p className="text-xl md:text-2xl lg:text-3xl">{subline}</p>
+          <p className="text-xl md:text-2xl lg:text-3xl mb-4">{subline}</p>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold">{headline}</h1>
         </div>
       </div>
     </section>
