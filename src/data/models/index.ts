@@ -1,3 +1,4 @@
+
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -107,7 +108,14 @@ export const modelsData = {
     heroImage: "/placeholder.svg",
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
     technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" },
-    highlights: ["Luxuriöse Ausstattung auf höchstem Niveau", "Großzügige Raumaufteilung", "Premium-Materialien und Verarbeitung", "Innovative Technologie-Integration", "Exklusives Design"],
+    highlights: [
+      "Integriertes Hubbett",
+      "Winterfester, beheizter Doppelboden",
+      "Extra große Stauräume durch Garagenabsenkung",
+      "Isolierte und beheizte Wassertanks",
+      "Elektrisch gesteuerte Abwassertank-Entleerung",
+      "Isofix (grundrissabhängig)"
+    ],
     layouts: [{ id: "prs-899-eb", name: "PRS 899 EB", image: "/placeholder.svg", length: "8,99 m", sleepingPlaces: "2" }],
     interior: [{ name: "Luxus-Lounge", description: "Edle Sitzlandschaft" }, { name: "Designer-Küche", description: "Hochwertige Ausstattung" }, { name: "Master-Bedroom", description: "Komfortables Schlafzimmer" }, { name: "Wellness-Bad", description: "Spa-ähnlicher Komfort" }],
     upholsteryTypes: ["Premium Leder Schwarz", "Premium Leder Cognac", "Luxus-Stoff Anthrazit"],
