@@ -125,7 +125,13 @@ export const modelsData = {
       { id: "prs-720-qf", name: "PRS 720 QF", image: "/placeholder.svg", length: "7,58 m", sleepingPlaces: "4" },
       { id: "prs-720-ef", name: "PRS 720 EF", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "4" }
     ],
-    interior: [{ name: "Luxus-Lounge", description: "Edle Sitzlandschaft" }, { name: "Designer-Küche", description: "Hochwertige Ausstattung" }, { name: "Master-Bedroom", description: "Komfortables Schlafzimmer" }, { name: "Wellness-Bad", description: "Spa-ähnlicher Komfort" }],
+    interior: [
+      { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" },
+      { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" },
+      { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" },
+      { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" },
+      { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" }
+    ],
     upholsteryTypes: ["Premium Leder Schwarz", "Premium Leder Cognac", "Luxus-Stoff Anthrazit"],
     equipment: { chassis: ["Mercedes-Benz Sprinter", "Automatikgetriebe", "Tempomat", "Premium Sicherheitspaket"], body: ["Vollintegrierter Luxus-Aufbau", "Premium Isolierung", "Elektrische Stufe", "LED-Beleuchtungspaket"], livingArea: ["Luxus-Sitzgruppe mit Lederbezug", "Entertainment-System", "Klimaanlage", "Premium-Möbel"], kitchen: ["Induktions-Kochfeld", "Großraum-Kühlschrank", "Backofen mit Grill", "Geschirrspüler"], bathroom: ["Separate Regendusche", "Waschtisch mit Naturstein", "Premium-WC", "Fußbodenheizung"], electrical: ["Lithium-Batterien", "Solaranlage", "Wechselrichter", "Smart-Home-System"] }
   },
