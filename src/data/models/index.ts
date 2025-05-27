@@ -146,26 +146,29 @@ export const modelsData = {
   "profila-t-mercedes": { 
     id: "profila-t-mercedes", 
     name: "Profila T Mercedes", 
-    intro: `Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures. In der Saison 2024 kommt die speziell für die Mercedes Profila geschaffene Wohnwelt 'Natural Heritage' dazu, die den exklusiven Charakter der Top-Modelle noch stärker betont.`, 
+    intro: `Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20 cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures. In der Saison 2024 kommt die speziell für die Mercedes Profila geschaffene Wohnwelt 'Natural Heritage' dazu, die den exklusiven Charakter der Top-Modelle noch stärker betont.`, 
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], 
-    technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
+    technicalData: { länge: "7,12 m – 7,54 m", sitzplätze: "4", schlafplätze: "2" }, 
     highlights: [
       "Basisfahrzeug Mercedes Sprinter",
       "AL-KO Tiefrahmen", 
       "Alde Warmwasserheizung",
       "Auf Wunsch exklusive Wohnwelt \"Natural Heritage\"",
       "Winterfester, beheizter Doppelboden",
-      "Elektrische Abwasserklappen – Entleerung"
+      "Elektrische Abwassertank-Entleerung"
     ], 
     layouts: [
-      { id: "ptm-784-eb", name: "PTM 784 EB", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" },
-      { id: "ptm-784-qf", name: "PTM 784 QF", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" }
+      { id: "pt696-eb", name: "PT696 EB", image: "/placeholder.svg", length: "7,12 m", sleepingPlaces: "2" },
+      { id: "pt726-ef", name: "PT726 EF", image: "/placeholder.svg", length: "7,54 m", sleepingPlaces: "2" },
+      { id: "pt726-qf", name: "PT726 QF", image: "/placeholder.svg", length: "7,54 m", sleepingPlaces: "2" },
+      { id: "pt726-eb", name: "PT726 EB", image: "/placeholder.svg", length: "7,54 m", sleepingPlaces: "2" }
     ], 
     interior: [
-      { name: "PTM 784 Chalet – Rustico", description: "PTM 784 Chalet – Rustico" },
-      { name: "PTM 784 Chalet – Rustico", description: "PTM 784 Chalet – Rustico" },
-      { name: "PTM 784 Chalet – Rustico", description: "PTM 784 Chalet – Rustico" }
+      { name: "726 EF Natural Heritage", description: "726 EF Natural Heritage" },
+      { name: "726 EF Chalet", description: "726 EF Chalet" },
+      { name: "726 EF Natural Heritage", description: "726 EF Natural Heritage" },
+      { name: "726 EF Natural Heritage", description: "726 EF Natural Heritage" }
     ], 
     upholsteryTypes: [
       "Polster Como – Dekoration Maka", 
