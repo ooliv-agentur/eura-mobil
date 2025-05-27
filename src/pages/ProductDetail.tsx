@@ -47,6 +47,7 @@ const ProductDetail = () => {
   
   const navigationItems = [
     { id: "model-hero", label: "Hero" },
+    { id: "model-hero-section", label: "Model Hero" },
     { id: "model-intro", label: "Intro" },
     { id: "model-highlights", label: "Highlights" },
     { id: "model-floorplans", label: "Grundrisse" },
@@ -90,13 +91,23 @@ const ProductDetail = () => {
         />
 
         <div className="container mx-auto overflow-visible">
-          {/* 2. Intro Section */}
+          {/* 2. New Model Hero Section */}
+          <section id="model-hero-section" className="my-12 text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              Hauptüberschrift Platzhalter
+            </h1>
+            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600">
+              {modelDetails.name}
+            </p>
+          </section>
+
+          {/* 3. Intro Section */}
           <ModelIntro 
             title={getIntroTitle()}
             content={modelDetails.intro}
           />
 
-          {/* 3. Highlights Section */}
+          {/* 4. Highlights Section */}
           <ModelHighlights highlights={modelDetails.highlights} />
 
           {/* Technical Data Summary */}
@@ -134,7 +145,7 @@ const ProductDetail = () => {
             </Carousel>
           </section>
           
-          {/* 4. Floorplans Section */}
+          {/* 5. Floorplans Section */}
           {hasLayouts(modelDetails) && (
             <ModelFloorplans 
               floorplans={modelDetails.layouts}
@@ -142,22 +153,22 @@ const ProductDetail = () => {
             />
           )}
           
-          {/* 5. Interior Hotspots Section */}
+          {/* 6. Interior Hotspots Section */}
           {hasInterior(modelDetails) && (
             <ModelInteriorHotspots interiorItems={modelDetails.interior} />
           )}
           
-          {/* 6. Upholstery Section */}
+          {/* 7. Upholstery Section */}
           {hasUpholstery(modelDetails) && (
             <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes} />
           )}
           
-          {/* 7. Equipment Tabs Section */}
+          {/* 8. Equipment Tabs Section */}
           {hasEquipment(modelDetails) && (
             <ModelEquipmentTabs equipment={modelDetails.equipment} />
           )}
 
-          {/* 8. Final CTA Block */}
+          {/* 9. Final CTA Block */}
           <ModelFinalCTA modelName={modelDetails.name} />
         </div>
         
