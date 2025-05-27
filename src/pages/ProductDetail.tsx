@@ -167,12 +167,21 @@ const ProductDetail = () => {
       <ProductLayout modelName={modelDetails.name}>
         <SidebarNavigation items={navigationItems} />
         
-        {/* Hero Section */}
+        {/* Hero Section with Hotspot Picture */}
         <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
-          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
-            <div className="text-center text-black z-10">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
-              <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
+          <div className="relative">
+            <AspectRatio ratio={16/9} className="bg-gray-200">
+              <img 
+                src="https://images.unsplash.com/photo-1721322800607-8c38375eef04" 
+                alt="Van Interior - Living Room"
+                className="w-full h-full object-cover"
+              />
+            </AspectRatio>
+            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+              <div className="text-center text-white z-10">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
+                <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
+              </div>
             </div>
           </div>
         </section>
