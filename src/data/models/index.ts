@@ -455,10 +455,16 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
       { id: "xt-686-ef", name: "XT 686 EF", image: "/placeholder.svg", length: "6,88 m", sleepingPlaces: "2" }
     ], 
     interior: [
-      { name: "Dinette mit Panoramafenster", description: "Komfortable Sitzgruppe mit großem Panoramafenster" },
-      { name: "Kompakte Küche", description: "Funktionale Küche mit Induktionskochfeld und Kompressor-Kühlschrank" },
-      { name: "Komfortables Heckbett", description: "Großes Bett im Heckbereich mit hochwertigen Matratzen" },
-      { name: "Multifunktionales Bad", description: "Platzsparendes Bad mit separater Dusche" }
+      { name: "Einzelsitz Face to Face", description: "Flexibler Einzelsitz mit Face-to-Face Funktion für optimale Raumnutzung" },
+      { name: "Kompressor-Kühlschrank", description: "Energieeffizienter Kompressor-Kühlschrank für lange Standzeiten" },
+      { name: "Schlafbereich", description: "Komfortables Heckbett mit hochwertigen Matratzen" },
+      { name: "Schwenkbare Duschwand", description: "Platzsparende schwenkbare Duschwand für flexibles Badezimmer" },
+      { name: "Filztaschen", description: "Praktische Filztaschen für zusätzlichen Stauraum" },
+      { name: "Gas-/Induktions-Kocher", description: "Vielseitiges Kochfeld mit Gas- und Induktionsfunktion" },
+      { name: "Handtuchstange", description: "Ausziehbare Handtuchstange für praktische Nutzung" },
+      { name: "Schwanenhalslampe", description: "Flexible Schwanenhalslampe für optimale Beleuchtung" },
+      { name: "Panoramadach", description: "Großes Panoramadach für ein offenes Raumgefühl" },
+      { name: "Alde im Laufboden bzw. Sitz", description: "Alde Heizung im Laufboden und Sitzbereich für Wärmekomfort" }
     ],
     exterior: [
       { name: "Robuste Front", description: "Verstärkte Front für Offroad-Einsätze" },
