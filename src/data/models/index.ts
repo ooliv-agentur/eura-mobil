@@ -433,7 +433,11 @@ export const modelsData = {
   "xtura": { 
     id: "xtura", 
     name: "Xtura", 
-    intro: "Der neue Xtura – Stark autark!", 
+    intro: `Mit dem neuen Xtura als seinem ersten 4×4 Fernreisemobil hat Eura Mobil in der Saison auf Anhieb ein eigenes Marktsegment definiert: konsequent robust ausgestattet, mit hoher elektrischer Energieautarkie, busgesteuerter Onboard-Technik und der Möglichkeit zu weltweiter Satellitennavigation im Offroad-Bereich positioniert sich der neue Xtura erfolgreich zwischen den Standard 4×4 Teilintegrierten und High-End Offroad-Expeditionsfahrzeugen.
+
+Zur Saison 2025 öffnet sich Eura Mobil gleich in mehrfacher Hinsicht den individuellen Ansprüchen von Weltreisenden noch deutlicher: zum einen gibt es optional eine „Vorbereitung Alternativtoilette" bei der die Kunden frei wählen können, ob eine Trenntoilette (systemunabhängig) oder doch die klassische WC-Toilette beim Xtura eingebaut wird. Zum Anderen stellt Eura Mobil ein neues „Xtura Carryer" Zubehörsystem vor, bei dem auf einer Grundplatte am Heck wahlweise Ersatzradhalterung oder Transport-/ Sportausrüstung montiert werden können. Auch auf dem Dach finden unterschiedliche, modular zu installierende Transportboxen o.ä. eine sichere Befestigung. Auch im Detail hat sich Eura Mobil schon im Verlauf der Saison 2024 noch stärker an den rauen Anforderungen abseits befestigter Strassen orientiert. So sind die Küchenauszüge beispielsweise mit doppelten Verschlüssen gesichert worden.
+
+Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26. Januar  auf einer Sonderfläche auf dem Eura Mobil Stand in Halle 1 B52, wir freuen uns auf Ihren Besuch!`, 
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg"], 
     technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
