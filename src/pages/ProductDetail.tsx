@@ -104,7 +104,7 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
       return 'DER GRAND TOURISMO IN DER KÖNIGSKLASSE';
     }
     if (modelDetails.id === 'integra') {
-      return 'Premium-Vollintegration auf höchstem Niveau';
+      return 'Der Freiheit ein Gesicht gegeben.';
     }
     if (modelDetails.id === 'xtura') {
       return 'Innovation und Design in reinster Form';

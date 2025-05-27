@@ -119,7 +119,7 @@ export function getMainHeading(modelDetails: ModelData) {
   
   // Special case for Integra model
   if (modelDetails.id === 'integra') {
-    return 'Integra Premium-Vollintegration';
+    return 'Integra – Oberklasse Integrierte';
   }
   
   // Special case for Xtura model
@@ -169,7 +169,7 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   
   // Special case for Integra model
   if (modelDetails.id === 'integra') {
-    return 'Integra Premium-Vollintegration';
+    return 'Integra – Oberklasse Integrierte';
   }
   
   // Special case for Xtura model
