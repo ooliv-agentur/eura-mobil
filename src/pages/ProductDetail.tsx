@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -18,7 +17,6 @@ import { ModelInteriorHotspots } from "@/components/model/ModelInteriorHotspots"
 import { ModelUpholstery } from "@/components/model/ModelUpholstery";
 import { ModelEquipmentTabs } from "@/components/model/ModelEquipmentTabs";
 import { ModelFinalCTA } from "@/components/model/ModelFinalCTA";
-import { Check } from "lucide-react";
 
 import {
   Carousel,
@@ -113,151 +111,29 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
     }
     return undefined;
   };
-
-  // Custom content for Integra model based on screenshot
-  const renderIntegraHeroAndIntro = () => {
-    if (modelDetails.id === 'integra') {
-      return (
-        <>
-          {/* Custom Integra Hero Section */}
-          <section id="model-hero" className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
-            <div 
-              className="relative h-[60vh] md:h-[70vh] flex items-center justify-center bg-cover bg-center"
-              style={{
-                backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/lovable-uploads/dd9e9bac-23d8-476d-9bcf-59a8d4eb1d81.png')`
-              }}
-            >
-              <div className="text-center z-10 px-4 max-w-6xl text-white">
-                <h1 className="text-red-500 text-4xl md:text-6xl lg:text-7xl font-bold italic mb-4" style={{ fontFamily: 'serif' }}>
-                  Integra
-                </h1>
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
-                  Die neue Oberklasse
-                </h2>
-              </div>
-            </div>
-            
-            {/* Navigation tabs */}
-            <div className="bg-white border-b">
-              <div className="container mx-auto">
-                <nav className="flex justify-center space-x-8 py-4">
-                  <a href="#model-highlights" className="text-gray-800 hover:text-red-500 font-medium">HIGHLIGHTS</a>
-                  <a href="#model-floorplans" className="text-gray-800 hover:text-red-500 font-medium">GRUNDRISSE</a>
-                  <a href="#model-interior-hotspots" className="text-gray-800 hover:text-red-500 font-medium">INNENRAUM</a>
-                  <a href="#model-upholstery" className="text-gray-800 hover:text-red-500 font-medium">POLSTER</a>
-                  <a href="#model-equipment-tabs" className="text-gray-800 hover:text-red-500 font-medium">SERIENAUSSTATTUNG</a>
-                </nav>
-              </div>
-            </div>
-          </section>
-
-          {/* Custom Integra Intro Section */}
-          <section id="model-intro" className="mb-16">
-            <div className="mx-auto">
-              <p className="text-xl md:text-2xl text-center mb-4 text-blue-800">Der Freiheit ein Gesicht gegeben.</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-                Integra – Oberklasse<br />Integrierte
-              </h2>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <div className="space-y-6 leading-relaxed text-gray-700">
-                  <p>
-                    Mit dem Integra hat Eura Mobil die Messlatte bei den Reisemobilen der Oberklasse auf ein völlig neues Niveau gehoben: Ein emotional markantes, gleichzeitig hochfunktionales und eindeutig sicherheitsorientiertes <strong>Lichtdesign</strong> innen wie außen untermalt den luxuriösen Charakter in dieser Klasse. Dezente Ambientebeleuchtung und <strong>modernste LED-Technik</strong> erzeugen eine besonders eindrucksvolle Lichtstimmung, die sich überall sehen lassen kann. Hochwertige Materialien, erstklassige Verarbeitung, formvollendete Architektur und die <strong>extrem großzügige Raumgestaltung</strong> verbinden sich zu einem unvergleichlichen Wohlfühlambiente. Steigen Sie ein und lassen Sie sich von vorne bis hinten begeistern – während Ihrer gesamten Reise in diesem <strong>Luxus-Reisemobil</strong>.
-                  </p>
-                </div>
-                
-                <div>
-                  <div className="bg-[#E5E7EB] w-full aspect-video rounded-md" />
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Custom Integra Highlights Section */}
-          <section id="model-highlights" className="mb-16">
-            <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
-              <h3 className="text-2xl md:text-3xl font-bold mb-6">Highlights der Baureihe:</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-sm bg-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p><strong>Modernste LED-Lichttechnik</strong></p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-sm bg-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p><strong>Sitzpolster mit Einzelkissen</strong></p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-sm bg-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p><strong>Isolierte und beheizte Wassertanks</strong></p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-sm bg-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p><strong>Automotives Design</strong></p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-sm bg-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p><strong>Winterfester, beheizter Doppelboden</strong></p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-sm bg-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="h-4 w-4 text-white" />
-                    </div>
-                    <p><strong>Elektrische Abwassertankentleerung</strong></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      );
-    }
-    return null;
-  };
   
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
         <SidebarNavigation items={navigationItems} />
         
-        {/* Render custom Integra sections or standard sections */}
-        {modelDetails.id === 'integra' ? (
-          renderIntegraHeroAndIntro()
-        ) : (
-          <>
-            {/* 1. Hero Section */}
-            <ModelHero 
-              headline={heroContent.title}
-              subline={heroContent.subtitle}
-            />
-
-            <div className="container mx-auto overflow-visible">
-              {/* 2. Intro Section */}
-              <ModelIntro 
-                title={introSectionTitle}
-                content={getIntroContent()}
-                topLine={getTopLine()}
-              />
-
-              {/* 3. Highlights Section - Always show with fallback */}
-              <ModelHighlights highlights={modelDetails.highlights || []} />
-            </div>
-          </>
-        )}
+        {/* 1. Hero Section */}
+        <ModelHero 
+          headline={heroContent.title}
+          subline={heroContent.subtitle}
+        />
 
         <div className="container mx-auto overflow-visible">
+          {/* 2. Intro Section */}
+          <ModelIntro 
+            title={introSectionTitle}
+            content={getIntroContent()}
+            topLine={getTopLine()}
+          />
+
+          {/* 3. Highlights Section - Always show with fallback */}
+          <ModelHighlights highlights={modelDetails.highlights || []} />
+
           {/* 4. Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
             <div className="flex flex-col items-center p-2">
