@@ -71,10 +71,10 @@ const ProductDetail = () => {
 
   const heroContent = getHeroContent(modelDetails);
   
-  // Get the appropriate intro title based on model
+  // Get the appropriate intro title based on model - return empty for Profila T models
   const getIntroTitle = () => {
     if (modelDetails.id === "profila-t-fiat" || modelDetails.id === "profila-t-mercedes") {
-      return "Profila T";
+      return ""; // Hide the intro title for Profila T models
     }
     return `Für Deine beste Zeit. Eura Mobil ${modelDetails.name}`;
   };
