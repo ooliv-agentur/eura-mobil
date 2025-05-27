@@ -16,3 +16,13 @@ export function getHeroContent(modelDetails: ModelData) {
     subtitle: modelDetails.name
   };
 }
+
+export function getMainHeading(modelDetails: ModelData) {
+  // Special case for Profila T models
+  if (modelDetails.id === "profila-t-fiat" || modelDetails.id === "profila-t-mercedes") {
+    return "Profila T";
+  }
+  
+  // Default heading for other models
+  return `Für Deine beste Zeit. Eura Mobil ${modelDetails.name}`;
+}
