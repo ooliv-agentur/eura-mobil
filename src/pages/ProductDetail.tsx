@@ -1,15 +1,24 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Card, CardContent } from "@/components/ui/card";
-import { Check, Circle } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { ProductLayout } from "@/components/ProductLayout";
+import { ComparisonProvider } from "@/context/ComparisonContext";
+import { ComparisonBar } from "@/components/comparison/ComparisonBar";
+import { ComparisonModal } from "@/components/comparison/ComparisonModal";
+import { SidebarNavigation } from "@/components/SidebarNavigation";
+import { modelsData, hasLayouts, hasInterior, hasUpholstery, hasEquipment } from "@/data/modelsData";
+import { getHeroContent } from "@/utils/heroContent";
+
+// Import modular components
+import { ModelHero } from "@/components/model/ModelHero";
+import { ModelIntro } from "@/components/model/ModelIntro";
+import { ModelHighlights } from "@/components/model/ModelHighlights";
+import { ModelFloorplans } from "@/components/model/ModelFloorplans";
+import { ModelInteriorHotspots } from "@/components/model/ModelInteriorHotspots";
+import { ModelUpholstery } from "@/components/model/ModelUpholstery";
+import { ModelEquipmentTabs } from "@/components/model/ModelEquipmentTabs";
+import { ModelFinalCTA } from "@/components/model/ModelFinalCTA";
+
 import {
   Carousel,
   CarouselContent,
@@ -18,14 +27,7 @@ import {
   CarouselPrevious,
   CarouselIndicators,
 } from "@/components/ui/carousel";
-import { ProductLayout } from "@/components/ProductLayout";
-import { ComparisonProvider } from "@/context/ComparisonContext";
-import { ComparisonBar } from "@/components/comparison/ComparisonBar";
-import { ComparisonModal } from "@/components/comparison/ComparisonModal";
-import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
-import { SidebarNavigation } from "@/components/SidebarNavigation";
-import { modelsData, equipmentTabs, hasLayouts, hasInterior, hasUpholstery, hasEquipment } from "@/data/modelsData";
-import { getHeroContent } from "@/utils/heroContent";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const ProductDetail = () => {
   const { modelId } = useParams();
@@ -44,11 +46,14 @@ const ProductDetail = () => {
   const hasMultipleLayouts = hasLayouts(modelDetails) && modelDetails.layouts.length > 1;
   
   const navigationItems = [
-    { id: "highlights", label: "Highlights" },
-    { id: "grundrisse", label: "Grundrisse" },
-    { id: "innenraum", label: "Innenraum" },
-    { id: "polster", label: "Polster" },
-    { id: "serienausstattung", label: "Serienausstattung" },
+    { id: "model-hero", label: "Hero" },
+    { id: "model-intro", label: "Intro" },
+    { id: "model-highlights", label: "Highlights" },
+    { id: "model-floorplans", label: "Grundrisse" },
+    { id: "model-interior-hotspots", label: "Innenraum" },
+    { id: "model-upholstery", label: "Polster" },
+    { id: "model-equipment-tabs", label: "Serienausstattung" },
+    { id: "model-final-cta", label: "CTA" },
   ];
   
   useEffect(() => {
@@ -62,180 +67,29 @@ const ProductDetail = () => {
       return () => clearTimeout(timer);
     }
   }, [location.hash]);
-  
-  const EmptyGrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`} />
-  );
-
-  const renderLayouts = () => {
-    if (!hasLayouts(modelDetails)) return null;
-    
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {modelDetails.layouts.map((layout) => (
-          <SelectableModelCard 
-            key={layout.id}
-            id={layout.id}
-            name={layout.name}
-            length={layout.length}
-            sleepingPlaces={layout.sleepingPlaces}
-            showComparison={hasMultipleLayouts}
-          />
-        ))}
-      </div>
-    );
-  };
-  
-  const renderInterior = () => {
-    if (!hasInterior(modelDetails)) return null;
-    
-    return (
-      <Carousel className="w-full" showIndicators={true}>
-        <CarouselContent>
-          {modelDetails.interior.map((item, index) => (
-            <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-              <Card className="overflow-hidden border shadow-sm">
-                <AspectRatio ratio={1/1} className="bg-gray-200" />
-                <CardContent className="p-4">
-                  <h3 className="font-medium mb-1">{item.name}</h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
-                </CardContent>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="hidden md:flex justify-end gap-2 mt-2">
-          <CarouselPrevious />
-          <CarouselNext />
-        </div>
-        <CarouselIndicators />
-      </Carousel>
-    );
-  };
-  
-  const renderUpholstery = () => {
-    if (!hasUpholstery(modelDetails)) return null;
-    
-    const upholsteryData = modelDetails.id === "profila-t-mercedes" 
-      ? [
-          "Polster Como\nDekoration Maka",
-          "Polster Milano\nDekoration Lasca", 
-          "Polster Pisa\nDekoration Rana",
-          "Polster Dara\nDekoration Maka",
-          "Polster Bergamo\nDekoration Evorno"
-        ]
-      : modelDetails.upholsteryTypes;
-    
-    return (
-      <Carousel className="w-full" showIndicators={true}>
-        <CarouselContent>
-          {upholsteryData.map((type, index) => (
-            <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3">
-              <div className="bg-gray-100 rounded-lg overflow-hidden">
-                <AspectRatio ratio={4/3} className="bg-gray-200" />
-                <div className="p-3 text-center">
-                  <h3 className="font-medium whitespace-pre-line">{type}</h3>
-                </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="hidden md:flex justify-end gap-2 mt-2">
-          <CarouselPrevious />
-          <CarouselNext />
-        </div>
-        <CarouselIndicators />
-      </Carousel>
-    );
-  };
-  
-  const renderEquipment = () => {
-    if (!hasEquipment(modelDetails)) return null;
-    
-    return (
-      <div className="space-y-4">
-        {Object.entries(modelDetails.equipment).map(([key, items]) => (
-          <Accordion type="single" collapsible className="w-full" key={key}>
-            <AccordionItem value={key} className="border rounded-lg bg-white">
-              <AccordionTrigger className="px-4 py-3">
-                <span className="text-lg font-medium">{equipmentTabs[key as keyof typeof equipmentTabs]}</span>
-              </AccordionTrigger>
-              <AccordionContent className="px-4 pb-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                  {items.map((item, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        ))}
-      </div>
-    );
-  };
 
   const heroContent = getHeroContent(modelDetails);
-  
-  // Split intro text by double line breaks to create paragraphs
-  const introParagraphs = modelDetails.intro.split('\n\n').filter(paragraph => paragraph.trim() !== '');
   
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
         <SidebarNavigation items={navigationItems} />
         
-        {/* Full-width Hero Section */}
-        <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
-          <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
-            <div className="text-center text-black z-10">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">{heroContent.title}</h1>
-              <p className="text-xl md:text-2xl lg:text-3xl">{heroContent.subtitle}</p>
-            </div>
-          </div>
-        </section>
+        {/* 1. Hero Section */}
+        <ModelHero 
+          headline={heroContent.title}
+          subline={heroContent.subtitle}
+        />
 
         <div className="container mx-auto overflow-visible">
-          {/* Intro Section with Highlights */}
-          <section id="highlights" className="mb-16">
-            <div className="mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
-                Für Deine beste Zeit. Eura Mobil Vans
-              </h2>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <div className="space-y-8 text-black leading-relaxed">
-                  {introParagraphs.map((paragraph, index) => (
-                    <div key={index}>
-                      <p className="text-black">
-                        {paragraph.trim()}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                
-                <div>
-                  <EmptyGrayBoxPlaceholder ratio={16/9} />
-                </div>
-              </div>
+          {/* 2. Intro Section */}
+          <ModelIntro 
+            title="Für Deine beste Zeit. Eura Mobil Vans"
+            content={modelDetails.intro}
+          />
 
-              <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
-                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-black">Highlights:</h3>
-                <div className="space-y-4">
-                  {modelDetails.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                      <div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-                        <Circle className="h-3 w-3 text-gray-600 fill-current" />
-                      </div>
-                      <p className="text-black">{highlight}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
+          {/* 3. Highlights Section */}
+          <ModelHighlights highlights={modelDetails.highlights} />
 
           {/* Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
@@ -272,37 +126,31 @@ const ProductDetail = () => {
             </Carousel>
           </section>
           
-          {/* Grundrisse Section */}
+          {/* 4. Floorplans Section */}
           {hasLayouts(modelDetails) && (
-            <section id="grundrisse" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
-              {renderLayouts()}
-            </section>
+            <ModelFloorplans 
+              floorplans={modelDetails.layouts}
+              showComparison={hasMultipleLayouts}
+            />
           )}
           
-          {/* Innenraum Section */}
+          {/* 5. Interior Hotspots Section */}
           {hasInterior(modelDetails) && (
-            <section id="innenraum" className="my-10">
-              <h2 className="text-2xl font-semibold mb-6">Innenraum</h2>
-              {renderInterior()}
-            </section>
+            <ModelInteriorHotspots interiorItems={modelDetails.interior} />
           )}
           
-          {/* Polster Section */}
+          {/* 6. Upholstery Section */}
           {hasUpholstery(modelDetails) && (
-            <section id="polster" className="my-10">
-              <h2 className="text-2xl font-semibold mb-4">Polster</h2>
-              {renderUpholstery()}
-            </section>
+            <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes} />
           )}
           
-          {/* Serienausstattung Section */}
+          {/* 7. Equipment Tabs Section */}
           {hasEquipment(modelDetails) && (
-            <section id="serienausstattung" className="my-10 pt-8">
-              <h2 className="text-2xl font-semibold mb-6">Serienausstattung</h2>
-              {renderEquipment()}
-            </section>
+            <ModelEquipmentTabs equipment={modelDetails.equipment} />
           )}
+
+          {/* 8. Final CTA Block */}
+          <ModelFinalCTA modelName={modelDetails.name} />
         </div>
         
         {/* Comparison components */}
