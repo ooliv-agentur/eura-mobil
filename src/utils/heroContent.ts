@@ -45,8 +45,8 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Integra Line Fiat model
   if (modelDetails.id === 'integra-line-fiat') {
     return {
-      title: 'Vollintegrierte Raumwunder',
-      subtitle: 'Integra Line Fiat'
+      title: 'Freiheit soll genossen werden.',
+      subtitle: 'Integra Line'
     };
   }
   
@@ -109,7 +109,7 @@ export function getMainHeading(modelDetails: ModelData) {
   
   // Special case for Integra Line Fiat model
   if (modelDetails.id === 'integra-line-fiat') {
-    return 'Integra Line auf Fiat Ducato';
+    return 'Integra Line Integrierte';
   }
   
   // Special case for Integra Line GT Mercedes model
@@ -159,7 +159,7 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   
   // Special case for Integra Line Fiat model
   if (modelDetails.id === 'integra-line-fiat') {
-    return 'Integra Line auf Fiat Ducato';
+    return 'Integra Line Integrierte';
   }
   
   // Special case for Integra Line GT Mercedes model

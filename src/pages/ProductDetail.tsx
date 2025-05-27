@@ -81,6 +81,9 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
     if (modelDetails.id === 'profila-rs') {
       return `Mit 140 PS Motorisierung und mit State-of-the-art-Fahrzeugtechnik, wie ABS, ESP und 16''-Rädern am CCS-Breitspur-Tiefrahmen mit einer Spurweite von 1.980 mm und weiteren intelligenten Techniklösungen ausgestattet, lässt es sich in den Profila RS Modellen stressfrei in den Traumurlaub starten: Im Fahrerhaus mit seiner schnittigen Silhouette und dem bequemen Fahrersitz Platz genommen, kann kommen, was will – der verdienten Auszeit steht nichts mehr im Weg. Im Innenraum des Wohnmobils beeindruckt das großzügige Raumgefühl, das vor allem durch die in der Decke „versenkte" Hubbett (Serie) entsteht. Auch der Aufbau mit durchgehend isoliertem Leichtbaudoppelboden, holzfreier GFK-Wandung und dem leicht erreichbaren Serviceklappen lässt keine Wünsche an eine angenehme Reise offen.`;
     }
+    if (modelDetails.id === 'integra-line-fiat') {
+      return `Sich einfach mal ganz weit wegträumen – oder einfach gleich hinfahren! Diese Freiheit genießen Sie ganz individuell mit dem Integra Line: das Reisemobil für alle, die ihren eigenen Weg gehen und dabei die ursprüngliche Vielfalt der Landschaft genießen wollen. Für die, die herausragendes Design lieben, vor allem wenn es aus natürlichen Formen entsteht. Und auch für alle, die ihren Traum von individueller Freiheit in die Wirklichkeit verwandeln wollen. Das Fahrzeug schmiegt sich ganz einfach in die natürliche Umgebung ein und lässt dich keine Wünsche an Luxus und Komfort offen.`;
+    }
     return modelDetails.intro;
   };
 
@@ -96,7 +99,7 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
       return 'Edel, exklusiv und elegant';
     }
     if (modelDetails.id === 'integra-line-fiat') {
-      return 'Vollintegrierte Raumwunder auf Fiat Ducato';
+      return 'Freiheit soll genossen werden.';
     }
     if (modelDetails.id === 'integra-line-gt-mercedes') {
       return 'Luxus und Performance auf Mercedes-Benz Sprinter';

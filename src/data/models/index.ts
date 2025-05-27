@@ -151,7 +151,26 @@ export const modelsData = {
     equipment: { chassis: ["Mercedes-Benz Sprinter", "Automatikgetriebe", "Tempomat", "Premium Sicherheitspaket"], body: ["Vollintegrierter Luxus-Aufbau", "Premium Isolierung", "Elektrische Stufe", "LED-Beleuchtungspaket"], livingArea: ["Luxus-Sitzgruppe mit Lederbezug", "Entertainment-System", "Klimaanlage", "Premium-Möbel"], kitchen: ["Induktions-Kochfeld", "Großraum-Kühlschrank", "Backofen mit Grill", "Geschirrspüler"], bathroom: ["Separate Regendusche", "Waschtisch mit Naturstein", "Premium-WC", "Fußbodenheizung"], electrical: ["Lithium-Batterien", "Solaranlage", "Wechselrichter", "Smart-Home-System"] }
   },
   // Add remaining models with condensed data for now...
-  "integra-line-fiat": { id: "integra-line-fiat", name: "Integra Line Fiat", intro: "Die Integra Line auf Fiat Ducato bietet vollintegrierte Raumwunder mit optimaler Platzausnutzung.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "2-4" }, highlights: ["Vollintegrierter Aufbau"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
+  "integra-line-fiat": { 
+    id: "integra-line-fiat", 
+    name: "Integra Line Fiat", 
+    intro: "Sich einfach mal ganz weit wegträumen – oder einfach gleich hinfahren! Diese Freiheit genießen Sie ganz individuell mit dem Integra Line: das Reisemobil für alle, die ihren eigenen Weg gehen und dabei die ursprüngliche Vielfalt der Landschaft genießen wollen. Für die, die herausragendes Design lieben, vor allem wenn es aus natürlichen Formen entsteht. Und auch für alle, die ihren Traum von individueller Freiheit in die Wirklichkeit verwandeln wollen. Das Fahrzeug schmiegt sich ganz einfach in die natürliche Umgebung ein und lässt dich keine Wünsche an Luxus und Komfort offen.", 
+    heroImage: "/placeholder.svg", 
+    galleryImages: ["/placeholder.svg"], 
+    technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "2-4" }, 
+    highlights: [
+      "Winterfester, beheizter Doppelboden",
+      "Elektrische Abwassertankentleerung",
+      "Gesamthöhe unter 2,90 m",
+      "Isolierte und beheizte Wassertanks",
+      "Optional mit Alde Warmwasserheizung",
+      "Isofix (grundrissabhängig)"
+    ], 
+    layouts: [], 
+    interior: [], 
+    upholsteryTypes: [], 
+    equipment: {} 
+  },
   "integra-line-gt-mercedes": { id: "integra-line-gt-mercedes", name: "Integra Line GT Mercedes", intro: "Die Integra Line GT auf Mercedes-Benz Sprinter verkörpert Luxus und Performance in Perfektion.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Mercedes-Benz Sprinter Chassis"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
   "profila-t-mercedes": { 
     id: "profila-t-mercedes", 
