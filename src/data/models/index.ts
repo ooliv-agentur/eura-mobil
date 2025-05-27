@@ -132,7 +132,13 @@ export const modelsData = {
       { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" },
       { name: "PRS 675 Chalet – Rustico", description: "PRS 675 Chalet – Rustico" }
     ],
-    upholsteryTypes: ["Premium Leder Schwarz", "Premium Leder Cognac", "Luxus-Stoff Anthrazit"],
+    upholsteryTypes: [
+      "Polster Como – Dekoration Maka", 
+      "Polster Milano – Dekoration Lasca", 
+      "Polster Pisa – Dekoration Rana",
+      "Polster Dara – Dekoration Maka",
+      "Polster Bergamo – Dekoration Evorno"
+    ],
     equipment: { chassis: ["Mercedes-Benz Sprinter", "Automatikgetriebe", "Tempomat", "Premium Sicherheitspaket"], body: ["Vollintegrierter Luxus-Aufbau", "Premium Isolierung", "Elektrische Stufe", "LED-Beleuchtungspaket"], livingArea: ["Luxus-Sitzgruppe mit Lederbezug", "Entertainment-System", "Klimaanlage", "Premium-Möbel"], kitchen: ["Induktions-Kochfeld", "Großraum-Kühlschrank", "Backofen mit Grill", "Geschirrspüler"], bathroom: ["Separate Regendusche", "Waschtisch mit Naturstein", "Premium-WC", "Fußbodenheizung"], electrical: ["Lithium-Batterien", "Solaranlage", "Wechselrichter", "Smart-Home-System"] }
   },
   // Add remaining models with condensed data for now...
