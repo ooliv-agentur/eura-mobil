@@ -7,7 +7,7 @@ import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 import { modelsData, hasLayouts, hasInterior, hasUpholstery, hasEquipment } from "@/data/modelsData";
-import { getHeroContent } from "@/utils/heroContent";
+import { getHeroContent, getIntroSectionTitle } from "@/utils/heroContent";
 
 // Import modular components
 import { ModelHero } from "@/components/model/ModelHero";
@@ -69,6 +69,7 @@ const ProductDetail = () => {
   }, [location.hash]);
 
   const heroContent = getHeroContent(modelDetails);
+  const introSectionTitle = getIntroSectionTitle(modelDetails);
   
   return (
     <ComparisonProvider>
@@ -84,7 +85,7 @@ const ProductDetail = () => {
         <div className="container mx-auto overflow-visible">
           {/* 2. Intro Section */}
           <ModelIntro 
-            title="Für Deine beste Zeit. Eura Mobil Vans"
+            title={introSectionTitle}
             content={modelDetails.intro}
           />
 

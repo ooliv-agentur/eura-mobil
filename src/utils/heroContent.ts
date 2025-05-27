@@ -39,3 +39,18 @@ export function getMainHeading(modelDetails: ModelData) {
   // Default case for other models
   return modelDetails.name;
 }
+
+export function getIntroSectionTitle(modelDetails: ModelData) {
+  // Special case for Van model
+  if (modelDetails.id === 'van') {
+    return 'Für Deine beste Zeit. Eura Mobil Vans';
+  }
+  
+  // Special case for Profila T Fiat model
+  if (modelDetails.id === 'profila-t-fiat') {
+    return 'Feel free!\nProfila T Teilintegrierte';
+  }
+  
+  // Default case for other models
+  return `Für Deine beste Zeit. ${modelDetails.name}`;
+}
