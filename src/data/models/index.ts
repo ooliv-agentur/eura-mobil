@@ -1,4 +1,5 @@
 
+
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -107,7 +108,7 @@ export const modelsData = {
     intro: `Der Profila RS steht für Reisemobil-Luxus der Spitzenklasse. Mit seinem durchdachten Design und der hochwertigen Ausstattung bietet er alles, was das Herz von anspruchsvollen Reisenden höher schlagen lässt. Jedes Detail wurde sorgfältig ausgewählt, um maximalen Komfort zu gewährleisten.`,
     heroImage: "/placeholder.svg",
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
-    technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" },
+    technicalData: { länge: "6,99 – 7,58 m", sitzplätze: "4", schlafplätze: "4" },
     highlights: [
       "Integriertes Hubbett",
       "Winterfester, beheizter Doppelboden",
@@ -132,3 +133,4 @@ export const modelsData = {
 
 // Re-export types and other utilities
 export * from '../modelsData';
+
