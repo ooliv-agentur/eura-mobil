@@ -4,14 +4,18 @@ import { Circle } from "lucide-react";
 
 interface ModelHighlightsProps {
   highlights: string[];
+  headline?: string;
 }
 
-export const ModelHighlights: React.FC<ModelHighlightsProps> = ({ highlights }) => {
+export const ModelHighlights: React.FC<ModelHighlightsProps> = ({ 
+  highlights, 
+  headline = "Highlights der Baureihe:" 
+}) => {
   return (
     <section id="model-highlights" className="mb-16">
       {/* Highlights Section */}
       <div className="bg-gray-50 p-6 md:p-8 rounded-lg">
-        <h3 className="text-2xl md:text-3xl font-bold mb-6">Highlights der Baureihe:</h3>
+        <h3 className="text-2xl md:text-3xl font-bold mb-6">{headline}</h3>
         <div className="space-y-4">
           {highlights.map((highlight, index) => (
             <div key={index} className="flex items-start gap-4">

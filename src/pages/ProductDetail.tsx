@@ -112,6 +112,14 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
     return undefined;
   };
   
+  // Get custom highlights headline for specific models
+  const getHighlightsHeadline = () => {
+    if (modelDetails.id === 'xtura') {
+      return 'Highlights (zum Teil als Sonderausstattung):';
+    }
+    return undefined; // Uses default headline
+  };
+  
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
@@ -132,7 +140,10 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
           />
 
           {/* 3. Highlights Section - Always show with fallback */}
-          <ModelHighlights highlights={modelDetails.highlights || []} />
+          <ModelHighlights 
+            highlights={modelDetails.highlights || []} 
+            headline={getHighlightsHeadline()}
+          />
 
           {/* 4. Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">

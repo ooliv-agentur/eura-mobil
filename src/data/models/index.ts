@@ -441,7 +441,15 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
     heroImage: "/placeholder.svg", 
     galleryImages: ["/placeholder.svg"], 
     technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
-    highlights: ["Zukunftsweisendes Design"], 
+    highlights: [
+      "330 Ah Lithium-Batterie",
+      "Allradantrieb",
+      "Garmin world wide Navigation",
+      "Busgesteuerte Überwachung der Bordtechnik via Control-Panel und Pad/Smartphone",
+      "Solarmodule und Umfeldbeleuchtung in Dachträgersystem integriert",
+      "Besonders verwindungsfester Aufbau mit 85mm starker Bodenplatte",
+      "Komfortausstattung u.a. mit Fußbodenheizung, Kompressor-Kühlschrank und Backofen"
+    ], 
     layouts: [], 
     interior: [], 
     upholsteryTypes: [], 
