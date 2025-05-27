@@ -114,7 +114,11 @@ const ActivaOneDetail = () => {
         {/* Intro Section */}
         <section id="highlights" className="mb-16">
           <div className="mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">Ein Zuhause für Groß und Klein. Activa One</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">
+              Ein Zuhause für Groß und Klein.
+              <br />
+              Activa One Alkoven Wohnmobile
+            </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
               <div className="space-y-8 text-black leading-relaxed">
