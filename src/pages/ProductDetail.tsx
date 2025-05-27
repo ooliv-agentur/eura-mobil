@@ -70,6 +70,14 @@ const ProductDetail = () => {
 
   const heroContent = getHeroContent(modelDetails);
   
+  // Get the appropriate intro title based on model
+  const getIntroTitle = () => {
+    if (modelDetails.id === "profila-t-fiat" || modelDetails.id === "profila-t-mercedes") {
+      return "Profila T";
+    }
+    return `Für Deine beste Zeit. Eura Mobil ${modelDetails.name}`;
+  };
+  
   return (
     <ComparisonProvider>
       <ProductLayout modelName={modelDetails.name}>
@@ -84,7 +92,7 @@ const ProductDetail = () => {
         <div className="container mx-auto overflow-visible">
           {/* 2. Intro Section */}
           <ModelIntro 
-            title="Für Deine beste Zeit. Eura Mobil Vans"
+            title={getIntroTitle()}
             content={modelDetails.intro}
           />
 
@@ -112,7 +120,7 @@ const ProductDetail = () => {
             <h2 className="text-2xl font-semibold mb-4">Galerie</h2>
             <Carousel className="w-full" showIndicators={true}>
               <CarouselContent>
-                {[1, 2, 3, 4, 5, 6].map((_, index) => (
+                {modelDetails.galleryImages.map((_, index) => (
                   <CarouselItem key={index} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                     <AspectRatio ratio={4/3} className="bg-gray-200 rounded-md" />
                   </CarouselItem>

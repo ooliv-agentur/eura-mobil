@@ -10,13 +10,17 @@ export const modelsData = {
   "profila-t-fiat": {
     id: "profila-t-fiat",
     name: "Profila T",
-    intro: `Offen, großzügig, frei
-
-Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.
+    intro: `Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.
 
 In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.`,
     heroImage: "/placeholder.svg",
-    galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
+    galleryImages: [
+      "/placeholder.svg", 
+      "/placeholder.svg", 
+      "/placeholder.svg", 
+      "/placeholder.svg",
+      "/placeholder.svg"
+    ],
     technicalData: { länge: "6,99 – 7,58 m", sitzplätze: "4", schlafplätze: "2" },
     highlights: [
       "Winterfester, beheizter Doppelboden",
@@ -34,17 +38,18 @@ In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich v
       { id: "pt-660-eb", name: "PT 660 EB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "2" }
     ],
     interior: [
-      { name: "726 EF Chalet - Rustico", description: "Gemütliche Sitzgruppe" },
-      { name: "720 EF Chalet - Rustico", description: "Moderne Ausstattung" },
-      { name: "Wohnbereich", description: "Komfortable Betten" },
-      { name: "Küche", description: "Funktionaler Waschraum" }
+      { name: "Oberschränke", description: "Geräumige Staumöglichkeiten" },
+      { name: "Einzelsitze mit Isofix-Halterung", description: "Sichere Kindersitzanbindung" },
+      { name: "Tisch mit klappbarer Platte", description: "Flexibler Esstisch" },
+      { name: "Gewürzboard", description: "Praktische Küchenausstattung" },
+      { name: "Küchenblock mit viel Arbeitsfläche", description: "Komfortable Kochstelle" }
     ],
     upholsteryTypes: [
-      "Polster Como\nDekoration Maka", 
-      "Polster Milano\nDekoration Lasca", 
-      "Polster Pisa\nDekoration Rana",
-      "Polster Dara\nDekoration Maka",
-      "Polster Bergamo\nDekoration Evorno"
+      "Polster Como\nDeko Maka", 
+      "Polster Milano\nDeko Lasca", 
+      "Polster Pisa\nDeko Rana",
+      "Polster Dara\nDeko Maka",
+      "Polster Bergamo\nDeko Evorno"
     ],
     equipment: { 
       chassis: [
@@ -61,46 +66,100 @@ In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich v
         "ESP inkl. Traction+ & Hill-Descent-Control"
       ],
       driversCabin: [
+        "GFK-Hutze, isoliert, mit großen Ablagefächern",
         "Fahrerhaus-Verdunkelung",
-        "Multifunktionslenkrad",
-        "Bordcomputer",
-        "Radio mit Bluetooth"
+        "Multifunktionslenkrad"
       ],
       body: [
+        "Leichtbaudoppelboden durchgehend, isoliert und beheizt",
         "Teilintegrierter Aufbau",
         "GFK-Dach mit Hagelschutzklasse 4",
         "Isolierte Rahmenfenster",
-        "LED-Außenbeleuchtung"
+        "LED-Außenbeleuchtung",
+        "Einstieg mit elektrischer Stufe",
+        "Aufbautür mit Zentralverriegelung",
+        "Garage mit Beleuchtung",
+        "Motorraum isoliert",
+        "Außendusche",
+        "Markise manuell",
+        "Heckträger für Fahrräder",
+        "Serviceklappe außen",
+        "Dachhaube mit Ventilator",
+        "Isolierverglasung",
+        "Moskitonetz an allen Fenstern",
+        "Verdunkelung komplett",
+        "Panoramafenster im Heck",
+        "Dachluke über Fahrerhaus",
+        "Außensteckdose 230V",
+        "TV-Satellitenvorbereitung",
+        "Solarpanel-Vorbereitung",
+        "Fahrradträger-Vorbereitung",
+        "Anhängerkupplung-Vorbereitung",
+        "Gasflaschenschrank isoliert",
+        "Unterflurgas-Anschluss"
       ],
       livingArea: [
+        "Interieur „Chalet Rustico"",
         "Dinette-Sitzgruppe",
         "LED-Ambientebeleuchtung", 
         "Panoramafenster",
-        "Stauraumschränke"
+        "Stauraumschränke",
+        "Kleiderschrank",
+        "Schuhschrank",
+        "Garderobenhaken",
+        "Spiegel groß",
+        "Ablagenetz",
+        "Mülleinschub"
       ],
       kitchen: [
+        "Längsküche mit breiten Auszügen (660 EB)",
         "3-Flammen-Gaskocher",
         "Kompressor-Kühlschrank",
         "Spüle mit Abdeckung",
-        "Arbeitsplatte"
+        "Arbeitsplatte",
+        "Gewürzboard",
+        "Dunstabzug",
+        "Geschirrabtropfleiste",
+        "Küchenutensilien-Halterung",
+        "Mülleimer ausziehbar"
       ],
       bathroom: [
+        "Mittelwaschraum m. integr. Raumdusche (695 EB)",
         "Separate Dusche",
         "Cassetten-WC",
         "Waschbecken mit Spiegel",
-        "Beleuchtung und Lüftung"
+        "Beleuchtung und Lüftung",
+        "Handtuchhalter",
+        "Seifenspender",
+        "WC-Papierhalter",
+        "Duschvorhang",
+        "Ablageboards",
+        "Haken für Utensilien"
       ],
       installation: [
+        "Frischwasser-System aus Hartflex-Kunststoff",
         "Frischwassertank 140 l",
         "Abwassertank 110 l",
         "Boiler 10 l",
-        "Druckwasserpumpe"
+        "Druckwasserpumpe",
+        "Abwassertank elektrisch entleerbar",
+        "Wassertanks isoliert und beheizt",
+        "Einfüllstutzen außen",
+        "Tankinhalt-Anzeige",
+        "Frostschutz-Ventil",
+        "Wasserhahn schwenkbar"
       ],
       electrical: [
+        "Elektrozentrale gut zugänglich unter Beifahrersitz",
         "AGM-Batterien 2 x 95 Ah",
         "Ladegerät 230V",
         "230V-Steckdosen",
-        "USB-Anschlüsse"
+        "USB-Anschlüsse",
+        "12V-Steckdosen",
+        "TV-Anschlussdose",
+        "Außensteckdose",
+        "Batteriecomputer",
+        "Sicherungskasten"
       ]
     }
   },

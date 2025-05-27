@@ -1,28 +1,18 @@
 
-import { ModelData } from '@/data/modelsData';
+import { ModelData } from "@/data/modelsData";
 
 export function getHeroContent(modelDetails: ModelData) {
-  // Special case for Van model
-  if (modelDetails.id === 'van') {
+  // Special case for Profila T models
+  if (modelDetails.id === "profila-t-fiat" || modelDetails.id === "profila-t-mercedes") {
     return {
-      title: 'Für Aktive und Unabhängige',
-      subtitle: 'Vans'
+      title: "Offen, großzügig, frei",
+      subtitle: "Profila T"
     };
   }
   
-  // Default case for other models
+  // Default hero content for other models
   return {
-    title: `Für Deine beste Zeit. ${modelDetails.name}`,
-    subtitle: ''
+    title: `Für Deine beste Zeit. Eura Mobil ${modelDetails.name}`,
+    subtitle: modelDetails.name
   };
-}
-
-export function getMainHeading(modelDetails: ModelData) {
-  // Special case for Van model
-  if (modelDetails.id === 'van') {
-    return 'Für Deine beste Zeit.\nEura Mobil Vans';
-  }
-  
-  // Default case for other models
-  return modelDetails.name;
 }
