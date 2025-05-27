@@ -1,4 +1,3 @@
-
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -10,11 +9,7 @@ export const modelsData = {
   "profila-t-fiat": {
     id: "profila-t-fiat",
     name: "Profila T",
-    intro: `Offen, großzügig, frei
-
-Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.
-
-In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.`,
+    intro: `Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer -Stehhöhe von 1,97 m im Innenraum. In ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.`,
     heroImage: "/placeholder.svg",
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
     technicalData: { länge: "6,99 – 7,58 m", sitzplätze: "4", schlafplätze: "2" },
