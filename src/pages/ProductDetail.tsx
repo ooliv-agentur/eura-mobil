@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -101,11 +102,36 @@ const ProductDetail = () => {
             </h2>
           </section>
 
-          {/* 3. Intro Section */}
-          <ModelIntro 
-            title={getIntroTitle()}
-            content={modelDetails.intro}
-          />
+          {/* 3. Intro Section - Only show if title is not empty */}
+          {getIntroTitle() && (
+            <ModelIntro 
+              title={getIntroTitle()}
+              content={modelDetails.intro}
+            />
+          )}
+
+          {/* Show intro content without title for Profila T models */}
+          {(modelDetails.id === "profila-t-fiat" || modelDetails.id === "profila-t-mercedes") && (
+            <section id="model-intro" className="mb-16">
+              <div className="mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                  <div className="space-y-8 text-black leading-relaxed">
+                    {modelDetails.intro.split('\n\n').filter(paragraph => paragraph.trim() !== '').map((paragraph, index) => (
+                      <div key={index}>
+                        <p className="text-black">
+                          {paragraph.trim()}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div>
+                    <div className="bg-[#E5E7EB] w-full aspect-video rounded-md" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* 4. Highlights Section */}
           <ModelHighlights highlights={modelDetails.highlights} />
