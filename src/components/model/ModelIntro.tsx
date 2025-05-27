@@ -1,15 +1,28 @@
 
 import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface ModelIntroProps {
   title: string;
   content: string;
   topLine?: string;
+  interiorHotspots?: Array<{ name: string; description: string; }>;
+  exteriorHotspots?: Array<{ name: string; description: string; }>;
 }
 
-export const ModelIntro: React.FC<ModelIntroProps> = ({ title, content, topLine }) => {
+export const ModelIntro: React.FC<ModelIntroProps> = ({ 
+  title, 
+  content, 
+  topLine, 
+  interiorHotspots, 
+  exteriorHotspots 
+}) => {
   // Split intro text by double line breaks to create paragraphs
   const introParagraphs = content.split('\n\n').filter(paragraph => paragraph.trim() !== '');
+  
+  const hasHotspots = interiorHotspots || exteriorHotspots;
+  const hasMultipleHotspotTypes = interiorHotspots && exteriorHotspots;
 
   return (
     <section id="model-intro" className="mb-16">
@@ -30,7 +43,26 @@ export const ModelIntro: React.FC<ModelIntroProps> = ({ title, content, topLine 
           </div>
           
           <div>
-            <div className="bg-[#E5E7EB] w-full aspect-video rounded-md" />
+            {hasHotspots ? (
+              hasMultipleHotspotTypes ? (
+                <Tabs defaultValue="interior" className="w-full">
+                  <TabsList className="grid w-full grid-cols-2 mb-4">
+                    <TabsTrigger value="interior">Innen</TabsTrigger>
+                    <TabsTrigger value="exterior">Außen</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="interior">
+                    <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
+                  </TabsContent>
+                  <TabsContent value="exterior">
+                    <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
+                  </TabsContent>
+                </Tabs>
+              ) : (
+                <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
+              )
+            ) : (
+              <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
+            )}
           </div>
         </div>
       </div>

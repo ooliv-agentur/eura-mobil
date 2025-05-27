@@ -137,6 +137,8 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             title={introSectionTitle}
             content={getIntroContent()}
             topLine={getTopLine()}
+            interiorHotspots={modelDetails.id === 'xtura' ? (modelDetails as any).interior : undefined}
+            exteriorHotspots={modelDetails.id === 'xtura' ? (modelDetails as any).exterior : undefined}
           />
 
           {/* 3. Highlights Section - Always show with fallback */}
@@ -189,7 +191,6 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
           {/* 7. Interior Hotspots Section - Always show with fallback */}
           <ModelInteriorHotspots 
             interiorItems={modelDetails.interior || []} 
-            exteriorItems={modelDetails.id === 'xtura' ? (modelDetails as any).exterior : undefined}
           />
           
           {/* 8. Upholstery Section - Always show with fallback */}
