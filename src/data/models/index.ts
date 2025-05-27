@@ -36,11 +36,11 @@ export const modelsData = {
       { name: "720 EF Chalet – Rustico", description: "720 EF Chalet – Rustico" }
     ],
     upholsteryTypes: [
-      "Polster Como\nDekoration Maka", 
-      "Polster Milano\nDekoration Lasca", 
-      "Polster Pisa\nDekoration Rana",
-      "Polster Dara\nDekoration Maka",
-      "Polster Bergamo\nDekoration Evorno"
+      "Polster Como – Dekoration Maka", 
+      "Polster Milano – Dekoration Lasca", 
+      "Polster Pisa – Dekoration Rana",
+      "Polster Dara – Dekoration Maka",
+      "Polster Bergamo – Dekoration Evorno"
     ],
     equipment: { 
       chassis: [
