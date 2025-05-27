@@ -20,13 +20,17 @@ export const ModelIntro: React.FC<ModelIntroProps> = ({ title, content, topLine 
         )}
         <h2 className="text-3xl md:text-4xl font-bold text-center text-black mb-8">{title}</h2>
         
-        <div className="mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           <div className="space-y-6 text-black leading-relaxed">
             {introParagraphs.map((paragraph, index) => (
               <p key={index} className="text-black">
                 {paragraph.trim()}
               </p>
             ))}
+          </div>
+          
+          <div>
+            <div className="bg-[#E5E7EB] w-full aspect-video rounded-md" />
           </div>
         </div>
       </div>

@@ -1,5 +1,4 @@
 
-
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -144,7 +143,96 @@ export const modelsData = {
   // Add remaining models with condensed data for now...
   "integra-line-fiat": { id: "integra-line-fiat", name: "Integra Line Fiat", intro: "Die Integra Line auf Fiat Ducato bietet vollintegrierte Raumwunder mit optimaler Platzausnutzung.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "2-4" }, highlights: ["Vollintegrierter Aufbau"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
   "integra-line-gt-mercedes": { id: "integra-line-gt-mercedes", name: "Integra Line GT Mercedes", intro: "Die Integra Line GT auf Mercedes-Benz Sprinter verkörpert Luxus und Performance in Perfektion.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Mercedes-Benz Sprinter Chassis"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
-  "profila-t-mercedes": { id: "profila-t-mercedes", name: "Profila T Mercedes", intro: "Der Profila T auf Mercedes-Benz Sprinter kombiniert die bewährte Zuverlässigkeit des Sprinter-Chassis.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Mercedes-Benz Sprinter Chassis"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
+  "profila-t-mercedes": { 
+    id: "profila-t-mercedes", 
+    name: "Profila T Mercedes", 
+    intro: `Mit 140 PS Motorisierung und mit State-of-the-art-Fahrzeugtechnik, wie ABS, ESP und 16''-Rädern am CCS-Breitspur-Tiefrahmen mit einer Spurweite von 1.980 mm und weiteren intelligenten Techniklösungen ausgestattet, lässt es sich in den Profila T Mercedes Modellen stressfrei in den Traumurlaub starten. Im Fahrerhaus mit seiner schnittigen Silhouette und dem bequemen Fahrersitz Platz genommen, kann kommen, was will – der verdienten Auszeit steht nichts mehr im Weg.
+
+Der Profila T auf Mercedes-Benz Sprinter kombiniert die bewährte Zuverlässigkeit des Sprinter-Chassis mit dem eleganten Design der Profila T Baureihe. Die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum macht das Fahren besonders angenehm, während der bequeme „Coupé-Einstieg" mit integrierten und voll isolierten Einstiegsstufen aus GFK den Komfort unterstreicht.`, 
+    heroImage: "/placeholder.svg", 
+    galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], 
+    technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
+    highlights: [
+      "Mercedes-Benz Sprinter Chassis",
+      "Winterfester, beheizter Doppelboden", 
+      "Große Stauräume durch Garagenabsenkung",
+      "Isolierte & beheizte Wassertanks",
+      "Elektr. Abwassertank-Entleerung",
+      "Niedrige Gesamthöhe unter 2,90 m"
+    ], 
+    layouts: [
+      { id: "ptm-784-eb", name: "PTM 784 EB", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" },
+      { id: "ptm-784-qf", name: "PTM 784 QF", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" }
+    ], 
+    interior: [
+      { name: "PTM 784 Chalet – Rustico", description: "PTM 784 Chalet – Rustico" },
+      { name: "PTM 784 Chalet – Rustico", description: "PTM 784 Chalet – Rustico" },
+      { name: "PTM 784 Chalet – Rustico", description: "PTM 784 Chalet – Rustico" }
+    ], 
+    upholsteryTypes: [
+      "Polster Como – Dekoration Maka", 
+      "Polster Milano – Dekoration Lasca", 
+      "Polster Pisa – Dekoration Rana",
+      "Polster Dara – Dekoration Maka",
+      "Polster Bergamo – Dekoration Evorno"
+    ], 
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Sprinter 140 PS",
+        "CCS Breitspur-Tiefrahmen (Spurweite 1.980 mm)",
+        "ABS mit elektronischer Bremskraftverteilung",
+        "ESP inkl. Traction+ & Hill-Descent-Control",
+        "Fahrer-/Beifahrerairbag",
+        "16\" Räder",
+        "Rahmenverlängerung",
+        "Fix and go Pannenset"
+      ],
+      body: [
+        "Teilintegrierter Aufbau",
+        "GFK-Dach mit Hagelschutzklasse 4",
+        "Isolierte Rahmenfenster",
+        "LED-Außenbeleuchtung",
+        "Winterfester Doppelboden"
+      ],
+      driversCabin: [
+        "Fahrerhaus-Verdunkelung",
+        "Multifunktionslenkrad",
+        "Bordcomputer",
+        "Radio mit Bluetooth",
+        "Elektrische Fensterheber"
+      ],
+      livingArea: [
+        "Dinette-Sitzgruppe",
+        "LED-Ambientebeleuchtung",
+        "Panoramafenster",
+        "Stauraumschränke"
+      ],
+      kitchen: [
+        "3-Flammen-Gaskocher",
+        "Kompressor-Kühlschrank",
+        "Spüle mit Abdeckung",
+        "Arbeitsplatte"
+      ],
+      bathroom: [
+        "Separate Dusche",
+        "Cassetten-WC",
+        "Waschbecken mit Spiegel",
+        "Beleuchtung und Lüftung"
+      ],
+      installation: [
+        "Frischwassertank 140 l",
+        "Abwassertank 110 l",
+        "Boiler 10 l",
+        "Druckwasserpumpe"
+      ],
+      electrical: [
+        "AGM-Batterien 2 x 95 Ah",
+        "Ladegerät 230V",
+        "230V-Steckdosen",
+        "USB-Anschlüsse"
+      ]
+    }
+  },
   "activa-one": { id: "activa-one", name: "Activa One", intro: "Der Activa One ist der Familien-Alkoven der Extraklasse.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "4-6" }, highlights: ["Alkoven-Bauweise"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
   "integra": { id: "integra", name: "Integra", intro: "Die Integra-Serie steht für Premium-Vollintegration auf höchstem Niveau.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Premium-Vollintegration"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
   "xtura": { id: "xtura", name: "Xtura", intro: "Der Xtura verkörpert Innovation und Design in reinster Form.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Zukunftsweisendes Design"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} }
@@ -152,4 +240,3 @@ export const modelsData = {
 
 // Re-export types and other utilities
 export * from '../modelsData';
-

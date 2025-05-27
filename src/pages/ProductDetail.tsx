@@ -69,12 +69,20 @@ const ProductDetail = () => {
   const introSectionTitle = getIntroSectionTitle(modelDetails);
   const mainHeading = getMainHeading(modelDetails);
   
-  // Custom intro content for Profila RS
+  // Custom intro content for specific models
   const getIntroContent = () => {
     if (modelDetails.id === 'profila-rs') {
       return `Mit 140 PS Motorisierung und mit State-of-the-art-Fahrzeugtechnik, wie ABS, ESP und 16''-Rädern am CCS-Breitspur-Tiefrahmen mit einer Spurweite von 1.980 mm und weiteren intelligenten Techniklösungen ausgestattet, lässt es sich in den Profila RS Modellen stressfrei in den Traumurlaub starten: Im Fahrerhaus mit seiner schnittigen Silhouette und dem bequemen Fahrersitz Platz genommen, kann kommen, was will – der verdienten Auszeit steht nichts mehr im Weg. Im Innenraum des Wohnmobils beeindruckt das großzügige Raumgefühl, das vor allem durch die in der Decke „versenkte" Hubbett (Serie) entsteht. Auch der Aufbau mit durchgehend isoliertem Leichtbaudoppelboden, holzfreier GFK-Wandung und dem leicht erreichbaren Serviceklappen lässt keine Wünsche an eine angenehme Reise offen.`;
     }
     return modelDetails.intro;
+  };
+
+  // Get topLine for models that should have one
+  const getTopLine = () => {
+    if (modelDetails.id === 'profila-rs' || modelDetails.id === 'profila-t-mercedes') {
+      return mainHeading;
+    }
+    return undefined;
   };
   
   return (
@@ -93,7 +101,7 @@ const ProductDetail = () => {
           <ModelIntro 
             title={introSectionTitle}
             content={getIntroContent()}
-            topLine={modelDetails.id === 'profila-rs' ? mainHeading : undefined}
+            topLine={getTopLine()}
           />
 
           {/* 3. Highlights Section */}
