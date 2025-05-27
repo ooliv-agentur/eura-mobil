@@ -9,16 +9,96 @@ export const modelsData = {
   // We'll add the other models here as we create their files
   "profila-t-fiat": {
     id: "profila-t-fiat",
-    name: "Profila T auf Fiat",
-    intro: "Der Profila T auf Fiat Ducato vereint bewährte Technologie mit modernem Design. Großzügige Raumaufteilung und durchdachte Details machen jeden Aufenthalt zu einem besonderen Erlebnis. Mit seinem teilintegrierten Aufbau bietet er optimale Platzausnutzung bei gleichzeitig komfortabler Handhabung.",
+    name: "Profila T",
+    intro: "Offen, großzügig, frei\n\nUnbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.\n\nIn ihrem Ladevolumen von 1.500 bis 3.000 Liter unterscheiden sie sich deutlich voneinander, während der bequeme, niedrige „Coupé-Einstieg" mit den integrierten und voll isolierten Einstiegsstufen aus GFK wieder allen gemeinsam ist.",
     heroImage: "/placeholder.svg",
     galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"],
-    technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4", schlafplätze: "2-4" },
-    highlights: ["Teilintegrierter Aufbau mit großzügigem Platzangebot", "Fiat Ducato Chassis mit bewährter Technik", "Flexible Grundrisse für verschiedene Bedürfnisse", "Moderne Küchenausstattung", "Komfortable Schlafbereiche"],
-    layouts: [{ id: "pt-730-eb", name: "PT 730 EB", image: "/placeholder.svg", length: "7,30 m", sleepingPlaces: "2" }, { id: "pt-784-qb", name: "PT 784 QB", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "4" }],
-    interior: [{ name: "Wohnbereich", description: "Gemütliche Sitzgruppe" }, { name: "Küche", description: "Moderne Ausstattung" }, { name: "Schlafbereich", description: "Komfortable Betten" }, { name: "Bad", description: "Funktionaler Waschraum" }],
-    upholsteryTypes: ["Polster Como\nDekoration Maka", "Polster Milano\nDekoration Lasca", "Polster Pisa\nDekoration Rana"],
-    equipment: { chassis: ["Fiat Ducato Multijet 3.0", "Euro 6D Final", "Manuelle Klimaanlage", "ESP mit ASR und ABS"], body: ["Teilintegrierter Aufbau", "GFK-Dach", "Isolierte Rahmenfenster", "LED-Außenbeleuchtung"], livingArea: ["Dinette-Sitzgruppe", "LED-Ambientebeleuchtung", "Panoramafenster", "Stauraumschränke"], kitchen: ["3-Flammen-Gaskocher", "Kompressor-Kühlschrank", "Spüle mit Abdeckung", "Mikrowelle optional"], bathroom: ["Separate Dusche", "Cassetten-WC", "Waschbecken mit Spiegel", "Beleuchtung und Lüftung"], electrical: ["AGM-Batterien", "Solaranlage optional", "230V-Steckdosen", "USB-Anschlüsse"] }
+    technicalData: { länge: "6,99 – 7,58 m", sitzplätze: "4", schlafplätze: "2" },
+    highlights: [
+      "Winterfester, beheizter Doppelboden",
+      "Große Stauräume durch Garagenabsenkung", 
+      "Isolierte & beheizte Wassertanks",
+      "Elektr. Abwassertank-Entleerung",
+      "Isofix (grundrissabhängig)"
+    ],
+    layouts: [
+      { id: "pt-720-eb", name: "PT 720 EB", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "2" },
+      { id: "pt-695-eb", name: "PT 695 EB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "2" },
+      { id: "pt-675-sb", name: "PT 675 SB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "2" },
+      { id: "pt-720-qf", name: "PT 720 QF", image: "/placeholder.svg", length: "7,58 m", sleepingPlaces: "2" },
+      { id: "pt-720-ef", name: "PT 720 EF", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "2" },
+      { id: "pt-660-eb", name: "PT 660 EB", image: "/placeholder.svg", length: "6,99 m", sleepingPlaces: "2" }
+    ],
+    interior: [
+      { name: "726 EF Chalet - Rustico", description: "Gemütliche Sitzgruppe" },
+      { name: "720 EF Chalet - Rustico", description: "Moderne Ausstattung" },
+      { name: "Wohnbereich", description: "Komfortable Betten" },
+      { name: "Küche", description: "Funktionaler Waschraum" }
+    ],
+    upholsteryTypes: [
+      "Polster Como\nDekoration Maka", 
+      "Polster Milano\nDekoration Lasca", 
+      "Polster Pisa\nDekoration Rana",
+      "Polster Dara\nDekoration Maka",
+      "Polster Bergamo\nDekoration Evorno"
+    ],
+    equipment: { 
+      chassis: [
+        "140 PS Motor, Euro 6d-Final",
+        "CCS Breitspur-Tiefrahmen (Spurweite 1.980 mm)", 
+        "ABS",
+        "manuelle Klimaanlage",
+        "Rahmenverlängerung",
+        "Fahrer-/Beifahrerairbag",
+        "elektrische Fensterheber, Fahrerhaus Zentralverriegelung",
+        "Fix and go Pannenset",
+        "Tagfahrlicht", 
+        "16\" Räder",
+        "ESP inkl. Traction+ & Hill-Descent-Control"
+      ],
+      driversCabin: [
+        "Fahrerhaus-Verdunkelung",
+        "Multifunktionslenkrad",
+        "Bordcomputer",
+        "Radio mit Bluetooth"
+      ],
+      body: [
+        "Teilintegrierter Aufbau",
+        "GFK-Dach mit Hagelschutzklasse 4",
+        "Isolierte Rahmenfenster",
+        "LED-Außenbeleuchtung"
+      ],
+      livingArea: [
+        "Dinette-Sitzgruppe",
+        "LED-Ambientebeleuchtung", 
+        "Panoramafenster",
+        "Stauraumschränke"
+      ],
+      kitchen: [
+        "3-Flammen-Gaskocher",
+        "Kompressor-Kühlschrank",
+        "Spüle mit Abdeckung",
+        "Arbeitsplatte"
+      ],
+      bathroom: [
+        "Separate Dusche",
+        "Cassetten-WC",
+        "Waschbecken mit Spiegel",
+        "Beleuchtung und Lüftung"
+      ],
+      installation: [
+        "Frischwassertank 140 l",
+        "Abwassertank 110 l",
+        "Boiler 10 l",
+        "Druckwasserpumpe"
+      ],
+      electrical: [
+        "AGM-Batterien 2 x 95 Ah",
+        "Ladegerät 230V",
+        "230V-Steckdosen",
+        "USB-Anschlüsse"
+      ]
+    }
   },
   "profila-rs": {
     id: "profila-rs",
