@@ -1,4 +1,3 @@
-
 import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
@@ -92,8 +91,7 @@ const Carousel = React.forwardRef<
       const slideCount = api.slideNodes().length
       setItemCount(slideCount)
       
-      // Determine if content needs scrolling based on slide count and viewport
-      // For typical responsive layouts: show navigation only if more than 4 items
+      // Hide navigation if 4 or fewer items
       const needsScrolling = slideCount > 4 && (api.canScrollPrev() || api.canScrollNext())
       setHasScrollableContent(needsScrolling)
     }, [])

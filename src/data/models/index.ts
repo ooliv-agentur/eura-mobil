@@ -156,8 +156,8 @@ export const modelsData = {
     name: "Integra Line Fiat", 
     intro: "Sich einfach mal ganz weit wegträumen – oder einfach gleich hinfahren! Diese Freiheit genießen Sie ganz individuell mit dem Integra Line: das Reisemobil für alle, die ihren eigenen Weg gehen und dabei die ursprüngliche Vielfalt der Landschaft genießen wollen. Für die, die herausragendes Design lieben, vor allem wenn es aus natürlichen Formen entsteht. Und auch für alle, die ihren Traum von individueller Freiheit in die Wirklichkeit verwandeln wollen. Das Fahrzeug schmiegt sich ganz einfach in die natürliche Umgebung ein und lässt dich keine Wünsche an Luxus und Komfort offen.", 
     heroImage: "/placeholder.svg", 
-    galleryImages: ["/placeholder.svg"], 
-    technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "2-4" }, 
+    galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], 
+    technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4–6", schlafplätze: "2–4" }, 
     highlights: [
       "Winterfester, beheizter Doppelboden",
       "Elektrische Abwassertankentleerung",
@@ -166,10 +166,57 @@ export const modelsData = {
       "Optional mit Alde Warmwasserheizung",
       "Isofix (grundrissabhängig)"
     ], 
-    layouts: [], 
-    interior: [], 
-    upholsteryTypes: [], 
-    equipment: {} 
+    layouts: [
+      { id: "il-700-eb", name: "IL 700 EB", image: "/placeholder.svg", length: "7,30 m", sleepingPlaces: "2" },
+      { id: "il-720-ef", name: "IL 720 EF", image: "/placeholder.svg", length: "7,41 m", sleepingPlaces: "2" },
+      { id: "il-726-ef", name: "IL 726 EF", image: "/placeholder.svg", length: "7,61 m", sleepingPlaces: "2" },
+      { id: "il-730-eb", name: "IL 730 EB", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "4" }
+    ], 
+    interior: [
+      { name: "Interieur Chalet", description: "Interieur Chalet" },
+      { name: "Interieur Natural Heritage", description: "Interieur Natural Heritage" },
+      { name: "Schlafbereich mit Stauraum", description: "Schlafbereich mit Stauraum" },
+      { name: "Küche mit Erweiterung", description: "Küche mit Erweiterung" }
+    ], 
+    upholsteryTypes: [
+      "Polster Milano – Dekoration Lasca",
+      "Polster Como – Dekoration Maka",
+      "Polster Pisa – Dekoration Rana",
+      "Polster Bergamo – Dekoration Evorno"
+    ], 
+    equipment: {
+      chassis: [
+        "Fiat Ducato 140 PS",
+        "Schaltgetriebe",
+        "ESP",
+        "ABS"
+      ],
+      body: [
+        "Integrierter Aufbau",
+        "GFK-Dach",
+        "Isolierte Rahmenfenster"
+      ],
+      livingArea: [
+        "Dinette-Sitzgruppe",
+        "LED-Beleuchtung",
+        "Panoramafenster"
+      ],
+      kitchen: [
+        "3-Flammen-Gaskocher",
+        "Kompressor-Kühlschrank",
+        "Spüle"
+      ],
+      bathroom: [
+        "Separate Dusche",
+        "Cassetten-WC",
+        "Waschbecken"
+      ],
+      electrical: [
+        "AGM-Batterien",
+        "Ladegerät 230V",
+        "230V-Steckdosen"
+      ]
+    } 
   },
   "integra-line-gt-mercedes": { id: "integra-line-gt-mercedes", name: "Integra Line GT Mercedes", intro: "Die Integra Line GT auf Mercedes-Benz Sprinter verkörpert Luxus und Performance in Perfektion.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Mercedes-Benz Sprinter Chassis"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
   "profila-t-mercedes": { 
