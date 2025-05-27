@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -7,6 +8,7 @@ import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 import { modelsData, hasLayouts, hasInterior, hasUpholstery, hasEquipment } from "@/data/modelsData";
 import { getHeroContent, getIntroSectionTitle, getMainHeading } from "@/utils/heroContent";
+import { Award } from "lucide-react";
 
 // Import modular components
 import { ModelHero } from "@/components/model/ModelHero";
@@ -146,6 +148,37 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             highlights={modelDetails.highlights || []} 
             headline={getHighlightsHeadline()}
           />
+
+          {/* 3.5. Awards Section - Only for Xtura */}
+          {modelDetails.id === 'xtura' && (
+            <section className="my-12">
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 md:p-8 rounded-lg border border-yellow-200">
+                <h3 className="text-2xl font-bold text-center mb-6 text-gray-800">Ausgezeichnet</h3>
+                <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+                  <div className="flex flex-col items-center">
+                    <div className="w-24 h-24 bg-yellow-300 rounded-full flex items-center justify-center mb-3">
+                      <Award className="h-12 w-12 text-yellow-800" />
+                    </div>
+                    <div className="text-center">
+                      <h4 className="font-semibold text-gray-800">European Innovation Award</h4>
+                      <p className="text-sm text-gray-600">2024</p>
+                      <p className="text-xs text-gray-500 mt-1">Innovation & Design</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-center">
+                    <div className="w-24 h-24 bg-yellow-300 rounded-full flex items-center justify-center mb-3">
+                      <Award className="h-12 w-12 text-yellow-800" />
+                    </div>
+                    <div className="text-center">
+                      <h4 className="font-semibold text-gray-800">European Innovation Award</h4>
+                      <p className="text-sm text-gray-600">2024</p>
+                      <p className="text-xs text-gray-500 mt-1">Technical Excellence</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* 4. Technical Data Summary */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-8 bg-gray-50 p-4 rounded-lg mx-4">
