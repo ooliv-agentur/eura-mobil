@@ -395,7 +395,26 @@ export const modelsData = {
     }
   },
   "activa-one": { id: "activa-one", name: "Activa One", intro: "Der Activa One ist der Familien-Alkoven der Extraklasse.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "4-6" }, highlights: ["Alkoven-Bauweise"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
-  "integra": { id: "integra", name: "Integra", intro: "Die Integra-Serie steht für Premium-Vollintegration auf höchstem Niveau.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Premium-Vollintegration"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
+  "integra": { 
+    id: "integra", 
+    name: "Integra", 
+    intro: "Mit dem Integra hat Eura Mobil die Messlatte bei den Reisemobilen der Oberklasse auf ein völlig neues Niveau gehoben: Ein emotional markantes, gleichzeitig hochfunktionales und eindeutig sicherheitsorientiertes Lichtdesign innen wie außen untermalt den luxuriösen Charakter in dieser Klasse. Dezente Ambientebeleuchtung und modernste LED-Technik erzeugen eine besonders eindrucksvolle Lichtstimmung, die sich überall sehen lassen kann. Hochwertige Materialien, erstklassige Verarbeitung, formvollendete Architektur und die extrem großzügige Raumgestaltung verbinden sich zu einem unvergleichlichen Wohlfühlambiente. Steigen Sie ein und lassen Sie sich von vorne bis hinten begeistern – während Ihrer gesamten Reise in diesem Luxus-Reisemobil.", 
+    heroImage: "/placeholder.svg", 
+    galleryImages: ["/placeholder.svg"], 
+    technicalData: { länge: "8,99 m", sitzplätze: "4", schlafplätze: "2" }, 
+    highlights: [
+      "Modernste LED-Lichttechnik",
+      "Automotives Design", 
+      "Sitzpolster mit Einzelkissen",
+      "Winterfester, beheizter Doppelboden",
+      "Isolierte und beheizte Wassertanks",
+      "Elektrische Abwassertankentleerung"
+    ], 
+    layouts: [], 
+    interior: [], 
+    upholsteryTypes: [], 
+    equipment: {} 
+  },
   "xtura": { id: "xtura", name: "Xtura", intro: "Der Xtura verkörpert Innovation und Design in reinster Form.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Zukunftsweisendes Design"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} }
 };
 
