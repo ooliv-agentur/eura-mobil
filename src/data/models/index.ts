@@ -223,7 +223,7 @@ export const modelsData = {
     name: "Integra Line GT Mercedes", 
     intro: "Der neue Integra Line GT schlägt ein neues Kapitel bei den Integrierten von Eura Mobil auf. Die Funktionalität der Liner Klasse vereint sich mit der Eleganz eines kompakten Integrierten und der Komfort der Luxusklasse paart sich im GT mit der Dynamik eines Teilintegrierten. Die exklusive und individuelle Ausstattung verleiht unserem neuen Grand Tourismo dabei seinen ganz eigenen Charme.", 
     heroImage: "/placeholder.svg", 
-    galleryImages: ["/placeholder.svg"], 
+    galleryImages: ["/placeholder.svg", "/placeholder.svg", "/placeholder.svg", "/placeholder.svg"], 
     technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
     highlights: [
       "Dynamisch elegantes Design",
@@ -238,10 +238,70 @@ export const modelsData = {
       "Interieur Natural Heritage (exklusiv für MB) oder Chalet Rustico",
       "Top-Ausstattung mit Lithium-Batterie, Alde-Heizung…"
     ], 
-    layouts: [], 
-    interior: [], 
-    upholsteryTypes: [], 
-    equipment: {} 
+    layouts: [
+      { id: "ilgt-730-ef", name: "ILGT 730 EF", image: "/placeholder.svg", length: "7,84 m", sleepingPlaces: "2" }
+    ], 
+    interior: [
+      { name: "Interieur \"Natural Heritage\" (exklusiv für MB)", description: "Interieur \"Natural Heritage\" (exklusiv für MB)" },
+      { name: "Interieur \"Chalet Rustico\"", description: "Interieur \"Chalet Rustico\"" },
+      { name: "Durchsicht Wohnbereich", description: "Durchsicht Wohnbereich" },
+      { name: "Schlafzimmer", description: "Schlafzimmer" }
+    ], 
+    upholsteryTypes: [
+      "Polster Como\nDekoration Maka",
+      "Polster Milano\nDekoration Lasca",
+      "Polster Pisa\nDekoration Rana",
+      "Polster Dara\nDekoration Maka"
+    ], 
+    equipment: {
+      chassis: [
+        "Mercedes-Benz Sprinter 170 PS",
+        "AL-KO Spezialtiefrahmen",
+        "Automatikgetriebe 9G-TRONIC",
+        "ESP mit Fahrassistenzsystemen",
+        "Short Cabin Fahrerhaus",
+        "Premium Sicherheitspaket"
+      ],
+      body: [
+        "Vollintegrierter Aufbau",
+        "30cm Doppelboden mit drei Ladezonen",
+        "Liner-Stauklappen mit Aufstelldämpfer",
+        "Sportive Front mit RIM Formteilen",
+        "2,05m Stehhöhe",
+        "LED-Außenbeleuchtung"
+      ],
+      livingArea: [
+        "Interieur Natural Heritage oder Chalet Rustico",
+        "Panorama-Sitzgruppe",
+        "LED-Ambientebeleuchtung",
+        "Klimaanlage Truma Aventa",
+        "Premium-Möbel"
+      ],
+      kitchen: [
+        "Induktions-Kochfeld",
+        "Kompressor-Kühlschrank 160L",
+        "Backofen mit Grill",
+        "Mineralstoff-Arbeitsplatte"
+      ],
+      bathroom: [
+        "Separate Regendusche",
+        "Premium-Waschbecken",
+        "Cassetten-WC",
+        "Fußbodenheizung"
+      ],
+      installation: [
+        "Alde Warmwasserheizung",
+        "Frischwassertank 200 l",
+        "Abwassertank 150 l",
+        "Elektr. Abwassertankentleerung"
+      ],
+      electrical: [
+        "Lithium-Batterien 200 Ah",
+        "Solaranlage 190 Wp",
+        "Wechselrichter 2000W",
+        "Smart-Home-System"
+      ]
+    }
   },
   "profila-t-mercedes": { 
     id: "profila-t-mercedes", 
