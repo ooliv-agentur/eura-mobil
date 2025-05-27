@@ -53,8 +53,8 @@ export function getHeroContent(modelDetails: ModelData) {
   // Special case for Integra Line GT Mercedes model
   if (modelDetails.id === 'integra-line-gt-mercedes') {
     return {
-      title: 'Luxus und Performance',
-      subtitle: 'Integra Line GT Mercedes'
+      title: 'Der Grand Tourismo in der Königsklasse',
+      subtitle: 'Integra Line GT'
     };
   }
   
@@ -164,7 +164,7 @@ export function getIntroSectionTitle(modelDetails: ModelData) {
   
   // Special case for Integra Line GT Mercedes model
   if (modelDetails.id === 'integra-line-gt-mercedes') {
-    return 'Integra Line GT auf Mercedes-Benz Sprinter';
+    return 'Integra Line GT Integrierte';
   }
   
   // Special case for Integra model

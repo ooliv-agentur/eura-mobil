@@ -1,3 +1,4 @@
+
 import { vanData } from './van';
 import { conturaData } from './contura';
 // Import other models as we create them
@@ -217,7 +218,31 @@ export const modelsData = {
       ]
     } 
   },
-  "integra-line-gt-mercedes": { id: "integra-line-gt-mercedes", name: "Integra Line GT Mercedes", intro: "Die Integra Line GT auf Mercedes-Benz Sprinter verkörpert Luxus und Performance in Perfektion.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, highlights: ["Mercedes-Benz Sprinter Chassis"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
+  "integra-line-gt-mercedes": { 
+    id: "integra-line-gt-mercedes", 
+    name: "Integra Line GT Mercedes", 
+    intro: "Der neue Integra Line GT schlägt ein neues Kapitel bei den Integrierten von Eura Mobil auf. Die Funktionalität der Liner Klasse vereint sich mit der Eleganz eines kompakten Integrierten und der Komfort der Luxusklasse paart sich im GT mit der Dynamik eines Teilintegrierten. Die exklusive und individuelle Ausstattung verleiht unserem neuen Grand Tourismo dabei seinen ganz eigenen Charme.", 
+    heroImage: "/placeholder.svg", 
+    galleryImages: ["/placeholder.svg"], 
+    technicalData: { länge: "7,84 m", sitzplätze: "4", schlafplätze: "2" }, 
+    highlights: [
+      "Dynamisch elegantes Design",
+      "MB Sprinter Chassis mit AL-KO Spezialtiefrahmen",
+      "30cm Doppelboden mit drei Ladezonen",
+      "Short Cabin Fahrerhaus mit optimalem Sichtfeld nach vorn",
+      "2,05m Stehhöhe",
+      "Liner-Stauklappen mit Aufstelldämpfer",
+      "Sportive Front mit hochpräzisen RIM Formteilen",
+      "Erfüllt bereits heute die ab 2026 geltenden Rahmenvorgaben für Sicherheits- und Assistenzsysteme",
+      "Beidseitig ausziehbare Stauwanne im Heckbereich",
+      "Interieur Natural Heritage (exklusiv für MB) oder Chalet Rustico",
+      "Top-Ausstattung mit Lithium-Batterie, Alde-Heizung…"
+    ], 
+    layouts: [], 
+    interior: [], 
+    upholsteryTypes: [], 
+    equipment: {} 
+  },
   "profila-t-mercedes": { 
     id: "profila-t-mercedes", 
     name: "Profila T Mercedes", 

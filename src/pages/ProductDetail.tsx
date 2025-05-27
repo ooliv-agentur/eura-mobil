@@ -102,7 +102,7 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
       return 'Freiheit soll genossen werden.';
     }
     if (modelDetails.id === 'integra-line-gt-mercedes') {
-      return 'Luxus und Performance auf Mercedes-Benz Sprinter';
+      return 'DER GRAND TOURISMO IN DER KÖNIGSKLASSE';
     }
     if (modelDetails.id === 'integra') {
       return 'Premium-Vollintegration auf höchstem Niveau';
