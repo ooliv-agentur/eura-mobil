@@ -1,9 +1,10 @@
+
 import { FullModelData } from '../modelsData';
 
 export const vanData: FullModelData = {
   id: "van",
   name: "Van",
-  intro: "Sichtbar anders: Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken….\n\nSpürbar anders: „Cosy" – das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal….",
+  intro: "Sichtbar anders: Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken....\n\nSpürbar anders: \"Cosy\" - das ist der Lieblingsbegriff unserer Kunden für das Ambiente im Eura Mobil Van. Ausgewählte Bezugsstoffe bei den Polstern, ein flauschiger Deckenbelag und die textile Wandbespannung mit Eco-Leder Applikationen statt blanker Kunststoffoberflächen machen den spürbaren Unterschied aus. Fühlen Sie mal....",
   heroImage: "/placeholder.svg",
   galleryImages: [
     "/placeholder.svg",
@@ -123,7 +124,7 @@ export const vanData: FullModelData = {
     ],
     bathroom: [
       "Waschraum mit schwenkbarer Duschwand",
-      "Duschfläche bis zu 60×90 cm",
+      "Duschfläche bis zu 60x90 cm",
       "Holz-Duschrost",
       "Mineralstoff-Waschbecken mit Click-Clack-Verschluss",
       "Staufächer & Spiegelschrank",
@@ -156,7 +157,7 @@ export const vanData: FullModelData = {
       "230 V-Steckdosen in Küche, Sitzgruppe & Bad",
       "Separat schaltbare Funktions-/Ambientebeleuchtung",
       "TV-Vorbereitung & 12 V-Steckdose",
-      "2× USB in Wohnraum & Schlafbereich",
+      "2x USB in Wohnraum & Schlafbereich",
       "Trennschalter Starter-/Wohnraumbatterie",
       "Elektronischer Ladeautomat",
       "CEE-Außenanschluss mit Sicherungsautomat",
