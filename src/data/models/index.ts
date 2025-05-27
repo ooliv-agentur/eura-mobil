@@ -451,7 +451,18 @@ Den Xtura präsentieren wir Ihnen wieder auf der CMT in Stuttgart vom 18. bis 26
       "Komfortausstattung u.a. mit Fußbodenheizung, Kompressor-Kühlschrank und Backofen"
     ], 
     layouts: [], 
-    interior: [], 
+    interior: [
+      { name: "Dinette mit Panoramafenster", description: "Komfortable Sitzgruppe mit großem Panoramafenster" },
+      { name: "Kompakte Küche", description: "Funktionale Küche mit Induktionskochfeld und Kompressor-Kühlschrank" },
+      { name: "Komfortables Heckbett", description: "Großes Bett im Heckbereich mit hochwertigen Matratzen" },
+      { name: "Multifunktionales Bad", description: "Platzsparendes Bad mit separater Dusche" }
+    ],
+    exterior: [
+      { name: "Robuste Front", description: "Verstärkte Front für Offroad-Einsätze" },
+      { name: "Solarmodule im Dachträger", description: "Integrierte Solaranlage für Energieautarkie" },
+      { name: "Xtura Carrier System", description: "Modulares Transportsystem am Heck" },
+      { name: "LED-Umfeldbeleuchtung", description: "Integrierte Beleuchtung für Campingplätze" }
+    ],
     upholsteryTypes: [], 
     equipment: {} 
   }
