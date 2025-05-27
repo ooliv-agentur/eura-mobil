@@ -93,12 +93,12 @@ const ProductDetail = () => {
         <div className="container mx-auto overflow-visible">
           {/* 2. New Model Hero Section */}
           <section id="model-hero-section" className="my-12 text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Hauptüberschrift Platzhalter
-            </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl text-gray-600">
-              {modelDetails.name}
-            </p>
+            <div className="text-lg md:text-xl font-medium text-gray-600 mb-2">
+              Feel free!
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              Profila T Teilintegrierte
+            </h2>
           </section>
 
           {/* 3. Intro Section */}
