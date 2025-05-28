@@ -72,7 +72,7 @@ const Wohnmobiltypen = () => {
   }: { 
     model: { id: string; name: string; description: string; technicalData: { länge: string; schlafplätze: string } };
   }) => (
-    <Card className="bg-white border border-black">
+    <Card className="border border-black bg-white">
       <AspectRatio ratio={4/3}>
         <div className="w-full h-full bg-gray-300"></div>
       </AspectRatio>
@@ -111,7 +111,7 @@ const Wohnmobiltypen = () => {
   );
 
   const USPSection = ({ usps }: { usps: string[] }) => (
-    <div className="border border-black p-6 mb-8">
+    <div className="border border-black p-6 mb-8 bg-white">
       <h3 className="text-xl font-bold mb-4">Highlights der Baureihe</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {usps.map((usp, index) => (
