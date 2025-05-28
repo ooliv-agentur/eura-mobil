@@ -91,18 +91,18 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
   }
 
   return (
-    <section className="my-16 border border-gray-200 p-8">
-      <div className="max-w-6xl mx-auto">
+    <section className="my-16">
+      <div className="container mx-auto px-4">
         {/* Category Information */}
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center">
-              <div className="w-6 h-6 border border-gray-400"></div>
+            <div className="w-12 h-12 border border-gray-300 rounded flex items-center justify-center">
+              <div className="w-6 h-6 border border-gray-400 rounded-sm"></div>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{info.title}</h2>
           </div>
           
-          <p className="text-gray-600 text-lg mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-gray-600 text-lg mb-8 max-w-4xl mx-auto leading-relaxed">
             {info.description}
           </p>
           
@@ -125,45 +125,41 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </h3>
           
           <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
               {relatedModels.map((model) => (
-                <div key={model.id} className="w-full max-w-sm mx-auto">
-                  <div className="border border-gray-200 overflow-hidden h-full flex flex-col">
-                    <AspectRatio ratio={4/3} className="border-b border-gray-200">
-                      <div className="w-full h-full flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="w-12 h-12 border border-gray-300 mx-auto mb-2 flex items-center justify-center">
-                            <div className="w-6 h-6 border border-gray-400"></div>
-                          </div>
-                          <span className="text-sm text-gray-500 font-medium">Modellbild</span>
-                        </div>
+                <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                  <AspectRatio ratio={4/3} className="bg-gray-200">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-center text-gray-500">
+                        <div className="w-16 h-16 border-2 border-gray-300 rounded mx-auto mb-2"></div>
+                        <span className="text-sm font-medium">Modellbild</span>
                       </div>
-                    </AspectRatio>
-                    
-                    <div className="p-6 flex-grow flex flex-col">
-                      <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
-                      <p className="text-gray-600 mb-4 flex-grow line-clamp-3 leading-relaxed">
-                        {model.description}
-                      </p>
-                      
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="text-center p-3 border border-gray-200">
-                          <div className="text-sm text-gray-500 mb-1">Länge</div>
-                          <div className="font-semibold text-gray-900">{model.length}</div>
-                        </div>
-                        <div className="text-center p-3 border border-gray-200">
-                          <div className="text-sm text-gray-500 mb-1">Schlafplätze</div>
-                          <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
-                        </div>
-                      </div>
-                      
-                      <Button asChild variant="outline" className="w-full font-medium py-3 transition-colors">
-                        <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
-                          Mehr erfahren
-                          <ChevronRight size={16} />
-                        </Link>
-                      </Button>
                     </div>
+                  </AspectRatio>
+                  
+                  <div className="p-6">
+                    <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
+                    <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                      {model.description}
+                    </p>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="text-center p-3 bg-gray-50 rounded">
+                        <div className="text-xs text-gray-500 mb-1">Länge</div>
+                        <div className="font-semibold text-gray-900">{model.length}</div>
+                      </div>
+                      <div className="text-center p-3 bg-gray-50 rounded">
+                        <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
+                        <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+                      </div>
+                    </div>
+                    
+                    <Button asChild variant="outline" className="w-full">
+                      <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
+                        Mehr erfahren
+                        <ChevronRight size={16} />
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               ))}
