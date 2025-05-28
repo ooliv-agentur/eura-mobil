@@ -26,16 +26,16 @@ const enhancedModelData: Record<string, Model> = {
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b?text=Activa+One",
+    image: "https://placehold.co/400x250/e2e8f0/1e293b",
     description: "Kompaktes Einsteigermodell für 2-4 Personen, ideal für den Sommerurlaub.",
     features: ["Kompakte Größe", "Gute Raumnutzung", "Einsteigerfreundlich"],
     length: "6,5 m",
     sleepingPlaces: "4"
   },
-  "profila-t": {
+  "profila-rs": {
     id: "profila-rs",
     name: "Profila RS",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b?text=Profila+RS",
+    image: "https://placehold.co/400x250/e2e8f0/1e293b",
     description: "Vielseitiger Camper mit optimaler Balance zwischen Komfort und Mobilität.",
     features: ["Großzügiger Wohnraum", "Separate Dusche", "Flexible Schlafplätze"],
     length: "7,2 m",
@@ -44,7 +44,7 @@ const enhancedModelData: Record<string, Model> = {
   "integra-line": {
     id: "integra-line",
     name: "Integra Line",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b?text=Integra+Line",
+    image: "https://placehold.co/400x250/e2e8f0/1e293b",
     description: "Luxuriöser Integralwohnmobil mit gehobener Ausstattung und maximaler Raumnutzung.",
     features: ["Großzügiges Raumgefühl", "Premiumausstattung", "Hervorragende Isolierung"],
     length: "8,1 m",
@@ -53,7 +53,7 @@ const enhancedModelData: Record<string, Model> = {
   "van": {
     id: "van",
     name: "Van",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b?text=Van",
+    image: "https://placehold.co/400x250/e2e8f0/1e293b",
     description: "Kompakter Van für urbane Abenteuer und spontane Trips.",
     features: ["Wendig und kompakt", "Parkplatzfreundlich", "Perfekt für Paare"],
     length: "5,9 m",
@@ -62,7 +62,7 @@ const enhancedModelData: Record<string, Model> = {
   "contura": {
     id: "contura",
     name: "Contura",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b?text=Contura",
+    image: "https://placehold.co/400x250/e2e8f0/1e293b",
     description: "Hochwertiges Integralmobil mit elegantem Design und luxuriöser Ausstattung.",
     features: ["Exklusives Design", "Hochwertige Materialien", "Premium-Komfort"],
     length: "8,8 m",
@@ -100,7 +100,7 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
   const enhancedModels = models.map(model => 
     enhancedModelData[model.id] || {
       ...model,
-      image: "https://placehold.co/400x250/e2e8f0/1e293b?text=" + encodeURIComponent(model.name),
+      image: "https://placehold.co/400x250/e2e8f0/1e293b",
       description: `Hochwertiges Wohnmobil der ${model.name} Serie`,
       features: ["Komfortabel", "Zuverlässig", "Durchdacht"]
     }
