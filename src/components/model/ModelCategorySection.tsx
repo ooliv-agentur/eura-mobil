@@ -58,7 +58,7 @@ const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   ],
   teilintegriert: [
     { id: "profila-t-mercedes", name: "Profila T", length: "7,2-8,1 m", sleepingPlaces: "2-4", description: "Teilintegrierte auf Mercedes Basis" },
-    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Kompakter Teilintegrierter" }
+    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlätze: "3", description: "Kompakter Teilintegrierter" }
   ],
   integriert: [
     { id: "integra-line-fiat", name: "Integra Line", length: "7,5-8,1 m", sleepingPlaces: "2-4", description: "Luxuriöser Vollintegrierter" },
@@ -93,6 +93,10 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
   const relatedModels = relatedModelsByCategory[category].filter(
     model => model.id !== currentModelId
   ).slice(0, 2); // Show max 2 related models
+
+  // Check if there are multiple models in this category (including current model)
+  const totalModelsInCategory = relatedModelsByCategory[category].length;
+  const hasMultipleModels = totalModelsInCategory > 1;
 
   return (
     <section className="my-12 bg-gray-50 p-6 md:p-8 rounded-lg">
@@ -154,15 +158,17 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         )}
 
-        {/* Category Overview Link */}
-        <div className="text-center">
-          <Button asChild>
-            <Link to={info.overviewLink} className="flex items-center gap-2">
-              Alle {info.title} ansehen
-              <ChevronRight size={16} />
-            </Link>
-          </Button>
-        </div>
+        {/* Category Overview Link - Only show if there are multiple models in the category */}
+        {hasMultipleModels && (
+          <div className="text-center">
+            <Button asChild>
+              <Link to={info.overviewLink} className="flex items-center gap-2">
+                Alle {info.title} ansehen
+                <ChevronRight size={16} />
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
