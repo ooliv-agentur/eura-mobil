@@ -127,65 +127,57 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Modern Card Grid */}
+        {/* Related Models - Centered Grid */}
         <div className="mb-8">
           <h3 className="text-2xl font-bold mb-8 text-center text-gray-800">
             Weitere Modelle aus dieser Kategorie
           </h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-            {relatedModels.map((model) => (
-              <div key={model.id} className="w-full max-w-sm">
-                <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
-                  <AspectRatio ratio={4/3} className="bg-gradient-to-br from-gray-100 to-gray-200">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="w-12 h-12 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                          <Car className="w-6 h-6 text-gray-500" />
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+              {relatedModels.map((model) => (
+                <div key={model.id} className="w-full max-w-sm mx-auto">
+                  <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
+                    <AspectRatio ratio={4/3} className="bg-gradient-to-br from-gray-100 to-gray-200">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="w-12 h-12 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                            <Car className="w-6 h-6 text-gray-500" />
+                          </div>
+                          <span className="text-sm text-gray-500 font-medium">Modellbild</span>
                         </div>
-                        <span className="text-sm text-gray-500 font-medium">Modellbild</span>
                       </div>
-                    </div>
-                  </AspectRatio>
-                  
-                  <div className="p-6 flex-grow flex flex-col">
-                    <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
-                    <p className="text-gray-600 mb-4 flex-grow line-clamp-3 leading-relaxed">
-                      {model.description}
-                    </p>
+                    </AspectRatio>
                     
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
-                        <div className="text-sm text-gray-500 mb-1">Länge</div>
-                        <div className="font-semibold text-gray-900">{model.length}</div>
+                    <div className="p-6 flex-grow flex flex-col">
+                      <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
+                      <p className="text-gray-600 mb-4 flex-grow line-clamp-3 leading-relaxed">
+                        {model.description}
+                      </p>
+                      
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="text-center p-3 bg-gray-50 rounded-lg">
+                          <div className="text-sm text-gray-500 mb-1">Länge</div>
+                          <div className="font-semibold text-gray-900">{model.length}</div>
+                        </div>
+                        <div className="text-center p-3 bg-gray-50 rounded-lg">
+                          <div className="text-sm text-gray-500 mb-1">Schlafplätze</div>
+                          <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+                        </div>
                       </div>
-                      <div className="text-center p-3 bg-gray-50 rounded-lg">
-                        <div className="text-sm text-gray-500 mb-1">Schlafplätze</div>
-                        <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
-                      </div>
+                      
+                      <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors">
+                        <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
+                          Mehr erfahren
+                          <ChevronRight size={16} />
+                        </Link>
+                      </Button>
                     </div>
-                    
-                    <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors">
-                      <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
-                        Mehr erfahren
-                        <ChevronRight size={16} />
-                      </Link>
-                    </Button>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Link to category overview */}
-        <div className="text-center">
-          <Button variant="outline" asChild className="bg-white hover:bg-gray-50 border-2 border-blue-200 text-blue-700 hover:text-blue-800 px-8 py-3 rounded-lg font-medium">
-            <Link to={info.overviewLink} className="flex items-center gap-2">
-              Alle {info.title} ansehen
-              <ChevronRight size={16} />
-            </Link>
-          </Button>
         </div>
       </div>
     </section>
