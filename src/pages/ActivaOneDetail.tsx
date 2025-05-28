@@ -112,14 +112,7 @@ const ActivaOneDetail = () => {
   const isMobile = useIsMobile();
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
-  
-  // Simple gray box placeholder component without text
-  
-  // Floor plans data
-
-  // Equipment data for accordion
-
-  const { models, toggleModel } = useComparison();
+  const { selectedModels } = useComparison();
 
   return (
     <ProductLayout modelName="Activa One">
