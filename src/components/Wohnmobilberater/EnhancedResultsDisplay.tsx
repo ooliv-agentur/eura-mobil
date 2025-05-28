@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { ChevronRight, MapPin, Settings, Download } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useComparison } from "@/context/ComparisonContext";
+import { modelsData } from "@/data/models";
 
 type Model = {
   id: string;
@@ -21,52 +22,52 @@ interface EnhancedResultsDisplayProps {
   onClose: () => void;
 }
 
-// Enhanced model data that matches your existing UX patterns
+// Enhanced model data that matches your existing UX patterns with real technical data
 const enhancedModelData: Record<string, Model> = {
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop",
     description: "Kompaktes Einsteigermodell für 2-4 Personen, ideal für den Sommerurlaub.",
     features: ["Kompakte Größe", "Gute Raumnutzung", "Einsteigerfreundlich"],
-    length: "6,5 m",
-    sleepingPlaces: "4"
+    length: "7,30 – 7,84 m",
+    sleepingPlaces: "4-6"
   },
   "profila-rs": {
     id: "profila-rs",
     name: "Profila RS",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b",
+    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=250&fit=crop",
     description: "Vielseitiger Camper mit optimaler Balance zwischen Komfort und Mobilität.",
     features: ["Großzügiger Wohnraum", "Separate Dusche", "Flexible Schlafplätze"],
-    length: "7,2 m",
-    sleepingPlaces: "3"
+    length: "6,99 – 7,58 m",
+    sleepingPlaces: "4"
   },
   "integra-line": {
     id: "integra-line",
     name: "Integra Line",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b",
+    image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400&h=250&fit=crop",
     description: "Luxuriöser Integralwohnmobil mit gehobener Ausstattung und maximaler Raumnutzung.",
     features: ["Großzügiges Raumgefühl", "Premiumausstattung", "Hervorragende Isolierung"],
-    length: "8,1 m",
-    sleepingPlaces: "4"
+    length: "7,30 – 7,84 m",
+    sleepingPlaces: "2–4"
   },
   "van": {
     id: "van",
     name: "Van",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b",
+    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=250&fit=crop",
     description: "Kompakter Van für urbane Abenteuer und spontane Trips.",
     features: ["Wendig und kompakt", "Parkplatzfreundlich", "Perfekt für Paare"],
-    length: "5,9 m",
-    sleepingPlaces: "2"
+    length: "5,99 - 6,36 m",
+    sleepingPlaces: "2-3"
   },
   "contura": {
     id: "contura",
     name: "Contura",
-    image: "https://placehold.co/400x250/e2e8f0/1e293b",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=250&fit=crop",
     description: "Hochwertiges Integralmobil mit elegantem Design und luxuriöser Ausstattung.",
     features: ["Exklusives Design", "Hochwertige Materialien", "Premium-Komfort"],
-    length: "8,8 m",
-    sleepingPlaces: "4"
+    length: "7,84 m",
+    sleepingPlaces: "2"
   }
 };
 
@@ -96,11 +97,11 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
     }
   };
 
-  // Map the basic model data to enhanced model data
+  // Map the basic model data to enhanced model data with real technical specifications
   const enhancedModels = models.map(model => 
     enhancedModelData[model.id] || {
       ...model,
-      image: "https://placehold.co/400x250/e2e8f0/1e293b",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=250&fit=crop",
       description: `Hochwertiges Wohnmobil der ${model.name} Serie`,
       features: ["Komfortabel", "Zuverlässig", "Durchdacht"]
     }
