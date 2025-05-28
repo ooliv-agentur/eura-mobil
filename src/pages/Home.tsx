@@ -11,8 +11,6 @@ import {
   CarouselPrevious, 
   CarouselIndicators 
 } from "@/components/ui/carousel";
-import Wohnmobilberater from "@/components/Wohnmobilberater/Wohnmobilberater";
-import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -181,7 +179,6 @@ const wohnmobiltypenLinks = {
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const [activeFilter, setActiveFilter] = useState("alle");
   const [isTypesExpanded, setIsTypesExpanded] = useState(false);
   const [activeTab, setActiveTab] = useState("unternehmen");
@@ -314,10 +311,6 @@ const Home = () => {
     setShowPredictions(false);
   };
 
-  const handleStartBerater = () => {
-    startBeraterFlow({ mode: "dialog", initialStep: 1 });
-  };
-  
   // New carousel hook for news items
   const [newsEmblaRef] = useEmblaCarousel({
     align: "start",
@@ -526,9 +519,6 @@ const Home = () => {
             </div>
           </div>
         </section>
-
-        {/* Include the Wohnmobilberater component */}
-        <Wohnmobilberater />
 
         {/* Section 6: Händlersuche - Updated with 16:9 aspect ratio map placeholder */}
         <section className="py-16 px-4">
