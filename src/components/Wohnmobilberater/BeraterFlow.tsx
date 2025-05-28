@@ -40,22 +40,28 @@ const BeraterFlow: React.FC = () => {
           </Button>
         </div>
 
-        {/* Preview Cards */}
+        {/* Preview Cards with proper explanations */}
         <div className="grid md:grid-cols-3 gap-6">
           <div className="text-center p-6 border rounded-lg">
             <div className="text-3xl mb-3">🛏️</div>
             <h3 className="font-semibold mb-2">Schlafplätze</h3>
-            <p className="text-sm text-gray-600">Wie viele Personen sollen mitreisen?</p>
+            <p className="text-sm text-gray-700">
+              Wie viele Personen sollen mitreisen? Wir helfen Ihnen bei der Auswahl der passenden Schlafplatz-Konfiguration.
+            </p>
           </div>
           <div className="text-center p-6 border rounded-lg">
             <div className="text-3xl mb-3">📏</div>
-            <h3 className="font-semibold mb-2">Größe</h3>
-            <p className="text-sm text-gray-600">Welche Fahrzeuglänge passt zu Ihnen?</p>
+            <h3 className="font-semibold mb-2">Größe & Länge</h3>
+            <p className="text-sm text-gray-700">
+              Welche Fahrzeuglänge passt zu Ihnen? Je nach Reiseziel und Stellplatz-Anforderungen finden wir die optimale Größe.
+            </p>
           </div>
           <div className="text-center p-6 border rounded-lg">
             <div className="text-3xl mb-3">⚖️</div>
-            <h3 className="font-semibold mb-2">Gewicht</h3>
-            <p className="text-sm text-gray-600">Welchen Führerschein haben Sie?</p>
+            <h3 className="font-semibold mb-2">Gewicht & Führerschein</h3>
+            <p className="text-sm text-gray-700">
+              Welchen Führerschein haben Sie? Wir berücksichtigen die Gewichtsklasse für eine rechtssichere Fahrzeugwahl.
+            </p>
           </div>
         </div>
       </div>
@@ -134,6 +140,8 @@ const BeraterFlow: React.FC = () => {
     }
   };
 
+  const canProceed = isMultiSelect ? selectedOptions.length > 0 : true;
+
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-8">
@@ -191,17 +199,20 @@ const BeraterFlow: React.FC = () => {
           <div className="mt-6">
             <Button
               onClick={handleMultiSelectNext}
-              disabled={selectedOptions.length === 0}
+              disabled={!canProceed}
               className="w-full"
             >
-              Weiter ({selectedOptions.length} ausgewählt)
+              {selectedOptions.length > 0 
+                ? `Weiter (${selectedOptions.length} ausgewählt)` 
+                : 'Mindestens eine Option wählen'
+              }
             </Button>
           </div>
         )}
       </div>
 
-      {currentStep > 1 && (
-        <div className="flex justify-start">
+      <div className="flex justify-between items-center">
+        {currentStep > 1 && (
           <Button
             variant="ghost"
             onClick={handleBack}
@@ -210,8 +221,15 @@ const BeraterFlow: React.FC = () => {
             <ChevronLeft className="h-4 w-4" />
             Zurück
           </Button>
-        </div>
-      )}
+        )}
+        
+        {/* For single-select questions, show a continue button if no option selected yet */}
+        {!isMultiSelect && selectedOptions.length === 0 && (
+          <div className="ml-auto">
+            <p className="text-sm text-gray-500">Bitte wählen Sie eine Option</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
