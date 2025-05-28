@@ -7,9 +7,10 @@ interface SidebarNavigationProps {
     id: string;
     label: string;
   }>;
+  children?: React.ReactNode; // For the Konfigurieren button
 }
 
-export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items }) => {
+export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items, children }) => {
   const [activeSection, setActiveSection] = useState<string>("");
 
   // Setup intersection observer to detect which section is in view
@@ -94,6 +95,13 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items }) =
             </div>
           </div>
         ))}
+        
+        {/* Render children (Konfigurieren button) if provided */}
+        {children && (
+          <div className="mt-4 w-48">
+            {children}
+          </div>
+        )}
       </nav>
     </div>
   );

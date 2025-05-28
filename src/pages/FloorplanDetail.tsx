@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
 import { Settings, ArrowLeft } from "lucide-react";
+import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 const FloorplanDetail = () => {
   const { modelId, floorplanId } = useParams();
@@ -49,9 +50,26 @@ const FloorplanDetail = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
 
+  const sidebarItems = [
+    { id: "beschreibung", label: "Beschreibung" },
+    { id: "technische-daten", label: "Technische Daten" },
+    { id: "ausstattung", label: "Ausstattung" }
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      
+      {/* Sidebar Navigation */}
+      <SidebarNavigation items={sidebarItems}>
+        <Button 
+          onClick={handleKonfiguratorClick} 
+          className="bg-gray-800 text-white hover:bg-gray-900 w-full flex items-center gap-2"
+        >
+          <Settings size={16} />
+          Konfigurieren
+        </Button>
+      </SidebarNavigation>
       
       {/* Hero Section */}
       <section className="relative bg-[#E5E7EB] h-[50vh] flex items-center justify-center">
@@ -59,22 +77,6 @@ const FloorplanDetail = () => {
           <h1 className="text-4xl md:text-6xl font-bold">{floorplanData.name}</h1>
         </div>
       </section>
-
-      {/* Sticky Navigation */}
-      <div className="sticky top-16 bg-white border-b z-50">
-        <div className="container mx-auto px-4">
-          <nav className="flex items-center justify-between py-3">
-            <div className="flex space-x-6">
-              <a href="#beschreibung" className="text-sm uppercase hover:text-blue-600">Beschreibung</a>
-              <a href="#technische-daten" className="text-sm uppercase hover:text-blue-600">Technische Daten</a>
-              <a href="#ausstattung" className="text-sm uppercase hover:text-blue-600">Ausstattung</a>
-            </div>
-            <Button onClick={handleKonfiguratorClick} className="flex items-center gap-2">
-              Konfigurieren <Settings size={16} />
-            </Button>
-          </nav>
-        </div>
-      </div>
 
       <main className="flex-1 container mx-auto px-4 py-8">
         {/* Back Navigation */}
