@@ -58,7 +58,7 @@ const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   ],
   teilintegriert: [
     { id: "profila-t-mercedes", name: "Profila T", length: "7,2-8,1 m", sleepingPlaces: "2-4", description: "Teilintegrierte auf Mercedes Basis" },
-    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlätze: "3", description: "Kompakter Teilintegrierter" }
+    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Kompakter Teilintegrierter" }
   ],
   integriert: [
     { id: "integra-line-fiat", name: "Integra Line", length: "7,5-8,1 m", sleepingPlaces: "2-4", description: "Luxuriöser Vollintegrierter" },
