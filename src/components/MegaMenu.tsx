@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
@@ -49,7 +50,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
             <div>
               <h3 className="font-bold text-lg mb-3">Modelle</h3>
               <div className="space-y-2">
-                {/* Updated order of models to match the specified sequence */}
                 <div><MenuLink to="/modelle/van" onClick={handleLinkClick}>Van</MenuLink></div>
                 <div><MenuLink to="/modelle/activa-one" onClick={handleLinkClick}>Activa One</MenuLink></div>
                 <div><MenuLink to="/modelle/profila-t-fiat" onClick={handleLinkClick}>Profila T - Fiat</MenuLink></div>
@@ -75,7 +75,6 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
             </div>
 
             <div className="hidden md:block">
-              {/* Placeholder for model image */}
               <div className="bg-gray-100 h-48 rounded flex items-center justify-center">
                 <span className="text-gray-400">Modellbild-Placeholder</span>
               </div>
