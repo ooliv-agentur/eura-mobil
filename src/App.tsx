@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import ModelleOverview from "./pages/ModelleOverview";
 import ProductDetail from "./pages/ProductDetail";
+import FloorplanDetail from "./pages/FloorplanDetail";
 import ActivaOneDetail from "./pages/ActivaOneDetail";
 import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
@@ -63,7 +64,10 @@ const App = () => (
                 <Route path="/wohnmobiltypen/integriert" element={<IntegrierteOverview />} />
                 <Route path="/wohnmobiltypen/teilintegriert" element={<TeilintegrierteOverview />} />
                 
-                {/* Dynamic route for all models - this will capture the modelId parameter */}
+                {/* Nested routes for model series and individual floor plans */}
+                <Route path="/modelle/:modelId/:floorplanId" element={<FloorplanDetail />} />
+                
+                {/* Dynamic route for model series overview */}
                 <Route path="/modelle/:modelId" element={<ProductDetail />} />
                 
                 {/* Special route for Activa One that uses its own component */}

@@ -15,6 +15,7 @@ interface ModelCardProps {
   length: string;
   sleepingPlaces: string;
   showComparison?: boolean;
+  modelSeries?: string; // Add this to know which model series this floor plan belongs to
 }
 
 export const SelectableModelCard: React.FC<ModelCardProps> = ({ 
@@ -22,7 +23,8 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({
   name, 
   length, 
   sleepingPlaces, 
-  showComparison = true 
+  showComparison = true,
+  modelSeries = "xtura" // Default fallback
 }) => {
   const { addModel, removeModel, isSelected, selectedModels } = useComparison();
   
@@ -52,7 +54,7 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({
         
         <div className="space-y-2">
           <Button variant="outline" className="w-full" asChild>
-            <Link to={`/modelle/${id}`}>
+            <Link to={`/modelle/${modelSeries}/${id}`}>
               Grundriss ansehen
             </Link>
           </Button>
