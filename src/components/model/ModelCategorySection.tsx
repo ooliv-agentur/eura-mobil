@@ -51,11 +51,10 @@ const categoryInfo = {
   }
 };
 
-// Mock data for related models by category
+// Updated model classification - Profila RS moved to teilintegriert
 const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   alkoven: [
-    { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Kompakte Alkoven-Serie für Familien" },
-    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Vielseitiger Alkoven-Camper" }
+    { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Kompakte Alkoven-Serie für Familien" }
   ],
   teilintegriert: [
     { id: "profila-t-mercedes", name: "Profila T", length: "7,2-8,1 m", sleepingPlaces: "2-4", description: "Teilintegrierte auf Mercedes Basis" },
@@ -74,12 +73,11 @@ const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
 // Function to determine category from model ID
 const getCategoryFromModelId = (modelId: string): CategoryType => {
   if (modelId.includes("activa") || modelId.includes("alkoven")) return "alkoven";
-  if (modelId.includes("profila") && !modelId.includes("rs")) return "teilintegriert";
+  if (modelId.includes("profila")) return "teilintegriert";
   if (modelId.includes("integra") || modelId.includes("contura") || modelId.includes("xtura")) return "integriert";
   if (modelId.includes("van")) return "van";
   
-  // Default fallback based on common patterns
-  if (modelId.includes("profila")) return "alkoven";
+  // Default fallback
   return "teilintegriert";
 };
 
@@ -124,7 +122,7 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models */}
+        {/* Related Models - Only show if there are other models in the category */}
         {relatedModels.length > 0 && (
           <div className="mb-6">
             <h3 className="text-xl font-semibold mb-4 text-center">
