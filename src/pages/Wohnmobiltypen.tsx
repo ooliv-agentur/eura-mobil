@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { MapPin, Circle } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 const Wohnmobiltypen = () => {
   // Van models
@@ -105,15 +105,13 @@ const Wohnmobiltypen = () => {
   );
 
   const USPSection = ({ usps }: { usps: string[] }) => (
-    <div className="bg-gray-50 p-6 rounded-lg mb-8">
+    <div className="mb-8">
       <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe:</h3>
       <div className="space-y-3">
         {usps.map((usp, index) => (
           <div key={index} className="flex items-start gap-3">
-            <div className="w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
-              <Circle className="h-2.5 w-2.5 text-gray-600 fill-current" />
-            </div>
-            <p className="text-sm">{usp}</p>
+            <div className="w-2 h-2 rounded-full bg-gray-400 flex-shrink-0 mt-2"></div>
+            <p className="text-sm text-gray-700">{usp}</p>
           </div>
         ))}
       </div>
