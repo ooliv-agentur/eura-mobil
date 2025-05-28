@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -108,15 +106,11 @@ const FloorplanDetail = () => {
                   </div>
                   
                   {/* Floor Plan Image */}
-                  <div className="border bg-white p-4 mb-4">
+                  <div className="border bg-white p-4">
                     <AspectRatio ratio={4/3} className="bg-gray-200 rounded flex items-center justify-center">
                       <span className="text-gray-500">Grundriss {floorplanData.name}</span>
                     </AspectRatio>
                   </div>
-                  
-                  <Button variant="outline" className="w-full">
-                    Modell vergleichen
-                  </Button>
                 </CardContent>
               </Card>
             </div>
