@@ -53,7 +53,7 @@ export const SelectableModelCard: React.FC<ModelCardProps> = ({
         <div className="space-y-2">
           <Button variant="outline" className="w-full" asChild>
             <Link to={`/modelle/${id}`}>
-              Modell ansehen
+              Grundriss ansehen
             </Link>
           </Button>
           
