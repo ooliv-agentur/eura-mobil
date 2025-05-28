@@ -28,7 +28,7 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
           hideCloseButton={true}
         >
           <div className="h-full overflow-y-auto">
-            <BeraterContainer onClose={onClose} />
+            <BeraterContainer />
           </div>
         </DialogContent>
       </Dialog>

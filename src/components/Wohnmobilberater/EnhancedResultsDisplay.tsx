@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,7 +19,6 @@ type Model = {
 
 interface EnhancedResultsDisplayProps {
   models: Model[];
-  onClose: () => void;
 }
 
 // Enhanced model data that matches your existing UX patterns with real technical data
@@ -70,12 +70,11 @@ const enhancedModelData: Record<string, Model> = {
   }
 };
 
-const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models, onClose }) => {
+const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models }) => {
   const navigate = useNavigate();
-  const { addModel, removeModel, isSelected } = useComparison();
+  const { addModel, removeModel, isSelected, selectedModels } = useComparison();
 
   const handleMehrErfahren = (modelId: string) => {
-    onClose();
     navigate(`/modelle/${modelId}`);
   };
 
@@ -98,7 +97,7 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-24">
       <div className="text-center">
         <h2 className="text-2xl font-bold mb-2">Diese Wohnmobile könnten zu Ihnen passen</h2>
         <p className="text-gray-600">Basierend auf Ihren Angaben haben wir passende Modelle für Sie gefunden.</p>
@@ -167,8 +166,8 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
       <div className="text-center pt-4">
         <Button 
           variant="outline" 
-          onClick={onClose}
           className="mr-4"
+          onClick={() => window.location.reload()}
         >
           Beratung beenden
         </Button>
