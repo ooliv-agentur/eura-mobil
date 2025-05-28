@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { useWohnmobilberater } from '@/context/WohnmobilberaterContext';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, X } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
+import { useNavigate } from 'react-router-dom';
 import EnhancedResultsDisplay from './EnhancedResultsDisplay';
 
 const BeraterFlow: React.FC = () => {
@@ -19,6 +19,13 @@ const BeraterFlow: React.FC = () => {
     toggleOption,
     resetBerater
   } = useWohnmobilberater();
+  
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    resetBerater();
+    navigate('/');
+  };
 
   // Show intro/hero section on first load
   if (currentStep === 1 && answers.length === 0) {
@@ -147,9 +154,20 @@ const BeraterFlow: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-bold">Wohnmobil-Berater</h1>
-          <span className="text-sm text-gray-500">
-            Schritt {currentStep} von {totalSteps}
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-500">
+              Schritt {currentStep} von {totalSteps}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleClose}
+              className="h-8 w-8"
+              title="Berater schließen"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
         <Progress value={progress} className="w-full" />
       </div>
@@ -223,7 +241,6 @@ const BeraterFlow: React.FC = () => {
           </Button>
         )}
         
-        {/* For single-select questions, show a continue button if no option selected yet */}
         {!isMultiSelect && selectedOptions.length === 0 && (
           <div className="ml-auto">
             <p className="text-sm text-gray-500">Bitte wählen Sie eine Option</p>
