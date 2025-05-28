@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -123,7 +122,7 @@ const Wohnmobiltypen = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {usps.map((usp, index) => (
           <div key={index} className="flex items-start gap-3 bg-white p-4 rounded-lg shadow-sm">
-            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+            <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0 mt-2"></div>
             <p className="text-sm text-gray-700 leading-relaxed">{usp}</p>
           </div>
         ))}
@@ -149,15 +148,13 @@ const Wohnmobiltypen = () => {
   const CategorySection = ({ 
     title, 
     description, 
-    models, 
-    categoryPath,
+    models,
     usps,
     type
   }: { 
     title: string; 
     description: string; 
     models: Array<{ id: string; name: string; description: string; technicalData: { länge: string; schlafplätze: string } }>;
-    categoryPath: string;
     usps: string[];
     type: string;
   }) => (
@@ -170,12 +167,6 @@ const Wohnmobiltypen = () => {
           </h2>
         </div>
         <p className="text-gray-600 text-lg max-w-4xl mx-auto mb-8 leading-relaxed">{description}</p>
-        <Button size="lg" variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300" asChild>
-          <Link to={categoryPath}>
-            Alle {title} entdecken
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-        </Button>
       </div>
       
       <USPSection usps={usps} />
@@ -213,7 +204,6 @@ const Wohnmobiltypen = () => {
             title="Vans"
             description="Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details – perfekt für urbane Abenteuer und spontane Trips."
             models={vanModels}
-            categoryPath="/wohnmobiltypen/vans"
             usps={vanUSPs}
             type="van"
           />
@@ -222,7 +212,6 @@ const Wohnmobiltypen = () => {
             title="Alkoven-Wohnmobile"
             description="In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit."
             models={alkovenModels}
-            categoryPath="/wohnmobiltypen/alkoven"
             usps={alkovenUSPs}
             type="alkoven"
           />
@@ -231,7 +220,6 @@ const Wohnmobiltypen = () => {
             title="Teilintegrierte Wohnmobile"
             description="Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik für maximalen Reisekomfort."
             models={teilintegrierteModels}
-            categoryPath="/wohnmobiltypen/teilintegriert"
             usps={teilintegrierteUSPs}
             type="teilintegriert"
           />
@@ -240,7 +228,6 @@ const Wohnmobiltypen = () => {
             title="Integrierte Wohnmobile"
             description="Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl für anspruchsvolle Reisende."
             models={integrierteModels}
-            categoryPath="/wohnmobiltypen/integriert"
             usps={integrierteUSPs}
             type="integriert"
           />

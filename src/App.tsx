@@ -22,10 +22,6 @@ import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
 import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
-import VansOverview from "./pages/VansOverview";
-import AlkovenOverview from "./pages/AlkovenOverview";
-import IntegrierteOverview from "./pages/IntegrierteOverview";
-import TeilintegrierteOverview from "./pages/TeilintegrierteOverview";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
 import SealedStructure from "./pages/quality/SealedStructure";
@@ -59,10 +55,6 @@ const App = () => (
                 <Route path="/berater" element={<Index />} />
                 <Route path="/modelle" element={<ModelleOverview />} />
                 <Route path="/wohnmobiltypen" element={<Wohnmobiltypen />} />
-                <Route path="/wohnmobiltypen/vans" element={<VansOverview />} />
-                <Route path="/wohnmobiltypen/alkoven" element={<AlkovenOverview />} />
-                <Route path="/wohnmobiltypen/integriert" element={<IntegrierteOverview />} />
-                <Route path="/wohnmobiltypen/teilintegriert" element={<TeilintegrierteOverview />} />
                 
                 {/* Nested routes for model series and individual floor plans */}
                 <Route path="/modelle/:modelId/:floorplanId" element={<FloorplanDetail />} />
