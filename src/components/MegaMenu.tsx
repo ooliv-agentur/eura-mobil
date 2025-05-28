@@ -85,7 +85,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-3">
-              <div><MenuLink to="/wohnmobiltypen">Wohnmobiltypen Übersicht</MenuLink></div>
+              <div><MenuLink to="/wohnmobiltypen">Wohnmobiltypen</MenuLink></div>
               <div><MenuLink to="/berater">Wohnmobilberater</MenuLink></div>
               <div><MenuLink to="/konfigurator">Konfigurator</MenuLink></div>
               <div><MenuLink to="/mietfahrzeuge">Mietfahrzeuge</MenuLink></div>
