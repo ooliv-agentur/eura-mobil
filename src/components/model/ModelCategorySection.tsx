@@ -17,7 +17,7 @@ interface RelatedModel {
 
 interface ModelCategorySectionProps {
   currentModelId: string;
-  category: CategoryType;
+  category?: CategoryType;
 }
 
 const categoryInfo = {
@@ -43,7 +43,7 @@ const categoryInfo = {
   }
 };
 
-// Updated model classification - Added Contura to teilintegriert
+// Updated model classification
 const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   alkoven: [
     { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Praktische Wohnmobile für Einsteiger und Familien. Bis 6 Personen reisen mit optimiertem Platz." }
@@ -55,7 +55,9 @@ const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   ],
   integriert: [
     { id: "integra-line-fiat", name: "Integra Line", length: "7,5-8,1 m", sleepingPlaces: "2-4", description: "Luxuriöser Vollintegrierter" },
-    { id: "integra-line-gt-mercedes", name: "Integra Line GT", length: "8,8 m", sleepingPlaces: "4", description: "Premium Vollintegrierter" }
+    { id: "integra-line-gt-mercedes", name: "Integra Line GT", length: "8,8 m", sleepingPlaces: "4", description: "Premium Vollintegrierter" },
+    { id: "integra", name: "Integra", length: "7,89-8,99 m", sleepingPlaces: "4", description: "Luxus-Reisemobil der Oberklasse" },
+    { id: "xtura", name: "Xtura", length: "6,88 m", sleepingPlaces: "2", description: "4×4 Fernreisemobil für Abenteurer" }
   ],
   van: [
     { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer mit maximaler Wendigkeit." }
@@ -64,12 +66,15 @@ const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
 
 // Function to determine category from model ID
 const getCategoryFromModelId = (modelId: string): CategoryType => {
-  if (modelId.includes("activa") || modelId.includes("alkoven")) return "alkoven";
-  if (modelId.includes("profila")) return "teilintegriert";
-  if (modelId.includes("integra") || modelId.includes("contura") || modelId.includes("xtura")) return "integriert";
+  console.log("Getting category for modelId:", modelId);
+  
+  if (modelId.includes("activa")) return "alkoven";
+  if (modelId.includes("profila") || modelId.includes("contura")) return "teilintegriert";
+  if (modelId.includes("integra") || modelId.includes("xtura")) return "integriert";
   if (modelId.includes("van")) return "van";
   
   // Default fallback
+  console.log("Using fallback category for modelId:", modelId);
   return "teilintegriert";
 };
 
@@ -77,19 +82,26 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
   currentModelId, 
   category: providedCategory 
 }) => {
+  console.log("ModelCategorySection rendering with:", { currentModelId, providedCategory });
+  
   const category = providedCategory || getCategoryFromModelId(currentModelId);
   const info = categoryInfo[category];
   
+  console.log("Determined category:", category);
+  console.log("Category info:", info);
+  
+  // Get all models in this category
+  const allModelsInCategory = relatedModelsByCategory[category];
+  
   // Filter out the current model from related models
-  const relatedModels = relatedModelsByCategory[category].filter(
+  const relatedModels = allModelsInCategory.filter(
     model => model.id !== currentModelId
   );
 
-  // Don't show section if no other models in category
-  if (relatedModels.length === 0) {
-    return null;
-  }
+  console.log("All models in category:", allModelsInCategory);
+  console.log("Related models after filtering:", relatedModels);
 
+  // Always show the category section, even if no other models
   return (
     <section className="my-16">
       <div className="container mx-auto px-4">
@@ -118,45 +130,62 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Section Title */}
-        <h3 className="text-2xl font-bold mb-8 text-center text-gray-900">
-          Weitere Modelle aus dieser Kategorie
-        </h3>
+        {/* Related Models Section - Only show if there are other models */}
+        {relatedModels.length > 0 && (
+          <>
+            <h3 className="text-2xl font-bold mb-8 text-center text-gray-900">
+              Weitere Modelle aus dieser Kategorie
+            </h3>
 
-        {/* Related Models Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {relatedModels.map((model) => (
-            <div key={model.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-              <AspectRatio ratio={16/9} className="bg-gray-200">
-              </AspectRatio>
-              
-              <div className="p-6">
-                <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
-                <p className="text-gray-600 mb-6 text-sm leading-relaxed">
-                  {model.description}
-                </p>
-                
-                <div className="grid grid-cols-2 gap-4 mb-6 text-center">
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">Länge</div>
-                    <div className="font-semibold text-gray-900">{model.length}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
-                    <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {relatedModels.map((model) => (
+                <div key={model.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                  <AspectRatio ratio={16/9} className="bg-gray-200">
+                  </AspectRatio>
+                  
+                  <div className="p-6">
+                    <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
+                    <p className="text-gray-600 mb-6 text-sm leading-relaxed">
+                      {model.description}
+                    </p>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-6 text-center">
+                      <div>
+                        <div className="text-xs text-gray-500 mb-1">Länge</div>
+                        <div className="font-semibold text-gray-900">{model.length}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
+                        <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+                      </div>
+                    </div>
+                    
+                    <Button asChild variant="outline" className="w-full flex items-center justify-center gap-2">
+                      <Link to={`/modelle/${model.id}`}>
+                        Mehr erfahren
+                        <ChevronRight size={16} />
+                      </Link>
+                    </Button>
                   </div>
                 </div>
-                
-                <Button asChild variant="outline" className="w-full flex items-center justify-center gap-2">
-                  <Link to={`/modelle/${model.id}`}>
-                    Mehr erfahren
-                    <ChevronRight size={16} />
-                  </Link>
-                </Button>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
+
+        {/* If no other models, show a message */}
+        {relatedModels.length === 0 && (
+          <div className="text-center py-8">
+            <p className="text-gray-600">
+              Entdecken Sie weitere Modelle in unserer {info.title.toLowerCase()} Kategorie.
+            </p>
+            <Button asChild className="mt-4">
+              <Link to="/wohnmobiltypen">
+                Alle Kategorien ansehen
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
