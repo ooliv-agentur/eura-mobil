@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,7 +26,7 @@ const enhancedModelData: Record<string, Model> = {
   "activa-one": {
     id: "activa-one",
     name: "Activa One",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=250&fit=crop",
+    image: "",
     description: "Kompaktes Einsteigermodell für 2-4 Personen, ideal für den Sommerurlaub.",
     features: ["Kompakte Größe", "Gute Raumnutzung", "Einsteigerfreundlich"],
     length: "7,30 – 7,84 m",
@@ -36,7 +35,7 @@ const enhancedModelData: Record<string, Model> = {
   "profila-rs": {
     id: "profila-rs",
     name: "Profila RS",
-    image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=250&fit=crop",
+    image: "",
     description: "Vielseitiger Camper mit optimaler Balance zwischen Komfort und Mobilität.",
     features: ["Großzügiger Wohnraum", "Separate Dusche", "Flexible Schlafplätze"],
     length: "6,99 – 7,58 m",
@@ -45,7 +44,7 @@ const enhancedModelData: Record<string, Model> = {
   "integra-line": {
     id: "integra-line",
     name: "Integra Line",
-    image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400&h=250&fit=crop",
+    image: "",
     description: "Luxuriöser Integralwohnmobil mit gehobener Ausstattung und maximaler Raumnutzung.",
     features: ["Großzügiges Raumgefühl", "Premiumausstattung", "Hervorragende Isolierung"],
     length: "7,30 – 7,84 m",
@@ -54,7 +53,7 @@ const enhancedModelData: Record<string, Model> = {
   "van": {
     id: "van",
     name: "Van",
-    image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=250&fit=crop",
+    image: "",
     description: "Kompakter Van für urbane Abenteuer und spontane Trips.",
     features: ["Wendig und kompakt", "Parkplatzfreundlich", "Perfekt für Paare"],
     length: "5,99 - 6,36 m",
@@ -63,7 +62,7 @@ const enhancedModelData: Record<string, Model> = {
   "contura": {
     id: "contura",
     name: "Contura",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=250&fit=crop",
+    image: "",
     description: "Hochwertiges Integralmobil mit elegantem Design und luxuriöser Ausstattung.",
     features: ["Exklusives Design", "Hochwertige Materialien", "Premium-Komfort"],
     length: "7,84 m",
@@ -101,7 +100,7 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
   const enhancedModels = models.map(model => 
     enhancedModelData[model.id] || {
       ...model,
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=250&fit=crop",
+      image: "",
       description: `Hochwertiges Wohnmobil der ${model.name} Serie`,
       features: ["Komfortabel", "Zuverlässig", "Durchdacht"]
     }
@@ -117,12 +116,8 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {enhancedModels.map((model) => (
           <Card key={model.id} className="overflow-hidden">
-            <div className="aspect-video bg-gray-100">
-              <img
-                src={model.image}
-                alt={model.name}
-                className="w-full h-full object-cover"
-              />
+            <div className="aspect-video placeholder-image">
+              {/* Gray placeholder without any image */}
             </div>
             <CardHeader className="pb-3">
               <CardTitle className="text-xl">{model.name}</CardTitle>
