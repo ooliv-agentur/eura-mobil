@@ -105,8 +105,8 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
   );
 
   return (
-    <div className="relative">
-      <div className={`space-y-6 ${selectedModels.length > 0 ? 'pb-24' : ''}`}>
+    <>
+      <div className="space-y-6">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-2">Diese Wohnmobile könnten zu Ihnen passen</h2>
           <p className="text-gray-600">Basierend auf Ihren Angaben haben wir passende Modelle für Sie gefunden.</p>
@@ -186,51 +186,13 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models,
         </div>
       </div>
 
-      {selectedModels.length > 0 && (
-        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <span className="font-semibold">
-                {selectedModels.length === 1 
-                  ? "1 Modell ausgewählt" 
-                  : `${selectedModels.length} Modelle ausgewählt`}
-              </span>
-              <div className="flex gap-2">
-                {selectedModels.map((model) => (
-                  <div key={model.id} className="flex items-center bg-gray-100 px-3 py-1 rounded-full">
-                    <span className="mr-2">{model.name}</span>
-                    <button
-                      onClick={() => removeModel(model.id)}
-                      className="text-gray-500 hover:text-gray-900"
-                    >
-                      <ChevronRight className="h-4 w-4 rotate-45" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Button variant="outline" onClick={() => removeModel(selectedModels[selectedModels.length - 1]?.id)}>
-                Zurücksetzen
-              </Button>
-              <Button 
-                onClick={handleCompareClick}
-                disabled={selectedModels.length < 2}
-              >
-                {selectedModels.length < 2 
-                  ? "Noch ein Modell auswählen" 
-                  : "Vergleich starten"}
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      <ComparisonBar onCompareClick={handleCompareClick} />
       
       <ComparisonModal 
         open={showComparisonModal} 
         onOpenChange={setShowComparisonModal} 
       />
-    </div>
+    </>
   );
 };
 
