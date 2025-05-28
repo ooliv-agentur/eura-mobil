@@ -1,10 +1,17 @@
 
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Users, Home, Car } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselIndicators,
+} from "@/components/ui/carousel";
 
 type CategoryType = "alkoven" | "teilintegriert" | "integriert" | "van";
 
@@ -128,35 +135,43 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Exact homepage card styling */}
+        {/* Related Models - Exact homepage carousel styling */}
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-4 text-center">
             Weitere Modelle aus dieser Kategorie
           </h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {relatedModels.map((model) => (
-              <Card key={model.id} className="h-full transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
-                <CardContent className="p-4 flex flex-col h-full">
-                  {/* Fixed aspect ratio for consistent image dimensions - same as homepage */}
-                  <div className="mb-4">
-                    <AspectRatio ratio={16 / 9}>
-                      <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
-                        <span className="text-xs text-gray-400">Modellbild</span>
+          <Carousel className="w-full" showIndicators={true}>
+            <CarouselContent>
+              {relatedModels.map((model) => (
+                <CarouselItem key={model.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <div className="p-1">
+                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-200">
+                      <AspectRatio ratio={4/3} className="bg-gray-200">
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <span className="text-xs text-gray-400">Modellbild</span>
+                        </div>
+                      </AspectRatio>
+                      <div className="p-4">
+                        <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
+                        <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                          {model.description}
+                        </p>
+                        <Button variant="outline" asChild className="w-full">
+                          <Link to={`/modelle/${model.id}`}>Mehr erfahren</Link>
+                        </Button>
                       </div>
-                    </AspectRatio>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold mb-2">{model.name}</h3>
-                  <p className="text-sm text-gray-600 mb-4 flex-grow h-[60px] overflow-hidden">
-                    {model.description}
-                  </p>
-                  <Button variant="outline" asChild className="w-full mt-auto">
-                    <Link to={`/modelle/${model.id}`}>Mehr erfahren</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:flex justify-end gap-2 mt-2">
+              <CarouselPrevious />
+              <CarouselNext />
+            </div>
+            <CarouselIndicators />
+          </Carousel>
         </div>
       </div>
     </section>
