@@ -1,6 +1,5 @@
-
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,20 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 const Wohnmobiltypen = () => {
+  const location = useLocation();
+
+  // Handle smooth scrolling to anchor on page load
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.slice(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   const navigationItems = [
     { id: "van", label: "Vans" },
     { id: "alkoven", label: "Alkoven Wohnmobile" },
@@ -83,7 +96,7 @@ const Wohnmobiltypen = () => {
         </section>
         
         {wohnmobiltypen.map((typ) => (
-          <section key={typ.id} id={typ.id} className="my-16">
+          <section key={typ.id} id={typ.id} className="my-16 scroll-mt-24">
             <div className="mb-12">
               <div className="flex items-center justify-center gap-3 mb-6">
                 <div className="w-12 h-12 border border-gray-300 rounded flex items-center justify-center">

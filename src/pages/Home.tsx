@@ -172,7 +172,7 @@ const wohnmobiltypenButtonText = {
   vans: "Was macht Vans besonders?",
 };
 
-// Define the anchor links for each wohnmobiltyp
+// Define the anchor links for each wohnmobiltyp - corrected to match actual section IDs
 const wohnmobiltypenLinks = {
   alkoven: "/wohnmobiltypen#alkoven",
   teilintegriert: "/wohnmobiltypen#teilintegriert", 
