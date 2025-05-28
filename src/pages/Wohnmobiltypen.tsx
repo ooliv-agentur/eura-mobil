@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -118,7 +119,7 @@ const Wohnmobiltypen = () => {
               </h3>
               
               <div className="flex justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-6xl w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                   {typ.models.map((model) => (
                     <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white max-w-sm w-full">
                       <AspectRatio ratio={4/3} className="bg-gray-200">
