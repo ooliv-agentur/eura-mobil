@@ -4,38 +4,50 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { ChevronRight } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Wohnmobiltypen = () => {
   const wohnmobiltypen = [
     {
-      id: "vans",
+      id: "van",
       title: "Vans",
-      description: "Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den EURA MOBIL Van zu Ihrem ganz persönlichen mobilen Zuhause machen.",
-      buttonText: "Jetzt Vans entdecken",
-      linkTo: "/wohnmobiltypen/vans",
+      description: "Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans.\n\nDie Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden.\n\nAuch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik.\n\nDie Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!",
+      benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich", "Vielseitig", "Clevere Raumlösungen", "Spontane Reisen"],
+      models: [
+        { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer mit maximaler Wendigkeit." }
+      ]
     },
     {
       id: "alkoven",
-      title: "Alkoven-Wohnmobile",
-      description: "In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit.",
-      buttonText: "Alkoven-Modelle anzeigen",
-      linkTo: "/wohnmobiltypen/alkoven",
+      title: "Alkoven Wohnmobile",
+      description: "Alkoven-Wohnmobile bieten maximalen Wohnraum durch das charakteristische Bett über dem Fahrerhaus. Diese Bauart ist ideal für Familien mit 4-6 Personen und überzeugt durch optimale Raumnutzung.\n\nDas zusätzliche Bett im Alkoven schafft mehr Schlafplätze, ohne den Wohnraum zu beeinträchtigen. Durch die erhöhte Position entstehen auch praktische Staufächer und ein großzügiges Raumgefühl im Innenbereich.",
+      benefits: ["Maximaler Schlafplatz", "Familienfreundlich", "Großzügiger Wohnraum", "Viel Stauraum", "Optimale Raumnutzung"],
+      models: [
+        { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Praktische Wohnmobile für Einsteiger und Familien. Bis 6 Personen reisen mit optimiertem Platz." }
+      ]
     },
     {
       id: "teilintegriert",
       title: "Teilintegrierte Wohnmobile",
-      description: "Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik.",
-      buttonText: "Teilintegrierte entdecken",
-      linkTo: "/wohnmobiltypen/teilintegriert",
+      description: "Zu einem Teil kompakter gebaut, zum anderen Teil mit der überzeugenden Technik der Großen: Teilintegrierte Reisemobile von Eura Mobil bieten ein Höchstmaß an Komfort auch bei überschaubaren Abmessungen. Sie vereinen die Wendigkeit kleinerer Fahrzeuge mit dem Luxus größerer Modelle.\n\nDas originale Fahrerhaus bleibt erhalten, was Kosten spart und gleichzeitig bewährte Fahreigenschaften garantiert. Moderne Hightech-Materialien und durchdachte Grundrisse sorgen für maximalen Wohnkomfort.",
+      benefits: ["Kompakter Aufbau", "Überzeugende Technik", "Maximaler Komfort", "Überschaubare Abmessungen", "Hightech-Materialien", "Wendigkeit"],
+      models: [
+        { id: "profila-t-mercedes", name: "Profila T", length: "7,2-8,1 m", sleepingPlaces: "2-4", description: "Teilintegrierte auf Mercedes Basis" },
+        { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Hoher Reisekomfort und flexible Nutzung." },
+        { id: "contura", name: "Contura", length: "7,84 m", sleepingPlaces: "2", description: "Premium Teilintegrierter mit Luxusausstattung" }
+      ]
     },
     {
       id: "integriert",
-      title: "Integrierte Wohnmobile",
-      description: "Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl.",
-      buttonText: "Integrierte anzeigen",
-      linkTo: "/wohnmobiltypen/integriert",
-    },
+      title: "Vollintegrierte Wohnmobile",
+      description: "Vollintegrierte Wohnmobile bieten maximalen Luxus und Raumkomfort auf höchstem Niveau. Das Fahrerhaus ist vollständig in den Wohnraum integriert, wodurch ein durchgängiges und großzügiges Raumgefühl entsteht.\n\nDiese Premium-Kategorie überzeugt durch edle Materialien, luxuriöse Ausstattung und innovative Lösungen. Große Panoramafenster sorgen für lichtdurchflutete Innenräume, während die aerodynamische Form für bessere Fahreigenschaften und geringeren Kraftstoffverbrauch sorgt.",
+      benefits: ["Maximaler Komfort", "Luxuriöse Ausstattung", "Großzügiges Raumgefühl", "Premium-Materialien", "Panoramafenster", "Aerodynamisch"],
+      models: [
+        { id: "integra-line-fiat", name: "Integra Line", length: "7,5-8,1 m", sleepingPlaces: "2-4", description: "Luxuriöser Vollintegrierter" },
+        { id: "integra-line-gt-mercedes", name: "Integra Line GT", length: "8,8 m", sleepingPlaces: "4", description: "Premium Vollintegrierter" }
+      ]
+    }
   ];
 
   return (
@@ -50,22 +62,80 @@ const Wohnmobiltypen = () => {
           </p>
         </section>
         
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          {wohnmobiltypen.map((typ) => (
-            <Card key={typ.id} className="overflow-hidden">
-              <CardContent className="p-6">
-                <div className="aspect-video bg-gray-100 mb-4 flex items-center justify-center">
-                  {/* Empty placeholder box - no icons or images as requested */}
+        {wohnmobiltypen.map((typ) => (
+          <section key={typ.id} className="my-16">
+            <div className="mb-12">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-12 h-12 border border-gray-300 rounded flex items-center justify-center">
+                  <div className="w-6 h-6 border border-gray-400 rounded-sm"></div>
                 </div>
-                <h2 className="text-2xl font-bold mb-3">{typ.title}</h2>
-                <p className="text-gray-600 mb-6">{typ.description}</p>
-                <Button className="w-full sm:w-auto" asChild>
-                  <Link to={typ.linkTo}>{typ.buttonText}</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </section>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{typ.title}</h2>
+              </div>
+              
+              <div className="max-w-4xl mx-auto text-left space-y-4 mb-8">
+                {typ.description.split('\n\n').filter(p => p.trim() !== '').map((paragraph, index) => (
+                  <p key={index} className="text-gray-600 text-lg leading-relaxed">
+                    {paragraph.trim()}
+                  </p>
+                ))}
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-3 mb-8">
+                {typ.benefits.map((benefit, index) => (
+                  <span 
+                    key={index}
+                    className="border border-gray-300 text-gray-700 text-sm font-medium px-4 py-2 rounded"
+                  >
+                    {benefit}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Models */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold mb-8 text-center text-gray-800">
+                Modelle aus dieser Kategorie
+              </h3>
+              
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+                  {typ.models.map((model) => (
+                    <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                      <AspectRatio ratio={4/3} className="bg-gray-200">
+                      </AspectRatio>
+                      
+                      <div className="p-6">
+                        <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
+                        <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                          {model.description}
+                        </p>
+                        
+                        <div className="grid grid-cols-2 gap-4 mb-6">
+                          <div className="text-center p-3 bg-gray-50 rounded">
+                            <div className="text-xs text-gray-500 mb-1">Länge</div>
+                            <div className="font-semibold text-gray-900">{model.length}</div>
+                          </div>
+                          <div className="text-center p-3 bg-gray-50 rounded">
+                            <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
+                            <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+                          </div>
+                        </div>
+                        
+                        <Button asChild variant="outline" className="w-full">
+                          <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
+                            Mehr erfahren
+                            <ChevronRight size={16} />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        ))}
       </main>
       
       <Footer />
