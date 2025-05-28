@@ -121,7 +121,7 @@ const Wohnmobiltypen = () => {
               <div className="flex justify-center">
                 <div className="inline-flex flex-wrap justify-center gap-8">
                   {typ.models.map((model) => (
-                    <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white w-full max-w-sm">
+                    <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white max-w-sm">
                       <AspectRatio ratio={4/3} className="bg-gray-200">
                       </AspectRatio>
                       
