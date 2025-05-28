@@ -363,6 +363,58 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         
         {/* 2. Link grid section with 12-column grid for consistent alignment */}
         <div className="grid grid-cols-12 gap-x-6 gap-y-8 mb-12">
+          {/* Wohnmobiltypen - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-3">Wohnmobiltypen</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link 
+                  to="/wohnmobiltypen" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Alle Typen im Überblick
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/wohnmobiltypen/vans" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Vans
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/wohnmobiltypen/alkoven" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Alkoven-Wohnmobile
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/wohnmobiltypen/teilintegriert" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Teilintegrierte Wohnmobile
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/wohnmobiltypen/integriert" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Integrierte Wohnmobile
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
           {/* Qualität & Vorteile - 3 columns */}
           <div className="col-span-12 md:col-span-3">
             <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
@@ -505,9 +557,9 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
           
-          {/* Unternehmen - 3 columns */}
+          {/* Unternehmen & Service - 3 columns */}
           <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-3">Unternehmen</h3>
+            <h3 className="font-medium text-lg mb-3">Unternehmen & Service</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -545,13 +597,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   Videos
                 </Link>
               </li>
-            </ul>
-          </div>
-          
-          {/* Karriere & Service - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-3">Karriere & Service</h3>
-            <ul className="space-y-2">
               <li>
                 <a 
                   href="/karriere" 
