@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -249,7 +248,7 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
           {/* 10. Final CTA Block - Always show */}
           <ModelFinalCTA modelName={modelDetails.name} />
 
-          {/* 11. Category Section - NEW: Show related models and category info */}
+          {/* 11. Category Section - Show related models and category info */}
           <ModelCategorySection 
             currentModelId={modelDetails.id}
             category={undefined} // Will auto-detect based on model ID

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
@@ -391,11 +390,13 @@ const ActivaOneDetail = () => {
         </div>
       </section>
 
-      {/* Category Section - NEW: Show related models and category info */}
-      <ModelCategorySection 
-        currentModelId="activa-one"
-        category="alkoven"
-      />
+      {/* Category Section - Show related models and category info */}
+      <div className="container mx-auto px-4">
+        <ModelCategorySection 
+          currentModelId="activa-one"
+          category="alkoven"
+        />
+      </div>
 
       {/* Comparison Modal */}
       <ComparisonModal 
