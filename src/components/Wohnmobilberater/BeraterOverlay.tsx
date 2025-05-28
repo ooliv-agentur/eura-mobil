@@ -10,13 +10,44 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import EnhancedResultsDisplay from "./EnhancedResultsDisplay";
 
-// Mock data for models to display in results
+// Updated mock data to match the Model type with all required properties
 const mockModels = [
-  { id: "activa-one", name: "Activa One", length: "6,5 m", sleepingPlaces: "4" },
-  { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3" },
-  { id: "integra-line", name: "Integra Line", length: "8,1 m", sleepingPlaces: "4" },
-  { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2" },
-  { id: "contura", name: "Contura", length: "8,8 m", sleepingPlaces: "4" },
+  { 
+    id: "activa-one", 
+    name: "Activa One", 
+    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=250&fit=crop",
+    description: "Kompaktes Einsteigermodell für 2-4 Personen, ideal für den Sommerurlaub.",
+    features: ["Kompakte Größe", "Gute Raumnutzung", "Einsteigerfreundlich"],
+    length: "6,5 m", 
+    sleepingPlaces: "4" 
+  },
+  { 
+    id: "profila-rs", 
+    name: "Profila RS", 
+    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=250&fit=crop",
+    description: "Vielseitiger Camper mit optimaler Balance zwischen Komfort und Mobilität.",
+    features: ["Großzügiger Wohnraum", "Separate Dusche", "Flexible Schlafplätze"],
+    length: "7,2 m", 
+    sleepingPlaces: "3" 
+  },
+  { 
+    id: "integra-line", 
+    name: "Integra Line", 
+    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=250&fit=crop",
+    description: "Luxuriöser Integralwohnmobil mit gehobener Ausstattung und maximaler Raumnutzung.",
+    features: ["Großzügiges Raumgefühl", "Premiumausstattung", "Hervorragende Isolierung"],
+    length: "8,1 m", 
+    sleepingPlaces: "4" 
+  },
+  { 
+    id: "van", 
+    name: "Van", 
+    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=400&h=250&fit=crop",
+    description: "Kompakter Van für urbane Abenteuer und spontane Trips.",
+    features: ["Wendig und kompakt", "Parkplatzfreundlich", "Perfekt für Paare"],
+    length: "5,9 m", 
+    sleepingPlaces: "2" 
+  },
 ];
 
 export type BeraterAnswer = {
@@ -218,23 +249,29 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleCloseOverlay}>
-      <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto p-0" hideCloseButton>
         <div className="relative p-6">
-          {/* Progress indicator */}
-          <div className="mb-6">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-600">
-                Schritt {step} von {totalSteps}
-              </span>
-              <button
-                onClick={handleCloseOverlay}
-                className="absolute right-4 top-4 p-1 rounded-full bg-white/80 hover:bg-gray-200"
-              >
-                <X size={20} />
-              </button>
+          {/* Single close button - only show on non-results steps */}
+          {step < 5 && (
+            <button
+              onClick={handleCloseOverlay}
+              className="absolute right-4 top-4 p-1 rounded-full bg-white/80 hover:bg-gray-200 z-10"
+            >
+              <X size={20} />
+            </button>
+          )}
+          
+          {/* Progress indicator - only show on non-results steps */}
+          {step < 5 && (
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-gray-600">
+                  Schritt {step} von {totalSteps - 1}
+                </span>
+              </div>
+              <Progress value={(step / (totalSteps - 1)) * 100} />
             </div>
-            <Progress value={(step / totalSteps) * 100} />
-          </div>
+          )}
           
           {/* Content */}
           <div className="min-h-[60vh]">
