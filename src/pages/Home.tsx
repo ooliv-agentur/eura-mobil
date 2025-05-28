@@ -69,7 +69,7 @@ const wohnmobiltypenErklaerungen = {
   }
 };
 
-// CTA cards data
+// CTA cards data - updated to use navigation instead of overlay
 const ctaCards = [
   {
     title: "Alle Modelle",
@@ -82,8 +82,7 @@ const ctaCards = [
     title: "Beratungs-Tool",
     description: "Finden Sie mit wenigen Klicks das passende Modell für Ihre Wünsche und Bedürfnisse.",
     buttonText: "Beratung starten",
-    path: "#",
-    isBeratung: true,
+    path: "/berater",
     icon: "advice"
   },
   {
@@ -467,11 +466,7 @@ const Home = () => {
                     </div>
                     <h3 className="text-xl font-bold mb-3 text-center">{card.title}</h3>
                     <p className="text-gray-200 mb-6 flex-grow text-center">{card.description}</p>
-                    {card.isBeratung ? (
-                      <Button onClick={handleStartBerater} variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
-                        {card.buttonText}
-                      </Button>
-                    ) : card.isExternal ? (
+                    {card.isExternal ? (
                       <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
                         <a href={card.path} target="_blank" rel="noopener noreferrer">
                           {card.buttonText}
