@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -10,7 +11,10 @@ import { ArrowLeft, Settings } from "lucide-react";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 const FloorplanDetail = () => {
+  console.log("FloorplanDetail component rendering...");
+  
   const { modelId, floorplanId } = useParams();
+  console.log("URL params:", { modelId, floorplanId });
 
   // Mock data - in real app this would come from API/data source
   const floorplanData = {
@@ -47,6 +51,7 @@ const FloorplanDetail = () => {
   };
 
   const handleKonfiguratorClick = () => {
+    console.log("Konfigurator button clicked");
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
 
@@ -55,6 +60,8 @@ const FloorplanDetail = () => {
     { id: "technische-daten", label: "Technische Daten" },
     { id: "ausstattung", label: "Ausstattung" }
   ];
+
+  console.log("About to render component structure...");
 
   return (
     <div className="flex flex-col min-h-screen">
