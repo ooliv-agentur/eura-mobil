@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
@@ -95,24 +96,24 @@ const equipmentTitles = {
   elektroinstallation: "Elektroinstallation"
 };
 
-const handleKonfiguratorClick = () => {
-  window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
-};
-  
-const handleBeratungClick = () => {
-  startBeraterFlow();
-};
-
-const handleCatalogueDownload = () => {
-  // Placeholder functionality - would download the actual PDF
-  console.log("Downloading catalogue for Activa One");
-};
-
 const ActivaOneDetail = () => {
   const isMobile = useIsMobile();
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const { selectedModels } = useComparison();
+
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+  };
+    
+  const handleBeratungClick = () => {
+    startBeraterFlow();
+  };
+
+  const handleCatalogueDownload = () => {
+    // Placeholder functionality - would download the actual PDF
+    console.log("Downloading catalogue for Activa One");
+  };
 
   return (
     <ProductLayout modelName="Activa One">
