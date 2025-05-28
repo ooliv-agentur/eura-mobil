@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -6,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
-import { Settings, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 const FloorplanDetail = () => {
@@ -61,15 +60,7 @@ const FloorplanDetail = () => {
       <Header />
       
       {/* Sidebar Navigation */}
-      <SidebarNavigation items={sidebarItems}>
-        <Button 
-          onClick={handleKonfiguratorClick} 
-          className="bg-gray-800 text-white hover:bg-gray-900 w-full flex items-center gap-2"
-        >
-          <Settings size={16} />
-          Konfigurieren
-        </Button>
-      </SidebarNavigation>
+      <SidebarNavigation items={sidebarItems} />
       
       {/* Hero Section */}
       <section className="relative bg-[#E5E7EB] h-[50vh] flex items-center justify-center">

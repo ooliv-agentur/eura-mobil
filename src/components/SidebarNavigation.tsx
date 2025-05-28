@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Circle, CircleDot } from "lucide-react";
+import { Circle, CircleDot, Settings } from "lucide-react";
 
 interface SidebarNavigationProps {
   items: Array<{
@@ -68,6 +68,10 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items, chi
     }
   };
 
+  const handleKonfiguratorClick = () => {
+    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+  };
+
   return (
     <div className="hidden md:block fixed left-6 top-1/2 -translate-y-1/2 z-20">
       <nav className="flex flex-col gap-4">
@@ -96,12 +100,21 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ items, chi
           </div>
         ))}
         
-        {/* Render children (Konfigurieren button) if provided */}
-        {children && (
-          <div className="mt-4 w-48">
-            {children}
+        {/* Konfigurieren Button */}
+        <div className="relative group mt-4">
+          <button
+            onClick={handleKonfiguratorClick}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 hover:bg-gray-900 transition-colors"
+            aria-label="Konfigurieren"
+          >
+            <Settings className="h-6 w-6 text-white" />
+          </button>
+          
+          {/* Label that appears on hover */}
+          <div className="hidden group-hover:flex absolute left-12 top-1/2 -translate-y-1/2 bg-white px-3 py-1.5 rounded-md shadow-md whitespace-nowrap">
+            <span className="text-sm font-medium">Konfigurieren</span>
           </div>
-        )}
+        </div>
       </nav>
     </div>
   );
