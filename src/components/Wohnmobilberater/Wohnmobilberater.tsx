@@ -1,77 +1,34 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useWohnmobilberater } from "@/context/WohnmobilberaterContext";
-import { X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import QuestionScreen from "./QuestionScreen";
-import ResultScreen from "@/components/ResultScreen";
+import { useNavigate, useLocation } from "react-router-dom";
+import BeraterOverlay from "./BeraterOverlay";
 
 const Wohnmobilberater: React.FC = () => {
-  const {
-    currentStep,
-    totalSteps,
-    questions,
-    selectedOption,
-    handleNext,
-    handleBack,
-    answers,
-    resetBerater,
-  } = useWohnmobilberater();
-  
+  const { resetBerater } = useWohnmobilberater();
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Initialize berater when the page loads - start at step 1 (skip intro)
+  // Check if we should open the overlay based on the current route
   useEffect(() => {
-    // Reset and set current step to 1 (first question)
-    resetBerater();
-    // No need to open berater as we're already on the page
-  }, []);
-
-  // Function to handle closing the berater and navigating back
-  const handleClose = () => {
-    navigate(-1);
-  };
-
-  // Enhanced wrapper for handleNext to ensure it works properly
-  const handleNextWrapper = (option: string) => {
-    console.log("handleNextWrapper called with option:", option);
-    
-    // Use setTimeout to ensure state updates properly
-    setTimeout(() => {
-      handleNext(option);
-    }, 10);
-  };
-
-  const renderContent = () => {
-    if (currentStep >= 1 && currentStep <= totalSteps) {
-      return (
-        <QuestionScreen
-          questionData={questions[currentStep - 1]}
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          selectedOption={selectedOption}
-          onNext={handleNextWrapper}
-          onBack={handleBack}
-        />
-      );
-    } else {
-      return <ResultScreen answers={answers} onRestart={resetBerater} />;
+    if (location.pathname === '/berater') {
+      setIsOverlayOpen(true);
+      resetBerater();
     }
+  }, [location.pathname, resetBerater]);
+
+  // Handle overlay close - navigate back to home
+  const handleClose = () => {
+    setIsOverlayOpen(false);
+    navigate('/');
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100 relative">
-      <button
-        onClick={handleClose}
-        className="absolute right-4 top-4 rounded-full p-1 bg-white/80 hover:bg-gray-200 transition-colors z-10"
-        aria-label="Close advisor"
-      >
-        <X size={20} />
-      </button>
-      <div className="flex-1 w-full max-w-md mx-auto p-4">
-        {renderContent()}
-      </div>
-    </div>
+    <BeraterOverlay 
+      isOpen={isOverlayOpen} 
+      onClose={handleClose} 
+    />
   );
 };
 

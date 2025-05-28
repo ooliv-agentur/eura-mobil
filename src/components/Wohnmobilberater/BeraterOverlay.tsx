@@ -8,14 +8,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import ResultsDisplay from "./ResultsDisplay";
-import { useNavigate } from "react-router-dom";
-import { useComparison } from "@/context/ComparisonContext";
+import EnhancedResultsDisplay from "./EnhancedResultsDisplay";
 
 // Mock data for models to display in results
 const mockModels = [
   { id: "activa-one", name: "Activa One", length: "6,5 m", sleepingPlaces: "4" },
-  { id: "profila-t", name: "Profila T", length: "7,2 m", sleepingPlaces: "3" },
+  { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3" },
   { id: "integra-line", name: "Integra Line", length: "8,1 m", sleepingPlaces: "4" },
   { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2" },
   { id: "contura", name: "Contura", length: "8,8 m", sleepingPlaces: "4" },
@@ -34,8 +32,6 @@ type BeraterOverlayProps = {
 };
 
 const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
-  const navigate = useNavigate();
-  const { selectedModels, clearModels } = useComparison();
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<BeraterAnswer>({
     persons: "",
@@ -93,22 +89,7 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
       length: "",
       weight: "",
     });
-    clearModels(); // Clear any selected models for comparison
     onClose();
-  };
-  
-  // Navigation to model details with overlay closing
-  const handleViewModel = (modelId: string) => {
-    handleCloseOverlay();
-    navigate(`/modelle/${modelId}`);
-  };
-  
-  // Start comparison with selected models
-  const handleStartComparison = () => {
-    if (selectedModels.length === 2) {
-      handleCloseOverlay();
-      navigate(`/modellvergleich?modelA=${selectedModels[0].id}&modelB=${selectedModels[1].id}`);
-    }
   };
   
   // Helper function to check if we have results that match criteria
@@ -224,57 +205,10 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
         
       case 5:
         return (
-          <div className="flex flex-col gap-4">
-            <h2 className="text-xl font-semibold mb-2 text-center">
-              Diese Wohnmobile könnten zu Ihnen passen...
-            </h2>
-            
-            {!hasMatchingResults() && (
-              <>
-                <p className="text-center text-gray-700 my-2">
-                  Leider passt kein Modell zu Ihrer Auswahl. Bitte starten Sie die Beratung neu.
-                </p>
-                <Button onClick={() => setStep(1)} className="mx-auto mb-4">
-                  Beratung neu starten
-                </Button>
-                <h3 className="text-lg font-semibold text-center">
-                  Diese Wohnmobile könnten trotzdem passen...
-                </h3>
-              </>
-            )}
-            
-            <ResultsDisplay 
-              models={mockModels} 
-              onViewModel={handleViewModel}
-            />
-            
-            {selectedModels.length === 2 && (
-              <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4 z-50">
-                <div className="container mx-auto flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold">Ausgewählt:</span>
-                    <span>{selectedModels[0].name} vs. {selectedModels[1].name}</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Button variant="outline" onClick={clearModels}>
-                      Auswahl zurücksetzen
-                    </Button>
-                    <Button onClick={handleStartComparison}>
-                      Modelle vergleichen
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
-            
-            <div className="flex justify-center mt-4 mb-16">
-              <Button 
-                onClick={() => setStep(1)}
-              >
-                Neue Beratung starten
-              </Button>
-            </div>
-          </div>
+          <EnhancedResultsDisplay 
+            models={mockModels} 
+            onClose={handleCloseOverlay}
+          />
         );
         
       default:
@@ -284,7 +218,7 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleCloseOverlay}>
-      <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto p-0">
         <div className="relative p-6">
           {/* Progress indicator */}
           <div className="mb-6">
