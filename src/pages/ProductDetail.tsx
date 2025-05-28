@@ -12,7 +12,7 @@ import { ModelEquipmentTabs } from "@/components/model/ModelEquipmentTabs";
 import { ModelFinalCTA } from "@/components/model/ModelFinalCTA";
 import { ModelCategorySection } from "@/components/model/ModelCategorySection";
 import { modelsData } from "@/data/modelsData";
-import { NotFound } from "@/pages/NotFound";
+import NotFound from "@/pages/NotFound";
 
 const ProductDetail = () => {
   const { modelId } = useParams<{ modelId: string }>();
@@ -41,15 +41,22 @@ const ProductDetail = () => {
   return (
     <ProductLayout modelName={modelDetails.name}>
       <div className="container mx-auto px-4">
-        <ModelHero modelDetails={modelDetails} />
-        <ModelIntro modelDetails={modelDetails} />
-        <ModelHighlights modelDetails={modelDetails} />
-        <ModelFloorplans modelDetails={modelDetails} />
-        <ModelInteriorHotspots modelDetails={modelDetails} />
-        <ModelUpholstery modelDetails={modelDetails} />
-        <ModelEquipmentTabs modelDetails={modelDetails} />
+        <ModelHero 
+          headline={modelDetails.name}
+          subline={modelDetails.intro?.split('\n\n')[0] || ''}
+        />
+        <ModelIntro 
+          title={modelDetails.name}
+          content={modelDetails.intro || ''}
+          interiorHotspots={modelDetails.interior}
+        />
+        <ModelHighlights highlights={modelDetails.highlights || []} />
+        <ModelFloorplans floorplans={modelDetails.layouts || []} />
+        <ModelInteriorHotspots interiorItems={modelDetails.interior || []} />
+        <ModelUpholstery upholsteryTypes={modelDetails.upholsteryTypes || []} />
+        <ModelEquipmentTabs equipment={modelDetails.equipment || {}} />
         <ModelCategorySection currentModelId={modelId} category={category} />
-        <ModelFinalCTA modelDetails={modelDetails} />
+        <ModelFinalCTA modelName={modelDetails.name} />
       </div>
     </ProductLayout>
   );
