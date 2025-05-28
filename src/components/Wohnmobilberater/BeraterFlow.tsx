@@ -33,7 +33,7 @@ const BeraterFlow: React.FC = () => {
           </p>
           <Button 
             size="lg" 
-            onClick={() => {/* currentStep will advance automatically */}}
+            onClick={() => handleNext([])}
             className="px-8 py-3"
           >
             Beratung starten
