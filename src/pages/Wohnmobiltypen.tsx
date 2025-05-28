@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -118,40 +117,38 @@ const Wohnmobiltypen = () => {
                 Modelle aus dieser Kategorie
               </h3>
               
-              <div className="flex justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-                  {typ.models.map((model) => (
-                    <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white w-full max-w-sm">
-                      <AspectRatio ratio={4/3} className="bg-gray-200">
-                      </AspectRatio>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto justify-items-center">
+                {typ.models.map((model) => (
+                  <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white w-full max-w-sm">
+                    <AspectRatio ratio={4/3} className="bg-gray-200">
+                    </AspectRatio>
+                    
+                    <div className="p-6">
+                      <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
+                      <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                        {model.description}
+                      </p>
                       
-                      <div className="p-6">
-                        <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
-                        <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                          {model.description}
-                        </p>
-                        
-                        <div className="grid grid-cols-2 gap-4 mb-6">
-                          <div className="text-center p-3 bg-gray-50 rounded">
-                            <div className="text-xs text-gray-500 mb-1">Länge</div>
-                            <div className="font-semibold text-gray-900">{model.length}</div>
-                          </div>
-                          <div className="text-center p-3 bg-gray-50 rounded">
-                            <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
-                            <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
-                          </div>
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="text-center p-3 bg-gray-50 rounded">
+                          <div className="text-xs text-gray-500 mb-1">Länge</div>
+                          <div className="font-semibold text-gray-900">{model.length}</div>
                         </div>
-                        
-                        <Button asChild variant="outline" className="w-full">
-                          <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
-                            Mehr erfahren
-                            <ChevronRight size={16} />
-                          </Link>
-                        </Button>
+                        <div className="text-center p-3 bg-gray-50 rounded">
+                          <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
+                          <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+                        </div>
                       </div>
+                      
+                      <Button asChild variant="outline" className="w-full">
+                        <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
+                          Mehr erfahren
+                          <ChevronRight size={16} />
+                        </Link>
+                      </Button>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </section>
