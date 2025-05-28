@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -6,8 +5,16 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { SidebarNavigation } from "@/components/SidebarNavigation";
 
 const Wohnmobiltypen = () => {
+  const navigationItems = [
+    { id: "van", label: "Vans" },
+    { id: "alkoven", label: "Alkoven Wohnmobile" },
+    { id: "teilintegriert", label: "Teilintegrierte Wohnmobile" },
+    { id: "integriert", label: "Vollintegrierte Wohnmobile" }
+  ];
+
   const wohnmobiltypen = [
     {
       id: "van",
@@ -54,6 +61,9 @@ const Wohnmobiltypen = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       
+      {/* Sidebar Navigation */}
+      <SidebarNavigation items={navigationItems} />
+      
       {/* Hero Section */}
       <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
         <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
@@ -72,7 +82,7 @@ const Wohnmobiltypen = () => {
         </section>
         
         {wohnmobiltypen.map((typ) => (
-          <section key={typ.id} className="my-16">
+          <section key={typ.id} id={typ.id} className="my-16">
             <div className="mb-12">
               <div className="flex items-center justify-center gap-3 mb-6">
                 <div className="w-12 h-12 border border-gray-300 rounded flex items-center justify-center">
