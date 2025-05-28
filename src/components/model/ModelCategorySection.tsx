@@ -107,6 +107,9 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
     return null;
   }
 
+  // Only show navigation and indicators if more than 4 models
+  const showNavigation = relatedModels.length > 4;
+
   return (
     <section className="my-12 bg-gray-50 p-6 md:p-8 rounded-lg">
       <div className="max-w-4xl mx-auto">
@@ -135,13 +138,13 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Exact homepage carousel styling */}
+        {/* Related Models - Homepage carousel style */}
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-4 text-center">
             Weitere Modelle aus dieser Kategorie
           </h3>
           
-          <Carousel className="w-full" showIndicators={true}>
+          <Carousel className="w-full" showIndicators={showNavigation}>
             <CarouselContent>
               {relatedModels.map((model) => (
                 <CarouselItem key={model.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
@@ -166,11 +169,13 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="hidden md:flex justify-end gap-2 mt-2">
-              <CarouselPrevious />
-              <CarouselNext />
-            </div>
-            <CarouselIndicators />
+            {showNavigation && (
+              <div className="hidden md:flex justify-end gap-2 mt-2">
+                <CarouselPrevious />
+                <CarouselNext />
+              </div>
+            )}
+            {showNavigation && <CarouselIndicators />}
           </Carousel>
         </div>
       </div>
