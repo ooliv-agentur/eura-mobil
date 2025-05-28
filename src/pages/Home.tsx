@@ -172,6 +172,14 @@ const wohnmobiltypenButtonText = {
   vans: "Was macht Vans besonders?",
 };
 
+// Define the anchor links for each wohnmobiltyp
+const wohnmobiltypenLinks = {
+  alkoven: "/wohnmobiltypen#alkoven",
+  teilintegriert: "/wohnmobiltypen#teilintegriert", 
+  integriert: "/wohnmobiltypen#integriert",
+  vans: "/wohnmobiltypen#van",
+};
+
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
@@ -396,7 +404,7 @@ const Home = () => {
             {activeFilter !== 'alle' && (
               <div className="flex justify-center mb-8">
                 <Button asChild size="lg" className="mt-4">
-                  <Link to="/wohnmobiltypen">
+                  <Link to={wohnmobiltypenLinks[activeFilter]}>
                     {wohnmobiltypenButtonText[activeFilter]}
                   </Link>
                 </Button>
