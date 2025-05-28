@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -127,10 +126,10 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
               Weitere Modelle aus dieser Kategorie
             </h3>
             
-            <div className="flex justify-center">
-              <div className="flex flex-wrap justify-center gap-8 max-w-6xl">
+            <div className="w-full flex justify-center">
+              <div className="flex flex-wrap justify-center items-start gap-8" style={{ maxWidth: 'fit-content' }}>
                 {relatedModels.map((model) => (
-                  <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white w-full max-w-sm">
+                  <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white w-full max-w-sm flex-shrink-0">
                     <AspectRatio ratio={4/3} className="bg-gray-200">
                     </AspectRatio>
                     
