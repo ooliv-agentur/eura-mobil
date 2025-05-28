@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { MapPin, ArrowRight, CheckCircle, Users, Home, Car, Sparkles } from 'lucide-react';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 const Wohnmobiltypen = () => {
   // Van models
@@ -72,34 +72,34 @@ const Wohnmobiltypen = () => {
   }: { 
     model: { id: string; name: string; description: string; technicalData: { länge: string; schlafplätze: string } };
   }) => (
-    <Card className="border border-gray-300">
-      <AspectRatio ratio={4/3} className="bg-gray-200">
-        <div className="w-full h-full bg-gray-200"></div>
+    <Card className="bg-white border border-black">
+      <AspectRatio ratio={4/3}>
+        <div className="w-full h-full bg-gray-300"></div>
       </AspectRatio>
       <CardContent className="p-4">
-        <h3 className="text-lg font-semibold mb-2">{model.name}</h3>
-        <p className="text-gray-600 text-sm mb-4">{model.description}</p>
+        <h3 className="text-lg font-bold mb-2">{model.name}</h3>
+        <p className="text-sm mb-4">{model.description}</p>
         
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="border border-gray-300 p-2 text-center">
-            <div className="text-xs text-gray-500 mb-1">Länge</div>
-            <div className="font-medium">{model.technicalData.länge}</div>
+          <div className="border border-black p-2 text-center">
+            <div className="text-xs mb-1">Länge</div>
+            <div className="font-bold">{model.technicalData.länge}</div>
           </div>
-          <div className="border border-gray-300 p-2 text-center">
-            <div className="text-xs text-gray-500 mb-1">Schlafplätze</div>
-            <div className="font-medium">{model.technicalData.schlafplätze}</div>
+          <div className="border border-black p-2 text-center">
+            <div className="text-xs mb-1">Schlafplätze</div>
+            <div className="font-bold">{model.technicalData.schlafplätze}</div>
           </div>
         </div>
         
         <div className="space-y-2">
-          <Button className="w-full" asChild>
+          <Button className="w-full bg-black text-white border border-black hover:bg-gray-800" asChild>
             <Link to={`/modelle/${model.id}`}>
               Modell ansehen
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           
-          <Button variant="outline" className="w-full" asChild>
+          <Button variant="outline" className="w-full border-black text-black hover:bg-gray-100" asChild>
             <Link to="/haendler">
               <MapPin size={16} />
               Händler finden
@@ -111,8 +111,8 @@ const Wohnmobiltypen = () => {
   );
 
   const USPSection = ({ usps }: { usps: string[] }) => (
-    <div className="border border-gray-300 p-6 mb-8">
-      <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe</h3>
+    <div className="border border-black p-6 mb-8">
+      <h3 className="text-xl font-bold mb-4">Highlights der Baureihe</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {usps.map((usp, index) => (
           <div key={index} className="flex items-start gap-2">
@@ -138,7 +138,7 @@ const Wohnmobiltypen = () => {
     <section className="mb-16">
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">{title}</h2>
-        <p className="text-gray-600 text-lg mb-6">{description}</p>
+        <p className="text-lg mb-6">{description}</p>
       </div>
       
       <USPSection usps={usps} />
@@ -157,12 +157,12 @@ const Wohnmobiltypen = () => {
       
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-gray-100 py-16">
+        <section className="bg-gray-200 py-16">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Unsere Wohnmobiltypen
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl max-w-3xl mx-auto">
               EURA MOBIL bietet Ihnen für jedes Reisebedürfnis den passenden Wohnmobiltyp – von kompakten Vans bis zu luxuriösen Integrierten.
             </p>
           </div>
