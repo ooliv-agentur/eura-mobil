@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { MapPin } from 'lucide-react';
+import { MapPin, Circle } from 'lucide-react';
 
 const Wohnmobiltypen = () => {
   // Van models
@@ -14,9 +14,25 @@ const Wohnmobiltypen = () => {
     { id: "van", name: "Van", description: "Premium Van mit exklusivem Ambiente", technicalData: { länge: "6,36 m", schlafplätze: "2" } }
   ];
 
+  const vanUSPs = [
+    "Kompakt und wendig für Stadtverkehr und enge Straßen",
+    "Moderne Küche, bequemes Bett und geräumiges Bad",
+    "Gut durchdachte Innenräume mit viel Stauraum",
+    "Hervorragende Technik auf höchstem Niveau",
+    "Premium-Materialien und exklusives Ambiente"
+  ];
+
   // Alkoven models
   const alkovenModels = [
     { id: "activa-one", name: "Activa One", description: "Familien-Alkoven der Extraklasse", technicalData: { länge: "7,30 – 7,84 m", schlafplätze: "4-6" } }
+  ];
+
+  const alkovenUSPs = [
+    "Praktischer Schlafbereich über dem Fahrerhaus (Alkoven)",
+    "Großes Doppelbett oder 2 Einzelbetten mit zusätzlichem Stauraum",
+    "Moderne Klimaanlage und Tiefrahmenchassis",
+    "Beheizter Doppelboden mit Fußbodenheizung",
+    "Ideal für Familien und Freizeitsportler"
   ];
 
   // Teilintegrierte models
@@ -27,12 +43,28 @@ const Wohnmobiltypen = () => {
     { id: "contura", name: "Contura", description: "Luxus mit Starlight Dome Panoramaglasdach", technicalData: { länge: "7,84 m", schlafplätze: "2" } }
   ];
 
+  const teilintegrierteUSPs = [
+    "Großes, bequemes Hubbett direkt in der Decke (Profila RS)",
+    "Mercedes-Benz Chassis mit AL-KO Tiefrahmen verfügbar",
+    "Durchgehend isolierter und beheizter Doppelboden",
+    "Hightech-Materialien in Leichtbaukonstruktion",
+    "Maximaler Komfort bei überschaubaren Abmessungen"
+  ];
+
   // Integrierte models
   const integrierteModels = [
     { id: "integra-line-fiat", name: "Integra Line Fiat", description: "Natürliches Design mit Luxus und Komfort", technicalData: { länge: "7,30 – 7,84 m", schlafplätze: "2–4" } },
     { id: "integra-line-gt-mercedes", name: "Integra Line GT Mercedes", description: "Grand Tourismo mit dynamisch elegantem Design", technicalData: { länge: "7,47 – 7,64 m", schlafplätze: "4" } },
     { id: "integra", name: "Integra", description: "Luxus-Reisemobil der Oberklasse", technicalData: { länge: "7,89 – 8,99 m", schlafplätze: "4" } },
     { id: "xtura", name: "Xtura", description: "4×4 Fernreisemobil für Offroad-Abenteuer", technicalData: { länge: "6,88 m", schlafplätze: "2" } }
+  ];
+
+  const integrierteUSPs = [
+    "Besonders großzügige Raumgestaltung",
+    "Aufwendige Lichttechnik und edle Materialien",
+    "Verschiedene Raumaufteilungen: Querbett, Einzelbetten, zentrales Doppelbett",
+    "Elektrisches Hubbett und elektrisches Frontplissee",
+    "Beheizter Doppelboden und langlebige GFK-Verbundwerkstoffe"
   ];
 
   const ModelCard = ({ 
@@ -72,16 +104,34 @@ const Wohnmobiltypen = () => {
     </Card>
   );
 
+  const USPSection = ({ usps }: { usps: string[] }) => (
+    <div className="bg-gray-50 p-6 rounded-lg mb-8">
+      <h3 className="text-xl font-semibold mb-4">Highlights der Baureihe:</h3>
+      <div className="space-y-3">
+        {usps.map((usp, index) => (
+          <div key={index} className="flex items-start gap-3">
+            <div className="w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0 mt-1">
+              <Circle className="h-2.5 w-2.5 text-gray-600 fill-current" />
+            </div>
+            <p className="text-sm">{usp}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   const CategorySection = ({ 
     title, 
     description, 
     models, 
-    categoryPath 
+    categoryPath,
+    usps
   }: { 
     title: string; 
     description: string; 
     models: Array<{ id: string; name: string; description: string; technicalData: { länge: string; schlafplätze: string } }>;
     categoryPath: string;
+    usps: string[];
   }) => (
     <section className="mb-16">
       <div className="text-center mb-8">
@@ -91,6 +141,8 @@ const Wohnmobiltypen = () => {
           <Link to={categoryPath}>Alle {title} anzeigen</Link>
         </Button>
       </div>
+      
+      <USPSection usps={usps} />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {models.map((model) => (
@@ -117,6 +169,7 @@ const Wohnmobiltypen = () => {
           description="Im neuen Premium Van von EURA MOBIL verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details."
           models={vanModels}
           categoryPath="/wohnmobiltypen/vans"
+          usps={vanUSPs}
         />
 
         <CategorySection
@@ -124,6 +177,7 @@ const Wohnmobiltypen = () => {
           description="In den Alkoven-Wohnmobilen von EURA MOBIL schafft die optimale Raumnutzung Platz für bis zu 6 Familienmitglieder oder Freunde. Dank intelligenter Leichtbauarchitektur steht bereits in der Gewichtsklasse unter 3,5 Tonnen ein Premium-Reisemobil bereit."
           models={alkovenModels}
           categoryPath="/wohnmobiltypen/alkoven"
+          usps={alkovenUSPs}
         />
 
         <CategorySection
@@ -131,6 +185,7 @@ const Wohnmobiltypen = () => {
           description="Die Teilintegrierten von EURA MOBIL bieten Flexibilität und Komfort – perfekt für Paare oder Familien, die ihre Freizeit ohne Kompromisse genießen möchten. Mit vielfältigen Grundrissen und modernster Technik."
           models={teilintegrierteModels}
           categoryPath="/wohnmobiltypen/teilintegriert"
+          usps={teilintegrierteUSPs}
         />
 
         <CategorySection
@@ -138,6 +193,7 @@ const Wohnmobiltypen = () => {
           description="Integrierte Wohnmobile stehen für Luxus und Freiheit. Ob kurze Reisen oder lange Touren: EURA MOBIL bietet mit seinen Integrierten ein mobiles Zuhause mit maximalem Komfort und einzigartigem Raumgefühl."
           models={integrierteModels}
           categoryPath="/wohnmobiltypen/integriert"
+          usps={integrierteUSPs}
         />
       </main>
       
