@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Users, Home, Car } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 type CategoryType = "alkoven" | "teilintegriert" | "integriert" | "van";
 
@@ -54,11 +55,11 @@ const categoryInfo = {
 // Updated model classification - Added Contura to teilintegriert
 const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   alkoven: [
-    { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Kompakte Alkoven-Serie für Familien" }
+    { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Praktische Wohnmobile für Einsteiger und Familien. Bis 6 Personen reisen mit optimiertem Platz." }
   ],
   teilintegriert: [
     { id: "profila-t-mercedes", name: "Profila T", length: "7,2-8,1 m", sleepingPlaces: "2-4", description: "Teilintegrierte auf Mercedes Basis" },
-    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Kompakter Teilintegrierter" },
+    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Großzügiger Wohnraum mit cleverer Raumaufteilung. Hoher Reisekomfort und flexible Nutzung." },
     { id: "contura", name: "Contura", length: "7,84 m", sleepingPlaces: "2", description: "Premium Teilintegrierter mit Luxusausstattung" }
   ],
   integriert: [
@@ -66,7 +67,7 @@ const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
     { id: "integra-line-gt-mercedes", name: "Integra Line GT", length: "8,8 m", sleepingPlaces: "4", description: "Premium Vollintegrierter" }
   ],
   van: [
-    { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2", description: "Kompakter Kastenwagen" }
+    { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2", description: "Kompakte Fahrzeuge für flexibles Reisen. Ideal für urbane Abenteuer mit maximaler Wendigkeit." }
   ]
 };
 
@@ -92,11 +93,12 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
   // Filter out the current model from related models
   const relatedModels = relatedModelsByCategory[category].filter(
     model => model.id !== currentModelId
-  ).slice(0, 2); // Show max 2 related models
+  );
 
-  // Check if there are multiple models in this category (including current model)
-  const totalModelsInCategory = relatedModelsByCategory[category].length;
-  const hasMultipleModels = totalModelsInCategory > 1;
+  // Don't show section if no other models in category
+  if (relatedModels.length === 0) {
+    return null;
+  }
 
   return (
     <section className="my-12 bg-gray-50 p-6 md:p-8 rounded-lg">
@@ -126,49 +128,45 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Only show if there are other models in the category */}
-        {relatedModels.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-4 text-center">
-              Weitere Modelle aus dieser Kategorie
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              {relatedModels.map((model) => (
-                <Card key={model.id} className="hover:shadow-md transition-shadow">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg">{model.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 text-sm mb-3">{model.description}</p>
-                    <div className="flex justify-between text-sm text-gray-500 mb-3">
-                      <span>Länge: {model.length}</span>
-                      <span>Schlafplätze: {model.sleepingPlaces}</span>
-                    </div>
-                    <Button variant="outline" size="sm" asChild className="w-full">
-                      <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
-                        Mehr erfahren
-                        <ChevronRight size={14} />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+        {/* Related Models - Using homepage slider style cards */}
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold mb-4 text-center">
+            Weitere Modelle aus dieser Kategorie
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {relatedModels.map((model) => (
+              <div key={model.id} className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                {/* Model Image */}
+                <AspectRatio ratio={16/9} className="bg-gray-200">
+                  <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-400">Modellbild</span>
+                  </div>
+                </AspectRatio>
+                
+                {/* Model Content */}
+                <div className="p-6">
+                  <h4 className="text-xl font-semibold mb-2 text-gray-800">{model.name}</h4>
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">{model.description}</p>
+                  
+                  {/* Technical specs */}
+                  <div className="flex justify-between text-sm text-gray-500 mb-4">
+                    <span>Länge: {model.length}</span>
+                    <span>Schlafplätze: {model.sleepingPlaces}</span>
+                  </div>
+                  
+                  {/* Action button */}
+                  <Button asChild className="w-full">
+                    <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
+                      Mehr erfahren
+                      <ChevronRight size={16} />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
-        )}
-
-        {/* Category Overview Link - Only show if there are multiple models in the category */}
-        {hasMultipleModels && (
-          <div className="text-center">
-            <Button asChild>
-              <Link to={info.overviewLink} className="flex items-center gap-2">
-                Alle {info.title} ansehen
-                <ChevronRight size={16} />
-              </Link>
-            </Button>
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );
