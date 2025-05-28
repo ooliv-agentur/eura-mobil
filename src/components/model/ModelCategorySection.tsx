@@ -23,23 +23,23 @@ interface ModelCategorySectionProps {
 const categoryInfo = {
   alkoven: {
     title: "Alkoven Wohnmobile",
-    description: "Alkoven-Wohnmobile bieten maximalen Wohnraum durch das charakteristische Bett über dem Fahrerhaus. Ideal für Familien mit 4-6 Personen.",
-    benefits: ["Viel Schlafplatz", "Großzügiger Wohnraum", "Familienfreundlich"]
+    description: "Alkoven-Wohnmobile bieten maximalen Wohnraum durch das charakteristische Bett über dem Fahrerhaus. Diese Bauart ist ideal für Familien mit 4-6 Personen und überzeugt durch optimale Raumnutzung. Das zusätzliche Bett im Alkoven schafft mehr Schlafplätze, ohne den Wohnraum zu beeinträchtigen. Durch die erhöhte Position entstehen auch praktische Staufächer und ein großzügiges Raumgefühl im Innenbereich.",
+    benefits: ["Maximaler Schlafplatz", "Familienfreundlich", "Großzügiger Wohnraum", "Viel Stauraum", "Optimale Raumnutzung"]
   },
   teilintegriert: {
     title: "Teilintegrierte Wohnmobile", 
-    description: "Zu einem Teil kompakter gebaut, zum anderen Teil mit der überzeugenden Technik der Großen: Teilintegrierte Reisemobile von Eura Mobil bieten ein Höchstmaß an Komfort auch bei überschaubaren Abmessungen.",
-    benefits: ["Kompakter Aufbau", "Überzeugende Technik", "Maximaler Komfort", "Überschaubare Abmessungen", "Hightech-Materialien"]
+    description: "Zu einem Teil kompakter gebaut, zum anderen Teil mit der überzeugenden Technik der Großen: Teilintegrierte Reisemobile von Eura Mobil bieten ein Höchstmaß an Komfort auch bei überschaubaren Abmessungen. Sie vereinen die Wendigkeit kleinerer Fahrzeuge mit dem Luxus größerer Modelle. Das originale Fahrerhaus bleibt erhalten, was Kosten spart und gleichzeitig bewährte Fahreigenschaften garantiert. Moderne Hightech-Materialien und durchdachte Grundrisse sorgen für maximalen Wohnkomfort.",
+    benefits: ["Kompakter Aufbau", "Überzeugende Technik", "Maximaler Komfort", "Überschaubare Abmessungen", "Hightech-Materialien", "Wendigkeit"]
   },
   integriert: {
     title: "Integrierte Wohnmobile",
-    description: "Vollintegrierte Wohnmobile bieten maximalen Luxus und Raumkomfort. Das Fahrerhaus ist vollständig in den Wohnraum integriert.",
-    benefits: ["Maximaler Komfort", "Luxuriöse Ausstattung", "Großzügiges Raumgefühl"]
+    description: "Vollintegrierte Wohnmobile bieten maximalen Luxus und Raumkomfort auf höchstem Niveau. Das Fahrerhaus ist vollständig in den Wohnraum integriert, wodurch ein durchgängiges und großzügiges Raumgefühl entsteht. Diese Premium-Kategorie überzeugt durch edle Materialien, luxuriöse Ausstattung und innovative Lösungen. Große Panoramafenster sorgen für lichtdurchflutete Innenräume, während die aerodynamische Form für bessere Fahreigenschaften und geringeren Kraftstoffverbrauch sorgt.",
+    benefits: ["Maximaler Komfort", "Luxuriöse Ausstattung", "Großzügiges Raumgefühl", "Premium-Materialien", "Panoramafenster", "Aerodynamisch"]
   },
   van: {
     title: "Vans & Kastenwagen",
-    description: "Kompakte Vans sind wendig und alltagstauglich. Perfect für Paare und spontane Trips in die Stadt oder Natur.",
-    benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich"]
+    description: "Kompakte Vans sind wendig und alltagstauglich - perfekt für Paare und spontane Trips in die Stadt oder Natur. Diese wendigen Fahrzeuge überzeugen durch ihre Vielseitigkeit und Parkplatzfreundlichkeit. Trotz kompakter Außenmaße bieten sie clevere Raumlösungen und durchdachte Ausstattung. Sie sind ideal für Wochenendtrips, Stadtbesuche oder längere Reisen zu zweit. Die hohe Wendigkeit macht sie zum perfekten Begleiter für jeden Tag und jedes Abenteuer.",
+    benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich", "Vielseitig", "Clevere Raumlösungen", "Spontane Reisen"]
   }
 };
 
