@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { X, ChevronRight, ChevronLeft } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
@@ -183,9 +182,6 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="flex justify-center mt-4">
-              <Button onClick={handleNext}>Weiter</Button>
             </div>
           </div>
         );
