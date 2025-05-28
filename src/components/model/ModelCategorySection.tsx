@@ -51,19 +51,19 @@ const categoryInfo = {
   }
 };
 
-// Updated model classification - Profila RS moved to teilintegriert
+// Updated model classification - Added Contura to teilintegriert
 const relatedModelsByCategory: Record<CategoryType, RelatedModel[]> = {
   alkoven: [
     { id: "activa-one", name: "Activa One", length: "5,99-6,99 m", sleepingPlaces: "4-6", description: "Kompakte Alkoven-Serie für Familien" }
   ],
   teilintegriert: [
     { id: "profila-t-mercedes", name: "Profila T", length: "7,2-8,1 m", sleepingPlaces: "2-4", description: "Teilintegrierte auf Mercedes Basis" },
-    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Kompakter Teilintegrierter" }
+    { id: "profila-rs", name: "Profila RS", length: "7,2 m", sleepingPlaces: "3", description: "Kompakter Teilintegrierter" },
+    { id: "contura", name: "Contura", length: "7,84 m", sleepingPlaces: "2", description: "Premium Teilintegrierter mit Luxusausstattung" }
   ],
   integriert: [
     { id: "integra-line-fiat", name: "Integra Line", length: "7,5-8,1 m", sleepingPlaces: "2-4", description: "Luxuriöser Vollintegrierter" },
-    { id: "integra-line-gt-mercedes", name: "Integra Line GT", length: "8,8 m", sleepingPlaces: "4", description: "Premium Vollintegrierter" },
-    { id: "contura", name: "Contura", length: "8,8 m", sleepingPlaces: "4", description: "Exklusiver Vollintegrierter" }
+    { id: "integra-line-gt-mercedes", name: "Integra Line GT", length: "8,8 m", sleepingPlaces: "4", description: "Premium Vollintegrierter" }
   ],
   van: [
     { id: "van", name: "Van", length: "5,9 m", sleepingPlaces: "2", description: "Kompakter Kastenwagen" }
