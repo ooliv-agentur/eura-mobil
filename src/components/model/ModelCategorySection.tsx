@@ -138,7 +138,7 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Homepage carousel style */}
+        {/* Related Models - Exact Homepage Carousel Style */}
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-4 text-center">
             Weitere Modelle aus dieser Kategorie
@@ -149,17 +149,21 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
               {relatedModels.map((model) => (
                 <CarouselItem key={model.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                   <div className="p-1">
-                    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-200">
-                      <AspectRatio ratio={4/3} className="bg-gray-200">
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                          <span className="text-xs text-gray-400">Modellbild</span>
+                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 h-full">
+                      <AspectRatio ratio={4/3} className="bg-gray-100">
+                        <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                          <span className="text-sm text-gray-400">Modellbild</span>
                         </div>
                       </AspectRatio>
                       <div className="p-4">
-                        <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
-                        <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                        <h4 className="font-semibold text-lg mb-2 text-gray-900">{model.name}</h4>
+                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
                           {model.description}
                         </p>
+                        <div className="flex justify-between items-center text-xs text-gray-500 mb-4">
+                          <span>Länge: {model.length}</span>
+                          <span>Schlafplätze: {model.sleepingPlaces}</span>
+                        </div>
                         <Button variant="outline" asChild className="w-full">
                           <Link to={`/modelle/${model.id}`}>Mehr erfahren</Link>
                         </Button>
@@ -170,7 +174,7 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
               ))}
             </CarouselContent>
             {showNavigation && (
-              <div className="hidden md:flex justify-end gap-2 mt-2">
+              <div className="flex justify-center gap-2 mt-4">
                 <CarouselPrevious />
                 <CarouselNext />
               </div>
