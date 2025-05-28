@@ -20,11 +20,11 @@ interface FullscreenMenuProps {
 const modelPreviewData = {
   "van": {
     title: "Van",
-    text: "Kompakter Van mit flexiblem Innenraum. Ideal für Reisende, die ein wendiges Fahrzeug für Städte und kleine Straßen suchen.",
+    text: "Im neuen Premium Van von Eura Mobil verwandelt das exklusive Ambiente jeden Moment in einen besonderen Augenblick. Spüren Sie die edlen Materialien und erleben Sie die individuellen Details, die den Eura Mobil Van zu Ihrem ganz persönlichen mobilen Zuhause machen. Nehmen Sie sich die Zeit und lassen Sie das Interieur auf sich wirken....",
     facts: [
-      { label: "Länge", value: "5,4 - 6,0 m" },
-      { label: "Sitzplätze", value: "2 - 4" },
-      { label: "Schlafplätze", value: "2 - 3" }
+      { label: "Länge", value: "5,99 - 6,36 m" },
+      { label: "Sitzplätze", value: "4" },
+      { label: "Schlafplätze", value: "2-3" }
     ]
   },
   "activa-one": {
@@ -110,7 +110,7 @@ const modelPreviewData = {
   }
 };
 
-// Simplified model preview component with proper aspect ratio and balanced spacing
+// Simplified model preview component with smaller aspect ratio and balanced spacing
 const ModelPreviewHero = ({
   modelId,
   onClose
@@ -125,8 +125,8 @@ const ModelPreviewHero = ({
   
   return (
     <div className="flex flex-col h-full">
-      {/* Image placeholder with reduced height - using 3:2 aspect ratio instead of 16:9 */}
-      <AspectRatio ratio={3/2} className="mb-4 bg-gray-200 rounded-md overflow-hidden" />
+      {/* Image placeholder with much smaller height - using 5:2 aspect ratio */}
+      <AspectRatio ratio={5/2} className="mb-4 bg-gray-200 rounded-md overflow-hidden" />
       
       <h3 className="text-xl font-medium mb-2">{modelData.title}</h3>
       
@@ -178,7 +178,7 @@ const MobileModelItem = ({
         onClick={() => onSelect(modelId)}
       >
         {/* Small dummy image with reduced size */}
-        <div className="bg-gray-200 w-12 h-8 mr-3 flex-shrink-0 rounded-sm"></div>
+        <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
         <span className="font-medium flex-grow">{model.title}</span>
         {isActive ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
       </button>
@@ -186,7 +186,7 @@ const MobileModelItem = ({
       {/* Expandable preview section */}
       {isActive && (
         <div className="px-2 pb-4 animate-fade-in">
-          <AspectRatio ratio={3/2} className="mb-3 bg-gray-200 rounded-md overflow-hidden" />
+          <AspectRatio ratio={5/2} className="mb-3 bg-gray-200 rounded-md overflow-hidden" />
           
           <p className="text-sm text-gray-600 mb-3">
             {model.text}
@@ -303,7 +303,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                           onClick={() => handleModelSelect(modelId)}
                         >
                           {/* Small dummy image with reduced size */}
-                          <div className="bg-gray-200 w-12 h-8 mr-3 flex-shrink-0 rounded-sm"></div>
+                          <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
                           <span className="font-medium">{model.title}</span>
                         </button>
                       </li>
