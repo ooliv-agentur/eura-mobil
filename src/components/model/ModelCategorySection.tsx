@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -129,12 +128,6 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
               {relatedModels.map((model) => (
                 <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
                   <AspectRatio ratio={4/3} className="bg-gray-200">
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="text-center text-gray-500">
-                        <div className="w-16 h-16 border-2 border-gray-300 rounded mx-auto mb-2"></div>
-                        <span className="text-sm font-medium">Modellbild</span>
-                      </div>
-                    </div>
                   </AspectRatio>
                   
                   <div className="p-6">
