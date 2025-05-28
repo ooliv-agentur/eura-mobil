@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -38,7 +37,7 @@ const categoryInfo = {
   },
   van: {
     title: "Vans",
-    description: "Kompakte Vans sind wendig und alltagstauglich - perfekt für Paare und spontane Trips in die Stadt oder Natur. Diese wendigen Fahrzeuge überzeugen durch ihre Vielseitigkeit und Parkplatzfreundlichkeit. Trotz kompakter Außenmaße bieten sie clevere Raumlösungen und durchdachte Ausstattung. Sie sind ideal für Wochenendtrips, Stadtbesuche oder längere Reisen zu zweit. Die hohe Wendigkeit macht sie zum perfekten Begleiter für jeden Tag und jedes Abenteuer.",
+    description: "Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans. Die Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden. Auch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik. Die Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!",
     benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich", "Vielseitig", "Clevere Raumlösungen", "Spontane Reisen"]
   }
 };
