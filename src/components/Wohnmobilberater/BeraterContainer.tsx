@@ -1,11 +1,10 @@
 
 import React from 'react';
-import { useWohnmobilberater } from '@/context/WohnmobilberaterContext';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Layout } from '@/components/Layout';
 import BeraterFlow from './BeraterFlow';
 
 const BeraterContainer: React.FC = () => {
-  const { isOpen, closeBerater } = useWohnmobilberater();
   const location = useLocation();
   
   // Only render on the berater route
@@ -13,8 +12,14 @@ const BeraterContainer: React.FC = () => {
     return null;
   }
   
-  // Show the berater flow
-  return <BeraterFlow />;
+  // Render with full layout (header + footer)
+  return (
+    <Layout>
+      <div className="container mx-auto px-4 py-8">
+        <BeraterFlow />
+      </div>
+    </Layout>
+  );
 };
 
 export default BeraterContainer;

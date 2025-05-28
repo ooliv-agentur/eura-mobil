@@ -16,8 +16,51 @@ const BeraterFlow: React.FC = () => {
     handleNext,
     handleBack,
     answers,
-    toggleOption
+    toggleOption,
+    resetBerater
   } = useWohnmobilberater();
+
+  // Show intro/hero section on first load
+  if (currentStep === 1 && answers.length === 0) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">Wohnmobil-Berater</h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Finden Sie in wenigen Schritten das perfekte Wohnmobil für Ihre Bedürfnisse. 
+            Unser Berater hilft Ihnen dabei, aus unserer Modellvielfalt das passende Fahrzeug auszuwählen.
+          </p>
+          <Button 
+            size="lg" 
+            onClick={() => {/* currentStep will advance automatically */}}
+            className="px-8 py-3"
+          >
+            Beratung starten
+          </Button>
+        </div>
+
+        {/* Preview Cards */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="text-center p-6 border rounded-lg">
+            <div className="text-3xl mb-3">🛏️</div>
+            <h3 className="font-semibold mb-2">Schlafplätze</h3>
+            <p className="text-sm text-gray-600">Wie viele Personen sollen mitreisen?</p>
+          </div>
+          <div className="text-center p-6 border rounded-lg">
+            <div className="text-3xl mb-3">📏</div>
+            <h3 className="font-semibold mb-2">Größe</h3>
+            <p className="text-sm text-gray-600">Welche Fahrzeuglänge passt zu Ihnen?</p>
+          </div>
+          <div className="text-center p-6 border rounded-lg">
+            <div className="text-3xl mb-3">⚖️</div>
+            <h3 className="font-semibold mb-2">Gewicht</h3>
+            <p className="text-sm text-gray-600">Welchen Führerschein haben Sie?</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // If we're past all questions, show results
   if (currentStep > totalSteps) {
@@ -53,7 +96,24 @@ const BeraterFlow: React.FC = () => {
       return models;
     };
 
-    return <EnhancedResultsDisplay models={getRecommendedModels()} />;
+    return (
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold mb-4">Ihre Wohnmobil-Empfehlungen</h1>
+          <p className="text-gray-600 mb-6">
+            Basierend auf Ihren Angaben haben wir passende Modelle für Sie gefunden.
+          </p>
+          <Button 
+            variant="outline" 
+            onClick={resetBerater}
+            className="mb-8"
+          >
+            Neue Beratung starten
+          </Button>
+        </div>
+        <EnhancedResultsDisplay models={getRecommendedModels()} />
+      </div>
+    );
   }
 
   const currentQuestion = questions[currentStep - 1];
@@ -75,7 +135,7 @@ const BeraterFlow: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
+    <div className="max-w-2xl mx-auto">
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-bold">Wohnmobil-Berater</h1>
