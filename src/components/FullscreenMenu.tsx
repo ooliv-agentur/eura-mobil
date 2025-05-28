@@ -16,7 +16,7 @@ interface FullscreenMenuProps {
   onClose: () => void;
 }
 
-// Dummy data for model previews - Updated order to match the specified sequence
+// Updated model preview data with exact content from screenshots
 const modelPreviewData = {
   "van": {
     title: "Van",
@@ -29,43 +29,43 @@ const modelPreviewData = {
   },
   "activa-one": {
     title: "Activa One",
-    text: "Teilintegriertes Wohnmobil mit optimiertem Raumangebot. Perfekt für Paare und kleine Familien auf der Suche nach Komfort.",
+    text: "Der neue Activa One ist ein wendiger Kompakt-Alkoven. Seine kompakten Außenmaße machen ihn zu einem agilen Gefährten für alle Abenteuer. Die großzügigen Platzverhältnisse drinnen sorgen für entspannte Reisen zu zweit oder zu viert. Das charakteristische, neue Gesicht des Activa One zeigt seine Zugehörigkeit zur Eura Mobil Familie - und macht ihn gleichzeitig zu etwas Besonderem.",
     facts: [
-      { label: "Länge", value: "6,5 - 7,1 m" },
-      { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "2 - 4" }
+      { label: "Länge", value: "6,38 - 6,99 m" },
+      { label: "Sitzplätze", value: "4 - 6" },
+      { label: "Schlafplätze", value: "4 - 6" }
     ]
   },
   "profila-t-fiat": {
     title: "Profila T – Fiat",
-    text: "Teilintegriertes Wohnmobil auf Fiat-Basis mit flexiblem Grundriss. Ideal für komfortable Reisen mit praktischer Ausstattung.",
+    text: "Unbeschwert und ohne Hetze die Welt erfahren, dafür eignen sich sämtliche Modelle der Baureihe Profila T besonders gut. Neben ihrem eleganten und schnittigen Design bestechen sie durch die niedrige Gesamthöhe von weniger als 2,90 m bei einer Stehhöhe von 1,97 m im Innenraum.",
     facts: [
-      { label: "Länge", value: "7,1 - 7,4 m" },
+      { label: "Länge", value: "6,99 - 7,58 m" },
       { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "2 - 4" }
+      { label: "Schlafplätze", value: "2" }
     ]
   },
   "profila-rs": {
     title: "Profila RS",
-    text: "Sportliches Reisemobil mit dynamischer Linie. Kombiniert Fahrkomfort mit praktischer Raumnutzung für aktive Reisende.",
+    text: "Mit dem Profila RS erleben Sie Reisemobil-Luxus der Spitzenklasse. Die neue Baureihe vereint ein durchdachtes Design mit hochwertiger Ausstattung und bietet alles, was das Herz von anspruchsvollen Reisenden höher schlagen lässt.",
     facts: [
-      { label: "Länge", value: "7,1 - 7,5 m" },
+      { label: "Länge", value: "6,99 - 7,58 m" },
       { label: "Sitzplätze", value: "4" },
       { label: "Schlafplätze", value: "4" }
     ]
   },
   "profila-t-mercedes": {
     title: "Profila T – Mercedes",
-    text: "Premium-Teilintegrierten auf Mercedes-Basis. Bietet hohen Fahrkomfort und erstklassige Verarbeitung für anspruchsvolle Reisende.",
+    text: "Die Profila T auf Mercedes verkörpern die Top-Modelle innerhalb der Profila Baureihe. Mit AL-KO Tiefrahmen, Alde-Warmwasserheizung, 20 cm hohem Doppelboden und dem optional erhältlichen Panoramadach mit Aufstellfunktion verfügen diese Modelle über besondere Ausstattungsfeatures.",
     facts: [
-      { label: "Länge", value: "7,2 - 7,5 m" },
+      { label: "Länge", value: "7,12 - 7,54 m" },
       { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "2 - 4" }
+      { label: "Schlafplätze", value: "2" }
     ]
   },
   "contura": {
     title: "Contura",
-    text: "Elegantes Wohnmobil mit großzügigem Raumkonzept. Bietet Wohnkomfort auf höchstem Niveau mit durchdachten Details.",
+    text: "Der Contura ist ein elegantes Wohnmobil mit großzügigem Raumkonzept. Er bietet Wohnkomfort auf höchstem Niveau mit durchdachten Details und modernem Design für entspannte Reisen.",
     facts: [
       { label: "Länge", value: "7,6 - 8,0 m" },
       { label: "Sitzplätze", value: "4" },
@@ -74,38 +74,38 @@ const modelPreviewData = {
   },
   "integra-line-fiat": {
     title: "Integra Line – Fiat",
-    text: "Vollintegriertes Reisemobil auf Fiat-Basis. Überzeugt durch harmonisches Raumkonzept und hochwertige Verarbeitung.",
+    text: "Sich einfach mal ganz weit wegträumen – oder einfach gleich hinfahren! Diese Freiheit genießen Sie ganz individuell mit dem Integra Line: das Reisemobil für alle, die ihren eigenen Weg gehen und dabei die ursprüngliche Vielfalt der Landschaft genießen wollen.",
     facts: [
-      { label: "Länge", value: "7,1 - 7,6 m" },
-      { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "4" }
+      { label: "Länge", value: "7,30 - 7,84 m" },
+      { label: "Sitzplätze", value: "4 - 6" },
+      { label: "Schlafplätze", value: "2 - 4" }
     ]
   },
   "integra-line-gt-mercedes": {
     title: "Integra Line GT – Mercedes",
-    text: "Premium-Vollintegrierter auf Mercedes-Basis mit GT-Ausstattung. Vereint Luxus und Funktionalität für höchste Ansprüche.",
+    text: "Der neue Integra Line GT schlägt ein neues Kapitel bei den Integrierten von Eura Mobil auf. Die Funktionalität der Liner Klasse vereint sich mit der Eleganz eines kompakten Integrierten und der Komfort der Luxusklasse paart sich im GT mit der Dynamik eines Teilintegrierten.",
     facts: [
-      { label: "Länge", value: "7,2 - 7,7 m" },
+      { label: "Länge", value: "7,47 - 7,64 m" },
       { label: "Sitzplätze", value: "4" },
       { label: "Schlafplätze", value: "4" }
     ]
   },
   "integra": {
     title: "Integra",
-    text: "Luxuriöses Flaggschiff mit exklusiver Ausstattung. Bietet maximalen Wohnkomfort für anspruchsvolle Reisende auf langen Strecken.",
+    text: "Mit dem Integra hat Eura Mobil die Messlatte bei den Reisemobilen der Oberklasse auf ein völlig neues Niveau gehoben: Ein emotional markantes, gleichzeitig hochfunktionales und eindeutig sicherheitsorientiertes Lichtdesign innen wie außen untermalt den luxuriösen Charakter in dieser Klasse.",
     facts: [
-      { label: "Länge", value: "7,9 - 8,9 m" },
+      { label: "Länge", value: "7,89 - 8,99 m" },
       { label: "Sitzplätze", value: "4" },
       { label: "Schlafplätze", value: "4" }
     ]
   },
   "xtura": {
     title: "Xtura",
-    text: "Geräumiges Reisemobil mit luxuriöser Ausstattung. Bietet hohen Komfort für anspruchsvolle Reisende auf langen Strecken.",
+    text: "Mit dem neuen Xtura als seinem ersten 4×4 Fernreisemobil hat Eura Mobil in der Saison auf Anhieb ein eigenes Marktsegment definiert: konsequent robust ausgestattet, mit hoher elektrischer Energieautarkie, busgesteuerter Onboard-Technik und der Möglichkeit zu weltweiter Satellitennavigation im Offroad-Bereich.",
     facts: [
-      { label: "Länge", value: "7,4 - 7,9 m" },
-      { label: "Sitzplätze", value: "4" },
-      { label: "Schlafplätze", value: "4" }
+      { label: "Länge", value: "6,88 m" },
+      { label: "Sitzplätze", value: "3" },
+      { label: "Schlafplätze", value: "2" }
     ]
   }
 };
@@ -125,8 +125,8 @@ const ModelPreviewHero = ({
   
   return (
     <div className="flex flex-col h-full">
-      {/* Image placeholder with proper 16:9 aspect ratio */}
-      <AspectRatio ratio={16/9} className="mb-4 bg-gray-200 rounded-md overflow-hidden" />
+      {/* Image placeholder with reduced height - using 3:2 aspect ratio instead of 16:9 */}
+      <AspectRatio ratio={3/2} className="mb-4 bg-gray-200 rounded-md overflow-hidden" />
       
       <h3 className="text-xl font-medium mb-2">{modelData.title}</h3>
       
@@ -177,8 +177,8 @@ const MobileModelItem = ({
         )}
         onClick={() => onSelect(modelId)}
       >
-        {/* Small dummy image with consistent size */}
-        <div className="bg-gray-200 w-16 h-10 mr-3 flex-shrink-0 rounded-sm"></div>
+        {/* Small dummy image with reduced size */}
+        <div className="bg-gray-200 w-12 h-8 mr-3 flex-shrink-0 rounded-sm"></div>
         <span className="font-medium flex-grow">{model.title}</span>
         {isActive ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
       </button>
@@ -186,7 +186,7 @@ const MobileModelItem = ({
       {/* Expandable preview section */}
       {isActive && (
         <div className="px-2 pb-4 animate-fade-in">
-          <AspectRatio ratio={16/9} className="mb-3 bg-gray-200 rounded-md overflow-hidden" />
+          <AspectRatio ratio={3/2} className="mb-3 bg-gray-200 rounded-md overflow-hidden" />
           
           <p className="text-sm text-gray-600 mb-3">
             {model.text}
@@ -302,8 +302,8 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                               : 'hover:bg-gray-100 hover:text-blue-600'}`}
                           onClick={() => handleModelSelect(modelId)}
                         >
-                          {/* Small dummy image with consistent size */}
-                          <div className="bg-gray-200 w-16 h-10 mr-3 flex-shrink-0 rounded-sm"></div>
+                          {/* Small dummy image with reduced size */}
+                          <div className="bg-gray-200 w-12 h-8 mr-3 flex-shrink-0 rounded-sm"></div>
                           <span className="font-medium">{model.title}</span>
                         </button>
                       </li>
