@@ -19,6 +19,7 @@ import { ModelInteriorHotspots } from "@/components/model/ModelInteriorHotspots"
 import { ModelUpholstery } from "@/components/model/ModelUpholstery";
 import { ModelEquipmentTabs } from "@/components/model/ModelEquipmentTabs";
 import { ModelFinalCTA } from "@/components/model/ModelFinalCTA";
+import { ModelCategorySection } from "@/components/model/ModelCategorySection";
 
 import {
   Carousel,
@@ -247,6 +248,12 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
 
           {/* 10. Final CTA Block - Always show */}
           <ModelFinalCTA modelName={modelDetails.name} />
+
+          {/* 11. Category Section - NEW: Show related models and category info */}
+          <ModelCategorySection 
+            currentModelId={modelDetails.id}
+            category={undefined} // Will auto-detect based on model ID
+          />
         </div>
         
         {/* Comparison components */}
