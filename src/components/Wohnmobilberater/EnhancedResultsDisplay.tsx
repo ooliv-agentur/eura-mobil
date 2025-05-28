@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useComparison } from "@/context/ComparisonContext";
+import { useWohnmobilberater } from "@/context/WohnmobilberaterContext";
 
 type Model = {
   id: string;
@@ -73,6 +73,7 @@ const enhancedModelData: Record<string, Model> = {
 const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models }) => {
   const navigate = useNavigate();
   const { addModel, removeModel, isSelected, selectedModels } = useComparison();
+  const { resetBerater, closeBerater } = useWohnmobilberater();
 
   const handleMehrErfahren = (modelId: string) => {
     navigate(`/modelle/${modelId}`);
@@ -84,6 +85,15 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models 
     } else {
       removeModel(model.id);
     }
+  };
+
+  const handleBeraterBeenden = () => {
+    closeBerater();
+    navigate('/');
+  };
+
+  const handleNeueBeratung = () => {
+    resetBerater();
   };
 
   // Map the basic model data to enhanced model data with real technical specifications
@@ -167,11 +177,11 @@ const EnhancedResultsDisplay: React.FC<EnhancedResultsDisplayProps> = ({ models 
         <Button 
           variant="outline" 
           className="mr-4"
-          onClick={() => window.location.reload()}
+          onClick={handleBeraterBeenden}
         >
           Beratung beenden
         </Button>
-        <Button onClick={() => window.location.reload()}>
+        <Button onClick={handleNeueBeratung}>
           Neue Beratung starten
         </Button>
       </div>
