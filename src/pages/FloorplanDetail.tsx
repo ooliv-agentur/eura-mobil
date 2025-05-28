@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -5,8 +6,14 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Settings } from "lucide-react";
+import { ArrowLeft, Settings, Check } from "lucide-react";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const FloorplanDetail = () => {
   console.log("FloorplanDetail component rendering...");
@@ -46,6 +53,82 @@ const FloorplanDetail = () => {
       "Batteriekapazität": "1 x 330 Ah Lithium",
       "Abwasserkapazität (l)": "105 ltr."
     }
+  };
+
+  // Equipment data with the labels from the screenshot
+  const equipmentData = {
+    "MOTOR": [
+      "2,0 ltr. BlueTEC Motor",
+      "6-Gang manuelles Getriebe",
+      "Start-Stop-System",
+      "Umweltplakette grün"
+    ],
+    "WEITERE OPTIONEN": [
+      "Zusätzliche Batteriekapazität",
+      "Solaranlage",
+      "Satelliten-TV Anlage",
+      "Klimaanlage Fahrerhaus"
+    ],
+    "AUSSEN": [
+      "LED-Scheinwerfer",
+      "Elektrische Eingangsstufe",
+      "Aufbautür mit Fenster",
+      "Fahrradträger-Vorbereitung"
+    ],
+    "AUSSTATTUNGS-PAKETE": [
+      "Komfort-Paket",
+      "Premium-Paket",
+      "Winter-Paket",
+      "Outdoor-Paket"
+    ],
+    "MULTIMEDIA": [
+      "Bluetooth-Freisprecheinrichtung",
+      "USB-Anschlüsse",
+      "12V-Steckdosen",
+      "Rückfahrkamera"
+    ],
+    "INNEN": [
+      "Polsterung in Leder",
+      "Dimmbares LED-Licht",
+      "Panorama-Dachfenster",
+      "Insektenschutz"
+    ],
+    "MARKISEN": [
+      "Thule Omnistor 5200",
+      "LED-Markisenbeleuchtung",
+      "Windschutz",
+      "Vorzelt-Anschluss"
+    ],
+    "VERSORGUNGSTECHNIK": [
+      "Truma Combi 6 Heizung",
+      "Boiler 14 Liter",
+      "Wasserpumpe",
+      "Bordbatterie AGM"
+    ],
+    "TEXTILE AUSSTATTUNG": [
+      "Vorhänge",
+      "Spannbettlaken",
+      "Kissen und Decken",
+      "Fliegengitter"
+    ],
+    "MÖBEL": [
+      "Massivholz-Möbel",
+      "Soft-Close Beschläge",
+      "Ausziehbare Arbeitsplatte",
+      "Schubladenauszüge"
+    ],
+    "KÜCHE": [
+      "3-Flammen-Gasherd",
+      "Kompressor-Kühlschrank 142L",
+      "Mikrowelle",
+      "Spülbecken Edelstahl"
+    ],
+    "VERSICHERUNGSPRODUKTE": [
+      "Vollkasko-Versicherung",
+      "Reise-Rücktrittsversicherung",
+      "Pannenhilfe Europa",
+      "Diebstahl-Schutz"
+    ]
   };
 
   const handleKonfiguratorClick = () => {
@@ -150,10 +233,26 @@ const FloorplanDetail = () => {
         {/* Equipment Section */}
         <section id="ausstattung" className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Ausstattung</h2>
-          <div className="bg-gray-50 border rounded-lg p-6">
-            <p className="text-gray-600 text-center">
-              Ausstattungsdetails werden hier angezeigt
-            </p>
+          <div className="space-y-4">
+            {Object.entries(equipmentData).map(([category, items]) => (
+              <Accordion type="single" collapsible className="w-full" key={category}>
+                <AccordionItem value={category} className="border rounded-lg bg-white">
+                  <AccordionTrigger className="px-4 py-3">
+                    <span className="text-lg font-medium">{category}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-4 pb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                      {items.map((item, i) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            ))}
           </div>
         </section>
 
