@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { ProductLayout } from "@/components/ProductLayout";
@@ -147,6 +148,19 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
             highlights={modelDetails.highlights || []} 
             headline={getHighlightsHeadline()}
           />
+
+          {/* 3.2. Video Section - Placeholder for video content */}
+          <section className="my-12">
+            <h3 className="text-2xl font-bold text-center mb-6 text-gray-800">Video</h3>
+            <div className="bg-gray-200 rounded-lg flex items-center justify-center h-64 md:h-80">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <div className="w-0 h-0 border-l-4 border-l-gray-600 border-t-2 border-t-transparent border-b-2 border-b-transparent ml-1"></div>
+                </div>
+                <p className="text-gray-600">Video Placeholder</p>
+              </div>
+            </div>
+          </section>
 
           {/* 3.5. Awards Section - Only for Xtura */}
           {modelDetails.id === 'xtura' && (
