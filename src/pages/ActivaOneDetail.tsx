@@ -14,6 +14,7 @@ import { SelectableModelCard } from "@/components/comparison/SelectableModelCard
 import { useComparison } from "@/context/ComparisonContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { ModelCategorySection } from "@/components/model/ModelCategorySection";
+import { ModelFinalCTA } from "@/components/model/ModelFinalCTA";
 import {
   Accordion,
   AccordionContent,
@@ -121,7 +122,7 @@ const ActivaOneDetail = () => {
         <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
           <div className="text-center text-black z-10">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4">Entspannung nach Plan</h1>
-            <p className="text-xl md:text-2xl lg:text-3xl">Activa One</p>
+            <p className="text-xl md:text-2xl lg:text-3xl">Activa One Alkoven Wohnmobile</p>
           </div>
         </div>
       </section>
@@ -335,66 +336,15 @@ const ActivaOneDetail = () => {
       </div>
 
       {/* Final CTA Block with PDF Catalogue */}
-      <section id="model-final-cta" className="my-10 bg-gray-50 p-6 rounded-lg">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Interessiert am Activa One?</h2>
-        
-        {/* PDF Catalogue Preview */}
-        <div className="mb-6 flex justify-center">
-          <div className="bg-white p-4 rounded-lg shadow-sm border max-w-xs">
-            <div className="flex items-start gap-3">
-              <div className="bg-gray-200 w-16 h-20 rounded flex items-center justify-center flex-shrink-0">
-                <FileText size={24} className="text-gray-500" />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-medium text-sm mb-1">Activa One Katalog</h3>
-                <p className="text-xs text-gray-600 mb-2">Technische Daten, Grundrisse und Ausstattungsdetails</p>
-                <Button 
-                  size="sm" 
-                  variant="outline" 
-                  className="w-full"
-                  onClick={handleCatalogueDownload}
-                >
-                  <Download size={14} />
-                  PDF herunterladen
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Button 
-            className="flex items-center justify-center gap-2"
-            onClick={handleKonfiguratorClick}
-          >
-            <Settings size={18} />
-            Jetzt konfigurieren
-          </Button>
-          <Button 
-            variant="outline" 
-            className="flex items-center justify-center gap-2" 
-            asChild
-          >
-            <Link to="/haendler">
-              <MapPin size={18} />
-              Händler finden
-            </Link>
-          </Button>
-          <Button 
-            className="bg-blue-600 hover:bg-blue-700 flex items-center justify-center gap-2"
-            onClick={handleBeratungClick}
-          >
-            Beratung starten
-          </Button>
-        </div>
-      </section>
+      <ModelFinalCTA modelName="Activa One" />
 
       {/* Category Section - Show related models and category info */}
-      <ModelCategorySection 
-        currentModelId="activa-one"
-        category="alkoven"
-      />
+      <div className="container mx-auto">
+        <ModelCategorySection 
+          currentModelId="activa-one"
+          category="alkoven"
+        />
+      </div>
 
       {/* Comparison Modal */}
       <ComparisonModal 
