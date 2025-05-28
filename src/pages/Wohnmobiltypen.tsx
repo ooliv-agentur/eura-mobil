@@ -54,9 +54,18 @@ const Wohnmobiltypen = () => {
     <div className="flex flex-col min-h-screen">
       <Header />
       
+      {/* Hero Section */}
+      <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12">
+        <div className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
+          <div className="text-center z-10 px-4 max-w-6xl">
+            <p className="text-xl md:text-2xl lg:text-3xl mb-4">Für jedes Reisebedürfnis das passende Fahrzeug</p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">Unsere Wohnmobiltypen</h1>
+          </div>
+        </div>
+      </section>
+      
       <main className="flex-1 container mx-auto px-4 py-8">
         <section className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Unsere Wohnmobiltypen im Überblick</h1>
           <p className="text-gray-600 max-w-3xl mx-auto">
             EURA MOBIL bietet Ihnen für jedes Reisebedürfnis den passenden Wohnmobiltyp – von kompakten Vans bis zu luxuriösen Integrierten. Hier erfahren Sie, was die einzelnen Kategorien auszeichnet und welche Modelle zu Ihnen passen könnten.
           </p>
@@ -99,9 +108,9 @@ const Wohnmobiltypen = () => {
               </h3>
               
               <div className="flex justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center max-w-6xl w-full">
                   {typ.models.map((model) => (
-                    <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white">
+                    <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white max-w-sm w-full">
                       <AspectRatio ratio={4/3} className="bg-gray-200">
                       </AspectRatio>
                       
