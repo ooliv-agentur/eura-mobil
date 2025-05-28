@@ -5,34 +5,72 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { MapPin } from 'lucide-react';
 
 const Wohnmobiltypen = () => {
   // Van models
   const vanModels = [
-    { id: "van-620-eb", name: "Van 620 EB", length: "6,36 m", sleepingPlaces: "2", modelSeries: "van" },
-    { id: "van-620-qf", name: "Van 620 QF", length: "6,36 m", sleepingPlaces: "2", modelSeries: "van" }
+    { id: "van", name: "Van", description: "Premium Van mit exklusivem Ambiente", technicalData: { länge: "6,36 m", schlafplätze: "2" } }
   ];
 
   // Alkoven models
   const alkovenModels = [
-    { id: "ao-600-sf", name: "AO 600 SF", length: "7,30 m", sleepingPlaces: "4", modelSeries: "activa-one" },
-    { id: "ao-660-hb", name: "AO 660 HB", length: "7,84 m", sleepingPlaces: "6", modelSeries: "activa-one" }
+    { id: "activa-one", name: "Activa One", description: "Familien-Alkoven der Extraklasse", technicalData: { länge: "7,30 – 7,84 m", schlafplätze: "4-6" } }
   ];
 
   // Teilintegrierte models
   const teilintegrierteModels = [
-    { id: "pt-720-eb", name: "PT 720 EB", length: "7,41 m", sleepingPlaces: "2", modelSeries: "profila-t-fiat" },
-    { id: "pt-695-eb", name: "PT 695 EB", length: "6,99 m", sleepingPlaces: "2", modelSeries: "profila-t-fiat" },
-    { id: "ct-766-eb", name: "CT 766 EB", length: "7,84 m", sleepingPlaces: "2", modelSeries: "contura" }
+    { id: "profila-t-fiat", name: "Profila T", description: "Elegante Teilintegrierte mit niedrigem Einstieg", technicalData: { länge: "6,99 – 7,58 m", schlafplätze: "2" } },
+    { id: "profila-t-mercedes", name: "Profila T Mercedes", description: "Top-Modelle mit AL-KO Tiefrahmen und Alde-Heizung", technicalData: { länge: "7,12 m – 7,54 m", schlafplätze: "2" } },
+    { id: "profila-rs", name: "Profila RS", description: "Luxus-Teilintegrierte mit Hubbett", technicalData: { länge: "6,99 – 7,58 m", schlafplätze: "4" } },
+    { id: "contura", name: "Contura", description: "Luxus mit Starlight Dome Panoramaglasdach", technicalData: { länge: "7,84 m", schlafplätze: "2" } }
   ];
 
   // Integrierte models
   const integrierteModels = [
-    { id: "il-720-eb", name: "IL 720 EB", length: "7,41 m", sleepingPlaces: "2", modelSeries: "integra-line-fiat" },
-    { id: "i-890-qb", name: "I 890 QB", length: "8,99 m", sleepingPlaces: "4", modelSeries: "integra" },
-    { id: "xt-686-ef", name: "XT 686 EF", length: "6,88 m", sleepingPlaces: "2", modelSeries: "xtura" }
+    { id: "integra-line-fiat", name: "Integra Line Fiat", description: "Natürliches Design mit Luxus und Komfort", technicalData: { länge: "7,30 – 7,84 m", schlafplätze: "2–4" } },
+    { id: "integra-line-gt-mercedes", name: "Integra Line GT Mercedes", description: "Grand Tourismo mit dynamisch elegantem Design", technicalData: { länge: "7,47 – 7,64 m", schlafplätze: "4" } },
+    { id: "integra", name: "Integra", description: "Luxus-Reisemobil der Oberklasse", technicalData: { länge: "7,89 – 8,99 m", schlafplätze: "4" } },
+    { id: "xtura", name: "Xtura", description: "4×4 Fernreisemobil für Offroad-Abenteuer", technicalData: { länge: "6,88 m", schlafplätze: "2" } }
   ];
+
+  const ModelCard = ({ 
+    model 
+  }: { 
+    model: { id: string; name: string; description: string; technicalData: { länge: string; schlafplätze: string } };
+  }) => (
+    <Card className="border border-gray-300">
+      <AspectRatio ratio={4/3} className="bg-[#E5E7EB]" />
+      <CardContent className="p-4">
+        <h3 className="text-xl font-semibold mb-2">{model.name}</h3>
+        <p className="text-gray-600 text-sm mb-3">{model.description}</p>
+        <div className="grid grid-cols-2 gap-2 text-sm mb-4">
+          <div>
+            <span>Länge:</span> {model.technicalData.länge}
+          </div>
+          <div>
+            <span>Schlafplätze:</span> {model.technicalData.schlafplätze}
+          </div>
+        </div>
+        
+        <div className="space-y-2">
+          <Button variant="outline" className="w-full" asChild>
+            <Link to={`/modelle/${model.id}`}>
+              Modell ansehen
+            </Link>
+          </Button>
+          
+          <Button variant="outline" className="w-full flex items-center justify-center gap-2" asChild>
+            <Link to="/haendler">
+              <MapPin size={16} />
+              Händler finden
+            </Link>
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  );
 
   const CategorySection = ({ 
     title, 
@@ -42,7 +80,7 @@ const Wohnmobiltypen = () => {
   }: { 
     title: string; 
     description: string; 
-    models: Array<{id: string; name: string; length: string; sleepingPlaces: string; modelSeries: string}>;
+    models: Array<{ id: string; name: string; description: string; technicalData: { länge: string; schlafplätze: string } }>;
     categoryPath: string;
   }) => (
     <section className="mb-16">
@@ -56,15 +94,7 @@ const Wohnmobiltypen = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {models.map((model) => (
-          <SelectableModelCard
-            key={model.id}
-            id={model.id}
-            name={model.name}
-            length={model.length}
-            sleepingPlaces={model.sleepingPlaces}
-            modelSeries={model.modelSeries}
-            showComparison={true}
-          />
+          <ModelCard key={model.id} model={model} />
         ))}
       </div>
     </section>
