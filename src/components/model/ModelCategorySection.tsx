@@ -4,14 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, Users, Home, Car } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  CarouselIndicators,
-} from "@/components/ui/carousel";
 
 type CategoryType = "alkoven" | "teilintegriert" | "integriert" | "van";
 
@@ -107,30 +99,27 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
     return null;
   }
 
-  // Only show navigation and indicators if more than 4 models
-  const showNavigation = relatedModels.length > 4;
-
   return (
-    <section className="my-12 bg-gray-50 p-6 md:p-8 rounded-lg">
-      <div className="max-w-4xl mx-auto">
+    <section className="my-16 bg-gray-50 p-8 rounded-xl">
+      <div className="max-w-6xl mx-auto">
         {/* Category Information */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <IconComponent className="w-6 h-6 text-blue-600" />
+        <div className="text-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <IconComponent className="w-8 h-8 text-blue-600" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">{info.title}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{info.title}</h2>
           </div>
           
-          <p className="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
+          <p className="text-gray-600 text-lg mb-8 max-w-3xl mx-auto leading-relaxed">
             {info.description}
           </p>
           
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             {info.benefits.map((benefit, index) => (
               <span 
                 key={index}
-                className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full"
+                className="bg-blue-100 text-blue-800 text-sm font-medium px-4 py-2 rounded-full"
               >
                 {benefit}
               </span>
@@ -138,49 +127,65 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Exact Homepage Carousel Style */}
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-4 text-center">
+        {/* Related Models - Modern Card Grid */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-bold mb-8 text-center text-gray-800">
             Weitere Modelle aus dieser Kategorie
           </h3>
           
-          <Carousel className="w-full" showIndicators={showNavigation}>
-            <CarouselContent>
-              {relatedModels.map((model) => (
-                <CarouselItem key={model.id} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                  <div className="p-1">
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 h-full">
-                      <AspectRatio ratio={4/3} className="bg-gray-100">
-                        <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                          <span className="text-sm text-gray-400">Modellbild</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            {relatedModels.map((model) => (
+              <div key={model.id} className="w-full max-w-sm">
+                <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
+                  <AspectRatio ratio={4/3} className="bg-gradient-to-br from-gray-100 to-gray-200">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-12 h-12 bg-gray-300 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                          <Car className="w-6 h-6 text-gray-500" />
                         </div>
-                      </AspectRatio>
-                      <div className="p-4">
-                        <h4 className="font-semibold text-lg mb-2 text-gray-900">{model.name}</h4>
-                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                          {model.description}
-                        </p>
-                        <div className="flex justify-between items-center text-xs text-gray-500 mb-4">
-                          <span>Länge: {model.length}</span>
-                          <span>Schlafplätze: {model.sleepingPlaces}</span>
-                        </div>
-                        <Button variant="outline" asChild className="w-full">
-                          <Link to={`/modelle/${model.id}`}>Mehr erfahren</Link>
-                        </Button>
+                        <span className="text-sm text-gray-500 font-medium">Modellbild</span>
                       </div>
                     </div>
+                  </AspectRatio>
+                  
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h4 className="font-bold text-xl mb-3 text-gray-900">{model.name}</h4>
+                    <p className="text-gray-600 mb-4 flex-grow line-clamp-3 leading-relaxed">
+                      {model.description}
+                    </p>
+                    
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                        <div className="text-sm text-gray-500 mb-1">Länge</div>
+                        <div className="font-semibold text-gray-900">{model.length}</div>
+                      </div>
+                      <div className="text-center p-3 bg-gray-50 rounded-lg">
+                        <div className="text-sm text-gray-500 mb-1">Schlafplätze</div>
+                        <div className="font-semibold text-gray-900">{model.sleepingPlaces}</div>
+                      </div>
+                    </div>
+                    
+                    <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-colors">
+                      <Link to={`/modelle/${model.id}`} className="flex items-center justify-center gap-2">
+                        Mehr erfahren
+                        <ChevronRight size={16} />
+                      </Link>
+                    </Button>
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            {showNavigation && (
-              <div className="flex justify-center gap-2 mt-4">
-                <CarouselPrevious />
-                <CarouselNext />
+                </div>
               </div>
-            )}
-            {showNavigation && <CarouselIndicators />}
-          </Carousel>
+            ))}
+          </div>
+        </div>
+
+        {/* Link to category overview */}
+        <div className="text-center">
+          <Button variant="outline" asChild className="bg-white hover:bg-gray-50 border-2 border-blue-200 text-blue-700 hover:text-blue-800 px-8 py-3 rounded-lg font-medium">
+            <Link to={info.overviewLink} className="flex items-center gap-2">
+              Alle {info.title} ansehen
+              <ChevronRight size={16} />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
