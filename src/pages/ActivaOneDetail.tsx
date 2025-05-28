@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { ProductLayout } from "@/components/ProductLayout";
 import { Button } from "@/components/ui/button";
@@ -14,6 +13,7 @@ import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
 import { useComparison } from "@/context/ComparisonContext";
 import { Card, CardContent } from "@/components/ui/card";
+import { ModelCategorySection } from "@/components/model/ModelCategorySection";
 import {
   Accordion,
   AccordionContent,
@@ -29,89 +29,97 @@ import {
   CarouselIndicators,
 } from "@/components/ui/carousel";
 
+// Simple gray box placeholder component without text
+const EmptyGrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
+  <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`} />
+);
+  
+// Floor plans data
+const floorplans = [
+  { id: "activa-one-690-hb", name: "AO 690 HB", length: "6,99 m", sleepingPlaces: "6" },
+  { id: "activa-one-570-hs", name: "AO 570 HS", length: "5,99 m", sleepingPlaces: "4" },
+  { id: "activa-one-650-hs", name: "AO 650 HS", length: "6,50 m", sleepingPlaces: "4" },
+  { id: "activa-one-690-vb", name: "AO 690 VB", length: "6,99 m", sleepingPlaces: "6" },
+  { id: "activa-one-630-ls", name: "AO 630 LS", length: "6,44 m", sleepingPlaces: "5" }
+];
+
+// Equipment data for accordion
+const equipmentData = {
+  chassis: [
+    "140 PS Motor, Euro 6d-Final",
+    "CCS Breitspur-Tiefrahmen (1.980 mm)",
+    "ESP inkl. Traction+, Hill-Descent-Control",
+    "16\" Räder, Tagfahrlicht, Tempomat"
+  ],
+  aufbau: [
+    "Leichtbaudoppelboden, isoliert & beheizt",
+    "Wände/Dach/Boden: 30/32/38mm",
+    "Beheizter Alkoven mit klappbarem Boden",
+    "2 Fenster + Sicherheitsnetz im Alkoven",
+    "Karosserie GFK + Aluminium, winterfest EN 1646"
+  ],
+  wohnwelt: [
+    "Möbeldekor Wildeiche & Strandweiß",
+    "Oberschränke mit Geräuschdämpfung",
+    "7-Zonen-Kaltschaummatratzen",
+    "Fußboden mit Trittschalldämpfung"
+  ],
+  kueche: [
+    "3-Flamm Kocher mit Zündung",
+    "Kühlschrank 142 Liter",
+    "Wasserhahn mit Anti-Tropf-Auslass"
+  ],
+  waschraum: [
+    "Ergonomisch optimierte Mittelwaschräume",
+    "Duschkabine, Spiegelschrank, Cassetten-WC"
+  ],
+  wasserinstallation: [
+    "143–150 l Frischwasser, 150 l Abwasser (beheizt, isoliert)",
+    "Schnellverschlussventile, Keramikkartuschen"
+  ],
+  elektroinstallation: [
+    "80 Ah Gel-Batterie",
+    "LED-Spots, 2× 230 V, 1× 12 V, 1× USB",
+    "Ladegerät 21 A",
+    "Haushaltslogik Lichtsystem"
+  ]
+};
+
+const equipmentTitles = {
+  chassis: "Chassis",
+  aufbau: "Aufbau",
+  wohnwelt: "Wohnwelt",
+  kueche: "Küche",
+  waschraum: "Waschraum",
+  wasserinstallation: "Wasserinstallation",
+  elektroinstallation: "Elektroinstallation"
+};
+
+const handleKonfiguratorClick = () => {
+  window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
+};
+  
+const handleBeratungClick = () => {
+  startBeraterFlow();
+};
+
+const handleCatalogueDownload = () => {
+  // Placeholder functionality - would download the actual PDF
+  console.log("Downloading catalogue for Activa One");
+};
+
 const ActivaOneDetail = () => {
   const isMobile = useIsMobile();
   const [isComparisonModalOpen, setIsComparisonModalOpen] = useState(false);
   const { startBeraterFlow } = useWohnmobilberaterTrigger();
   
   // Simple gray box placeholder component without text
-  const EmptyGrayBoxPlaceholder = ({ className = "", ratio = 16/9 }: { className?: string, ratio?: number }) => (
-    <AspectRatio ratio={ratio} className={`bg-[#E5E7EB] ${className}`} />
-  );
   
   // Floor plans data
-  const floorplans = [
-    { id: "activa-one-690-hb", name: "AO 690 HB", length: "6,99 m", sleepingPlaces: "6" },
-    { id: "activa-one-570-hs", name: "AO 570 HS", length: "5,99 m", sleepingPlaces: "4" },
-    { id: "activa-one-650-hs", name: "AO 650 HS", length: "6,50 m", sleepingPlaces: "4" },
-    { id: "activa-one-690-vb", name: "AO 690 VB", length: "6,99 m", sleepingPlaces: "6" },
-    { id: "activa-one-630-ls", name: "AO 630 LS", length: "6,44 m", sleepingPlaces: "5" }
-  ];
 
   // Equipment data for accordion
-  const equipmentData = {
-    chassis: [
-      "140 PS Motor, Euro 6d-Final",
-      "CCS Breitspur-Tiefrahmen (1.980 mm)",
-      "ESP inkl. Traction+, Hill-Descent-Control",
-      "16\" Räder, Tagfahrlicht, Tempomat"
-    ],
-    aufbau: [
-      "Leichtbaudoppelboden, isoliert & beheizt",
-      "Wände/Dach/Boden: 30/32/38mm",
-      "Beheizter Alkoven mit klappbarem Boden",
-      "2 Fenster + Sicherheitsnetz im Alkoven",
-      "Karosserie GFK + Aluminium, winterfest EN 1646"
-    ],
-    wohnwelt: [
-      "Möbeldekor Wildeiche & Strandweiß",
-      "Oberschränke mit Geräuschdämpfung",
-      "7-Zonen-Kaltschaummatratzen",
-      "Fußboden mit Trittschalldämpfung"
-    ],
-    kueche: [
-      "3-Flamm Kocher mit Zündung",
-      "Kühlschrank 142 Liter",
-      "Wasserhahn mit Anti-Tropf-Auslass"
-    ],
-    waschraum: [
-      "Ergonomisch optimierte Mittelwaschräume",
-      "Duschkabine, Spiegelschrank, Cassetten-WC"
-    ],
-    wasserinstallation: [
-      "143–150 l Frischwasser, 150 l Abwasser (beheizt, isoliert)",
-      "Schnellverschlussventile, Keramikkartuschen"
-    ],
-    elektroinstallation: [
-      "80 Ah Gel-Batterie",
-      "LED-Spots, 2× 230 V, 1× 12 V, 1× USB",
-      "Ladegerät 21 A",
-      "Haushaltslogik Lichtsystem"
-    ]
-  };
 
-  const equipmentTitles = {
-    chassis: "Chassis",
-    aufbau: "Aufbau",
-    wohnwelt: "Wohnwelt",
-    kueche: "Küche",
-    waschraum: "Waschraum",
-    wasserinstallation: "Wasserinstallation",
-    elektroinstallation: "Elektroinstallation"
-  };
-
-  const handleKonfiguratorClick = () => {
-    window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
-  };
-  
-  const handleBeratungClick = () => {
-    startBeraterFlow();
-  };
-
-  const handleCatalogueDownload = () => {
-    // Placeholder functionality - would download the actual PDF
-    console.log("Downloading catalogue for Activa One");
-  };
+  const { models, toggleModel } = useComparison();
 
   return (
     <ProductLayout modelName="Activa One">
@@ -388,6 +396,12 @@ const ActivaOneDetail = () => {
           </Button>
         </div>
       </section>
+
+      {/* Category Section - NEW: Show related models and category info */}
+      <ModelCategorySection 
+        currentModelId="activa-one"
+        category="alkoven"
+      />
 
       {/* Comparison Modal */}
       <ComparisonModal 
