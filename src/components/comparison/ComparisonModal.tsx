@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
   DialogClose,
 } from "@/components/ui/dialog";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
@@ -19,45 +20,71 @@ interface ComparisonModalProps {
 
 // Van model data for comparison
 const modelData = {
-  'v-635-eb': {
-    name: 'V 635 EB',
-    length: '6,36 m',
-    width: '2,05 m',
-    height: '2,65 m',
+  'van': {
+    name: 'Van',
+    length: '5,99 - 6,36 m',
+    width: '2,20 m',
+    height: '2,75 m',
     weight: '3.500 kg',
     seats: '4',
     sleepingPlaces: '2',
-    bedLayout: 'Einzelbetten',
+    bedLayout: 'Queensbett',
     bathroom: 'Komfort-Raumbad',
     freshWaterTank: '100 l',
     wasteWaterTank: '90 l',
   },
-  'v-635-hb': {
-    name: 'V 635 HB',
-    length: '6,36 m',
-    width: '2,05 m',
-    height: '2,65 m',
+  'activa-one': {
+    name: 'Activa One',
+    length: '7,30 – 7,84 m',
+    width: '2,32 m',
+    height: '2,95 m',
+    weight: '3.500 kg',
+    seats: '5',
+    sleepingPlaces: '4-6',
+    bedLayout: 'Alkovenbett + Dinette',
+    bathroom: 'Raumbad',
+    freshWaterTank: '140 l',
+    wasteWaterTank: '110 l',
+  },
+  'profila-rs': {
+    name: 'Profila RS',
+    length: '6,99 – 7,58 m',
+    width: '2,32 m',
+    height: '2,95 m',
+    weight: '3.500 kg',
+    seats: '4',
+    sleepingPlaces: '4',
+    bedLayout: 'Hubbett + Heckbett',
+    bathroom: 'Raumbad',
+    freshWaterTank: '140 l',
+    wasteWaterTank: '110 l',
+  },
+  'integra-line': {
+    name: 'Integra Line',
+    length: '7,30 – 7,84 m',
+    width: '2,32 m',
+    height: '3,05 m',
+    weight: '3.500 kg',
+    seats: '4',
+    sleepingPlaces: '2–4',
+    bedLayout: 'Queensbett + Hubbett',
+    bathroom: 'Premium-Raumbad',
+    freshWaterTank: '140 l',
+    wasteWaterTank: '110 l',
+  },
+  'contura': {
+    name: 'Contura',
+    length: '7,84 m',
+    width: '2,32 m',
+    height: '2,95 m',
     weight: '3.500 kg',
     seats: '4',
     sleepingPlaces: '2',
-    bedLayout: 'Hubbett (quer)',
-    bathroom: 'Komfort-Raumbad',
-    freshWaterTank: '100 l',
-    wasteWaterTank: '90 l',
-  },
-  'v-595-hb': {
-    name: 'V 595 HB',
-    length: '5,99 m',
-    width: '2,05 m',
-    height: '2,65 m',
-    weight: '3.300 kg',
-    seats: '4',
-    sleepingPlaces: '2',
-    bedLayout: 'Hubbett (quer)',
-    bathroom: 'Standard-Raumbad',
-    freshWaterTank: '100 l',
-    wasteWaterTank: '90 l',
-  },
+    bedLayout: 'Queensbett',
+    bathroom: 'Premium-Raumbad',
+    freshWaterTank: '140 l',
+    wasteWaterTank: '110 l',
+  }
 };
 
 // Helper function to check if values differ
@@ -65,8 +92,7 @@ const valuesDiffer = (property: string, selectedModelIds: string[]): boolean => 
   if (selectedModelIds.length < 2) return false;
   
   const values = selectedModelIds.map(id => {
-    const modelId = id.startsWith('v-') ? id : `v-${id}`;
-    return modelData[modelId as keyof typeof modelData]?.[property as keyof (typeof modelData)[keyof typeof modelData]];
+    return modelData[id as keyof typeof modelData]?.[property as keyof (typeof modelData)[keyof typeof modelData]];
   });
   
   return values[0] !== values[1];
@@ -99,7 +125,9 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ open, onOpenCh
       <DialogContent className="max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl">Modellvergleich</DialogTitle>
-          <DialogClose className="absolute right-4 top-4" onClick={handleClose} />
+          <DialogDescription>
+            Vergleichen Sie die technischen Daten und Eigenschaften der ausgewählten Wohnmobile.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="mt-6">
@@ -109,7 +137,7 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ open, onOpenCh
                 <TableHead className="w-1/3">Eigenschaften</TableHead>
                 {selectedModels.map((model) => (
                   <TableHead key={model.id} className="w-1/3 text-center">
-                    {(modelData[model.id as keyof typeof modelData] || modelData[`v-${model.id}` as keyof typeof modelData])?.name || model.name}
+                    {modelData[model.id as keyof typeof modelData]?.name || model.name}
                   </TableHead>
                 ))}
               </TableRow>
@@ -122,11 +150,10 @@ export const ComparisonModal: React.FC<ComparisonModalProps> = ({ open, onOpenCh
                   <TableRow key={row.property} className={isDifferent ? 'bg-yellow-50' : ''}>
                     <TableCell className="font-medium">{row.label}</TableCell>
                     {selectedModelIds.map((modelId) => {
-                      const id = modelId.startsWith('v-') ? modelId : `v-${modelId}`;
-                      const value = modelData[id as keyof typeof modelData]?.[row.property as keyof (typeof modelData)[keyof typeof modelData]] || '-';
+                      const value = modelData[modelId as keyof typeof modelData]?.[row.property as keyof (typeof modelData)[keyof typeof modelData]] || '-';
                       
                       return (
-                        <TableCell key={id} className={`text-center ${isDifferent ? 'font-semibold' : ''}`}>
+                        <TableCell key={modelId} className={`text-center ${isDifferent ? 'font-semibold' : ''}`}>
                           {value}
                         </TableCell>
                       );

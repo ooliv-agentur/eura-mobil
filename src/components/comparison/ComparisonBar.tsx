@@ -18,12 +18,10 @@ export const ComparisonBar: React.FC<ComparisonBarProps> = ({ onCompareClick }) 
   }
 
   const handleVergleichStarten = () => {
+    console.log('Vergleich starten clicked', selectedModels);
     if (selectedModels.length >= 2) {
-      if (onCompareClick) {
-        onCompareClick();
-      } else {
-        setShowComparison(true);
-      }
+      setShowComparison(true);
+      console.log('Opening comparison modal');
     }
   };
 
@@ -67,7 +65,6 @@ export const ComparisonBar: React.FC<ComparisonBarProps> = ({ onCompareClick }) 
         </div>
       </div>
 
-      {/* Comparison Modal */}
       <ComparisonModal 
         open={showComparison} 
         onOpenChange={setShowComparison}
