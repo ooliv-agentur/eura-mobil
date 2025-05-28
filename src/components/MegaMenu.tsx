@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { X } from "lucide-react";
@@ -75,6 +76,26 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
             <div className="col-span-1 md:col-span-3 mt-4">
               <Button variant="outline" className="w-full md:w-auto" asChild>
                 <Link to="/modelle">Alle Modelle ansehen</Link>
+              </Button>
+            </div>
+          </div>
+        );
+
+      case "wohnmobiltypen":
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-bold text-lg mb-3">Wohnmobiltypen</h3>
+              <div className="space-y-2">
+                <div><MenuLink to="/wohnmobiltypen/vans">Vans</MenuLink></div>
+                <div><MenuLink to="/wohnmobiltypen/alkoven">Alkoven-Wohnmobile</MenuLink></div>
+                <div><MenuLink to="/wohnmobiltypen/teilintegriert">Teilintegrierte Wohnmobile</MenuLink></div>
+                <div><MenuLink to="/wohnmobiltypen/integriert">Integrierte Wohnmobile</MenuLink></div>
+              </div>
+            </div>
+            <div>
+              <Button className="mt-4 w-full md:w-auto" asChild>
+                <Link to="/wohnmobiltypen">Alle Typen im Überblick</Link>
               </Button>
             </div>
           </div>
@@ -190,6 +211,8 @@ function getMegaMenuTitle(menuKey: string | null): string {
   switch (menuKey) {
     case "wohnmobile":
       return "Wohnmobile & Vans";
+    case "wohnmobiltypen":
+      return "Wohnmobiltypen";
     case "kaufen":
       return "Kaufen & Mieten";
     case "qualitaet":
