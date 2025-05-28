@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
@@ -22,22 +23,22 @@ interface ModelCategorySectionProps {
 const categoryInfo = {
   alkoven: {
     title: "Alkoven Wohnmobile",
-    description: "Alkoven-Wohnmobile bieten maximalen Wohnraum durch das charakteristische Bett über dem Fahrerhaus. Diese Bauart ist ideal für Familien mit 4-6 Personen und überzeugt durch optimale Raumnutzung. Das zusätzliche Bett im Alkoven schafft mehr Schlafplätze, ohne den Wohnraum zu beeinträchtigen. Durch die erhöhte Position entstehen auch praktische Staufächer und ein großzügiges Raumgefühl im Innenbereich.",
+    description: "Alkoven-Wohnmobile bieten maximalen Wohnraum durch das charakteristische Bett über dem Fahrerhaus. Diese Bauart ist ideal für Familien mit 4-6 Personen und überzeugt durch optimale Raumnutzung.\n\nDas zusätzliche Bett im Alkoven schafft mehr Schlafplätze, ohne den Wohnraum zu beeinträchtigen. Durch die erhöhte Position entstehen auch praktische Staufächer und ein großzügiges Raumgefühl im Innenbereich.",
     benefits: ["Maximaler Schlafplatz", "Familienfreundlich", "Großzügiger Wohnraum", "Viel Stauraum", "Optimale Raumnutzung"]
   },
   teilintegriert: {
     title: "Teilintegrierte Wohnmobile", 
-    description: "Zu einem Teil kompakter gebaut, zum anderen Teil mit der überzeugenden Technik der Großen: Teilintegrierte Reisemobile von Eura Mobil bieten ein Höchstmaß an Komfort auch bei überschaubaren Abmessungen. Sie vereinen die Wendigkeit kleinerer Fahrzeuge mit dem Luxus größerer Modelle. Das originale Fahrerhaus bleibt erhalten, was Kosten spart und gleichzeitig bewährte Fahreigenschaften garantiert. Moderne Hightech-Materialien und durchdachte Grundrisse sorgen für maximalen Wohnkomfort.",
+    description: "Zu einem Teil kompakter gebaut, zum anderen Teil mit der überzeugenden Technik der Großen: Teilintegrierte Reisemobile von Eura Mobil bieten ein Höchstmaß an Komfort auch bei überschaubaren Abmessungen. Sie vereinen die Wendigkeit kleinerer Fahrzeuge mit dem Luxus größerer Modelle.\n\nDas originale Fahrerhaus bleibt erhalten, was Kosten spart und gleichzeitig bewährte Fahreigenschaften garantiert. Moderne Hightech-Materialien und durchdachte Grundrisse sorgen für maximalen Wohnkomfort.",
     benefits: ["Kompakter Aufbau", "Überzeugende Technik", "Maximaler Komfort", "Überschaubare Abmessungen", "Hightech-Materialien", "Wendigkeit"]
   },
   integriert: {
     title: "Vollintegrierte Wohnmobile",
-    description: "Vollintegrierte Wohnmobile bieten maximalen Luxus und Raumkomfort auf höchstem Niveau. Das Fahrerhaus ist vollständig in den Wohnraum integriert, wodurch ein durchgängiges und großzügiges Raumgefühl entsteht. Diese Premium-Kategorie überzeugt durch edle Materialien, luxuriöse Ausstattung und innovative Lösungen. Große Panoramafenster sorgen für lichtdurchflutete Innenräume, während die aerodynamische Form für bessere Fahreigenschaften und geringeren Kraftstoffverbrauch sorgt.",
+    description: "Vollintegrierte Wohnmobile bieten maximalen Luxus und Raumkomfort auf höchstem Niveau. Das Fahrerhaus ist vollständig in den Wohnraum integriert, wodurch ein durchgängiges und großzügiges Raumgefühl entsteht.\n\nDiese Premium-Kategorie überzeugt durch edle Materialien, luxuriöse Ausstattung und innovative Lösungen. Große Panoramafenster sorgen für lichtdurchflutete Innenräume, während die aerodynamische Form für bessere Fahreigenschaften und geringeren Kraftstoffverbrauch sorgt.",
     benefits: ["Maximaler Komfort", "Luxuriöse Ausstattung", "Großzügiges Raumgefühl", "Premium-Materialien", "Panoramafenster", "Aerodynamisch"]
   },
   van: {
     title: "Vans",
-    description: "Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans. Die Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden. Auch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik. Die Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!",
+    description: "Als Reisemobilhersteller ist Eura Mobil seit langem bekannt für seine herausragenden Fahrzeuge, die Komfort und Luxus auf vier Rädern bieten. Etwas Besonderes für die Freunde der Campervans zu schaffen, war das Ziel bei der Entwicklung der neuen Eura Mobil Vans.\n\nDie Vans von Eura Mobil sind perfekt für Reisende, die sich ein kompaktes Wohnmobil wünschen, das trotzdem viel Platz bietet. Die Vans sind in verschiedenen Größen erhältlich und bieten Platz für bis zu vier Personen. Dank ihrer kompakten Größe sind sie ideal für den Stadtverkehr und können auch auf engen Straßen mühelos manövriert werden.\n\nAuch in Sachen Ausstattung lassen die Vans von Eura Mobil keine Wünsche offen. Sie verfügen über eine moderne Küche, ein bequemes Bett und ein geräumiges Bad. Die Innenräume sind gut durchdacht und bieten genügend Stauraum für all Ihre Reiseutensilien. Ein weiteres Highlight der Vans von Eura Mobil ist ihre hervorragende Technik.\n\nDie Vans von Eura Mobil sind eine hervorragende Wahl für alle Reisenden, die ein kompaktes, aber dennoch geräumiges Fahrzeug suchen. Sie bieten Komfort, Luxus und Technologie auf höchstem Niveau. Überzeugen Sie sich selbst von den Vans von Eura Mobil und planen Sie Ihre nächste Reise!",
     benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich", "Vielseitig", "Clevere Raumlösungen", "Spontane Reisen"]
   }
 };
@@ -84,11 +85,14 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
     model => model.id !== currentModelId
   );
 
+  // Split description into paragraphs
+  const descriptionParagraphs = info.description.split('\n\n').filter(p => p.trim() !== '');
+
   return (
     <section className="my-16">
       <div className="container mx-auto px-4">
         {/* Category Information - Always show */}
-        <div className="text-center mb-12">
+        <div className="mb-12">
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-12 border border-gray-300 rounded flex items-center justify-center">
               <div className="w-6 h-6 border border-gray-400 rounded-sm"></div>
@@ -96,9 +100,13 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800">{info.title}</h2>
           </div>
           
-          <p className="text-gray-600 text-lg mb-8 max-w-4xl mx-auto leading-relaxed">
-            {info.description}
-          </p>
+          <div className="max-w-4xl mx-auto text-left space-y-4 mb-8">
+            {descriptionParagraphs.map((paragraph, index) => (
+              <p key={index} className="text-gray-600 text-lg leading-relaxed">
+                {paragraph.trim()}
+              </p>
+            ))}
+          </div>
           
           <div className="flex flex-wrap justify-center gap-3 mb-8">
             {info.benefits.map((benefit, index) => (
