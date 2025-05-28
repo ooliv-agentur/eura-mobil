@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 export interface QuestionData {
   question: string;
   options: string[];
+  multiSelect?: boolean; // Add support for multiple selection
 }
 
 // Define the context type including all missing properties
@@ -16,19 +17,20 @@ interface WohnmobilberaterContextType {
   currentStep: number;
   totalSteps: number;
   questions: QuestionData[];
-  selectedOption: string;
+  selectedOptions: string[]; // Changed from selectedOption to selectedOptions
   displayMode: "dialog" | "inline" | "fullpage";
-  handleNext: (option: string) => void;
+  handleNext: (options: string | string[]) => void; // Updated to handle both single and multiple
   handleBack: () => void;
-  answers: string[];
+  answers: (string | string[])[]; // Updated to handle arrays
   resetBerater: () => void;
-  startBerater: (initialStep?: number, prefilled?: string[]) => void;
+  startBerater: (initialStep?: number, prefilled?: (string | string[])[]) => void;
   setDisplayMode: (mode: "dialog" | "inline" | "fullpage") => void;
+  toggleOption: (option: string) => void; // New method for multi-select
 }
 
 const WohnmobilberaterContext = createContext<WohnmobilberaterContextType | undefined>(undefined);
 
-// Example questions data
+// Example questions data with multi-select support
 const beraterQuestions: QuestionData[] = [
   {
     question: "Wieviele Schlafplätze benötigen Sie?",
@@ -36,7 +38,8 @@ const beraterQuestions: QuestionData[] = [
   },
   {
     question: "Welche Bettenform bevorzugen Sie?",
-    options: ["Queensbett", "Alkovenbett", "Einzelbetten", "Hubbett", "Seitenbett", "Heckbett", "Stockbetten"]
+    options: ["Queensbett", "Alkovenbett", "Einzelbetten", "Hubbett", "Seitenbett", "Heckbett", "Stockbetten"],
+    multiSelect: true // Enable multiple selection for bed types
   },
   {
     question: "Wie lang soll Ihr Wohnmobil maximal sein?",
@@ -56,8 +59,8 @@ export const WohnmobilberaterProvider: React.FC<{
   
   // Berater state
   const [currentStep, setCurrentStep] = useState<number>(1);
-  const [answers, setAnswers] = useState<string[]>([]);
-  const [selectedOption, setSelectedOption] = useState<string>("");
+  const [answers, setAnswers] = useState<(string | string[])[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [displayMode, setDisplayMode] = useState<"dialog" | "inline" | "fullpage">("dialog");
   
   // Constants
@@ -73,7 +76,7 @@ export const WohnmobilberaterProvider: React.FC<{
     setIsOpen(false);
   };
   
-  const startBerater = (initialStep: number = 1, prefilled: string[] = []) => {
+  const startBerater = (initialStep: number = 1, prefilled: (string | string[])[] = []) => {
     setCurrentStep(initialStep);
     setAnswers(prefilled);
     setIsOpen(true);
@@ -82,19 +85,34 @@ export const WohnmobilberaterProvider: React.FC<{
   const resetBerater = () => {
     setCurrentStep(1);
     setAnswers([]);
-    setSelectedOption("");
+    setSelectedOptions([]);
   };
 
-  const handleNext = (option: string) => {
+  const toggleOption = (option: string) => {
+    setSelectedOptions(prev => {
+      if (prev.includes(option)) {
+        return prev.filter(opt => opt !== option);
+      } else {
+        return [...prev, option];
+      }
+    });
+  };
+
+  const handleNext = (options: string | string[]) => {
     // Save the answer
     const newAnswers = [...answers];
-    newAnswers[currentStep - 1] = option;
+    newAnswers[currentStep - 1] = options;
     setAnswers(newAnswers);
-    setSelectedOption("");
+    setSelectedOptions([]);
     
     // Move to next step
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
+      // Pre-populate selected options for the next step if it exists
+      const nextAnswer = newAnswers[currentStep];
+      if (nextAnswer) {
+        setSelectedOptions(Array.isArray(nextAnswer) ? nextAnswer : [nextAnswer]);
+      }
     } else {
       // We're at the results step
       setCurrentStep(totalSteps + 1);
@@ -104,7 +122,12 @@ export const WohnmobilberaterProvider: React.FC<{
   const handleBack = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
-      setSelectedOption(answers[currentStep - 2] || "");
+      const previousAnswer = answers[currentStep - 2];
+      if (previousAnswer) {
+        setSelectedOptions(Array.isArray(previousAnswer) ? previousAnswer : [previousAnswer]);
+      } else {
+        setSelectedOptions([]);
+      }
     }
   };
 
@@ -117,14 +140,15 @@ export const WohnmobilberaterProvider: React.FC<{
         currentStep,
         totalSteps,
         questions,
-        selectedOption,
+        selectedOptions,
         displayMode,
         handleNext,
         handleBack,
         answers,
         resetBerater,
         startBerater,
-        setDisplayMode
+        setDisplayMode,
+        toggleOption
       }}
     >
       {children}

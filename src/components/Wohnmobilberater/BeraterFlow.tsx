@@ -4,6 +4,7 @@ import { useWohnmobilberater } from '@/context/WohnmobilberaterContext';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { ChevronLeft } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
 import EnhancedResultsDisplay from './EnhancedResultsDisplay';
 
 const BeraterFlow: React.FC = () => {
@@ -11,10 +12,11 @@ const BeraterFlow: React.FC = () => {
     currentStep,
     totalSteps,
     questions,
-    selectedOption,
+    selectedOptions,
     handleNext,
     handleBack,
-    answers
+    answers,
+    toggleOption
   } = useWohnmobilberater();
 
   // If we're past all questions, show results
@@ -24,16 +26,19 @@ const BeraterFlow: React.FC = () => {
       const models = [];
       
       // Based on sleeping places
-      if (answers[0]?.includes('2')) {
-        models.push({ id: 'van', name: 'Van' });
-        models.push({ id: 'contura', name: 'Contura' });
-      }
-      if (answers[0]?.includes('4')) {
-        models.push({ id: 'profila-rs', name: 'Profila RS' });
-        models.push({ id: 'integra-line', name: 'Integra Line' });
-      }
-      if (answers[0]?.includes('6')) {
-        models.push({ id: 'activa-one', name: 'Activa One' });
+      const sleepingAnswer = answers[0];
+      if (typeof sleepingAnswer === 'string') {
+        if (sleepingAnswer.includes('2')) {
+          models.push({ id: 'van', name: 'Van' });
+          models.push({ id: 'contura', name: 'Contura' });
+        }
+        if (sleepingAnswer.includes('4')) {
+          models.push({ id: 'profila-rs', name: 'Profila RS' });
+          models.push({ id: 'integra-line', name: 'Integra Line' });
+        }
+        if (sleepingAnswer.includes('6')) {
+          models.push({ id: 'activa-one', name: 'Activa One' });
+        }
       }
       
       // Ensure we always return at least some models
@@ -53,6 +58,21 @@ const BeraterFlow: React.FC = () => {
 
   const currentQuestion = questions[currentStep - 1];
   const progress = (currentStep / totalSteps) * 100;
+  const isMultiSelect = currentQuestion.multiSelect;
+
+  const handleOptionClick = (option: string) => {
+    if (isMultiSelect) {
+      toggleOption(option);
+    } else {
+      handleNext(option);
+    }
+  };
+
+  const handleMultiSelectNext = () => {
+    if (selectedOptions.length > 0) {
+      handleNext(selectedOptions);
+    }
+  };
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -68,18 +88,56 @@ const BeraterFlow: React.FC = () => {
 
       <div className="mb-8">
         <h2 className="text-xl mb-6">{currentQuestion.question}</h2>
+        
+        {isMultiSelect && (
+          <p className="text-sm text-gray-600 mb-4">
+            Mehrfachauswahl möglich - wählen Sie alle passenden Optionen.
+          </p>
+        )}
+        
         <div className="grid gap-3">
           {currentQuestion.options.map((option, index) => (
-            <Button
-              key={index}
-              variant={selectedOption === option ? "default" : "outline"}
-              className="justify-start p-4 h-auto text-left"
-              onClick={() => handleNext(option)}
-            >
-              {option}
-            </Button>
+            <div key={index}>
+              {isMultiSelect ? (
+                <div className="flex items-center space-x-3 p-4 border rounded-lg hover:bg-gray-50 cursor-pointer"
+                     onClick={() => handleOptionClick(option)}>
+                  <Checkbox
+                    id={`option-${index}`}
+                    checked={selectedOptions.includes(option)}
+                    onChange={() => {}} // Handled by parent div click
+                  />
+                  <label 
+                    htmlFor={`option-${index}`} 
+                    className="flex-1 cursor-pointer"
+                  >
+                    {option}
+                  </label>
+                </div>
+              ) : (
+                <Button
+                  key={index}
+                  variant={selectedOptions.includes(option) ? "default" : "outline"}
+                  className="justify-start p-4 h-auto text-left w-full"
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option}
+                </Button>
+              )}
+            </div>
           ))}
         </div>
+
+        {isMultiSelect && (
+          <div className="mt-6">
+            <Button
+              onClick={handleMultiSelectNext}
+              disabled={selectedOptions.length === 0}
+              className="w-full"
+            >
+              Weiter ({selectedOptions.length} ausgewählt)
+            </Button>
+          </div>
+        )}
       </div>
 
       {currentStep > 1 && (
