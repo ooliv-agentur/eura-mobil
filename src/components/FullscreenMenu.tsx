@@ -290,13 +290,13 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             <div className="hidden md:grid grid-cols-12 gap-6">
               {/* Left side: Model list (4 columns) */}
               <div className="col-span-4">
-                <ul className="space-y-2">
+                <ul className="space-y-1">
                   {modelIds.map(modelId => {
                     const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
                     return (
                       <li key={modelId}>
                         <button 
-                          className={`flex items-center w-full text-left py-2 pl-2 rounded-sm transition-colors
+                          className={`flex items-center w-full text-left py-4 pl-3 pr-2 rounded-sm transition-colors
                             ${activeModel === modelId 
                               ? 'text-blue-600 bg-blue-50 border-l-2 border-blue-500' 
                               : 'hover:bg-gray-100 hover:text-blue-600'}`}
