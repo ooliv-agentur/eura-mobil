@@ -32,12 +32,12 @@ const categoryInfo = {
     benefits: ["Kompakter Aufbau", "Überzeugende Technik", "Maximaler Komfort", "Überschaubare Abmessungen", "Hightech-Materialien", "Wendigkeit"]
   },
   integriert: {
-    title: "Integrierte Wohnmobile",
+    title: "Vollintegrierte Wohnmobile",
     description: "Vollintegrierte Wohnmobile bieten maximalen Luxus und Raumkomfort auf höchstem Niveau. Das Fahrerhaus ist vollständig in den Wohnraum integriert, wodurch ein durchgängiges und großzügiges Raumgefühl entsteht. Diese Premium-Kategorie überzeugt durch edle Materialien, luxuriöse Ausstattung und innovative Lösungen. Große Panoramafenster sorgen für lichtdurchflutete Innenräume, während die aerodynamische Form für bessere Fahreigenschaften und geringeren Kraftstoffverbrauch sorgt.",
     benefits: ["Maximaler Komfort", "Luxuriöse Ausstattung", "Großzügiges Raumgefühl", "Premium-Materialien", "Panoramafenster", "Aerodynamisch"]
   },
   van: {
-    title: "Vans & Kastenwagen",
+    title: "Vans",
     description: "Kompakte Vans sind wendig und alltagstauglich - perfekt für Paare und spontane Trips in die Stadt oder Natur. Diese wendigen Fahrzeuge überzeugen durch ihre Vielseitigkeit und Parkplatzfreundlichkeit. Trotz kompakter Außenmaße bieten sie clevere Raumlösungen und durchdachte Ausstattung. Sie sind ideal für Wochenendtrips, Stadtbesuche oder längere Reisen zu zweit. Die hohe Wendigkeit macht sie zum perfekten Begleiter für jeden Tag und jedes Abenteuer.",
     benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich", "Vielseitig", "Clevere Raumlösungen", "Spontane Reisen"]
   }
