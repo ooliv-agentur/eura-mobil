@@ -6,7 +6,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Settings, Check, MapPin, GitCompare } from "lucide-react";
+import { ArrowLeft, Settings, Check } from "lucide-react";
+import { SidebarNavigation } from "@/components/SidebarNavigation";
 import {
   Accordion,
   AccordionContent,
@@ -25,7 +26,6 @@ const FloorplanDetail = () => {
     name: "XT 686 EF",
     modelSeries: "Xtura",
     length: "6,88 m",
-    seats: "3",
     sleepingPlaces: "2",
     technicalData: {
       "Basisfahrzeug": "Mercedes Benz",
@@ -55,10 +55,13 @@ const FloorplanDetail = () => {
     }
   };
 
-  // Equipment data with proper categories
+  // Equipment data with the labels from the screenshot
   const equipmentData = {
     "MOTOR": [
-      "190 PS Motor Mercedes-Benz – serienmäßig"
+      "2,0 ltr. BlueTEC Motor",
+      "6-Gang manuelles Getriebe",
+      "Start-Stop-System",
+      "Umweltplakette grün"
     ],
     "WEITERE OPTIONEN": [
       "Zusätzliche Batteriekapazität",
@@ -133,22 +136,25 @@ const FloorplanDetail = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
 
+  const sidebarItems = [
+    { id: "beschreibung", label: "Beschreibung" },
+    { id: "technische-daten", label: "Technische Daten" },
+    { id: "ausstattung", label: "Ausstattung" }
+  ];
+
   console.log("About to render component structure...");
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       
-      {/* Full-width Hero Section */}
-      <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-        <div className="relative bg-gray-300 h-[60vh] flex items-center justify-center">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-gray-600 text-lg">Hero Placeholder</span>
-          </div>
-          <div className="text-center z-10 px-4">
-            <p className="text-xl md:text-2xl mb-2 text-white">{floorplanData.modelSeries}</p>
-            <h1 className="text-4xl md:text-6xl font-bold text-white">{floorplanData.name}</h1>
-          </div>
+      {/* Sidebar Navigation */}
+      <SidebarNavigation items={sidebarItems} />
+      
+      {/* Hero Section */}
+      <section className="relative bg-[#E5E7EB] h-[50vh] flex items-center justify-center">
+        <div className="text-center z-10 px-4 max-w-4xl">
+          <h1 className="text-4xl md:text-6xl font-bold">{floorplanData.name}</h1>
         </div>
       </section>
 
@@ -163,64 +169,54 @@ const FloorplanDetail = () => {
           </Button>
         </div>
 
-        {/* Spec Overview Row */}
-        <section className="mb-8">
-          <div className="flex flex-wrap gap-8 text-center">
-            <div>
-              <span className="text-sm text-gray-600">Länge:</span>
-              <span className="ml-2 font-medium text-lg">{floorplanData.length}</span>
-            </div>
-            <div>
-              <span className="text-sm text-gray-600">Sitzplätze:</span>
-              <span className="ml-2 font-medium text-lg">{floorplanData.seats}</span>
-            </div>
-            <div>
-              <span className="text-sm text-gray-600">Schlafplätze:</span>
-              <span className="ml-2 font-medium text-lg">{floorplanData.sleepingPlaces}</span>
-            </div>
-          </div>
-        </section>
-
-        {/* Horizontal Layout Block */}
-        <section className="mb-16">
+        {/* Description Section */}
+        <section id="beschreibung" className="mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left Column - Floor Plan */}
-            <div>
+            {/* Floor Plan Card */}
+            <div className="order-2 lg:order-1">
               <Card className="bg-gray-50">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-4">Grundriss {floorplanData.name}</h3>
+                  <h2 className="text-2xl font-bold mb-4">{floorplanData.name}</h2>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <span className="text-sm text-gray-600">Länge:</span>
+                      <span className="ml-2 font-medium">{floorplanData.length}</span>
+                    </div>
+                    <div>
+                      <span className="text-sm text-gray-600">Schlafplätze:</span>
+                      <span className="ml-2 font-medium">{floorplanData.sleepingPlaces}</span>
+                    </div>
+                  </div>
+                  
+                  {/* Floor Plan Image */}
                   <div className="border bg-white p-4">
                     <AspectRatio ratio={4/3} className="bg-gray-200 rounded flex items-center justify-center">
-                      <span className="text-gray-500">Grundriss Placeholder</span>
+                      <span className="text-gray-500">Grundriss {floorplanData.name}</span>
                     </AspectRatio>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Right Column - 360° Panorama */}
-            <div>
-              <Card className="bg-gray-50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-4">360° Panorama</h3>
-                  <div className="bg-gray-100 border rounded-lg p-8 text-center min-h-[300px] flex flex-col items-center justify-center">
-                    <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mb-4">
-                      <div className="w-8 h-8 bg-gray-500 rounded"></div>
-                    </div>
-                    <p className="text-gray-600 mb-2">360° Panorama Viewer</p>
-                    <p className="text-sm text-gray-500 mb-4">Interaktive Innenansicht</p>
-                    <Button variant="outline">
-                      Panorama laden
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+            {/* 360° Panorama */}
+            <div className="order-1 lg:order-2">
+              <h3 className="text-xl font-bold mb-4">360° Panorama:</h3>
+              <div className="bg-gray-100 border rounded-lg p-8 text-center min-h-[300px] flex flex-col items-center justify-center">
+                <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mb-4">
+                  <div className="w-8 h-8 bg-gray-500 rounded"></div>
+                </div>
+                <p className="text-gray-600 mb-2">360° Panorama Viewer</p>
+                <p className="text-sm text-gray-500">Interaktive Innenansicht</p>
+                <Button variant="outline" className="mt-4">
+                  Panorama laden
+                </Button>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Technical Data Section */}
-        <section className="mb-16">
+        <section id="technische-daten" className="mb-16">
           <h2 className="text-3xl font-bold mb-6">Technische Daten</h2>
           <div className="bg-gray-50 border rounded-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
@@ -234,9 +230,9 @@ const FloorplanDetail = () => {
           </div>
         </section>
 
-        {/* Serienausstattung Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Serienausstattung</h2>
+        {/* Equipment Section */}
+        <section id="ausstattung" className="mb-16">
+          <h2 className="text-3xl font-bold mb-6">Ausstattung</h2>
           <div className="space-y-4">
             {Object.entries(equipmentData).map(([category, items]) => (
               <Accordion type="single" collapsible className="w-full" key={category}>
@@ -260,7 +256,7 @@ const FloorplanDetail = () => {
           </div>
         </section>
 
-        {/* Final CTA Section */}
+        {/* CTA Section */}
         <section className="bg-blue-50 p-8 rounded-lg text-center">
           <h2 className="text-2xl font-bold mb-4">Interessiert am {floorplanData.name}?</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -268,15 +264,10 @@ const FloorplanDetail = () => {
               <Settings size={18} />
               Jetzt konfigurieren
             </Button>
-            <Button variant="outline" asChild className="flex items-center gap-2">
+            <Button variant="outline" asChild>
               <Link to="/haendler">
-                <MapPin size={18} />
                 Händler finden
               </Link>
-            </Button>
-            <Button variant="outline" className="flex items-center gap-2">
-              <GitCompare size={18} />
-              Modell vergleichen
             </Button>
           </div>
         </section>
