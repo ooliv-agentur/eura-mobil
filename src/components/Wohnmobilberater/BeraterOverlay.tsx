@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import BeraterContainer from "./BeraterContainer";
+import BeraterFlow from "./BeraterFlow";
 import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
 import { useComparison } from "@/context/ComparisonContext";
@@ -28,7 +28,7 @@ const BeraterOverlay: React.FC<BeraterOverlayProps> = ({ isOpen, onClose }) => {
           hideCloseButton={true}
         >
           <div className="h-full overflow-y-auto">
-            <BeraterContainer />
+            <BeraterFlow />
           </div>
         </DialogContent>
       </Dialog>

@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
 import { Layout } from "@/components/Layout";
-import Wohnmobilberater from "@/components/Wohnmobilberater/Wohnmobilberater";
+import BeraterContainer from "@/components/Wohnmobilberater/BeraterContainer";
 import { useNavigate } from "react-router-dom";
 
 const Index = () => {
@@ -11,7 +11,7 @@ const Index = () => {
   useEffect(() => {
     // Small delay to ensure component is mounted
     const timer = setTimeout(() => {
-      // The Wohnmobilberater component will handle opening the overlay
+      // The BeraterContainer component will handle showing the flow
     }, 100);
 
     return () => clearTimeout(timer);
@@ -19,7 +19,7 @@ const Index = () => {
 
   return (
     <Layout>
-      <Wohnmobilberater />
+      <BeraterContainer />
     </Layout>
   );
 };

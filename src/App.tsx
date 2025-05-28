@@ -7,7 +7,7 @@ import { WohnmobilberaterProvider } from "./context/WohnmobilberaterContext";
 import { OverlayProvider } from "./context/OverlayContext";
 import { ComparisonProvider } from "./context/ComparisonContext";
 import { ScrollToTop } from "./components/ScrollToTop";
-import BeraterContainer from "./components/Wohnmobilberater/BeraterContainer";
+import Wohnmobilberater from "./components/Wohnmobilberater/Wohnmobilberater";
 import Index from "./pages/Index";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -94,6 +94,7 @@ const App = () => (
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
+              <Wohnmobilberater />
             </BrowserRouter>
           </ComparisonProvider>
         </OverlayProvider>
