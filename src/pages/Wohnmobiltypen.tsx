@@ -119,7 +119,7 @@ const Wohnmobiltypen = () => {
               </h3>
               
               <div className="flex justify-center">
-                <div className="flex flex-wrap justify-center gap-8 max-w-6xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl justify-items-center">
                   {typ.models.map((model) => (
                     <div key={model.id} className="border border-gray-200 rounded-lg overflow-hidden bg-white w-full max-w-sm">
                       <AspectRatio ratio={4/3} className="bg-gray-200">
