@@ -37,7 +37,7 @@ const categoryInfo = {
     benefits: ["Maximaler Komfort", "Luxuriöse Ausstattung", "Großzügiges Raumgefühl"]
   },
   van: {
-    title: "Vans & Kastenwagen",
+    title: "Vans",
     description: "Kompakte Vans sind wendig und alltagstauglich. Perfect für Paare und spontane Trips in die Stadt oder Natur.",
     benefits: ["Wendig & kompakt", "Alltagstauglich", "Parkplatzfreundlich"]
   }
