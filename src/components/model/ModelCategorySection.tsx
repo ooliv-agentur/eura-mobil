@@ -128,33 +128,31 @@ export const ModelCategorySection: React.FC<ModelCategorySectionProps> = ({
           </div>
         </div>
 
-        {/* Related Models - Exact homepage card styling with compact design */}
+        {/* Related Models - Exact homepage card styling */}
         <div className="mb-6">
           <h3 className="text-xl font-semibold mb-4 text-center">
             Weitere Modelle aus dieser Kategorie
           </h3>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {relatedModels.map((model) => (
-              <Card key={model.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-200">
-                <CardContent className="p-0">
-                  {/* Square aspect ratio image like homepage */}
-                  <AspectRatio ratio={1} className="bg-gray-200">
-                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-400 text-sm">Modellbild</span>
-                    </div>
-                  </AspectRatio>
-                  
-                  {/* Content section - compact like homepage */}
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2 text-gray-800">{model.name}</h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
-                      {model.description}
-                    </p>
-                    <Button variant="outline" asChild className="w-full">
-                      <Link to={`/modelle/${model.id}`}>Mehr erfahren</Link>
-                    </Button>
+              <Card key={model.id} className="h-full transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
+                <CardContent className="p-4 flex flex-col h-full">
+                  {/* Fixed aspect ratio for consistent image dimensions - same as homepage */}
+                  <div className="mb-4">
+                    <AspectRatio ratio={16 / 9}>
+                      <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
+                        <span className="text-xs text-gray-400">Modellbild</span>
+                      </div>
+                    </AspectRatio>
                   </div>
+                  <h3 className="text-lg font-bold mb-2">{model.name}</h3>
+                  <p className="text-sm text-gray-600 mb-4 flex-grow h-[60px] overflow-hidden">
+                    {model.description}
+                  </p>
+                  <Button variant="outline" asChild className="w-full mt-auto">
+                    <Link to={`/modelle/${model.id}`}>Mehr erfahren</Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
