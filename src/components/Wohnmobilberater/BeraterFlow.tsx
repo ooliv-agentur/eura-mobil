@@ -47,13 +47,20 @@ const BeraterFlow: React.FC = () => {
           </Button>
         </div>
 
-        {/* Preview Cards with proper explanations */}
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Preview Cards with all 4 steps */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="text-center p-6 border rounded-lg">
             <div className="text-3xl mb-3">🛏️</div>
             <h3 className="font-semibold mb-2">Schlafplätze</h3>
             <p className="text-sm text-gray-700">
               Wie viele Personen sollen mitreisen? Wir helfen Ihnen bei der Auswahl der passenden Schlafplatz-Konfiguration.
+            </p>
+          </div>
+          <div className="text-center p-6 border rounded-lg">
+            <div className="text-3xl mb-3">🛌</div>
+            <h3 className="font-semibold mb-2">Bettenform</h3>
+            <p className="text-sm text-gray-700">
+              Welche Bettenformen bevorzugen Sie? Von Queensbett bis Stockbetten - finden Sie Ihren Schlafkomfort.
             </p>
           </div>
           <div className="text-center p-6 border rounded-lg">
