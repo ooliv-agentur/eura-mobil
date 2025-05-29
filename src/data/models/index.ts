@@ -1,6 +1,6 @@
 import { vanData } from './van';
 import { conturaData } from './contura';
-// Import other models as we create them
+import { activaOneData } from './activaOne';
 
 export const modelsData = {
   "van": vanData,
@@ -395,7 +395,7 @@ export const modelsData = {
       ]
     }
   },
-  "activa-one": { id: "activa-one", name: "Activa One", intro: "Der Activa One ist der Familien-Alkoven der Extraklasse.", heroImage: "/placeholder.svg", galleryImages: ["/placeholder.svg"], technicalData: { länge: "7,30 – 7,84 m", sitzplätze: "4-6", schlafplätze: "4-6" }, highlights: ["Alkoven-Bauweise"], layouts: [], interior: [], upholsteryTypes: [], equipment: {} },
+  "activa-one": activaOneData,
   "integra": { 
     id: "integra", 
     name: "Integra", 
