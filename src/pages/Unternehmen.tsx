@@ -9,13 +9,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 const Unternehmen = () => {
   return (
     <Layout>
-      {/* Hero Section - matching other pages */}
+      {/* Hero Section */}
       <section className="relative bg-gray-50 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="placeholder-image w-full h-64 md:h-80 mb-8 flex items-center justify-center">
-              <span className="text-gray-400 text-lg">Unternehmen Hero Bild</span>
-            </div>
+            <div className="placeholder-image w-full h-96 mb-8 rounded-lg"></div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
               EURA MOBIL – Qualität aus Deutschland
             </h1>
@@ -45,6 +43,17 @@ const Unternehmen = () => {
                 strenge Qualitätskontrollen.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Video Section */}
+        <section className="mb-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-8">Unser Unternehmen im Video</h2>
+            <div className="placeholder-image w-full h-64 md:h-80 rounded-lg mb-4"></div>
+            <p className="text-gray-600">
+              Erfahren Sie mehr über unsere Produktion und Philosophie
+            </p>
           </div>
         </section>
         
@@ -206,6 +215,7 @@ const TimelineItem = ({
         {year}
       </span>
     </div>
+    <div className="placeholder-image w-full h-48 rounded-lg mb-4"></div>
     <h3 className="font-bold text-xl mb-3">{event}</h3>
     {description && (
       <p className="text-gray-600 text-lg">{description}</p>
