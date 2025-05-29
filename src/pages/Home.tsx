@@ -321,9 +321,9 @@ const Home = () => {
 
   return (
     <Layout>
-      <main className="flex-1">
-        {/* Section 1: Hero Section (reduced to ~75vh) */}
-        <section className="relative w-full h-[75vh] flex flex-col justify-center items-center">
+      <main className="flex-1 relative">
+        {/* Fixed Hero Section */}
+        <section className="fixed top-0 left-0 w-full h-screen flex flex-col justify-center items-center z-10">
           <div className="relative z-20 max-w-3xl text-center px-6 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
@@ -336,308 +336,311 @@ const Home = () => {
             </Button>
           </div>
           
-          {/* Scroll indicator - made more subtle */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
+          {/* Scroll indicator */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity z-30">
             <ArrowDown className="h-5 w-5 text-gray-500 mb-1 animate-bounce" />
             <span className="text-xs text-gray-500">Scrollen</span>
           </div>
         </section>
 
-        {/* Models & CTA Section */}
-        <section className="py-16 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            {/* Main section heading */}
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
-              Welches Wohnmobil passt zu mir?
-            </h2>
-            
-            {/* Filter tab buttons - pill style */}
-            <div className="flex justify-center mb-4">
-              <ToggleGroup 
-                type="single" 
-                value={activeFilter}
-                onValueChange={(value) => value && setActiveFilter(value)} 
-                className="border rounded-full overflow-hidden shadow-sm p-1 flex-wrap justify-center"
-              >
-                <ToggleGroupItem value="alle" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
-                  Alle
-                </ToggleGroupItem>
-                <ToggleGroupItem value="alkoven" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
-                  Alkoven
-                </ToggleGroupItem>
-                <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
-                  Teilintegriert
-                </ToggleGroupItem>
-                <ToggleGroupItem value="integriert" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
-                  Integriert
-                </ToggleGroupItem>
-                <ToggleGroupItem value="vans" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
-                  Vans
-                </ToggleGroupItem>
-              </ToggleGroup>
-            </div>
+        {/* Scrolling Content - starts after hero height */}
+        <div className="relative z-20 bg-white" style={{ marginTop: '100vh' }}>
+          {/* Models & CTA Section */}
+          <section className="py-16 px-4 bg-gray-50">
+            <div className="max-w-7xl mx-auto">
+              {/* Main section heading */}
+              <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
+                Welches Wohnmobil passt zu mir?
+              </h2>
+              
+              {/* Filter tab buttons - pill style */}
+              <div className="flex justify-center mb-4">
+                <ToggleGroup 
+                  type="single" 
+                  value={activeFilter}
+                  onValueChange={(value) => value && setActiveFilter(value)} 
+                  className="border rounded-full overflow-hidden shadow-sm p-1 flex-wrap justify-center"
+                >
+                  <ToggleGroupItem value="alle" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                    Alle
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="alkoven" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                    Alkoven
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="teilintegriert" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                    Teilintegriert
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="integriert" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                    Integriert
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="vans" className="rounded-full text-sm md:text-base px-4 py-2 transition-all duration-200">
+                    Vans
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
 
-            {/* Type explanation box */}
-            <div className="bg-gray-100 rounded-md p-4 mb-4 max-w-3xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-center gap-4">
-                <div className="flex justify-center md:justify-start">
-                  {/* Generic circle placeholder with consistent size */}
-                  <div className="bg-gray-300 rounded-full p-3 w-16 h-16 flex items-center justify-center">
-                    <Circle size={32} className="text-gray-600" />
+              {/* Type explanation box */}
+              <div className="bg-gray-100 rounded-md p-4 mb-4 max-w-3xl mx-auto">
+                <div className="flex flex-col md:flex-row md:items-center gap-4">
+                  <div className="flex justify-center md:justify-start">
+                    {/* Generic circle placeholder with consistent size */}
+                    <div className="bg-gray-300 rounded-full p-3 w-16 h-16 flex items-center justify-center">
+                      <Circle size={32} className="text-gray-600" />
+                    </div>
                   </div>
+                  <p className="text-gray-700 text-center md:text-left">
+                    {wohnmobiltypenErklaerungen[activeFilter].text}
+                  </p>
                 </div>
-                <p className="text-gray-700 text-center md:text-left">
-                  {wohnmobiltypenErklaerungen[activeFilter].text}
-                </p>
+              </div>
+              
+              {/* New CTA button that only appears for specific filters */}
+              {activeFilter !== 'alle' && (
+                <div className="flex justify-center mb-8">
+                  <Button asChild size="lg" className="mt-4">
+                    <Link to={wohnmobiltypenLinks[activeFilter]}>
+                      {wohnmobiltypenButtonText[activeFilter]}
+                    </Link>
+                  </Button>
+                </div>
+              )}
+
+              {/* Model cards carousel - with consistent spacing and sizing */}
+              <div className="mb-16">
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {filteredModels.map((model) => (
+                      <CarouselItem 
+                        key={model.name} 
+                        className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4"
+                      >
+                        <Card className="h-full transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
+                          <CardContent className="p-4 flex flex-col h-full">
+                            {/* Fixed aspect ratio for consistent image dimensions */}
+                            <div className="mb-4">
+                              <AspectRatio ratio={16 / 9}>
+                                <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
+                                  <span className="text-xs text-gray-400">Modellbild</span>
+                                </div>
+                              </AspectRatio>
+                            </div>
+                            <h3 className="text-lg font-bold mb-2">{model.name}</h3>
+                            <p className="text-sm text-gray-600 mb-4 flex-grow h-[60px] overflow-hidden">
+                              {model.description}
+                            </p>
+                            <Button variant="outline" asChild className="w-full mt-auto">
+                              <Link to={model.path}>Mehr erfahren</Link>
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  
+                  {/* Navigation arrows - only visible on desktop */}
+                  <div className="hidden md:block">
+                    <CarouselPrevious className="-left-12" />
+                    <CarouselNext className="-right-12" />
+                  </div>
+                  
+                  {/* Add indicators */}
+                  <CarouselIndicators />
+                </Carousel>
+              </div>
+              
+              {/* CTA Cards - dark background with white text and buttons */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {ctaCards.map((card, index) => (
+                  <Card key={index} className="h-full bg-[#0E1122] text-white border-0 overflow-hidden transition-transform duration-200 hover:transform hover:scale-[1.02]">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      <div className="mb-6 flex justify-center">
+                        <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+                          {/* Icon placeholder */}
+                          <div className="w-6 h-6" />
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold mb-3 text-center">{card.title}</h3>
+                      <p className="text-gray-200 mb-6 flex-grow text-center">{card.description}</p>
+                      {card.isExternal ? (
+                        <Button 
+                          asChild 
+                          variant="outline" 
+                          className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0"
+                          onClick={() => window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer")}
+                        >
+                          <button>
+                            {card.buttonText}
+                          </button>
+                        </Button>
+                      ) : (
+                        <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
+                          <Link to={card.path}>{card.buttonText}</Link>
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
-            
-            {/* New CTA button that only appears for specific filters */}
-            {activeFilter !== 'alle' && (
-              <div className="flex justify-center mb-8">
-                <Button asChild size="lg" className="mt-4">
-                  <Link to={wohnmobiltypenLinks[activeFilter]}>
-                    {wohnmobiltypenButtonText[activeFilter]}
+          </section>
+
+          {/* Video Placeholder Section - Updated with consistent width and 16:9 aspect ratio */}
+          <section className="py-16 px-4">
+            <div className="max-w-5xl mx-auto"> {/* Updated to match dealer map width */}
+              <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
+                <AspectRatio ratio={16/9}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Video className="h-16 w-16 text-gray-400" />
+                  </div>
+                </AspectRatio>
+              </div>
+            </div>
+          </section>
+
+          {/* New Three-Column Cards Section: About EURA MOBIL */}
+          <section className="py-16 px-4 bg-gray-50">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="text-3xl font-bold mb-10 text-center">Entdecken Sie EURA MOBIL</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {euraCards.map((card, index) => (
+                  <Card key={index} className="h-full bg-white shadow-sm hover:shadow transition-shadow duration-300">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      <h3 className="text-xl font-bold mb-4">{card.title}</h3>
+                      
+                      <p className="text-gray-600 mb-6 whitespace-pre-line flex-grow">
+                        {card.content}
+                      </p>
+                      
+                      {/* Small square grey icon placeholder */}
+                      <div className="w-12 h-12 bg-gray-200 rounded mb-6 flex items-center justify-center">
+                        <Circle className="h-6 w-6 text-gray-400" />
+                      </div>
+                      
+                      <Button asChild variant="outline" className="mt-auto w-fit">
+                        <Link to={card.linkPath}>{card.linkText}</Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 6: Händlersuche - Updated with 16:9 aspect ratio map placeholder */}
+          <section className="py-16 px-4">
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-2xl font-bold mb-4">Händler in Ihrer Nähe</h2>
+              <p className="text-gray-600 mb-6">
+                Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
+              </p>
+              
+              {/* Search input with Google Places Autocomplete */}
+              <div className="flex gap-2 mb-6">
+                <div className="flex-1 relative">
+                  <Input 
+                    ref={searchInputRef}
+                    placeholder="Ort oder PLZ eingeben"
+                    value={dealerSearch}
+                    onChange={handleDealerSearchChange}
+                    className="flex-1 w-full"
+                    aria-label="Ort oder PLZ Suche"
+                    autoComplete="off"
+                  />
+                  
+                  {/* Autocomplete dropdown */}
+                  {showPredictions && placePredictions.length > 0 && (
+                    <div className="absolute z-10 w-full bg-white mt-1 shadow-lg rounded-md border border-gray-200">
+                      <ul className="py-1">
+                        {placePredictions.map((prediction) => (
+                          <li
+                            key={prediction.place_id}
+                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handlePredictionSelect(prediction)}
+                          >
+                            {prediction.description}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                <Button asChild className="flex items-center gap-2">
+                  <Link to={`/haendler${dealerSearch ? `?location=${encodeURIComponent(dealerSearch)}` : ''}`}>
+                    <Search size={18} className="mr-1" />
+                    <span>Händler finden</span>
                   </Link>
                 </Button>
               </div>
-            )}
-
-            {/* Model cards carousel - with consistent spacing and sizing */}
-            <div className="mb-16">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {filteredModels.map((model) => (
-                    <CarouselItem 
-                      key={model.name} 
-                      className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-4"
-                    >
-                      <Card className="h-full transition-transform duration-200 hover:shadow-lg hover:-translate-y-1">
-                        <CardContent className="p-4 flex flex-col h-full">
-                          {/* Fixed aspect ratio for consistent image dimensions */}
-                          <div className="mb-4">
-                            <AspectRatio ratio={16 / 9}>
-                              <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
-                                <span className="text-xs text-gray-400">Modellbild</span>
-                              </div>
-                            </AspectRatio>
-                          </div>
-                          <h3 className="text-lg font-bold mb-2">{model.name}</h3>
-                          <p className="text-sm text-gray-600 mb-4 flex-grow h-[60px] overflow-hidden">
-                            {model.description}
-                          </p>
-                          <Button variant="outline" asChild className="w-full mt-auto">
-                            <Link to={model.path}>Mehr erfahren</Link>
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                {/* Navigation arrows - only visible on desktop */}
-                <div className="hidden md:block">
-                  <CarouselPrevious className="-left-12" />
-                  <CarouselNext className="-right-12" />
-                </div>
-                
-                {/* Add indicators */}
-                <CarouselIndicators />
-              </Carousel>
-            </div>
-            
-            {/* CTA Cards - dark background with white text and buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {ctaCards.map((card, index) => (
-                <Card key={index} className="h-full bg-[#0E1122] text-white border-0 overflow-hidden transition-transform duration-200 hover:transform hover:scale-[1.02]">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="mb-6 flex justify-center">
-                      <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
-                        {/* Icon placeholder */}
-                        <div className="w-6 h-6" />
-                      </div>
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 text-center">{card.title}</h3>
-                    <p className="text-gray-200 mb-6 flex-grow text-center">{card.description}</p>
-                    {card.isExternal ? (
-                      <Button 
-                        asChild 
-                        variant="outline" 
-                        className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0"
-                        onClick={() => window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer")}
-                      >
-                        <button>
-                          {card.buttonText}
-                        </button>
-                      </Button>
-                    ) : (
-                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
-                        <Link to={card.path}>{card.buttonText}</Link>
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Video Placeholder Section - Updated with consistent width and 16:9 aspect ratio */}
-        <section className="py-16 px-4">
-          <div className="max-w-5xl mx-auto"> {/* Updated to match dealer map width */}
-            <div className="w-full bg-gray-200 rounded-lg overflow-hidden relative">
-              <AspectRatio ratio={16/9}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Video className="h-16 w-16 text-gray-400" />
-                </div>
-              </AspectRatio>
-            </div>
-          </div>
-        </section>
-
-        {/* New Three-Column Cards Section: About EURA MOBIL */}
-        <section className="py-16 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold mb-10 text-center">Entdecken Sie EURA MOBIL</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {euraCards.map((card, index) => (
-                <Card key={index} className="h-full bg-white shadow-sm hover:shadow transition-shadow duration-300">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <h3 className="text-xl font-bold mb-4">{card.title}</h3>
-                    
-                    <p className="text-gray-600 mb-6 whitespace-pre-line flex-grow">
-                      {card.content}
-                    </p>
-                    
-                    {/* Small square grey icon placeholder */}
-                    <div className="w-12 h-12 bg-gray-200 rounded mb-6 flex items-center justify-center">
-                      <Circle className="h-6 w-6 text-gray-400" />
-                    </div>
-                    
-                    <Button asChild variant="outline" className="mt-auto w-fit">
-                      <Link to={card.linkPath}>{card.linkText}</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Section 6: Händlersuche - Updated with 16:9 aspect ratio map placeholder */}
-        <section className="py-16 px-4">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">Händler in Ihrer Nähe</h2>
-            <p className="text-gray-600 mb-6">
-              Besuchen Sie einen unserer autorisierten Händler und erleben Sie unsere Wohnmobile live.
-            </p>
-            
-            {/* Search input with Google Places Autocomplete */}
-            <div className="flex gap-2 mb-6">
-              <div className="flex-1 relative">
-                <Input 
-                  ref={searchInputRef}
-                  placeholder="Ort oder PLZ eingeben"
-                  value={dealerSearch}
-                  onChange={handleDealerSearchChange}
-                  className="flex-1 w-full"
-                  aria-label="Ort oder PLZ Suche"
-                  autoComplete="off"
+              
+              {/* Updated MapComponent with 16:9 aspect ratio */}
+              <div className="w-full">
+                <MapComponent 
+                  dealers={[]} 
+                  googleMapsLoaded={false}
+                  onSelectDealer={() => {}}
                 />
-                
-                {/* Autocomplete dropdown */}
-                {showPredictions && placePredictions.length > 0 && (
-                  <div className="absolute z-10 w-full bg-white mt-1 shadow-lg rounded-md border border-gray-200">
-                    <ul className="py-1">
-                      {placePredictions.map((prediction) => (
-                        <li
-                          key={prediction.place_id}
-                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() => handlePredictionSelect(prediction)}
-                        >
-                          {prediction.description}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
               </div>
-              <Button asChild className="flex items-center gap-2">
-                <Link to={`/haendler${dealerSearch ? `?location=${encodeURIComponent(dealerSearch)}` : ''}`}>
-                  <Search size={18} className="mr-1" />
-                  <span>Händler finden</span>
-                </Link>
-              </Button>
             </div>
-            
-            {/* Updated MapComponent with 16:9 aspect ratio */}
-            <div className="w-full">
-              <MapComponent 
-                dealers={[]} 
-                googleMapsLoaded={false}
-                onSelectDealer={() => {}}
-              />
-            </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Section 7: News and Events - Updated with Carousel AND INDICATORS */}
-        <section className="py-16 px-4 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl font-bold mb-8 text-center">Aktuelles & Events</h2>
-            
-            {/* News items carousel */}
-            <div className="mb-10">
-              <Carousel className="w-full">
-                <CarouselContent className="-ml-4" ref={newsEmblaRef}>
-                  {newsItems.map((news, index) => (
-                    <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-                      <Card className="h-full">
-                        <CardContent className="p-4 flex flex-col h-full">
-                          {/* Image placeholder with fixed aspect ratio */}
-                          <div className="mb-3">
-                            <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
-                          </div>
-                          
-                          {/* Date */}
-                          <div className="text-sm text-gray-500 mb-2">{news.date}</div>
-                          
-                          {/* Title - limited to 2 lines */}
-                          <h3 className="text-lg font-semibold mb-2 line-clamp-2">{news.title}</h3>
-                          
-                          {/* Description - limited to 3 lines */}
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">{news.description}</p>
-                          
-                          {/* Button */}
-                          <Button variant="outline" asChild size="sm" className="mt-auto w-full">
-                            <Link to={news.path}>Mehr erfahren</Link>
-                          </Button>
-                        </CardContent>
-                      </Card>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                
-                {/* Non-sticky navigation arrows - only visible on desktop */}
-                <div className="hidden md:block">
-                  <CarouselPrevious className="left-0 md:-left-5" />
-                  <CarouselNext className="right-0 md:-right-5" />
-                </div>
-                
-                {/* Add indicators */}
-                <CarouselIndicators />
-              </Carousel>
+          {/* Section 7: News and Events - Updated with Carousel AND INDICATORS */}
+          <section className="py-16 px-4 bg-gray-50">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="text-2xl font-bold mb-8 text-center">Aktuelles & Events</h2>
+              
+              {/* News items carousel */}
+              <div className="mb-10">
+                <Carousel className="w-full">
+                  <CarouselContent className="-ml-4" ref={newsEmblaRef}>
+                    {newsItems.map((news, index) => (
+                      <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                        <Card className="h-full">
+                          <CardContent className="p-4 flex flex-col h-full">
+                            {/* Image placeholder with fixed aspect ratio */}
+                            <div className="mb-3">
+                              <AspectRatio ratio={16/9} className="bg-gray-200 rounded-md" />
+                            </div>
+                            
+                            {/* Date */}
+                            <div className="text-sm text-gray-500 mb-2">{news.date}</div>
+                            
+                            {/* Title - limited to 2 lines */}
+                            <h3 className="text-lg font-semibold mb-2 line-clamp-2">{news.title}</h3>
+                            
+                            {/* Description - limited to 3 lines */}
+                            <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-grow">{news.description}</p>
+                            
+                            {/* Button */}
+                            <Button variant="outline" asChild size="sm" className="mt-auto w-full">
+                              <Link to={news.path}>Mehr erfahren</Link>
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  
+                  {/* Non-sticky navigation arrows - only visible on desktop */}
+                  <div className="hidden md:block">
+                    <CarouselPrevious className="left-0 md:-left-5" />
+                    <CarouselNext className="right-0 md:-right-5" />
+                  </div>
+                  
+                  {/* Add indicators */}
+                  <CarouselIndicators />
+                </Carousel>
+              </div>
+              
+              {/* "View all news" button */}
+              <div className="flex justify-center">
+                <Button asChild variant="outline" className="px-6">
+                  <Link to="/news">Alle Meldungen ansehen</Link>
+                </Button>
+              </div>
             </div>
-            
-            {/* "View all news" button */}
-            <div className="flex justify-center">
-              <Button asChild variant="outline" className="px-6">
-                <Link to="/news">Alle Meldungen ansehen</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
     </Layout>
   );
