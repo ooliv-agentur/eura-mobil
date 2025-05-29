@@ -24,7 +24,8 @@ const BeraterFlow: React.FC = () => {
 
   const handleClose = () => {
     resetBerater();
-    navigate('/');
+    // Stay on berater page instead of going to home
+    navigate('/berater');
   };
 
   // Show intro/hero section on first load
@@ -170,7 +171,7 @@ const BeraterFlow: React.FC = () => {
               size="icon"
               onClick={handleClose}
               className="h-8 w-8"
-              title="Berater schließen"
+              title="Beratung beenden"
             >
               <X className="h-4 w-4" />
             </Button>
