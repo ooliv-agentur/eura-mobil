@@ -1,27 +1,26 @@
 
+
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Unternehmen = () => {
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative bg-gray-50 py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="placeholder-image w-full h-96 mb-8 rounded-lg"></div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              EURA MOBIL – Qualität aus Deutschland
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Seit über 60 Jahren steht EURA MOBIL für höchste Qualität und Innovation im Wohnmobilbau. 
-              Als familiengeführtes Unternehmen verbinden wir Tradition mit modernster Technik.
-            </p>
-          </div>
+      {/* Hero Section - Full width */}
+      <section className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
+        <div className="text-center z-10 px-4 max-w-6xl">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+            EURA MOBIL – Qualität aus Deutschland
+          </h1>
+          <p className="text-xl md:text-2xl lg:text-3xl text-gray-600 max-w-4xl mx-auto">
+            Seit über 60 Jahren steht EURA MOBIL für höchste Qualität und Innovation im Wohnmobilbau. 
+            Als familiengeführtes Unternehmen verbinden wir Tradition mit modernster Technik.
+          </p>
         </div>
       </section>
 
@@ -50,7 +49,11 @@ const Unternehmen = () => {
         <section className="mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-8">Unser Unternehmen im Video</h2>
-            <div className="placeholder-image w-full h-64 md:h-80 rounded-lg mb-4"></div>
+            <AspectRatio ratio={16/9} className="bg-gray-200 rounded-lg mb-4">
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-gray-400">Video Placeholder</span>
+              </div>
+            </AspectRatio>
             <p className="text-gray-600">
               Erfahren Sie mehr über unsere Produktion und Philosophie
             </p>
