@@ -460,10 +460,15 @@ const Home = () => {
                     <h3 className="text-xl font-bold mb-3 text-center">{card.title}</h3>
                     <p className="text-gray-200 mb-6 flex-grow text-center">{card.description}</p>
                     {card.isExternal ? (
-                      <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
-                        <a href={card.path} target="_blank" rel="noopener noreferrer">
+                      <Button 
+                        asChild 
+                        variant="outline" 
+                        className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0"
+                        onClick={() => window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer")}
+                      >
+                        <button>
                           {card.buttonText}
-                        </a>
+                        </button>
                       </Button>
                     ) : (
                       <Button asChild variant="outline" className="mt-auto w-full bg-white text-[#0E1122] hover:bg-white/90 hover:text-[#0E1122] border-0">
