@@ -54,6 +54,26 @@ const FloorplanDetail = () => {
   // Generate technical data based on model and floorplan
   const getTechnicalData = () => {
     const baseData = modelData.technicalData;
+    
+    // Safe access to properties that might not exist
+    const getWidth = () => {
+      if ('breite' in baseData) return baseData.breite?.replace(' m', '00') || "2198";
+      if ('width' in baseData) return baseData.width?.replace(' m', '00') || "2198";
+      return "2198";
+    };
+    
+    const getHeight = () => {
+      if ('höhe' in baseData) return baseData.höhe?.replace(' m', '00') || "3022";
+      if ('height' in baseData) return baseData.height?.replace(' m', '00') || "3022";
+      return "3022";
+    };
+    
+    const getSitzplaetze = () => {
+      if ('sitzplätze' in baseData) return baseData.sitzplätze || "4";
+      if ('sitzplaetze' in baseData) return baseData.sitzplaetze || "4";
+      return "4";
+    };
+
     return {
       "Basisfahrzeug": "Mercedes Benz", // Default for most models
       "Motorisierung Serie": "2,0 ltr.",
@@ -64,12 +84,12 @@ const FloorplanDetail = () => {
       "Masse in fahrbereitem Zustand (Serie) (kg)": "3320 (3154 - 3486)",
       "Zulässige Anhängelast (gebremst)": "2000 kg",
       "Gesamtlänge (mm)": floorplanData.length.replace(' m', '00'),
-      "Gesamtbreite (mm)": baseData.breite?.replace(' m', '00') || "2198",
-      "Gesamthöhe (mm)": baseData.höhe?.replace(' m', '00') || "3022",
+      "Gesamtbreite (mm)": getWidth(),
+      "Gesamthöhe (mm)": getHeight(),
       "Innenbreite (mm)": "2050",
       "Stehhöhe (mm)": "1975",
       "Schlafplätze": floorplanData.sleepingPlaces,
-      "Sitzplätze": baseData.sitzplätze || "4",
+      "Sitzplätze": getSitzplaetze(),
       "Wandstärke (mm)": "30",
       "Dachstärke (mm)": "30",
       "Bodenstärke (mm)": "85",
@@ -234,7 +254,7 @@ const FloorplanDetail = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-4 pb-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
-                      {items.map((item, i) => (
+                      {Array.isArray(items) && items.map((item, i) => (
                         <div key={i} className="flex items-start gap-2">
                           <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
                           <span>{item}</span>
