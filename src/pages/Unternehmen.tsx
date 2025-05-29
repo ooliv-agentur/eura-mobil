@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -68,7 +69,7 @@ const Unternehmen = () => {
               <div className="space-y-8">
                 <TimelineItem 
                   year="2024" 
-                  event="Eura Mobil führt das 4×4 Fernreisemobil „Xtura" ein" 
+                  event="Eura Mobil führt das 4×4 Fernreisemobil 'Xtura' ein" 
                   description="Hohe Energieautarkie, Smarte Onboard Vernetzung und weltweite Navigation mit Mobilfunknetz unabhängiger Notruffunktion kennzeichnen das innovative Konzept."
                 />
                 
