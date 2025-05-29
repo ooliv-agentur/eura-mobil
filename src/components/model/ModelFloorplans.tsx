@@ -1,6 +1,6 @@
 
 import React from "react";
-import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { FloorplanCard } from "@/components/comparison/FloorplanCard";
 
 interface FloorplanData {
   id: string;
@@ -13,11 +13,13 @@ interface FloorplanData {
 interface ModelFloorplansProps {
   floorplans: FloorplanData[];
   showComparison?: boolean;
+  modelSeries?: string; // Add modelSeries prop to pass to FloorplanCard
 }
 
 export const ModelFloorplans: React.FC<ModelFloorplansProps> = ({ 
   floorplans, 
-  showComparison = false 
+  showComparison = false,
+  modelSeries = "xtura" // Default fallback
 }) => {
   if (floorplans.length === 0) return null;
 
@@ -27,13 +29,14 @@ export const ModelFloorplans: React.FC<ModelFloorplansProps> = ({
       <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {floorplans.map((floorplan) => (
-          <SelectableModelCard
+          <FloorplanCard
             key={floorplan.id}
             id={floorplan.id}
             name={floorplan.name}
             length={floorplan.length}
             sleepingPlaces={floorplan.sleepingPlaces}
             showComparison={showComparison}
+            modelSeries={modelSeries}
           />
         ))}
       </div>

@@ -232,6 +232,7 @@ Das Mercedes Chassis profitiert von den zahlreichen optionalen Assistenzsystem-M
           <ModelFloorplans 
             floorplans={modelDetails.layouts || []}
             showComparison={hasMultipleLayouts}
+            modelSeries={modelDetails.id}
           />
           
           {/* 7. Interior Hotspots Section - Always show with fallback */}
