@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -68,39 +67,81 @@ const Unternehmen = () => {
               
               <div className="space-y-8">
                 <TimelineItem 
-                  year="1959" 
-                  event="Gründung als Blessing KG" 
-                  description="Der Grundstein unserer Erfolgsgeschichte wird in einer kleinen Werkstatt in Rheinland-Pfalz gelegt."
+                  year="2024" 
+                  event="Eura Mobil führt das 4×4 Fernreisemobil „Xtura" ein" 
+                  description="Hohe Energieautarkie, Smarte Onboard Vernetzung und weltweite Navigation mit Mobilfunknetz unabhängiger Notruffunktion kennzeichnen das innovative Konzept."
                 />
                 
                 <TimelineItem 
-                  year="1983" 
-                  event="Start der Reisemobil-Produktion" 
-                  description="Nach erfolgreichen Jahren in der Wohnwagen-Produktion wagen wir den Schritt zum Reisemobil."
-                />
-                
-                <TimelineItem 
-                  year="2005" 
-                  event="Übernahme durch Trigano" 
-                  description="Ein wichtiger Meilenstein für die internationale Expansion."
-                />
-                
-                <TimelineItem 
-                  year="2016" 
-                  event="Einführung 10 Jahre Dichtigkeitsgarantie" 
-                  description="Als einer der ersten Hersteller bieten wir eine 10-Jahres-Garantie auf die Dichtigkeit."
+                  year="2020" 
+                  event="Reisemobil Forum" 
+                  description="Das neue Reisemobil Forum wurde wieder aufgebaut und eröffnete zum 01.10.2020 seine Tore für Besucher/innen. Die neue Ausstellungsfläche ist 3.000 qm groß und es finden 50 Fahrzeuge darin Platz."
                 />
                 
                 <TimelineItem 
                   year="2019" 
-                  event="60 Jahre Jubiläum"
-                  description="Sechs Jahrzehnte Innovation und Leidenschaft für Reisemobile."
+                  event="60 Jahre Eura Mobil"
+                  description="Zum 60-jährigen Jubiläum wurde auf dem Caravan Salon 2019 der neue Luxus-Teilintegrierte Contura und das neue Alkoven-Interieur Beach-Home vorgestellt."
                 />
                 
                 <TimelineItem 
-                  year="2024" 
-                  event="Launch Xtura 4×4 Fernreisemobil" 
-                  description="Mit dem neuen Xtura 4×4 revolutionieren wir den Markt für Fernreisemobile."
+                  year="2017" 
+                  event="4. Generation Integra" 
+                  description="Die 4. Generation des Integra wird als neues Flaggschiff von Eura Mobil auf dem Caravan Salon 2017 in Düsseldorf vorgestellt."
+                />
+                
+                <TimelineItem 
+                  year="2016" 
+                  event="10 Jahre Dichtigkeitsgarantie" 
+                  description="Die Eura Mobil GmbH feiert 10-jähriges Jubiläum der Klebetechnologie mit einem Geschenk: 10 Jahre Dichtigkeitsgarantie ohne Aufpreis für unsere Reisemobile mit Aufbau!"
+                />
+                
+                <TimelineItem 
+                  year="2010" 
+                  event="Integra Style" 
+                  description="Mit dem neuen Integra Style etabliert sich Eura Mobil in der 3,5t-Klasse der Integrierten."
+                />
+                
+                <TimelineItem 
+                  year="2005" 
+                  event="Trigano" 
+                  description="Übernahme von Eura Mobil durch den internationalen Reisemobilkonzern Trigano."
+                />
+                
+                <TimelineItem 
+                  year="2002" 
+                  event="Reisemobil Forum" 
+                  description="Eröffnung des Reisemobil Forums, des ersten Kommunikations- und Informationszentrums für Reisemobilisten/innen."
+                />
+                
+                <TimelineItem 
+                  year="2000" 
+                  event="Karmann-Mobil" 
+                  description="Übernahme der Marken- und Produktionsrechte von Karmann-Mobil."
+                />
+                
+                <TimelineItem 
+                  year="1997" 
+                  event="Teilintegrierte: Contura" 
+                  description="Komplettierung der Produktpalette durch die Produktionsaufnahme von Teilintegrierten Fahrzeugen (Typ: Contura)."
+                />
+                
+                <TimelineItem 
+                  year="1983" 
+                  event="Eura Mobil GmbH" 
+                  description="Beginn der Reisemobil-Produktion und Umbenennung in Eura Mobil GmbH."
+                />
+                
+                <TimelineItem 
+                  year="1969" 
+                  event="Eura Caravan" 
+                  description="Übernahme und Umfirmierung in Mayr KG (Markenname: Eura Caravan)."
+                />
+                
+                <TimelineItem 
+                  year="1959" 
+                  event="Blessing KG" 
+                  description="Gründung der Blessing KG. Beginn der Wohnwagen-Produktion (Markenname: Blessing Wohnwagen)."
                 />
               </div>
               
