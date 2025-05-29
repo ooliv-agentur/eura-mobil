@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useWohnmobilberater } from '@/context/WohnmobilberaterContext';
 import { Button } from '@/components/ui/button';
@@ -51,28 +52,28 @@ const BeraterFlow: React.FC = () => {
         {/* Preview Cards with all 4 steps */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="text-center p-6 border rounded-lg">
-            <div className="text-3xl mb-3">🛏️</div>
+            <div className="text-xl mb-3 text-gray-400">[Bett-Icon]</div>
             <h3 className="font-semibold mb-2">Schlafplätze</h3>
             <p className="text-sm text-gray-700">
               Wie viele Personen sollen mitreisen? Wir helfen Ihnen bei der Auswahl der passenden Schlafplatz-Konfiguration.
             </p>
           </div>
           <div className="text-center p-6 border rounded-lg">
-            <div className="text-3xl mb-3">🛌</div>
+            <div className="text-xl mb-3 text-gray-400">[Betten-Icon]</div>
             <h3 className="font-semibold mb-2">Bettenform</h3>
             <p className="text-sm text-gray-700">
               Welche Bettenformen bevorzugen Sie? Von Queensbett bis Stockbetten - finden Sie Ihren Schlafkomfort.
             </p>
           </div>
           <div className="text-center p-6 border rounded-lg">
-            <div className="text-3xl mb-3">📏</div>
+            <div className="text-xl mb-3 text-gray-400">[Längen-Icon]</div>
             <h3 className="font-semibold mb-2">Größe & Länge</h3>
             <p className="text-sm text-gray-700">
               Welche Fahrzeuglänge passt zu Ihnen? Je nach Reiseziel und Stellplatz-Anforderungen finden wir die optimale Größe.
             </p>
           </div>
           <div className="text-center p-6 border rounded-lg">
-            <div className="text-3xl mb-3">⚖️</div>
+            <div className="text-xl mb-3 text-gray-400">[Gewicht-Icon]</div>
             <h3 className="font-semibold mb-2">Gewicht & Führerschein</h3>
             <p className="text-sm text-gray-700">
               Welchen Führerschein haben Sie? Wir berücksichtigen die Gewichtsklasse für eine rechtssichere Fahrzeugwahl.
