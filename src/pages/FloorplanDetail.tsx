@@ -8,6 +8,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Settings, Check } from "lucide-react";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
+import { modelsData } from "@/data/modelsData";
 import {
   Accordion,
   AccordionContent,
@@ -21,118 +22,109 @@ const FloorplanDetail = () => {
   const { modelId, floorplanId } = useParams();
   console.log("URL params:", { modelId, floorplanId });
 
-  // Mock data - in real app this would come from API/data source
-  const floorplanData = {
-    name: "XT 686 EF",
-    modelSeries: "Xtura",
-    length: "6,88 m",
-    sleepingPlaces: "2",
-    technicalData: {
-      "Basisfahrzeug": "Mercedes Benz",
+  // Get the model data based on the modelId
+  const modelData = modelId && modelId in modelsData 
+    ? modelsData[modelId as keyof typeof modelsData] 
+    : null;
+
+  // Find the specific floorplan within the model's layouts
+  const floorplanData = modelData && 'layouts' in modelData
+    ? modelData.layouts.find(layout => layout.id === floorplanId)
+    : null;
+
+  // If we can't find the floorplan data, show error or fallback
+  if (!modelData || !floorplanData) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-1 container mx-auto px-4 py-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Grundriss nicht gefunden</h1>
+            <p className="mb-4">Der angeforderte Grundriss konnte nicht gefunden werden.</p>
+            <Button asChild>
+              <Link to="/modelle">Zurück zur Modellübersicht</Link>
+            </Button>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  // Generate technical data based on model and floorplan
+  const getTechnicalData = () => {
+    const baseData = modelData.technicalData;
+    return {
+      "Basisfahrzeug": "Mercedes Benz", // Default for most models
       "Motorisierung Serie": "2,0 ltr.",
       "Motorisierung Option": "2,0 ltr.",
       "Radstand (mm)": "3665",
-      "Bereifung Serie (mm)": "225/75 R16C(265/60 R18C)",
+      "Bereifung Serie (mm)": "225/75 R16C",
       "Technisch zulässige Gesamtmasse (kg)": "4100 kg",
       "Masse in fahrbereitem Zustand (Serie) (kg)": "3320 (3154 - 3486)",
       "Zulässige Anhängelast (gebremst)": "2000 kg",
-      "Gesamtlänge (mm)": "6880",
-      "Gesamtbreite (mm)": "2198",
-      "Gesamthöhe (mm)": "3022",
+      "Gesamtlänge (mm)": floorplanData.length.replace(' m', '00'),
+      "Gesamtbreite (mm)": baseData.breite?.replace(' m', '00') || "2198",
+      "Gesamthöhe (mm)": baseData.höhe?.replace(' m', '00') || "3022",
       "Innenbreite (mm)": "2050",
       "Stehhöhe (mm)": "1975",
-      "Sitzgruppe vorne (mm)": "830 x 600",
-      "Heckbett (mm)": "1960 x 800/1950 x 800",
-      "Schlafplätze": "2",
-      "Erweiterung auf X Schlafplätze": "3",
-      "zulässige Personenzahl mit 3-Pkt": "3",
+      "Schlafplätze": floorplanData.sleepingPlaces,
+      "Sitzplätze": baseData.sitzplätze || "4",
       "Wandstärke (mm)": "30",
       "Dachstärke (mm)": "30",
       "Bodenstärke (mm)": "85",
       "Frischwassertankgröße (l)": "140 ltr.",
       "Batteriekapazität": "1 x 330 Ah Lithium",
       "Abwasserkapazität (l)": "105 ltr."
-    }
+    };
   };
 
-  // Equipment data with the labels from the screenshot
-  const equipmentData = {
-    "MOTOR": [
-      "2,0 ltr. BlueTEC Motor",
-      "6-Gang manuelles Getriebe",
-      "Start-Stop-System",
-      "Umweltplakette grün"
-    ],
-    "WEITERE OPTIONEN": [
-      "Zusätzliche Batteriekapazität",
-      "Solaranlage",
-      "Satelliten-TV Anlage",
-      "Klimaanlage Fahrerhaus"
-    ],
-    "AUSSEN": [
-      "LED-Scheinwerfer",
-      "Elektrische Eingangsstufe",
-      "Aufbautür mit Fenster",
-      "Fahrradträger-Vorbereitung"
-    ],
-    "AUSSTATTUNGS-PAKETE": [
-      "Komfort-Paket",
-      "Premium-Paket",
-      "Winter-Paket",
-      "Outdoor-Paket"
-    ],
-    "MULTIMEDIA": [
-      "Bluetooth-Freisprecheinrichtung",
-      "USB-Anschlüsse",
-      "12V-Steckdosen",
-      "Rückfahrkamera"
-    ],
-    "INNEN": [
-      "Polsterung in Leder",
-      "Dimmbares LED-Licht",
-      "Panorama-Dachfenster",
-      "Insektenschutz"
-    ],
-    "MARKISEN": [
-      "Thule Omnistor 5200",
-      "LED-Markisenbeleuchtung",
-      "Windschutz",
-      "Vorzelt-Anschluss"
-    ],
-    "VERSORGUNGSTECHNIK": [
-      "Truma Combi 6 Heizung",
-      "Boiler 14 Liter",
-      "Wasserpumpe",
-      "Bordbatterie AGM"
-    ],
-    "TEXTILE AUSSTATTUNG": [
-      "Vorhänge",
-      "Spannbettlaken",
-      "Kissen und Decken",
-      "Fliegengitter"
-    ],
-    "MÖBEL": [
-      "Massivholz-Möbel",
-      "Soft-Close Beschläge",
-      "Ausziehbare Arbeitsplatte",
-      "Schubladenauszüge"
-    ],
-    "KÜCHE": [
-      "3-Flammen-Gasherd",
-      "Kompressor-Kühlschrank 142L",
-      "Mikrowelle",
-      "Spülbecken Edelstahl"
-    ],
-    "VERSICHERUNGSPRODUKTE": [
-      "Vollkasko-Versicherung",
-      "Reise-Rücktrittsversicherung",
-      "Pannenhilfe Europa",
-      "Diebstahl-Schutz"
-    ]
+  // Equipment data - using model's equipment if available, otherwise default
+  const getEquipmentData = () => {
+    if ('equipment' in modelData && modelData.equipment) {
+      return modelData.equipment;
+    }
+    
+    // Default equipment structure
+    return {
+      "MOTOR": [
+        "2,0 ltr. BlueTEC Motor",
+        "6-Gang manuelles Getriebe",
+        "Start-Stop-System",
+        "Umweltplakette grün"
+      ],
+      "AUSSEN": [
+        "LED-Scheinwerfer",
+        "Elektrische Eingangsstufe",
+        "Aufbautür mit Fenster",
+        "Fahrradträger-Vorbereitung"
+      ],
+      "INNEN": [
+        "Polsterung in Leder",
+        "Dimmbares LED-Licht",
+        "Panorama-Dachfenster",
+        "Insektenschutz"
+      ],
+      "KÜCHE": [
+        "3-Flammen-Gasherd",
+        "Kompressor-Kühlschrank 142L",
+        "Mikrowelle",
+        "Spülbecken Edelstahl"
+      ],
+      "VERSORGUNGSTECHNIK": [
+        "Truma Combi 6 Heizung",
+        "Boiler 14 Liter",
+        "Wasserpumpe",
+        "Bordbatterie AGM"
+      ]
+    };
   };
+
+  const technicalData = getTechnicalData();
+  const equipmentData = getEquipmentData();
 
   const handleKonfiguratorClick = () => {
-    console.log("Konfigurator button clicked");
+    console.log("Konfigurator button clicked for:", floorplanData.name);
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
   };
 
@@ -142,7 +134,7 @@ const FloorplanDetail = () => {
     { id: "ausstattung", label: "Ausstattung" }
   ];
 
-  console.log("About to render component structure...");
+  console.log("About to render component structure for:", floorplanData.name);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -164,7 +156,7 @@ const FloorplanDetail = () => {
           <Button variant="ghost" asChild className="flex items-center gap-2">
             <Link to={`/modelle/${modelId}`}>
               <ArrowLeft size={16} />
-              Zurück zu {floorplanData.modelSeries}
+              Zurück zu {modelData.name}
             </Link>
           </Button>
         </div>
@@ -206,7 +198,7 @@ const FloorplanDetail = () => {
                   <div className="w-8 h-8 bg-gray-500 rounded"></div>
                 </div>
                 <p className="text-gray-600 mb-2">360° Panorama Viewer</p>
-                <p className="text-sm text-gray-500">Interaktive Innenansicht</p>
+                <p className="text-sm text-gray-500">Interaktive Innenansicht für {floorplanData.name}</p>
                 <Button variant="outline" className="mt-4">
                   Panorama laden
                 </Button>
@@ -220,7 +212,7 @@ const FloorplanDetail = () => {
           <h2 className="text-3xl font-bold mb-6">Technische Daten</h2>
           <div className="bg-gray-50 border rounded-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-              {Object.entries(floorplanData.technicalData).map(([key, value]) => (
+              {Object.entries(technicalData).map(([key, value]) => (
                 <div key={key} className="flex justify-between py-2 border-b border-gray-200 last:border-b-0">
                   <span className="text-sm font-medium">{key}</span>
                   <span className="text-sm text-right">{value}</span>
