@@ -260,9 +260,11 @@ const TimelineItem = ({
         {year}
       </span>
     </div>
-    <AspectRatio ratio={16/9} className="mb-4">
-      <div className="placeholder-image w-full h-full rounded-lg"></div>
-    </AspectRatio>
+    <div className="max-w-md mb-4">
+      <AspectRatio ratio={16/9}>
+        <div className="placeholder-image w-full h-full rounded-lg"></div>
+      </AspectRatio>
+    </div>
     <h3 className="font-bold text-xl mb-3">{event}</h3>
     {description && (
       <p className="text-gray-600 text-lg">{description}</p>
