@@ -10,7 +10,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ComparisonBar } from "@/components/comparison/ComparisonBar";
 import { ComparisonModal } from "@/components/comparison/ComparisonModal";
-import { SelectableModelCard } from "@/components/comparison/SelectableModelCard";
+import { FloorplanCard } from "@/components/comparison/FloorplanCard";
 import { useComparison } from "@/context/ComparisonContext";
 import { Card, CardContent } from "@/components/ui/card";
 import { ModelCategorySection } from "@/components/model/ModelCategorySection";
@@ -240,12 +240,14 @@ const ActivaOneDetail = () => {
           <h2 className="text-2xl font-semibold mb-4">Grundrisse</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {floorplans.map((floorplan) => (
-              <SelectableModelCard
+              <FloorplanCard
                 key={floorplan.id}
                 id={floorplan.id}
                 name={floorplan.name}
                 length={floorplan.length}
                 sleepingPlaces={floorplan.sleepingPlaces}
+                showComparison={true}
+                modelSeries="activa-one"
               />
             ))}
           </div>
