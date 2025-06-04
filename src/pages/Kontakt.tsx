@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -21,9 +20,6 @@ const Kontakt = () => {
       {/* Hero Section */}
       <section className="relative bg-[color:var(--placeholder-color)] h-[60vh] flex items-center justify-center">
         <div className="text-center">
-          <div className="bg-gray-400 text-gray-700 px-4 py-2 rounded mb-4 inline-block">
-            Hero Placeholder
-          </div>
           <h1 className="text-4xl font-bold">Wir helfen Ihnen weiter – Kontakt</h1>
         </div>
       </section>
