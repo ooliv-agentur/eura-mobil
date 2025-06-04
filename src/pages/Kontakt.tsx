@@ -47,7 +47,7 @@ const Kontakt = () => {
         </section>
 
         {/* Contact Form */}
-        <section className="mb-8">
+        <section className="mb-16">
           <div className="max-w-4xl mx-auto">
             <Card>
               <CardHeader>
@@ -153,31 +153,80 @@ const Kontakt = () => {
           </div>
         </section>
 
-        {/* Original Contact Information */}
-        <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-          <address className="not-italic">
-            <p className="font-medium">Eura Mobil GmbH</p>
-            <p>Kreuznacher Straße 78</p>
-            <p>55576 Sprendlingen / Rhh.</p>
-            <div className="my-4">
-              <p>
-                <span className="font-medium">Telefon:</span> +49 6701 20 30
-              </p>
-              <p>
-                <span className="font-medium">Fax:</span> +49 6701 20 32 10
-              </p>
-              <p>
-                <span className="font-medium">E-Mail:</span>{" "}
-                <a 
-                  href="mailto:info@euramobil.de"
-                  className="text-blue-600 hover:underline"
-                >
-                  info@euramobil.de
-                </a>
-              </p>
+        {/* Contact Details Section */}
+        <section className="mb-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6">Ansprechpartner</h2>
+            <div className="bg-gray-100 p-8 rounded-lg">
+              <div className="space-y-6">
+                {/* Company Name */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0"></div>
+                  <div>
+                    <p className="font-medium text-lg">Eura Mobil GmbH</p>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0 mt-1"></div>
+                  <div>
+                    <p className="text-lg">Kreuznacher Straße 78</p>
+                    <p className="text-lg">55576 Sprendlingen / Rhh.</p>
+                    <p className="text-lg">Germany</p>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0"></div>
+                  <div>
+                    <p className="text-lg">
+                      <span className="font-medium">Telefon:</span> +49 6701 20 30
+                    </p>
+                  </div>
+                </div>
+
+                {/* Fax */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0"></div>
+                  <div>
+                    <p className="text-lg">
+                      <span className="font-medium">Fax:</span> +49 6701 20 32 10
+                    </p>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0"></div>
+                  <div>
+                    <p className="text-lg">
+                      <span className="font-medium">E-Mail:</span>{" "}
+                      <a 
+                        href="mailto:info@euramobil.de"
+                        className="text-blue-600 hover:underline"
+                      >
+                        info@euramobil.de
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </address>
-        </div>
+          </div>
+        </section>
+
+        {/* Map Placeholder Section */}
+        <section className="mb-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gray-100 p-8 rounded-lg">
+              <div className="h-64 bg-gray-300 rounded-lg flex items-center justify-center">
+                <p className="text-gray-600 text-xl font-medium">Map Placeholder</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   );
