@@ -14,30 +14,29 @@ const Karriere = () => {
         <section className="relative bg-gray-300 h-[60vh] md:h-[70vh] flex items-center justify-center">
           <div className="text-center z-10 px-4 max-w-4xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Karriere bei EURA MOBIL
+              Steigen Sie bei uns ein!
             </h1>
             <p className="text-lg md:text-xl mb-8">
-              Werde Teil eines starken Teams mit Leidenschaft für mobile Freiheit.
+              Karriere bei der Eura Mobil GmbH
             </p>
-            <Button 
-              size="lg" 
-              className="px-8 bg-gray-600 hover:bg-gray-700"
-              asChild
-            >
-              <a 
-                href="https://recruitingapp-5607.de.umantis.com/Jobs/All" 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                Jetzt offene Stellen ansehen
-              </a>
-            </Button>
           </div>
         </section>
 
-        {/* Warum EURA MOBIL Section */}
+        {/* Intro Section */}
         <section className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl font-bold mb-12 text-center">Warum EURA MOBIL?</h2>
+          <div className="max-w-4xl mx-auto space-y-6 text-lg">
+            <p>
+              Als führendes Unternehmen am internationalen Reisemobil-Markt hat sich die Eura Mobil GmbH eine starke Position erarbeitet. Mit den Marken Eura Mobil, Karmann-Mobil und Forster decken wir das gesamte Spektrum qualitativ hochwertiger Reisemobile ab.
+            </p>
+            <p>
+              Als Mitglied der europäischen Trigano-Gruppe mit mehr als 10.000 Mitarbeitern in 14 Ländern bieten sich unserem Unternehmen am Standort Sprendlingen hervorragende Zukunftsperspektiven.
+            </p>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section className="container mx-auto px-4 py-16">
+          <h2 className="text-3xl font-bold mb-12 text-center">Benefits bei Eura Mobil</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="flex items-start gap-4">
@@ -85,7 +84,14 @@ const Karriere = () => {
             <div className="flex items-start gap-4">
               <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0"></div>
               <div>
-                <p className="text-lg">600 € Gesundheitsbudget</p>
+                <p className="text-lg">Weiterbildungs- und Entwicklungsmöglichkeiten</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0"></div>
+              <div>
+                <p className="text-lg">600€ Gesundheitsbudget</p>
               </div>
             </div>
             
@@ -103,26 +109,26 @@ const Karriere = () => {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-center">Radiointerviews</h2>
             
-            <div className="max-w-2xl mx-auto">
-              <div className="space-y-2 mb-8">
-                <div className="h-4 bg-gray-500 rounded w-full"></div>
-                <div className="h-4 bg-gray-500 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-500 rounded w-5/6"></div>
+            <div className="max-w-4xl mx-auto">
+              <div className="mb-8">
+                <p className="text-lg mb-6">
+                  Wir sind stolz darauf, als „Arbeitgeber des Monats" von unserem regionalen Radiosender Antenne Bad Kreuznach ausgezeichnet worden zu sein. In den nachfolgenden Interviews möchten wir Ihnen gerne verschiedene Unternehmensbereiche sowie spannende Karrieremöglichkeiten vorstellen. Diese Interviews bieten Ihnen nicht nur Einblicke in unsere Unternehmenskultur, sondern ermöglichen es Ihnen auch, mehr über die vielfältigen Aufgaben bei Eura Mobil zu erfahren.
+                </p>
               </div>
               
               <ul className="space-y-3 text-lg">
-                <li>• Geschäftsführer</li>
-                <li>• Leiter Technik- und Entwicklungsabteilung</li>
-                <li>• Marketingabteilung</li>
-                <li>• Produktionsleiter</li>
-                <li>• HR-Abteilung</li>
-                <li>• Logistikabteilung</li>
+                <li>• Interviews mit unserem Geschäftsführer</li>
+                <li>• Interview mit unserem Leiter der Technik- u. Entwicklungsabteilung</li>
+                <li>• Interview mit unserer Marketing Abteilung</li>
+                <li>• Interview mit unseren Produktionsleitern</li>
+                <li>• Interview mit unserer HR-Abteilung</li>
+                <li>• Interview mit unserem Leiter der Logistikabteilung</li>
               </ul>
             </div>
           </div>
         </section>
 
-        {/* Bewerbungsinfo Section */}
+        {/* Kontakt & Bewerbung Section */}
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <p className="text-lg">
@@ -130,11 +136,11 @@ const Karriere = () => {
             </p>
             
             <p className="text-lg">
-              Bei Rückfragen erreichen Sie uns unter karriere@euramobil.de.
+              Bei Rückfragen erreichen Sie uns unter <a href="mailto:karriere@euramobil.de" className="text-blue-600 hover:underline">karriere@euramobil.de</a>.
             </p>
             
             <p className="text-lg">
-              Informationen zur Verarbeitung Ihrer personenbezogenen Daten finden Sie in unserer Datenschutzerklärung.
+              Die Informationen über die Verarbeitung Ihrer personenbezogenen Daten bei der Eura Mobil GmbH entnehmen Sie unserer Datenschutzerklärung.
             </p>
           </div>
         </section>
