@@ -7,7 +7,7 @@ const Werksfuehrung = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative bg-gray-300 h-[60vh] flex items-center justify-center">
+      <section className="relative bg-[color:var(--placeholder-color)] h-[60vh] flex items-center justify-center">
         <div className="text-center">
           <div className="bg-gray-400 text-gray-700 px-4 py-2 rounded mb-4 inline-block">
             Hero Placeholder
@@ -50,7 +50,7 @@ const Werksfuehrung = () => {
             <h2 className="text-3xl font-bold mb-8">Interaktive Werkstour</h2>
             
             {/* Interactive Map Placeholder */}
-            <div className="bg-gray-300 h-96 rounded-lg flex items-center justify-center mb-8">
+            <div className="placeholder-image h-96 rounded-lg flex items-center justify-center mb-8">
               <div className="text-center">
                 <div className="bg-gray-400 text-gray-700 px-4 py-2 rounded mb-2 inline-block">
                   Interactive Map Placeholder
