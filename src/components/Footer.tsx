@@ -1,6 +1,13 @@
 
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Footer = () => {
   return (
@@ -81,8 +88,27 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+
+        {/* Language Switcher Section */}
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="mb-4">
+            <h3 className="font-bold mb-3">Eura Mobil International</h3>
+            <div className="max-w-xs">
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Deutsch" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="de">Deutsch</SelectItem>
+                  <SelectItem value="en">Englisch</SelectItem>
+                  <SelectItem value="fr">Französisch</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </div>
         
-        <div className="mt-8 pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-6 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-gray-500">
             © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
           </div>

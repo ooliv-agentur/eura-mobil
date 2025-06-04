@@ -189,22 +189,6 @@ const Kontakt = () => {
             </div>
           </address>
         </div>
-
-        <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-          <h2 className="text-xl font-medium mb-4">Eura Mobil International</h2>
-          <div className="max-w-xs">
-            <Select>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Deutsch" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="de">Deutsch</SelectItem>
-                <SelectItem value="en">Englisch</SelectItem>
-                <SelectItem value="fr">Französisch</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
       </div>
     </Layout>
   );
