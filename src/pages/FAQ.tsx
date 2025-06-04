@@ -13,43 +13,93 @@ const FAQ = () => {
   const faqData = [
     {
       id: "item-1",
-      question: "Wie lange ist die Garantie auf mein Wohnmobil?",
-      answer: "Unsere Wohnmobile haben eine Herstellergarantie von 2 Jahren auf das Fahrzeug und 3 Jahren auf die Aufbauteile. Zusätzlich bieten wir erweiterte Garantieoptionen an."
+      question: "Informationen zu Lieferterminen",
+      answer: "Jeder Auftrag wird von Eura Mobil an den Vertragshändler mit Angabe des voraussichtlichen Liefertermins bestätigt. Bei Fragen zu Lieferstatus und zum konkreten Auslieferungstermin wenden Sie sich bitte direkt an Ihren Vertragshändler."
     },
     {
-      id: "item-2", 
-      question: "Wo finde ich die nächste Servicewerkstatt?",
-      answer: "Nutzen Sie unsere Händlersuche auf der Website, um die nächstgelegene autorisierte Servicewerkstatt zu finden. Dort erhalten Sie professionellen Service und Originalersatzteile."
+      id: "item-2",
+      question: "Werksabholung",
+      answer: "Eine Werksabholung bieten wir zur Zeit nicht an."
     },
     {
       id: "item-3",
-      question: "Kann ich mein Wohnmobil individuell konfigurieren?",
-      answer: "Ja, wir bieten verschiedene Ausstattungsoptionen und Sonderausstattungen an. Nutzen Sie unseren Online-Konfigurator oder sprechen Sie mit einem unserer Händler über Ihre individuellen Wünsche."
+      question: "Werksbesichtigung",
+      answer: "Ab 11. April 2023 bieten wir wieder täglich eine Werksführung durch unsere Produktion an. Einfach montags bis freitags um kurz vor 10 Uhr zum Treffpunkt ins Reisemobil Forum kommen (Kreuznacher Str. 78, 55576 Sprendlingen). Nach einer kurzen Sicherheitseinweisung geht's direkt los: Produktion, Schreinerei, Möbelvormontage, Qualitätssicherung usw. Die Werksführung dauert ca. 1 Stunde. Im Anschluss erhalten Sie einen Kaffee in unserem Reisemobil Forum. Weitere Informationen finden Sie auf der Webseite des Reisemobil Forums!"
     },
     {
       id: "item-4",
-      question: "Wie funktioniert die Winterfestigkeit bei Eura Mobil?",
-      answer: "Unsere Wohnmobile sind standardmäßig winterfest ausgelegt. Die Sealed Structure Technologie und spezielle Isolierung sorgen dafür, dass Sie auch bei niedrigen Temperaturen komfortabel reisen können."
+      question: "Werksverkauf",
+      answer: "Es findet kein Verkauf ab Werk statt. Den nächsten Eura Mobil Händler in Ihrer Region finden Sie unter „Händler"."
     },
     {
       id: "item-5",
-      question: "Welche Führerscheinklasse benötige ich?",
-      answer: "Die meisten unserer Wohnmobile können mit einem normalen Pkw-Führerschein (Klasse B) gefahren werden. Für Fahrzeuge über 3,5t ist ein C1-Führerschein erforderlich. Die genauen Angaben finden Sie in den Fahrzeugspezifikationen."
+      question: "Fahrzeugausstellung im Werk",
+      answer: "Informationen zu unserem Reisemobil Forum finden Sie auf der Webseite vom Reisemobil Forum: https://www.reisemobilforum.de"
     },
     {
       id: "item-6",
-      question: "Wie kann ich eine Probefahrt vereinbaren?",
-      answer: "Kontaktieren Sie einen unserer autorisierten Händler über unsere Händlersuche. Dort können Sie einen Termin für eine Probefahrt vereinbaren und sich das Wohnmobil Ihrer Wahl ausführlich zeigen lassen."
+      question: "Vermietung ab Werk",
+      answer: "Es findet keine Vermietung ab Werk statt. Wenn Sie ein Eura Mobil mieten möchten, wenden Sie sich bitte an Ihren Eura Mobil Vertragshändler oder die Deutsche Reisemobil Vermietung DRM."
     },
     {
       id: "item-7",
-      question: "Was ist in der regelmäßigen Wartung enthalten?",
-      answer: "Die regelmäßige Wartung umfasst die Überprüfung aller sicherheitsrelevanten Systeme, Dichtigkeitsprüfung, Gasprüfung und technische Inspektion. Ihr Händler erstellt einen individuellen Wartungsplan für Ihr Fahrzeug."
+      question: "Sonderausstattungen",
+      answer: "Die ab Werk erhältlichen Sonderausstattungen finden Sie in der aktuellen Sonderausstattungsliste unter „Downloads" (Technische Daten). Gewünschte Änderungen am Ausstattungsumfang Ihres Neufahrzeuges klären Sie bitte direkt mit Ihrem Eura Mobil Vertragshändler."
     },
     {
       id: "item-8",
-      question: "Wie funktioniert die Gasanlage im Wohnmobil?",
-      answer: "Unsere Wohnmobile sind mit einer sicheren Gasanlage ausgestattet, die für Heizung, Warmwasser und Kochen verwendet wird. Eine regelmäßige Gasprüfung alle 2 Jahre ist gesetzlich vorgeschrieben."
+      question: "Länderausstattungen",
+      answer: "Bei Bestellungen in anderen Ländern beachten Sie bitte die jeweiligen Länderausstattungen, die sich vom Ausstattungsumfang in Deutschland unterscheiden können."
+    },
+    {
+      id: "item-9",
+      question: "COC – Papiere / Homologation / Auflastungen",
+      answer: "Bei Änderungen zur technischen Ausführung oder den Zulassungspapieren Ihres Eura Mobil Fahrzeuges wenden Sie sich bitte direkt an Ihren Vertragshändler, der von uns alle erforderlichen Informationen und Unterlagen erhält."
+    },
+    {
+      id: "item-10",
+      question: "Ersatzteile",
+      answer: "Bei Fragen / Bestellungen zu Ersatzteilen ist Ihr Eura Mobil Service-Partner der kompetente Ansprechpartner. Anhand der Fahrgestellnummer kann er im elektronischen Ersatzteilkatalog Ihre Anfrage schnell und zuverlässig bearbeiten."
+    },
+    {
+      id: "item-11",
+      question: "Reparaturanweisungen / Montageanweisungen",
+      answer: "Bitte haben Sie Verständnis dafür, dass wir Ihnen keine Reparatur- und Montageanleitungen für Arbeiten an unseren Fahrzeugen zukommen lassen können. Bitte wenden Sie sich dazu an Ihren Eura Mobil Vertragshändler."
+    },
+    {
+      id: "item-12",
+      question: "Individuelle Fahrzeuganfertigungen / Fahrzeugumbauten",
+      answer: "Eura Mobil fertigt moderne Reisemobile in Serienproduktion. Individuelle Wünsche können im Rahmen unseres umfangreichen Sonderausstattungsprogramms berücksichtigt werden. Darüber hinaus gehende Sonderwünsche besprechen Sie bitte mit Ihrem Eura Mobil Vertragshändler."
+    },
+    {
+      id: "item-13",
+      question: "Garantie / Garantiebedingungen",
+      answer: "Eura Mobil bietet auf die Reisemobile mit Aufbau (außer Vans) eine Dichtigkeitsgarantie von insgesamt 10 Jahren (bis 150.000 km) und eine Möbelgarantie von drei Jahren ab Modelljahr 2017. Ältere Modelle haben 6 Jahre Dichtigkeitsgarantie und 3 Jahre Möbelgarantie. Vans haben 6 Jahre Dichtigkeitsgarantie (bis 100.000 km). Voraussetzung ist die jährliche Dichtigkeitskontrolle beim autorisierten Eura Mobil Service Partner."
+    },
+    {
+      id: "item-14",
+      question: "Gewichtsangaben",
+      answer: "Die Angaben zum Leergewicht ab Werk Ihres Eura Mobil Fahrzeuges finden Sie auf der ersten Seite des Serviceheftes. Beachten Sie vor dem Kauf auch das Gewicht der Sonderausstattung, die die Zuladung verringert."
+    },
+    {
+      id: "item-15",
+      question: "Informationen zu Gebrauchtfahrzeugen",
+      answer: "Zu Eura Mobil Gebrauchtfahrzeugen berät Sie Ihr Vertragshändler gern."
+    },
+    {
+      id: "item-16",
+      question: "Händler",
+      answer: "Den nächsten Eura Mobil Vertragshändler in Ihrer Region finden Sie unter „Händler"."
+    },
+    {
+      id: "item-17",
+      question: "Eura Mobil Club",
+      answer: "Für gemeinsame Aktivitäten mit anderen Eura Mobil Besitzern empfehlen wir den werksunabhängigen Eura Mobil Club: www.euramobilclub.de"
+    },
+    {
+      id: "item-18",
+      question: "Reisemobilstellplatz",
+      answer: "Der Reisemobilstellplatz bei uns am Werk ist geöffnet."
     }
   ];
 
