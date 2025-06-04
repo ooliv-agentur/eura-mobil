@@ -39,13 +39,6 @@ const Kontakt = () => {
           </div>
         </section>
 
-        {/* Grey Divider */}
-        <div className="placeholder-image h-2 rounded mb-16 flex items-center justify-center">
-          <div className="bg-gray-400 text-gray-700 px-4 py-2 rounded text-sm">
-            Section Divider Placeholder
-          </div>
-        </div>
-
         {/* Information Block */}
         <section className="mb-8">
           <div className="max-w-4xl mx-auto">

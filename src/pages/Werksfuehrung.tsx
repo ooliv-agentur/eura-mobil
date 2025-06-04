@@ -49,9 +49,6 @@ const Werksfuehrung = () => {
           </div>
         </section>
 
-        {/* Grey Divider */}
-        <div className="placeholder-image h-2 rounded mb-16"></div>
-
         {/* Interactive Werkstour Section */}
         <section className="mb-16">
           <div className="max-w-4xl mx-auto">
@@ -64,19 +61,6 @@ const Werksfuehrung = () => {
                   Interactive Map Placeholder
                 </div>
                 <p className="text-gray-600">(clickable stations planned)</p>
-              </div>
-            </div>
-
-            {/* Horizontal Scrollable Station Blocks */}
-            <div className="overflow-x-auto mb-8">
-              <div className="flex space-x-4 pb-4">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((station) => (
-                  <div key={station} className="placeholder-image min-w-[120px] h-20 rounded flex items-center justify-center flex-shrink-0">
-                    <div className="bg-gray-400 text-gray-700 px-2 py-1 rounded text-sm">
-                      Station {station}
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
 
