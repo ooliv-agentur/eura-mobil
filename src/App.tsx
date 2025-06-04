@@ -32,6 +32,7 @@ import Schlafkomfort from "./pages/quality/Schlafkomfort";
 import Kuechenwelt from "./pages/quality/Kuechenwelt";
 import Wellness from "./pages/quality/Wellness";
 import Kontakt from "./pages/Kontakt";
+import FAQ from "./pages/FAQ";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import AGB from "./pages/AGB";
@@ -84,6 +85,7 @@ const App = () => (
                 <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
                 <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
                 <Route path="/kontakt" element={<Kontakt />} />
+                <Route path="/faq" element={<FAQ />} />
                 <Route path="/impressum" element={<Impressum />} />
                 <Route path="/datenschutz" element={<Datenschutz />} />
                 <Route path="/agb" element={<AGB />} />
