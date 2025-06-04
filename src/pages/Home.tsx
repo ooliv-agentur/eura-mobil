@@ -99,7 +99,7 @@ const euraCards = [
     title: "Über EURA MOBIL",
     content: "Seit 1959 steht EURA MOBIL für Qualität und Ingenieurskunst im Wohnmobilbau.\nIn Sprendlingen entstehen unsere Fahrzeuge mit Präzision, Sorgfalt und Leidenschaft.\nAls Teil der Trigano-Gruppe kombinieren wir deutsche Fertigung mit europäischem Weitblick – für langlebige, moderne Reisemobile.",
     linkText: "Mehr erfahren",
-    linkPath: "/ueber-eura-mobil"
+    linkPath: "/unternehmen"
   },
   {
     title: "Qualität & Vorteile",
