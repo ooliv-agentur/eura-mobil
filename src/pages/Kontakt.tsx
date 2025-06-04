@@ -49,15 +49,18 @@ const Kontakt = () => {
 
   return (
     <Layout>
-      {/* Hero Section - Updated to match homepage font sizes with headline first */}
+      {/* Hero Section - Updated with concise text and FAQ button */}
       <section className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
         <div className="text-center z-10 px-4 max-w-6xl">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             Wir helfen Ihnen weiter – Kontakt
           </h1>
-          <p className="text-lg md:text-xl">
-            Um Ihnen schnellstmöglich weiterhelfen zu können, haben wir bereits eine Menge Fragen für Sie beantwortet. Sollten Sie hier nicht die gewünschte Antwort finden, nutzen Sie bitte das Kontaktformular.
+          <p className="text-lg md:text-xl mb-6">
+            Können Sie Ihre Antwort nicht in den FAQ finden? Kontaktieren Sie unser Team.
           </p>
+          <Button asChild size="lg" className="px-8">
+            <a href="/faq">FAQ besuchen</a>
+          </Button>
         </div>
       </section>
 
