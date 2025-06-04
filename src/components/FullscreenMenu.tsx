@@ -237,12 +237,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
     setActiveModel(id);
   };
 
-  // Handler for starting berater instead of navigating
-  const handleStartBerater = () => {
-    onClose(); // Close the menu first
-    startBeraterFlow(); // Start the berater with default options
-  };
-
   // Array of all model IDs in the specified order
   const modelIds = [
     "van",
