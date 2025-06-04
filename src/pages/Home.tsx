@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -322,8 +323,8 @@ const Home = () => {
   return (
     <Layout>
       <main className="flex-1">
-        {/* Standard Hero Section - no longer fixed */}
-        <section className="min-h-screen flex flex-col justify-center items-center bg-gray-50">
+        {/* Standard Hero Section - 70% height to show content below */}
+        <section className="h-[70vh] flex flex-col justify-center items-center bg-gray-50">
           <div className="max-w-3xl text-center px-6 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
