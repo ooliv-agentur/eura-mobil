@@ -19,8 +19,18 @@ const Karriere = () => {
             <p className="text-lg md:text-xl mb-8">
               Werde Teil eines starken Teams mit Leidenschaft für mobile Freiheit.
             </p>
-            <Button size="lg" className="px-8 bg-gray-600 hover:bg-gray-700">
-              Jetzt offene Stellen ansehen
+            <Button 
+              size="lg" 
+              className="px-8 bg-gray-600 hover:bg-gray-700"
+              asChild
+            >
+              <a 
+                href="https://recruitingapp-5607.de.umantis.com/Jobs/All" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Jetzt offene Stellen ansehen
+              </a>
             </Button>
           </div>
         </section>
@@ -132,8 +142,18 @@ const Karriere = () => {
         {/* Stellenangebote CTA Section */}
         <section className="bg-gray-100 py-16">
           <div className="container mx-auto px-4 text-center">
-            <Button size="lg" className="px-12 py-6 text-lg bg-gray-600 hover:bg-gray-700">
-              Jetzt offene Stellen ansehen
+            <Button 
+              size="lg" 
+              className="px-12 py-6 text-lg bg-gray-600 hover:bg-gray-700"
+              asChild
+            >
+              <a 
+                href="https://recruitingapp-5607.de.umantis.com/Jobs/All" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Jetzt offene Stellen ansehen
+              </a>
             </Button>
           </div>
         </section>
