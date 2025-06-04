@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -153,10 +154,46 @@ const Kontakt = () => {
           </div>
         </section>
 
-        {/* Contact Details Section */}
+        {/* Ansprechpartner Section */}
         <section className="mb-8">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-6">Ansprechpartner</h2>
+            <div className="bg-gray-100 p-8 rounded-lg">
+              <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                {/* Profile Picture Placeholder */}
+                <div className="w-32 h-32 bg-gray-300 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <p className="text-gray-600 text-sm text-center">Profile Picture Placeholder</p>
+                </div>
+                
+                {/* Contact Person Details */}
+                <div className="space-y-4 text-center md:text-left">
+                  <div>
+                    <p className="font-medium text-xl">Name Placeholder</p>
+                    <p className="text-lg text-gray-600">Position Placeholder</p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {/* Phone */}
+                    <div className="flex items-center justify-center md:justify-start space-x-3">
+                      <div className="w-8 h-8 bg-gray-400 rounded-full flex-shrink-0"></div>
+                      <p className="text-lg">Phone Placeholder</p>
+                    </div>
+                    
+                    {/* Email */}
+                    <div className="flex items-center justify-center md:justify-start space-x-3">
+                      <div className="w-8 h-8 bg-gray-400 rounded-full flex-shrink-0"></div>
+                      <p className="text-lg">Email Placeholder</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Company Contact Details Section */}
+        <section className="mb-8">
+          <div className="max-w-4xl mx-auto">
             <div className="bg-gray-100 p-8 rounded-lg">
               <div className="space-y-6">
                 {/* Company Name */}
@@ -172,7 +209,7 @@ const Kontakt = () => {
                   <div className="w-12 h-12 bg-gray-400 rounded-full flex-shrink-0 mt-1"></div>
                   <div>
                     <p className="text-lg">Kreuznacher Straße 78</p>
-                    <p className="text-lg">55576 Sprendlingen / Rhh.</p>
+                    <p className="text-lg">55576 Sprendlingen</p>
                     <p className="text-lg">Germany</p>
                   </div>
                 </div>
