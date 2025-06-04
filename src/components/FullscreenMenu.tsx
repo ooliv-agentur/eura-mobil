@@ -216,7 +216,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const { startBeraterFlow } = useWohnmobilberaterTrigger();
   const [activeModel, setActiveModel] = useState<string | null>("van"); // Default to first model
   
   // Control body scroll when menu is open
@@ -352,8 +351,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                 </a>
               </Button>
               
-              <Button className="bg-blue-600 hover:bg-blue-700" onClick={handleStartBerater}>
-                Beratung starten
+              <Button className="bg-blue-600 hover:bg-blue-700" asChild>
+                <Link to="/berater" onClick={onClose}>
+                  Beratung starten
+                </Link>
               </Button>
             </div>
           </div>
@@ -456,12 +457,13 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
             <ul className="space-y-2">
               <li>
-                <button 
-                  onClick={handleStartBerater}
-                  className="hover:text-blue-600 transition-colors block py-1 text-left w-full"
+                <Link 
+                  to="/berater" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
                 >
                   Wohnmobilberater
-                </button>
+                </Link>
               </li>
               <li>
                 <a 
@@ -703,8 +705,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
       {/* Mobile only: Fixed CTA at the bottom - with proper spacing */}
       {isMobile && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden">
-          <Button className="w-full" onClick={handleStartBerater}>
-            Jetzt Beratung starten
+          <Button className="w-full" asChild>
+            <Link to="/berater" onClick={onClose}>
+              Jetzt Beratung starten
+            </Link>
           </Button>
         </div>
       )}
