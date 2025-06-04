@@ -324,7 +324,7 @@ const Home = () => {
     <Layout>
       <main className="flex-1">
         {/* Standard Hero Section - 70% height to show content below */}
-        <section className="h-[70vh] flex flex-col justify-center items-center bg-gray-50">
+        <section className="h-[70vh] flex flex-col justify-center items-center bg-white">
           <div className="max-w-3xl text-center px-6 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
