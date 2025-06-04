@@ -3,21 +3,14 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Settings, MapPin, Download, FileText } from "lucide-react";
-import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 
 interface ModelFinalCTAProps {
   modelName: string;
 }
 
 export const ModelFinalCTA: React.FC<ModelFinalCTAProps> = ({ modelName }) => {
-  const { startBeraterFlow } = useWohnmobilberaterTrigger();
-  
   const handleKonfiguratorClick = () => {
     window.open("https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE", "_blank", "noopener noreferrer");
-  };
-  
-  const handleBeratungClick = () => {
-    startBeraterFlow();
   };
 
   const handleCatalogueDownload = () => {
@@ -75,9 +68,11 @@ export const ModelFinalCTA: React.FC<ModelFinalCTAProps> = ({ modelName }) => {
         </Button>
         <Button 
           className="bg-blue-600 hover:bg-blue-700 flex items-center justify-center gap-2"
-          onClick={handleBeratungClick}
+          asChild
         >
-          Beratung starten
+          <Link to="/berater">
+            Beratung starten
+          </Link>
         </Button>
       </div>
     </section>
