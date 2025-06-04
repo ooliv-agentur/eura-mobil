@@ -9,16 +9,16 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 const Unternehmen = () => {
   return (
     <Layout>
-      {/* Hero Section - Updated to match homepage font sizes and order */}
+      {/* Hero Section - Updated to match homepage font sizes with headline first */}
       <section className="relative bg-[#E5E7EB] h-[60vh] md:h-[70vh] flex items-center justify-center">
         <div className="text-center z-10 px-4 max-w-6xl">
-          <p className="text-lg md:text-xl mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+            EURA MOBIL – Qualität aus Deutschland
+          </h1>
+          <p className="text-lg md:text-xl">
             Seit über 60 Jahren steht EURA MOBIL für höchste Qualität und Innovation im Wohnmobilbau. 
             Als familiengeführtes Unternehmen verbinden wir Tradition mit modernster Technik.
           </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            EURA MOBIL – Qualität aus Deutschland
-          </h1>
         </div>
       </section>
 
