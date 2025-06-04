@@ -321,10 +321,10 @@ const Home = () => {
 
   return (
     <Layout>
-      <main className="flex-1 relative">
-        {/* Fixed Hero Section - reduced z-index to be below footer */}
-        <section className="fixed top-0 left-0 w-full h-screen flex flex-col justify-center items-center z-0">
-          <div className="relative z-10 max-w-3xl text-center px-6 flex flex-col items-center">
+      <main className="flex-1">
+        {/* Standard Hero Section - no longer fixed */}
+        <section className="min-h-screen flex flex-col justify-center items-center bg-gray-50">
+          <div className="max-w-3xl text-center px-6 flex flex-col items-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Freiheit erleben. Komfort genießen.
             </h1>
@@ -335,16 +335,10 @@ const Home = () => {
               <Link to="/modelle">Jetzt Modell entdecken</Link>
             </Button>
           </div>
-          
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity z-10">
-            <ArrowDown className="h-5 w-5 text-gray-500 mb-1 animate-bounce" />
-            <span className="text-xs text-gray-500">Scrollen</span>
-          </div>
         </section>
 
-        {/* Scrolling Content - starts after hero height */}
-        <div className="relative z-20 bg-white" style={{ marginTop: '100vh' }}>
+        {/* Content sections - no longer offset */}
+        <div className="relative bg-white">
           {/* Models & CTA Section */}
           <section className="py-16 px-4 bg-gray-50">
             <div className="max-w-7xl mx-auto">
