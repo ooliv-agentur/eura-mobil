@@ -89,10 +89,7 @@ const App = () => (
                 <Route path="/impressum" element={<Impressum />} />
                 <Route path="/datenschutz" element={<Datenschutz />} />
                 <Route path="/agb" element={<AGB />} />
-                <Route path="/service" element={<NotFound />} />
-                <Route path="/ueber-uns" element={<NotFound />} />
                 <Route path="/ueber-eura-mobil" element={<Navigate to="/unternehmen" replace />} />
-                <Route path="/haendler-login" element={<NotFound />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

@@ -24,12 +24,12 @@ const FAQ = () => {
     {
       id: "item-3",
       question: "Werksbesichtigung",
-      answer: "Ab 11. April 2023 bieten wir wieder täglich eine Werksführung durch unsere Produktion an. Einfach montags bis freitags um kurz vor 10 Uhr zum Treffpunkt ins Reisemobil Forum kommen (Kreuznacher Str. 78, 55576 Sprendlingen). Nach einer kurzen Sicherheitseinweisung geht's direkt los: Produktion, Schreinerei, Möbelvormontage, Qualitätssicherung usw. Die Werksführung dauert ca. 1 Stunde. Im Anschluss erhalten Sie einen Kaffee in unserem Reisemobil Forum. Weitere Informationen finden Sie auf der Webseite des Reisemobil Forums!"
+      answer: "Ab 11. April 2023 bieten wir wieder täglich eine Werksführung durch unsere Produktion an. Einfach montags bis freitags um kurz vor 10 Uhr zum Treffpunkt ins Reisemobil Forum kommen (Kreuznacher Str. 78, 55576 Sprendlingen). Nach einer kurzen Sicherheitseinweisung geht es direkt los: Produktion, Schreinerei, Möbelvormontage, Qualitätssicherung usw. Die Werksführung dauert ca. 1 Stunde. Im Anschluss erhalten Sie einen Kaffee in unserem Reisemobil Forum. Weitere Informationen finden Sie auf der Webseite des Reisemobil Forums!"
     },
     {
       id: "item-4",
       question: "Werksverkauf",
-      answer: "Es findet kein Verkauf ab Werk statt. Den nächsten Eura Mobil Händler in Ihrer Region finden Sie unter „Händler"."
+      answer: "Es findet kein Verkauf ab Werk statt. Den nächsten Eura Mobil Händler in Ihrer Region finden Sie unter 'Händler'."
     },
     {
       id: "item-5",
@@ -44,7 +44,7 @@ const FAQ = () => {
     {
       id: "item-7",
       question: "Sonderausstattungen",
-      answer: "Die ab Werk erhältlichen Sonderausstattungen finden Sie in der aktuellen Sonderausstattungsliste unter „Downloads" (Technische Daten). Gewünschte Änderungen am Ausstattungsumfang Ihres Neufahrzeuges klären Sie bitte direkt mit Ihrem Eura Mobil Vertragshändler."
+      answer: "Die ab Werk erhältlichen Sonderausstattungen finden Sie in der aktuellen Sonderausstattungsliste unter 'Downloads' (Technische Daten). Gewünschte Änderungen am Ausstattungsumfang Ihres Neufahrzeuges klären Sie bitte direkt mit Ihrem Eura Mobil Vertragshändler."
     },
     {
       id: "item-8",
@@ -89,7 +89,7 @@ const FAQ = () => {
     {
       id: "item-16",
       question: "Händler",
-      answer: "Den nächsten Eura Mobil Vertragshändler in Ihrer Region finden Sie unter „Händler"."
+      answer: "Den nächsten Eura Mobil Vertragshändler in Ihrer Region finden Sie unter 'Händler'."
     },
     {
       id: "item-17",
