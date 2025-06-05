@@ -1,16 +1,8 @@
 
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 interface DownloadItem {
   id: string;
@@ -128,21 +120,6 @@ const Downloads = () => {
             Informationen finden Sie stets im Online-Konfigurator.
           </p>
         </section>
-        
-        {/* Filter Section */}
-        <div className="mb-8">
-          <Select>
-            <SelectTrigger className="w-full md:w-80 bg-gray-200">
-              <SelectValue placeholder="Kategorie auswählen (Alle Dokumente)" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Alle Dokumente</SelectItem>
-              <SelectItem value="Kataloge">Kataloge</SelectItem>
-              <SelectItem value="Preislisten">Preislisten</SelectItem>
-              <SelectItem value="Technische Daten">Technische Daten</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
         
         {/* Document Groups */}
         <DownloadSection title="Kataloge" items={kataloge} />
