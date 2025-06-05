@@ -141,7 +141,7 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-20 right-4 w-80 max-w-[calc(100vw-2rem)] z-50">
+    <div className="fixed bottom-20 right-4 w-[480px] max-w-[calc(100vw-2rem)] z-50">
       <div className="bg-white rounded-lg shadow-lg border border-gray-200 max-h-[calc(100vh-120px)] flex flex-col">
         {/* Header */}
         <div className="p-4 border-b flex justify-between items-center bg-blue-600 text-white rounded-t-lg">
@@ -161,7 +161,7 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
               }`}
             >
               <div 
-                className={`max-w-[80%] p-3 rounded-lg text-sm ${
+                className={`max-w-[90%] p-3 rounded-lg text-sm ${
                   message.role === "user" 
                     ? "bg-blue-600 text-white" 
                     : "bg-gray-100 text-gray-800"
