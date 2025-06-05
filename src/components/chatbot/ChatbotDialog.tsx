@@ -142,8 +142,8 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed bottom-20 right-4 w-80 max-w-[calc(100vw-2rem)] z-50">
-      <div className="bg-white rounded-lg shadow-lg border border-gray-200 max-h-[500px] flex flex-col">
-        {/* Header - only one close button */}
+      <div className="bg-white rounded-lg shadow-lg border border-gray-200 max-h-[calc(100vh-120px)] flex flex-col">
+        {/* Header */}
         <div className="p-4 border-b flex justify-between items-center bg-blue-600 text-white rounded-t-lg">
           <h2 className="text-lg font-semibold">EURA MOBIL Assistent</h2>
           <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-blue-700 h-8 w-8">
@@ -152,7 +152,7 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
         </div>
         
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-60">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[200px] max-h-[300px]">
           {messages.map((message, index) => (
             <div 
               key={index} 
