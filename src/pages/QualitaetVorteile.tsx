@@ -10,35 +10,43 @@ import { Skeleton } from "@/components/ui/skeleton";
 const qualityFeatures = [
   {
     title: "Sealed Structure",
-    link: "/qualitaet/sealed-structure"
+    link: "/qualitaet/sealed-structure",
+    description: "Innovative Abdichtungstechnologie für maximale Dichtheit und Langlebigkeit."
   },
   {
     title: "Winterfestigkeit",
-    link: "/qualitaet/winterfestigkeit"
+    link: "/qualitaet/winterfestigkeit",
+    description: "Optimale Isolierung und Heizung für komfortables Reisen bei kalten Temperaturen."
   },
   {
-    title: "Leichtbau",
-    link: "/qualitaet/leichtbau"
+    title: "Leichtbauarchitektur",
+    link: "/qualitaet/leichtbau",
+    description: "Moderne Leichtbauweise für bessere Fahrdynamik und Kraftstoffeffizienz."
   },
   {
     title: "Möbelbau",
-    link: "/qualitaet/moebelbau"
+    link: "/qualitaet/moebelbau",
+    description: "Hochwertige Möbel mit durchdachten Details und langlebiger Qualität."
   },
   {
     title: "Doppelboden",
-    link: "/qualitaet/doppelboden"
+    link: "/qualitaet/doppelboden",
+    description: "Zusätzlicher Stauraum und verbesserte Isolierung durch innovative Bodenkonstruktion."
   },
   {
     title: "Schlafkomfort",
-    link: "/qualitaet/schlafkomfort"
+    link: "/qualitaet/schlafkomfort",
+    description: "Ergonomische Betten und hochwertige Matratzen für erholsamen Schlaf."
   },
   {
-    title: "Küchen",
-    link: "/qualitaet/kuechenwelt"
+    title: "Küchenwelt",
+    link: "/qualitaet/kuechenwelt",
+    description: "Funktionale Küchenausstattung mit hochwertigen Geräten und cleverer Raumnutzung."
   },
   {
     title: "Wellness",
-    link: "/qualitaet/wellnessbereich"
+    link: "/qualitaet/wellnessbereich",
+    description: "Komfortable Sanitärbereiche für Entspannung und Wohlbefinden unterwegs."
   }
 ];
 
@@ -68,14 +76,15 @@ const QualitaetVorteile = () => {
           </div>
         </section>
         
-        {/* Teaser-Grid */}
+        {/* Teaser-Grid mit verbesserter Darstellung */}
         <section className="mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {qualityFeatures.map((feature) => (
               <Card key={feature.title} className="hover:shadow-md transition-shadow">
                 <CardContent className="p-6 flex flex-col h-full">
                   <Skeleton className="h-32 w-full mb-4" />
-                  <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                  <p className="text-gray-600 mb-4 flex-grow">{feature.description}</p>
                   <div className="mt-auto">
                     <Button variant="outline" asChild className="w-full">
                       <Link to={feature.link}>Mehr erfahren</Link>

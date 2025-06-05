@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
@@ -464,7 +463,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
           
-          {/* Qualität & Vorteile - 4 columns */}
+          {/* Qualität & Vorteile - 4 columns (simplified to single overview link) */}
           <div className="col-span-12 md:col-span-4">
             <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
             <ul className="space-y-2">
@@ -474,79 +473,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   className="hover:text-blue-600 transition-colors block py-1"
                 >
-                  Alle Vorteile im Überblick
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/sealed-structure" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Sealed Structure
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/winterfestigkeit" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Winterfestigkeit
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/leichtbau" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Leichtbau
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/moebelbau" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Möbelbau
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/doppelboden" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Doppelboden
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/schlafkomfort" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Schlafkomfort
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/kuechenwelt" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Küchenwelt
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/qualitaet/wellnessbereich" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Wellness
+                  Qualität & Vorteile
                 </Link>
               </li>
             </ul>
