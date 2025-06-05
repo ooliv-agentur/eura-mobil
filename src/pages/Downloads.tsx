@@ -1,4 +1,5 @@
 
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Header from "../components/Header";
@@ -18,7 +19,7 @@ interface DownloadItem {
   category: string;
 }
 
-const downloadItems: DownloadItem[] = [
+const kataloge: DownloadItem[] = [
   {
     id: "1",
     title: "Katalog 2025",
@@ -27,27 +28,33 @@ const downloadItems: DownloadItem[] = [
   },
   {
     id: "2",
+    title: "Zubehörkatalog 2025",
+    fileInfo: "PDF, 8 MB",
+    category: "Kataloge"
+  }
+];
+
+const preislisten: DownloadItem[] = [
+  {
+    id: "3",
     title: "Preisliste Activa One",
     fileInfo: "PDF, 3 MB",
     category: "Preislisten"
   },
   {
-    id: "3",
-    title: "Technische Daten Integra Serie",
-    fileInfo: "PDF, 5 MB",
-    category: "Technische Daten"
-  },
-  {
     id: "4",
-    title: "Zubehörkatalog 2025",
-    fileInfo: "PDF, 8 MB",
-    category: "Kataloge"
-  },
-  {
-    id: "5",
     title: "Preisliste Contura",
     fileInfo: "PDF, 2 MB",
     category: "Preislisten"
+  }
+];
+
+const technischeDaten: DownloadItem[] = [
+  {
+    id: "5",
+    title: "Technische Daten Integra Serie",
+    fileInfo: "PDF, 5 MB",
+    category: "Technische Daten"
   },
   {
     id: "6",
@@ -74,6 +81,30 @@ const downloadItems: DownloadItem[] = [
     category: "Technische Daten"
   }
 ];
+
+const DownloadSection = ({ title, items }: { title: string; items: DownloadItem[] }) => (
+  <section className="mb-12">
+    <h2 className="text-2xl font-bold mb-6">{title}</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {items.map((item) => (
+        <Card key={item.id} className="bg-gray-200 border-gray-300">
+          <CardHeader>
+            <CardTitle className="text-lg">{item.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-600 mb-2">{item.fileInfo}</p>
+            <p className="text-xs text-gray-500">Kategorie: {item.category}</p>
+          </CardContent>
+          <CardFooter>
+            <Button className="w-full bg-gray-400 hover:bg-gray-500 text-black">
+              Jetzt herunterladen
+            </Button>
+          </CardFooter>
+        </Card>
+      ))}
+    </div>
+  </section>
+);
 
 const Downloads = () => {
   return (
@@ -113,25 +144,10 @@ const Downloads = () => {
           </Select>
         </div>
         
-        {/* Download Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {downloadItems.map((item) => (
-            <Card key={item.id} className="bg-gray-200 border-gray-300">
-              <CardHeader>
-                <CardTitle className="text-lg">{item.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-gray-600 mb-2">{item.fileInfo}</p>
-                <p className="text-xs text-gray-500">Kategorie: {item.category}</p>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full bg-gray-400 hover:bg-gray-500 text-black">
-                  Jetzt herunterladen
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        {/* Document Groups */}
+        <DownloadSection title="Kataloge" items={kataloge} />
+        <DownloadSection title="Preislisten" items={preislisten} />
+        <DownloadSection title="Technische Daten" items={technischeDaten} />
       </main>
       
       <Footer />
@@ -140,3 +156,4 @@ const Downloads = () => {
 };
 
 export default Downloads;
+
