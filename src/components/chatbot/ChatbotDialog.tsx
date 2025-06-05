@@ -1,6 +1,4 @@
-
 import React, { useState, useRef, useEffect } from "react";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, X } from "lucide-react";
@@ -140,19 +138,21 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
     form.dispatchEvent(new Event("submit", { cancelable: true }));
   };
 
+  if (!isOpen) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[425px] p-0 gap-0 max-h-[80vh] flex flex-col">
-        {/* Header */}
+    <div className="fixed bottom-20 right-4 w-80 max-w-[calc(100vw-2rem)] z-50">
+      <div className="bg-white rounded-lg shadow-lg border border-gray-200 max-h-[500px] flex flex-col">
+        {/* Header - only one close button */}
         <div className="p-4 border-b flex justify-between items-center bg-blue-600 text-white rounded-t-lg">
           <h2 className="text-lg font-semibold">EURA MOBIL Assistent</h2>
-          <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-blue-700">
+          <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-blue-700 h-8 w-8">
             <X className="h-4 w-4" />
           </Button>
         </div>
         
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-60">
           {messages.map((message, index) => (
             <div 
               key={index} 
@@ -161,7 +161,7 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
               }`}
             >
               <div 
-                className={`max-w-[80%] p-3 rounded-lg ${
+                className={`max-w-[80%] p-3 rounded-lg text-sm ${
                   message.role === "user" 
                     ? "bg-blue-600 text-white" 
                     : "bg-gray-100 text-gray-800"
@@ -179,13 +179,13 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
         </div>
         
         {/* Suggestions */}
-        <div className="p-4 border-t flex gap-2 overflow-x-auto">
+        <div className="p-3 border-t flex gap-2 overflow-x-auto">
           {SUGGESTIONS.map((suggestion) => (
             <Button 
               key={suggestion} 
               variant="outline" 
               size="sm" 
-              className="whitespace-nowrap"
+              className="whitespace-nowrap text-xs"
               onClick={() => handleSuggestionClick(suggestion)}
             >
               {suggestion}
@@ -197,21 +197,21 @@ const ChatbotDialog: React.FC<ChatbotDialogProps> = ({ isOpen, onClose }) => {
         <form 
           id="chatbot-form"
           onSubmit={handleSubmit} 
-          className="p-4 border-t flex gap-2 items-end"
+          className="p-3 border-t flex gap-2 items-end"
         >
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Stell mir eine Frage..."
-            className="resize-none"
+            className="resize-none text-sm"
             rows={1}
           />
-          <Button type="submit" size="icon" className="h-10 w-10">
-            <Send className="h-4 w-4" />
+          <Button type="submit" size="icon" className="h-8 w-8">
+            <Send className="h-3 w-3" />
           </Button>
         </form>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 };
 
