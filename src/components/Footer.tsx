@@ -38,25 +38,35 @@ const Footer = () => {
 
         {/* 4-column grid structure */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {/* Column 1: Service */}
+          {/* Column 1: Kaufen & Mieten */}
           <div>
-            <h3 className="font-bold mb-3">Service</h3>
+            <h3 className="font-bold mb-3">Kaufen & Mieten</h3>
             <ul className="space-y-2">
               <li><Link to="/berater" className="text-gray-600 hover:text-blue-600 block py-1">Wohnmobilberater</Link></li>
-              <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
+              <li><a href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1 flex items-center">Konfigurator <ExternalLink className="ml-1 h-3 w-3" /></a></li>
               <li><a href="https://www.drm.de/de/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1 flex items-center">Mietfahrzeuge <ExternalLink className="ml-1 h-3 w-3" /></a></li>
               <li><Link to="/gebrauchtfahrzeuge" className="text-gray-600 hover:text-blue-600 block py-1">Gebrauchtfahrzeuge</Link></li>
               <li><Link to="/finanzierung-leasing" className="text-gray-600 hover:text-blue-600 block py-1">Finanzierung & Leasing</Link></li>
-              <li><Link to="/garantie" className="text-gray-600 hover:text-blue-600 block py-1">Garantie</Link></li>
-              <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
-              <li><Link to="/faq" className="text-gray-600 hover:text-blue-600 block py-1">FAQ</Link></li>
+              <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
             </ul>
           </div>
           
-          {/* Column 2: Karriere & Service */}
+          {/* Column 2: Qualität & Vorteile - Single link only */}
           <div>
-            <h3 className="font-bold mb-3">Karriere & Service</h3>
+            <h3 className="font-bold mb-3">
+              <Link to="/qualitaet" className="text-gray-900 hover:text-blue-600">
+                Qualität & Vorteile
+              </Link>
+            </h3>
+          </div>
+
+          {/* Column 3: Service */}
+          <div>
+            <h3 className="font-bold mb-3">Service</h3>
             <ul className="space-y-2">
+              <li><Link to="/garantie" className="text-gray-600 hover:text-blue-600 block py-1">Garantie</Link></li>
+              <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
+              <li><Link to="/faq" className="text-gray-600 hover:text-blue-600 block py-1">FAQ</Link></li>
               <li><Link to="/karriere" className="text-gray-600 hover:text-blue-600 block py-1">Karriere</Link></li>
               <li><Link to="/stellenangebote" className="text-gray-600 hover:text-blue-600 block py-1">Stellenangebote</Link></li>
               <li><Link to="/ausbildung" className="text-gray-600 hover:text-blue-600 block py-1">Ausbildung</Link></li>
@@ -65,10 +75,10 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Unternehmen & Rechtliches */}
+          {/* Column 4: Unternehmen & Rechtliches + Language & Social Links */}
           <div>
             <h3 className="font-bold mb-3">Unternehmen & Rechtliches</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 mb-6">
               <li><Link to="/unternehmen" className="text-gray-600 hover:text-blue-600 block py-1">Über EURA MOBIL</Link></li>
               <li><Link to="/werksfuehrung" className="text-gray-600 hover:text-blue-600 block py-1">Werksführung</Link></li>
               <li><Link to="/club" className="text-gray-600 hover:text-blue-600 block py-1">Club</Link></li>
@@ -76,10 +86,7 @@ const Footer = () => {
               <li><Link to="/datenschutz" className="text-gray-600 hover:text-blue-600 block py-1">Datenschutz</Link></li>
               <li><Link to="/agb" className="text-gray-600 hover:text-blue-600 block py-1">AGB</Link></li>
             </ul>
-          </div>
 
-          {/* Column 4: Language & Social Links */}
-          <div>
             <h3 className="font-bold mb-3">Eura Mobil International</h3>
             <div className="max-w-xs mb-4">
               <Select>
