@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -41,6 +42,11 @@ import AGB from "./pages/AGB";
 import Werksfuehrung from "./pages/Werksfuehrung";
 import News from "./pages/News";
 import ReisemobilForum from "./pages/ReisemobilForum";
+import Newsletter from "./pages/Newsletter";
+import Stellenangebote from "./pages/Stellenangebote";
+import Ausbildung from "./pages/Ausbildung";
+import Club from "./pages/Club";
+import Videos from "./pages/Videos";
 
 const queryClient = new QueryClient();
 
@@ -74,9 +80,14 @@ const App = () => (
                 
                 <Route path="/haendler" element={<Haendlersuche />} />
                 <Route path="/karriere" element={<Karriere />} />
+                <Route path="/stellenangebote" element={<Stellenangebote />} />
+                <Route path="/ausbildung" element={<Ausbildung />} />
                 <Route path="/unternehmen" element={<Unternehmen />} />
                 <Route path="/werksfuehrung" element={<Werksfuehrung />} />
+                <Route path="/club" element={<Club />} />
+                <Route path="/videos" element={<Videos />} />
                 <Route path="/downloads" element={<Downloads />} />
+                <Route path="/newsletter" element={<Newsletter />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/reisemobil-forum" element={<ReisemobilForum />} />
                 <Route path="/gebrauchtfahrzeuge" element={<Gebrauchtfahrzeuge />} />

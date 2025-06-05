@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -52,34 +52,46 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div>
             <h3 className="font-bold mb-3">Service</h3>
             <ul className="space-y-2">
               <li><Link to="/berater" className="text-gray-600 hover:text-blue-600 block py-1">Wohnmobilberater</Link></li>
-              <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
-              <li><a href="https://www.drm.de/de/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1">Mietfahrzeuge</a></li>
-              <li><Link to="/gebrauchtfahrzeuge" className="text-gray-600 hover:text-blue-600 block py-1">Gebrauchtfahrzeuge</Link></li>
-              <li><Link to="/finanzierung-leasing" className="text-gray-600 hover:text-blue-600 block py-1">Finanzierung & Leasing</Link></li>
-              <li><Link to="/garantie" className="text-gray-600 hover:text-blue-600 block py-1">Garantie</Link></li>
-              <li><Link to="/downloads" className="text-gray-600 hover:text-blue-600 block py-1">Downloads</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-bold mb-3">Kontakt & FAQ</h3>
-            <ul className="space-y-2">
               <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
+              <li><Link to="/downloads" className="text-gray-600 hover:text-blue-600 block py-1">Downloads</Link></li>
               <li><Link to="/newsletter" className="text-gray-600 hover:text-blue-600 block py-1">Newsletter</Link></li>
               <li><Link to="/faq" className="text-gray-600 hover:text-blue-600 block py-1">FAQ</Link></li>
             </ul>
           </div>
+          
+          <div>
+            <h3 className="font-bold mb-3">Kaufen & Mieten</h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="https://konfigurator.euramobil.de/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1 flex items-center gap-1">
+                  Konfigurator
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </li>
+              <li><a href="https://www.drm.de/de/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1 flex items-center gap-1">Mietfahrzeuge <ExternalLink className="h-3 w-3" /></a></li>
+              <li><Link to="/gebrauchtfahrzeuge" className="text-gray-600 hover:text-blue-600 block py-1">Gebrauchtfahrzeuge</Link></li>
+              <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
+              <li><Link to="/finanzierung-leasing" className="text-gray-600 hover:text-blue-600 block py-1">Finanzierung & Leasing</Link></li>
+            </ul>
+          </div>
 
           <div>
-            <h3 className="font-bold mb-3">Unternehmen & Rechtliches</h3>
+            <h3 className="font-bold mb-3">Karriere & Jobs</h3>
             <ul className="space-y-2">
-              <li><Link to="/unternehmen" className="text-gray-600 hover:text-blue-600 block py-1">Unternehmen</Link></li>
-              <li><Link to="/werksfuehrung" className="text-gray-600 hover:text-blue-600 block py-1">Werksführung</Link></li>
+              <li><Link to="/karriere" className="text-gray-600 hover:text-blue-600 block py-1">Karriere</Link></li>
+              <li><Link to="/stellenangebote" className="text-gray-600 hover:text-blue-600 block py-1">Stellenangebote</Link></li>
+              <li><Link to="/ausbildung" className="text-gray-600 hover:text-blue-600 block py-1">Ausbildung</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold mb-3">Rechtliches</h3>
+            <ul className="space-y-2">
               <li><Link to="/impressum" className="text-gray-600 hover:text-blue-600 block py-1">Impressum</Link></li>
               <li><Link to="/datenschutz" className="text-gray-600 hover:text-blue-600 block py-1">Datenschutz</Link></li>
               <li><Link to="/agb" className="text-gray-600 hover:text-blue-600 block py-1">AGB</Link></li>
