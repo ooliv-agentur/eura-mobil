@@ -60,18 +60,18 @@ const Footer = () => {
             </h3>
           </div>
 
-          {/* Column 3: Service */}
+          {/* Column 3: Service & Support */}
           <div>
-            <h3 className="font-bold mb-3">Service</h3>
+            <h3 className="font-bold mb-3">Service & Support</h3>
             <ul className="space-y-2">
               <li><Link to="/garantie" className="text-gray-600 hover:text-blue-600 block py-1">Garantie</Link></li>
               <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
               <li><Link to="/faq" className="text-gray-600 hover:text-blue-600 block py-1">FAQ</Link></li>
+              <li><Link to="/newsletter" className="text-gray-600 hover:text-blue-600 block py-1">Newsletter</Link></li>
+              <li><Link to="/downloads" className="text-gray-600 hover:text-blue-600 block py-1">Downloads</Link></li>
               <li><Link to="/karriere" className="text-gray-600 hover:text-blue-600 block py-1">Karriere</Link></li>
               <li><Link to="/stellenangebote" className="text-gray-600 hover:text-blue-600 block py-1">Stellenangebote</Link></li>
               <li><Link to="/ausbildung" className="text-gray-600 hover:text-blue-600 block py-1">Ausbildung</Link></li>
-              <li><Link to="/newsletter" className="text-gray-600 hover:text-blue-600 block py-1">Newsletter</Link></li>
-              <li><Link to="/downloads" className="text-gray-600 hover:text-blue-600 block py-1">Downloads</Link></li>
             </ul>
           </div>
 
@@ -82,6 +82,7 @@ const Footer = () => {
               <li><Link to="/unternehmen" className="text-gray-600 hover:text-blue-600 block py-1">Über EURA MOBIL</Link></li>
               <li><Link to="/werksfuehrung" className="text-gray-600 hover:text-blue-600 block py-1">Werksführung</Link></li>
               <li><Link to="/club" className="text-gray-600 hover:text-blue-600 block py-1">Club</Link></li>
+              <li><Link to="/videos" className="text-gray-600 hover:text-blue-600 block py-1">Videos</Link></li>
               <li><Link to="/impressum" className="text-gray-600 hover:text-blue-600 block py-1">Impressum</Link></li>
               <li><Link to="/datenschutz" className="text-gray-600 hover:text-blue-600 block py-1">Datenschutz</Link></li>
               <li><Link to="/agb" className="text-gray-600 hover:text-blue-600 block py-1">AGB</Link></li>

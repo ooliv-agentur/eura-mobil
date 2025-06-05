@@ -394,93 +394,98 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         
         <Separator className="my-6" />
         
-        {/* 2. Navigation sections with 12-column grid for consistent alignment */}
+        {/* 2. Core navigation sections with 12-column grid and button-style links */}
         <div className="grid grid-cols-12 gap-x-6 gap-y-8 mb-12">
-          {/* Kaufen & Mieten - 4 columns */}
-          <div className="col-span-12 md:col-span-4">
-            <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  to="/berater" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
+          {/* Kaufen & Mieten - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-4">Kaufen & Mieten</h3>
+            <div className="space-y-3">
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/berater" onClick={onClose}>
                   Wohnmobilberater
                 </Link>
-              </li>
-              <li>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
                 <a 
                   href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
-                  onClick={onClose}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors py-1"
+                  onClick={onClose}
                 >
                   <span>Konfigurator</span>
-                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                  <ExternalLink className="ml-auto h-4 w-4" />
                 </a>
-              </li>
-              <li>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
                 <a 
                   href="https://www.drm.de/de/" 
-                  onClick={onClose}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors py-1"
+                  onClick={onClose}
                 >
                   <span>Mietfahrzeuge</span>
-                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                  <ExternalLink className="ml-auto h-4 w-4" />
                 </a>
-              </li>
-              <li>
-                <Link 
-                  to="/gebrauchtfahrzeuge" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/gebrauchtfahrzeuge" onClick={onClose}>
                   Gebrauchtfahrzeuge
                 </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/finanzierung-leasing" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/finanzierung-leasing" onClick={onClose}>
                   Finanzierung & Leasing
                 </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/haendler" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/haendler" onClick={onClose}>
                   Händlersuche
                 </Link>
-              </li>
-            </ul>
+              </Button>
+            </div>
           </div>
           
-          {/* Qualität & Vorteile - 4 columns (simplified to single overview link) */}
-          <div className="col-span-12 md:col-span-4">
-            <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  to="/qualitaet" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
+          {/* Qualität & Vorteile - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-4">Qualität & Vorteile</h3>
+            <div className="space-y-3">
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/qualitaet" onClick={onClose}>
                   Qualität & Vorteile
                 </Link>
-              </li>
-            </ul>
+              </Button>
+            </div>
           </div>
           
-          {/* Empty column for spacing - 4 columns */}
-          <div className="col-span-12 md:col-span-4"></div>
+          {/* Unternehmen - 3 columns */}
+          <div className="col-span-12 md:col-span-3">
+            <h3 className="font-medium text-lg mb-4">Unternehmen</h3>
+            <div className="space-y-3">
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/unternehmen" onClick={onClose}>
+                  Über EURA MOBIL
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/werksfuehrung" onClick={onClose}>
+                  Werksführung
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/club" onClick={onClose}>
+                  Club
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link to="/videos" onClick={onClose}>
+                  Videos
+                </Link>
+              </Button>
+            </div>
+          </div>
+          
+          {/* Empty column for spacing - 3 columns */}
+          <div className="col-span-12 md:col-span-3"></div>
         </div>
       </div>
       
