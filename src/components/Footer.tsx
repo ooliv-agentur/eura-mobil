@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
             <h3 className="font-bold mb-3">Service</h3>
             <ul className="space-y-2">
@@ -62,13 +62,19 @@ const Footer = () => {
               <li><Link to="/gebrauchtfahrzeuge" className="text-gray-600 hover:text-blue-600 block py-1">Gebrauchtfahrzeuge</Link></li>
               <li><Link to="/finanzierung-leasing" className="text-gray-600 hover:text-blue-600 block py-1">Finanzierung & Leasing</Link></li>
               <li><Link to="/garantie" className="text-gray-600 hover:text-blue-600 block py-1">Garantie</Link></li>
-              <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
               <li><Link to="/downloads" className="text-gray-600 hover:text-blue-600 block py-1">Downloads</Link></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 className="font-bold mb-3">Kontakt & FAQ</h3>
+            <ul className="space-y-2">
+              <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
               <li><Link to="/newsletter" className="text-gray-600 hover:text-blue-600 block py-1">Newsletter</Link></li>
               <li><Link to="/faq" className="text-gray-600 hover:text-blue-600 block py-1">FAQ</Link></li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-bold mb-3">Unternehmen & Rechtliches</h3>
             <ul className="space-y-2">
