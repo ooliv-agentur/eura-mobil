@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -40,6 +39,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import AGB from "./pages/AGB";
 import Werksfuehrung from "./pages/Werksfuehrung";
+import News from "./pages/News";
 
 const queryClient = new QueryClient();
 
@@ -76,11 +76,13 @@ const App = () => (
                 <Route path="/unternehmen" element={<Unternehmen />} />
                 <Route path="/werksfuehrung" element={<Werksfuehrung />} />
                 <Route path="/downloads" element={<Downloads />} />
+                <Route path="/news" element={<News />} />
                 <Route path="/gebrauchtfahrzeuge" element={<Gebrauchtfahrzeuge />} />
                 <Route path="/mietfahrzeuge" element={<Mietfahrzeuge />} />
                 <Route path="/finanzierung-leasing" element={<FinanzierungLeasing />} />
                 <Route path="/konfigurator" element={<Konfigurator />} />
                 <Route path="/qualitaet" element={<QualitaetVorteile />} />
+                
                 <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
                 <Route path="/qualitaet/winterfestigkeit" element={<Winterfestigkeit />} />
                 <Route path="/qualitaet/leichtbau" element={<Leichtbauarchitektur />} />
@@ -89,6 +91,7 @@ const App = () => (
                 <Route path="/qualitaet/schlafkomfort" element={<Schlafkomfort />} />
                 <Route path="/qualitaet/kuechenwelt" element={<Kuechenwelt />} />
                 <Route path="/qualitaet/wellnessbereich" element={<Wellness />} />
+                
                 <Route path="/kontakt" element={<Kontakt />} />
                 <Route path="/faq" element={<FAQ />} />
                 <Route path="/garantie" element={<Garantie />} />
