@@ -12,9 +12,9 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-gray-100 py-8 px-4">
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-4xl">
         {/* Main 5-section layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
           {/* 1️⃣ Contact & Address (left side) */}
           <div className="lg:col-span-2">
             <h3 className="font-bold mb-4">EURA Mobil GmbH</h3>
@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
 
           {/* 2️⃣ Navigation Links (center, 3 equal-width columns) */}
-          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Column 1: Produkte & Services */}
             <div>
               <h3 className="font-bold mb-3">Produkte & Services</h3>
