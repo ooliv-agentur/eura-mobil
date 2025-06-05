@@ -148,6 +148,24 @@ const Downloads = () => {
         <DownloadSection title="Kataloge" items={kataloge} />
         <DownloadSection title="Preislisten" items={preislisten} />
         <DownloadSection title="Technische Daten" items={technischeDaten} />
+
+        {/* Bedienungsanleitungen Section */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Bedienungsanleitungen</h2>
+          <p className="text-gray-700 mb-6">
+            Hier finden Sie unsere aktuellen Bedienungsanleitungen für alle Fahrzeuge als externe Links.
+          </p>
+          <a
+            href="https://cloud.euramobil.de/index.php/s/umUUvaypTVqNMO7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <Button className="w-full md:w-auto bg-gray-400 hover:bg-gray-500 text-black px-8 py-4 text-lg">
+              Zur externen Seite
+            </Button>
+          </a>
+        </section>
       </main>
       
       <Footer />
@@ -156,4 +174,3 @@ const Downloads = () => {
 };
 
 export default Downloads;
-
