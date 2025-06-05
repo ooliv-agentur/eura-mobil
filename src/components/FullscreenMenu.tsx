@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Facebook, Instagram, Youtube, X, ExternalLink } from "lucide-react";
@@ -9,7 +10,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useWohnmobilberaterTrigger } from "@/hooks/useWohnmobilberaterTrigger";
 
 interface FullscreenMenuProps {
   isOpen: boolean;
@@ -216,7 +216,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
   const { setActiveOverlay } = useOverlay();
   const location = useLocation();
   const isMobile = useIsMobile();
-  const [activeModel, setActiveModel] = useState<string | null>("van"); // Default to first model
+  const [activeModel, setActiveModel] = useState<string | null>("van");
   
   // Control body scroll when menu is open
   useEffect(() => {
@@ -273,7 +273,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
 
       {/* Main content with 12-column grid */}
       <div className="container mx-auto px-4 pb-16 md:pb-0">
-        {/* 1. Vehicle models section */}
+        {/* 1. Wohnmobile & Vans section */}
         <section className="mb-8">
           <h2 className="text-xl font-medium mb-3">Wohnmobile & Vans</h2>
           
@@ -284,6 +284,26 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               {/* Left side: Model list (4 columns) */}
               <div className="col-span-4">
                 <ul className="space-y-1">
+                  <li>
+                    <Link 
+                      to="/modelle"
+                      onClick={onClose}
+                      className="flex items-center w-full text-left py-4 pl-3 pr-2 rounded-sm transition-colors hover:bg-gray-100 hover:text-blue-600"
+                    >
+                      <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
+                      <span className="font-medium">Modelle Übersicht</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      to="/wohnmobiltypen"
+                      onClick={onClose}
+                      className="flex items-center w-full text-left py-4 pl-3 pr-2 rounded-sm transition-colors hover:bg-gray-100 hover:text-blue-600"
+                    >
+                      <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
+                      <span className="font-medium">Wohnmobiltypen</span>
+                    </Link>
+                  </li>
                   {modelIds.map(modelId => {
                     const model = modelPreviewData[modelId as keyof typeof modelPreviewData];
                     return (
@@ -295,7 +315,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                               : 'hover:bg-gray-100 hover:text-blue-600'}`}
                           onClick={() => handleModelSelect(modelId)}
                         >
-                          {/* Small dummy image with reduced size */}
                           <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
                           <span className="font-medium">{model.title}</span>
                         </button>
@@ -313,6 +332,26 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             
             {/* Mobile: Accordion style list with inline previews */}
             <div className="md:hidden">
+              <div className="border-b border-gray-100 pb-2 mb-2">
+                <Link 
+                  to="/modelle"
+                  onClick={onClose}
+                  className="flex items-center w-full text-left py-3 px-2 transition-colors hover:text-blue-600"
+                >
+                  <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
+                  <span className="font-medium">Modelle Übersicht</span>
+                </Link>
+              </div>
+              <div className="border-b border-gray-100 pb-2 mb-2">
+                <Link 
+                  to="/wohnmobiltypen"
+                  onClick={onClose}
+                  className="flex items-center w-full text-left py-3 px-2 transition-colors hover:text-blue-600"
+                >
+                  <div className="bg-gray-200 w-16 h-6 mr-3 flex-shrink-0 rounded-sm"></div>
+                  <span className="font-medium">Wohnmobiltypen</span>
+                </Link>
+              </div>
               {modelIds.map(modelId => (
                 <MobileModelItem 
                   key={modelId}
@@ -324,10 +363,10 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               ))}
             </div>
             
-            {/* CTA Buttons in 3-column grid with proper spacing */}
+            {/* CTA Buttons in 3-column grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
               <Button variant="outline" asChild>
-                <Link to="/modellvergleich" onClick={onClose}>
+                <Link to="/modelle" onClick={onClose}>
                   Modelle vergleichen
                 </Link>
               </Button>
@@ -356,10 +395,77 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         
         <Separator className="my-6" />
         
-        {/* 2. Link grid section with 12-column grid for consistent alignment */}
+        {/* 2. Navigation sections with 12-column grid for consistent alignment */}
         <div className="grid grid-cols-12 gap-x-6 gap-y-8 mb-12">
-          {/* Qualität & Vorteile - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
+          {/* Kaufen & Mieten - 4 columns */}
+          <div className="col-span-12 md:col-span-4">
+            <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link 
+                  to="/berater" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Wohnmobilberater
+                </Link>
+              </li>
+              <li>
+                <a 
+                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
+                  onClick={onClose}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center hover:text-blue-600 transition-colors py-1"
+                >
+                  <span>Konfigurator</span>
+                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://www.drm.de/de/" 
+                  onClick={onClose}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center hover:text-blue-600 transition-colors py-1"
+                >
+                  <span>Mietfahrzeuge</span>
+                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
+                </a>
+              </li>
+              <li>
+                <Link 
+                  to="/gebrauchtfahrzeuge" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Gebrauchtfahrzeuge
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/finanzierung-leasing" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Finanzierung & Leasing
+                </Link>
+              </li>
+              <li>
+                <Link 
+                  to="/haendler" 
+                  onClick={onClose}
+                  className="hover:text-blue-600 transition-colors block py-1"
+                >
+                  Händlersuche
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Qualität & Vorteile - 4 columns */}
+          <div className="col-span-12 md:col-span-4">
             <h3 className="font-medium text-lg mb-3">Qualität & Vorteile</h3>
             <ul className="space-y-2">
               <li>
@@ -431,7 +537,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   className="hover:text-blue-600 transition-colors block py-1"
                 >
-                  Küchen
+                  Küchenwelt
                 </Link>
               </li>
               <li>
@@ -446,210 +552,18 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
             </ul>
           </div>
           
-          {/* Kaufen & Mieten - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-3">Kaufen & Mieten</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  to="/berater" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Wohnmobilberater
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
-                  onClick={onClose}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors py-1"
-                >
-                  <span>Konfigurator</span>
-                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
-                </a>
-              </li>
-              <li>
-                <Link 
-                  to="/mietfahrzeuge" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Mietfahrzeuge
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/gebrauchtfahrzeuge" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Gebrauchtfahrzeuge
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/haendler" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Händlersuche
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Unternehmen - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-3">Unternehmen</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  to="/unternehmen" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Über EURA MOBIL
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/unternehmen/werksfuehrung" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Werksführung
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/unternehmen/club" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Club
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/unternehmen/videos" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Videos
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Karriere & Service - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-3">Karriere & Service</h3>
-            <ul className="space-y-2">
-              <li>
-                <a 
-                  href="/karriere" 
-                  onClick={onClose}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center hover:text-blue-600 transition-colors py-1"
-                >
-                  <span>Stellenangebote</span>
-                  <ExternalLink className="ml-1 h-3.5 w-3.5 text-gray-400" />
-                </a>
-              </li>
-              <li>
-                <Link 
-                  to="/karriere/ausbildung" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Ausbildung
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/kontakt" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Kontakt
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/garantie" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Garantie
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/newsletter" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Newsletter
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/downloads" 
-                  onClick={onClose}
-                  className="hover:text-blue-600 transition-colors block py-1"
-                >
-                  Downloads
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {/* Empty column for spacing - 4 columns */}
+          <div className="col-span-12 md:col-span-4"></div>
         </div>
       </div>
       
-      {/* Footer with links, social media, and language selector - aligned to the grid */}
+      {/* Footer with language selector and social media - aligned to the grid */}
       <div className="mt-auto border-t border-gray-200 bg-gray-50 py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            {/* Legal links */}
+            {/* Language selector */}
             <div className="mb-4 md:mb-0">
-              <ul className="flex flex-wrap gap-x-6 gap-y-2">
-                <li>
-                  <Link 
-                    to="/impressum" 
-                    onClick={onClose}
-                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    Impressum
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/datenschutz" 
-                    onClick={onClose}
-                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    Datenschutz
-                  </Link>
-                </li>
-                <li>
-                  <Link 
-                    to="/agb" 
-                    onClick={onClose}
-                    className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
-                  >
-                    AGB
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Language selector and social media */}
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
-              {/* Language selector */}
+              <h3 className="font-medium mb-3">Eura Mobil International</h3>
               <Select defaultValue="de">
                 <SelectTrigger className="w-32 h-9 text-sm">
                   <SelectValue placeholder="Sprache" />
@@ -660,8 +574,11 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
                   <SelectItem value="fr">Französisch</SelectItem>
                 </SelectContent>
               </Select>
-              
-              {/* Social media icons - slightly larger hit area */}
+            </div>
+            
+            {/* Social media icons */}
+            <div>
+              <h3 className="font-medium mb-3">Folgen Sie uns</h3>
               <div className="flex gap-4">
                 <a 
                   href="https://www.instagram.com/euramobil/" 
@@ -696,7 +613,7 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
       
-      {/* Mobile only: Fixed CTA at the bottom - with proper spacing */}
+      {/* Mobile only: Fixed CTA at the bottom */}
       {isMobile && (
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden">
           <Button className="w-full" asChild>
