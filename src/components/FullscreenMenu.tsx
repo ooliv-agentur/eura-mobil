@@ -394,98 +394,73 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
         
         <Separator className="my-6" />
         
-        {/* 2. Core navigation sections with 12-column grid and button-style links */}
-        <div className="grid grid-cols-12 gap-x-6 gap-y-8 mb-12">
-          {/* Kaufen & Mieten - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-4">Kaufen & Mieten</h3>
-            <div className="space-y-3">
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/berater" onClick={onClose}>
-                  Wohnmobilberater
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <a 
-                  href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                >
-                  <span>Konfigurator</span>
-                  <ExternalLink className="ml-auto h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <a 
-                  href="https://www.drm.de/de/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={onClose}
-                >
-                  <span>Mietfahrzeuge</span>
-                  <ExternalLink className="ml-auto h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/gebrauchtfahrzeuge" onClick={onClose}>
-                  Gebrauchtfahrzeuge
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/finanzierung-leasing" onClick={onClose}>
-                  Finanzierung & Leasing
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/haendler" onClick={onClose}>
-                  Händlersuche
-                </Link>
-              </Button>
-            </div>
-          </div>
+        {/* 2. Core navigation links as uniformly styled buttons */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/berater" onClick={onClose}>
+              Wohnmobilberater
+            </Link>
+          </Button>
           
-          {/* Qualität & Vorteile - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-4">Qualität & Vorteile</h3>
-            <div className="space-y-3">
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/qualitaet" onClick={onClose}>
-                  Qualität & Vorteile
-                </Link>
-              </Button>
-            </div>
-          </div>
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <a 
+              href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" 
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+            >
+              <span>Konfigurator</span>
+              <ExternalLink className="ml-auto h-4 w-4" />
+            </a>
+          </Button>
           
-          {/* Unternehmen - 3 columns */}
-          <div className="col-span-12 md:col-span-3">
-            <h3 className="font-medium text-lg mb-4">Unternehmen</h3>
-            <div className="space-y-3">
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/unternehmen" onClick={onClose}>
-                  Über EURA MOBIL
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/werksfuehrung" onClick={onClose}>
-                  Werksführung
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/club" onClick={onClose}>
-                  Club
-                </Link>
-              </Button>
-              <Button variant="outline" className="w-full justify-start" asChild>
-                <Link to="/videos" onClick={onClose}>
-                  Videos
-                </Link>
-              </Button>
-            </div>
-          </div>
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <a 
+              href="https://www.drm.de/de/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onClose}
+            >
+              <span>Mietfahrzeuge</span>
+              <ExternalLink className="ml-auto h-4 w-4" />
+            </a>
+          </Button>
           
-          {/* Empty column for spacing - 3 columns */}
-          <div className="col-span-12 md:col-span-3"></div>
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/gebrauchtfahrzeuge" onClick={onClose}>
+              Gebrauchtfahrzeuge
+            </Link>
+          </Button>
+          
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/haendler" onClick={onClose}>
+              Händlersuche
+            </Link>
+          </Button>
+          
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/finanzierung-leasing" onClick={onClose}>
+              Finanzierung & Leasing
+            </Link>
+          </Button>
+          
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/qualitaet" onClick={onClose}>
+              Qualität & Vorteile
+            </Link>
+          </Button>
+          
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/unternehmen" onClick={onClose}>
+              Über EURA MOBIL
+            </Link>
+          </Button>
+          
+          <Button variant="outline" className="w-full justify-start" asChild>
+            <Link to="/werksfuehrung" onClick={onClose}>
+              Werksführung
+            </Link>
+          </Button>
         </div>
       </div>
       

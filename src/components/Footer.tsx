@@ -1,4 +1,5 @@
 
+
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import {
@@ -128,3 +129,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
