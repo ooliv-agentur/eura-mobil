@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { X, ExternalLink } from "lucide-react";
@@ -68,27 +69,17 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
             <div>
               <h3 className="font-bold text-lg mb-3">Modelle</h3>
               <div className="space-y-2">
+                <div><MenuLink to="/modelle" onClick={handleLinkClick}>Alle Modelle Übersicht</MenuLink></div>
                 <div><MenuLink to="/modelle/van" onClick={handleLinkClick}>Van</MenuLink></div>
                 <div><MenuLink to="/modelle/activa-one" onClick={handleLinkClick}>Activa One</MenuLink></div>
-                <div><MenuLink to="/modelle/profila-t-fiat" onClick={handleLinkClick}>Profila T - Fiat</MenuLink></div>
+                <div><MenuLink to="/modelle/profila-t-fiat" onClick={handleLinkClick}>Profila T – Fiat</MenuLink></div>
                 <div><MenuLink to="/modelle/profila-rs" onClick={handleLinkClick}>Profila RS</MenuLink></div>
-                <div><MenuLink to="/modelle/profila-t-mercedes" onClick={handleLinkClick}>Profila T - Mercedes</MenuLink></div>
+                <div><MenuLink to="/modelle/profila-t-mercedes" onClick={handleLinkClick}>Profila T – Mercedes</MenuLink></div>
                 <div><MenuLink to="/modelle/contura" onClick={handleLinkClick}>Contura</MenuLink></div>
-                <div><MenuLink to="/modelle/integra-line-fiat" onClick={handleLinkClick}>Integra Line - Fiat</MenuLink></div>
-                <div><MenuLink to="/modelle/integra-line-gt-mercedes" onClick={handleLinkClick}>Integra Line GT - Mercedes</MenuLink></div>
+                <div><MenuLink to="/modelle/integra-line-fiat" onClick={handleLinkClick}>Integra Line – Fiat</MenuLink></div>
+                <div><MenuLink to="/modelle/integra-line-gt-mercedes" onClick={handleLinkClick}>Integra Line GT – Mercedes</MenuLink></div>
                 <div><MenuLink to="/modelle/integra" onClick={handleLinkClick}>Integra</MenuLink></div>
                 <div><MenuLink to="/modelle/xtura" onClick={handleLinkClick}>Xtura</MenuLink></div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-lg mb-3">Typen</h3>
-              <div className="space-y-2">
-                <div><MenuLink to="/wohnmobiltypen" onClick={handleLinkClick}>Wohnmobiltypen Übersicht</MenuLink></div>
-                <div><MenuLink to="/wohnmobiltypen#van" onClick={handleLinkClick}>Vans</MenuLink></div>
-                <div><MenuLink to="/wohnmobiltypen#alkoven" onClick={handleLinkClick}>Alkoven</MenuLink></div>
-                <div><MenuLink to="/wohnmobiltypen#teilintegriert" onClick={handleLinkClick}>Teilintegriert</MenuLink></div>
-                <div><MenuLink to="/wohnmobiltypen#integriert" onClick={handleLinkClick}>Integriert</MenuLink></div>
               </div>
             </div>
 
@@ -97,31 +88,19 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
                 <span className="text-gray-400">Modellbild-Placeholder</span>
               </div>
             </div>
-
-            <div className="col-span-1 md:col-span-3 mt-4">
-              <Button variant="outline" className="w-full md:w-auto" asChild>
-                <Link to="/modelle" onClick={handleLinkClick}>Alle Modelle ansehen</Link>
-              </Button>
-            </div>
           </div>
         );
       
       case "kaufen":
         return (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-3">
-              <div><MenuLink to="/wohnmobiltypen" onClick={handleLinkClick}>Wohnmobiltypen Übersicht</MenuLink></div>
               <div><MenuLink to="/berater" onClick={handleLinkClick}>Wohnmobilberater</MenuLink></div>
-              <div><MenuLink to="/konfigurator" onClick={handleLinkClick}>Konfigurator</MenuLink></div>
-              <div><MenuLink to="/mietfahrzeuge" onClick={handleLinkClick}>Mietfahrzeuge</MenuLink></div>
+              <div><MenuLink to="https://konfigurator.euramobil.de/" external onClick={handleLinkClick}>Konfigurator</MenuLink></div>
+              <div><MenuLink to="https://www.drm.de/de/" external onClick={handleLinkClick}>Mietfahrzeuge</MenuLink></div>
               <div><MenuLink to="/gebrauchtfahrzeuge" onClick={handleLinkClick}>Gebrauchtfahrzeuge</MenuLink></div>
               <div><MenuLink to="/finanzierung-leasing" onClick={handleLinkClick}>Finanzierung & Leasing</MenuLink></div>
-              <div><MenuLink to="https://www.drm.de/de/" external onClick={handleLinkClick}>Wohnmobil mieten</MenuLink></div>
-            </div>
-            <div>
-              <Button className="mt-4 w-full md:w-auto" asChild>
-                <Link to="/haendler" onClick={handleLinkClick}>Jetzt Händler finden</Link>
-              </Button>
+              <div><MenuLink to="/haendler" onClick={handleLinkClick}>Händlersuche</MenuLink></div>
             </div>
           </div>
         );
@@ -130,23 +109,19 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-2">
+              <div><MenuLink to="/qualitaet" onClick={handleLinkClick}>Alle Vorteile im Überblick</MenuLink></div>
               <div><MenuLink to="/qualitaet/sealed-structure" onClick={handleLinkClick}>Sealed Structure</MenuLink></div>
               <div><MenuLink to="/qualitaet/winterfestigkeit" onClick={handleLinkClick}>Winterfestigkeit</MenuLink></div>
-              <div><MenuLink to="/qualitaet/leichtbau" onClick={handleLinkClick}>Leichtbau</MenuLink></div>
             </div>
             <div className="space-y-2">
+              <div><MenuLink to="/qualitaet/leichtbau" onClick={handleLinkClick}>Leichtbauarchitektur</MenuLink></div>
               <div><MenuLink to="/qualitaet/moebelbau" onClick={handleLinkClick}>Möbelbau</MenuLink></div>
               <div><MenuLink to="/qualitaet/schlafkomfort" onClick={handleLinkClick}>Schlafkomfort</MenuLink></div>
-              <div><MenuLink to="/qualitaet/kuechenwelt" onClick={handleLinkClick}>Küche</MenuLink></div>
             </div>
             <div className="space-y-2">
+              <div><MenuLink to="/qualitaet/kuechenwelt" onClick={handleLinkClick}>Küchenwelt</MenuLink></div>
               <div><MenuLink to="/qualitaet/doppelboden" onClick={handleLinkClick}>Doppelboden</MenuLink></div>
               <div><MenuLink to="/qualitaet/wellnessbereich" onClick={handleLinkClick}>Wellness</MenuLink></div>
-            </div>
-            <div className="col-span-1 md:col-span-3 mt-4">
-              <Button variant="outline" className="w-full md:w-auto" asChild>
-                <Link to="/qualitaet" onClick={handleLinkClick}>Alle Vorteile im Überblick</Link>
-              </Button>
             </div>
           </div>
         );
@@ -155,13 +130,8 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <div><MenuLink to="/unternehmen#ueber-uns" onClick={handleLinkClick}>Eura Mobil GmbH</MenuLink></div>
-              <div><MenuLink to="/werksbesichtigung" onClick={handleLinkClick}>Werksführung</MenuLink></div>
-              <div><MenuLink to="/reisemobil-forum" onClick={handleLinkClick}>Reisemobil Forum</MenuLink></div>
-            </div>
-            <div className="space-y-2">
-              <div><MenuLink to="/eura-mobil-card" onClick={handleLinkClick}>Eura Mobil Card</MenuLink></div>
-              <div><MenuLink to="/eura-mobil-club" onClick={handleLinkClick}>Eura Mobil Club</MenuLink></div>
+              <div><MenuLink to="/unternehmen" onClick={handleLinkClick}>Unternehmen</MenuLink></div>
+              <div><MenuLink to="/werksfuehrung" onClick={handleLinkClick}>Werksführung</MenuLink></div>
             </div>
           </div>
         );
@@ -170,9 +140,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
         return (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <div><MenuLink to="/karriere/stellenangebote" onClick={handleLinkClick}>Stellenangebote</MenuLink></div>
-              <div><MenuLink to="/karriere/ausbildung" onClick={handleLinkClick}>Ausbildung & Praktikum</MenuLink></div>
-              <div><MenuLink to="/karriere/werte" onClick={handleLinkClick}>Unternehmenswerte</MenuLink></div>
+              <div><MenuLink to="/karriere" onClick={handleLinkClick}>Karriere</MenuLink></div>
             </div>
           </div>
         );
@@ -182,11 +150,11 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
               <div><MenuLink to="/garantie" onClick={handleLinkClick}>Garantie</MenuLink></div>
-              <div><MenuLink to="/downloads" onClick={handleLinkClick}>Downloads</MenuLink></div>
+              <div><MenuLink to="/kontakt" onClick={handleLinkClick}>Kontakt</MenuLink></div>
             </div>
             <div className="space-y-2">
-              <div><MenuLink to="/newsletter" onClick={handleLinkClick}>Newsletter</MenuLink></div>
-              <div><MenuLink to="/kontakt" onClick={handleLinkClick}>Kontakt</MenuLink></div>
+              <div><MenuLink to="/downloads" onClick={handleLinkClick}>Downloads</MenuLink></div>
+              <div><MenuLink to="/faq" onClick={handleLinkClick}>FAQ</MenuLink></div>
             </div>
           </div>
         );
@@ -228,7 +196,7 @@ function getMegaMenuTitle(menuKey: string | null): string {
     case "karriere":
       return "Karriere";
     case "service":
-      return "Service";
+      return "Service & Kontakt";
     default:
       return "";
   }
