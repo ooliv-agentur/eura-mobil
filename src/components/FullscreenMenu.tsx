@@ -26,10 +26,6 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleLinkClick = () => {
-    onClose();
-  };
-
   const handleMegaMenuClose = () => {
     setMegaMenuOpen(false);
     setActiveMegaMenu(null);
@@ -89,15 +85,28 @@ const FullscreenMenu: React.FC<FullscreenMenuProps> = ({ isOpen, onClose }) => {
               </li>
 
               <li>
-                <Link
-                  to="/berater"
-                  onClick={handleLinkClick}
-                  className="text-2xl font-bold hover:text-blue-600 transition-colors duration-200 block"
+                <button
+                  onClick={() => handleMegaMenuToggle("karriere")}
+                  className="text-2xl font-bold hover:text-blue-600 transition-colors duration-200 flex items-center gap-2 w-full text-left"
                 >
-                  Wohnmobilberater
-                </Link>
+                  Karriere & Service
+                  <ChevronDown className="h-5 w-5" />
+                </button>
               </li>
             </ul>
+
+            {/* Language Switcher at Bottom */}
+            <div className="mt-16 pt-8 border-t border-gray-200">
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">Sprache:</span>
+                <Link 
+                  to="/" 
+                  className="ml-2 text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  Eura Mobil International
+                </Link>
+              </div>
+            </div>
           </nav>
         </div>
       </div>
