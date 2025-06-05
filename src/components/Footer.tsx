@@ -13,15 +13,15 @@ const Footer = () => {
   return (
     <footer className="bg-gray-100 py-8 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Main 3-section layout */}
+        {/* Main 5-section layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
           {/* 1️⃣ Contact & Address (left side) */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <h3 className="font-bold mb-4">EURA Mobil GmbH</h3>
             <div className="space-y-3">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-gray-500 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-600">Kreuznacher Str. 78, 55576 Sprendlingen, Germany</span>
+                <span className="text-gray-600">Kreuznacher Str. 78, 55576 Sprendlingen, Deutschland</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-gray-500" />
@@ -34,11 +34,11 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* 2️⃣ Navigation Links (center, 3 columns) */}
-          <div className="lg:col-span-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Column 1: Products & Services */}
+          {/* 2️⃣ Navigation Links (center, 3 equal-width columns) */}
+          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Column 1: Produkte & Services */}
             <div>
-              <h3 className="font-bold mb-3">Products & Services</h3>
+              <h3 className="font-bold mb-3">Produkte & Services</h3>
               <ul className="space-y-2">
                 <li><Link to="/berater" className="text-gray-600 hover:text-blue-600 block py-1">Wohnmobilberater</Link></li>
                 <li><a href="https://eura.tef-kat.com/konfigurator-eura/Home/Start?culture=de-DE" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1 flex items-center">Konfigurator <ExternalLink className="ml-1 h-3 w-3" /></a></li>
@@ -48,9 +48,9 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 2: Quality & Advantages */}
+            {/* Column 2: Qualität & Vorteile */}
             <div>
-              <h3 className="font-bold mb-3">Quality & Advantages</h3>
+              <h3 className="font-bold mb-3">Qualität & Vorteile</h3>
               <ul className="space-y-2">
                 <li><Link to="/qualitaet" className="text-gray-600 hover:text-blue-600 block py-1">Alle Vorteile im Überblick</Link></li>
                 <li><Link to="/qualitaet/sealed-structure" className="text-gray-600 hover:text-blue-600 block py-1">Sealed Structure</Link></li>
@@ -64,9 +64,9 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 3: Company & Legal */}
+            {/* Column 3: Unternehmen & Rechtliches */}
             <div>
-              <h3 className="font-bold mb-3">Company & Legal</h3>
+              <h3 className="font-bold mb-3">Unternehmen & Rechtliches</h3>
               <ul className="space-y-2">
                 <li><Link to="/unternehmen" className="text-gray-600 hover:text-blue-600 block py-1">Über EURA MOBIL</Link></li>
                 <li><Link to="/werksfuehrung" className="text-gray-600 hover:text-blue-600 block py-1">Werksführung</Link></li>
@@ -79,12 +79,12 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* 3️⃣ Social Media & Language (right side) */}
-          <div className="lg:col-span-3">
+          {/* 3️⃣ EURA Mobil International & Social Media (right side) */}
+          <div className="lg:col-span-2">
             <div className="space-y-6">
               {/* Language Dropdown */}
               <div>
-                <h3 className="font-bold mb-3">Eura Mobil International</h3>
+                <h3 className="font-bold mb-3">EURA Mobil International</h3>
                 <Select defaultValue="de">
                   <SelectTrigger className="w-full max-w-xs">
                     <SelectValue placeholder="Deutsch" />
@@ -101,14 +101,32 @@ const Footer = () => {
               <div>
                 <h3 className="font-bold mb-3">Folgen Sie uns</h3>
                 <div className="flex space-x-4">
-                  <a href="https://www.instagram.com/euramobil/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                    <Instagram className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+                  <a 
+                    href="https://www.instagram.com/euramobil/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="Instagram"
+                    className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center hover:bg-gray-400 transition-colors"
+                  >
+                    <Instagram className="w-4 h-4 text-gray-700" />
                   </a>
-                  <a href="https://www.facebook.com/EuraMobil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                    <Facebook className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+                  <a 
+                    href="https://www.facebook.com/EuraMobil" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="Facebook"
+                    className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center hover:bg-gray-400 transition-colors"
+                  >
+                    <Facebook className="w-4 h-4 text-gray-700" />
                   </a>
-                  <a href="https://www.youtube.com/@euramobil" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                    <Youtube className="w-5 h-5 text-gray-500 hover:text-gray-700" />
+                  <a 
+                    href="https://www.youtube.com/@euramobil" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="YouTube"
+                    className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center hover:bg-gray-400 transition-colors"
+                  >
+                    <Youtube className="w-4 h-4 text-gray-700" />
                   </a>
                 </div>
               </div>
