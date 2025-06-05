@@ -21,6 +21,7 @@ import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
 import Gebrauchtfahrzeuge from "./pages/Gebrauchtfahrzeuge";
 import Mietfahrzeuge from "./pages/Mietfahrzeuge";
+import FinanzierungLeasing from "./pages/FinanzierungLeasing";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
@@ -76,6 +77,7 @@ const App = () => (
                 <Route path="/downloads" element={<Downloads />} />
                 <Route path="/gebrauchtfahrzeuge" element={<Gebrauchtfahrzeuge />} />
                 <Route path="/mietfahrzeuge" element={<Mietfahrzeuge />} />
+                <Route path="/finanzierung-leasing" element={<FinanzierungLeasing />} />
                 <Route path="/konfigurator" element={<Konfigurator />} />
                 <Route path="/qualitaet" element={<QualitaetVorteile />} />
                 <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />

@@ -115,6 +115,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
               <div><MenuLink to="/konfigurator" onClick={handleLinkClick}>Konfigurator</MenuLink></div>
               <div><MenuLink to="/mietfahrzeuge" onClick={handleLinkClick}>Mietfahrzeuge</MenuLink></div>
               <div><MenuLink to="/gebrauchtfahrzeuge" onClick={handleLinkClick}>Gebrauchtfahrzeuge</MenuLink></div>
+              <div><MenuLink to="/finanzierung-leasing" onClick={handleLinkClick}>Finanzierung & Leasing</MenuLink></div>
               <div><MenuLink to="https://www.drm.de/de/" external onClick={handleLinkClick}>Wohnmobil mieten</MenuLink></div>
             </div>
             <div>

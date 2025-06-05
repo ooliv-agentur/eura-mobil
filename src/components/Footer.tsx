@@ -68,6 +68,7 @@ const Footer = () => {
               <li><Link to="/haendler" className="text-gray-600 hover:text-blue-600 block py-1">Händlersuche</Link></li>
               <li><Link to="/mietfahrzeuge" className="text-gray-600 hover:text-blue-600 block py-1">Mietfahrzeuge</Link></li>
               <li><Link to="/gebrauchtfahrzeuge" className="text-gray-600 hover:text-blue-600 block py-1">Gebrauchtfahrzeuge</Link></li>
+              <li><Link to="/finanzierung-leasing" className="text-gray-600 hover:text-blue-600 block py-1">Finanzierung & Leasing</Link></li>
               <li><Link to="/kontakt" className="text-gray-600 hover:text-blue-600 block py-1">Kontakt</Link></li>
               <li><Link to="/faq" className="text-gray-600 hover:text-blue-600 block py-1">FAQ</Link></li>
             </ul>
