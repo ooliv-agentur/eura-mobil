@@ -12,7 +12,7 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-gray-100 py-8 px-4">
-      <div className="mx-auto max-w-6xl px-8">
+      <div className="mx-auto max-w-7xl px-4">
         {/* Main 5-section layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
           {/* 1️⃣ Contact & Address (left side) */}
