@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { X } from "lucide-react";
+import { X, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -9,9 +9,28 @@ interface MenuLinkProps {
   children: React.ReactNode;
   className?: string;
   onClick?: () => void;
+  external?: boolean;
 }
 
-const MenuLink: React.FC<MenuLinkProps> = ({ to, children, className, onClick }) => {
+const MenuLink: React.FC<MenuLinkProps> = ({ to, children, className, onClick, external = false }) => {
+  if (external) {
+    return (
+      <a 
+        href={to}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onClick}
+        className={cn(
+          "text-sm hover:text-blue-600 transition-colors duration-200 flex items-center gap-1",
+          className
+        )}
+      >
+        {children}
+        <ExternalLink className="h-3 w-3" />
+      </a>
+    );
+  }
+
   return (
     <Link 
       to={to}
@@ -96,6 +115,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, activeMenu, onClose }) => {
               <div><MenuLink to="/konfigurator" onClick={handleLinkClick}>Konfigurator</MenuLink></div>
               <div><MenuLink to="/mietfahrzeuge" onClick={handleLinkClick}>Mietfahrzeuge</MenuLink></div>
               <div><MenuLink to="/gebrauchtfahrzeuge" onClick={handleLinkClick}>Gebrauchtfahrzeuge</MenuLink></div>
+              <div><MenuLink to="https://www.drm.de/de/" external onClick={handleLinkClick}>Wohnmobil mieten</MenuLink></div>
             </div>
             <div>
               <Button className="mt-4 w-full md:w-auto" asChild>
