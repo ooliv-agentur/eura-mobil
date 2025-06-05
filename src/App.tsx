@@ -40,6 +40,7 @@ import Datenschutz from "./pages/Datenschutz";
 import AGB from "./pages/AGB";
 import Werksfuehrung from "./pages/Werksfuehrung";
 import News from "./pages/News";
+import ReisemobilForum from "./pages/ReisemobilForum";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ const App = () => (
                 <Route path="/werksfuehrung" element={<Werksfuehrung />} />
                 <Route path="/downloads" element={<Downloads />} />
                 <Route path="/news" element={<News />} />
+                <Route path="/reisemobil-forum" element={<ReisemobilForum />} />
                 <Route path="/gebrauchtfahrzeuge" element={<Gebrauchtfahrzeuge />} />
                 <Route path="/mietfahrzeuge" element={<Mietfahrzeuge />} />
                 <Route path="/finanzierung-leasing" element={<FinanzierungLeasing />} />
