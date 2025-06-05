@@ -19,7 +19,8 @@ import Haendlersuche from "./pages/Haendlersuche";
 import Karriere from "./pages/Karriere";
 import Unternehmen from "./pages/Unternehmen";
 import Downloads from "./pages/Downloads";
-import GebrauchtMietfahrzeuge from "./pages/GebrauchtMietfahrzeuge";
+import Gebrauchtfahrzeuge from "./pages/Gebrauchtfahrzeuge";
+import Mietfahrzeuge from "./pages/Mietfahrzeuge";
 import Wohnmobiltypen from "./pages/Wohnmobiltypen";
 import Konfigurator from "./pages/Konfigurator";
 import QualitaetVorteile from "./pages/QualitaetVorteile";
@@ -73,7 +74,8 @@ const App = () => (
                 <Route path="/unternehmen" element={<Unternehmen />} />
                 <Route path="/werksfuehrung" element={<Werksfuehrung />} />
                 <Route path="/downloads" element={<Downloads />} />
-                <Route path="/gebrauchtfahrzeuge" element={<GebrauchtMietfahrzeuge />} />
+                <Route path="/gebrauchtfahrzeuge" element={<Gebrauchtfahrzeuge />} />
+                <Route path="/mietfahrzeuge" element={<Mietfahrzeuge />} />
                 <Route path="/konfigurator" element={<Konfigurator />} />
                 <Route path="/qualitaet" element={<QualitaetVorteile />} />
                 <Route path="/qualitaet/sealed-structure" element={<SealedStructure />} />
