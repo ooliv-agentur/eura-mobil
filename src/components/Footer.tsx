@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import {
@@ -64,9 +63,9 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Column 3: Unternehmen & Rechtliches */}
+            {/* Column 3: Unternehmen & Karriere */}
             <div>
-              <h3 className="font-bold mb-3">Unternehmen & Rechtliches</h3>
+              <h3 className="font-bold mb-3">Unternehmen & Karriere</h3>
               <ul className="space-y-2">
                 <li><Link to="/unternehmen" className="text-gray-600 hover:text-blue-600 block py-1">Über EURA MOBIL</Link></li>
                 <li><Link to="/karriere" className="text-gray-600 hover:text-blue-600 block py-1">Karriere</Link></li>
@@ -75,9 +74,6 @@ const Footer = () => {
                 <li><Link to="/werksfuehrung" className="text-gray-600 hover:text-blue-600 block py-1">Werksführung</Link></li>
                 <li><Link to="/club" className="text-gray-600 hover:text-blue-600 block py-1">Club</Link></li>
                 <li><Link to="/videos" className="text-gray-600 hover:text-blue-600 block py-1">Videos</Link></li>
-                <li><Link to="/impressum" className="text-gray-600 hover:text-blue-600 block py-1">Impressum</Link></li>
-                <li><Link to="/datenschutz" className="text-gray-600 hover:text-blue-600 block py-1">Datenschutz</Link></li>
-                <li><Link to="/agb" className="text-gray-600 hover:text-blue-600 block py-1">AGB</Link></li>
               </ul>
             </div>
           </div>
@@ -137,10 +133,17 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Copyright */}
+        {/* Copyright with legal links */}
         <div className="pt-6 border-t border-gray-200">
-          <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="text-sm text-gray-500">
+              © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <Link to="/impressum" className="text-gray-500 hover:text-blue-600">Impressum</Link>
+              <Link to="/datenschutz" className="text-gray-500 hover:text-blue-600">Datenschutz</Link>
+              <Link to="/agb" className="text-gray-500 hover:text-blue-600">AGB</Link>
+            </div>
           </div>
         </div>
       </div>
