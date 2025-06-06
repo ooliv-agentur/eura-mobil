@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, ExternalLink } from "lucide-react";
 import {
@@ -133,17 +134,16 @@ const Footer = () => {
           </div>
         </div>
         
-        {/* Copyright with legal links */}
+        {/* Copyright with legal links inline */}
         <div className="pt-6 border-t border-gray-200">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div className="text-sm text-gray-500">
-              © {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.
-            </div>
-            <div className="flex flex-wrap gap-4 text-sm">
-              <Link to="/impressum" className="text-gray-500 hover:text-blue-600">Impressum</Link>
-              <Link to="/datenschutz" className="text-gray-500 hover:text-blue-600">Datenschutz</Link>
-              <Link to="/agb" className="text-gray-500 hover:text-blue-600">AGB</Link>
-            </div>
+          <div className="text-sm text-gray-500 flex flex-wrap items-center gap-1">
+            <span>© {new Date().getFullYear()} EURA MOBIL. Alle Rechte vorbehalten.</span>
+            <span className="hidden md:inline">|</span>
+            <Link to="/impressum" className="hover:text-blue-600 underline md:no-underline md:hover:underline">Impressum</Link>
+            <span>|</span>
+            <Link to="/datenschutz" className="hover:text-blue-600 underline md:no-underline md:hover:underline">Datenschutz</Link>
+            <span>|</span>
+            <Link to="/agb" className="hover:text-blue-600 underline md:no-underline md:hover:underline">AGB</Link>
           </div>
         </div>
       </div>
