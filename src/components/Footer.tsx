@@ -69,6 +69,9 @@ const Footer = () => {
               <h3 className="font-bold mb-3">Unternehmen & Rechtliches</h3>
               <ul className="space-y-2">
                 <li><Link to="/unternehmen" className="text-gray-600 hover:text-blue-600 block py-1">Über EURA MOBIL</Link></li>
+                <li><Link to="/karriere" className="text-gray-600 hover:text-blue-600 block py-1">Karriere</Link></li>
+                <li><a href="https://recruitingapp-5607.de.umantis.com/Jobs/All" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 block py-1 flex items-center">Stellenangebote <ExternalLink className="ml-1 h-3 w-3" /></a></li>
+                <li><Link to="/ausbildung" className="text-gray-600 hover:text-blue-600 block py-1">Ausbildung & Praktikum</Link></li>
                 <li><Link to="/werksfuehrung" className="text-gray-600 hover:text-blue-600 block py-1">Werksführung</Link></li>
                 <li><Link to="/club" className="text-gray-600 hover:text-blue-600 block py-1">Club</Link></li>
                 <li><Link to="/videos" className="text-gray-600 hover:text-blue-600 block py-1">Videos</Link></li>
