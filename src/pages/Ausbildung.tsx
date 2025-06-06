@@ -81,7 +81,7 @@ const Ausbildung = () => {
         </div>
 
         {/* Call to Action Section */}
-        <div className="bg-blue-50 rounded-lg p-8 text-center">
+        <div className="placeholder-image rounded-lg p-8 text-center">
           <h2 className="text-2xl font-bold mb-6">Wir freuen uns auf Ihre Bewerbung!</h2>
           <p className="text-gray-700 mb-6 max-w-3xl mx-auto">
             Bewerben Sie sich mit Angabe Ihres frühestmöglichen Eintrittstermins über unser Bewerberportal.
