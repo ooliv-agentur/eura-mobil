@@ -1,5 +1,6 @@
 
 import { Layout } from "@/components/Layout";
+import { ModelHero } from "@/components/model/ModelHero";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -117,11 +118,15 @@ const Ausbildung = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Ihre Karriere bei der Eura Mobil GmbH</h1>
-          <h2 className="text-2xl text-gray-600 mb-6">Ausbildung & Praktikum</h2>
+      {/* Hero Section */}
+      <ModelHero 
+        headline="Ihre Karriere bei der Eura Mobil GmbH"
+        subline="Ausbildung & Praktikum"
+      />
+
+      <div className="container mx-auto px-4 py-12">
+        {/* Introduction Section */}
+        <div className="text-center mb-16">
           <p className="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
             Wir suchen ständig gute Auszubildende (m/w/d) in den Fachbereichen Holzmechanik, Fertigung, Lager, 
             Verwaltung, IT usw. Sehen Sie hier, was Sie bei uns im Bereich Ausbildung & Praktikum erwarten können:
@@ -130,14 +135,14 @@ const Ausbildung = () => {
 
         {/* Video Section */}
         <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-6 text-center">
+          <h2 className="text-2xl font-bold mb-6 text-center">
             Entdecke unseren neuen Ausbildungsberuf zum Karosserie- und Fahrzeugbaumechaniker (m/w/d):
-          </h3>
+          </h2>
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-900 rounded-lg overflow-hidden aspect-video relative">
+            <div className="placeholder-image aspect-video relative">
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center text-white">
-                  <Play className="w-16 h-16 mx-auto mb-4 opacity-80" />
+                <div className="text-center text-gray-600">
+                  <Play className="w-16 h-16 mx-auto mb-4 opacity-60" />
                   <p className="text-lg">Video-Player</p>
                   <p className="text-sm opacity-60 mt-2">00:00 / 00:30</p>
                 </div>
@@ -148,7 +153,7 @@ const Ausbildung = () => {
 
         {/* Ausbildungsberufe Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold mb-8 text-center">Unsere Ausbildungsberufe im Überblick:</h3>
+          <h2 className="text-3xl font-bold mb-8 text-center">Unsere Ausbildungsberufe im Überblick:</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {ausbildungsberufe.map((beruf, index) => (
               <Card key={index} className="h-full">
@@ -184,9 +189,9 @@ const Ausbildung = () => {
 
         {/* Radio Interviews Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold mb-8 text-center">
+          <h2 className="text-3xl font-bold mb-8 text-center">
             Unsere Azubis zu Gast bei „Antenne Bad Kreuznach":
-          </h3>
+          </h2>
           <div className="space-y-8">
             {radioInterviews.map((interview, index) => (
               <Card key={index}>
@@ -198,7 +203,7 @@ const Ausbildung = () => {
                   <CardDescription>{interview.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="bg-gray-100 p-6 rounded-lg text-center">
+                  <div className="placeholder-image p-6 text-center">
                     <p className="text-gray-600 mb-4">
                       Klicken Sie auf den unteren Button, um den Inhalt von w.soundcloud.com zu laden.
                     </p>
@@ -215,7 +220,7 @@ const Ausbildung = () => {
 
         {/* Call to Action Section */}
         <div className="bg-blue-50 rounded-lg p-8 text-center">
-          <h3 className="text-2xl font-bold mb-6">Wir freuen uns auf Ihre Bewerbung!</h3>
+          <h2 className="text-2xl font-bold mb-6">Wir freuen uns auf Ihre Bewerbung!</h2>
           <p className="text-gray-700 mb-6 max-w-3xl mx-auto">
             Bewerben Sie sich mit Angabe Ihres frühestmöglichen Eintrittstermins über unser Bewerberportal.
             Bei Rückfragen erreichen Sie uns unter{" "}
